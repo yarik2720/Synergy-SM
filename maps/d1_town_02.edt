@@ -45,6 +45,19 @@ d1_town_02
 	//			spawnflags "1"
 	//			speed "750"
 	//			pushdir "0 0 0"} }
+	
+//Prevent Backtracking from 02a
+		create {classname "trigger_push" origin "-3712 -104 -3014"
+			values {model "*140" angles "0 90 0"
+				spawnflags "1"//65
+				speed "1000"
+				pushdir "0 90 0"} }
+				
+		create {classname "trigger_push" origin "-3847 -290 -3115"
+			values {model "*140" angles "0 0 0"
+				spawnflags "1"//65
+				speed "1000"
+				pushdir "0 180 0"} }
 //ally
 		create {classname "point_template"
 			values {spawnflags "3"
