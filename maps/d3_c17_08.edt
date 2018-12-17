@@ -1,0 +1,298 @@
+d3_c17_08
+{
+	entity {
+//--Setup--
+		delete {classname "logic_auto" origin "-2235.37 -3200 239.31"}
+		edit {classname "func_areaportal" values {targetname "syn_disabledPortal" StartOpen "1"} }
+
+//Prevent Backtracking
+		create {classname "syn_transition_wall" origin "-2248 -3288 224" values {angles "0 90 0"} }
+
+		//create {classname "trigger_push" origin "0 64 0"
+		//	values {model "*49"
+		//		spawnflags "1"
+		//		speed "750"
+		//		pushdir "0 90 0"} }
+
+//--Starting Items--
+		create {classname "info_player_equip"
+			values {
+				item_suit			"1"
+				item_armor			"60"
+				weapon_crowbar		"1"
+				weapon_pistol		"1"
+				weapon_smg1			"1"
+				weapon_frag			"1"
+				weapon_357			"1"
+				weapon_physcannon	"1"
+				weapon_shotgun		"1"
+				weapon_ar2			"1"
+				weapon_rpg			"1"
+				weapon_crossbow		"1"
+				weapon_bugbait		"1"
+				weapon_slam			"1"
+				weapon_stunstick	"1"
+				ammo_pistol			"54"//72
+				ammo_smg1			"45"
+				ammo_grenade		"1"
+				ammo_smg1_grenade	"1"
+				ammo_357			"6"
+				ammo_buckshot		"12"
+				ammo_ar2			"30"
+				ammo_ar2altfire		"1"
+				//ammo_rpg_round	"1"
+				//ammo_crossbow		"0"
+				//ammo_slam			"2"
+			} }
+
+//--Spawns--
+		create {classname "info_spawn_manager"
+			values {targetname "syn_spawn_manager"} }
+
+		create {classname "info_player_coop" origin "-2239.12 -3255.57 232.03"
+			values {angles "0 90 0" targetname "syn_spawn_player_1"} }
+
+		create {classname "info_player_coop" origin "1768 376 400"
+			values {angles "0 180 0" targetname "syn_spawn_player_2" StartDisabled "1"} }
+
+		create {classname "info_global_settings"
+			values {IsVehicleMap "0" targetname "syn_global_settings"} }
+
+//--Extra--
+
+		// create intermission
+		"create" { "classname" "info_intermission" "origin" "1039.476563 600.825745 971.505188" "values" { "angles" "28 -60 0" } }
+
+//Trav|Edt - Doors: Open Only
+		edit {targetname "steamroom_exit_doors" values {spawnflags "2048"} }//To avoid orign
+		edit {classname "prop_door_rotating" values {spawnflags "0"} }
+
+//Trav|Edt - delay intro music
+		delete {classname "trigger_once" origin "-2232 -2904 92"}
+		create {classname "trigger_once" origin "-2232 -2904 92"
+			values {model "*96"
+				spawnflags "1"
+				OnTrigger "song_hl1_14,PlaySound,,45,-1"} }
+
+//Trav|Edt - Prevent doors from look like being picked up
+		edit {targetname "stairwell_1_swinging_door_1"
+			values {spawnflags "2097152"} }
+
+		edit {targetname "stairwell_1_swinging_door_2"
+			values {spawnflags "2097152"} }
+
+//Trav|Edt - add blocking prop for crouch jump exploit
+		create {classname "prop_dynamic"
+			origin "176 -1456 -234"
+			values{model "models/props_c17/fence01a.mdl"
+				disableshadows "1"
+				solid "6"
+				angles "0 90 0"} }
+
+//Trav|Edt - have crab_hatch_crab_1 crabs to be alive
+		//delete {targetname "crab_hatch_crab_*"}//doesnt work, but thats ok
+		create {classname "npc_headcrab_black" origin "208 -2152 16" values {spawnflags "516"} }
+		create {classname "npc_headcrab_black" origin "208 -2152 32" values {spawnflags "516"} }
+		create {classname "npc_headcrab_black" origin "208 -2152 48" values {spawnflags "516"} }
+		create {classname "npc_headcrab_black" origin "208 -2152 64" values {spawnflags "516"} }
+		create {classname "npc_headcrab_black" origin "208 -2152 80" values {spawnflags "516"} }
+		create {classname "npc_headcrab_black" origin "208 -2152 96" values {spawnflags "516"} }
+
+//Trav|Edt - remove breakable_catwalk_3_rails, players get stuck on it
+		delete {targetname "breakable_catwalk_3_rails"}
+
+//Trav|Edt - prevent players from calling platform during movement
+		create {classname "logic_relay"
+			values {targetname "platform_lower_relay"
+				OnTrigger "crane_control_lever,Lock,,0,-1"
+				//OnTrigger "crane_control_lever,UnLock,,60,-1"
+				} }
+
+		create {classname "logic_relay"
+			values {targetname "platform_raise_relay"
+				OnTrigger "crane_control_lever,Lock,,0,-1"
+				OnTrigger "trav_trigger_multicheckpoint,Enable,,45,-1"
+				OnTrigger "crane_control_lever,UnLock,,60,-1"} }
+
+//Trav|Edt - prevent grav gun from punting phys elevator(rails are still puntable)
+		edit {targetname "platform_X_axis"
+			values {spawnflags "6291456"} }
+
+//Trav|Edt- prevent rails on phys vator from being picked up
+		edit {targetname "platform_rail_1"
+			values {spawnflags "512"} }
+
+		edit {targetname "platform_rail_2"
+			values {spawnflags "512"} }
+
+		edit {targetname "platform_rail_3"
+			values {spawnflags "512"} }
+
+		edit {targetname "platform_rail_4"
+			values {spawnflags "512"} }
+
+		//delete {targetname "platform_rail_1"}
+		//delete {targetname "platform_rail_2"}
+		//delete {targetname "platform_rail_3"}
+		//delete {targetname "platform_rail_4"}
+
+//Trav|Edt - antirush for platform
+		create {classname "trigger_coop"
+			origin "1432 360 464"
+			values {model "*81"
+				spawnflags "1"
+				//StartDisabled "1"
+				targetname "syn_antirush_coop"
+				CountType "1"
+				parentname "platform_X_axis"
+				UseHUD "1"
+				PlayerValue "50"
+				OnPlayersIn "crane_control_lever,UnLock,,0,1"
+				OnPlayersIn "platform_lower_relay,AddOutPut,OnTrigger crane_control_lever:UnLock::60:-1,0,1"
+				OnTrigger "syn_antirush_text,Display,,1,-1"
+				OnPlayersIn "!self,Disable,,0,-1"} }
+
+//Trav|Edt - add vclips for platform (test)
+		create {classname "filter_activator_name"
+			values {targetname "trav_filter_platform"
+				filtername "platform_X_axis"} }
+
+		create {classname "func_clip_vphysics"
+			origin "1724.5 46.5 287.91"
+			values {model "*99"
+				targetname "trav_platform_vphysclips"
+				filtername "trav_filter_platform"} }
+
+		create {classname "func_clip_vphysics"
+			origin "1724.5 -334.5 287.91"
+			values {model "*99"
+				targetname "trav_platform_vphysclips"
+				filtername "trav_filter_platform"} }
+
+		create {classname "func_clip_vphysics"
+			origin "1724.5 -334.5 191.91"
+			values {model "*99"
+				targetname "trav_platform_vphysclips"
+				filtername "trav_filter_platform"} }
+
+		create {classname "func_clip_vphysics"
+			origin "1075.5 46.5 287.91"
+			values {model "*99"
+				targetname "trav_platform_vphysclips"
+				filtername "trav_filter_platform"} }
+
+		create {classname "func_clip_vphysics"
+			origin "1075.5 -334.5 287.91"
+			values {model "*99"
+				targetname "trav_platform_vphysclips"
+				filtername "trav_filter_platform"} }
+
+		create {classname "func_clip_vphysics"
+			origin "1075.5 -334.5 191.91"
+			values {model "*99"
+				targetname "trav_platform_vphysclips"
+				filtername "trav_filter_platform"} }
+
+//Trav|Edt - teleport players when on platform elevator thingy, setnew checkpoint, add teleport trav_turret
+
+		//create {classname "trigger_once"
+		//	origin "1411.5 -304 256"
+		//	values {model "*44"
+		//		spawnflags "1"
+		//		targetname "craneride_soldier_trigger_1"
+		//		OnTrigger "syn_spawn_manager,MovePlayers,,0,-1"} }
+
+		create {classname "trigger_multiple"
+			origin "992 712 460"
+			values {model "*96"
+				spawnflags "1"
+				targetname "trav_trigger_multicheckpoint"
+				wait "180"//5
+				OnTrigger "!self,Disable,,3,-1"
+				OnTrigger "syn_spawn_manager,SetCheckpoint,syn_spawn_player_2,0,1"
+				OnTrigger "syn_global_settings,AddOutput,IsVehicleMap 1,0,-1"
+				OnTrigger "syn_spawn_manager,MovePlayers,,0.1,-1"
+				OnTrigger "trav_teleport_turret,Teleport,,0.1,1"
+				OnTrigger "syn_killfallers,Enable,,1,-1"} }
+
+		create {classname "point_teleport"
+			origin "1368 592 400"
+			values {targetname "trav_teleport_turret"
+				angles "0 0 0"
+				target "trav_turret"} }
+
+//Trav|Edt - kill players who fall (lazy method)
+		create {classname "trigger_multiple" origin "1126 166 344.5"
+			values {model "*81" angles "0 90 0"
+				targetname "syn_killfallers"
+				StartDisabled "1"
+				spawnflags "1"
+				OnStartTouch "!activator,SetHealth,0,1.25,-1"} }
+
+		create {classname "trigger_multiple" origin "1418 170 344.5"
+			values {model "*81" angles "0 90 0"
+				targetname "syn_killfallers"
+				StartDisabled "1"
+				spawnflags "1"
+				OnStartTouch "!activator,SetHealth,0,1.25,-1"} }
+
+		create {classname "trigger_multiple" origin "1418 -382 344.5"
+			values {model "*81" angles "0 90 0"
+				targetname "syn_killfallers"
+				StartDisabled "1"
+				spawnflags "1"
+				OnStartTouch "!activator,SetHealth,0,1.25,-1"} }
+
+//Trav|Edt - autirush
+		create {classname "trigger_coop"
+			origin "2282 -350 519.5"
+			values {model "*81"
+				spawnflags "1"
+				//StartDisabled "1"
+				targetname "syn_antirush_coop"
+				CountType "1"
+				UseHUD "1"
+				PlayerValue "50"
+				wait "1.5"
+				OnTrigger "syn_antirush_text,Display,,0,-1"
+				//OnPlayersIn "syn_antirush_push,Disable,,0,1"
+				OnPlayersIn "syn_antirush_wall,Kill,,0,1"
+				OnPlayersIn "!self,Disable,,1,1"
+				OnTrigger "trav_teleport2,Teleport,,0,1"
+				OnTrigger "trav_trigger_multicheckpoint,Kill,,0,1"} }//Disable
+
+		create {classname "syn_transition_wall" origin "2528 -416 480" values {angles "0 180 0" targetname "syn_antirush_wall"} }
+
+		//create {classname "trigger_push"
+		//	origin "2632 -432 556"
+		//	values {model "*96"
+		//		spawnflags "1"
+		//		targetname "syn_antirush_push"
+		//		pushdir "0 180 0"
+		//		speed "750"} }
+
+		create {classname "point_teleport"
+			origin "1960 -424 496"
+			values {targetname "trav_teleport2"
+				angles "0 0 0"
+				target "trav_turret"} }
+
+		create {classname "game_text"
+			values {spawnflags "0"
+				targetname "syn_antirush_text"
+				message "Need More Players to Continue. . ."
+				channel "0"
+				effect "2"
+				x "-1"
+				y "0.85"
+				color "100 100 100"
+				color2 "240 110 0"
+				fadein "0.03"
+				fadeout "1.25"
+				holdtime "2"
+				fxtime "0.25"} }
+
+//Trav|Edt - Functionality check
+		create {classname "logic_relay" values {targetname "trav_functionality_d3_c17_08"} }
+	}
+}

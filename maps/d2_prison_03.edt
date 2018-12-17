@@ -1,0 +1,291 @@
+d2_prison_03
+{
+	console
+	{
+		sk_antlionguard_health 2560
+		sk_antlionguard_dmg_charge 30 //20
+		sk_antlionguard_dmg_shove 15 //10
+		sk_antlion_health 75 //30
+	}
+
+	entity
+	{
+//--Setup--
+		delete {classname "logic_auto" origin "-2372 3191 156"}
+		edit {classname "func_areaportal" values {targetname "syn_disabledPortal" StartOpen "1"} }
+		edit {targetname "control_room_occluder" values {StartActive "0" targetname "syn_control_room_occluder"} }//Disable this occluder
+
+//Prevent Backtracking
+		create {classname "prop_dynamic" origin "-2160 3488 112"
+			values {model "models/synergy/tools/syn_transition.mdl"
+				angles "0 180 0"
+				solid "6"
+				DisableShadows "1"} }
+
+		//create {classname "trigger_push" origin "-64 0 0"
+		//	values {model "*65"
+		//		spawnflags "1"
+		//		speed "750"
+		//		pushdir "0 180 0"} }
+
+//--Starting Items--
+		create {classname "info_player_equip"
+			values {
+				item_suit			"1"
+				item_armor			"60"
+				weapon_crowbar		"1"
+				weapon_pistol		"1"
+				weapon_smg1			"1"
+				weapon_frag			"1"
+				weapon_357			"1"
+				weapon_physcannon	"1"
+				weapon_shotgun		"1"
+				weapon_ar2			"1"
+				weapon_rpg			"1"
+				weapon_crossbow		"1"
+				weapon_bugbait		"1"
+				weapon_stunstick	"1"
+					weapon_slam		"1"
+				ammo_pistol			"54"//72
+				ammo_smg1			"45"
+				ammo_grenade		"1"
+				ammo_smg1_grenade	"1"
+				ammo_357			"6"
+				ammo_buckshot		"12"
+				ammo_ar2			"30"
+				ammo_rpg_round		"1"
+				//ammo_crossbow		"0"
+				//	ammo_slam		"2"
+			} }
+
+//--Spawns--
+		create {classname "info_spawn_manager"
+			values {targetname "syn_spawn_manager"} }
+
+		create {classname "info_player_coop" origin "-2198.45 3154.68 128.03"
+			values {angles "0 180 0" targetname "syn_spawn_player_1"} }
+
+		create {classname "info_global_settings"
+			values {IsVehicleMap "0" targetname "syn_global_settings"} }
+
+//--Extra--
+
+		// create intermission
+		"create" { "classname" "info_intermission" "origin" "-2890.937500 3198.750000 217.562500" "values" { "angles" "15 -128 0" } }
+
+//Trav|Edt - Doors: Open Only
+		edit {targetname "shower_doors" values {spawnflags "2048"} }//10240
+		edit {targetname "tau_control_room_door" values {spawnflags "2048"} }
+		edit {classname "prop_door_rotating" values {spawnflags "0"} }
+
+//Trav|Edt - Disable Enemy turrets when tipped (avoid player greif)
+		create {classname "logic_auto"
+			values {spawnflags "1"
+				OnMapSpawn "npc_turret_floor,AddOutput,OnTipped !self:SelfDestruct::0:-1,0,-1"} }//DepleteAmmo
+
+		delete {targetname "template_turretFloor"}
+
+//Trav|Edt - increase combine tripmines damage
+		edit {targetname "slam_exp_1" values {iMagnitude "200"} }
+
+//Trav|Edt - make guard a template instead of a sleeper
+
+		delete {targetname "showers_guard"}
+
+		create {classname "trigger_once"
+			origin "-3120 1632 62"
+			values {model "*30"
+				spawnflags "1"
+				OnTrigger "trav_guard_spawner,ForceSpawn,,0,-1"
+				OnTrigger "syn_spawn_manager,MovePlayers,,0,-1"} }
+
+		create {classname "point_template"
+			values {spawnflags "2"
+				targetname "trav_guard_spawner"
+				Template01 "showers_guard"} }
+
+		create {classname "npc_antlionguard"
+			origin "-3008 3056 2"
+			values {spawnflags "131076"//196612
+				angles "0 270 0"
+				targetname "showers_guard"
+				ignoreunseenenemies "1"
+				startburrowed "0"
+				OnDeath "antspawner_1,Enable,,5.0,1"
+				OnDeath "overwatch_a7,PlaySound,,7.5,-1"
+				OnDeath "shower_doors,Unlock,,0,-1"} }
+
+//Trav|Edt - remove player clip at antguard rails
+		delete {targetname "playerclip_shower_dropdown"}
+
+//Trav|Edt - add mo peeps
+		create {classname "npc_combine_s"
+			origin "-3056 4800 8"
+			values {spawnflags "2564"
+				targetname "trav_combine1"
+				model "models/combine_soldier_prisonguard.mdl"
+				squadname "squad1"
+// it will happen, someday.. someday.
+				NumGrenades "9001"//999999
+				additionalequipment "weapon_ar2"} }
+
+		create {classname "npc_template_maker"
+			origin "-3056 4800 8"
+			values {spawnflags "128"
+				angles " 0 345 0"
+				targetname "trav_tmaker_combine1"
+				StartDisabled "1"
+				MaxNPCCount "12"
+				SpawnFrequency "0.5"
+				MaxLiveChildren "-1"
+				TemplateName "trav_combine1"} }
+
+		create {classname "trigger_once"
+			origin "-3384 3504 64"
+			values {model "*52"//*53
+				spawnflags "1"
+				OnTrigger "trav_tmaker_combine1,Enable,,0,-1"} }
+
+		create {classname "npc_combine_s"
+			origin "-3560 4536 8"
+			values {spawnflags "2564"
+				targetname "trav_combine2"
+				model "models/combine_soldier_prisonguard.mdl"
+				squadname "dispatched_combine"
+				NumGrenades "999999"
+				additionalequipment "weapon_shotgun"} }
+
+		create {classname "npc_template_maker"
+			origin "-3560 4536 8"//-3992 448 8
+			values {spawnflags "128"
+				angles " 0 270 0"
+				targetname "trav_tmaker_combine2"
+				StartDisabled "1"
+				MaxNPCCount "6"
+				SpawnFrequency "1"
+				MaxLiveChildren "-1"
+				TemplateName "trav_combine1"} }
+
+		create {classname "logic_relay"
+			values {targetname "second_wave_relay"
+				OnTrigger "trav_tmaker_combine2,Enable,,0,-1"} }
+
+		create {classname "npc_combine_s"
+			origin "-3728 5992 8"
+			values {spawnflags "2564"
+				targetname "trav_combine3"
+				model "models/combine_soldier_prisonguard.mdl"
+				squadname "counterattack"
+				NumGrenades "999999"
+				additionalequipment "weapon_ar2"} }
+
+		create {classname "npc_template_maker"
+			origin "-3728 5992 8"
+			values {spawnflags "128"
+				angles " 0 345 0"
+				targetname "trav_tmaker_combine3"
+				StartDisabled "1"
+				MaxNPCCount "6"
+				SpawnFrequency "1"
+				MaxLiveChildren "-1"
+				TemplateName "trav_combine3"} }
+
+		//create {classname "trigger_look"
+		//	origin "-3267.14 4728 178"
+		//	values {model "*58"//*59
+		//		spawnflags "129"
+		//		LookTime "0.1"
+		//		target "monitor_1"
+		//		OnTrigger "trav_tmaker_combine3,Enable,0,-1"} }
+
+//Trav|Edt - prevent monintor(s) from disabling
+		delete {classname "trigger_multiple" origin "-3344 4592 176"}
+
+		create {classname "trigger_once"
+			origin "-3728 4912 196"
+			values {model "*37"//*38
+				spawnflags "1"
+				OnTrigger "monitor_1,Enable,,0.25,-1"} }
+
+//Trav|Edt - only turn off fan if ALL players are out
+		delete {classname "trigger_multiple" origin "-3414 5824 72"}
+
+		create {classname "trigger_multiple"
+			origin "-3414 5824 72"
+			values {model "*86"
+				spawnflags "1"
+				OnEndTouchAll "fan_motor,TurnOff,,0.5,-1"
+				OnEndTouchAll "fan_wind,Disable,,0,-1"
+				OnStartTouch "fan_wind,Enable,,0,-1"
+				OnStartTouch "fan_motor,TurnOn,,0.1,-1"} }
+
+//Trav|Edt - stop fan movement when broken and clear
+		create {classname "trigger_once"
+			origin "-3469 5822 26.5"
+			values {model "*84"
+				spawnflags "1"
+				targetname "trav_fan_disablemotion"
+				StartDisabled "1"
+				OnTrigger "fan,DisableMotion,,1,-1"} }
+
+		create {classname "logic_relay"
+			values {spawnflags "1"
+				targetname "fan_death_relay"
+				OnTrigger "trav_fan_disablemotion,Enable,,1,-1"} }
+
+		create {classname "trigger_once"
+			origin "-3469 5822 26.5"
+			values {model "*84"
+				spawnflags "1"
+				OnTrigger "trav_tmaker_combine3,Enable,,0,-1"} }
+
+//Trav|Edt - autirush
+		create {classname "trigger_coop"
+			origin "-3572.5 6048 66"
+			values {model "*3"
+				spawnflags "1"
+				targetname "syn_antirush_coop"
+				CountType "1"
+				UseHUD "1"
+				PlayerValue "50"
+				wait "1.5"
+				OnTrigger "syn_antirush_text,Display,,0,-1"
+				OnPlayersIn "syn_antirush_blocker,Kill,,0,1"
+				//OnPlayersIn "syn_antirush_light,TurnOff,,0,1"
+				OnPlayersIn "!self,Disable,,1,1"} }
+
+		create {classname "prop_dynamic" origin "-3440 6336 -8"
+			values {model "models/synergy/tools/syn_transition.mdl"
+				targetname "syn_antirush_blocker"
+				angles "0 180 0"
+				solid "6"
+				DisableShadows "1"} }
+
+		//create {classname "light_dynamic" origin "-3384 6048 64"
+		//	values {targetname "syn_antirush_light"
+		//		_light "170 255 170"
+		//		brightness "1"
+		//		distance "300"
+		//		//_inner_cone "75"
+		//		//_cone "80"
+		//		style "12"} }
+
+		create {classname "game_text"
+			values {spawnflags "0"
+				targetname "syn_antirush_text"
+				message "Need More Players to Continue. . ."
+				channel "0"
+				effect "2"
+				x "-1"
+				y "0.85"
+				color "100 100 100"
+				color2 "240 110 0"
+				fadein "0.03"
+				fadeout "1.25"
+				holdtime "2"
+				fxtime "0.25"} }
+
+//Trav|Edt - Functionality check
+		create {classname "logic_relay" values {targetname "trav_functionality_d2_prison_03"} }
+	}
+}

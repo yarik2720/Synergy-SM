@@ -1,0 +1,227 @@
+ep1_citadel_03
+{
+	entity
+	{
+//--Setup--
+		delete {targetname "global_newgame_template_base_items"}
+		delete {targetname "global_newgame_spawner_physcannon"}
+		delete {targetname "global_newgame_spawner_suit"}
+		create {classname "point_template" origin "-724.211 12187.9 5408"
+			values {spawnflags "2"
+			//	Template03 "alyx"
+			//	Template02 "global_newgame_spawner_physcannon"
+			//	Template01 "global_newgame_spawner_suit"
+				Template01 "alyx"
+				targetname "global_newgame_template_base_items"} }
+		edit {classname "func_areaportal" values {targetname "syn_DisabledPortal" StartOpen "1"} }
+		edit {classname "func_areaportalwindow" values {targetname "syn_DisabledPortalWindow" FadeStartDist "1000" FadeDist "1500"} }
+
+//--Starting Items--
+		create {classname "info_player_equip"
+			values {
+				item_suit			"1"
+				item_armor			"45"
+				weapon_physcannon	"1"
+			} }
+
+//--Spawns--
+		create {classname "info_spawn_manager"
+			values {targetname "syn_spawn_manager"} }
+//Intro
+		create {classname "info_player_coop" origin "-713 12183 5338"
+			values {angles "0 0 0" targetname "syn_spawn_player_1"} }
+//Elevator Console
+		create {classname "info_player_coop" origin "1044 11807 5348"
+			values {angles "0 -35 0" targetname "syn_spawn_player_2" StartDisabled "1"} }
+//Enter Core
+		create {classname "info_player_coop" origin "1690 11743 4248"
+			values {angles "0 0 0" targetname "syn_spawn_player_3" StartDisabled "1"} }
+//Core Console
+		create {classname "info_player_coop" origin "1408 12129 5340"
+			values {angles "0 0 0" targetname "syn_spawn_player_4" StartDisabled "1"} }
+//End Checkpoint
+		create {classname "info_player_coop" origin "1141.08 13495.43 3712.03"
+			values {angles "0 0 0" targetname "syn_spawn_player_5" StartDisabled "1"} }
+//Core Top
+		create {classname "info_player_coop" origin "3055.281250 12575.795898 5567.541016"
+			values {angles "0 90 0" targetname "syn_spawn_player_6" StartDisabled "1"} }
+
+		create {classname "info_global_settings"
+			values {targetname "syn_global_settings" IsVehicleMap "0"} }
+
+//--Extra--
+
+//Trav|Edt - be strict on max ragdoll count to reduce lag
+		edit {classname "game_ragdoll_manager" values {MaxRagdollCount "1"} }//3
+
+//Trav|Edt - disable +use on bridges (to damn hacky)
+		edit {targetname "brush_bridge_01" values {spawnflags "2"} }
+		edit {targetname "brush_bridge_02" values {spawnflags "2"} }
+		edit {targetname "brush_bridge_03" values {spawnflags "2"} }
+		//edit {targetname "brush_bridge_04" values {spawnflags "2"} }
+
+		delete {targetname "brush_bridge_04"}
+
+		create {classname "func_brush"
+			origin "2596.8 11575.5 4214"
+			values {model "*26"
+				spawnflags "2"
+				StartDisabled "1"
+				parentname "rot_core_bridge_04"
+				targetname "brush_bridge_04"} }
+
+		create {classname "logic_auto"
+			values {spawnflags "1"
+				OnMapSpawn "brush_bridge_04,AddOutput,origin 2596.8 11575.5 4214,0,-1"} }
+
+	//	edit {classname "func_brush" origin "2596.8 11575.5 4214" values {spawnflags "2"} }
+	//	edit {classname "func_brush" origin "3040 11763.6 4214" values {spawnflags "2"} }
+	//	edit {classname "func_brush" origin "3045.5 12535.8 4214" values {spawnflags "2"} }
+	//	edit {classname "func_brush" origin "2600.5 12716.2 4214" values {spawnflags "2"} }
+
+		// this prevents a player trap from occuring after the core arms are lowered
+		create { classname "trigger_once" origin "3080 12666.6 5613.5"
+			values { "model" "*206" "spawnflags" "1" "StartDisabled" "0"
+				OnTrigger "checkpoint-syn_spawn_player_6,enable,,0,-1"
+				OnTrigger "syn_spawn_manager,SetCheckpoint,checkpoint-syn_spawn_player_6,0,-1"
+				OnTrigger "syn_spawn_player_3,disable,,0,-1"
+				//OnTrigger "syn_spawn_manager,MovePlayers,,0.1,-1"
+				OnTrigger "syn_spawn_player_3,kill,,0.1,-1"
+			}
+		}
+
+		create { classname "info_intermission" origin "2430.906250 12803.875000 5438.968750" values { angles "33 -90 0" } }
+
+//Trav|Edt - dont move players until after alyx gets in end vator
+		create {classname "logic_auto"
+			values {spawnflags "1"
+				OnMapSpawn "lcs_alyx_powerdown,AddOutput,OnStart trav_trigger_moveplayers_vator_end:Enable::0:-1,0,-1"} }
+
+		create { classname "trigger_once" origin "1152 13654 5312"
+			values {model "*197"
+				spawnflags "1"
+				StartDisabled "1"
+				targetname "trav_trigger_moveplayers_vator_end"
+				OnTrigger "syn_spawn_manager,MovePlayers,,0,-1"} }
+
+//End of Trav|Edt
+
+		// first big door can stay open
+		delete { targetname "trigger_alyx_close_airlock" }
+
+		// activate checkpoint when we get to the elevator
+		delete { classname "trigger_multiple" origin "1200 11708 5247.96" }
+		create { classname "trigger_multiple" origin "1200 11708 5247.96"
+			values {
+				"model" "*160"
+				"wait" "1"
+				"targetname" "trigger_door_comb_close"
+				"filtername" "filter_alyx"
+				"spawnflags" "2"
+				"StartDisabled" "1"
+				"OnTrigger" "logic_door_comb_1_close,Trigger,,0,1"
+				"OnTrigger" "pclip_door1,Enable,,0,1"
+
+				"OnTrigger" "trigger_CP01,Enable,,0,1"
+			}
+		}
+
+		create { classname "trigger_once" origin "1200 11708 5247.96"
+			values {
+				"model" "*160"
+				"StartDisabled" "1"
+				"spawnflags" "1"
+				"targetname" "trigger_CP01"
+
+				"OnTrigger" "syn_spawn_manager,SetCheckpoint,syn_spawn_player_2,0,-1"
+				"OnTrigger" "syn_spawn_manager,MovePlayers,,0.1,-1"
+			}
+		}
+
+		// activate checkpoint after elevator ride
+		delete { targetname "Trigger_lift" }
+		create { classname "trigger_once" origin "1522 11720 5312"
+			values {
+				"model" "*163"
+				"targetname" "Trigger_lift"
+			//	"wait" "5"
+				"spawnflags" "1"
+				"StartDisabled" "1"
+				"OnStartTouch" "lcs_core_control_scene,Resume,,0,-1"
+				"OnStartTouch" "Core_lift_doors,Close,,0,-1"
+
+				"OnStartTouch" "syn_spawn_manager,SetCheckpoint,syn_spawn_player_3,0,-1"
+				"OnStartTouch" "syn_spawn_manager,MovePlayers,,0.1,-1"
+			}
+		}
+
+		// do not close door after elevator
+		delete { targetname "core_airlock_close" }
+		create { classname "trigger_multiple" origin "1906 11720 4375.77"
+			values {
+				"model" "*161"
+				"wait" "1"
+				"targetname" "core_airlock_close"
+				"spawnflags" "3"
+				"StartDisabled" "0"
+			//	"OnStartTouch" "brush_doorblocker_corelift,Enable,,0,-1"
+			//	"OnStartTouch" "logic_door_comb_2_close,Trigger,,0,-1"
+				"OnStartTouch" "core_airlock_close,Disable,,0,-1"
+				"OnStartTouch" "camera_bridge_status,SetOnAndTurnOthersOff,,0,-1"
+			}
+		}
+
+		// activate checkpoint once we meet up with alyx again
+		delete { targetname "trigger_alyx_reunion" }
+		create { classname "trigger_once" origin "1488 12144 5535.91"
+			values {
+				"model" "*222"
+				"spawnflags" "1"
+				"StartDisabled" "1"
+				"targetname" "trigger_alyx_reunion"
+				"OnTrigger" "lcs_alyx_corecomplete,Resume,,0,-1"
+				"OnTrigger" "relay_core_sealed,Trigger,,0,-1"
+				"OnTrigger" "door_core_breaker_room_04,SetAnimation,idle_closed,0,-1"
+
+				"OnTrigger" "syn_spawn_manager,SetCheckpoint,syn_spawn_player_4,0,-1"
+				"OnTrigger" "syn_spawn_manager,MovePlayers,,0.1,-1"
+			}
+		}
+
+		// activate checkpoint after the exit elevator starts to move
+	//	delete { classname "trigger_multiple" origin "1152 13654 5312" }
+	//	create { classname "trigger_multiple" origin "1152 13654 5312"
+	//		values {
+	//			"model" "*197"
+	//			"spawnflags" "1"
+	//			"wait" "1"
+	//			"StartDisabled" "0"
+	//			"OnStartTouch" "relay_powerdown_sequence,Trigger,,0,-1"
+	//			"OnEndTouch" "relay_powerdown_sequence,CancelPending,,0,-1"
+
+	//			"OnTrigger" "syn_spawn_manager,SetCheckpoint,PS_ExitEle,0,1"
+	//			"OnTrigger" "syn_spawn_manager,MovePlayers,,0.05,1"
+	//		}
+	//	}
+		// remove and fix fall triggers
+		delete { targetname "trigger_fall_2" }
+
+		delete { targetname "trigger_fall" }
+		create { classname "trigger_hurt" origin "2768 12144 2896"
+			values {
+				"model" "*166"
+				"targetname" "trigger_fall"
+				"spawnflags" "1"
+				"StartDisabled" "0"
+				"damagemodel" "0"
+				"damagetype" "32"
+				"damagecap" "1000"
+				"damage" "1000"
+				nodmgforce "1"
+			}
+		}
+
+//Trav|Edt - Functionality check
+		create {classname "logic_relay" values {targetname "trav_functionality_ep1_citadel_03"} }
+	}
+}

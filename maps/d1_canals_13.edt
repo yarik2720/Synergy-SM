@@ -1,0 +1,307 @@
+d1_canals_13
+{
+	console {
+		sk_helicopter_health 7500 //5600
+	}
+
+	entity {
+//--Setup--
+		delete {classname "logic_auto" origin "-10660.4 4788.56 -434.892"}
+		edit {classname "func_areaportal" values {targetname "disabledPortal" StartOpen "1"} }
+
+//Enable Airboat Gun
+		create {classname "logic_auto"
+			values {spawnflags "1"
+				OnMapSpawn "prop_vehicle_airboat,EnableGun,1,3,-1"} }
+
+//Trav|Edt - Doors: Open Only
+		//edit {targetname "canals_door_helipadhouse01" values {spawnflags "0" returndelay "-1"} }
+
+//Prevent Backtracking
+		create {classname "prop_dynamic" origin "-10752 5007.95 -512"
+			values {model "models/synergy/tools/syn_transition.mdl"
+				angles "0 270 0"
+				solid "6"
+				DisableShadows "1"} }
+
+		create {classname "light_dynamic" origin "-10752 4480 -320"
+			values {_light "170 255 170"
+				brightness "1"
+				distance "256"
+				style "12"} }
+
+		//create {classname "trigger_push" origin "0 -64 0"
+		//	values {model "*71"
+		//		spawnflags "1"
+		//		speed "750"
+		//		pushdir "0 -90 0"} }
+//infront of synwall
+		create {classname "func_vehicleclip" origin "0 -64 0"
+			values {model "*71"} }
+
+//--Starting Items--
+		create {classname "info_player_equip"
+			values {
+				targetname "syn_eqipment_base"
+				item_suit			"1"
+				item_armor			"45"
+				weapon_crowbar		"1"
+				weapon_pistol		"1"
+				weapon_smg1			"1"
+				weapon_frag			"1"
+				weapon_357			"1"
+				ammo_pistol			"54"//72
+				ammo_smg1			"45"
+				ammo_grenade		"1"
+				ammo_smg1_grenade	"1"
+				ammo_357			"6"
+			} }
+
+//--Spawns--
+		create {classname "info_spawn_manager"
+			values {targetname "syn_spawn_manager"} }
+
+		create {classname "info_player_coop" origin "-10968 3088 -348"//-10775.40 3839.94 -415.46
+			values {angles "0 345 0" targetname "syn_spawn_player_1"} }//y-90
+
+		create {classname "info_global_settings"
+			values {IsVehicleMap "1" targetname "syn_global_settings"} }
+
+		create {classname "info_vehicle_spawn" origin "-10754 2911 -421"
+			values {targetname	"syn_spawn_vehicle_1"
+				angles "0 180 0"
+				StartEnabled "1"
+				StartGunEnabled "1"
+				RespawnVehicle "1"
+				Ownership "1"
+				VehicleType "2"
+				VehicleSize "164"
+				model "models/airboat.mdl"
+				VehicleScript "scripts/vehicles/airboat.txt"} }
+
+		create {classname "logic_auto"
+			values {spawnflags "1"
+				OnMapTransition "syn_spawn_manager,TeleportPlayers,syn_spawn_teleport,0.1,-1"} }
+
+		create {classname "info_teleport_destination" origin "-10775.40 3839.94 -415.46" values {targetname "syn_spawn_teleport" angles "0 -90 0"} }
+
+//--Exploits--
+//block airboating over dam
+		create {classname "func_vehicleclip" origin "-1024 -6144 17" values {model "*16"} }//57 WS!!
+		create {classname "func_vehicleclip" origin "512 -5824 -46.92" values {model "*16" targetname "trav_antiskip"} }
+
+//--Extra--
+//TODO
+//Trav|Edt - add second heli (test) TODO:make guardtower replace bullrushing if first heli dies
+		create {classname "npc_helicopter" origin "13824 0 896"
+			values {spawnflags "328004"//3473732
+				targetname "syn_vint_canals_npc_reservoircopter02"
+				target "syn_heli2_track_2"//syn_heli2_track
+				//OnDeath "canals_trigger_gateperchpath01,Enable,,0,-1"//on 2nd heli death, enable 1st heli to protect gate
+				OnDeath "syn_hate_gateopener_*,AddOutPut,subject syn_vint_canals_npc_reservoircopter02,0,-1"//use releationships for 1st heli if 2nd dies first
+				//OnHalfHealth "!self,StartBullrushBehavior,,0,1"//unidle when hurt
+				//OnHalfHealth "!self,FlyToSpecificTrackViaPath,canals_path_reservoircopter01_2_11,0,-1"
+				} }
+
+	//	create {classname "path_track" origin "2304 2816 512"
+	//		values {targetname "syn_heli2_track"//guard tower
+	//			target "path_npc_heli_2_1"
+	//			radius "0"} }
+
+		create {classname "logic_auto"
+			values {spawnflags "1"
+				OnMapSpawn "canals_npc_reservoircopter*,SetSquad,squad_syn_heli,0,-1"
+				OnMapSpawn "syn_vint_canals_npc_reservoircopter02,StartLongCycleShooting,,0,-1"
+				OnMapSpawn "canals_npc_reservoircopter01,AddOutPut,OnDeath trav_heli1_death:Trigger::0:-1,0,-1"
+				} }
+
+		create {classname "logic_relay"
+			values {spawnflags "1"
+				targetname "trav_heli1_death"
+				OnTrigger "syn_vint_canals_npc_reservoircopter02,StartPatrol,,0.15,-1"
+				OnTrigger "syn_vint_canals_npc_reservoircopter02,StartBreakableMovement,,0.2,-1"
+				OnTrigger "syn_vint_canals_npc_reservoircopter02,StartBullrushBehavior,,0.5,-1"
+				OnTrigger "syn_vint_canals_npc_reservoircopter02,FlyToSpecificTrackViaPath,canals_path_reservoircopter01_2_11,0.6,-1"
+				} }
+//path for 2nd heli
+		create {classname "path_track" origin "5632 2560 512"
+			values {targetname "syn_heli2_track_1"
+				target "syn_heli2_track_2"
+				radius "1024" } }
+
+		create {classname "path_track" origin "-3072 2560 512"
+			values {targetname "syn_heli2_track_2"
+				//target "syn_heli2_track_1"
+				radius "512"
+				OnPass "syn_vint_canals_npc_reservoircopter02,FlyToSpecificTrackViaPath,syn_heli2_track_2,10,-1"} }//dunno why i need this
+
+//so helis wont collide
+		edit {targetname "canals_path_reservoircopter01_2_2" values {radius "1750"} }
+		edit {targetname "canals_path_reservoircopter01_2_11" values {radius "1750"} }
+
+//dont let heli run far away on awakening
+		delete {targetname "logic_start_helicopter"}
+		create {classname "logic_relay"
+			values {targetname "logic_start_helicopter"
+				OnTrigger "canals_npc_reservoircopter01,Activate,,0,-1"
+				OnTrigger "syn_vint_canals_npc_reservoircopter02,Activate,,0,-1"
+					//OnTrigger "syn_vint_canals_npc_reservoircopter02,SetTrack,syn_heli2_track,1,-1"
+				OnTrigger "canals_npc_reservoircopter01,StartPatrol,,0.15,-1"
+				OnTrigger "canals_npc_reservoircopter01,StartBreakableMovement,,0.2,-1"
+				OnTrigger "canals_npc_reservoircopter01,StartBullrushBehavior,,0.5,-1"
+				OnTrigger "canals_npc_reservoircopter01,FlyToSpecificTrackViaPath,canals_path_reservoircopter01_2_11,0.6,-1"//canals_npc_reservoircopter01
+					OnTrigger "syn_vint_canals_npc_reservoircopter02,StartPatrol,,0.2,-1"
+					OnTrigger "syn_vint_canals_npc_reservoircopter02,SetTrack,syn_heli2_track_2,0.6,-1"
+					OnTrigger "syn_vint_canals_npc_reservoircopter02,FlyToSpecificTrackViaPath,syn_heli2_track_2,0.8,-1"} }
+
+		edit {targetname "canals_trigger_gateperchpath01" values {targetname "syn_canals_trigger_gateperchpath01"} }//prevent default inputs
+		edit {targetname "canals_music_helideath" values {targetname "syn_canals_music_helideath"} }
+
+		create {classname"math_counter"
+			values {targetname "syn_helisdead"
+				max "2"
+				OnHitMax "syn_canals_music_helideath,PlaySound,,0,-1"
+				//OnHitMax "trav_antiskip,Disable,,0,-1"
+//Trav|Edt when helis die, make gate toggle only
+				OnHitMax "gate3_wheel,AddOutput,spawnflags 1185,0,-1"
+				OnHitMax "syn_antirush_wall,Kill,,0,-1"
+				OnHitMax "syn_antirush_temp,Kill,,0,-1"} }
+
+//Trav|Edt have helicopter hate player opening the gate the most and make more aggressive
+//on tower platform
+		create {classname "trigger_multiple"
+			origin "3136 2600 -128"
+			values {model "*35"
+				targetname "syn_gatetower_target"
+				spawnflags "1"
+				wait "6"
+				//OnStartTouch "syn_can12_KillMeNow,ApplyRelationship,1,0.1,-1"//refresh?
+				//OnEndTouch "syn_can12_KillMeLater,ApplyRelationship,1,0.1,-1"
+				//OnEndTouch "trav_hate_gateopener,RevertToDefaultRelationship,,0,-1"
+				OnStartTouch "!activator,AddOutPut,targetname syn_can12_KillMeNow,0,-1"//hate players on tower
+				OnEndTouch "!activator,AddOutPut,targetname syn_can12_KillMeLater,0,-1"//hate players who were on tower
+
+				//OnTrigger "syn_vint_canals_npc_reservoircopter02,DropBombAtTargetAlways ,,0,-1"
+				//OnStartTouch "syn_vint_canals_npc_reservoircopter02,EnableDeadlyShooting,syn_gatetower_target,0,-1"
+				//OnStartTouch "syn_vint_canals_npc_reservoircopter02,StartDefaultBehavior,,0,-1"
+				//OnStartTouch "syn_vint_canals_npc_reservoircopter02,StartContinuousShooting,,0,-1"
+				//OnEndTouchAll "syn_vint_canals_npc_reservoircopter02,DisableDeadlyShooting,,0,-1"
+				//OnEndTouchAll "syn_vint_canals_npc_reservoircopter02,StartDefaultBehavior,,0,-1"
+				} }
+
+		create {classname "ai_relationship"
+			values {subject "canals_npc_reservoircopter01"//syn_vint_canals_npc_reservoircopter02
+				target "syn_can12_KillMeNow"//Opening the gate
+				targetname "syn_hate_gateopener_now"
+				disposition "1"
+				StartActive "1"
+				rank "9999"} }
+
+		create {classname "ai_relationship"
+			values {subject "canals_npc_reservoircopter01"//syn_vint_canals_npc_reservoircopter02
+				target "syn_can12_KillMeLater"//Tried to open gate
+				targetname "syn_hate_gateopener_later"
+				disposition "1"
+				StartActive "1"
+				rank "99"} }
+
+		//edit {targetname "canals_trigger_gateperchpath01" values {StartDisabled "1"} }
+
+		//delete {targetname "canals_trigger_gateperchpath01"}
+		//create {classname "trigger_multiple"
+		//	origin "3264 2432 -192"
+		//	values {model "*31"
+		//		spawnflags "1"
+		//		targetname "canals_trigger_gateperchpath01"
+		//		wait "1"
+		//		OnEndTouchAll "canals_npc_reservoircopter01,StartBullrushBehavior,,0,-1"//OnEndTouch
+		//		OnEndTouchAll "canals_npc_reservoircopter01,DisableDeadlyShooting,,0,-1"
+		//		OnEndTouchAll "canals_npc_reservoircopter01,SetTrack,canals_path_reservoircopter01_2_8,0,-1"
+		//		OnStartTouch "canals_npc_reservoircopter01,StartDefaultBehavior,,0,-1"
+		//		OnStartTouch "canals_npc_reservoircopter01,StartDefaultBehavior,,0,-1"
+		//		OnStartTouch "canals_npc_reservoircopter01,SetTrack,canals_path_reservoircopter01_4_1,0.1,-1"} }
+
+
+		//edit {targetname "canals_npc_reservoircopter01" values {spawnflags "3473732"} }
+
+//TODO: how much more aggressive?
+//Trav|Edt - attempt to optimize network usage [laggy map]
+		edit {classname "prop_physics" values {classname "prop_physics_multiplayer" spawnflags "128"} }
+
+		create {classname "logic_auto"
+			values {spawnflags "1"
+				OnMapSpawn "prop_ragdoll,DisableMotion,,10,-1"
+				OnMapSpawn "prop_physics_multiplayer,Sleep,,10,-1"//DisableMotion
+				OnMapSpawn "item_item_crate,DisableMotion,,10,-1"} }
+
+//Trav|Edt - allow vort to armor charge (test)
+		create {classname "logic_auto"
+			values {spawnflags "1"
+				OnMapSpawn "vort,AddOutput,ArmorRechargeEnabled 1,0,-1"} }
+
+		edit {targetname "vort" values {spawnflags "16518"} }//134
+
+//Trav|Edt - Stunstick spawn in warehouse
+		create {classname "weapon_stunstick"
+			origin "2932 -1180 232"
+			values {//spawnflags "1"
+				targetname "syn_vint_trav_stunstick2"
+				angles "0 15 0"
+				OnPlayerPickup "syn_vint_trav_point_temp_stunstick,ForceSpawn,,0,-1" } }
+
+		create {classname "point_template"
+			values {spawnflags "3"
+				targetname "syn_vint_trav_point_temp_stunstick"
+				Template01 "syn_vint_trav_stunstick2" } }
+
+//Trav|Edt - antiskip
+		create {classname "prop_dynamic" origin "-880 -3712 -528"
+			values {model "models/synergy/tools/syn_transition.mdl"
+				angles "0 90 0"
+				solid "6"
+				targetname "syn_antirush_wall"//at dam gate
+				DisableShadows "1"} }
+
+		create {classname "point_template"
+			values {spawnflags "2"
+				targetname "syn_antirush_temp"
+				Template01 "syn_antirush_wall"} }
+
+		create {classname "logic_auto"
+			values {spawnflags "1"
+				OnMapSpawn "gate_control_lever,AddOutput,OnOpen syn_antirush_temp:ForceSpawn::0:1,0,-1"} }
+
+	//	create {classname "trigger_push"
+	//		origin "512 -5856 -46.92"
+	//		values {model "*16"
+	//			spawnflags "1"
+	//			targetname "trav_antiskip"
+	//			pushdir "0 90 0"
+	//			speed "500"} }
+
+		create {classname "logic_auto"
+			values {spawnflags "1"
+				OnMapSpawn "canals_npc_reservoircopter01,AddOutput,OnDeath syn_helisdead:Add:1:0:-1,8,-1"
+				OnMapSpawn "syn_vint_canals_npc_reservoircopter02,AddOutput,OnDeath syn_helisdead:Add:1:0:-1,8,-1"} }
+
+//Trav|Edt - changeup changelevel
+		delete {classname "trigger_once" origin "-1024 -6656 -1262.92"}
+
+	//	create {classname "logic_auto"
+	//		values {spawnflags "1"
+	//			OnMapSpawn "canals_trigger_elitrans,AddOutput,origin 0 1200 -2400,0,-1"
+	//			OnMapSpawn "canals_trigger_elitrans,AddOutput,spawnflags 0,0,-1"} }
+
+	//	edit {targetname "canals_trigger_elitrans" values {origin "0 1200 -2400" spawnflags "0"} }
+
+		create {classname "trigger_changelevel" origin "-1024 -7360 -1262.92"//-1024 -6656 -1262.92
+			values {model "*16"
+				angles "0 90 0"
+				map "d1_eli_01"
+				landmark "canals_trans_13_eli"
+				} }
+
+//Trav|Edt - Functionality check
+		create {classname "logic_relay" values {targetname "trav_functionality_d1_canals_13"} }
+	}
+}

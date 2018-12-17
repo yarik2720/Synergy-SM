@@ -1,0 +1,283 @@
+d3_c17_05
+{
+	entity {
+//--Setup--
+		delete {targetname "spawn_items_template"}
+		delete {targetname "spawn_items"}
+		edit {classname "func_areaportal" values {targetname "disabledPortal" StartOpen "1"} }
+
+//Prevent Backtracking
+		create {classname "syn_transition_wall" origin "40 -5512 129"}
+
+		//create {classname "trigger_push" origin "64 0 0"
+		//	values {model "*37"
+		//		spawnflags "1"
+		//		speed "750"
+		//		pushdir "0 0 0"} }
+
+//--Starting Items--
+		create {classname "info_player_equip"
+			values {
+				item_suit			"1"
+				item_armor			"60"
+				weapon_crowbar		"1"
+				weapon_pistol		"1"
+				weapon_smg1			"1"
+				weapon_frag			"1"
+				weapon_357			"1"
+				weapon_physcannon	"1"
+				weapon_shotgun		"1"
+				weapon_ar2			"1"
+				weapon_rpg			"1"
+				weapon_crossbow		"1"
+				weapon_bugbait		"1"
+				weapon_slam			"1"
+				weapon_stunstick	"1"
+				ammo_pistol			"54"//72
+				ammo_smg1			"45"
+				ammo_grenade		"1"
+				ammo_smg1_grenade	"1"
+				ammo_357			"6"
+				ammo_buckshot		"12"
+				ammo_ar2			"30"
+				ammo_ar2altfire		"1"
+				//ammo_rpg_round		"1"
+				//ammo_crossbow		"0"
+				//ammo_slam			"2"
+			} }
+
+//--Spawns--
+		create {classname "info_spawn_manager"
+			values {targetname "syn_spawn_manager"} }
+
+		create {classname "info_player_coop" origin "206.82 -5903.96 128.03"
+			values {angles "0 -90 0" targetname "syn_spawn_player_1"} }
+
+		create {classname "info_global_settings"
+			values {IsVehicleMap "0" targetname "syn_global_settings"} }
+
+//--Extra--
+
+		// create intermission
+		"create" { "classname" "info_intermission" "origin" "767.493774 -6603.148438 229.327713" "values" { "angles" "9.451239 60.379959 0.0" } }
+
+		// fix spawn items
+	//	"delete" { "classname" "logic_auto" "origin" "252.003 -5857.07 168.736" }
+
+		"create"
+		{
+			"classname" "point_template"
+			"origin" "216.257 -5891.45 137"
+			"values"
+			{
+				"Template02" "citizen"
+			//	"Template01" "spawn_items"
+				"targetname" "spawn_items_template"
+				"spawnflags" "2"
+			}
+		}
+
+
+//Trav|Edt Doors: open only
+		edit {targetname "outpost_room_1_door_1" values {spawnflags "16384"} }
+		edit {targetname "door_serviceentrance" values {spawnflags "0"} }//returndelay "-1"
+		edit {targetname "zombie_room_door" values {spawnflags "0"} }
+		edit {targetname "ruined_building_door" values {spawnflags "2048"} }
+		//edit {classname "prop_door_rotating" values {spawnflags "0"} } TODO: a few more doors
+
+//Trav|Edt - Disable Enemy turrets when tipped (avoid player greif)
+		create {classname "logic_auto"
+			values {spawnflags "1"
+				OnMapSpawn "npc_turret_floor,AddOutput,OnTipped !self:SelfDestruct::0:-1,0,-1"//DepleteAmmo
+				OnMapSpawn "trav_temp_turret_nooutput,ForceSpawn,,1,-1"} }
+
+//Trav|Edt - use funky method for gate-to-stay-open
+		create {classname "trigger_once" origin "1749.5 -4074.5 251.55"
+			values {model "*35"
+				spawnflags "64"
+				filtername "syn_filter_func_door"
+				OnTrigger "!activator,AddOutput,targetname syn_gate_button,0,-1"} }
+
+		create {classname "filter_activator_class"
+			values {targetname "syn_filter_func_door"
+				filterclass "func_door"} }
+
+		create {classname "trigger_once" origin "1749.5 -4074.5 251.55"
+			values {model "*35"
+				spawnflags "1"
+				OnTrigger "syn_gate_button,AddOutput,OnOpen !self:Lock::0:-1,0,-1"} }
+
+//Trav|Edt - add hoppers round teh place
+		create {classname "combine_mine" origin "1472 -5576 136"}//barrel
+		create {classname "combine_mine" origin "1712 -5528 136"}//drop corner
+		create {classname "combine_mine" origin "828 -4224 136"}//drop2
+		create {classname "combine_mine" origin "624 -4032 144"}//droppostcornerwall
+
+//Trav|Edt - Add crates in optional area (zombie/breen tv)
+		create {classname "item_item_crate"
+			origin	"385 -6305 532"
+			values{ItemClass "item_dynamic_resupply"
+				ItemCount "5"} }
+
+		create {classname "item_item_crate"
+			origin	"385 -6305 564"
+			values{ItemClass "item_dynamic_resupply"
+				ItemCount "5"} }
+
+		create {classname "item_item_crate"
+			origin	"385 -6305 596"
+			values{ItemClass "item_dynamic_resupply"
+				ItemCount "5"} }
+
+//357 room
+		create {classname "item_item_crate"
+			origin	"49 -6305 532"
+			values{ItemClass "item_dynamic_resupply"
+				ItemCount "5"} }
+
+		create {classname "item_item_crate"
+			origin	"49 -6305 564"
+			values{ItemClass "item_dynamic_resupply"
+				ItemCount "5"} }
+
+//stairs
+		create {classname "item_item_crate"
+			origin	"1504 -6360 200"
+			values{ItemClass "item_dynamic_resupply"
+				ItemCount "5"} }
+
+		create {classname "item_item_crate"
+			origin	"1504 -6360 232"
+			values{ItemClass "item_dynamic_resupply"
+				ItemCount "5"} }
+
+		create {classname "item_item_crate"
+			origin	"1464 -6360 200"
+			values{ItemClass "item_dynamic_resupply"
+				ItemCount "5"} }
+
+//deadend combinedoor room
+		create {classname "item_item_crate"
+			origin	"89 -6241 212"
+			values{ItemClass "item_dynamic_resupply"
+				ItemCount "5"} }
+
+		create {classname "item_item_crate"
+			origin	"89 -6241 212"
+			values{ItemClass "item_dynamic_resupply"
+				ItemCount "5"} }
+
+//add rollermine in this room ||| freakin TKers QQ
+		//create {classname "npc_rollermine"
+		//	origin "1384 -6344 200"
+		//	values {spawnflags "256"
+		//		targetname "trav_rollermine"
+		//		uniformsightdist "1"
+		//		startburied "1"} }
+
+//Trav|Edt - make gate open only for player
+		//edit {classname "func_door" origin "1938 -4100 256" values {targetname "OMFGLAWLS"} }
+
+//Trav|Edt - allow more cops at gate
+		//edit {targetname "barricade_cop_respawn_timer"
+		//	values {RefireTime "12"} }//20
+
+		edit {targetname "barricade1_cop_a_maker"
+			values {MaxLiveChildren "3"
+				MaxNPCCount "24"} }
+
+		edit {targetname "barricade1_cop_b_maker"
+			values {MaxLiveChildren "3"
+				MaxNPCCount "24"} }
+
+		edit {targetname "barricade1_cop_c_maker"
+			values {MaxLiveChildren "3"
+				MaxNPCCount "24"} }
+
+//Trav|Edt - extra charger
+		create {classname "item_suitcharger"
+			origin "1867 -3200 497"}
+
+//Trav|Edt - add stuff in optional area (past next load point)
+		create {classname "point_template"
+			values {spawnflags "2"
+				targetname "trav_temp_turret_nooutput"
+				Template01 "trav_turret"} }
+
+		create {classname "npc_turret_floor"
+			 origin	"2859 -3996 160"
+			 values { spawnflags "640"//friendly
+				angles "0 145 0"
+				targetname "trav_turret"
+				SkinNumber "1"
+			OnPhysGunPickup "!activator,Enable,,0,-1"} }
+
+//		create { classname "npc_zombine"
+//			 origin	"2466 -4303 168"
+//			 values { spawnflags "516"
+//				  angles "0 90 0" } }
+//
+//		create {classname "ai_relationship"
+//			values {subject "npc_metropolice"
+//				target "npc_zombine"
+//				disposition "4"
+//				Reciprocal "1"
+//				StartActive "1"} }
+
+//Trav|Edt - add crate behind stair turret
+		create {classname "item_item_crate"
+			origin	"1561 -3369 596"
+			values{ItemClass "item_dynamic_resupply"
+				ItemCount "6"} }
+
+//Trav|Edt - add crate behind stairs (turret)
+		create {classname "item_item_crate"
+			origin	"1601 -3129 -44"
+			values{ItemClass "item_dynamic_resupply"
+				ItemCount "6"} }
+
+//Trav|Edt - autirush
+		create {classname "trigger_coop"
+			origin "2527.5 -3622.12 -68"
+			values {model "*28"
+				spawnflags "1"
+				//StartDisabled "1"
+				targetname "syn_antirush_coop"
+				CountType "1"
+				UseHUD "1"
+				PlayerValue "50"
+				wait "1.5"
+				OnTrigger "syn_antirush_text,Display,,0,-1"
+				//OnPlayersIn "syn_antirush_push,Kill,,0,1"
+				OnPlayersIn "syn_antirush_wall,Kill,,0,1"
+				OnPlayersIn "!self,Kill,,1,1"} }
+
+		create {classname "syn_transition_wall" origin "2680 -3072 -320" values {angles "0 180 0" targetname "syn_antirush_wall"} }
+
+		//create {classname "trigger_push"
+		//	origin "2754 -3375 -68"
+		//	values {model "*135"
+		//		spawnflags "1"
+		//		targetname "syn_antirush_push"
+		//		pushdir "0 180 0"
+		//		speed "450"} }
+
+		create {classname "game_text"
+			values {spawnflags "0"
+				targetname "syn_antirush_text"
+				message "Need More Players to Continue. . ."
+				channel "0"
+				effect "2"
+				x "-1"
+				y "0.85"
+				color "100 100 100"
+				color2 "240 110 0"
+				fadein "0.03"
+				fadeout "1.25"
+				holdtime "2"
+				fxtime "0.25"} }
+
+//Trav|Edt - Functionality check
+		create {classname "logic_relay" values {targetname "trav_functionality_d3_c17_05"} }
+	}
+}

@@ -1,0 +1,287 @@
+d3_c17_10a
+{
+	entity {
+//--Setup--
+		delete {targetname "player_spawn_items"}
+		edit {classname "func_areaportal" values {targetname "syn_disabledPortal" StartOpen "1"} }
+
+//Prevent Backtracking
+		create {classname "syn_transition_wall" origin "-4168 6464 -8"}
+
+		//create {classname "trigger_push" origin "64 0 0"
+		//	values {model "*32"
+		//		spawnflags "1"
+		//		speed "750"
+		//		pushdir "0 0 0"} }
+
+//--Starting Items--
+		create {classname "info_player_equip"
+			values {
+				item_suit			"1"
+				item_armor			"60"
+				weapon_crowbar		"1"
+				weapon_pistol		"1"
+				weapon_smg1			"1"
+				weapon_frag			"1"
+				weapon_357			"1"
+				weapon_physcannon	"1"
+				weapon_shotgun		"1"
+				weapon_ar2			"1"
+				weapon_rpg			"1"
+				weapon_crossbow		"1"
+				weapon_bugbait		"1"
+				weapon_slam			"1"
+				weapon_stunstick	"1"
+				ammo_pistol			"54"//72
+				ammo_smg1			"45"
+				ammo_grenade		"1"
+				ammo_smg1_grenade	"1"
+				ammo_357			"6"
+				ammo_buckshot		"12"
+				ammo_ar2			"30"
+				ammo_ar2altfire		"1"
+				//ammo_rpg_round	"1"
+				//ammo_crossbow		"0"
+				//ammo_slam			"2"
+			} }
+
+//--Spawns--
+		create {classname "info_spawn_manager"
+			values {targetname "syn_spawn_manager"} }
+
+		create {classname "info_player_coop" origin "-4051.34 6764.27 0.03"
+			values {angles "0 0 0" targetname "syn_spawn_player_1"} }
+
+		create {classname "info_global_settings"
+			values {IsVehicleMap "0" targetname "syn_global_settings"} }
+
+//--Extra--
+
+		// logic check for barney
+		create { "classname" "logic_relay"
+			values { "spawnflags" "3"
+				"targetname" "mapedit_spawn_new_barney_relay"
+				"OnTrigger" "player_spawn_items_maker,ForceSpawn,,0,-1"
+			}
+		}
+
+//Trav|Edt - Doors: Open Only
+		edit {targetname "bldg1_door2" values {spawnflags "0"} }
+		edit {targetname "first_doors" values {spawnflags "0"} }
+		edit {targetname "bldg1_door1" values {spawnflags "0"} }
+		edit {targetname "bldg2_door2" values {spawnflags "0"} }
+		edit {targetname "soldierscare_door" values {spawnflags "0"} }
+		edit {targetname "jail_door_door" values {spawnflags "2834"} }
+
+//Trav|Edt - Respawning Weps/Items (Use sv_hl2dm_* for spawntimes)
+		create { "classname" "logic_auto"
+			values { "spawnflags" "0"
+				"OnMapSpawn" "barney,addoutput,OnUser1 mapedit_spawn_new_barney_relay:Disable::0:-1,5,-1"
+				//"OnMapSpawn" "barney,FireUser1,,6,-1"
+				//"OnMapSpawn" "mapedit_spawn_new_barney_relay,Trigger,,7,-1"
+			}
+		}
+
+//Trav|Edt - block window
+		create {classname "func_brush" origin "-2424 7488 580"
+			values {model "*53"//or *129 for LOS
+				spawnflags "2"} }
+
+//Trav|Edt - increase magnitude of mortar
+		//delete {targetname "tank_mortar"}
+
+		//create {classname "func_tankmortar"
+		//	origin "504 5117 1020"
+		//	values {model "*16"
+		//		spawnflags "80"
+		//		angles "0 180 0"
+		//		targetname "tank_mortar"
+		//		barrel "96"
+		//		barrelz "64"
+		//		firedelay "1.5"
+		//		firerate "0.22"
+		//		firespread "1"
+		//		firestartsound "Weapon_Mortar.Single"
+		//		firevariance "1"
+		//		incomingsound "Weapon_Mortar.Incomming"
+		//		yawrate "360"
+		//		yawrange "360"
+		//		pitchrate "100"
+		//		pitchtolerance "180"
+		//		minRange "500"
+		//		maxRange "5000"
+		//		spritescale "6"
+		//		persistence "0"
+		//		spriteflash "materials/Sprites/redglow1.vmt"
+		//		iMagnitude "500"//100 def
+		//		OnFire "mortar_fire_wav,PlaySound,,0,-1"} }
+
+//End of Trav|Edt
+
+		// -------------- standard tasks ------------
+
+		// intermission
+		"create" { "classname" "info_intermission" "origin" "-2377.062500 7637.375000 518.906250" "values" { "angles" "10 -40 0" } }
+
+//Trav|Edt - Disable Enemy turrets when tipped (avoid player greif)
+		create {classname "logic_auto"
+			values {spawnflags "1"
+				OnMapSpawn "npc_turret_floor,AddOutput,OnTipped !self:SelfDestruct::0:-1,0,-1"} }//DepleteAmmo
+
+//Trav|Edt - prevent doors from auto closing
+		delete {targetname "bldg1_door1_close_timer"}
+		delete {targetname "bldg1_door2_close_timer"}
+		delete {targetname "soldierscare_door_close_timer"}
+		delete {targetname "bldg2_door2_close_timer"}
+
+//Trav|Edt - add more combine that burst out of capital building.. looking thing.
+		create {classname "logic_auto"
+			values {spawnflags "1"
+				OnMapSpawn "lobby_frontdoors_soldier_makers,SetMaxLiveChildren,5,8,-1"
+				OnMapSpawn "lobby_frontdoors_soldier_makers,SetSpawnFrequency,0.1,8,-1"
+				OnMapSpawn "lobby_frontdoors_soldier_makers,AddMaxChildren,5,8,-1"
+				//OnMapSpawn "tank_mortar,SetDamage,100,8,-1"
+				} }
+
+//Trav|Edt - prevent rushingpast guardrush
+		create {classname "filter_activator_name"
+			values {targetname "trav_null_filter"
+				filtername "null"} }
+
+		edit {targetname "field1_plug" values {spawnflags "823296"} }
+
+		create {classname "logic_auto"
+			values {spawnflags "1"
+				OnMapSpawn "field1_breakable_plug_bit,SetDamageFilter,trav_null_filter,8,-1"} }
+				//OnMapSpawn "field1_breakable_plug_bit,DisableDamageForces,,5,-1"
+				//OnMapSpawn "field1_plug,DisablePhyscannonPickup,,5,-1"
+
+		create {classname "trigger_once"
+			origin "-460 6272 256"
+			values {model "*22"
+				spawnflags "1"
+				OnTrigger "field1_breakable_plug_bit,SetDamageFilter,,45,-1"
+				//OnTrigger "field1_breakable_plug_bit,EnableDamageForces,,10,-1"
+				OnTrigger "field1_plug,EnablePhyscannonPickup,,60,-1"} }//MUST DAMAGE
+
+//End of Trav|Edt
+
+		delete {targetname "lobby_frontdoors_assault"}
+
+		create {classname "ai_goal_assault"
+			values {targetname "lobby_frontdoors_assault"
+				actor "lobby_frontdoors_soldier*"
+				rallypoint "lobby_frontdoors_assault_rp*"
+				AssaultCue "3"} }
+
+		create {classname "trigger_multiple"
+			origin "252 6344 316"
+			values {model "*33"
+				spawnflags "2"
+				targetname "trav_combine_capitol_allout"
+				//StartDisabled "1"
+				filtername "trav_combine_filter"
+				OnEndTouchAll "lobby_frontdoors_counter,Add,1,0,-1"
+				OnEndTouchAll "trav_push_capitol,Disable,,1.5,-1"} }
+
+		create {classname "filter_activator_class"
+			values {targetname "trav_combine_filter"
+				filterclass "npc_combine_s" } }
+
+		create {classname "trigger_push"
+			origin "268 6272 316"
+			values {model "*33"
+				spawnflags "1"
+				targetname "trav_push_capitol"
+				pushdir "0 180 0"
+				speed "750"} }
+
+		//create {classname "func_brush"
+		//	origin "268 6232 316"
+		//	values {model "*33"
+		//		spawnflags "1"
+		//		rendermode "10"
+		//		excludednpc "npc_combine_s"
+		//		targetname "trav_doors_pclip_blocker"} }
+
+		//create {classname "logic_relay"
+		//	values {spawnflags "1"
+		//		targetname "lobby_frontdoors_relay"
+		//		OnTrigger "trav_combine_door_vol,Enable,0.1,0,-1"} }
+
+		edit {targetname "lobby_frontdoors_counter" values {max "4"} }
+
+//Trav|Edt - autirush
+		create {classname "trigger_coop"
+			origin "376 4880 356"
+			values {model "*24"
+				spawnflags "1"
+				//StartDisabled "1"
+				targetname "syn_antirush_coop"
+				CountType "1"
+				UseHUD "1"
+				PlayerValue "50"
+				wait "1.5"
+				OnTrigger "syn_antirush_text,Display,,0,-1"
+				//OnPlayersIn "syn_antirush_push,Disable,,0,1"
+				OnPlayersIn "syn_antirush_wall,Kill,,0,1"
+				OnPlayersIn "!self,Disable,,1,1"} }
+
+		create {classname "syn_transition_wall" origin "488 5168 256" values {angles "0 180 0" targetname "syn_antirush_wall"} }
+
+		create {classname "game_text"
+			values {spawnflags "0"
+				targetname "syn_antirush_text"
+				message "Need More Players to Continue. . ."
+				channel "0"
+				effect "2"
+				x "-1"
+				y "0.85"
+				color "100 100 100"
+				color2 "240 110 0"
+				fadein "0.03"
+				fadeout "1.25"
+				holdtime "2"
+				fxtime "0.25"} }
+
+//End of Trav|Edt
+
+		// changelevels
+		//"create"
+		//{
+		//	"classname" "trigger_push"
+		//	"origin"	"64 0 0"
+		//	"values"
+		//	{
+		//		"model" "*32"
+		//		"spawnflags" "1"
+		//		"pushdir" "0 0 0"
+		//		"speed" "750"
+		//	}
+		//}
+
+		// -------------- level tasks --------------
+
+		// fix those god damn doors
+		"edit" { "targetname" "bldg1_door1_close_timer" "values" { "RefireTime" "3" } }
+		"edit" { "targetname" "bldg1_door2_close_timer" "values" { "RefireTime" "3" } }
+		"edit" { "targetname" "soldierscare_door_close_timer" "values" { "RefireTime" "3" } }
+		"edit" { "targetname" "bldg2_door2_close_timer" "values" { "RefireTime" "3" } }
+
+		// activate checkpoint at second building
+	//	"create"
+	//	{
+	//		"classname" "trigger_once"
+	//		"origin" "-1404 8104 192"
+	//		"values"
+	//		{
+	//			"model" "*134"
+	//			"spawnflags" "1"
+	//			"OnTrigger" ""
+	//		}
+	//	}
+
+//Trav|Edt - Functionality check
+		create {classname "logic_relay" values {targetname "trav_functionality_d3_c17_10a"} }
+	}
+}

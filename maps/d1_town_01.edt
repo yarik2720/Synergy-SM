@@ -1,0 +1,415 @@
+d1_town_01
+{
+	entity
+	{
+//--Setup--
+		delete {classname "logic_auto" origin "4488 -2784 -3731"}
+		edit {classname "func_areaportal" values {targetname "disabledPortal" StartOpen "1"} }
+
+//Prevent Backtracking
+		create {classname "prop_dynamic" origin "4192 -2880 -4032"
+			values {model "models/synergy/tools/syn_transition.mdl"
+				angles "0 90 90"
+				solid "6"
+				DisableShadows "1"} }
+
+	//	create {classname "light_dynamic" origin "4256.01 -2912 -3712"
+	//		values {_light "170 255 170"
+	//			brightness "1"
+	//			distance "256"
+	//			style "12"} }
+
+	//	create {classname "trigger_push" origin "0 64 0"
+	//		values {model "*87"
+	//			spawnflags "1"
+	//			speed "750"
+	//			pushdir "0 90 0"} }
+
+//--Starting Items-- (reduced for ravemholme_
+		create {classname "info_player_equip"
+			values {
+				targetname "syn_eqipment_base"
+				item_suit			"1"
+				item_armor			"25"
+				weapon_crowbar		"1"
+				weapon_pistol		"1"
+				weapon_smg1			"1"
+				weapon_frag			"1"
+				weapon_357			"1"
+				weapon_physcannon	"1"
+				ammo_pistol			"54"//72
+				ammo_smg1			"45"
+				//ammo_grenade		"1"//
+				//ammo_smg1_grenade	"1"//
+				ammo_357			"3"//6
+			} }
+
+//--Spawns--
+		create {classname "info_spawn_manager"
+			values {targetname "syn_spawn_manager"} }
+
+		create {classname "info_player_coop" origin "4250 -2792 -3767"
+			values {angles "0 0 0" targetname "syn_spawn_player_1"} }
+
+		create {classname "info_player_coop" origin "2584 -1736 -3840"
+			values {angles "0 75 0" targetname "syn_spawn_player_2" StartDisabled "1"} }
+
+		create {classname "info_player_coop" origin "2464 -984 -3776"
+			values {angles "0 255 0" targetname "syn_spawn_player_3" StartDisabled "1"} }
+
+		create {classname "info_player_coop" origin "2480 -1680 -3776"
+			values {angles "0 180 0" targetname "syn_spawn_player_4" StartDisabled "1"} }
+
+		create {classname "info_player_coop" origin "2016 -1456 -3788"
+			values {angles "0 90 0" targetname "syn_spawn_player_5" StartDisabled "1"} }
+
+		create {classname "info_global_settings"
+			values {IsVehicleMap "0" targetname "syn_global_settings"} }
+
+//--Extra--
+
+		// add an intermission and its target
+
+		"create"
+		{
+			"classname"	"info_target"
+			"origin"	"928 -896 -3680"
+
+			"values"
+			{
+				"targetname"	"edt_camtarg"
+			}
+		}
+
+		"create"
+		{
+			"classname"	"info_intermission"
+			"origin"	"1664 -1504 -3264"
+
+			"values"
+			{
+				"target"	"edt_camtarg"
+			}
+		}
+
+//If dog's ball is carried over, keep invuln
+		create {classname "filter_activator_name"
+			values {targetname "syn_dfilter_null"
+				filtername "null"} }
+
+//Trav|Edt - Doors: Open Only
+		//edit {targetname "switch_room_door" values {spawnflags "2048"} }
+		//edit {targetname "start_door" values {spawnflags "2048"} }
+		//edit {classname "prop_door_rotating" values {spawnflags "0"} }
+
+//Trav|Edt - delay music (players not loaded won't hear it)
+		delete {classname "trigger_once" origin "4512 -2676 -3728.77"}
+
+		create {classname "trigger_once" origin "4512 -2676 -3728.77"
+			values {model "*106"
+				spawnflags "1"
+				OnTrigger "start_music,PlaySound,,20,-1"} }//30/45 (ppl loading faster and faster these days :P)
+
+
+//Trav|Edt - edit all propeller blades do people would be less likely to be spawn-decapatated when players are under them, break then when useless
+		//delete {classname "phys_hinge" origin "2715 -1219 -3782"}
+
+		//create {classname "phys_hinge" origin "2715 -1219 -3782"
+		//	values {spawnflags "9"
+		//		targetname "trav_propeller_01_hinge"
+		//		breaksound "Town.d1_town_03_blade_out"
+		//		hingeaxis "2714.5 -1218.5 -3792.63"
+		//		hingefriction "30"
+		//		minSoundThreshold "6"
+		//		maxSoundThreshold "80"
+		//		SystemLoadScale "1"
+		//		attach1 "propeller_01"} }
+
+//Trav|Edt - disable blades when applicable
+		create {classname "trigger_once"
+			origin "2457.5 -1170.5 -3719.66"
+			values {model "*69"
+				spawnflags "1"
+				targetname "syn_vint"
+				OnTrigger "propeller_01_lever_01,Lock,,0.01,-1"
+				OnTrigger "propeller_01,DisableMotion,,5,-1"
+				OnTrigger "propeller_01_lever_01,PressOut,,0,-1"
+				OnTrigger "syn_spawn_manager,SetCheckpoint,syn_spawn_player_3,0,-1"} }
+//startbladeonsound
+		edit {targetname "propeller_01_spinning_wav" values {spawnflags "0"} }
+
+		create {classname "trigger_once"
+			origin "1917 -1787.5 -3712"
+			values {model "*70"
+				spawnflags "1"
+				targetname "syn_vint"
+				OnTrigger "propeller_03_lever_01,Lock,,0.01,-1"
+				OnTrigger "propeller_03,DisableMotion,,5,-1"
+				OnTrigger "propeller_03_lever_01,PressOut,,0,-1"
+				OnTrigger "syn_spawn_manager,SetCheckpoint,syn_spawn_player_4,0,-1"} }
+
+//Trav|Edt - remove stupid logic I/O  loop
+		delete {targetname "electric_fence_rl_1"}
+		delete {targetname "electric_fence_rl_2"}
+
+//Trav|Edt - protect players when in fire zones
+		//edit {targetname "hallfire_1_trap_1_firesensor_1" values {targetname "syn_hallfire_1_trap_1_firesensor_1"} }
+
+		create {classname "trigger_multiple"
+			origin "680 -572 -3602.72"
+			values {model "*54"
+				spawnflags "1"
+				targetname "syn_vint"
+				OnStartTouch "hallfire_1_trap_1_ignition_button_1,Lock,,0,-1"
+				OnEndTouchAll "hallfire_1_trap_1_ignition_button_1,UnLock,,0,-1"
+				OnStartTouch "hallfire_1_trap_1_flamejet_wheel_1,Lock,,0,-1"
+				OnEndTouchAll "hallfire_1_trap_1_flamejet_wheel_1,UnLock,,0,-1"
+				//OnStartTouch "syn_hallfire_1_trap_1_firesensor_1,Disable,,0,-1"
+				//OnEndTouchAll "syn_hallfire_1_trap_1_firesensor_1,Enable,,0.01,-1"
+				OnStartTouch "hallfire_1_trap_1_fire_microphone,Disable,,0,-1"
+				OnEndTouchAll "hallfire_1_trap_1_fire_microphone,Enable,,0.01,-1"//triggers sparks even when disabled [but no biggie]
+				//OnStartTouch "hallfire_1_trap_1_fire_microphone,AddOutput,targetname syn_hallfire_1_trap_1_fire_microphone,0.01,-1"//Prevent being Enabled by wheel
+				//OnEndTouchAll "syn_hallfire_1_trap_1_fire_microphone,AddOutput,targetname hallfire_1_trap_1_fire_microphone,0,-1"
+				} }
+//TODO: What was this for?
+		create {classname "logic_auto"
+			values {spawnflags "1"
+				OnMapSpawn "hallfire_1_trap_1_flamejet_wheel_1,OnClose,,0,-1"} }
+
+		//do not let the doors close on players
+		delete {targetname "trigger_close_gates"}
+		//block the gap in the railing //Trav - wut?
+		//create {classname "prop_dynamic" origin "62 -2529 -492"
+		//	values {
+		//		fademaxdist	"0.0"
+		//		fademindist	"0.0"
+		//		model			"models/props_c17/handrail04_short.mdl"
+		//		solid			"6"
+		//		spawnflags	"0"} }
+
+//Trav|Edt - gag intro zombies
+		edit {targetname "zombie_03" values {spawnflags "2050"} }
+		edit {targetname "inside_zombie_02" values {spawnflags "2050"} }
+		edit {targetname "inside_zombie_03" values {spawnflags "2050"} }
+
+//Trav|Edt - Add more zombies
+		create {classname "npc_zombie"//zombine
+			origin "3825 -1765 -3862"
+			values {spawnflags "526"
+				targetname "syn_vint"} }
+//intro room
+		create {classname "logic_difficulty"
+			values {spawnflags "3"
+				targetname "syn_vint_ld"
+				OnNormal "syn_vint_trav_temp_zombies1,SetMaxChildren,3,0,-1"
+				OnHard "syn_vint_trav_temp_zombies1,SetMaxChildren,6,0,-1"
+				OnNormal "syn_vint_trav_temp_zombies2,SetMaxChildren,3,0,-1"
+				OnHard "syn_vint_trav_temp_zombies2,SetMaxChildren,6,0,-1"
+				OnNormal "syn_vint_trav_temp_zombies3,SetMaxChildren,8,0,-1"
+				OnHard "syn_vint_trav_temp_zombies3,SetMaxChildren,12,0,-1"
+				OnNormal "syn_vint_trav_temp_zombies4,SetMaxChildren,3,0,-1"
+				OnHard "syn_vint_trav_temp_zombies4,SetMaxChildren,6,0,-1"} }
+
+		create {classname "npc_maker"
+			origin "3048 -1848 -3776"
+			values {spawnflags "16"
+				angles "0 90 0"
+				targetname "syn_vint_trav_temp_zombies1"
+				MaxNPCCount "2"//8 LD Scaled
+				SpawnFrequency "1"
+				NPCType "npc_zombie"
+				NPCSquadname "goryroom_zombie_squad"} }
+//past 1st blade
+		create {classname "npc_maker"
+			origin "2560 -1264 -3768"
+			values {spawnflags "16"
+				targetname "syn_vint_trav_temp_zombies2"
+				NPCTargetname "syn_vint_trav_zombies2"
+				MaxNPCCount "2"//6 LD Scaled
+				SpawnFrequency "1"
+				StartDisabled "1"
+				NPCType "npc_zombie"
+				NPCSquadname "squad_trav_zombies2"
+				OnAllSpawnedDead "trav_propeller_01_hinge,Break,,0,-1"} }
+
+		create {classname "aiscripted_schedule"
+			values {spawnflags "4"
+				targetname "trav_aiscript_sched_zombies2"
+				m_iszEntity "syn_vint_trav_zombies2"
+				schedule "6"
+				goalent "!player"} }
+
+		create {classname "trigger_once"
+			origin "2718.5 -1324 -3758.07"
+			values {model "*49"
+				spawnflags "1"
+				//OnTrigger "intro_zombie_1_spawner_1,Enable,,0,-1"
+				//OnTrigger "intro_zombie_2_spawner_1,Enable,,0,-1"
+				OnTrigger "syn_vint_trav_temp_zombies2,Enable,,0,-1"
+				OnTrigger "trav_aiscript_sched_zombies2,StartSchedule,,0.2,-1"
+				OnTrigger "syn_spawn_manager,SetCheckpoint,syn_spawn_player_2,0,-1"
+				OnTrigger "syn_global_settings,AddOutput,IsVehicleMap 1,0,-1"} }
+
+		create {classname "npc_zombie"
+			origin "1344 -576 -3768"
+			values {targetname "syn_vint_trav_zombies3"
+				spawnflags "2564"
+				squadname "squad_trav_zombies3"} }
+
+		create {classname "npc_zombie"
+			origin "1344 -576 -3768"
+			values {targetname "syn_vint_trav_zombies4"
+				spawnflags "2564"
+				squadname "squad_trav_zombies4"} }
+//fireroom
+		create {classname "npc_template_maker"
+			origin "1344 -576 -3768"
+			values {spawnflags "128"
+				angles " 0 270 0"
+				targetname "syn_vint_trav_temp_zombies3"
+				MaxNPCCount "4"//12 LD Scaled
+				SpawnFrequency "1"
+				TemplateName "syn_vint_trav_zombies3"} }
+
+		create {classname "npc_poisonzombie"
+			origin "352 -746 -3459"
+			values {spawnflags "7"} }
+
+		create {classname "npc_template_maker"
+			origin "456 -336 -3656"
+			values {spawnflags "128"
+				angles " 0 270 0"
+				targetname "syn_vint_trav_temp_zombies4"
+				MaxNPCCount "2"//6 LD Scaled
+				SpawnFrequency "1"
+				TemplateName "syn_vint_trav_zombies4"} }
+
+//Trav|Edt - freeze some ragdawls
+		create {classname "logic_auto"
+			values {spawnflags "1"
+				OnMapSpawn "pyre_ragdolls_template,AddOutput,OnEntitySpawned pyre_corpse_*:DisableMotion::4:-1,0,-1"} }
+
+//Trav|Edt - lock levers when players are on cars
+		create {classname "trigger_multiple" origin "1160 41.5 -3542"
+			values {model "*118"
+				spawnflags "1"
+				parentname "crushtrap_01_weight_car"
+				StartDisabled "1"
+				targetname "syn_vint_trigger_car1"
+				OnStartTouch "crushtrap_01_switch_01,Lock,,0,-1"
+				OnEndTouchAll "crushtrap_01_switch_01,Unlock,,0,-1"} }
+
+		create {classname "trigger_multiple" origin "760 248.5 -3542"
+			values {model "*118" angles "0 45 0"
+				spawnflags "1"
+				parentname "crushtrap_02_weight_car"
+				StartDisabled "1"
+				targetname "syn_vint_trigger_car2"
+				OnStartTouch "crushtrap_02_switch_01,Lock,,0,-1"
+				OnEndTouchAll "crushtrap_02_switch_01,Unlock,,0,-1"} }
+
+		create {classname "logic_auto"
+			values {spawnflags "1"
+				OnMapSpawn "crushtrap_01_switch_01,AddOutput,OnPressed syn_vint_trigger_car1:Enable::1:1,0,-1"
+				OnMapSpawn "crushtrap_02_switch_01,AddOutput,OnPressed syn_vint_trigger_car2:Enable::1:1,0,-1"} }
+
+//Trav|Edt add antirush at endlevel
+		create {classname "trigger_coop"
+			origin "174.5 592.5 -3252"
+			values {model "*46"
+				spawnflags "1"
+				//StartDisabled "1"
+				targetname "syn_antirush_trav_town01_end_coop"
+				CountType "1"
+				UseHUD "1"
+				PlayerValue "50"
+				wait "1.5"
+				OnTrigger "syn_antirush_text,Display,,1,-1"
+				//OnPlayersIn "trav_town01_end_push,Disable,,0,1"
+				OnPlayersIn "start_door,UnLock,,0,1"
+				OnPlayersIn "!self,Disable,,1,-1"} }
+
+		create {classname "logic_relay"
+			values {spawnflags "1"
+				targetname "syn_antirush"
+				OnSpawn "start_door,Lock,,0,1"} }
+
+	//	create {classname "trigger_push"
+	//		origin "192 271.5 -3283"
+	//		values {model "*118"
+	//			spawnflags "1"
+	//			targetname "trav_town01_end_push"
+	//			pushdir "0 90 0"
+	//			speed "450"} }
+
+		create {classname "game_text"
+			values {spawnflags "0"
+				targetname "syn_antirush_text"
+				message "Need More Players to Continue. . ."
+				channel "0"
+				effect "2"
+				x "-1"
+				y "0.85"
+				color "100 100 100"
+				color2 "240 110 0"
+				fadein "0.03"
+				fadeout "1.25"
+				holdtime "2"
+				fxtime "0.25"} }
+
+//End of Trav|Edt
+
+		//edit triggers to make headcrab hate mp players
+		"edit"
+		{
+			"classname"	"trigger_once"
+			"origin"	"2556 -1082 -3725"
+
+			"values"
+			{
+				"OnTrigger"		"proproom_headcrab,SetRelationship,player D_HT 9999,0,0"
+			}
+		}
+
+		"create"
+		{
+			"classname"	"logic_relay"
+			"origin"	"2016 -1456 -3700"
+
+			"values"
+			{
+				"targetname"		"turn_off_all_propeller_traps" //so it is triggered at correct time
+
+				"StartDisabled"		"0"
+
+				"OnTrigger"		"syn_spawn_manager,SetCheckpoint,syn_spawn_player_5,0,0"
+//Trav|Edt - disable player teleport, nvm re-enable it
+				"OnTrigger"		"syn_spawn_manager,MovePlayers,,.2,0"
+				OnTrigger "syn_global_settings,AddOutput,IsVehicleMap 0,0,-1"
+//Trav|Edt - disable last blade
+				OnTrigger "propeller_02_lever_01,Lock,,0.01,-1"
+				OnTrigger "propeller_02,DisableMotion,,5,-1"
+				OnTrigger "propeller_02_lever_01,PressOut,,0,-1"
+			}
+		}
+
+		//change all goals to "player", and change those that weren't "!player" back
+		////I don't think this is necessary, but I'll leave it in just in case
+
+		//"edit"
+		//{
+		//	"classname"	"aiscripted_schedule"
+		//	"values" { "goalent" "player" }
+		//}
+
+		"edit"
+		{
+			"classname"	"aiscripted_schedule"
+			"targetname"	"corridor_zombie_2_aiss_1"
+			"values" { "goalent" "corridor_zombie_2_aiss_1" }
+		} 						
+
+//Trav|Edt - Functionality check
+		create {classname "logic_relay" values {targetname "trav_functionality_d1_town_01"} }
+	}
+}

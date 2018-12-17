@@ -1,0 +1,282 @@
+d2_coast_12
+{
+	console
+	{
+		sk_antlion_health 75 //30
+	}
+	entity
+	{
+//--Setup--
+		delete {classname "logic_auto" origin "4812.06 -12088.3 336.88"}
+		delete {classname "player_loadsaved"}
+		create {classname "logic_auto"
+			values {spawnflags "1"
+				OnMapSpawn "thumper_1_button_model,SetAnimation,depressed,0,-1"
+				OnMapSpawn "thumper_2_button_model,SetAnimation,depressed,0,-1"
+				OnMapSpawn "thumper_3_button_model,SetAnimation,depressed,0,-1"
+				OnMapSpawn "thumper_1,Enable,,0.5,-1"
+				OnMapSpawn "thumper_1,Disable,,0,-1"} }
+		edit {classname "func_areaportal" values {targetname "disabledPortal" StartOpen "1"} }
+		edit {classname "func_areaportalwindow" values {targetname "DisabledPortalWindow" FadeStartDist "1000" FadeDist "1500"} }
+
+//Prevent Backtracking
+		create {classname "prop_dynamic" origin "9760.01 -11584 176"
+			values {model "models/synergy/tools/syn_transition.mdl"
+				angles "0 135 0"
+				solid "6"
+				DisableShadows "1"} }
+
+		create {classname "light_dynamic" origin "9824 -11536 336"
+			values {_light "170 255 170"
+				brightness "1"
+				distance "512"
+				style "12"} }
+
+	//	create {classname "trigger_push" origin "-50 50 0"
+	//		values {model "*67"
+	//			spawnflags "1"
+	//			speed "750"
+	//			pushdir "0 135 0"} }
+
+//--Starting Items--
+		create {classname "info_player_equip"
+			values {targetname "syn_equipment_base"
+				item_suit			"1"
+				item_armor			"60"
+				weapon_crowbar		"1"
+				weapon_pistol		"1"
+				weapon_smg1			"1"
+				weapon_frag			"1"
+				weapon_357			"1"
+				weapon_physcannon	"1"
+				weapon_shotgun		"1"
+				weapon_ar2			"1"
+				weapon_rpg			"1"
+				weapon_crossbow		"1"
+					weapon_bugbait	"1"
+				ammo_pistol			"54"//72
+				ammo_smg1			"45"
+				ammo_grenade		"1"
+				ammo_smg1_grenade	"1"
+				ammo_357			"6"
+				ammo_buckshot		"12"
+				ammo_ar2			"30"
+				ammo_rpg_round		"1"
+				//ammo_crossbow		"0"
+			} }
+
+//--Spawns--
+		create {classname "info_spawn_manager"
+			values {targetname "syn_spawn_manager"} }
+
+		create {classname "info_player_coop" origin "9645 -11455 214"
+			values {angles "0 140 0" targetname "syn_spawn_player_1"} }
+//thumper
+		create {classname "info_player_coop" origin "4624 -8272 552"
+			values {angles "0 90 0" targetname "syn_spawn_player_2" StartDisabled "1"} }
+//struct-ss
+		create {classname "info_player_coop" origin "1128 1752 608"
+			values {angles "0 0 0" targetname "syn_spawn_player_2" StartDisabled "1"} }
+
+		create {classname "info_global_settings"
+			values {IsVehicleMap "0" targetname "syn_global_settings"} }
+
+//--Extra--
+
+//Trav|Edt -  add more combine
+		create {classname "npc_combine_s"
+			origin "2304 -4544 632"
+			values {spawnflags "2564"
+				targetname "syn_vint_trav_combine1"
+				model "models/combine_soldier_prisonguard.mdl"
+				squadname "bunker_1_squad"
+				additionalequipment "weapon_ar2"} }
+
+		create {classname "npc_template_maker"
+			origin "2304 -4544 632"
+			values {spawnflags "128"
+				targetname "syn_vint_trav_tmaker_combine1"
+				StartDisabled "1"
+				MaxNPCCount "8"
+				SpawnFrequency "1"
+				MaxLiveChildren "-1"
+				TemplateName "syn_vint_trav_combine1"} }
+
+		create {classname "logic_relay"
+			values{targetname "patrol_1_assault1_relay"
+				OnTrigger "syn_vint_trav_tmaker_combine1,Enable,,8,-1"} }
+
+//--
+
+		create {classname "npc_combine_s"
+			origin "1984 2368 688"
+			values {spawnflags "2564"
+				targetname "syn_vint_trav_tmaker_combine1"
+				model "models/combine_soldier_prisonguard.mdl"
+				squadname "bigbunker_squad"
+				additionalequipment "weapon_shotgun"} }
+
+		create {classname "npc_template_maker"
+			origin "1984 2368 688"
+			values {//spawnflags "128"
+				targetname "syn_vint_trav_tmaker_combine2"
+				StartDisabled "1"
+				MaxNPCCount "8"
+				SpawnFrequency "1"
+				MaxLiveChildren "-1"
+				TemplateName "syn_vint_trav_tmaker_combine1"} }
+
+		create {classname "trigger_once"
+			origin "2144 -304 728.5"//1904 272 728.5
+			values {model "*24"//*22
+				spawnflags "1"
+				OnTrigger "syn_vint_trav_tmaker_combine2,Enable,,0,-1"
+				OnTrigger "syn_spawn_manager,SetCheckpoint,syn_spawn_player_2,0,-1"
+				OnTrigger "syn_spawn_manager,MovePlayers,,0,-1"} }
+
+//--
+		create {classname "npc_combine_s"
+			origin "6280 6808 880"
+			values {spawnflags "2564"
+				targetname "syn_vint_trav_combine3"
+				model "models/combine_soldier_prisonguard.mdl"
+				squadname "assault_squad"
+				additionalequipment "weapon_ar2"} }
+
+		create {classname "logic_difficulty"
+			values {spawnflags "3"
+				targetname "syn_vint_ld"
+				OnNormal "syn_vint_trav_tmaker_combine3,SetMaxChildren,12,0,-1"
+				OnHard "syn_vint_trav_tmaker_combine3,SetMaxChildren,16,0,-1"} }
+
+		create {classname "npc_template_maker"
+			origin "6280 6808 880"
+			values {spawnflags "128"
+				angles " 0 180 0"
+				targetname "syn_vint_trav_tmaker_combine3"
+				StartDisabled "1"
+				MaxNPCCount "8"//24
+				SpawnFrequency "1"
+				MaxLiveChildren "6"
+				TemplateName "syn_vint_trav_combine3"} }
+
+		delete {classname "trigger_once" origin "5152 4112 720"}
+
+		create {classname "trigger_once"
+			origin "5152 4112 720"
+			values {model "*33"
+				spawnflags "1"
+				OnTrigger "antspawn_nodes_10,EnableHint,,0,-1"
+				OnTrigger "ragdoll_manager,SetMaxRagdollCount,2,0,-1"
+				OnTrigger "syn_vint_trav_tmaker_combine3,Enable,,0,-1"
+				//OnTrigger "syn_vint_trav_combine3_timer,Enable,,0,-1"
+				OnTrigger "assault_template_spawner,ForceSpawn,,0,-1"
+				OnTrigger "assault_template_spawner,ForceSpawn,,2,-1"
+				OnTrigger "assault_template_spawner,ForceSpawn,,4,-1"
+				OnTrigger "trav_bigassault_counter,Enable,,5,-1"} }
+//!!
+//Trav|Edt ^ test big assault (needs refining)
+		create {classname "logic_auto"
+			values {spawnflags "1"
+				//OnMapSpawn "assault_soldier_*,AddOutput,OnDeath trav_bigassault_counter:Subtract:1:0:-1,0,-1"
+				//OnMapSpawn "assault_template_spawner,AddOutput,OnEntitySpawned trav_bigassault_counter:Add:4:0:-1,0,-1"
+				OnMapSpawn "assault_template_spawner,AddOutput,OnEntitySpawned trav_bigassault_setuper:Trigger::0:-1,0,-1"} }
+//additional waves
+		create {classname"math_counter"
+			values {targetname "trav_bigassault_counter_total"
+				max "4"
+				OnHitMax "trav_bigassault_counter,Disable,,0,-1"} }
+//when to spawn next wave
+		create {classname"math_counter"
+			values {targetname "trav_bigassault_counter"
+				min "6"
+				startvalue "12"
+				StartDisabled "1"
+				OnHitMin "assault_template_spawner,ForceSpawn,,0,-1"
+				OnHitMin "trav_bigassault_counter_total,Add,1,,-1"} }
+//on squad spawn
+		create {classname "logic_relay"
+			values {targetname "trav_bigassault_setuper"
+				OnTrigger "trav_bigassault_counter,Add,4,0,-1"
+				OnTrigger "assault_soldier_*,AddOutput,OnDeath trav_bigassault_counter:Subtract:1:0:-1,0.1,-1"
+				OnTrigger "assault_soldier_*,AddOutput,targetname syn_assault_soldier,0.2,-1"} }
+
+		edit {targetname "field_assault" values {actor "syn_assault_soldier"} }
+
+		//create {classname "logic_timer"
+		//	values {targetname "syn_vint_trav_combine3_timer"
+		//		StartDisabled "1"
+		//		RefireTime "2"
+		//		OnTimer "assault_template_spawner,ForceSpawn,,0,-1"
+		//		OnTimer "!self,Disable,,3,1"
+		//		OnTimer "!self,Enable,,30,1"
+		//		//OnTimer "!self,Disable,,35,1"
+		//		OnTimer "!self,Enable,,50,1"
+		//		//OnTimer "!self,Disable,,55,1"
+		//		OnTimer "!self,Enable,,70,1"
+		//		//OnTimer "!self,Disable,,77,1"
+		//		OnTimer "syn_vint_trav_tmaker_combine3,Enable,,60,-1"} }//d80
+
+		create {classname "npc_poisonzombie"
+			origin "8872 8350 1012"
+			values {spawnflags "516"
+				angles "0 270 0"
+				targetname "syn_vint"} }
+
+	//	edit {targetname "tunnel_zombie"
+	//		values {MaxLiveChildren "-1"
+	//			MaxNPCCount "2"} }//1 -- 3
+
+//Trav|Edt - autirush
+		create {classname "trigger_coop"
+			origin "9174 8302 2118"
+			values {model "*73"
+				angles "0 90 0"
+				spawnflags "1"
+				targetname "syn_antirush_trigger"
+				CountType "1"
+				UseHUD "1"
+				PlayerValue "50"
+				wait "1.5"
+				OnTrigger "syn_antirush_text,Display,,0,-1"
+				OnPlayersIn "syn_antirush_blocker,Kill,,0,1"
+				OnPlayersIn "syn_antirush_light,TurnOff,,0,1"
+				OnPlayersIn "!self,Disable,,1,1"} }
+
+		create {classname "prop_dynamic" origin "9064 8504 2072"
+			values {model "models/synergy/tools/syn_transition.mdl"
+				targetname "syn_antirush_blocker"
+				angles "0 270 0"
+				solid "6"
+				DisableShadows "1"} }
+
+		create {classname "light_dynamic" origin "9280 8536 2144"
+			values {targetname "syn_antirush_light"
+				_light "170 255 170"
+				brightness "1"
+				distance "256"
+				//_inner_cone "75"
+				//_cone "80"
+				style "12"} }
+
+		create {classname "game_text"
+			values {spawnflags "0"
+				targetname "syn_antirush_text"
+				message "Need More Players to Continue. . ."
+				channel "0"
+				effect "2"
+				x "-1"
+				y "0.85"
+				color "100 100 100"
+				color2 "240 110 0"
+				fadein "0.03"
+				fadeout "1.25"
+				holdtime "2"
+				fxtime "0.25"} }
+
+		edit { classname "npc_antlion_maker" values { "spawntarget" "!rndplayer" } }
+
+//Trav|Edt - Functionality check
+		create {classname "logic_relay" values {targetname "trav_functionality_d2_coast_122"} }
+	}
+}

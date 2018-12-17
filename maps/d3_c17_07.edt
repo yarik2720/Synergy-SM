@@ -1,0 +1,384 @@
+d3_c17_07
+{
+	entity {
+//--Setup--
+		delete {classname "logic_auto" origin "4392 1174.85 289"}
+		edit {classname "func_areaportal" values {targetname "syn_disabledPortal" StartOpen "1"} }
+
+//Prevent Backtracking
+//no fit at cltrig
+		create {classname "syn_transition_wall" origin "4096 1064 217" values {angles "0 90 0" targetname "syn_antirush_wall"} }
+
+		//create {classname "trigger_push" origin "64 0 0"
+		//	values {model "*50"
+		//		spawnflags "1"
+		//		speed "750"
+		//		pushdir "0 0 0"} }
+
+//--Starting Items--
+		create {classname "info_player_equip"
+			values {
+				item_suit			"1"
+				item_armor			"60"
+				weapon_crowbar		"1"
+				weapon_pistol		"1"
+				weapon_smg1			"1"
+				weapon_frag			"1"
+				weapon_357			"1"
+				weapon_physcannon	"1"
+				weapon_shotgun		"1"
+				weapon_ar2			"1"
+				weapon_rpg			"1"
+				weapon_crossbow		"1"
+				weapon_bugbait		"1"
+				weapon_slam			"1"
+				weapon_stunstick	"1"
+				ammo_pistol			"54"//72
+				ammo_smg1			"45"
+				ammo_grenade		"1"
+				ammo_smg1_grenade	"1"
+				ammo_357			"6"
+				ammo_buckshot		"12"
+				ammo_ar2			"30"
+				ammo_ar2altfire		"1"
+				//ammo_rpg_round	"1"
+				//ammo_crossbow		"0"
+				//ammo_slam			"2"
+			} }
+
+//--Spawns--
+		create {classname "info_spawn_manager"
+			values {targetname "syn_spawn_manager"} }
+
+		create {classname "info_player_coop" origin "4408 1232 280"
+			values {angles "0 0 0" targetname "syn_spawn_player_1"} }
+
+		create {classname "info_player_coop" origin "4680 1256 1"
+			values {angles "0 270 0" targetname "syn_spawn_player_2" StartDisabled "1"} }
+
+		create {classname "info_player_coop" origin "7936 1728 1"
+			values {angles "0 0 0" targetname "syn_spawn_player_3" StartDisabled "1"} }
+
+		create {classname "info_global_settings"
+			values {IsVehicleMap "0" targetname "syn_global_settings"} }
+
+//--Extra--
+
+		// create intermission
+		"create" { "classname" "info_intermission" "origin" "7103.490723 1270.962769 204.487061" "values" { "angles" "16 150 0" } }
+
+//Trav|Edt - Doors: Open Only
+		edit {targetname "alyx_briefingroom_exitdoor" values {spawnflags "2048"} }
+		edit {classname "prop_door_rotating" values {spawnflags "0"} }
+
+//Trav|Edt - Fix alyx from spamming alyx_doorbreak_lcs1
+		create {classname "logic_auto"
+			values {spawnflags "1"
+				OnMapSpawn "turretroom_doorbreak_conditions,AddOutPut,OnConditionsSatisfied !self:Kill::0:-1,0,-1"} }
+
+//Trav|Edt - Disable Enemy turrets when tipped (avoid player greif) make sure this doesnt hurt trav_turret
+		create {classname "logic_auto"
+			values {spawnflags "1"
+				OnMapSpawn "npc_turret_floor,AddOutput,OnTipped !self:SelfDestruct::0:-1,0,-1"} }//DepleteAmmo
+
+//Trav|Edt - add trav_turret spawn if non-transition mapchange
+		create {classname "logic_auto"
+			values {spawnflags "1"
+				OnNewGame "trav_new_turret,ForceSpawn,,5,-1"} }
+
+		create {classname "point_template"
+			values {spawnflags "2"
+				targetname "trav_new_turret"
+				Template01 "trav_turret"} }
+
+		create { classname "npc_turret_floor"
+			 origin	"4704 824 280"
+			 values { spawnflags "640"
+				angles "0 120 0"
+				targetname "trav_turret"
+			OnPhysGunPickup "!activator,Enable,,0,-1"} }
+
+//Trav|Edt - add candy!
+		//create { classname "npc_turret_floor"
+		//	 origin	"6158 1811 32"
+		//	 values { spawnflags "640"
+		//		  angles "0 135 0"
+		//	OnPhysGunPickup "!activator,Enable,-1,0,-1" } }
+
+		//create { classname "npc_turret_floor"
+		//	 origin	"6160 1261 32"
+		//	 values { spawnflags "640"
+				 //angles "0 255 0"
+			//OnPhysGunPickup "!activator,Enable,-1,0,-1" } }
+
+		//create { classname "npc_turret_floor"
+		//	 origin	"7614 1459 28"
+		//	 values { spawnflags "640"
+		//		  angles "0 165 0"
+		//	OnPhysGunPickup "!activator,Enable,-1,0,-1" } }
+
+//Trav|Edt - get rid of turret here, makes it too easy.(players can still bring one from 05? but thats ok
+		//create { classname "npc_turret_floor"
+		//	 origin	"6496 800 4"
+		//	 values { spawnflags "640"
+		//		  angles "0 225 0"
+		//	OnPhysGunPickup "!activator,Enable,-1,0,-1" } }
+//occluder hides these, oh well?
+		create {classname "item_item_crate"
+			origin	"6569 843 16"
+			values{ItemClass "item_dynamic_resupply"
+				ItemCount "5"} }
+
+		create {classname "item_item_crate"
+			origin	"6569 843 44"
+			values{ItemClass "item_dynamic_resupply"
+				ItemCount "5"} }
+
+//Trav|Edt - add playerclip abovegate
+		create {classname "func_brush"
+			origin "7264 1520 248"
+			values {model "*35"
+				spawnflags "2"} }
+
+//Trav|Edt - Finale defense
+		//delete {targetname "northfront_soldiers_respawn_counter"}
+		//delete {targetname "southfront_soldiers_respawn_counter"}
+
+		//create {classname "math_counter"
+		//	values{targetname "northfront_soldiers_respawn_counter"
+		//		max "6"
+		//		OnHitMax "northfront_battle_reset,Trigger,,0,-1"
+		//		OnHitMax "northfront_soldier_template_maker,ForceSpawn,,6,-1"
+		//		OnHitMax "northfront_soldier_template_maker,ForceSpawn,,10,-1"
+		//		OnHitMax "northfront_wave_counter,Add,1,6,-1"} }
+
+		//create {classname "math_counter"
+		//	values{targetname "southfront_soldiers_respawn_counter"
+		//		max "8"
+		//		OnHitMax "southfront_battle_reset,Trigger,,0,-1"
+		//		OnHitMax "southfront_soldier_template_maker,ForceSpawn,,6,-1"
+		//		OnHitMax "southfront_soldier_template_maker,ForceSpawn,,10,-1"
+		//		OnHitMax "southfront_wave_counter,Add,1,6,-1"} }
+
+//Trav|Edt - moveplayers to main area, and close/lock door and teleport alyx, also set net checkpoint, and save
+		create {classname "trigger_once"
+			origin "5544 1408 64"
+			values {model "*11"
+				spawnflags "1"
+				OnTrigger "syn_spawn_manager,MovePlayers,,0.1,-1"
+				OnTrigger "trav_teleport_alyx1,Teleport,,0,-1"
+				OnTrigger "trav_teleport_turret,Teleport,,0,-1"
+				OnTrigger "alyx_briefingroom_exitdoor,Close,,0.2,-1"
+				OnTrigger "alyx_briefingroom_exitdoor,Lock,,1,-1"
+				OnTrigger "syn_spawn_manager,SetCheckPoint,syn_spawn_player_2,0,-1"
+				OnTrigger "alyx_doorbreak_save,Save,,3,-1"
+				OnTrigger "syn_global_settings,AddOutput,IsVehicleMap 1,0,-1"} }
+
+		create {classname "point_teleport"
+			origin "5264 1600 8"
+			values {targetname "trav_teleport_alyx1"
+				angles "0 270 0"
+				target "alyx"} }
+
+		create {classname "point_teleport"
+			origin "5200 1456 8"
+			values {targetname "trav_teleport_turret"
+				angles "0 0 0"
+				target "trav_turret"} }
+
+//Trav|Edt - have combine hate player more than alyx, and have cops not shoot mai turret q.q
+		create {classname "ai_relationship"
+			values{targetname "trav_air_combine_vs_alyx"
+				subject "npc_combine_s"
+				target "npc_alyx"
+				disposition "1"
+				rank "0"} }
+
+		create {classname "ai_relationship"
+			values{targetname "trav_air_combine_vs_player"
+				subject "npc_combine_s"
+				target "!player"
+				disposition "1"
+				rank "999"} }
+
+		create {classname "ai_relationship"
+			values{targetname "trav_air_cops_vs_turret"
+				subject "npc_metropolice"
+				target "npc_turret_floor"
+				StartActive "1"
+				disposition "4"} }
+
+		create {classname "logic_relay"
+			values{spawnflags "1"
+				targetname "southfront_begin_relay"
+				OnTrigger "southfront_soldier_template_maker,ForceSpawn,,4,-1"
+				OnTrigger "trav_air_combine_vs_alyx,ApplyRelationship,,0,-1"
+				OnTrigger "trav_air_combine_vs_player,ApplyRelationship,,0,-1"} }
+
+		create {classname "logic_relay"
+			values{spawnflags "1"
+				targetname "northfront_begin_relay"
+				OnTrigger "northfront_soldier_template_maker,ForceSpawn,,4,-1"
+				OnTrigger "trav_air_cops_vs_turret,RevertRelationship,,0,-1"} }
+
+//Trav|Edt - make balcony cop keep comming //nvm(too lazy to remove !self kill RAWR)
+		delete {targetname "balcony_cop1_maker"}
+
+		create {classname "npc_template_maker"
+			origin "5544 1608 389"
+			values {spawnflags "144"
+				angles " 0 270 0"
+				targetname "balcony_cop1_maker"
+				StartDisabled "1"
+				MaxNPCCount "24"
+				SpawnFrequency "4"
+				MaxLiveChildren "3"
+				Radius "0"
+				TemplateName "balcony_cop1"
+				OnSpawnNPC "balcony_doors,Open,,0,-1"
+				OnSpawnNPC "balcony_cop1_sched,StartSchedule,,0,-1"} }
+
+		//edit {targetname "balcony_cop1_maker"
+		//	values {spawnflags "48"//def 16
+		//		MaxLiveChildren "3"
+		//		SpawnFrequency "25"} }
+
+//Trav|Edt - add checkpoint stuff after gate, and move trav_turet
+
+		create {classname "info_teleport_destination"
+			origin "7552 1536 36"
+			values {targetname "trav_teleport_gate"} }
+
+		create {classname "point_teleport"
+			origin "7424 1728 8"
+			values {targetname "trav_teleport_alyx_gate"
+				angles "0 270 0"
+				target "alyx"} }
+
+		create {classname "point_teleport"
+			origin "7704 1376 0"
+			values {targetname "trav_teleport_turret_gate"
+				angles "0 165 0"
+				target "trav_turret"} }
+
+//Trav|Edt - autirush
+		create {classname "trigger_coop"
+			origin "9096 2592 -88"
+			values {model "*20"
+				spawnflags "1"
+				//StartDisabled "1"
+				targetname "syn_antirush_coop"
+				CountType "1"
+				UseHUD "1"
+				PlayerValue "50"
+				wait "1.5"
+				OnTrigger "syn_antirush_text,Display,,0,-1"
+				OnPlayersIn "syn_antirush_push,Disable,,0,1"
+				OnPlayersIn "syn_antirush_wall,Kill,,0,1"
+				OnPlayersIn "!self,Disable,,1,1"} }
+
+		create {classname "syn_transition_wall" origin "10152 2920 -488" values {angles "0 270 0" targetname "syn_antirush_wall"} }
+
+//		create {classname "trigger_push"
+//			origin "10168 2944 -416"
+//			values {model "*36"
+//				spawnflags "1"
+//				targetname "syn_antirush_push"
+//				pushdir "0 270 0"
+//				speed "750"} }
+
+		create {classname "game_text"
+			values {spawnflags "0"
+				targetname "syn_antirush_text"
+				message "Need More Players to Continue. . ."
+				channel "0"
+				effect "2"
+				x "-1"
+				y "0.85"
+				color "100 100 100"
+				color2 "240 110 0"
+				fadein "0.03"
+				fadeout "1.25"
+				holdtime "2"
+				fxtime "0.25"} }
+
+//End of Trav|Edt not rly D:
+
+		// ------------- level tasks ---------------
+
+		// move the trigger a bit so we have more spawn room
+		//// One spawn point: should require less space
+		//"edit"
+		//{
+		//	"classname" "trigger_once"
+		//	"origin" "4680 1064 340"
+		//	"values"
+		//	{
+		//		"origin" "4680 920 340"
+		//	}
+		//}
+
+		// do not let the control room door close
+		"delete" { "targetname" "alyx_briefingroom_exitdoor_conditions" }
+
+		// add in an mp5k
+		//// wai- wha- why!?
+		//"create" { "classname" "weapon_mp5k" "origin" "6183.97 1786.06 10.00" }
+
+		// do not let gate close
+//Trav|Edt - Re-enable gate closing, teleport players
+		"delete" { "targetname" "gate_close_counter" }
+		"create"
+		{
+			"classname" "math_counter"
+			"origin" "7400 1536 144"
+			"values"
+			{
+				"targetname" "gate_close_counter"
+				"max" "2"
+				"min" "0"
+				"startvalue" "0"
+				"OnHitMax" "alyx_waitforplayer_lcs0,Kill,,0,-1"
+				"OnHitMax" "alyx_waitforplayer_lcs1,Kill,,0,-1"
+				"OnHitMax" "alyx_waitforplayer_lcs2,Kill,,0,-1"
+				"OnHitMax" "alyx_waitforplayer_lcs3,Kill,,0,-1"
+				"OnHitMax" "alyx_waitforplayer_relay,Kill,,0,-1"
+				"OnHitMax" "killsoldiersassault_killtrigger,Enable,,1,-1"
+				"OnHitMax" "fallback_assault,Deactivate,,2,-1"
+				"OnHitMax" "alyx_end_seq,CancelSequence,,1,-1"
+				"OnHitMax" "gate_danger,InsertSound,300,0,-1"
+				"OnHitMax" "balcony_cop1,Kill,,0,-1"
+				"OnHitMax" "gate_open_wav,PlaySound,,5,-1" //Def trav +5
+				"OnHitMax" "barricade_gate,SetAnimation,close,5,-1" //Def //trav add time for alyx
+				"OnHitMax" "southfront_pressuresoldiers_maker,Kill,,3,-1"
+				"OnHitMax" "gate_close_trigger,Kill,,0,-1"
+				"OnHitMax" "northfront_pressuresoldiers_maker,Kill,,3,-1"
+				"OnHitMax" "gate_close_playerclip,Kill,,10,-1" //Def //trav add time for alyx
+				"OnHitMax" "gate_close_playerclip,Enable,,0,-1" //Def
+				"OnHitMax" "killsoldiers_sched,StartSchedule,,3,-1"
+				"OnHitMax" "finalassault_south,Deactivate,,2,-1"
+				"OnHitMax" "finalassault_north,Deactivate,,2,-1"
+				"OnHitMax" "lcs_alyx_notices_bridge,Start,,2,-1"
+				"OnHitMax" "gate_closed_nodelink,TurnOff,,0,-1"
+				"OnHitMax" "final_assault,Activate,,2.5,-1"
+				"OnHitMax" "final_soundscape,Enable,,0,-1"
+				"OnHitMax" "lcs_citizens_watch_alyx,Start,,7,-1"
+				"OnHitMax" "main_occluder,Activate,,7,-1" //Def
+				"OnHitMax" "gate_closing_hurt,Enable,,2,-1" //Def
+				"OnHitMax" "gate_closing_hurt,Disable,,5,-1" //Def
+//Trav|Edt - mai stuff
+				OnHitMax "syn_spawn_manager,TeleportPlayers,trav_teleport_gate,0,-1"
+				OnHitMax "syn_spawn_manager,SetCheckpoint,syn_spawn_player_3,0,-1"
+				OnHitMax "syn_global_settings,AddOutput,IsVehicleMap 0,0,-1"
+				OnHitMax "trav_teleport_alyx_gate,Teleport,,0,-1"//remove delay 4.9
+				OnHitMax "trav_teleport_turret_gate,Teleport,,0,-1"//4.9
+				OnHitMax "balcony_cop1_maker,Disable,,0,-1"
+				OnHitMax "npc_mectopolice,Kill,,0,-1"
+				OnHitMax "npc_manhack,Kill,,0,-1"
+			}
+		}
+
+//Trav|Edt - Functionality check
+		create {classname "logic_relay" values {targetname "trav_functionality_d3_c17_07"} }
+	}
+}

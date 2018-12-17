@@ -1,0 +1,326 @@
+d1_canals_11
+{
+	entity {
+//--Setup--
+		delete {classname "logic_auto" origin "10100.2 9040.8 -935"}
+		edit {classname "func_areaportal" values {targetname "disabledPortal" StartOpen "1"} }
+
+//Prevent Backtracking
+		create {classname "prop_dynamic" origin "9984 9999.99 -976"
+			values {model "models/synergy/tools/syn_transition.mdl"
+				angles "0 270 0"
+				solid "6"
+				DisableShadows "1"} }
+
+		create {classname "light_dynamic" origin "9984 10000 -832"
+			values {_light "170 255 170"
+				brightness "1"
+				distance "256"
+				style "12"} }
+
+		//create {classname "trigger_push" origin "0 -64 0"
+		//	values {model "*45"
+		//		spawnflags "65"
+		//		speed "750"
+		//		pushdir "0 -90 0"} }
+
+		//create {classname "func_vehicleclip" origin "0 -64 0"
+		//	values {model "*45"} }
+
+//Doors: Open Only
+		//edit {targetname "canals_door_ambush2" values {returndelay "-1"} }
+
+//Prevent hideout gate to drop
+		delete {targetname "relay_guncave_gate_exit_close"}
+
+//Prevent first watergate to drop
+		edit {targetname "gate1" values {targetname "gate1_disabled"} }
+
+//Enable Airboat Guns after vort magic [now done via spawner]
+	//	create {classname "logic_auto"
+	//		values {spawnflags "1"
+	//			OnMapSpawn "relay_guncave_startgunmount,AddOutput,OnTrigger prop_vehicle_airboat:EnableGun:1:9:-1,0,-1"} }
+
+//Don't spawn boats until puzzle solved
+		edit {targetname "hopper_physics_trigger" values {parentname ""} }//removoe parent (prevents logic inputs)
+
+		create {classname "logic_auto"
+			values {spawnflags "1"
+				OnMapSpawn "hopper_physics_trigger,AddOutput,OnTrigger syn_enable_vehiclespawn:Add:1:0:1,0,-1"
+				OnMapSpawn "lock_lever_button,AddOutput,OnPressed syn_enable_vehiclespawn:Add:1:0:1,0,-1"} }
+
+		create {classname"math_counter"
+			values {targetname "syn_enable_vehiclespawn"
+				max "2"
+				OnHitMax "syn_spawn_vehicle_1,Enable,,0,-1"} }
+
+//--Starting Items--
+		create {classname "info_player_equip"
+			values {
+				targetname "syn_eqipment_base"
+				item_suit			"1"
+				item_armor			"45"
+				weapon_crowbar		"1"
+				weapon_pistol		"1"
+				weapon_smg1			"1"
+				weapon_frag			"1"
+				weapon_357			"1"
+				ammo_pistol			"54"//72
+				ammo_smg1			"45"
+				ammo_grenade		"1"
+				ammo_smg1_grenade	"1"
+				ammo_357			"6"
+			} }
+
+//--Spawns--
+		create {classname "info_spawn_manager"
+			values {targetname "syn_spawn_manager"} }
+
+		create {classname "info_player_coop" origin "10104.35 9038.49 -944.99"
+			values {angles "0 -90 0" targetname "syn_spawn_player_1"} }
+
+		create {classname "info_player_coop" origin "6904 4656 -896"
+			values {angles "0 150 0" targetname "syn_spawn_player_2" StartDisabled "1"} }
+
+		create {classname "info_global_settings"
+			values {IsVehicleMap "1" targetname "syn_global_settings"} }
+
+		create {classname "info_vehicle_spawn" origin "9941.34 8931.36 -945.70"
+			values {targetname	"syn_spawn_vehicle_1"
+				angles "0 165 0"
+				StartEnabled "0"//Enabled in Extas
+				RespawnVehicle "1"
+				Ownership "1"
+				VehicleType "2"
+				VehicleSize "164"
+				model "models/airboat.mdl"
+				VehicleScript "scripts/vehicles/airboat.txt"} }
+
+		create {classname "info_vehicle_spawn" origin "6363 4874 -959"//5552 4992.01 -960
+			values {targetname	"syn_spawn_vehicle_2"
+				angles "0 90 0"//105y
+				StartEnabled "0"
+				StartGunEnabled "1"
+				RespawnVehicle "1"
+				Ownership "1"
+				VehicleType "2"
+				VehicleSize "164"
+				model "models/airboat.mdl"
+				VehicleScript "scripts/vehicles/airboat.txt"} }
+
+//fake vehicle
+		create {classname "logic_auto"
+			values {spawnflags "1"
+				OnMapSpawn "syn_fakeboat,DisableCollision,,0,-1"
+				OnMapSpawn "trigger_guncave_teleportboat,AddOutput,OnTrigger syn_fakeboat:Enable::0:1,0,-1"
+				OnMapSpawn "trigger_guncave_teleportboat,AddOutput,OnTrigger syn_fakeboat:EnableCollision::0:1,0,-1"
+				OnMapSpawn "trigger_guncave_teleportboat,AddOutput,OnTrigger syn_spawn_vehicle_1:ResetEmpty::0:1,0,-1"
+				//OnMapSpawn "trigger_guncave_teleportboat,AddOutput,OnTrigger syn_spawn_vehicle_1:Disable::0.1:1,0,-1"
+				} }
+
+		create {classname "logic_relay"
+			values {spawnflags "1"
+				targetname "relay_guncave_startgunmount"
+				OnTrigger "syn_fakeboat,AddOutput,body 1,0,-1"} }
+
+		create {classname "logic_relay"
+			values {spawnflags "1"
+				targetname "logic_labVortBeam_Off"
+				OnTrigger "syn_fakeboat,Kill,,0,-1"
+				OnTrigger "syn_spawn_vehicle_2,Enable,,0.01,-1"} }
+
+		create {classname "prop_dynamic" origin "6363 4874 -964"//-959
+			values {targetname "syn_fakeboat"
+				model "models/airboat.mdl"
+				StartDisabled "1"
+				angles "0 90 0"
+				solid "6"} }
+
+		create {classname "logic_auto"
+			values {spawnflags "1"
+				OnMapTransition "syn_spawn_manager,TeleportPlayers,syn_spawn_teleport,0.1,-1"} }
+
+		create {classname "info_teleport_destination" origin "10104.35 9038.49 -944.99" values {targetname "syn_spawn_teleport" angles "0 -90 0"} }
+
+//--Checkpoints--
+		//create {classname "trigger_once"
+		//	origin "5088 4864 -904"
+		//	values {model "*49"
+		//		spawnflags "1"
+		//		OnTrigger "syn_spawn_vehicle_2,Enable,,0,-1"} }
+
+//--Anti-Rush-- Wait for majority of players after puzzle jump
+//synvint
+		create {classname "logic_relay"
+			values {spawnflags "1"
+			targetname "synantirush"
+				OnTrigger "syn_original_vintage_trigger,Enable,,0,-1"} }
+//original trigger for vintage mode
+		create {classname "trigger_once" origin "7477.99 4867.84 -924"
+			values {model "*109"
+				targetname "syn_original_vintage_trigger"
+				spawnflags "41"
+				StartDisabled "1"
+				OnTrigger "lcs_guncave_gategreet1,Start,,0,-1"} }
+
+		delete {classname "trigger_once" origin "7477.99 4867.84 -924"}
+//AR
+		create {classname "trigger_coop"
+			origin "7744 4896 -928" //7808 4864 -928
+			values {model "*127"//GBMdl
+				spawnflags "1"
+				//StartDisabled "1"
+				//targetname "syn_antirush_coop"
+				CountType "1"
+				UseHUD "1"
+				PlayerValue "50"//66//75
+				wait "1.5"
+				OnTrigger "syn_antirush_text,Display,,1,-1"
+				OnPlayersIn "!self,Disable,,1,1"
+				OnPlayersIn "lcs_guncave_gategreet1,Start,,0,-1"
+				OnPlayersIn "syn_spawn_manager,SetCheckpoint,syn_spawn_player_2,0,-1"
+				OnPlayersIn "syn_original_vintage_trigger,Kill,,0,-1"} }//remove vint
+
+		create {classname "game_text"
+			values {spawnflags "0"
+				targetname "syn_antirush_text"
+				message "Need More Players to Continue. . ."
+				channel "0"
+				effect "2"
+				x "-1"
+				y "0.85"
+				color "100 100 100"
+				color2 "240 110 0"
+				fadein "0.03"
+				fadeout "1.25"
+				holdtime "2"
+				fxtime "0.25"} }
+
+//--Extra-
+//Trav|Edt - add second heli (test)
+		create {classname "npc_helicopter" origin "2944 512 -384"
+			values {spawnflags "524356"//3408132
+				angles "0 15 0"
+				targetname "syn_vint_npc_heli_2"
+				target "syn_vint_heli2_track"} }
+
+		create {classname "logic_relay"
+			values {spawnflags "1"
+				targetname "relay_heli_activate"
+				OnTrigger "syn_vint_npc_heli_2,Activate,,0,-1"
+				} }
+
+		create {classname "path_track" origin "2944 512 -384"
+			values {targetname "syn_vint_heli2_track"
+				target "path_npc_heli_2_1" } }
+
+		create {classname "logic_relay"
+			values {targetname "relay_heli_retreat"
+				OnTrigger "syn_vint_npc_heli_2,SetTrack,path_heli_2_1,4,-1"
+				OnTrigger "syn_vint_npc_heli_2,GunOff,,10,-1"
+				OnTrigger "syn_vint_npc_heli_2_rl,ApplyRelationship,,10,-1"
+				OnTrigger "syn_vint_npc_heli_2,FlyToSpecificTrackViaPath,path_npc_heli_2_7,11,-1"
+				//OnTrigger "path_npc_heli_2_7,AddOutPut,OnPass"//wut i forget naow
+				} }
+//set to kill activator rather than base heli
+		delete {targetname "path_npc_heli_2_7"}
+		create {classname "path_track" origin "-3948 -5200 -216"
+			values {targetname "path_npc_heli_2_7"
+				angles "0 90 0"
+				radius "64"
+				OnPass "!activator,Kill,,0,-1"} }
+
+		create {classname "ai_relationship"
+			values {targetname "syn_vint_npc_heli_2_rl"
+				target "!player"
+				subject "syn_vint_npc_heli_2"
+				disposition "4"
+				rank "9001"} }
+
+		//edit {targetname "relation_heli_like_player" values {subject "npc_helicopter"} }//npc_heli_1
+
+		create {classname "logic_auto"
+			values {spawnflags "1"
+				OnMapSpawn "*npc_heli_*,SetSquad,squad_syn_heli,0,-1"
+				OnMapSpawn "*npc_heli_*,StartLongCycleShooting,,0,-1"
+				} }
+
+//Trav|Edt - move chick from blocking doorway in briefing room
+		delete {targetname "brush_maproom_PCLIP"}
+		edit {targetname "mark_moveto_doorblock" values {origin "6144 5280 -887"} }
+
+//Trav|Edt - add crates by dishwasher
+		create {classname "item_item_crate"
+			origin	"9401 8115 -692"
+			values{ItemClass "item_dynamic_resupply"
+				ItemCount "5"
+				targetname "syn_vint"} }
+
+		create {classname "item_item_crate"
+			origin	"9401 8115 -664"
+			values{ItemClass "item_dynamic_resupply"
+				ItemCount "5"
+				targetname "syn_vint"} }
+
+//Trav|Edt - add stuff in tunnel base
+		create {classname "item_healthcharger" origin "6224 5377 -840" targetname "syn_vint"}
+		create {classname "item_suitcharger" origin "6224 5456 -840" targetname "syn_vint"}
+
+		create {classname "item_item_crate"
+			origin	"6985 4663 -880"
+			values{angles "0 300 0"
+				ItemClass "item_dynamic_resupply"
+				ItemCount "5"
+				targetname "syn_vint"} }
+
+		create {classname "item_item_crate"
+			origin	"6985 4663 -852"
+			values{ItemClass "item_dynamic_resupply"
+				ItemCount "5"
+				targetname "syn_vint"} }
+
+//Trav|Edt - move cop trigger (sooner)-NP- BbrushReq [gate early]
+		edit {classname "trigger_once" origin "1792 -7680 -768" values {origin "5083 -6801 -928" model "*134"} }//4736 -5760 -736
+//keep gate2 trigger ORI
+		edit {targetname "gate2" values {targetname "trav_gate2"} }
+		create {classname "trigger_once"
+			origin "1792 -7680 -768"
+			values {model "*58"
+				spawnflags "1"
+				OnTrigger "trav_gate2,EnableMotion,,0.5,-1"} }
+
+//Trav|Edt - Auti-rush
+		create {classname "trigger_coop"
+			origin "-9934 -2570 -944"
+			values {model "*134"
+				spawnflags "1"
+				//StartDisabled "1"
+				targetname "syn_antirush_coop"
+				CountType "1"
+				UseHUD "1"
+				PlayerValue "50"
+				wait "1.5"
+				OnTrigger "syn_antirush_text,Display,,1,-1"
+				OnPlayersIn "syn_antirush_wall,Kill,,0,1"
+				OnPlayersIn "syn_antirush_light,Kill,,0,1"
+				OnPlayersIn "syn_antirush_push,Disable,,0,1"
+				OnPlayersIn "!self,Disable,,1,1"} }
+
+		create {classname "prop_dynamic" origin "-11520 -1151.99 -976"
+			values {model "models/synergy/tools/syn_transition.mdl"
+				targetname "syn_antirush_wall"
+				angles "0 270 0"
+				solid "6"
+				DisableShadows "1"} }
+
+		create {classname "light_dynamic" origin "-11520 -1152 -864"
+			values {_light "170 255 170"
+				targetname "syn_antirush_light"
+				brightness "1"
+				distance "384"
+				style "12"} }
+
+//Trav|Edt - Functionality check
+		create {classname "logic_relay" values {targetname "trav_functionality_d1_canals_11"} }
+	}
+}

@@ -1,0 +1,699 @@
+d2_coast_07
+{
+	entity
+	{
+//--Setup--
+		delete {classname "logic_auto" origin "-6389 6152 1649"}//Pre-2010: -6388.92 4616.12 1648.88
+		delete {targetname "train_pusher"} //jeep fall
+		delete {classname "player_loadsaved"}
+		delete {targetname "fall_trigger"}
+		edit {classname "func_areaportal" values {targetname "disabledPortal" StartOpen "1"} }
+		edit {classname "func_areaportalwindow" values {targetname "DisabledPortalWindow" FadeStartDist "1000" FadeDist "1500"} }
+
+//Prevent Backtracking
+		create {classname "prop_dynamic" origin "-8640 5344 1600"
+			values {model "models/synergy/tools/syn_transition.mdl"
+				angles "0 60 0"
+				solid "6"
+				DisableShadows "1"} }
+
+		create {classname "light_dynamic" origin "-8640 5344 1728"
+			values {_light "170 255 170"
+				brightness "2"
+				distance "1024"
+				style "12"} }
+
+	//	create {classname "trigger_push" origin "40 80 0"
+	//		values {model "*84"//*86 - Pre 2010 Update TRAV:*133 -8768 4448 1696 VC: -8768 4448 1696
+	//			spawnflags "65"
+	//			speed "750"
+	//			pushdir "0 40 0"} }
+
+	//	create {classname "func_vehicleclip" origin "40 80 0"
+	//		values {model "*84"} }//*86 - Pre 2010 Update
+
+//--Starting Items--
+		create {classname "info_player_equip"
+			values {targetname "syn_equipment_base"
+				item_suit			"1"
+				item_armor			"60"
+				weapon_crowbar		"1"
+				weapon_pistol		"1"
+				weapon_smg1			"1"
+				weapon_frag			"1"
+				weapon_357			"1"
+				weapon_physcannon	"1"
+				weapon_shotgun		"1"
+				weapon_ar2			"1"
+				weapon_rpg			"1"
+				weapon_crossbow		"1"
+				ammo_pistol			"54"//72
+				ammo_smg1			"45"
+				ammo_grenade		"1"
+				ammo_smg1_grenade	"1"
+				ammo_357			"6"
+				ammo_buckshot		"12"
+				ammo_ar2			"30"
+				ammo_rpg_round		"1"
+				//ammo_crossbow		"0"
+			} }
+
+//--Spawns--
+		create {classname "info_spawn_manager"
+			values {targetname "syn_spawn_manager"} }
+//Intro: Tunnel
+		create {classname "info_player_coop" origin "-7616 5856 1601"//-4352 5920 1601//-6464 6144 1636 Pre-2010 -8141 4480 1600
+			values {angles "0 20 0" targetname "syn_spawn_player_1"} }
+//Small Street House
+		create {classname "info_player_coop" origin "-1448 9060 1696"
+			values {angles "0 345 0" targetname "syn_spawn_player_2" StartDisabled "1"} }
+//Main house
+		create {classname "info_player_coop" origin "1124 5087 1696"
+			values {angles "0 135 0" targetname "syn_spawn_player_3" StartDisabled "1"} }
+//08 transition room
+		create {classname "info_player_coop" origin "3200 5216 1544"
+			values {angles "0 180 0" targetname "syn_spawn_player_4" StartDisabled "1"} }
+//Bridge (after coast_08 is completed)
+		create {classname "info_player_coop" origin "3680 6960 2051"
+			values {angles "0 240 0" targetname "syn_spawn_player_5" StartDisabled "1"} }
+
+		//create { classname "info_player_coop" origin "2248 5792 1604" values { angles "0 180 0" StartDisabled "1" targetname "MPVS_SPAWN2" } }
+
+		create {classname "info_global_settings"
+			values {IsVehicleMap "1" targetname "syn_global_settings"} }
+//Intro: Tunnel
+		create {classname "info_vehicle_spawn" origin "-7456 5952 1632"//-3936 6048 1600.95//-6016 6032 1600.95
+			values {targetname "syn_spawn_vehicle_1"
+				angles "0 285 0"//y285//y270
+				StartEnabled "1"
+				StartGunEnabled "1"
+				RespawnVehicle "1"
+				VehicleType "4"//1&4 disalllows multiple players -v27
+				VehicleSize "192"
+				model "models/vehicles/buggy_p2.mdl"//models/vehicles/buggy_p2.mdl
+				VehicleScript "scripts/vehicles/jeep_test.txt"} }
+//Small house
+		create {classname "info_vehicle_spawn" origin "-928 8968.01 1680"
+			values {targetname "syn_spawn_vehicle_2"
+				angles "0 270 0"
+				StartEnabled "0"//
+				StartGunEnabled "1"
+				RespawnVehicle "1"
+				VehicleType "4"
+				VehicleSize "192"
+				model "models/vehicles/buggy_p2.mdl"//models/vehicles/buggy_p2.mdl
+				VehicleScript "scripts/vehicles/jeep_test.txt"} }
+//Bridge (after coast_08 is completed)
+		create {classname "info_vehicle_spawn" origin "3487.99 6896 2064"
+			values {targetname "syn_spawn_vehicle_3"
+				angles "0 165 0"
+				StartEnabled "0"//
+				StartGunEnabled "1"
+				RespawnVehicle "1"
+				VehicleType "4"
+				VehicleSize "192"
+				model "models/vehicles/buggy_p2.mdl"
+				VehicleScript "scripts/vehicles/jeep_test.txt"} }
+
+//Toggle Static Spawning on return
+		create {classname "trigger_once" origin "3476.13 6971.17 2164.43"
+			values {model "*186" angles "0 90 0"
+				spawnflags "1"
+				StartDisabled "1"
+				targetname "syn_static_spawning"
+				OnTrigger "syn_global_settings,AddOutput,IsVehicleMap 1,0,-1"} }
+
+//if gunship is still alive, manage the transition
+		create {classname "logic_auto"
+			values {spawnflags "1"
+				OnMapSpawn "gunship,AddOutput,targetname syn_gunship,0,-1"//break from IO
+				//OnMapSpawn "syn_telegunship,Teleport,,0.1,-1"
+				OnMapSpawn "path_b*,AddOutput,radius 768,0,-1"
+				OnMapSpawn "syn_gunship,SetTrack,path_b_7,1,-1"
+				OnMapSpawn "syn_gunship,flytospecifictrackviapath,path_b_7,1.1,-1"
+				OnMapSpawn "syn_gunship,AddOutput,spawnflags 4164,1,-1"
+				} }
+
+//--Checkpoints--
+		create {classname "trigger_once"
+			origin "-1244.9 9160 1712"
+			values {model "*137"
+				spawnflags "1"
+				OnTrigger "syn_spawn_manager,SetCheckpoint,syn_spawn_player_2,0,-1"
+				OnTrigger "syn_spawn_vehicle_2,Enable,,0,-1"
+				OnTrigger "syn_checkpoint_3*,Enable,,1,-1"} }
+
+		create {classname "trigger_once"
+			origin "1824 5312 1632"
+			values {model "*154"
+				spawnflags "1"
+				targetname "syn_checkpoint_3"
+				StartDisabled "1"
+				OnTrigger "syn_spawn_manager,SetCheckpoint,syn_spawn_player_3,0,-1"
+				OnTrigger "syn_relay_save,Trigger,,0,-1"} }
+
+		create {classname "trigger_once"
+			origin "3424 5312 1600"
+			values {model "*154"
+				spawnflags "1"
+				targetname "syn_checkpoint_3_2"
+				StartDisabled "1"
+				OnTrigger "syn_spawn_manager,SetCheckpoint,syn_spawn_player_3,0,-1"
+				OnTrigger "syn_relay_save,Trigger,,0,-1"} }
+
+		create {classname "logic_relay"
+			values {spawnflags "1"//only once
+				targetname "syn_relay_save"
+				OnTrigger "syn_autosave,Save,,1,-1"} }
+
+//--Extra--
+
+//Trav|Edt - manage saves (save only once)
+		edit {targetname "autosave" values {targetname "syn_autosave"} }
+
+		// stop combine from flooding the map on the return trip
+		edit {targetname "gunship_trigger_11" values {classname "trigger_once"} }
+
+//Trav|Edt - Doors: Open Only
+		edit {targetname "bridge_door_2" values {spawnflags "2048" returndelay "-1"} }//
+	//	edit {classname "prop_door_rotating" values {spawnflags "0" returndelay "-1"} }//this will not override previous entries
+//end_door open forward only
+		create {classname "logic_auto"
+			values {spawnflags "1"
+				OnMapSpawn "bridge_door_2,AddOutput,opendir 1,0,-1"} }
+
+//If a NewGame starts on coast_08, Fix the return trip to this level
+		create {classname "logic_auto"
+			values {spawnflags "1"
+				globalstate "d2_coast_08_is_newgame"
+				OnMapSpawn "syn_returnfix,Trigger,,0,-1"} }
+
+		create {classname "logic_relay"
+			values {targetname "syn_returnfix"
+				OnTrigger "dropship,Kill,,0,-1"
+				OnTrigger "halt_guy,Kill,,0,-1"
+				OnTrigger "assault_trigger,Kill,,0,-1"
+				OnTrigger "syn_vint_towercombine,Kill,,0,-1"
+				OnTrigger "syn_spawn_vehicle_1,Kill,,0,-1"
+				OnTrigger "syn_spawn_vehicle_2,Kill,,0,-1"
+				OnTrigger "syn_shiz,Trigger,,0,-1"
+				} }
+
+//Trav|Edt - move dropship trigger up past newspawn
+		edit {classname "trigger_multiple" origin "-5568 6144 1792" values {origin "-4032 6144 1792"} }
+
+//Trav|Edt - test custom spawner to enable use of 2-seater jeeps
+		//create {classname "point_template"
+		//	values {spawnflags "1"
+		//		targetname "trav_2seater_temp"
+		//		Template01 "trav_2seater"
+		//		OnEntitySpawned "trav_2seater_counter,Add,1,,-1"} }
+
+		//create {classname "prop_vehicle_jeep"
+		//	origin "-6016 6032 1600.95"
+		//	values {targetname "trav_2seater"
+		//	angles "0 270 0"
+		//	model "models/vehicles/buggy_p2.mdl"
+		//	vehiclescript "scripts/vehicles/jeep_test.txt"} }
+
+		//create {classname "math_counter"
+		//	values {targetname "trav_2seater_counter"
+		//		startvalue "0"
+		//		min "0"
+		//		max "12"
+		//		OnHitMax "trav_2seater_trigger,Disable,,0,-1"} }
+
+		//create {classname "trigger_multiple"
+		//	origin "-6256 6032.01 1712"
+		//	values {model "*173"
+		//		spawnflags "9"
+		//		targetname "trav_2seater_trigger"
+		//		wait "1"
+		//		//filtername "trav_2seater_filter"
+		//		OnEndTouchAll "trav_2seater_temp,ForceSpawn,,0,-1"} }
+
+//Trav|Edt - test custom spawner to enable use of 2-seater jeeps (return trip)
+		//create {classname "point_template"
+		//	values {spawnflags "0"
+		//		targetname "trav_2seater_temp_return"
+		//		Template01 "trav_2seater_return"
+		//		OnEntitySpawned "trav_2seater_counter_return,Add,1,,-1"} }
+
+		//create {classname "prop_vehicle_jeep"
+		//	origin "1952 6256 1535.99"
+		//	values {targetname "trav_2seater_return"
+		//	angles "0 270 0"
+		//	model "models/vehicles/buggy_p2.mdl"
+		//	vehiclescript "scripts/vehicles/jeep_test.txt"} }
+
+		//create {classname "math_counter"
+		//	values {targetname "trav_2seater_counter_return"
+		//		startvalue "0"
+		//		min "0"
+		//		max "12"
+		//		OnHitMax "trav_2seater_trigger_return,Disable,,0,-1"} }
+
+		//create {classname "trigger_multiple"
+		//	origin "2137.86 6256 1520"
+		//	values {model "*173"
+		//		spawnflags "9"
+		//		targetname "trav_2seater_trigger_return"
+		//		wait "1"
+		//		StartDisabled "1"
+		//		//filtername "trav_2seater_filter_return"
+		//		OnEndTouchAll "trav_2seater_temp_return,ForceSpawn,,0,-1"} }
+
+//Trav|Edt make fog controller(s) dynamic
+		create {classname "env_fog_controller"
+			values {targetname "trav_fog_tunnel"
+				fogenable "1"
+				fogstart "2048"
+				fogend "7500"
+				farz "7000"
+				fogmaxdensity "0.99"
+				use_angles "1"
+				fogcolor "21 23 19"
+				fogcolor2 "206 216 222"} }
+
+		delete {classname "trigger_multiple" origin "8753.96 -8167.08 2144"}
+		create {classname "trigger_multiple"
+			origin "8753.96 -8167.08 2144"
+			values {model "*181"
+				spawnflags "1"
+				OnTrigger "!activator,SetFogController,fog,0,-1"} }
+
+		delete {classname "trigger_multiple" origin "8799.21 -8212.33 2144"}
+		create {classname "trigger_multiple"
+			origin "8799.21 -8212.33 2144"
+			values {model "*165"
+				spawnflags "1"
+				OnTrigger "!activator,SetFogController,trav_fog_tunnel,0,-1"} }
+
+//Trav|Edt - add treat in empty house
+		create {classname "item_ammo_crate"
+			origin "-1444 9008 1713"//-1444 7512 1713
+			values {AmmoType "6"//.357
+			fademaxdist "1000"
+			fademindist "900"
+			targetname "syn_vint"} }
+
+//Trav|Edt - prevent garage doors from being picked up by grav gun (until network fix)
+		edit {targetname "garage_door_1" values {spawnflags "2097152"} }
+		edit {targetname "garage_door_2" values {spawnflags "2097152"} }
+
+//Trav|Edt - Add some snipertower combine
+		create {classname "npc_combine_s"
+			origin "2832 5232 2280"//2832 3696 2280
+			values {spawnflags "772"
+				angles "0 180 0"
+				additionalequipment "weapon_ar2"
+				targetname "syn_vint_towercombine"} }
+
+		create {classname "npc_combine_s"
+			origin "3832 5230 2280"//3832 3696 2280
+			values {spawnflags "772"
+				angles "0 180 0"
+				additionalequipment "weapon_ar2"
+				targetname "syn_vint_towercombine"} }
+
+		create {classname "npc_combine_s"
+			origin "2832 -2672 2280"//2832 -4208 2280
+			values {targetname "syn_vint_trav_combine1"
+				spawnflags "18692"
+				additionalequipment "weapon_ar2" } }
+
+		create {classname "npc_template_maker"
+			origin "2832 -2672 2315"//2864 -4208 2288
+			values {//spawnflags "128"
+				angles " 0 90 0"
+				targetname "syn_vint_trav_tmaker_combine1"
+				StartDisabled "1"
+				MaxNPCCount "1"
+				SpawnFrequency "1"
+				TemplateName "syn_vint_trav_combine1"} }
+
+		create {classname "npc_template_maker"
+			origin "3769 -2696 2315"//3800 -4216 2256
+			values {//spawnflags "128"
+				angles " 0 90 0"
+				targetname "syn_vint_trav_tmaker_combine1"
+				StartDisabled "1"
+				MaxNPCCount "1"
+				SpawnFrequency "1"
+				TemplateName "syn_vint_trav_combine1"} }
+
+		create {classname "npc_maker"
+			origin "7336 -7984 2085"//7336 -9504 2056
+			values {//spawnflags "128"
+				angles " 0 180 0"
+				targetname "trav_maker_zombie1"
+				StartDisabled "1"
+				NPCType "npc_fastzombie"
+				MaxNPCCount "1"
+				SpawnFrequency "1"} }
+
+		create {classname "trigger_once"
+			origin "3328 4864 2176"//3328 3328 2176
+			values {model "*136"
+				spawnflags "1"
+				OnTrigger "syn_vint_trav_tmaker_combine1,Spawn,,0,-1"
+				OnTrigger "trav_maker_zombie1,Spawn,,0,-1"
+				OnTrigger "syn_spawn_player_5,Enable,,0,-1"
+				OnTrigger "syn_spawn_manager,SetCheckpoint,syn_spawn_player_5,0,-1"
+				OnTrigger "syn_gunship,SetTrack,path_b_10,0,-1"} }
+
+		//create {classname "npc_combine_s"
+		//	origin "3832 -4208 2244"
+		//	values {spawnflags "772"
+		//		angles "0 180 0"
+		//		additionalequipment "weapon_ar2" } }
+
+		create {classname "ai_relationship"
+			values {subject "npc_combine_s"
+				target "npc_headcrab"
+				disposition "4"
+				StartActive "1"} }
+
+//Trav|Edt - raise kill trigger to prevent players from walking on shore
+		edit {classname "trigger_hurt" origin "-5593.6 9108.61 344" values {origin "-5593.6 9108.61 536"} }
+
+//Trav|Edt add testing anti-rush mapedt stuff to coast08
+		create {classname "trigger_coop"
+			origin "3392 5120 1664"
+			values {model "*136"
+				spawnflags "1"
+				//StartDisabled "1"
+				targetname "syn_antirush_coop"
+				CountType "1"
+				UseHUD "1"
+				PlayerValue "50"
+				wait "1.5"
+				OnTrigger "syn_antirush_text,Display,,1,-1"
+				OnPlayersIn "syn_antirush_push,Disable,,0,1"
+				OnPlayersIn "bridge_door_2,Unlock,,0,-1"
+				OnPlayersIn "!self,Disable,,1,1"} }
+
+		//create {classname "trigger_push"
+		//	origin "3344.83 5150 1640.43"
+		//	values {model "*175"
+		//		spawnflags "1"
+		//		targetname "syn_antirush_push"
+		//		pushdir "0 90 0"
+		//		speed "750"} }
+
+		create {classname "trigger_push"
+			origin "3736 4568 1632"
+			values {model "*133"
+				spawnflags "1"
+				targetname "syn_antirush_push"
+				pushdir "0 200 0"
+				speed "750"} }
+
+		create {classname "game_text"
+			values {spawnflags "0"
+				targetname "syn_antirush_text"
+				message "Need More Players to Continue. . ."
+				channel "0"
+				effect "2"
+				x "-1"
+				y "0.85"
+				color "100 100 100"
+				color2 "240 110 0"
+				fadein "0.03"
+				fadeout "1.25"
+				holdtime "2"
+				fxtime "0.25"} }
+
+//Trav|Edt - rase combine wall so players cant get over and skip coast08 3x
+//		create {classname "func_brush"
+//			origin "3340.89 5231.87 2324"//3340.89 3695.87 2324
+//			values {model "*170"
+//				spawnflags "2"
+//				targetname "bridge_field_02"
+//				globalname "bridge_field_02"} }
+//
+//		create {classname "func_brush"
+//			origin "3340.89 5231.87 2502"
+//			values {model "*170"
+//				spawnflags "2"
+//				targetname "bridge_field_02"
+//				globalname "bridge_field_02"} }
+
+		create {classname "trigger_hurt" origin "3328 4968 2176"
+			values {model "*136"
+				spawnflags "1"
+				targetname "trav_antiskip_hurt"
+				damage "1000"
+				//damagetype "262144"//rad
+				nodmgforce "1"} }
+
+//Trav|Edt - Stop crap from stopping train and allow to hurt players
+		create {classname "trigger_hurt"
+			origin "2846.11 11152 2248"
+			values {model "*192"
+				spawnflags "11"
+				parentname "razortrain"} }
+
+		create {classname "trigger_remove"
+			origin "2846.11 11152 2248"
+			values {model "*192"
+				spawnflags "12"
+				parentname "razortrain"
+				filtername "trav_train_filter"} }
+
+		create {classname "filter_multi"
+			values {targetname "trav_train_filter"
+				//Negated "1"
+				Filter01 "trav_train_filter1"
+				Filter02 "trav_train_filter2"
+				Filter03 "trav_train_filter3"} }
+
+		create {classname "filter_activator_class"
+			values {targetname "trav_train_filter1"
+				Negated "1"
+				filterclass "prop_physics"} }
+
+		create {classname "filter_activator_class"
+			values {targetname "trav_train_filter2"
+				Negated "1"
+				filterclass "item_item_crate"} }
+
+		create {classname "filter_activator_class"
+			values {targetname "trav_train_filter3"
+				Negated "1"
+				filterclass "prop_vehicle_*"} }
+
+		//delete {targetname "filter_rollermine"}
+
+		//create {classname "filter_multi"
+		//	values {targetname "filter_rollermine"
+		//		//Negated "1"
+		//		Filter01 "trav_train_filter_push1"
+		//		Filter02 "trav_train_filter_push2"} }
+
+		//create {classname "filter_activator_class"
+		//	values {targetname "trav_train_filter_push1"
+		//		filterclass "npc_rollermine"} }
+
+		//create {classname "filter_activator_class"
+		//	values {targetname "trav_train_filter_push2"
+		//		filterclass "item_*"} }
+
+//Trav|Edt - item_heathkit etc seem to ignore all filters >.< ... so jsut remove train peice by peice at end
+		create {classname "trigger_remove"
+			origin "121.11 10723 2200"
+			values {model "*192"
+				spawnflags "64"
+				filtername "trav_train_filter_kill"} }
+
+		create {classname "filter_activator_class"
+			values {targetname "trav_train_filter_kill"
+				filterclass "prop_dynamic"} }
+
+//add crate on collasped bridge for some reason
+		create {classname "item_item_crate"
+			origin	"5112 -7188 2088"
+			values{targetname "syn_vint"
+				angles "0 330 0"
+				ItemClass "item_dynamic_resupply"
+				ItemCount "4"} }
+
+//Trav|Edt - fix train from getting stuck on items
+//raise the train off the ground a little (Hotfix for getting stuck until item_* filters are fixed)
+		//edit {targetname "train_2_start" values {origin "3224 -12484 2144"} }//z2136
+		//edit {targetname "train_2_stop" values {origin "3224 15216 2144"} }//z2136
+
+//hacky method to make func_lod nonsolid
+		create {classname "trigger_once" origin "3348.83 7689.13 2164.43"
+			values {model "*186"
+				spawnflags "64"
+				filtername "trav_filter_func_lod"
+				OnTrigger "!activator,AddOutput,solid 1,0,-1"} }
+
+		create {classname "func_vehicleclip"
+			origin "3348.83 7741.13 2152.43"
+			values {model "*186"} }
+
+		create {classname "filter_activator_class"
+			values {targetname "trav_filter_func_lod"
+				filterclass "func_lod" } }
+//origin bad reference @worldspawn
+//use 3328 7712.5 2147.14 for altered origin for func_lod to line up with pclip along x axis (static props cannot be realigned)
+		//edit {targetname "func_lod" origin "3328 7704.61 2147.14" values {Solid "1"} }//3328 7704.61 2147.14 *172
+
+//Trav|Edt - Set physics lockers as non-moviable (antigreif)
+		edit {classname "prop_physics" origin "3344 5352 1580"
+			values {spawnflags "8"} }
+		edit {classname "prop_physics" origin "3284 5354 1580"
+			values {spawnflags "8"} }
+		edit {classname "prop_physics" origin "3108 5346 1580"
+			values {spawnflags "8"} }
+
+//Trav|Edt - autirush to 09
+		create {classname "trigger_coop"
+			origin "9120 -8480 2176"//8672 -8224 2176
+			values {model "*166"
+				spawnflags "1"
+				//StartDisabled "1"
+				targetname "syn_transition_trigger_2"
+				CountType "1"
+				UseHUD "1"
+				PlayerValue "50"
+				wait "1.5"
+				OnTrigger "syn_transition_text,Display,,1,-1"
+				//OnPlayersIn "trav_antirush_wall2,Disable,,0,1"
+				OnPlayersIn "syn_transition_blocker,Kill,,0,1"
+				OnPlayersIn "syn_transition_light,TurnOff,,0,1"
+				OnPlayersIn "!self,Disable,,1,1"} }
+
+		create {classname "prop_dynamic" origin "9224 -9528 2048"
+			values {model "models/synergy/tools/syn_transition.mdl"
+				targetname "syn_transition_blocker"
+				angles "0 90 0"
+				solid "6"
+				DisableShadows "1"} }
+
+		create {classname "light_dynamic" origin "9224 -9528 2136"
+			values {targetname "syn_transition_light"
+				_light "170 255 170"
+				brightness "2"
+				distance "1024"
+				//_inner_cone "75"
+				//_cone "80"
+				style "12"} }
+
+		//create {classname "func_brush"
+		//	origin "9216 -9344 2128"
+		//	values {model "*173"
+		//		targetname "trav_antirush_wall2"
+		//		spawnflags "2"} }
+
+		create {classname "game_text"
+			values {spawnflags "0"
+				targetname "syn_transition_text"
+				message "Need More Players to Continue. . ."
+				channel "0"
+				effect "2"
+				x "-1"
+				y "0.85"
+				color "100 100 100"
+				color2 "240 110 0"
+				fadein "0.03"
+				fadeout "1.25"
+				holdtime "2"
+				fxtime "0.25"} }
+
+//End of Trav|Edt
+
+		// destroy old vehicle and create new ones
+		delete { targetname "jeep" }
+
+//Trav|Edt - disable normal jeep spawn
+//Trav|Edt - move jeep (ORIGINAL ORIGIN "-7711 4437 1664")
+		//create { classname "info_vehicle_spawn" origin "-3765.2 6090 1620" //-3839.99 4496.01 1600.95
+		//	values
+		//	{
+		//		"angles" "0 270 0"
+		//		"StartEnabled" "1"
+		//		"targetname" "MPVS"
+
+		//		"VehicleType" "1"
+		//		"model" "models/vehicles/buggy_p2.mdl"
+
+		//		"VehicleScript" "scripts/vehicles/jeep_test.txt"
+		//		"RespawnVehicle" "1"
+		//		"VehicleSize" "128"
+		//	}
+		//}
+
+		// when we return to this level, we need to move our vehicles to the close spot
+		delete { classname "trigger_changelevel" }
+
+		create { classname "trigger_changelevel"
+			values {
+				"model" "*86"
+				"spawnflags" "0"
+				"landmark" "landmark_d2_coast_05-07"
+				"map" "d2_coast_05"
+			}
+		}
+
+		create { classname "trigger_changelevel"
+			values {
+				"model" "*139"
+				"spawnflags" "0"
+				"landmark" "landmark_d2_coast_07-08"
+				"map" "d2_coast_08"
+
+//Trav|Edt - disable normal jeep spawn (return)
+//Trav|Edt - fix jeep spawn origin (Thx THC) ORIGINAL ORIGIN ANGLES: 2131 4849 1599 0 90 0
+				//"OnChangeLevel" "MPVS,MoveSpawn,1984 6144 1568 0 90 0,0.5,1"
+			//	OnChangeLevel "trav_2seater_trigger_return,Enable,,0,-1"
+			//	OnChangeLevel "trav_2seater_temp_return,ForceSpawn,,0,-1"
+//Trav|Edt - close door and lock it/ fix checkpoints
+//Enable new checkpoint after
+				OnChangeLevel "syn_shiz,Trigger,,0,-1"
+				//OnChangelevel "syn_antirush_push,Enable,,0,-1"
+				//OnChangelevel "MPVS_SPAWN,Kill,,0,-1"
+				//OnChangelevel "PS_Manager,SetCheckpoint,MPVS_SPAWN2,0,-1"
+			}
+		}
+
+		create {classname "logic_relay"
+			values {targetname "_syn_antirush_doorunlocker"
+				spawnflags "1"
+				OnTrigger "bridge_door_2,Unlock,,1,-1"
+				} }
+
+		create {classname "logic_relay"
+			values {targetname "syn_shiz"
+				spawnflags "1"
+				OnTrigger "syn_spawn_player_1,Disable,,0,-1"
+				OnTrigger "syn_spawn_player_4,Enable,,0,-1"
+				OnTrigger "syn_spawn_manager,SetCheckpoint,syn_spawn_player_4,0,-1"
+				OnTrigger "syn_spawn_vehicle_3,Enable,,0,-1"
+				OnTrigger "trav_antiskip_hurt,Disable,,0,-1"
+				OnTrigger "bridge_door_2,Close,,1,-1"
+				OnTrigger "bridge_door_2,Lock,,2,-1"
+				OnTrigger "field_trigger,Disable,,0,-1"//stop annoying sound >.>
+				OnTrigger "syn_global_settings,AddOutput,IsVehicleMap 0,0,-1"//Disable Static Spawning
+				OnTrigger "syn_static_spawning,Enable,,0,-1"//Enable Static Spawing
+				} }
+
+		create { classname "trigger_changelevel"
+			values {
+				"model" "*164"
+				"spawnflags" "0"
+				"landmark" "landmark_d2_coast_07-09"
+				"map" "d2_coast_09"
+			}
+		}
+
+
+
+		edit { classname "npc_antlion_maker" values { "spawntarget" "!rndplayer" } }
+
+//Trav|Edt - Functionality check
+		create {classname "logic_relay" values {targetname "trav_functionality_d2_coast_07"} }
+	}
+}

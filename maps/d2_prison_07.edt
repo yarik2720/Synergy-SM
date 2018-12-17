@@ -1,0 +1,623 @@
+d2_prison_07
+{
+	entity {
+//--Setup--
+		delete {classname "logic_auto" origin "146.216 -2664 -208"}
+		edit {classname "func_areaportal" values {targetname "disabledPortal" StartOpen "1"} }
+
+//Prevent Backtracking
+		create {classname "syn_transition_wall" origin "240 -2560 -248" values {angles "0 180 0"} }
+
+		//create {classname "trigger_push" origin "-64 0 0"
+		//	values {model "*94"
+		//		spawnflags "1"//65
+		//		speed "750"
+		//		pushdir "0 180 0"} }
+
+//--Starting Items--
+		create {classname "info_player_equip"
+			values {
+				item_suit			"1"
+				item_armor			"60"
+				weapon_crowbar		"1"
+				weapon_pistol		"1"
+				weapon_smg1			"1"
+				weapon_frag			"1"
+				weapon_357			"1"
+				weapon_physcannon	"1"
+				weapon_shotgun		"1"
+				weapon_ar2			"1"
+				weapon_rpg			"1"
+				weapon_crossbow		"1"
+				weapon_bugbait		"1"
+				weapon_stunstick	"1"
+				weapon_slam			"1"
+				ammo_pistol			"54"//72
+				ammo_smg1			"45"
+				ammo_grenade		"1"
+				ammo_smg1_grenade	"1"
+				ammo_357			"6"
+				ammo_buckshot		"12"
+				ammo_ar2			"30"
+				ammo_ar2altfire		"1"
+				//ammo_rpg_round		"1"
+				//ammo_crossbow		"0"
+				//ammo_slam			"2"
+			} }
+
+//--Spawns--
+		create {classname "info_spawn_manager"
+			values {targetname "syn_spawn_manager"} }
+
+		create {classname "info_player_coop" origin "216 -2596 -240"
+			values {angles "0 180 0" targetname "syn_spawn_player_1"} }
+
+		create {classname "info_player_coop" origin "-368 -2824 -240"
+			values {angles "0 255 0" targetname "syn_spawn_player_2" StartDisabled "1"} }
+
+		create {classname "info_player_coop" origin "4800 -4232 -528"
+			values {angles "0 180 0" targetname "syn_spawn_player_3" StartDisabled "1"} }
+
+		create {classname "info_global_settings"
+			values {IsVehicleMap "0" targetname "syn_global_settings"} }
+
+//--Checkpoints--
+
+//--Exploits--
+
+//--Extra--
+
+		// create intermission
+	//	"create" { "classname" "info_intermission" "origin" "" "values" { "angles" "" } }
+
+		"create"
+		{
+			"classname" "logic_auto"
+			"origin" "146.216 -2664 -208"
+
+			"values"
+			{
+				"spawnflags" "1"
+			//	"OnNewGame" "global_newgame_template_base_items,ForceSpawn,,0,1"
+			//	"OnNewGame" "global_newgame_template_local_items,ForceSpawn,,0.2,1"
+			//	"OnNewGame" "global_newgame_template_ammo,ForceSpawn,,0.5,1"
+				"OnMapSpawn" "prop_camera,SetAnimation,idlealert,0,-1"
+				"OnMapSpawn" "sprite_alyx_EMP_MAIN,SetParent,alyx,0,-1"
+				"OnMapSpawn" "sprite_alyx_EMP_MAIN,SetParentAttachment,emp,0.1,-1"
+			}
+		}
+
+//Trav|Edt - Doors: Open Only
+		edit {classname "prop_door_rotating" values {returndelay "-1"} }
+
+//Trav|Edt - Close gate if all in (and move checkpoint)
+		create {classname "trigger_coop"
+			origin "-44.5 -3672 -91.5"
+			values {model "*23"
+				spawnflags "1"
+				CountType "1"
+				UseHUD "0"
+				PlayerValue "100"
+				OnPlayersIn "!self,Disable,,1,-1"
+				OnPlayersIn "door_croom2_gate,Close,,0,-1"
+				//OnPlayersIn "syn_spawn_player_1,MoveSpawn,-368 -2824 -240 0 255 0,0,-1"
+				OnPlayersIn "syn_spawn_manager,SetCheckpoint,syn_spawn_player_2,0,-1"
+				OnPlayersIn "syn_intro_teleport,Enable,,0,-1"
+				OnPlayersIn "syn_intro_turret_blocker,Disable,,2,-1"} }
+//failsafe for slow loders
+		create {classname "trigger_teleport"
+			origin "739.5 -2072 -90"
+			values {model "*23"
+				spawnflags "1"
+				targetname "syn_intro_teleport"
+				StartDisabled "1"
+				target "syn_intro_teleport_dest"} }
+
+		create {classname "info_teleport_destination" origin "-368 -2824 -240" values {targetname "syn_intro_teleport_dest" angles "0 225 0"} }
+
+//turretblocker at gate
+		create {classname "func_clip_vphysics"
+			origin "-440 -2796 -172"
+			values {model "*74"
+				targetname "syn_intro_turret_blocker"
+				filtername "trav_filter_turret_wall"} }
+
+//Trav|Edt - Make sure alyx comes out of vent
+		delete {targetname "trigger_croom2_alyxarrival"}
+
+		create {classname "trigger_once"
+			origin "-421.5 -3216 -118"
+			values {model "*76"
+				spawnflags "1"
+				StartDisabled "1"
+				targetname "trigger_croom2_alyxarrival"
+				OnTrigger "logic_croom2_move_alyx_to_croom2,Trigger,,0,-1"} }
+
+//Trav|Edt - have turets use citizen code state
+		edit {classname "npc_turret_floor" values {spawnflags "704"} }
+		edit {targetname "turret_buddy" origin "-602 -3364 -163" values {spawnflags "576"} }//non-fast retire
+
+		delete {targetname "relationship_turret_vs_combine_hate"}
+		delete {targetname "relationship_turret_vs_alyx_like"}
+		delete {targetname "relationship_turret_vs_manhack_hate"}
+		delete {targetname "relationship_combine_vs_turret_hate"}
+		delete {targetname "relationship_alyx_vs_turret_like"}
+		delete {targetname "relationship_turret_vs_player_like"}
+
+//Trav|Edt - increase max npcdropweapon cap
+		edit {classname "game_weapon_manager"
+			values{maxpieces "8"} }//3
+
+//Trav|Edt - dont spawn manlyhackies while vis
+		edit {targetname "maker_croom2_manhack_1" values {spawnflags "208"} }
+
+//Trav|Edt - extend clip in first defense
+		create {classname "func_brush"
+			origin "-423.9 -3681 17.21"
+			values {model "*17"
+				targetname "func_croom2_field_clip"} }
+
+		create {classname "func_brush"
+			origin "-423.9 -3681 185.21"
+			values {model "*17"
+				targetname "func_croom2_field_clip"} }
+
+//Trav|Edt - remove annoying sound trigger
+		delete {targetname "shield_sound_trigger1"}
+
+//Trav|Edt - first defense (TODO: or lower volume?)
+		create {classname "item_suitcharger"
+			origin "-536 -3088 -120"
+			values {angles " 0 270 0"} }
+
+		edit {targetname "math_croom2_combine_counter" values{max "24"} }
+		//edit {targetname "maker_croom2_*" values {MaxLiveChildren "-1"} }
+		edit {targetname "maker_croom2_1" values {MaxLiveChildren "-1"} }
+		edit {targetname "maker_croom2_2" values {MaxLiveChildren "-1"} }
+		edit {targetname "maker_croom2_3" values {MaxLiveChildren "-1"} }
+		edit {targetname "maker_croom2_4" values {MaxLiveChildren "-1"} }
+		edit {targetname "maker_croom2_balcony" values {MaxLiveChildren "-1"} }
+		edit {targetname "maker_croom2_manhack_1" values {MaxLiveChildren "-1"} }
+		edit {targetname "maker_croom2_manhack_2" values {MaxLiveChildren "-1"} }
+		delete {targetname "logic_croom2_assault_wave_1"}
+		delete {targetname "logic_croom2_assault_wave_2"}
+		delete {targetname "logic_croom2_assault_wave_3"}
+		delete {targetname "logic_croom2_assault_wave_4"}
+		delete {targetname "logic_croom2_assault_wave_5"}
+
+		create {classname "logic_relay"
+			values {targetname "logic_croom2_assault_wave_1"
+				OnTrigger "math_croom2_combine_counter,SetValue,12,0,-1"
+				OnTrigger "maker_croom2_1,AddMaxChildren,6,0,-1"
+				OnTrigger "maker_croom2_3,AddMaxChildren,6,0,-1"
+				OnTrigger "maker_croom2_1,Enable,,0.1,-1"
+				OnTrigger "trav_gtext_wavecount,Display,,0,-1"
+				OnTrigger "maker_croom2_3,Enable,,0.1,-1"} }
+
+		create {classname "logic_relay"
+			values {targetname "logic_croom2_assault_wave_2"
+				OnTrigger "math_croom2_combine_counter,SetValue,6,0,-1"
+				OnTrigger "maker_croom2_1,AddMaxChildren,6,0,-1"
+				OnTrigger "maker_croom2_2,AddMaxChildren,6,0,-1"
+				OnTrigger "maker_croom2_3,AddMaxChildren,6,0,-1"
+				OnTrigger "maker_croom2_1,Enable,,0.1,-1"
+				OnTrigger "maker_croom2_2,Enable,,0.1,-1"
+				OnTrigger "trav_gtext_wavecount,Display,,0,-1"
+				OnTrigger "maker_croom2_3,Enable,,0.1,-1"} }
+
+		create {classname "logic_relay"
+			values {targetname "logic_croom2_assault_wave_3"
+				OnTrigger "maker_croom2_1,AddMaxChildren,6,0,-1"
+				OnTrigger "maker_croom2_2,AddMaxChildren,6,0,-1"
+				OnTrigger "maker_croom2_3,AddMaxChildren,6,0,-1"
+				OnTrigger "maker_croom2_4,AddMaxChildren,6,0,-1"
+				OnTrigger "maker_croom2_1,Enable,,0.1,-1"
+				OnTrigger "maker_croom2_2,Enable,,0.1,-1"
+				OnTrigger "maker_croom2_3,Enable,,0.1,-1"
+				OnTrigger "trav_gtext_wavecount,Display,,0,-1"
+				OnTrigger "maker_croom2_4,Enable,,0.1,-1"} }
+
+		create {classname "logic_relay"
+			values {targetname "logic_croom2_assault_wave_4"
+				OnTrigger "maker_croom2_1,AddMaxChildren,6,0,-1"
+				OnTrigger "maker_croom2_2,AddMaxChildren,6,0,-1"
+				OnTrigger "maker_croom2_3,AddMaxChildren,6,0,-1"
+				OnTrigger "maker_croom2_4,AddMaxChildren,6,0,-1"
+				//OnTrigger "maker_croom2_balcony,AddMaxChildren,4,0,-1"
+				OnTrigger "maker_croom2_manhack_1,AddMaxChildren,4,0,-1"
+				OnTrigger "maker_croom2_1,Enable,,0.1,-1"
+				OnTrigger "maker_croom2_2,Enable,,0.1,-1"
+				OnTrigger "maker_croom2_3,Enable,,0.1,-1"
+				OnTrigger "maker_croom2_4,Enable,,0.1,-1"
+				//OnTrigger "maker_croom2_balcony,Enable,,0.1,-1"
+				OnTrigger "trav_gtext_wavecount,Display,,0,-1"
+				OnTrigger "maker_croom2_manhack_1,Enable,,0.1,-1"} }
+
+		create {classname "logic_relay"
+			values {targetname "logic_croom2_assault_wave_5"
+				OnTrigger "maker_croom2_1,AddMaxChildren,6,0,-1"
+				OnTrigger "maker_croom2_2,AddMaxChildren,6,0,-1"
+				OnTrigger "maker_croom2_3,AddMaxChildren,6,0,-1"
+				OnTrigger "maker_croom2_4,AddMaxChildren,6,0,-1"
+				//OnTrigger "maker_croom2_balcony,AddMaxChildren,4,0,-1"
+				OnTrigger "maker_croom2_manhack_1,AddMaxChildren,4,0,-1"
+				OnTrigger "maker_croom2_manhack_2,AddMaxChildren,4,0,-1"
+				OnTrigger "maker_croom2_1,Enable,,0.1,-1"
+				OnTrigger "maker_croom2_2,Enable,,0.1,-1"
+				OnTrigger "maker_croom2_3,Enable,,0.1,-1"
+				OnTrigger "maker_croom2_4,Enable,,0.1,-1"
+				//OnTrigger "maker_croom2_balcony,Enable,,0.1,-1"
+				OnTrigger "maker_croom2_manhack_1,Enable,,0.1,-1"
+				OnTrigger "maker_croom2_manhack_2,Enable,,0.1,-1"
+				OnTrigger "trav_gtext_wavecount,Display,,0,-1"
+				OnTrigger "trigger_ensure_no_combine_left,Enable,,2,-1"} }
+
+//Trav|Edt - Wave count (testing purposes)
+		//create {classname "game_text"
+		//	values {spawnflags "1"
+		//		targetname "trav_gtext_wavecount"
+		//			channel "2"
+		//			y "0.67"
+		//			x "-1"
+		//			color "100 100 100"
+		//			color2 "240 110 0"
+		//			effect "2"
+		//			fadein "0.05"
+		//			fadeout "0.5"
+		//			fxtime "0.25"
+		//			holdtime "4"
+		//			message "Wave +1"} }
+
+//Trav|Edt - Teleport players to 2nd turret defense and set checkpoint to avoid respawning at start (TODO: fix spawning at start on all dead pretick)
+
+		create {classname "trigger_once"
+			origin "4148 -4032 -476"
+			values {model "*70"
+				spawnflags "1"
+				OnTrigger "syn_spawn_manager,MovePlayers,,0,-1"
+					OnTrigger "syn_new_weapons,EquipAllPlayers,,0,-1"
+					OnTrigger "syn_new_weapons,Enable,,0,-1"
+				OnTrigger "syn_spawn_manager,SetCheckpoint,syn_spawn_player_3,0,-1"
+				OnTrigger "trav_turrets_teleport,Enable,,0,-1"
+				OnTrigger "trav_turrets_teleport,Disable,,2,-1"
+				OnTrigger "trav_turret_wall*,Enable,,0,-1"} }
+
+//Trav|Edt - teleport turrets if players brought them along.
+		create {classname "filter_activator_name"
+			values {targetname "trav_turrets_filter"
+				filtername "turret_buddy" } }
+
+		create {classname "trigger_teleport"
+			origin "2180.5 -3160 -723.5"
+			values {model "*23"
+				spawnflags "8"
+				targetname "trav_turrets_teleport"
+				StartDisabled "1"
+				target "trav_turrets_ITD"
+				filtername "trav_turrets_filter"
+				} }
+
+		create {classname "trigger_teleport"
+			origin "4747.5 -3136 -331.5"
+			values {model "*23"
+				spawnflags "8"
+				targetname "trav_turrets_teleport"
+				StartDisabled "1"
+				target "trav_turrets_ITD"
+				filtername "trav_turrets_filter"
+				} }
+
+		create {classname "info_teleport_destination"
+			origin "4704 -4240 -536"
+			values {targetname "trav_turrets_ITD"
+				angles "0 180 0"} }
+
+//Trav|Edt - add turret walls (antigreif)
+//1 right
+		create {classname "func_clip_vphysics"
+			origin "-2291.5 -4536 -83.5"
+			values {model "*23"
+				targetname "trav_turret_wall1_right"
+				//StartDisabled "1"
+				filtername "trav_filter_turret_wall"} }
+//1 left
+		create {classname "func_clip_vphysics"
+			origin "1315.5 -4536 -83.5"
+			values {model "*23"
+				targetname "trav_turret_wall1_left"
+				//StartDisabled "1"
+				filtername "trav_filter_turret_wall"} }
+//1 left2
+		create {classname "func_clip_vphysics"
+			origin "1315.5 -4536 340.5"
+			values {model "*23"
+				targetname "trav_turret_wall_toggle"
+				StartDisabled "1"
+				filtername "trav_filter_turret_wall"} }
+//1 mainhigh
+		create {classname "func_clip_vphysics"
+			origin "-876.01 -4913.75 22"
+			values {model "*54"
+				targetname "trav_turret_wallp_main"//perma
+				//StartDisabled "1"
+				filtername "trav_filter_turret_wall"} }
+//2 main
+		create {classname "func_clip_vphysics"
+			origin "3980 -3069.75 -482"//4324 -5706 -410 for double
+			values {model "*54"
+				targetname "trav_turret_wall2_main"
+				StartDisabled "1"
+				filtername "trav_filter_turret_wall"} }
+//2 back
+		create {classname "func_clip_vphysics"
+			origin "4460 -5801.75 -482"//4324 -5706 -410wtf
+			values {model "*54"
+				targetname "trav_turret_wall2_back"
+				StartDisabled "1"//not alviablez in 2007 codebase, but in fgd?
+				filtername "trav_filter_turret_wall"} }
+//2 side
+		create {classname "func_clip_vphysics"
+			origin "5268 -4293.75 -354"//5284 -4002 -282wtf
+			values {model "*54"
+				targetname "trav_turret_wall2_side"
+				StartDisabled "1"
+				filtername "trav_filter_turret_wall"} }
+//2 side toggle
+		create {classname "func_clip_vphysics"
+			origin "2868 -4737.75 -482"
+			values {model "*54"
+				targetname "trav_turret_wall2_toggle"
+				StartDisabled "1"
+				filtername "trav_filter_turret_wall"} }
+
+		create {classname "trigger_once"
+			origin "2868 -4737.75 -482"
+			values {model "*54"
+				spawnflags "1"
+				OnTrigger "trav_turret_wall_toggle,Disable,,0,-1"} }
+
+		create {classname "logic_relay"
+			values {spawnflags "1"
+				targetname "logic_room5_assault_finished"
+				OnTrigger "trav_turret_wall2_toggle,Disable,,0,-1"} }
+
+//null input when spawnflags == 1
+		create {classname "logic_auto"
+			values {spawnflags "0"
+				OnMapSpawn "trav_turret_wall2*,Disable,,0,1"} }
+
+		create {classname "filter_activator_class"
+			values {targetname "trav_filter_turret_wall"
+				filterclass "npc_turret_floor"} }
+
+		create {classname "logic_relay"
+			values {spawnflags "1"
+				targetname "logic_croom2_finished"
+				OnTrigger "trav_turret_wall1*,Disable,,1,-1"} }
+
+//Trav|Edt - second defense
+
+//change a spawn to elites
+		edit {targetname "maker_combine_room5_upper_2"
+			values {TemplateName "trav_template_upper_room5_combine_AR2_elite"} }
+
+		create {classname "npc_combine_s"
+			values {spawnflags "3840"
+				model "models/combine_soldier_prisonguard.mdl"
+				targetname "trav_template_upper_room5_combine_AR2_elite"
+				model "models/combine_super_soldier.mdl"
+				squadname "squad_combine_room5"
+				additionalequipment "weapon_ar2"
+				OnDeath "counter_room5_total_living_enemies,Subtract,1,0,-1"
+				OnDeath "logic_room5_on_combine_death_upper,Trigger,,0,-1"} }
+
+		edit {targetname "maker_combine_room5_lower_4" origin "4768 -4960 -500"
+			values {origin "4768 -5056 -536"} }//4768 -4960 -536
+
+		//delete {targetname "logic_room5_spawn_manhack"}
+		//delete {targetname "logic_spawn_single_manhack"}
+		delete {targetname "logic_room5_spawn_combine_upper"}
+		delete {targetname "logic_spawn_single_combine_upper"}
+		//delete {targetname "logic_room5_spawn_combine_lower"}
+		//delete {targetname "logic_spawn_single_combine_lower"}
+
+		//create {classname "logic_relay"
+		//	values {spawnflags "2"
+		//		targetname "logic_room5_spawn_manhack"
+		//		OnTrigger "counter_room5_total_living_enemies,Add,2,0,-1"
+		//		OnTrigger "logic_spawn_single_manhack,PickRandom,,0,-1"} }
+
+		//create {classname "logic_case"
+		//	values {targetname "logic_spawn_single_manhack"
+		//		Case01 "1"
+		//		Case02 "2"
+		//		OnCase01 "maker_manhack_room5_1,AddMaxChildren,2,0,-1"
+		//		OnCase01 "maker_manhack_room5_1,Enable,,0.1,-1"
+		//		OnCase02 "maker_manhack_room5_2,AddMaxChildren,2,0,-1"
+		//		OnCase02 "maker_manhack_room5_2,Enable,,0.1,-1"} }
+
+		create {classname "logic_relay"
+			values {spawnflags "2"
+				targetname "logic_room5_spawn_combine_upper"
+				OnTrigger "counter_room5_total_living_enemies,Add,2,0,-1"
+				OnTrigger "logic_spawn_single_combine_upper,PickRandom,,0,-1"} }
+
+		create {classname "logic_case"
+			values {targetname "logic_spawn_single_combine_upper"
+				Case01 "1"
+				Case02 "2"
+				Case03 "3"
+				OnCase01 "maker_combine_room5_upper_1,AddMaxChildren,2,0,-1"
+				OnCase01 "maker_combine_room5_upper_1,Enable,,0.1,-1"
+				OnCase02 "maker_combine_room5_upper_2,AddMaxChildren,2,0,-1"
+				OnCase02 "maker_combine_room5_upper_2,Enable,,0.1,-1"
+//add counter for extra combine and add mai combine
+				//OnCase02 "trav_maker_combine_room5_upper_2,AddMaxChildren,1,0,-1"
+				//OnCase02 "counter_room5_total_living_enemies,Add,1,0,-1"
+				//OnCase02 "trav_maker_combine_room5_upper_2,Enable,,0.1,-1"
+				OnCase03 "maker_combine_room5_upper_3,AddMaxChildren,2,0,-1"
+				OnCase03 "maker_combine_room5_upper_3,Enable,,0.1,-1"} }
+
+		//create {classname "logic_relay"
+		//	values {spawnflags "2"
+		//		targetname "logic_room5_spawn_combine_lower"
+		//		OnTrigger "counter_room5_total_living_enemies,Add,2,0,-1"
+		//		OnTrigger "logic_spawn_single_combine_lower,PickRandom,,0,-1"} }
+
+		//create {classname "logic_case"
+		//	values {targetname "logic_spawn_single_combine_lower"
+		//		Case01 "1"
+		//		Case02 "2"
+		//		Case03 "3"
+		//		Case04 "4"
+		//		Case05 "5"
+		//		OnCase01 "maker_combine_room5_lower_1,AddMaxChildren,2,0,-1"
+		//		OnCase01 "maker_combine_room5_lower_1,Enable,,0.1,-1"
+		//		OnCase02 "maker_combine_room5_lower_2,AddMaxChildren,2,0,-1"
+		//		OnCase02 "maker_combine_room5_lower_2,Enable,,0.1,-1"
+		//		OnCase03 "maker_combine_room5_lower_3,AddMaxChildren,2,0,-1"
+		//		OnCase03 "maker_combine_room5_lower_3,Enable,,0.1,-1"
+		//		OnCase04 "maker_combine_room5_lower_4,AddMaxChildren,2,0,-1"
+		//		OnCase04 "maker_combine_room5_lower_4,Enable,,0.1,-1"
+		//		OnCase05 "maker_combine_room5_lower_5,AddMaxChildren,2,0,-1"
+		//		OnCase05 "maker_combine_room5_lower_5,Enable,,0.1,-1"} }
+
+		create {classname "item_suitcharger"
+			origin "4232 -3904 -494"
+			values {angles " 0 270 0"} }
+
+//Trav|Edt - change ammo type
+		edit {classname "item_ammo_crate"
+			origin "4078 -4360 -527" //use -527z if u want it to work//z-523
+			values {AmmoType "4"} }//4 - shotgun 6 - 357 //DEFAULT:SMG1
+
+//Trav|Edt - Add Synergy deagle spawn ^^^^ (TEMP) [server only]
+	//	create {classname "info_player_equip"
+	//		values {targetname "syn_new_weapons"
+	//			StartDisabled "1"
+	//			weapon_deagle		"1"
+	//		} }
+
+		//create {classname "weapon_deagle" origin "4044 -4368 -536"
+		//	values {targetname "syn_deagle"
+		//		OnPlayerPickup "point_template,ForceSpawn,,0.75,1"} }
+
+		//create {classname "point_template"
+		//	values {spawnflags "3"
+		//		targetname "syn_deagle_temp"
+		//		Template01 "syn_deagle"} }
+
+//Trav|Edt - add combine on ledge (may want to disable until definite method for nonidling)
+		//create {classname "npc_template_maker"
+		//	origin "3480 -4016 -408"
+		//	values {spawnflags "128"
+		//		angles " 0 270 0"
+		//		targetname "trav_maker_combine_room5_upper_2"
+		//		StartDisabled "1"
+		//		MaxNPCCount "0"
+		//		SpawnFrequency "4"//2
+		//		MaxLiveChildren "3"//4
+		//		TemplateName "trav_template_upper_room5_combine_AR2"
+		//		OnSpawnNPC "!activator,AddOutPut,target trav_ledge_path,0,-1"} }
+
+		//create {classname "npc_combine_s"
+		//	values {spawnflags "3840"
+		//		model "models/combine_soldier_prisonguard.mdl"
+		//		targetname "trav_template_upper_room5_combine_AR2"
+		//		squadname "squadname"
+		//		additionalequipment "weapon_ar2"
+		//		target "trav_ledge_path"
+		//		OnDeath "counter_room5_total_living_enemies,Subtract,1,0,-1"
+		//		OnDeath "logic_room5_on_combine_death_upper,Trigger,,0,-1"} }
+
+		//create {classname "path_corner" origin "3600 -4336 -408"
+			//values {targetname "trav_ledge_path"} }
+//end remove ^^
+		//create {classname "assault_rallypoint"
+		//	origin "3480 -4048 -408"
+		//	values {targetname "rally_room5_upper"
+		//		assaultpoint "trav_assaultpoint"
+		//		priority "1"} }
+
+		//create {classname "assault_assaultpoint"
+		//	origin "3688 -4328 -408"
+		//	values {targetname "trav_assaultpoint"
+		//	//allowdiversion "1"
+		//	assaulttimeout "10"
+		//	nevertimeout "1"
+		//	assaulttolerance "36"} }
+
+		create {classname "info_node" origin "3480 -4016 -412"}
+		create {classname "info_node" origin "3472 -4264 -412"}
+		create {classname "info_node" origin "3608 -4328 -412"}
+		create {classname "info_node" origin "3688 -4272 -412"}
+		create {classname "info_node" origin "3688 -4328 -412"}
+		create {classname "info_node" origin "3688 -4392 -412"}
+
+//Trav|Edt make sure alyx trainsisons
+		create {classname "point_teleport"
+			origin "4968 -4296 -696"
+			values {targetname "trav_teleport_alyx"
+				angles "0 180 0"
+				target "alyx"} }
+
+		create {classname "trigger_once"
+			origin "4008 -4344 -632"
+			values {model "*107"
+				spawnflags "1"
+				OnTrigger "trav_teleport_alyx,Teleport,,0,-1"} }
+
+//Trav|Edt - autirush
+		create {classname "trigger_coop"
+			origin "4041 -4312 -676"
+			values {model "*95"
+				angles "0 90 0"
+				spawnflags "1"
+				targetname "syn_antirush_coop"
+				CountType "1"
+				UseHUD "1"
+				PlayerValue "50"
+				wait "1.5"
+				OnTrigger "syn_antirush_text,Display,,0,-1"
+				OnPlayersIn "syn_antirush_wall,Kill,,0,1"
+				//OnPlayersIn "syn_antirush_light,TurnOff,,0,1"
+				OnPlayersIn "!self,Disable,,1,1"} }
+
+		create {classname "syn_transition_wall" origin "4448 -4350.78 -880" values {angles "0 180 0" targetname "syn_antirush_wall"} }
+
+		//create {classname "light_dynamic" origin "-3384 6048 64"
+		//	values {targetname "syn_antirush_light"
+		//		_light "170 255 170"
+		//		brightness "1"
+		//		distance "300"
+		//		//_inner_cone "75"
+		//		//_cone "80"
+		//		style "12"} }
+
+		create {classname "game_text"
+			values {spawnflags "0"
+				targetname "syn_antirush_text"
+				message "Need More Players to Continue. . ."
+				channel "0"
+				effect "2"
+				x "-1"
+				y "0.85"
+				color "100 100 100"
+				color2 "240 110 0"
+				fadein "0.03"
+				fadeout "1.25"
+				holdtime "2"
+				fxtime "0.25"} }
+
+//End of Trav|Edt
+
+
+		// ------------------------------
+
+		// do not let the door close
+		"delete" { "classname" "trigger_once" "origin" "-440 -2908 -172" }
+
+//Trav|Edt - Functionality check
+		create {classname "logic_relay" values {targetname "trav_functionality_d2_prison_07"} }
+	}
+}

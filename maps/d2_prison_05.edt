@@ -1,0 +1,271 @@
+d2_prison_05
+{
+	console
+	{
+		sk_antlionguard_health 2560
+		sk_antlionguard_dmg_charge 30 //20
+		sk_antlionguard_dmg_shove 15 //10
+		sk_antlion_health 75 //30
+	}
+
+	entity
+	{
+//--Setup--
+		edit {classname "func_areaportal" values {targetname "syn_disabledPortal" StartOpen "1"} }
+
+//Prevent Backtracking
+		create {classname "syn_transition_wall" origin "1720 440 376" values {angles "0 90 0"} }
+
+		//create {classname "trigger_push" origin "0 64 0"
+		//	values {model "*36"
+		//		spawnflags "1"
+		//		speed "750"
+		//		pushdir "0 90 0"} }
+
+//--Starting Items--
+		create {classname "info_player_equip"
+			values {
+				item_suit			"1"
+				item_armor			"60"
+				weapon_crowbar		"1"
+				weapon_pistol		"1"
+				weapon_smg1			"1"
+				weapon_frag			"1"
+				weapon_357			"1"
+				weapon_physcannon	"1"
+				weapon_shotgun		"1"
+				weapon_ar2			"1"
+				weapon_rpg			"1"
+				weapon_crossbow		"1"
+				weapon_bugbait		"1"
+				weapon_stunstick	"1"
+				weapon_slam			"1"
+				ammo_pistol			"54"//72
+				ammo_smg1			"45"
+				ammo_grenade		"1"
+				ammo_smg1_grenade	"1"
+				ammo_357			"6"
+				ammo_buckshot		"12"
+				ammo_ar2			"30"
+				ammo_rpg_round		"1"
+				//ammo_crossbow		"0"
+				//	ammo_slam		"2"
+			} }
+
+//--Spawns--
+		create {classname "info_spawn_manager"
+			values {targetname "syn_spawn_manager"} }
+
+		create {classname "info_player_coop" origin "1512 520 384"//v2004 1509.48 459.28 384.03 0 90 0
+			values {angles "0 105 0" targetname "syn_spawn_player_1"} }
+
+		create {classname "info_global_settings"
+			values {IsVehicleMap "0" targetname "syn_global_settings"} }
+
+//--Extra--
+
+		// create intermission
+		"create" { "classname" "info_intermission" "origin" "-123.031250 1686.312500 650.531250" "values" { "angles" "20 -110 0" } }
+
+//Trav|Edt - Doors: Open Only
+		edit {targetname "laundry_double_doors" values {spawnflags "1"} }
+		edit {classname "prop_door_rotating" values {spawnflags "0"} }
+
+//Trav|Edt - Respawning Weps/Items (Use sv_hl2dm_* for spawntimes)
+			//create { classname "logic_auto"
+			//	values { spawnflags "1"
+			//		OnMapSpawn "weapon_*,AddOutput,RespawnCount -1,0,-1"
+			//		OnMapSpawn "item_*,AddOutput,RespawnCount -1,0,-1" } }
+
+//Trav|Edt - Disable Enemy turrets when tipped (avoid player greif)
+		create {classname "logic_auto"
+			values {spawnflags "1"
+				OnMapSpawn "npc_turret_floor,AddOutput,OnTipped !self:SelfDestruct::0:-1,0,-1"} }//DepleteAmmo
+
+		edit {targetname "kitchen_turrets" values {targetname "trav_kitchen_turrets"} }
+		edit {targetname "laundry_turret" values {targetname "trav_laundry_turret"} }
+		delete {targetname "stairway_turret_spawn"}
+
+//Trav|Edt - disable func_door
+		edit {classname "func_door_rotating" origin "-227 2058 438"
+			values {spawnflags "2048" wait "-1"} }
+
+//Trav|Edt - add suitcharger in poisonzombie area
+		create {classname "item_suitcharger" origin "-1472 620 435"}
+
+//Trav|Edt - add more peeps
+		create {classname "npc_combine_s"
+			origin "-560 40 520"
+			values {spawnflags "2564"
+				targetname "trav_combine1"
+				model "models/combine_soldier_prisonguard.mdl"
+				squadname "laundry_squad"
+				NumGrenades "999999"
+				additionalequipment "weapon_ar2"} }
+
+		create {classname "npc_template_maker"
+			origin "-560 40 520"
+			values {spawnflags "128"
+				//angles " 0 180 0"
+				targetname "trav_tmaker_combine1"
+				StartDisabled "1"
+				MaxNPCCount "8"
+				SpawnFrequency "1"
+				MaxLiveChildren "-1"
+				TemplateName "trav_combine1"} }
+
+		create {classname "trigger_once"
+			origin "-256 1758.25 464"
+			values {model "*38"
+				spawnflags "1"
+				OnTrigger "trav_tmaker_combine1,Enable,,0,-1"} }
+
+//Trav|Edt - prevent monitor from disabling
+		delete {classname "trigger_multiple" origin "1304 1156 448"}
+
+		create {classname "trigger_once"
+			origin "1304 1156 448"
+			values {model "*37"
+				spawnflags "1"
+				OnTrigger "monitor_1,Enable,,0,-1"
+				OnTrigger "monitor_1,SetCamera,laundry_camera,0,-1"} }
+
+//Trav|Edt - increase combine tripmines damage
+		edit {targetname "slam_exp_6" values {iMagnitude "200"} }
+		edit {targetname "slam_exp_7" values {iMagnitude "200"} }
+		edit {targetname "slam_exp_8" values {iMagnitude "200"} }
+		edit {targetname "slam_exp_9" values {iMagnitude "200"} }
+		edit {targetname "slam_exp_10" values {iMagnitude "200"} }
+		edit {targetname "slam_exp_11" values {iMagnitude "200"} }
+		edit {targetname "slam_exp_12" values {iMagnitude "200"} }
+
+//Trav|Edt - must kill guard to continue
+		//create {classname "trigger_push"
+		//	origin "-2848 424 784"
+		//	values {model "*58"
+		//		spawnflags "1"
+		//		targetname "trav_guardnotdead_push"
+		//		pushdir "0 90 0"
+		//		speed "750"} }
+
+
+		create {classname "syn_transition_wall" origin "-3104 440 536" values {angles "0 90 0" targetname "trav_guardnotdead_push"} }
+
+		delete {targetname "showers_guard"}
+
+		create {classname "npc_antlionguard"
+			origin "-1212 928 642"
+			values {spawnflags "131076"//196612
+				angles "0 180 0"
+				targetname "showers_guard"
+				startburrowed "0"
+				OnDeath "soldiers_vs_player,RevertRelationship,,0,1"
+				OnDeath "trav_guardnotdead_push,Kill,,0,-1"} }
+
+//Trav|Edt - moveplayers at wall
+		//delete {targetname "point_of_no_return"}
+
+		create {classname "trigger_once"
+			origin "-4048 -528 560"
+			values {model "*85"
+				spawnflags "1"
+				OnTrigger "syn_spawn_manager,MovePlayers,,0,-1"} }
+
+//Trav|Edt - add static crate for ledge
+	//	create {classname "prop_physics_override"
+	//		origin "-4530 -612 542"
+	//		values {spawnflags "8"
+	//			targetname "Crushables"
+	//			model "models/props_junk/wood_crate001a.mdl"
+	//			health "0"} }
+
+//Trav|Edt - increase combine wall speed
+		delete {classname "trigger_once" origin "-4048 -528 560"}
+
+		create {classname "trigger_once"
+			origin "-4048 -528 560"
+			values {model "*80"
+				spawnflags "1"
+				//OnTrigger "point_of_no_return,Enable,,0,-1"
+				OnTrigger "combine_crusherwall1_ss,BeginSequence,,0,-1"
+				OnTrigger "combine_crusherwall3_ss,BeginSequence,,5,-1"//7.5
+				OnTrigger "combine_crusherwall4_ss,BeginSequence,,10,-1"//15
+				OnTrigger "combine_crusherwall2_ss,BeginSequence,,15,-1"} }//22.5
+
+//Trav|Edt - Disable hurt_trigger_crusher_2 from still killing players after it crushes >.<; add invisable wall so players cant fall down
+		create {classname "logic_auto"
+			values {spawnflags "1"
+				OnMapSpawn "combine_crusherwall2_ss,AddOutput,OnScriptEvent02 hurt_trigger_crusher_2:Disable::0.1:-1,8,-1"//4
+				OnMapSpawn "combine_crusherwall2_ss,AddOutput,OnScriptEvent02 trav_endclip_brush:Enable::0:-1,8,-1"} }//3.9
+//still can go through prop, but no biggie, for now.
+		create {classname "func_brush"
+			origin "-4376 -280 1145.79"
+			values {model "*104"
+				spawnflags "2"
+				StartDisabled "1"
+				rendermode "10"
+				targetname "trav_endclip_brush"} }
+
+		create {classname "func_brush"
+			origin "-4224 -360 1145.79"
+			values {model "*104"
+				spawnflags "2"
+				StartDisabled "1"
+				rendermode "10"
+				targetname "trav_endclip_brush"} }
+
+//Trav|Edt - autirush
+		create {classname "trigger_coop"
+			origin "-4476.04 -997.64 704"
+			values {model "*75"
+				spawnflags "1"
+				StartDisabled "1"//enabled by combine_crusherwall2_ss
+				targetname "syn_antirush_coop"
+				CountType "1"
+				UseHUD "1"
+				PlayerValue "50"
+				wait "1.5"
+				OnTrigger "syn_antirush_text,Display,,0,-1"
+				//OnPlayersIn "syn_antirush_push,Disable,,0,1"
+				OnPlayersIn "syn_antirush_wall,Kill,,0,1"
+				OnPlayersIn "!self,Disable,,1,1"} }
+
+		create {classname "logic_auto"
+			values {spawnflags "1"
+				OnMapSpawn "combine_crusherwall2_ss,AddOutput,OnEndSequence syn_antirush_coop:Enable::0:-1,0,-1"} }
+
+		create {classname "syn_transition_wall" origin "-4368 -1336 632" values {angles "0 180 0" targetname "syn_antirush_wall"} }
+
+		//create {classname "trigger_push"
+		//	origin "-4296 -1096 712"//z816
+		//	values {model "*80"
+		//		spawnflags "1"
+		//		targetname "syn_antirush_push"
+		//		pushdir "0 180 0"
+		//		speed "450"} }
+
+		create {classname "game_text"
+			values {spawnflags "0"
+				targetname "syn_antirush_text"
+				message "Need More Players to Continue. . ."
+				channel "0"
+				effect "2"
+				x "-1"
+				y "0.85"
+				color "100 100 100"
+				color2 "240 110 0"
+				fadein "0.03"
+				fadeout "1.25"
+				holdtime "2"
+				fxtime "0.25"} }
+
+//End of Trav|Edt
+
+		// disable the combine wall
+//Trav|Edt - re-enable combine wall
+		//"delete" { "classname" "trigger_once" "origin" "-4048 -528 560" }
+
+//Trav|Edt - Functionality check
+		create {classname "logic_relay" values {targetname "trav_functionality_d2_prison_05"} }
+	}
+}

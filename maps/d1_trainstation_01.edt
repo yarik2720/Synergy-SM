@@ -1,0 +1,444 @@
+// Version_Tracker_Travis: 1.06+
+d1_trainstation_01
+{
+	console
+	{
+		// TODO: When all players disconnect from this map, restart map
+		mp_spawntime "-1" //fix map idle/restart issues -- needs testing
+	}
+	entity
+	{
+		// Hold these start autos
+		edit {classname "logic_auto" origin "-14112 -13824 -1140" values {classname "syn_logic_auto"} }
+		edit {classname "logic_auto" origin "-12032 -10656 -1380" values {classname "syn_logic_auto"} }
+
+		// == Main Auto==
+		create {classname "logic_auto"
+			values
+			{
+				spawnflags "1"
+				//Start intro cam
+				OnMapSpawn "syn_intro_viewcontrol,Enable,,0,-1"
+				// env_zoom - all players
+				OnMapSpawn "env_zoom,AddOutput,AllPlayers 1,0,-1"
+				// Set checkpoint after gman sequence
+				OnMapSpawn "logic_start_train,AddOutput,OnTrigger syn_spawn_manager:SetCheckpoint:syn_spawn_player_2:0:-1,0,-1"
+				// Enable DD settings
+				OnMapSpawn "logic_start_train,AddOutput,OnTrigger syn_vint_ld_1:CheckSkill::0:-1,0,-1"
+				// Move everyone to the train (failsafe)
+				OnMapSpawn "trigger_lcs_trainride_geton,AddOutput,OnTrigger syn_spawn_manager:MovePlayers::0:-1,0,-1"
+				// barney_door_2
+				OnMapSpawn "syn_barney_door_2,AddOutput,OnFullyClosed !self:Lock::0:-1,0,-1"
+				OnMapSpawn "syn_barney_door_2,AddOutput,OnBlockedClosing !self:Close::1:-1,0,-1"
+				OnMapSpawn "security_intro_01,AddOutput,OnTrigger1 syn_barney_door_2:UnLock::0:-1,0,-1"
+				OnMapSpawn "security_intro_01,AddOutput,OnTrigger1 syn_barney_door_2:Open::1:-1,0,-1"
+				OnMapSpawn "introom_door_1,AddOutput,OnTrigger1 syn_barney_door_2:Close::1:-1,0,-1"
+				OnMapSpawn "introom_door_1,AddOutput,OnTrigger1 syn_barney_door_2:Lock::1:.1-1,0,-1"
+				// storage room
+				OnMapSpawn "trigger_storage_close_door_1,AddOutput,target syn_barneyroom_wait_target2,0,-1"
+				OnMapSpawn "trigger_storage_close_door_1,AddOutput,OnPlayersIn !self:TeleportPlayersNotTouching::0:1,0,-1"
+				OnMapSpawn "trigger_storage_close_door_1,AddOutput,OnPlayersIn !self:Disable::0:1,0,-1"
+				OnMapSpawn "storage_room_door,AddOutput,OnFullyClosed syn_end_ladder:Enable::0:1,0,-1"
+				// ?
+				OnMapSpawn "syn_barney_door_2,AddOutput,OnClose trav_barney_room_blocker:Enable::0:-1,8,-1"
+				//OnMapSpawn "syn_barney_door_2,AddOutput,OnFullyClosed trav_barney_room_blocker:Disable::0:-1,8,-1"
+				OnMapSpawn "syn_barney_door_2,AddOutput,OnClose trav_barney_room_blocker:Disable::2:-1,8,-1"
+			}
+		}
+
+		//--Spawns--
+		create {classname "info_spawn_manager"
+			values {targetname "syn_spawn_manager"} }
+
+		// Gman
+		create {classname "info_player_coop" origin "-14576 -14208 -1300"
+			values {angles "0 0 0" targetname "syn_spawn_player_1"} }
+
+		// Outside train
+		create {classname "info_player_coop" origin "-5392 -1968 16"
+			values {angles "0 0 0" targetname "syn_spawn_player_2" StartDisabled "1"} }
+
+		// Intro wait camera
+		create {classname "point_viewcontrol" origin "-5280 -1504 592"
+			values {spawnflags "140" angles "30 320 0"
+				targetname "syn_intro_viewcontrol"} }
+
+		//Trav|Edt - Start countdown when a player spawns
+		// TODO intro map management
+		create {classname "trigger_once"
+			origin "-14576 -14208 -1236"
+			values {//model "*25"
+				edt_getbspmodelfor_targetname "teleport"
+				spawnflags "1"
+				OnTrigger "syn_start_timer,Start,30,4,-1"
+				} }
+
+		// Countdown timer
+		create { classname "hud_timer"
+			values {
+				targetname "syn_start_timer"
+				TimerType "1"
+				TimerText "STARTING GAME"
+				//OnTimer "syn_intro_trigger_post_tempfix,Enable,,0,-1"
+				OnTimer "syn_logic_auto,Go,,0,-1"
+				OnTimer "syn_vint_diff_cosmetic_ent_temp,ForceSpawn,,1,-1"
+			}
+		}
+
+		// TODO
+		create {classname "logic_relay"
+			values
+			{
+				targetname "logic_start_train"
+				OnTrigger "point_viewcontrol,Disable,,1,-1"
+				}
+			}
+
+		// Don't close train doors until everyone exits
+		delete {targetname "train_door_2_counter" }
+		create {classname "trigger_multiple"
+			origin "-5432 -1800 80"//-5336 -1944 80
+			values{//model "*25"
+				edt_getbspmodelfor_targetname "wind_2"
+				spawnflags "3"
+				targetname "trav_trigmulti_traindoor"
+				StartDisabled "1"
+				OnEndTouchAll "train_door_2,Close,,0,1"
+				OnEndTouchAll "trav_traindoor_clip,Enable,,0,-1"
+				OnEndTouchAll "!self,Disable,,1,-1"} }
+
+		create {classname "func_brush"
+			origin "-5384 -1917 91"
+			values {//model "*68"
+				edt_getbspmodelfor_targetname "cage_playerclip"
+				spawnflags "2"
+				targetname "trav_traindoor_clip"
+				StartDisabled "1"} }
+
+		create {classname "func_brush"
+			origin "-5320 -1917 91"
+			values {//model "*68"
+				edt_getbspmodelfor_targetname "cage_playerclip"
+				spawnflags "2"
+				targetname "trav_traindoor_clip"
+				StartDisabled "1"} }
+
+		create {classname "logic_relay"
+			values {spawnflags "1"
+				targetname "relay_train_reached_station"
+				OnTrigger "trav_trigmulti_traindoor,Enable,,0,-1"
+				OnTrigger "train_door_*,addoutput,OnFullyClosed trav_traindoor_clip:Disable::0:-1,0,-1"} }
+
+		// "All Players" flag for intro
+		edit {classname "point_viewcontrol" values {edt_addspawnflags "128"} }
+
+		// Some spiffy new dynamic difficulty test
+		create {classname "logic_difficulty"
+			values {spawnflags "1"
+				targetname "syn_vint_ld_1"
+				OnLow "syn_vint_diff_cosmetic_*,Kill,,0,-1"
+				OnNotHigh "syn_vint_diff_cosmetic_2*,Kill,,0,-1"
+				OnNotHigh "syn_vint_diff_cosmetic_4*,Kill,,0,-1"
+				OnNotHigh "syn_vint_diff_cosmetic_5*,Kill,,0,-1"
+				OnNotHigh "syn_vint_diff_cosmetic_7*,Kill,,0,-1"
+				OnNotHigh "syn_vint_diff_cosmetic_8*,Kill,,0,-1"} }
+
+		create {classname "point_template"
+			values {spawnflags "2"
+				targetname "syn_vint_diff_cosmetic_ent_temp"
+				Template01 "syn_vint_diff_cosmetic_1_ent"
+				Template02 "syn_vint_diff_cosmetic_2_ent"
+				Template03 "syn_vint_diff_cosmetic_3_ent"
+				Template04 "syn_vint_diff_cosmetic_4_ent"
+				Template05 "syn_vint_diff_cosmetic_5_ent"
+				OnEntitySpawned "syn_vint_diff_cosmetic_*_ss,BeginSequence,,1,-1"} }
+
+		create {classname "npc_metropolice"
+			origin "-4248 -2596 -31"
+			values {spawnflags "8708"//532
+				angles "0 90 0"
+				targetname "syn_vint_diff_cosmetic_1_ent"} }
+
+		create {classname "scripted_sequence"
+			values {targetname "syn_vint_diff_cosmetic_1_ss"
+				spawnflags "256"
+				m_iszEntity "syn_vint_diff_cosmetic_1_ent"
+				m_iszPostIdle "plazalean"} }
+
+		create {classname "npc_metropolice"
+			origin "-4247.31 -1539.56 -31"
+			values {spawnflags "8708"
+				targetname "syn_vint_diff_cosmetic_2_ent"
+				additionalequipment "weapon_smg1"} }
+
+		create {classname "scripted_sequence"
+			values {targetname "syn_vint_diff_cosmetic_2_ss"
+				spawnflags "256"
+				m_iszEntity "syn_vint_diff_cosmetic_2_ent"
+				m_iszPostIdle "smg1idle1"} }
+
+		create {classname "npc_metropolice"
+			origin "-4560 -1516 -32"
+			values {spawnflags "8708"
+				angles "0 270 0"
+				targetname "syn_vint_diff_cosmetic_3_ent"} }
+
+		create {classname "scripted_sequence"
+			values {targetname "syn_vint_diff_cosmetic_3_ss"
+				spawnflags "272"
+				m_iszEntity "syn_vint_diff_cosmetic_3_ent"
+				m_iszPostIdle "plazalean"} }
+
+		create {classname "npc_metropolice"
+			origin "-4836.01 -2044 354"
+			values {spawnflags "8708"
+				angles "0 180 0"
+				targetname "syn_vint_diff_cosmetic_4_ent"
+				additionalequipment "weapon_smg1"} }
+
+		create {classname "scripted_sequence"
+			values {targetname "syn_vint_diff_cosmetic_4_ss"
+				spawnflags "256"
+				m_iszEntity "syn_vint_diff_cosmetic_4_ent"
+				m_iszPostIdle "smg1idle1"} }
+
+		create {classname "npc_metropolice"
+			origin "-4762.88 -1693.61 354"
+			values {spawnflags "8708"
+				targetname "syn_vint_diff_cosmetic_5_ent"
+				additionalequipment "weapon_smg1"} }
+
+		create {classname "scripted_sequence"
+			values {targetname "syn_vint_diff_cosmetic_5_ss"
+				spawnflags "256"
+				m_iszEntity "syn_vint_diff_cosmetic_5_ent"
+				m_iszPostIdle "smg1idle1"} }
+
+		create {classname "npc_metropolice"
+			origin "-3776 -864 33"
+			values {spawnflags "8708"
+				targetname "syn_vint_diff_cosmetic_6_ent"
+				angles "0 180 0"
+				additionalequipment "weapon_stunstick"} }
+
+		create {classname "scripted_sequence"
+			values {targetname "syn_vint_diff_cosmetic_6_ss"
+				spawnflags "256"
+				m_iszEntity "syn_vint_diff_cosmetic_6_ent"
+				m_iszPostIdle "plazalean"} }
+
+		create {classname "npc_metropolice"
+			origin "-3872 -912 33"
+			values {spawnflags "8708"
+				targetname "syn_vint_diff_cosmetic_7_ent"
+				angles "0 180 0"
+				additionalequipment "weapon_smg1"} }
+
+		create {classname "scripted_sequence"
+			values {targetname "syn_vint_diff_cosmetic_7_ss"
+				spawnflags "256"
+				m_iszEntity "syn_vint_diff_cosmetic_7_ent"
+				m_iszPostIdle "smg1idle1"} }
+
+		create {classname "npc_metropolice"
+			origin "-4288 -320 -31"
+			values {spawnflags "8708"
+				targetname "syn_vint_diff_cosmetic_8_ent"
+				angles "0 270 0"
+				additionalequipment "weapon_smg1"} }
+
+		create {classname "scripted_sequence"
+			values {targetname "syn_vint_diff_cosmetic_8_ss"
+				spawnflags "256"
+				m_iszEntity "syn_vint_diff_cosmetic_8_ent"
+				m_iszPostIdle "smg1idle1"} }
+
+// Fix breaking the queue if you rush (added delay)
+
+		create {classname "trigger_once"
+			origin "-5022.15 -787.48 0"
+			values {
+				spawnflags "1"
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "-5022.15 -787.48 0"
+				OnTrigger "actbusy_customs_queue,MoveQueueUp,,1,-1"
+				} }
+
+		create {classname "trigger_once"
+			origin "-4614.97 -678.03 16"
+			values {
+				spawnflags "1"
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "-4614.97 -678.03 16"
+				OnTrigger "actbusy_customs_queue,MoveQueueUp,,2,-1"
+				OnTrigger "razortrain_cop_template,ForceSpawn,,0,-1"
+				} }
+
+		create {classname "trigger_once"
+			origin "-4614.97 -806.03 16"
+			values {
+				spawnflags "1"
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "-4614.97 -806.03 16"
+				OnTrigger "actbusy_customs_queue,MoveQueueUp,,3,-1"
+				} }
+
+		delete {classname "trigger_once" origin "-5022.15 -787.48 0"}
+		delete {classname "trigger_once" origin "-4614.97 -678.03 16"}
+		delete {classname "trigger_once" origin "-4614.97 -806.03 16"}
+
+		// fixup blockers at cagearea
+		delete {targetname "cage_playerclip"}
+		// dont let cop stand in the way
+		edit {targetname "razor_gate_retreat_block_2" values {origin "-4272.3 -658.94 -23"} }
+
+		//Trav|Edt - Fix exploit to get past closing gate
+		create {classname "func_brush"
+			origin "-4224.01 -407 45"
+			values {//model "*68"
+				edt_getbspmodelfor_targetname "cage_playerclip"
+				spawnflags "2"} }
+
+		// wait for most players to get in barneyroom, then teleport rest
+//		delete {classname "trigger_once" origin "-3442 -316 8"}
+//		create {classname "trigger_coop" origin "-3464 -240 32"
+//			values {//model "*25"
+//				edt_getbspmodelfor_targetname "wind_2"
+//				spawnflags "1"
+//				targetname "syn_barneyroom_wait_coop"
+//				CountType "1"
+//				target "syn_barneyroom_wait_target"
+//				PlayerValue "50"
+//				OnPlayersIn "syn_barneyroom_wait_coop_allin_relay,Trigger,,0,1"
+//				OnALLPlayersIn "syn_barneyroom_wait_coop_relay,Trigger,,0,1"
+//				OnALLPlayersIn "syn_barneyroom_wait_coop_allin_relay,CancelPending,,0,1"} }
+////if all players are in before waittime(15), go ahead and start
+//		create {classname "logic_relay"
+//			values {spawnflags "1"
+//				targetname "syn_barneyroom_wait_coop_allin_relay"
+//				OnTrigger "security_intro_02,Start,,10,1"
+//				OnTrigger "barney_room_blocker,Enable,,10,1"
+//				OnTrigger "syn_barneyroom_wait_coop_relay,Disable,,10,1"
+//				OnTrigger "syn_barneyroom_wait_coop,TeleportPlayersNotTouching,,10.1,1"
+//				}
+//			}
+//
+//		create {classname "info_target" origin "-3456 -224 -24" values {targetname "syn_barneyroom_wait_target" angles "0 270 0"} }
+//
+//		create {classname "logic_relay"
+//			values {spawnflags "1"
+//				targetname "syn_barneyroom_wait_coop_relay"
+//				OnTrigger "security_intro_02,Start,,0,1"
+//				OnTrigger "barney_room_blocker,Enable,,0,1"} }
+
+//if all players are in, go ahead and start
+		//create {classname "trigger_coop" origin "-3464 -240 32"
+		//	values {model "*25"
+		//		spawnflags "1"
+		//		targetname "syn_barneyroom_wait_coop_allin"
+		//		CountType "1"
+		//		PlayerValue "100"
+		//		OnPlayersIn "security_intro_02,Start,,0,-1"
+		//		OnPlayersIn "barney_room_blocker,Enable,,0,-1"} }
+
+
+		//Trav|Edt - allow barney_door_1 to close
+		create {classname "trigger_once" origin "-4211 -492 28"
+			values
+			{
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "-4211 -492 28"
+				spawnflags "1"
+				OnTrigger "barney_door_1,AddOutput,OnOpen !self:AddOutput:targetname syn_barney_door_1:0:1,0,-1"
+			}
+		}
+
+		create {classname "trigger_coop"
+			origin "-3684 -514 28"//-3684 -451 28
+			values{//model "*50"
+				spawnflags "1"
+				edt_getbspmodelfor_targetname "barney_door_close_trigger"
+				//edt_originoffset "TODO" // TODO?
+				targetname "barney_door_close_trigger"
+				StartDisabled "1"
+				CountType "1"
+				PlayerValue "100"
+				OnPlayersIn "syn_barney_door_1,Close,,0,1"
+				OnPlayersIn "syn_barney_door_1,Lock,,0.1,1"
+				OnPlayersIn "!self,Disable,,1,1"} }
+
+		//Trav|Edt - move barney out of door way
+		//edit {targetname "mark_barneyroom_comblock_4" values {origin "-3328 -216 -24"} }
+
+		// == manage storage room ==
+		// TODO output editor for EDT
+		//edit {targetname "trigger_storage_close_door_1" values {classname "trigger_coop"} }
+		create {classname "trigger_coop"
+			origin "-3488 80 112"
+			values
+			{
+				edt_getbspmodelfor_targetname "trigger_storage_close_door_1"
+				spawnflags "1"
+				targetname "trigger_storage_close_door_1"
+				StartDisabled "1"
+				CountType "1"
+				PlayerValue "50"
+				OnPlayersIn "security_04,Start,,0,-1"
+				OnPlayersIn "barney_room_blocker_2,Enable,,0,-1"
+				OnPlayersIn "logic_BarneyExitNag,CancelPending,,0,-1"
+				OnPlayersIn "security_04,Disable,,0.1,-1"
+			}
+		}
+		delete {targetname "trigger_storage_close_door_1"}
+
+		create {classname "info_target" origin "-3360 -64 -24" values {targetname "syn_barneyroom_wait_target2" angles "0 270 0"} }
+
+		// Control ladder to wait for all players
+		delete {targetname "ladder_1_top"}
+		delete {targetname "ladder_1_base"}
+		create {classname "func_useableladder"
+			values
+			{
+				targetname "syn_end_ladder"
+				StartDisabled "1"
+				point0 "-3458 93 110"
+				point1 "-3458 93 -32"
+			}
+		}
+
+		// == manage barney_door_2 door ==
+		edit {targetname "barney_door_2" values {targetname "syn_barney_door_2"} }
+		edit {targetname "barney_door_2_slot" values {parentname "syn_barney_door_2"} }
+		delete {targetname "trigger_cop_close_door_1"}
+
+		// teleport players who are not in this room after a bit
+		create {classname "trigger_coop"
+			origin "-3446.15 -179.48 0"//-3438.15 -27.48 0
+			values
+			{
+				//model "*63"
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "-5022.15 -787.48 0"
+				spawnflags "1"
+				targetname "trav_coop_barney_door_2"
+				//StartDisabled "1"
+				CountType "1"
+				target "syn_barneyroom_teleport_target"
+				PlayerValue "50"
+				OnTrigger "!self,TeleportPlayersNotTouching,,15,1"
+				OnTrigger "barney_room_blocker,Enable,,15,1"
+				OnTrigger "syn_barney_door_2,UnLock,,15,1"
+				OnTrigger "syn_barney_door_2,Close,,15.1,1"
+				OnTrigger "syn_barney_door_2,Lock,,16,1"
+				OnTrigger "!self,Disable,,1,1"
+			}
+		}
+
+		create {classname "info_target" origin "-3456 -256 -24" values {targetname "syn_barneyroom_teleport_target" angles "0 0 0"} }
+
+		edit {targetname "barney_room_blocker" values {targetname "trav_barney_room_blocker"} }
+
+//Trav|Edt - Functionality check
+		create {classname "logic_relay" values {targetname "trav_functionality_d1_trainstation_01"} }
+	}
+}

@@ -1,0 +1,146 @@
+d3_c17_13
+{
+	console
+	{
+//Trav|Edt - Max rpg carryness for rest of game(included in other maps).
+		//sk_max_rpg_round "5"
+	}
+	entity 
+	{
+//--Setup--
+		delete {classname "logic_auto" origin "4684.48 -2482.66 11.876"}
+		create {classname "logic_auto"
+			values {spawnflags "1"
+				OnMapSpawn "citizen_story_seq_0,BeginSequence,,0.5,-1"
+				OnMapSpawn "citizen_story,StartScripting,,0.5,-1"
+				OnMapSpawn "citizen_fears_strider_relationship,ApplyRelationship,,1,-1"} }
+		edit {classname "func_areaportal" values {targetname "syn_disabledPortal" StartOpen "1"} }
+
+//--Starting Items--
+		create {classname "info_player_equip"
+			values {
+				item_suit			"1"
+				item_armor			"60"
+				weapon_crowbar		"1"
+				weapon_pistol		"1"
+				weapon_smg1			"1"
+				weapon_frag			"1"
+				weapon_357			"1"
+				weapon_physcannon	"1"
+				weapon_shotgun		"1"
+				weapon_ar2			"1"
+				weapon_rpg			"1"
+				weapon_crossbow		"1"
+				weapon_bugbait		"1"
+				weapon_slam			"1"
+				weapon_stunstick	"1"
+				ammo_pistol			"54"//72
+				ammo_smg1			"45"
+				ammo_grenade		"1"
+				ammo_smg1_grenade	"1"
+				ammo_357			"6"
+				ammo_buckshot		"12"
+				ammo_ar2			"30"
+				ammo_ar2altfire		"1"
+				ammo_rpg_round		"3"
+				//ammo_crossbow		"0"
+				//ammo_slam			"2"
+			} }
+
+//--Spawns--
+		create {classname "info_spawn_manager"
+			values {targetname "syn_spawn_manager"} }
+
+		create {classname "info_player_coop" origin "5020.53 -3099.43 0.03"
+			values {angles "0 90 0" targetname "syn_spawn_player_1"} }
+
+		create {classname "info_global_settings"
+			values {IsVehicleMap "0" targetname "syn_global_settings"} }
+
+//--Extra--
+
+//Trav|Edt - manage ragdolls
+	//	delete {targetname "strider2_physobjects1"}
+	//	delete {targetname "strider2_physobjects2"}
+	//	delete {targetname "strider2_physobjects3"}
+	//	edit {targetname "strider2_physobjects1" {classname "prop_physics" model "models/props_vehicles/car002a_physics.mdl"} }
+	//	edit {targetname "strider2_physobjects2" {classname "prop_physics" model "models/props_vehicles/car002a_physics.mdl"} }
+	//	edit {targetname "strider2_physobjects3" {model "models/props_vehicles/car002b_physics.mdl"} }
+
+		// create intermission
+		"create" { "classname" "info_intermission" "origin" "5030.713379 1261.108276 187.134674" "values" { "angles" "0 -40 0" } }
+
+//Trav|Edt - allow striders to stomp on players
+		edit {targetname "strider1" values {spawnflags "68868"} }
+		edit {targetname "strider2" values {spawnflags "65924"} }
+		edit {targetname "strider3" values {spawnflags "65796"} }
+
+//Trav|Edt - disallow a strider from being removed
+		delete {classname "trigger_once" origin "6144 -904 -76"}
+
+//Trav|Edt - fix escape_attempt_killtrigger
+		delete {targetname "escape_attempt_killtrigger"}
+//works but i like it better for no instant kill
+		//create {classname "trigger_multiple"
+		//	origin "5080 -25.26 336"
+		//	values {model "*73"
+		//		spawnflags "1"
+		//		wait "1"
+		//		StartDisabled "1"
+		//		targetname "escape_attempt_killtrigger"
+		//		OnTrigger "!activator,SetHealth,0,0,-1"} }
+
+//Trav|Edt make fog controller(s) dynamic (fog seems fine...??)
+		create {classname "env_fog_controller"
+			values {targetname "trav_fog_citadel"
+				fogstart "200"
+				fogend "8000"
+				farz "6500"
+				fogcolor "67 107 107"
+				fogcolor2 "131 180 180"
+				fogdir "90 0 0"} }
+
+//Trav|Edt - teleport players and let dog drop combinewall part
+
+		create {classname "trigger_once"
+			origin "8386 1024 -114"
+			values {model "*103"//model i wanted is not showing?? maybe same as one i wanted D:
+				spawnflags "1"
+				OnTrigger "syn_spawn_manager,MovePlayers,,0,-1"} }
+
+//End of Trav|Edt
+//Trav|EDt - no reason to start these automaticallyz
+		// clear some room for spawn
+		//"delete" { "classname" "prop_physics" "origin" "4712.00 -2744.00 16.00" }
+		//"delete" { "classname" "prop_physics" "origin" "4680.00 -2768.00 16.00" }
+
+		// start some things automatically
+		// and disable the triggers
+		//"delete" { "classname" "trigger_once" "origin" "4736 -2552 40" }	// 69
+		//"delete" { "classname" "trigger_once" "origin" "4936 -2704 64" }	// 85
+
+		//"create"
+		//{
+		//	"classname" "logic_auto"
+		//	"origin" "0 0 0"
+		//	"values"
+		//	{
+		//		// 85
+		//		"OnMapSpawn" "story_lcs,Start,,2,-1"
+		//		"OnMapSpawn" "citizen_story,SetReadinessMedium,,2,-1"
+		//		"OnMapSpawn" "citizen_story_seq_0,CancelSequence,,2,-1"
+
+		//		// 69
+		//		"OnMapSpawn" "dropship1_maker,Spawn,,4,-1"
+		//	}
+		//}
+
+		// do not let dog close the opening
+//Trav|Edt allow dog to close it, but teleport players
+		//"delete" { "targetname" "ss_dog_drop" }
+
+
+//Trav|Edt - Functionality check
+		create {classname "logic_relay" values {targetname "trav_functionality_d3_c17_13"} }
+	}
+}

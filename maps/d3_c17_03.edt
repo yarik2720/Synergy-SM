@@ -1,0 +1,253 @@
+d3_c17_03
+{
+	entity {
+//--Setup--
+		delete {classname "logic_auto" origin "-5280.86 -4208.1 28"}
+		edit {classname "func_areaportal" values {targetname "disabledPortal" StartOpen "1"} }
+
+//Prevent Backtracking not necessary - krazy
+		//create {classname "trigger_push" origin "0 64 0"
+		//	values {model "*13"
+		//		spawnflags "1"
+		//		speed "750"
+		//		pushdir "0 90 0"} }
+
+//--Starting Items--
+		create {classname "info_player_equip"
+			values {
+				item_suit			"1"
+				item_armor			"60"
+				weapon_crowbar		"1"
+				weapon_pistol		"1"
+				weapon_smg1			"1"
+				weapon_frag			"1"
+				weapon_357			"1"
+				weapon_physcannon	"1"
+				weapon_shotgun		"1"
+				weapon_ar2			"1"
+				weapon_rpg			"1"
+				weapon_crossbow		"1"
+				weapon_bugbait		"1"
+				weapon_slam			"1"
+				ammo_pistol			"54"//72
+				ammo_smg1			"45"
+				ammo_grenade		"1"
+				ammo_smg1_grenade	"1"
+				ammo_357			"6"
+				ammo_buckshot		"12"
+				ammo_ar2			"30"
+				ammo_ar2altfire		"1"
+				//ammo_rpg_round		"1"
+				//ammo_crossbow		"0"
+				//ammo_slam			"2"
+			} }
+
+//--Spawns--
+		create {classname "info_spawn_manager"
+			values {targetname "syn_spawn_manager"} }
+
+		create {classname "info_player_coop" origin "-5327.84 -4366.99 0.03"
+			values {angles "0 90 0" targetname "syn_spawn_player_1"} }
+
+		create {classname "info_global_settings"
+			values {IsVehicleMap "0" targetname "syn_global_settings"} }
+
+//--Extra--
+
+		// create intermission
+		"create" { "classname" "info_intermission" "origin" "-3025.548096 -2883.803711 76.785973" "values" { "angles" "-11.847999 43.969814 -0.002262" } }
+
+//Delay Intro Music a little
+		delete {classname "trigger_once" origin "-5128 -4164 64.5"}
+		create {classname "trigger_once" origin "-5128 -4164 64.5"
+			values {model "*17"
+				spawnflags "1"
+				OnTrigger "music_playground,PlaySound,,15,-1"} }//delay1
+
+//Trav|Edt - add some crates around for no reason.
+//ledge
+		create {classname "item_item_crate"
+			origin	"-5392 -3568 120"
+			values{ItemClass "item_dynamic_resupply"
+				angles "0 15 0"
+				ItemCount "5"} }
+
+		create {classname "item_item_crate"
+			origin	"-5463 -4201 20"
+			values{ItemClass "item_dynamic_resupply"
+				ItemCount "5"} }
+
+		create {classname "item_item_crate"
+			origin	"-5431 -3545 84"
+			values{ItemClass "item_dynamic_resupply"
+				ItemCount "5"} }
+
+		create {classname "item_item_crate"
+			origin	"-5431 -3545 116"
+			values{ItemClass "item_dynamic_resupply"
+				ItemCount "5"} }
+
+		create {classname "item_item_crate"
+			origin	"-5539 -3605 16"
+			values{ItemClass "item_dynamic_resupply"
+				ItemCount "5"} }
+
+		create {classname "item_item_crate"
+			origin	"-5539 -3605 44"
+			values{ItemClass "item_dynamic_resupply"
+				ItemCount "5"} }
+
+		create {classname "item_item_crate"
+			origin	"-4191 -3729 12"
+			values{ItemClass "item_dynamic_resupply"
+				ItemCount "5"} }
+
+		create {classname "item_item_crate"
+			origin	"-4191 -3729 44"
+			values{ItemClass "item_dynamic_resupply"
+				ItemCount "5"} }
+
+		create {classname "item_item_crate"
+			origin	"-3655 -4737 52"
+			values{ItemClass "item_dynamic_resupply"
+				ItemCount "5"} }
+
+		create {classname "item_item_crate"
+			origin	"-2631 -633 12"
+			values{ItemClass "item_dynamic_resupply"
+				ItemCount "5"} }
+
+		create {classname "item_item_crate"
+			origin	"-2639 -633 44"
+			values{ItemClass "item_dynamic_resupply"
+				ItemCount "5"} }
+
+//Trav|Edt - Add ts03 dewds for no reason
+//This causes a crash on dedicated servers but not local - krazy
+		//create {classname "npc_citizen" origin "-3944 -3758 0"
+		//	values {spawnflags "1048576"//1048592
+		//		targetname "playground_cit_1"
+		//		angles "0 254 0"
+		//		ResponseContext "courtyard_citizen:1"
+		//		physdamagescale "0"
+		//		model "models/humans/group01/male_07.mdl"} }
+
+		//create {classname "npc_citizen" origin "-3903 -3761 0"
+		//	values {spawnflags "1048576"
+		//		targetname "playground_cit_2"
+		//		angles "0 254 0"
+		//		ResponseContext "courtyard_citizen:1"
+		//		physdamagescale "0"
+		//		model "models/humans/group01/male_09.mdl"} }
+
+		//create {classname "info_node_hint" origin "-3944 -3748 0"
+		//	values {angles "0 254 0"
+		//		targetname "playground_cit_1_armscrossed"
+		//		hinttype "12"
+		//		hintactivity "d1_t02_Playground_Cit1_Arms_Crossed"
+		//		Group "hintgroup_customs_queue"} }
+
+		//create {classname "info_node_hint" origin "-3903 -3761 0"
+		//	values {angles "0 226 0"
+		//		targetname "playground_cit_2_pockets"
+		//		hinttype "12"
+		//		hintactivity "d1_t02_Playground_Cit2_Pockets"
+		//		Group "hintgroup_customs_queue"} }
+
+		//create {classname "ai_goal_actbusy"
+		//	values {targetname "act_busy_playground_cit_1"
+		//	actor "playground_cit_1"
+		//	busysearchrange "512"
+
+		//	StartActive "1"} }
+
+		//create {classname "ai_goal_actbusy"
+		//	values {targetname "act_busy_playground_cit_2"
+		//	actor "playground_cit_2"
+		//	busysearchrange "512"
+
+		//	StartActive "1"} }
+
+		//	create {classname "logic_auto"
+		//	values {spawnflags "1"
+		//		OnMapSpawn "act_busy_playground_cit_1,ForceNPCToActBusy,playground_cit_1 playground_cit_1_armscrossed 0,0,-1"
+		//		OnMapSpawn "act_busy_playground_cit_2,ForceNPCToActBusy,playground_cit_2 playground_cit_2_pockets 0,0,-1"} }
+
+		//create {classname "info_teleport_destination" origin "12304 8886 -180" values {targetname "syn_spawn_teleport" angles "0 150 0"} }
+
+//Trav|Edt - add more cops
+		create {classname "npc_template_maker"
+			origin "-1072 -3552 136"
+			values {spawnflags "128"
+				angles " 0 180 0"
+				targetname "trav_tmaker_cops1"
+				StartDisabled "1"
+				MaxNPCCount "8"
+				SpawnFrequency "0.1"
+				MaxLiveChildren "-1"
+				TemplateName "gate_cop"} }
+
+		delete {targetname "gate_cop"}
+
+		create {classname "npc_metropolice"
+			origin "-1568 -3296 45"
+			values {spawnflags "2052"
+				angles "0 90 0"
+				targetname "gate_cop"
+				squadname "squad_trav_gate_cops"
+				target "trav_extracops_corner"
+				additionalequipment "weapon_pistol"
+				weapondrawn "1"} }
+
+		create {classname "path_corner" origin "-1504 -3424 32" values {targetname "trav_extracops_corner"} }
+
+		//create {classname "logic_relay"
+		//	values{spawnflags "1"
+		//		targetname "plaza_exit_relay"
+		//		OnTrigger "trav_tmaker_cops1,Enable,,0,-1"
+		//		//OnTrigger "syn_antirush_push,Disable,,20,-1"
+		//		} }
+
+		create {classname "logic_relay"
+			values {targetname "monitor_fall_relay"
+				OnTrigger "trav_tmaker_cops1,Enable,,30,-1"
+				//OnTrigger "gate_cop_assault,Activate,,13,-1"
+				//OnTrigger "gate_cop_assault,BeginAssault,,14,-1"
+				} }
+
+		//create {classname "trigger_push"
+		//	origin "-1684 -3379.99 63.5"
+		//	values {model "*17"
+		//		spawnflags "1"
+		//		targetname "syn_antirush_push"
+		//		pushdir "0 90 0"
+		//		speed "750"} }
+
+//Trav|Edt - add synergy logo
+		create {classname "infodecal"
+			origin "-3198 -2048 640"//-1440 -3196 429
+			values{texture "vgui/gfx/synergy"} }
+
+
+		//edit {targetname "gate_cop_makers"
+		//	values {MaxLiveChildren "4"
+		//		MaxNPCCount "4"} }
+
+		//delete {targetname "plaza_exit_relay"}
+
+		//create {classname "logic_relay"
+		//	values{spawnflags "1"
+		//		targetname "plaza_exit_relay"
+		//		OnTrigger "gate_cop_makers,Enable,,0,-1"
+		//		OnTrigger "combine_door,SetAnimation,open,5,-1"
+		//		OnTrigger "gate_nodelinks,TurnOn,,5,-1"
+		//		OnTrigger "gate_cop_assalt,Activate,,5,-1"
+		//		OnTrigger "gate_cop_relationship,ApplyRelationship,,5.2.-1"
+		//		OnTrigger "gate_cop_assault,BeginAssault,,7,-1"} }
+
+//End of Trav|Edt
+
+//Trav|Edt - Functionality check
+		create {classname "logic_relay" values {targetname "trav_functionality_d3_c17_03"} }
+	}
+}

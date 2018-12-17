@@ -1,0 +1,514 @@
+d2_prison_08
+{
+	entity {
+//--Setup--
+		delete {classname "logic_auto" origin "-2442.96 3061.35 988"}
+		create {classname "logic_auto"
+			values {spawnflags "1"
+				OnMapSpawn "combine_door_2,SetAnimation,open,0,-1"
+				OnMapSpawn "combine_door_1,SetAnimation,open,0,-1"
+				OnMapSpawn "prop_cameras,SetAnimation,idlealert,0,-1"
+				OnMapSpawn "teleport_lift_platform_1,SetAnimation,close,0,-1"
+				OnMapSpawn "alyx_goal_follow_1,Activate,,1,-1"
+				OnMapSpawn "prop_camerasx,SetAnimation,idlealert,0,-1"
+				OnNewGame "spawn_alyx,Spawn,,0.75,1"} }
+		edit {classname "func_areaportal" values {targetname "disabledPortal" StartOpen "1"} }
+
+//Prevent Backtracking
+		create {classname "trigger_push" origin "64 0 0"
+			values {model "*90"
+				spawnflags "1"
+				speed "750"
+				pushdir "0 0 0"} }
+
+//--Starting Items--
+		create {classname "info_player_equip"
+			values {
+				item_suit			"1"
+				item_armor			"60"
+				weapon_crowbar		"1"
+				weapon_pistol		"1"
+				weapon_smg1			"1"
+				weapon_frag			"1"
+				weapon_357			"1"
+				weapon_physcannon	"1"
+				weapon_shotgun		"1"
+				weapon_ar2			"1"
+				weapon_rpg			"1"
+				weapon_crossbow		"1"
+				weapon_bugbait		"1"
+				weapon_stunstick	"1"
+				weapon_slam			"1"
+				ammo_pistol			"54"//72
+				ammo_smg1			"45"
+				ammo_grenade		"1"
+				ammo_smg1_grenade	"1"
+				ammo_357			"6"
+				ammo_buckshot		"12"
+				ammo_ar2			"30"
+				ammo_ar2altfire		"1"
+				//ammo_rpg_round		"1"
+				//ammo_crossbow		"0"
+				//ammo_slam			"2"
+			} }
+
+//--Spawns--
+		create {classname "info_spawn_manager"
+			values {targetname "syn_spawn_manager"} }
+
+		create {classname "info_player_coop" origin "-2784.11 2980.66 960.03"
+			values {angles "0 0 0" targetname "syn_spawn_player_1"} }
+
+		create {classname "info_player_coop" origin "-910.35 857.09 960.03"
+			values {angles "0 0 0" targetname "syn_spawn_player_2" StartDisabled "1"} }
+
+		create {classname "info_player_coop" origin "-168 880 960"
+			values {angles "0 330 0" targetname "syn_spawn_player_3" StartDisabled "1"} }
+
+		create {classname "info_global_settings"
+			values {IsVehicleMap "0" targetname "syn_global_settings"} }
+
+//--Extra--
+
+		// Alyx body blocks the ending trigger
+		edit { "targetname" "mark_alyx_teleport_pad_1" values { "origin" "127 -24 1047" } }
+
+		// create intermission
+	//	"create" { "classname" "info_intermission" "origin" "" "values" { "angles" "" } }
+
+//Trav|Edt - have turets use citizen code state
+		edit {classname "npc_turret_floor" values {spawnflags "704"} }
+		edit {targetname "turret_buddy" origin "-272 856 965" values {spawnflags "576"} }//non-fast retire
+
+		delete {targetname "relationship_turret_vs_combine_hate"}
+		delete {targetname "relationship_turret_vs_alyx_like"}
+		delete {targetname "relationship_turret_vs_manhack_hate"}
+		delete {targetname "relationship_combine_vs_turret_hate"}
+		delete {targetname "relationship_alyx_vs_turret_like"}
+		delete {targetname "relationship_turret_vs_player_like"}
+
+		delete {targetname "relationship_turrets_vs_mossman_like"}
+		delete {targetname "relationship_turret_vs_eli_like"}
+		delete {targetname "relationship_turrets_vs_eli_like"}
+		delete {targetname "relationship_manhack_vs_turret_hate"}
+
+//Trav|Edt - Fix weird lighting on start
+		delete {classname "trigger_once" origin "-2416 3040 1015.5"}
+
+		create {classname "logic_auto"
+			values {spawnflags "1"
+				OnMapSpawn "light_booth,TurnOn,,1,-1"
+				OnMapSpawn "light_1,TurnOn,,1,-1"
+				OnMapSpawn "light_2,TurnOn,,1,-1"
+				OnMapSpawn "light_3,TurnOn,,1,-1"} }
+
+		create {classname "trigger_once"
+			origin "-2416 3040 1015.5"
+			values {model "*92"
+				spawnflags "1"
+				OnTrigger "alyx,StopScripting,,0,-1"
+				OnTrigger "unholster,Start,,0,-1"} }
+
+//Trav|Edt - fix sprite staying on at begining
+		delete {classname "env_sprite" origin "-2434 2947 1049"}
+
+		create {classname "env_sprite"
+			origin "-2434 2947 1049"
+			values {spawnflags "1"
+				targetname "trav_light_4_sprite"
+				rendermode "9"
+				rendercolor "254 216 146"
+				model "materials/Sprites/light_glow03.vmt"
+				scale "0.75"} }
+
+		create {classname "logic_relay"
+			values {spawnflags "1"
+				targetname "light_shutdown_relay"
+				OnTrigger "trav_light_4_sprite,HideSprite,,1.5,-1"} }
+
+//Trav|Edt - fix alyx going inside again after EMPn' door
+		edit {targetname "mark_alyx_sec_door_2in" values {origin "-201 626 937"} }
+
+//Trav|Edt - teleport turrets if players brought them along.
+		create {classname "filter_activator_name"
+			values {targetname "trav_turrets_filter"
+				filtername "turret_buddy" } }
+
+		create {classname "trigger_teleport"
+			origin "-1120 1232 1028"
+			values {model "*30"
+				spawnflags "8"
+				targetname "trav_turrets_teleport"
+				StartDisabled "1"
+				target "trav_turrets_ITD"
+				filtername "trav_turrets_filter"} }
+
+		create {classname "info_teleport_destination"
+			origin "-392 840 936"
+			values {targetname "trav_turrets_ITD"
+				angles "0 210 0"} }
+
+		//create {classname "point_teleport"
+		//	origin "-392 840 936"
+		//	values {targetname "trav_teleport_turrets"
+		//		angles "0 210 0"
+		//		target "turret_buddy"} }
+
+//Trav|Edt - Add a 4th turret in the empty locker
+		create { classname "npc_turret_floor"
+			 origin	"-272 810 997"
+			 values {spawnflags "640"//640 citizen turret
+				angles "0 180 0"
+				targetname "turret_buddy"
+				OnPhysGunPickup "!activator,Enable,-1,0,-1" } }
+
+		create {classname "trigger_once"
+			origin "96 240 996"
+			values {model "*30"
+				spawnflags "1"
+				OnTrigger "edt_spawns,SetCheckpoint,syn_spawn_player_3,0,-1"} }
+
+//Trav|Edt - add more combine
+		//edit {targetname "ambush_ar2_reinforcement_maker"
+		//	values {MaxNPCCount "3"
+		//		MaxLiveChildren "3"} }
+
+		//edit {targetname "ambush_smg_reinforcement_maker"
+		//	values {MaxNPCCount "3"
+		//		MaxLiveChildren "3"} }
+
+		//edit {targetname "ambush_shotgun_reinforcement_maker"
+		//	values {MaxNPCCount "3"
+		//		MaxLiveChildren "3"} }
+
+		//edit {targetname "final_ar2_reinforcement_maker"
+		//	values {MaxNPCCount "3"
+		//		MaxLiveChildren "3"} }
+
+		//edit {targetname "final_smg_reinforcement_maker"
+		//	values {MaxNPCCount "3"
+		//		MaxLiveChildren "3"} }
+
+		//edit {targetname "final_shotgun_reinforcement_maker"
+		//	values {MaxNPCCount "3"
+		//		MaxLiveChildren "3"} }
+
+//Trav|Edt - Close mossman's door when all players are in
+		create {classname "trigger_coop"
+			origin "-464 480 992"
+			values{model "*31"
+				spawnflags "1"
+				targetname "trav_coop_moss"
+				CountType "1"
+				PlayerValue "100"
+				//OnPlayersIn "combine_door_1,SetAnimation,idle_closed,5.5,-1"
+				OnPlayersIn "combine_door_1,SetAnimation,Close,0,1"
+				OnPlayersIn "sec_room_door_1,Close,,0,1"} }
+
+//Trav|Edt - Close teleporter room door when all players are in
+		create {classname "trigger_coop"
+			origin "96 240 996"
+			values{model "*30"
+				spawnflags "1"
+				targetname "trav_coop_teleporterroom"
+				StartDisabled "1"
+				CountType "1"
+				PlayerValue "100"
+				OnPlayersIn "combine_door_2,SetAnimation,close,0,1"
+				OnPlayersIn "PClip_sec_tp_door_1,Enable,,0,1"
+				OnPlayersIn "NClip_sec_tp_door_1,Enable,,0,1"
+				OnPlayersIn "combine_door_1,SetAnimation,idle_closed,0,1"
+				OnPlayersIn "sec_room_door_1,Close,,0,1"} }
+
+		//alyx in teleporter room before coop trig enable
+		create {classname "trigger_once"
+			origin "96 240 996"
+			values {model "*30"
+				spawnflags "2"
+				filtername "trav_filter_alyx"
+				OnTrigger "trav_coop_teleporterroom,Enable,,0,-1"} }
+
+		create {classname "filter_activator_name"
+			values{targetname "trav_filter_alyx"
+				Negated "0"
+				filtername "alyx"} }
+
+//Trav|Edt - finale defense
+		edit {targetname "maker_combine_lower_1" values {MaxLiveChildren "3"} }
+		edit {targetname "maker_combine_lower_2" values {MaxLiveChildren "3"} }
+		edit {targetname "maker_combine_lower_3" values {MaxLiveChildren "3"} }
+		edit {targetname "maker_combine_lower_4" values {MaxLiveChildren "3"} }
+		edit {targetname "maker_combine_lower_6" values {MaxLiveChildren "3"} }
+		edit {targetname "maker_combine_lower_7" values {MaxLiveChildren "3"} }
+		edit {targetname "maker_combine_upper_1" values {MaxLiveChildren "2"} }
+		edit {targetname "maker_combine_upper_2" values {MaxLiveChildren "2"} }
+		delete {targetname "logic_spawn_single_combine_upperandlower"}
+		delete {targetname "logic_spawn_single_combine_lower"}
+		delete {targetname "logic_spawn_single_combine_lower_and_behind"}
+
+		create {classname "logic_case"
+			values {targetname "logic_spawn_single_combine_upperandlower"
+				Case01 "1"
+				Case02 "2"
+				Case03 "3"
+				Case04 "4"
+				Case05 "5"
+				Case06 "6"
+				Case07 "7"
+				Case08 "8"
+				Case09 "9"
+				OnCase01 "maker_combine_lower_1,AddMaxChildren,3,0,-1"
+				OnCase01 "maker_combine_lower_1,Enable,,0.1,-1"
+				OnCase02 "maker_combine_lower_2,AddMaxChildren,3,0,-1"
+				OnCase02 "maker_combine_lower_2,Enable,,0.1,-1"
+				OnCase03 "maker_combine_lower_3,AddMaxChildren,3,0,-1"
+				OnCase03 "maker_combine_lower_3,Enable,,0.1,-1"
+				OnCase04 "maker_combine_lower_4,AddMaxChildren,3,0,-1"
+				OnCase04 "maker_combine_lower_4,Enable,,0.1,-1"
+				OnCase06 "maker_combine_upper_1,AddMaxChildren,2,0,-1"
+				OnCase06 "maker_combine_upper_1,Enable,,0.1,-1"
+				OnCase07 "maker_combine_upper_2,AddMaxChildren,2,0,-1"
+				OnCase07 "maker_combine_upper_2,Enable,,0.1,-1"
+				OnCase08 "maker_combine_lower_6,AddMaxChildren,3,0,-1"
+				OnCase08 "maker_combine_lower_6,Enable,,0.1,-1"
+				OnCase09 "maker_combine_lower_7,AddMaxChildren,3,0,-1"
+				OnCase09 "maker_combine_lower_7,Enable,,0.1,-1"} }
+
+		create {classname "logic_case"
+			values {targetname "logic_spawn_single_combine_lower"
+				Case01 "1"
+				Case02 "2"
+				Case03 "3"
+				Case04 "4"
+				Case05 "5"
+				Case06 "6"
+				OnCase01 "maker_combine_lower_1,AddMaxChildren,3,0,-1"
+				OnCase01 "maker_combine_lower_1,Enable,,0.1,-1"
+				OnCase02 "maker_combine_lower_2,AddMaxChildren,3,0,-1"
+				OnCase02 "maker_combine_lower_2,Enable,,0.1,-1"
+				OnCase03 "maker_combine_lower_3,AddMaxChildren,3,0,-1"
+				OnCase03 "maker_combine_lower_3,Enable,,0.1,-1"
+				OnCase04 "maker_combine_lower_4,AddMaxChildren,3,0,-1"
+				OnCase04 "maker_combine_lower_4,Enable,,0.1,-1"
+				OnCase05 "maker_combine_lower_6,AddMaxChildren,3,0,-1"
+				OnCase05 "maker_combine_lower_6,Enable,,0.1,-1"
+				OnCase06 "maker_combine_lower_7,AddMaxChildren,3,0,-1"
+				OnCase06 "maker_combine_lower_7,Enable,,0.1,-1"} }
+
+		create {classname "logic_case"
+			values {targetname "logic_spawn_single_combine_lower_and_behind"
+				Case01 "1"
+				Case02 "2"
+				Case03 "3"
+				Case04 "4"
+				Case05 "5"
+				Case06 "6"
+				Case07 "7"
+				OnCase01 "maker_combine_lower_1,AddMaxChildren,3,0,-1"
+				OnCase01 "maker_combine_lower_1,Enable,,0.1,-1"
+				OnCase02 "maker_combine_lower_2,AddMaxChildren,3,0,-1"
+				OnCase02 "maker_combine_lower_2,Enable,,0.1,-1"
+				OnCase03 "maker_combine_lower_3,AddMaxChildren,3,0,-1"
+				OnCase03 "maker_combine_lower_3,Enable,,0.1,-1"
+				OnCase04 "maker_combine_lower_4,AddMaxChildren,3,0,-1"
+				OnCase04 "maker_combine_lower_4,Enable,,0.1,-1"
+				OnCase05 "maker_combine_lower_6,AddMaxChildren,3,0,-1"
+				OnCase05 "maker_combine_lower_6,Enable,,0.1,-1"
+				OnCase06 "maker_combine_lower_7,AddMaxChildren,2,0,-1"
+				OnCase06 "maker_combine_lower_7,Enable,,0.1,-1"} }
+
+//Trav|Edt - increase max npcdropweapon cap
+		edit {classname "game_weapon_manager"
+			values{maxpieces "8"} }//3?
+
+//Trav|Edt - add countdown timer for combine teleporter
+		create {classname "hud_timer"
+			values {targetname "trav_hud_timer"
+				TimerType "1"} }
+
+		//delete {targetname "trigger_teleport_player_enter_1"}
+
+		//create {classname "trigger_once"
+		//	origin "128 -10 1093.84"
+		//	values {model "*35"
+		//		spawnflags "1"
+		//		StartDisabled "1"
+		//		targetname "trigger_teleport_player_enter_1"
+		//		OnTrigger "teleport_lift_platform_1,SetAnimation,Close,10,-1"//delay all 10 sec
+		//		OnTrigger "teleport_front_door_clip_1,Enable,,10,-1"
+		//		OnTrigger "prop_Tport_shields,Skin,0,10,-1"
+		//		OnTrigger "forcefield_sound_far_6,PlaySound,,10,-1"
+		//		OnTrigger "shield_sound_trigger_6,Enable,,10,-1"
+		//		OnTrigger "PClip_teleport_shield_final,Enable,,10,-1"
+		//		OnTrigger "physexp_final_assault_1,Explode,,10.4,-1"
+		//		OnTrigger "maker_combine_final_1,Spawn,,10.5,-1"
+		//		OnTrigger "teleport_lift_train_1,Resume,,11,-1"
+		//		OnTrigger "teleport_lift_train_1,SetSpeed,40,11,-1"
+		//		OnTrigger "holster,Start,,11,-1"
+		//		OnTrigger "brush_teleport_shield_1,Enable,,11.1,-1"
+		//		OnTrigger "sound_teleport_shield_1,PlaySound,,11.1,-1"
+		//		OnTrigger "assault_combine_teleporter_final,StartSchedule,,11.2,-1"
+		//		OnTrigger "logic_final_destruction,Trigger,,12,-1"
+//trav stuff
+		//		OnTrigger "trav_hud_timer,Start,10,0,-1"} }
+
+//Trav|Edt alt method for teleporting, make sure someone is in teleporter.
+		edit {targetname "trigger_teleport_player_enter_1" values {targetname "trav_trigger_teleport_player_enter_1"} }
+
+		create {classname "trigger_once"
+			origin "128 -10 1093.84"
+			values {model "*35"
+				spawnflags "1"
+				StartDisabled "1"
+				targetname "trigger_teleport_player_enter_1"
+				OnTrigger "trav_trigger_teleport_player_enter_1,Enable,,10,-1"
+				OnTrigger "trav_hud_timer,Start,10,0,-1"
+				OnTrigger "trav_hunter_template,ForceSpawn,,1,-1"} }
+
+//Trav|Edt - add hunters at end for noreason			// no EP2 content in HL2!
+//		create {classname "npc_hunter"
+//			origin "-336 -352 1216"
+//			values {spawnflags "1796"
+//				angles "0 60 0"
+//				squadname "squad_combine_teleporter"
+//				targetname "trav_hunter"} }
+
+//		create {classname "npc_hunter"
+//			origin "-896 1344 960"
+//			values {spawnflags "1796"
+//				angles "0 270 0"
+//				squadname "squad_combine_teleporter"
+//				targetname "trav_hunter2"} }
+
+//		create {classname "point_template"
+//			values {spawnflags "2"
+//				targetname "trav_hunter_template"
+///				Template01 "trav_hunter"
+//				Template02 "trav_hunter2"
+//				OnEntitySpawned "logic_door_comb_1_open,Trigger,,0,-1"
+//				OnEntitySpawned "NClip_sec_tp_door_1,Disable,,0,-1"
+//				OnEntitySpawned "PClip_sec_tp_door_1,Disable,,0,-1"
+//				OnEntitySpawned "combine_door_2,SetAnimation,open,0,-1"
+//				OnEntitySpawned "combine_door_1,SetAnimation,open,0,-1"
+//				OnEntitySpawned "sec_room_door_1,Open,,0,-1"
+//				OnEntitySpawned "trav_trigger_hunter2_door,Enable,,0,-1"} }
+
+//close door after hunter gets through
+//		create {classname "trigger_once"
+//			origin "-752 864 1015.5"
+//			values {model "*92"
+//				spawnflags "2"
+//				targetname "trav_trigger_hunter2_door"
+//				StartDisabled "1"
+//				OnTrigger "logic_door_comb_1_close,Trigger,,0,-1"
+//				OnTrigger "_brush_bigdoor_ALYXClip_1,Enable,,0,-1"} }
+
+//End of Trav|Edt
+
+		// --------------------------------
+
+
+		// leave door open
+
+		"delete" { "targetname" "trigger_teleport01" }
+
+		"create"
+		{
+			"classname" "trigger_once"
+			"origin" "-752 949.8 1024"
+			"values"
+			{
+				"model" "*29"
+				"targetname" "trigger_teleport01"
+				"spawnflags" "1"
+				"StartDisabled" "1"
+				"OnStartTouch" "soldier_radio_2,PlaySound,,16,-1"
+				"OnStartTouch" "soldier_radio_1,PlaySound,,10,-1"
+				"OnStartTouch" "lcs_np_teleport01,Start,,1,-1"
+				"OnStartTouch" "mossman_trap_monitor_1,Disable,,0,-1"
+
+				"OnStartTouch" "logic_door_comb_1_close,Trigger,,0,-1"
+
+				// activate checkpoint here
+				"OnTrigger" "edt_spawns,SetCheckpoint,syn_spawn_player_2,0,-1"//def 2.2
+//Trav|Edt - decrease teleport time to aviod players being crushed by door 
+				"OnTrigger" "edt_spawns,MovePlayers,syn_spawn_player_2,0.1,-1"//def 2.3
+//Trav|Edt - teleport any bought turrets
+				OnTrigger "trav_turrets_teleport,Enable,,0,-1"
+				OnTrigger "trav_turrets_teleport,Disable,,2,-1"
+			}
+		}
+
+		// create checkpoint to activate after bigdoor has closed
+
+		"create"
+		{
+			"classname"	"info_spawn_manager"
+			"origin"	"0 0 0"
+			"values" { "targetname" "edt_spawns" }
+		}
+
+		// do not let the mossman door close
+		"delete" { "targetname" "trigger_close_console_door_1" }
+		"create"
+		{
+			"classname" "trigger_once"
+			"origin" "-464 480 992"
+			"values"
+			{
+				"model" "*31"
+				"targetname" "trigger_close_console_door_1"
+				"spawnflags" "1"
+				"StartDisabled" "1"
+				"OnStartTouch" "logic_apply_relationships_1,Trigger,,0,-1"
+				"OnStartTouch" "prop_camerasx,Kill,,0,-1"
+
+			//	"OnStartTouch" "combine_door_1,SetAnimation,idle_closed,5.5,-1"
+			//	"OnStartTouch" "combine_door_1,SetAnimation,Close,0,-1"
+			//	"OnStartTouch" "sec_room_door_1,Close,,0,-1"
+			}
+		}
+
+		// do not let the mossman door 2 close either
+		"delete" { "targetname" "trigger_tp_scene_start" }
+		"create"
+		{
+			"classname" "trigger_once"
+			"origin" "96 240 996"
+			"values"
+			{
+				"model" "*30"
+				"targetname" "trigger_tp_scene_start"
+				"spawnflags" "1"
+				"StartDisabled" "0"
+				"OnStartTouch" "logic_teleport_wheels_start_1,Trigger,,0,-1"
+				"OnStartTouch" "lcs_np_teleport04,Start,,0,-1"
+				"OnTrigger" "music_song24,PlaySound,,1,-1"
+			//	"OnStartTouch" "PClip_sec_tp_door_1,Enable,,0,-1"
+			}
+		}
+
+		"delete" { "targetname" "lcs_np_teleport04" }
+		"create"
+		{
+			"classname" "logic_choreographed_scene"
+			"origin" "-120 456 1224"
+			"values"
+			{
+				"SceneFile" "scenes/novaprospekt/np_teleport04.vcd"
+				"targetname" "lcs_np_teleport04"
+				"OnTrigger1" "logic_eli_pod_start_1,Trigger,,0,-1"
+				"OnCompletion" "lcs_np_teleport05,Start,,0,-1"
+				"OnTrigger2" "logic_alyx_EMP_5,Trigger,,0,-1"
+			//	"OnTrigger3" "sec_tp_door_1,Close,,0,-1"
+			//	"OnTrigger3" "combine_door_2,SetAnimation,Close,0.5,-1"
+			//	"OnTrigger3" "combine_door_2,SetAnimation,idle_close,5,-1"
+				"OnTrigger6" "relayAnim_PodExtractor_extract,Trigger,,0,-1"
+				"OnCompletion" "NClip_sec_tp_door_1,Enable,,0,-1"
+			}
+		}
+
+//Trav|Edt - Functionality check
+		create {classname "logic_relay" values {targetname "trav_functionality_d2_prison_08"} }
+	}
+}

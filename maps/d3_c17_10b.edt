@@ -1,0 +1,327 @@
+d3_c17_10b
+{
+	entity 
+	{
+//--Setup--
+		delete {targetname "player_spawn_items"}
+		edit {classname "func_areaportal" values {targetname "syn_disabledPortal" StartOpen "1"} }
+
+//Prevent Backtracking
+		create {classname "syn_transition_wall" origin "2384 -1896 176"}
+
+		//create {classname "trigger_push" origin "64 0 0"
+		//	values {model "*143"
+		//		spawnflags "1"
+		//		speed "750"
+		//		pushdir "0 0 0"} }
+
+//--Starting Items--
+		create {classname "info_player_equip"
+			values {
+				item_suit			"1"
+				item_armor			"60"
+				weapon_crowbar		"1"
+				weapon_pistol		"1"
+				weapon_smg1			"1"
+				weapon_frag			"1"
+				weapon_357			"1"
+				weapon_physcannon	"1"
+				weapon_shotgun		"1"
+				weapon_ar2			"1"
+				weapon_rpg			"1"
+				weapon_crossbow		"1"
+				weapon_bugbait		"1"
+				weapon_slam			"1"
+				weapon_stunstick	"1"
+				ammo_pistol			"54"//72
+				ammo_smg1			"45"
+				ammo_grenade		"1"
+				ammo_smg1_grenade	"1"
+				ammo_357			"6"
+				ammo_buckshot		"12"
+				ammo_ar2			"30"
+				ammo_ar2altfire		"1"
+				//ammo_rpg_round	"1"
+				//ammo_crossbow		"0"
+				//ammo_slam			"2"
+			} }
+
+//--Spawns--
+		create {classname "info_spawn_manager"
+			values {targetname "syn_spawn_manager"} }
+
+		create {classname "info_player_coop" origin "2573 -1919 258"
+			values {angles "0 0 0" targetname "syn_spawn_player_1"} }
+
+		create {classname "info_player_coop" origin "3032 1216 512"
+			values {angles "0 315 0" targetname "syn_spawn_player_2" StartDisabled "1"} }
+
+		create {classname "info_global_settings"
+			values {IsVehicleMap "0" targetname "syn_global_settings"} }
+
+//--Extra--
+
+		// logic check for barney
+		create { "classname" "logic_relay"
+			values { "spawnflags" "3"
+				"targetname" "mapedit_spawn_new_barney_relay"
+				"OnTrigger" "player_spawn_items_maker,ForceSpawn,,0,-1"
+			}
+		}
+
+		create { "classname" "logic_auto"
+			values { "spawnflags" "0"
+				"OnMapSpawn" "barney,addoutput,OnUser1 mapedit_spawn_new_barney_relay:Disable::0:-1,5,-1"
+				"OnMapSpawn" "barney,FireUser1,,6,-1"
+				"OnMapSpawn" "mapedit_spawn_new_barney_relay,Trigger,,7,-1"
+			}
+		}
+
+		// ------------- standard -------------
+
+		// create intermission
+		"create" { "classname" "info_intermission" "origin" "24767 -1860 257" "values" { "angles" "0 0 0" } }
+
+//Trav|Edt - Disable Enemy turrets when tipped (avoid player greif)
+		create {classname "logic_auto"
+			values {spawnflags "1"
+				OnMapSpawn "npc_turret_floor,AddOutput,OnTipped !self:SelfDestruct::0:-1,0,-1"} }//DepleteAmmo
+
+//Trav|Edt - teleport all players into trap and set checkpoint; barney;trav_turret
+
+		create {classname "trigger_once"
+			origin "2716 860 566"
+			values {model "*47"
+				spawnflags "1"
+				OnTrigger "syn_spawn_manager,MovePlayers,,0,-1"
+				OnTrigger "trav_teleport_barney_trap,Teleport,,0,-1"
+				OnTrigger "syn_spawn_manager,SetCheckpoint,syn_spawn_player_2,0,-1"} }
+
+		create {classname "point_teleport"
+			origin "3264 1136 520"
+			values {targetname "trav_teleport_barney_trap"
+				//angles "0 135 0"
+				target "barney"} }
+
+		create {classname "point_teleport"
+			origin "3328 896 512"
+			values {targetname "trav_teleport_barney_trap"
+				angles "0 180 0"
+				target "trav_turret"} }
+
+//Trav|Edt - add more combine
+		edit {targetname "assault_1_soldier_1_maker_1" values {spawnflags "144"} }
+		edit {targetname "assault_1_soldier_2_maker_1" values {spawnflags "144"} }
+		edit {targetname "assault_1_soldier_3_maker_1" values {spawnflags "144"} }
+		edit {targetname "assault_1_soldier_4_maker_1" values {spawnflags "144"} }
+		edit {targetname "assault_1_soldier_5_maker_1" values {spawnflags "144"} }
+		edit {targetname "assault_1_soldier_6_maker_1" values {spawnflags "144"} }
+		edit {targetname "assault_1_soldier_7_maker_1" values {spawnflags "144"} }
+
+		create {classname "logic_relay"
+			values {spawnflags "1"
+				targetname "n_room_sounds_relay"
+				OnTrigger "assault_1_soldier_*,SetMaxLiveChildren,3,0,-1"
+				OnTrigger "assault_1_soldier_*,SetSpawnFrequency,3,0,-1"
+				OnTrigger "assault_1_soldier_*,AddMaxChildren,4,0,-1"
+				OnTrigger "assault_1_soldier_*,Enable,,1,-1"} }
+
+//Trav|Edt - add more combine after final shield is disabled
+		create {classname "logic_relay"
+			values {spawnflags "1"
+				targetname "switches_success_relay"
+				OnTrigger "trav_endsquad_assault,Activate,,0,-1"
+				OnTrigger "endsquad_soldier_makers,SetMaxLiveChildren,3,0,-1"
+				OnTrigger "endsquad_soldier_makers,SetSpawnFrequency,3,0,-1"
+				OnTrigger "endsquad_soldier_makers,AddMaxChildren,5,0,-1"
+				OnTrigger "endsquad_soldier_makers,Enable,,1,-1"} }
+
+		delete {targetname "endsquad_assault"}
+
+		create {classname "ai_goal_assault"
+			values {targetname "trav_endsquad_assault"
+				actor "endsquad_soldier*"
+				rallypoint "endsquad_assault_rp*"
+				AssaultCue "3"} }
+
+		delete {classname "trigger_once" origin "2688 52 308"}
+
+//Trav|Edt - disable extra combine at end from spawning randomly infront of everyone
+		create {classname "trigger_once"
+			origin "2556 872 376"
+			values {model "*167"
+				spawnflags "1"
+				OnTrigger "endsquad_soldier_makers,Kill,,0,-1"//Disable
+				OnTrigger "soldiersquad_soldier_makers,Kill,,0,-1"} }
+
+		//create {classname "logic_relay"
+		//	values {spawnflags "1"
+		//		targetname "n_room_sounds_relay"
+		//		OnTrigger "endsquad_soldier_makers,SetMaxLiveChildren,3,0,-1"
+		//		OnTrigger "endsquad_soldier_makers,SetSpawnFrequency,3,0,-1"} }
+
+//End of Trav|Edt
+
+		// do not close lobby door
+		"delete" { "classname" "trigger_once" "origin" "3192 -376 320" }
+		"create"
+		{
+			"classname" "trigger_once"
+			"origin" "3192 -376 320"
+			"values"
+			{
+				"model" "*33"
+				"spawnflags" "1"
+				"StartDisabled" "0"
+				"OnTrigger" "mortar_fire_expl,Explode,,11,-1"
+				"OnTrigger" "mortar_fire_wav2,PlaySound,,9.5,-1"
+				"OnTrigger" "mortar_fire_shake,StartShake,,8,-1"
+				"OnTrigger" "mortar_fire_wav,PlaySound,,8,-1"
+				"OnTrigger" "spookyroom_soldier_makers,Enable,,0,-1"
+				"OnTrigger" "turrets_squadstay_assault_trigger,Kill,,0,-1"
+				"OnTrigger" "turrets_barneystay_assault,Deactivate,,0.1,-1"
+				"OnTrigger" "turrets_squadstay_assault,Deactivate,,0.1,-1"
+
+			//	"OnTrigger" "lobby_combinedoor,SetAnimation,close,0,-1"
+			//	"OnTrigger" "lobby_combinedoor_portalbrush,Enable,,0,-1"
+			//	"OnTrigger" "lobby_combinedoor_portal,Close,,0,-1"
+			}
+		}
+
+		// found out that someone can be a noob and lock the one generator room
+		// need to allow the button to turn off the turrets and all that
+		"delete" { "targetname" "s_room_detected_relay" }
+		"create"
+		{
+			"classname" "logic_relay"
+			"origin" "3072 -2056 724"
+			"values"
+			{
+				"spawnflags" "0"
+				"targetname" "s_room_detected_relay"
+				"StartDisabled" "0"
+
+				"OnTrigger" "s_room_turret_1,Enable,,0,-1"
+				"OnTrigger" "s_room_turret_2,Enable,,0,-1"
+				"OnTrigger" "s_room_turret_3,Enable,,0,-1"
+				"OnTrigger" "s_room_turret_4,Enable,,0,-1"
+				"OnTrigger" "s_room_turret_6,Enable,,0,-1"
+				"OnTrigger" "s_room_turret_5,Enable,,0,-1"
+				"OnTrigger" "s_room_turret_8,Enable,,0,-1"
+
+				"OnTrigger" "s_laser27,TurnOff,,0,-1"
+				"OnTrigger" "s_laser26,TurnOff,,0,-1"
+				"OnTrigger" "s_laser23,TurnOff,,0,-1"
+				"OnTrigger" "s_laser24,TurnOff,,0,-1"
+				"OnTrigger" "s_laser25,TurnOff,,0,-1"
+				"OnTrigger" "s_laser22,TurnOff,,0,-1"
+				"OnTrigger" "s_laser21,TurnOff,,0,-1"
+				"OnTrigger" "s_laser18,TurnOff,,0,-1"
+				"OnTrigger" "s_laser17,TurnOff,,0,-1"
+				"OnTrigger" "s_laser16,TurnOff,,0,-1"
+				"OnTrigger" "s_laser15,TurnOff,,0,-1"
+				"OnTrigger" "s_laser14,TurnOff,,0,-1"
+				"OnTrigger" "s_laser13,TurnOff,,0,-1"
+				"OnTrigger" "s_laser12,TurnOff,,0,-1"
+				"OnTrigger" "s_laser11,TurnOff,,0,-1"
+				"OnTrigger" "s_laser10,TurnOff,,0,-1"
+				"OnTrigger" "s_laser9,TurnOff,,0,-1"
+				"OnTrigger" "s_laser8,TurnOff,,0,-1"
+				"OnTrigger" "s_laser7,TurnOff,,0,-1"
+				"OnTrigger" "s_laser6,TurnOff,,0,-1"
+				"OnTrigger" "s_laser4,TurnOff,,0,-1"
+				"OnTrigger" "s_laser5,TurnOff,,0,-1"
+				"OnTrigger" "s_laser3,TurnOff,,0,-1"
+				"OnTrigger" "s_laser2,TurnOff,,0,-1"
+				"OnTrigger" "s_laser1,TurnOff,,0,-1"
+
+				"OnTrigger" "laser_off_sound,PlaySound,,0,-1"
+				"OnTrigger" "laserroom_detected_sound,PlaySound,,0,-1"
+				"OnTrigger" "laserroom_detected_sound,StopSound,,1.5,-1"
+
+			//	"OnTrigger" "s_room_panelswitch,Lock,,0,-1"
+
+			//	"OnTrigger" "s_room_nodelink_2,TurnOff,,0,-1"
+			//	"OnTrigger" "s_room_doors,Close,,0,-1"
+			}
+		}
+
+		"create"
+		{
+			"classname" "logic_relay"
+			"origin" "0 0 0"
+			"values"
+			{
+				"targetname" "s_room_off_relay"
+				"StartDisabled" "0"
+
+				"OnTrigger" "laser_off_sound,StopSound,,0,-1"
+
+				"OnTrigger" "s_room_turret_1,Disable,,0,-1"
+				"OnTrigger" "s_room_turret_2,Disable,,0,-1"
+				"OnTrigger" "s_room_turret_3,Disable,,0,-1"
+				"OnTrigger" "s_room_turret_4,Disable,,0,-1"
+				"OnTrigger" "s_room_turret_6,Disable,,0,-1"
+				"OnTrigger" "s_room_turret_5,Disable,,0,-1"
+				"OnTrigger" "s_room_turret_8,Disable,,0,-1"
+			}
+		}
+
+		// do not let barney close the door
+		"delete" { "classname" "trigger_once" "origin" "2768 1136 832" }
+
+		// equip all players with the rocket launcher
+		create { classname "info_player_equip"
+			values {
+				targetname "IPE_RPG"
+				weapon_rpg 1
+				StartDisabled 1
+			}
+		}
+
+		delete { classname "weapon_rpg" origin "2712 1016 265" }
+		create { classname "weapon_rpg" origin "2712 1016 265"
+			values {
+				"angles" "0 129 0"
+				"OnPlayerPickup" "IPE_RPG,Enable,,0,1"
+				"OnPlayerPickup" "IPE_RPG,EquipAllPlayers,,0.1,1"
+			}
+		}
+
+//Trav|Edt - autirush (Disable until we get a proper wall [player collide only])
+//		create {classname "trigger_multiple"
+//			origin "2760 1115.15 850"//z787.15
+//			values {model "*144"
+//				angles "25 0 0"
+//				spawnflags "1"
+//				//StartDisabled "1"
+//				targetname "syn_antirush_coop"
+//				CountType "1"
+//				UseHUD "1"
+//				PlayerValue "50"
+//				wait "1.5"
+//				OnTrigger "syn_antirush_text,Display,,0,-1"
+//				OnPlayersIn "syn_antirush_wall,Kill,,0,1"
+//				OnPlayersIn "!self,Disable,,1,1"} }
+//
+//		create {classname "syn_transition_wall" origin "2616 1400 880" values {angles "90 0 0" targetname "syn_antirush_wall"} }
+//
+//		create {classname "game_text"
+//			values {spawnflags "0"
+//				targetname "syn_antirush_text"
+//				message "Need More Players to Continue. . ."
+//				channel "0"
+//				effect "2"
+//				x "-1"
+//				y "0.85"
+//				color "100 100 100"
+//				color2 "240 110 0"
+//				fadein "0.03"
+//				fadeout "1.25"
+//				holdtime "2"
+//				fxtime "0.25"} }
+
+//Trav|Edt - Functionality check
+		create {classname "logic_relay" values {targetname "trav_functionality_d3_c17_10b"} }
+	}
+}

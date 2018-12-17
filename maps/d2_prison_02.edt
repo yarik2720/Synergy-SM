@@ -1,0 +1,260 @@
+d2_prison_02
+{
+	console
+	{
+	sk_antlion_health 75 //30
+	}
+	entity
+	{
+//--Setup--
+		delete {classname "logic_auto" origin "-1129.89 3467.72 412"}
+		edit {classname "func_areaportal" values {targetname "syn_disabledPortal" StartOpen "1"} }
+
+//--Starting Items--
+		create {classname "info_player_equip"
+			values {
+				item_suit			"1"
+				item_armor			"60"
+				weapon_crowbar		"1"
+				weapon_pistol		"1"
+				weapon_smg1			"1"
+				weapon_frag			"1"
+				weapon_357			"1"
+				weapon_physcannon	"1"
+				weapon_shotgun		"1"
+				weapon_ar2			"1"
+				weapon_rpg			"1"
+				weapon_crossbow		"1"
+				weapon_bugbait		"1"
+				weapon_stunstick	"1"
+				ammo_pistol			"54"//72
+				ammo_smg1			"45"
+				ammo_grenade		"1"
+				ammo_smg1_grenade	"1"
+				ammo_357			"6"
+				ammo_buckshot		"12"
+				ammo_ar2			"30"
+				ammo_rpg_round		"1"
+				//ammo_crossbow		"0"
+			} }
+//New Weapon Found
+		create {classname "info_player_equip"
+			values {StartDisabled "1"
+				targetname "syn_new_weapon"
+				weapon_slam "1"
+				//ammo_slam "2"
+				} }
+
+		create {classname "trigger_multiple"
+			origin "-1080 3388 440"
+			values {model "*32"
+				spawnflags "1"
+				targetname "syn_new_weapon_trigger"
+				//StartDisabled "1"
+				filtername "syn_new_weapon_got"
+				OnStartTouch "syn_new_weapon,EquipPlayer,,0,-1"
+				OnStartTouch "syn_new_weapon,Enable,,0.1,-1"
+				OnStartTouch "!activator,AddOutput,targetname syn_d2_prison_02_received_new_weapon,0.1,-1"} }
+
+		create {classname "logic_auto"
+			values {spawnflags "1"
+				OnMapSpawn "shotgun_throw_shotgun,AddOutPut,OnPlayerPickup syn_new_weapon_trigger:Enable::0:-1,0,-1"} }
+
+		create {classname "filter_activator_name"
+			values {targetname "syn_new_weapon_got"
+				Negated "1"
+				filtername "syn_d2_prison_02_received_new_weapon"} }
+
+//--Spawns--
+		create {classname "info_spawn_manager"
+			values {targetname "syn_spawn_manager"} }
+
+		create {classname "info_player_coop" origin "-447.95 3521.46 386"
+			values {angles "0 180 0" targetname "syn_spawn_player_1"} }
+
+		create {classname "info_global_settings"
+			values {IsVehicleMap "0" targetname "syn_global_settings"} }
+
+//--Extra--
+
+		// create intermission
+		"create" { "classname" "info_intermission" "origin" "-1952.84375 1805.5625 730.375" "values" { "angles" "35 90 0" } }
+
+//remove leftover blockers from p01
+		create {classname "logic_auto"
+			values {spawnflags "1"
+				OnMapSpawn "syn_antirush_blocker2,Kill,,0,-1"} }
+
+//Trav|Edt - remove door close trigger
+		delete {classname "trigger_multiple" origin "-1080 3388 440"}
+		//edit {classname "prop_door_rotating" values {spawnflags "0" returndelay "-1"} }
+
+//Trav|Edt - Disable Enemy turrets when tipped (avoid player greif)
+		create {classname "logic_auto"
+			values {spawnflags "1"
+				OnMapSpawn "npc_turret_floor,AddOutput,OnTipped !self:SelfDestruct::0:-1,0,-1"} }//DepleteAmmo
+
+//Trav|Edt - Spam Spawn
+		//create {classname "logic_auto"//this avoids the respawncount output above
+		//	values {spawnflags "1"
+		//		OnMapSpawn "trav_point_temp_slam,ForceSpawn,,5,1"} }
+
+		//create {classname "weapon_slam"
+		//	origin "-1128 3384 392"
+		//	values {spawnflags "4"
+		//		targetname "trav_slam"
+		//		OnPlayerPickup "trav_point_temp_slam,ForceSpawn,,0,-1" } }
+
+		//create {classname "point_template"
+		//	values {spawnflags "2"
+		//		targetname "trav_point_temp_slam"
+		//		Template01 "trav_slam" } }
+
+//Trav|Edt - Create slam spawns at begining
+		//create { classname "weapon_slam"
+		//	 origin	"-1174 3388 388"
+		//	 values { spawnflags "4" } }
+
+		//create { classname "weapon_slam"
+		//	 origin	"-1174 3419 388"
+		//	 values { spawnflags "4" } }
+
+		//create { classname "weapon_slam"
+		//	 origin	"-1174 3450 388"
+		//	 values { spawnflags "4" } }
+
+		//create { classname "weapon_slam"
+		//	 origin	"-1174 3481 388"
+		//	 values { spawnflags "4" } }
+
+		//create { classname "weapon_slam"
+		//	 origin	"-1174 3512 388"
+		//	 values { spawnflags "4" } }
+
+		create {classname "logic_auto"
+			values {spawnflags "1"
+				OnMapSpawn "door_2*,AddOutPut,OnFullyOpen trav_pzombie1_sched:StartSchedule::0:-1,4,-1"} }
+
+//Trav|Edt - Add stuff
+		create {classname "npc_poisonzombie"
+			origin "-896 3118 420"
+			values {spawnflags "518"//772
+				angles "0 180 0"
+				targetname "trav_pzombie1"} }
+
+		create {classname "aiscripted_schedule"
+			values {spawnflags "2052"
+				targetname "trav_pzombie1_sched"
+				m_iszEntity "trav_pzombie1"
+				forcestate "3"
+				goalent "!player"
+				interruptability "0"
+				schedule "6"} }
+
+		create {classname "info_node" origin "-968 3120 396"}
+		create {classname "info_node" origin "-1104 3120 396"}
+		create {classname "info_node" origin "-1104 3296 396"}
+		create {classname "info_node" origin "-1104 2880 396"}
+		create {classname "info_node" origin "-1104 2688 396"}
+		create {classname "info_node" origin "-984 2696 396"}
+		create {classname "info_node" origin "-1120 2608 396"}
+		create {classname "info_node" origin "-1104 2608 396"}
+		create {classname "info_node" origin "-1168 2608 396"}
+		create {classname "info_node" origin "-1168 2664 396"}
+		create {classname "info_node" origin "-1168 2856 260"}
+		create {classname "info_node" origin "-1216 2912 260"}
+
+		create {classname "npc_poisonzombie"
+			origin "-1504 3662 545"
+			values {spawnflags "518"//517
+				angles "0 270 0"} }
+
+		create {classname "ai_relationship"
+			values {subject "npc_poisonzombie"
+				target "npc_turret_floor"
+				disposition "4"
+				StartActive "1"} }
+
+		//create {classname "ai_relationship"
+		//	values {subject "npc_headcrab_poison"
+		//		target "npc_turret_floor"
+		//		disposition "4"
+		//		StartActive "1"} }
+
+		create {classname "info_node" origin "-1504 3736 516"}
+		create {classname "info_node" origin "-1504 3616 516"}
+		create {classname "info_node" origin "-1672 3520 516"}
+		create {classname "info_node" origin "-2352 3464 388"}
+		create {classname "info_node" origin "-2496 3480 388"}
+
+//Trav|Edt - prevent monintor(s) from disabling (trouble finding original model#)
+		delete {classname "trigger_multiple" origin "-1344 2768 448"}
+
+		create {classname "trigger_once"
+			origin "-1592 2576 430"
+			values {model "*13"
+				spawnflags "1"
+				OnTrigger "monitor_1,Enable,,0,-1"
+				OnTrigger "shower_soldier_spawner,ForceSpawn,,0,-1"
+				OnTrigger "autosave,Save,,0.1,-1"} }
+
+//Trav|Edt - autirush
+		create {classname "trigger_coop"
+			origin "-2490.15 1175.31 700"
+			values {model "*6"
+				spawnflags "1"
+				//StartDisabled "1"
+				targetname "syn_antirush_coop"
+				CountType "1"
+				UseHUD "1"
+				PlayerValue "50"
+				wait "1.5"
+				OnTrigger "syn_antirush_text,Display,,0,-1"
+				//OnPlayersIn "syn_antirush_push,Kill,,0,1"
+				OnPlayersIn "syn_antirush_blocker,Kill,,0,1"
+				OnPlayersIn "syn_antirush_light,TurnOff,,0,1"
+				OnPlayersIn "!self,Disable,,1,1"} }
+
+		create {classname "prop_dynamic" origin "-2608 1520 641"
+			values {model "models/synergy/tools/syn_transition.mdl"
+				targetname "syn_antirush_blocker"
+				//angles "0 270 0"
+				solid "6"
+				DisableShadows "1"} }
+
+		create {classname "light_dynamic" origin "-2640 1232 736"
+			values {targetname "syn_antirush_light"
+				_light "170 255 170"
+				brightness "1"
+				distance "400"
+				//_inner_cone "75"
+				//_cone "80"
+				style "12"} }
+
+		//create {classname "trigger_push"
+		//	origin "-2664 1220 688"
+		//	values {model "*7"
+		//		spawnflags "1"
+		//		targetname "syn_antirush_push"
+		//		pushdir "0 0 0"
+		//		speed "450"} }
+
+		create {classname "game_text"
+			values {spawnflags "0"
+				targetname "syn_antirush_text"
+				message "Need More Players to Continue. . ."
+				channel "0"
+				effect "2"
+				x "-1"
+				y "0.85"
+				color "100 100 100"
+				color2 "240 110 0"
+				fadein "0.03"
+				fadeout "1.25"
+				holdtime "2"
+				fxtime "0.25"} }
+
+//Trav|Edt - Functionality check
+		create {classname "logic_relay" values {targetname "trav_functionality_d2_prison_02"} }
+	}
+}

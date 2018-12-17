@@ -1,0 +1,238 @@
+d1_town_03
+{
+	entity
+	{
+//--Setup--
+		delete {classname "logic_auto" origin "-3672.9 -457.209 -3550"}
+
+//Prevent Backtracking
+		create {classname "prop_dynamic" origin "-3648 -304 -3664"
+			values {model "models/synergy/tools/syn_transition.mdl"
+				targetname "syn_wall_removeme_t03"
+				angles "0 270 0"
+				//solid "6"
+				DisableShadows "1"} }
+
+		create {classname "light_dynamic" origin "-3648 -288 -3504"
+			values {_light "170 255 170"
+				targetname "syn_wall_removeme_t03"
+				brightness "1"
+				distance "256"
+				style "12"} }
+
+		create {classname "trigger_push" origin "0 -64 0"
+			values {model "*37"
+				spawnflags "1"
+				speed "750"
+				pushdir "0 270 0"} }
+
+		create {classname "logic_auto"
+			values {spawnflags "1"
+				OnMapSpawn "syn_wall_removeme_t02,Kill,,0,-1"
+				OnMapSpawn "syn_antirush_wall_ally,Kill,,0,-1"} }
+
+//--Starting Items--
+		create {classname "info_player_equip"
+			values {
+				targetname "syn_eqipment_base"
+				item_suit			"1"
+				item_armor			"25"
+				weapon_crowbar		"1"
+				weapon_pistol		"1"
+				weapon_smg1			"1"
+				weapon_frag			"1"
+				weapon_357			"1"
+				weapon_physcannon	"1"
+				weapon_shotgun		"1"
+				ammo_pistol			"54"//72
+				ammo_smg1			"45"
+				//ammo_grenade		"1"//
+				//ammo_smg1_grenade	"1"//
+				ammo_357			"3"//6
+				ammo_buckshot		"6"//12
+			} }
+
+//--Spawns--
+		create {classname "info_spawn_manager"
+			values {targetname "syn_spawn_manager"} }
+
+		create {classname "info_player_coop" origin "-3642.19 -453.21 -3519"
+			values {angles "0 270 0" targetname "syn_spawn_player_1"} }
+
+		create {classname "info_global_settings"
+			values {IsVehicleMap "0" targetname "syn_global_settings"} }//restartlevel "d1_town_02"
+//needed?
+		//if fail, go back to 02
+
+//--Extra--
+
+//If dog's ball is carried over, keep invuln
+		create {classname "filter_activator_name"
+			values {targetname "syn_dfilter_null"
+				filtername "null"} }
+
+//Trav|Edt - fix blade
+		edit {targetname "propeller_02_hinge" values {attach2 ""} }
+//fix grav gun bug (client side pickup)
+		//edit {targetname "propeller_02" values {spawnflags "512"} }
+
+//Trav|Edt - Freeze pinned ragdoll to save network usage a bit
+		create {classname "logic_auto"
+			values {spawnflags "1"
+				OnMapSpawn "pinned_zombie_*,DisableMotion,-1,4,-1"} }
+
+//Trav|Edt - prevent players from sprint-jump-croutching to skip tram.
+		create {classname "func_brush"
+			origin "-2381.5 -1231 -3328"
+			values {model "*79"
+				spawnflags "2"
+				targetname "trav_crouchjump_clip"
+				disablereceiveshadows "1"
+				disableshadows "1"} }
+				
+		create {classname "func_brush"
+			origin "-2330.5 -1327 -3379.07"
+			values {model "*79"
+				spawnflags "2"
+				targetname "trav_crouchjump_clip"
+				disablereceiveshadows "1"
+				disableshadows "1"} }
+
+		delete {targetname "street_lever"}
+
+		create {classname "func_rot_button"
+			origin "-2096 -1548 -3504"
+			values {model "*43"
+				spawnflags "3137"
+				targetname "street_lever"
+				distance "15"
+				sounds "23"
+				speed "100"
+				wait "-1"
+				OnPressed "!self,Lock,,0,-1"
+				OnPressed "street_lever_unlock_trigger,Kill,,0,-1"
+				OnPressed "streettram_largewheels_rot,StartForward,,0,-1"
+				OnPressed "streettram_largewheels_01,StartForward,,0,-1"
+				OnPressed "streettram_largewheels_02,StartForward,,0,-1"
+				OnPressed "streettram_largewheels_03,StartForward,,0,-1"
+				OnPressed "streettram_largewheels_04,StartForward,,0,-1"
+				OnPressed "streettram_largewheels_05,StartForward,,0,-1"
+				OnPressed "streettram_largewheels_06,StartForward,,0,-1"
+				OnPressed "streettram_largewheels_07,StartForward,,0,-1"
+				OnPressed "streettram_largewheels_08,StartForward,,0,-1"
+				OnPressed "streettram_largewheels_09,StartForward,,0,-1"
+				OnPressed "streettram_tram,Resume,,0,-1"
+				OnPressed "streettram_wav,PlaySound,,0,-1"
+				OnPressed "trav_crouchjump_clip,Disable,,4,-1"} }
+
+//Trav|Edt - Fix valve entity misname 'streetzombie_maker2_zombie'
+		edit {targetname "streetzombie_maker2_sched"
+			values {m_iszEntity "streetzombie_2"} }
+
+		edit {targetname "streetzombie_maker3_sched"
+			values {m_iszEntity "streetzombie_3"} }
+			
+//Trav|Edt - Edit zombie spawns for more zombies.
+		edit {targetname "streetzombie_maker1"
+			values {spawnflags "144"
+			MaxLiveChildren "4"} }
+			
+		edit {targetname "streetzombie_maker2"
+			values {spawnflags "144"
+			MaxLiveChildren "4"} }
+			
+		edit {targetname "streetzombie_maker3"
+			values {spawnflags "144"
+			MaxLiveChildren "4"} }
+
+		edit {targetname "streetzombie_maker4"
+			values {spawnflags "144"
+			MaxLiveChildren "4"} }
+
+		edit {targetname "last_fz_1_maker"
+			values {MaxLiveChildren "4"
+				MaxNPCCount "5"} }
+				
+		edit {targetname "last_fz_2_maker"
+			values {MaxLiveChildren "4"
+				MaxNPCCount "5"} }
+
+		edit {targetname "roofzombie_maker7"
+			values {MaxLiveChildren "2"
+				MaxNPCCount "4"} }
+
+		edit {targetname "roofzombie_maker8"
+			values {MaxLiveChildren "2"
+				MaxNPCCount "4"} }
+
+		edit {targetname "roofzombie_maker11"
+			values {MaxLiveChildren "2"
+				MaxNPCCount "4"} }
+
+		edit {targetname "poisonzombie_maker"
+			values {MaxLiveChildren "2"
+				MaxNPCCount "3"} }
+
+//Trav|Edt - Move changelevel trigger back a bit (no workie?)
+		edit {classname "trigger_changelevel" origin "-3760 -36 -3396" values {origin "-3760 -4 -3396"} }
+
+//Trav|Edt add antirush at endlevel
+		create {classname "trigger_coop"
+			origin "-4704 -144 -3072"//-4552 -168 -3136
+			values {model "*29"
+				spawnflags "1"
+				//StartDisabled "1"
+				targetname "syn_antirush_trav_town03_end_coop"
+				CountType "1"
+				UseHUD "1"
+				PlayerValue "50"
+				wait "1.5"
+				OnTrigger "syn_antirush_text,Display,,1,-1"
+				OnPlayersIn "syn_antirush_trav_town03_end_push,Kill,,0,1"
+				OnPlayersIn "syn_antirush_wall,Kill,,0,1"
+				OnPlayersIn "syn_antirush_light,Kill,,0,1"
+				OnPlayersIn "!self,Disable,,1,-1"} }
+
+		create {classname "prop_dynamic" origin "-3848 0 -3648"
+			values {model "models/synergy/tools/syn_transition.mdl"
+				targetname "syn_antirush_wall"
+				angles "0 270 0"
+				//solid "6"
+				DisableShadows "1"} }
+
+		create {classname "light_dynamic" origin "-3728 8 -3400"
+			values {_light "170 255 170"
+				targetname "syn_antirush_light"
+				brightness "0.5"
+				distance "256"
+				style "12"} }
+
+		create {classname "trigger_push"
+			origin "-3736 24 -3348"
+			values {model "*22"
+				spawnflags "1"
+				targetname "syn_antirush_trav_town03_end_push"
+				pushdir "0 270 0"
+				speed "450"} }
+
+		create {classname "game_text"
+			values {spawnflags "0"
+				targetname "syn_antirush_text"
+				message "Need More Players to Continue. . ."
+				channel "0"
+				effect "2"
+				x "-1"
+				y "0.85"
+				color "100 100 100"
+				color2 "240 110 0"
+				fadein "0.03"
+				fadeout "1.25"
+				holdtime "2"
+				fxtime "0.25"} }
+
+//End of Trav|Edt
+
+//Trav|Edt - Functionality check
+		create {classname "logic_relay" values {targetname "trav_functionality_d1_town_03"} }
+	}
+}

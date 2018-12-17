@@ -1,0 +1,102 @@
+d3_c17_02
+{
+	entity {
+//--Setup--
+		delete {classname "logic_auto" origin "-10488.4 -5283.25 2"}
+		edit {classname "func_areaportal" values {targetname "disabledPortal" StartOpen "1"} }
+
+//--Starting Items--
+		create {classname "info_player_equip"
+			values {
+				item_suit			"1"
+				item_armor			"60"
+				weapon_crowbar		"1"
+				weapon_pistol		"1"
+				weapon_smg1			"1"
+				weapon_frag			"1"
+				weapon_357			"1"
+				weapon_physcannon	"1"
+				weapon_shotgun		"1"
+				weapon_ar2			"1"
+				weapon_rpg			"1"
+				weapon_crossbow		"1"
+				weapon_bugbait		"1"
+				weapon_slam			"1"
+				ammo_pistol			"54"//72
+				ammo_smg1			"45"
+				ammo_grenade		"1"
+				ammo_smg1_grenade	"1"
+				ammo_357			"6"
+				ammo_buckshot		"12"
+				ammo_ar2			"30"
+				ammo_ar2altfire		"1"
+				//ammo_rpg_round		"1"
+				//ammo_crossbow		"0"
+				//ammo_slam			"2"
+			} }
+
+//--Spawns--
+		create {classname "info_spawn_manager"
+			values {targetname "syn_spawn_manager"} }
+
+		create {classname "info_player_coop" origin "-10568 -5256 -16"//-10397.95 -4856.71 -63.97
+			values {angles "0 315 0" targetname "syn_spawn_player_1"} }//0 -90 0
+
+		create {classname "info_global_settings"
+			values {IsVehicleMap "0" targetname "syn_global_settings"} }
+
+//--Extra--
+
+		// create intermission
+		"create" { "classname" "info_intermission" "origin" "-8806.531250 -5789.062500 290.156250" "values" { "angles" "3.463973 -17.247749 0" } }
+
+//Trav|Edt - allow cool dog-dropship scene, and teleport payers after close
+		create {classname "info_spawn_manager"
+			values {targetname "trav_spawn_manager"} }
+
+		create {classname "info_teleport_destination" origin "-5424 -5568 36"
+			values {angles "0 180 0"
+				targetname "trav_teleport"} }
+
+		create {classname "trigger_once"
+			origin "-5504 -5636 30"
+			values {model "*40"
+				spawnflags "1"
+				OnTrigger "trav_spawn_manager,TeleportPlayers,trav_teleport,0,-1"} }
+
+//Trav|Edt - allow gman tv to not turn off
+		delete {classname "trigger_look" origin "-4940.56 -4874 60"}
+
+		create {classname "trigger_look"
+			origin "-4940.56 -4874 60"
+			values {model "*56"
+				spawnflags "1"
+				target "breakable_flr1tv5_screen"
+				FieldOfView "0.5"
+				LookTime "0.85"
+				OnTrigger "ss_adjusttie,BeginSequence,,0,-1"
+				OnTrigger "monitor_flr1tv5_screen,Disable,,45,-1"} }//51
+
+//End of Trav|Edt
+
+		// start dog off automatically
+		//"delete" { "classname" "trigger_once" "origin" "-10448 -5312 -16" }
+
+		//"create"
+		//{
+		//	"classname" "logic_auto"
+		//	"origin" "0 0 0"
+		//	"values"
+		//	{
+		//		"OnMapSpawn" "ss_dog_KLabExit,BeginSequence,,2,1"
+		//	}
+		//}
+
+		// after dog has opened the gate, leave it open
+//Trav|Edt - reallow
+		//"delete" { "classname" "trigger_once" "origin" "-5504 -5636 30" }
+
+//Trav|Edt - Functionality check
+		create {classname "logic_relay" values {targetname "trav_functionality_d3_c17_02"} }
+	}
+}

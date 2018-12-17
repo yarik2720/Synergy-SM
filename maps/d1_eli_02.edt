@@ -1,0 +1,381 @@
+d1_eli_02
+{
+	entity {
+//--Setup--
+		delete {classname "logic_auto" origin "-504.462 1091.18 -2660"}
+
+		create {classname "logic_auto" //origin "-504.462 1091.18 -2660"
+			values {spawnflags "1"
+				OnNewGame "spawn_alyx,Spawn,,0,-1"
+				OnMapSpawn "alyx,StartScripting,,0.2,-1"
+				OnMapSpawn "ravenDoor_0,Kill,,0,-1"} }
+			//	"OnNewGame" "global_newgame_template_ammo,ForceSpawn,,0.5,1"
+			//	"OnNewGame" "global_newgame_template_local_items,ForceSpawn,,0.2,1"
+			//	"OnNewGame" "global_newgame_template_base_items,ForceSpawn,,0,1"
+
+		edit {classname "func_areaportal" values {targetname "disabledPortal" StartOpen "1"} }
+
+//--Starting Items--
+		create {classname "info_player_equip"
+			values {
+				targetname "syn_eqipment_base"
+				item_suit			"1"
+				item_armor			"60"
+				weapon_crowbar		"1"
+				weapon_pistol		"1"
+				weapon_smg1			"1"
+				weapon_frag			"1"
+				weapon_357			"2"
+				ammo_pistol			"54"//72
+				ammo_smg1			"45"
+				ammo_grenade		"1"
+				ammo_smg1_grenade	"1"
+				ammo_357			"6"
+//non-progressive
+				weapon_stunstick "1"
+				ammo_smg1_grenade "1"
+			} }
+
+//--Spawns--
+		create {classname "info_spawn_manager"
+			values {targetname "syn_spawn_manager"} }
+
+		create {classname "info_player_coop" origin "-631.43 1122.75 -2677.97"
+			values {angles "0 -90 0" targetname "syn_spawn_player_1"} }
+
+		create {classname "info_player_coop" origin "-544 968 -2687"
+			values {angles "0 90 0" targetname "syn_spawn_player_2" StartDisabled "1"} }
+//post ravendoor (dog)
+		create {classname "info_player_coop" origin "-3112 2456 -2735"
+			values {angles "0 15 0" targetname "syn_spawn_player_3" StartDisabled "1"} }
+
+		create {classname "info_global_settings"
+			values {IsVehicleMap "0" targetname "syn_global_settings"} }
+
+		//create {classname "info_vehicle_spawn" origin "-10754 2911 -421"
+		//	values {targetname	"syn_spawn_vehicle_1"
+		//		angles "0 180 0"
+		//		StartEnabled "1"
+		//		RespawnVehicle "1"
+		//		Ownership "1"
+		//		VehicleType "2"
+		//		VehicleSize "164"
+		//		model "models/airboat.mdl"
+		//		VehicleScript "scripts/vehicles/airboat.txt"} }
+
+//--Extra--
+
+		create {classname "logic_auto" //origin "-504.462 1091.18 -2660"
+			values {spawnflags "1"
+				OnNewGame "spawn_alyx,Spawn,,0,-1"
+				OnMapSpawn "alyx,StartScripting,,0.2,-1"
+				OnMapSpawn "ravenDoor_0,Kill,,0,-1"
+			//	"OnNewGame" "global_newgame_template_ammo,ForceSpawn,,0.5,1"
+			//	"OnNewGame" "global_newgame_template_local_items,ForceSpawn,,0.2,1"
+			//	"OnNewGame" "global_newgame_template_base_items,ForceSpawn,,0,1"
+			}
+		}
+
+//Trav|Edt - phys block airlock
+		create {classname "func_clip_vphysics"
+			origin "-600 884 -2624"
+			values {model "*117"
+				filtername "syn_clipfilter"
+				targetname "trav_airlock_phys"} }
+
+		create {classname "filter_multi"
+			values {targetname "syn_clipfilter"
+				Filter01 "syn_filter_1"
+				Filter02 "syn_filter_2"
+				Filter03 "syn_filter_3"
+				Filter04 "syn_filter_4"} }
+
+		create {classname "filter_activator_class"
+			values {targetname "syn_filter_1"
+				negated "1"
+				filterclass "npc_grenade_frag"} }
+
+		create {classname "filter_activator_class"
+			values {targetname "syn_filter_2"
+				negated "1"
+				filterclass "npc_satchel"} }
+
+		create {classname "filter_activator_class"
+			values {targetname "syn_filter_3"
+				negated "1"
+				filterclass "grenade_ar2"} }
+
+		create {classname "filter_activator_name"
+			values {targetname "syn_filter_4"
+				negated "1"
+				filtername "ball"} }
+
+//Trav|Edt - unlock gate when a player gets up
+		create {classname "logic_auto"
+			values {spawnflags "1"
+				OnMapSpawn "trigger_scrap_1st_success,AddOutput,OnTrigger door_scrapyard_gate:Open::30:-1,5,-1"} }//trigger_climb_up
+
+//Trav|Edt - remove HCC2 push and increase damage and decrease radius (doesnt work???) -- only dmg
+//Note: cannot add new keys, some ents have keys even if they are default, like areaportals?
+		//delete {targetname "push_player_cannister_1"}
+
+		delete {targetname "HCC2"}//Test using logic auto- addoutput instead
+
+		create {classname "env_headcrabcanister"
+			origin "-1520 1200 -2672"
+			values {spawnflags "0"
+				angles "-55.6645 216.867 34.2678"
+				targetname "HCC2"
+				FlightSpeed "3000"
+				FlightTime "5"
+				SmokeLifetime "30"
+				HeadcrabCount "1"
+				HeadcrabType "0"
+				Damage "75"//15
+				DamageRadius "350"} }
+
+		//edit {targetname "HCC2"
+		//values {Damage "10000"
+		//	DamageRadius "25600"} }
+
+//Trav|Edt - add gman
+		create {classname "npc_gman"
+			origin	"-1272 1120 -2245"
+			values {spawnflags "17044"
+				angles "0 225 0"
+				targetname "syn_vint_trav_gman_1" } }
+
+		create {classname "scripted_sequence"
+			origin	"-1272 1120 -2280"
+			values {spawnflags	"96"
+				targetname "syn_vint_trav_ss_gman_1_1"
+				m_iszEntity	"syn_vint_trav_gman_1"
+				m_iszPlay	"tiefidget"
+				m_iszNextScript	"syn_vint_trav_gman_1_2"} }
+
+		create {classname "scripted_sequence"
+			origin	"-975 1136 -2192"
+			values {spawnflags	"96"
+				targetname	"syn_vint_trav_gman_1_2"
+				m_fMoveTo	"1"
+				OnEndSequence "syn_vint_trav_gman_1,Kill,,0,-1"
+				OnEndSequence "syn_vint_trav_ss_gman_1_1,Kill,,0,-1"
+				OnEndSequence "!self,Kill,,0.1,-1"} }
+
+//Trav|Edt - trigger gman
+		create {classname "trigger_once"
+			origin "-1593 -441 -2652"
+			values {model "*113"
+				spawnflags "1"
+				OnTrigger "syn_vint_trav_ss_gman_1_1,BeginSequence,,8,-1" } }
+
+//Trav|Edt - make dog's ball invuln
+		delete {targetname "ball"}
+
+		create {classname "npc_rollermine"
+			values {spawnflags "72964"
+				targetname "ball"
+				damagefilter "syn_dfilter_null"
+				uniformsightdist "1"} }
+
+		create {classname "filter_activator_name"
+			values {targetname "syn_dfilter_null"
+				filtername "null"} }
+
+//Trav|Edt - add final gman in bunker
+		create {classname "npc_gman"
+			origin "-752 1040 -2656"
+			values {spawnflags "16532"
+				targetname "syn_vint_trav_gman_2"
+				sleepstate "3"} }
+
+		create {classname "scripted_sequence"
+			origin "-752 1040 -2656"
+			values {spawnflags "96"
+				targetname "syn_vint_trav_ss_gman_2_1"
+				m_iszEntity "syn_vint_trav_gman_2"
+				m_iszPlay "tiefidget"
+				m_iszNextScript "syn_vint_trav_ss_gman_2_2"} }
+
+		create {classname "scripted_sequence"
+			origin "-784 1136 -2656"
+			values {spawnflags "96"
+				angles "0 90 0"
+				targetname "syn_vint_trav_ss_gman_2_2"
+				m_fMoveTo "1"
+				OnEndSequence "syn_vint_trav_gman_2,Kill,,0,-1"
+				OnEndSequence "syn_vint_trav_ss_gman_2_1,Kill,,0,-1"
+				OnEndSequence "!self,Kill,,0.1,-1"} }
+
+		create {classname "logic_relay"
+			values {spawnflags "1"
+				targetname "logic_disable_airlockB_1"
+				OnTrigger "syn_vint_trav_gman_2,Wake,,0,-1"
+				OnTrigger "syn_vint_trav_ss_gman_2_1,BeginSequence,,8,-1"} }
+
+// hotfix pushy door
+		create {classname "func_brush" origin "-1890 1924 -2683"
+			values
+			{
+				targetname "syn_ravenDoor_brush"
+				edt_getbspmodelfor_targetname "brush_doorAirlock_opened_PClip2"
+				angles "0 90 0"
+			}
+		}
+		create {classname "logic_auto"
+			values
+			{
+				spawnflags "1"
+				OnMapSpawn "ravenDoor,disableplayercollision,,1,-1"
+				OnMapSpawn "SS_Dog_RavenDoor_Open,AddOutput,OnBeginSequence syn_ravenDoor_brush:Disable::1:-1,0,-1"
+				OnMapSpawn "SS_Dog_RavenDoor_Drop,AddOutput,OnBeginSequence syn_ravenDoor_brush:Enable::0:-1,0,-1"
+			}
+		}
+
+//Trav|Edt - allow dog to close ravendoor
+		create {classname "trigger_coop"
+			origin "-2352 3064 -2850.88"
+			values {model "*47"
+				spawnflags "1"
+				//StartDisabled "1"
+				targetname "trav_coop_ravendoor"
+				CountType "1"
+				PlayerValue "100"
+				OnTrigger "syn_spawn_manager,SetCheckpoint,syn_spawn_player_3,0,1"
+				OnTrigger "syn_global_settings,AddOutput,IsVehicleMap 1,0,1"
+				OnPlayersIn "SS_Dog_RavenDoor_Drop,BeginSequence,,0,1"
+				OnPlayersIn "remove_trigger,Enable,,0,1"
+				OnPlayersIn "ambient_attack_battle_2,Stopsound,,0.5,1"
+				OnPlayersIn "ambient_attack_battle_2,Stopsound,,0.7,1"
+				OnPlayersIn "ambient_attack_battle_2,Kill,,1,1"
+				OnPlayersIn "!self,Kill,,2,1"} }
+
+//End of Trav|Edt
+
+		// do not allow the door to close after leaving secure door
+		"delete" { "targetname" "trigger_scrapyard_start" }
+		"create"
+		{
+			"classname" "trigger_once"
+			"origin" "-588 646 -2624"
+
+			"values"
+			{
+				"model" "*50"
+				"targetname" "trigger_scrapyard_start"
+				"spawnflags" "1"
+				"StartDisabled" "1"
+				"OnTrigger" "lcs_gravgun01,Start,,2,-1"
+			//	"OnTrigger" "brush_doorAirlock_PClip_2,Enable,,0,-1"
+			//	"OnTrigger" "airlock_south_door_exit,Close,,0,-1"
+			//	"OnTrigger" "airlock_south_door_exitb,Close,,0,-1"
+			//	"OnTrigger" "brush_doorAirlock_opened_PClip,Enable,,0,-1"
+			}
+		}
+
+		// alyx needs to open the door automatically because some of our spawns
+		// are outside of the airlock
+		"delete" { "targetname" "trigger_alyxtour04b" }
+		"create"
+		{
+			"classname" "logic_auto"
+			"origin" "0 0 0"
+
+			"values"
+			{
+				"OnMapSpawn" "lcs_alyxtour04b,Start,,2,-1"
+				"OnMapSpawn" "alyx,StartScripting,,2,-1"
+			}
+		}
+
+		// give command does not work in MP, so we need to fix this
+		// instead create a physgun on the ground where alyx is
+		"delete" { "targetname" "trigger_Get_physgun" }
+		"create"
+		{
+			"classname" "trigger_once"
+			"origin" "-445.44 839.44 -2657.5"
+
+			"values"
+			{
+				"model" "*52"
+				"targetname" "trigger_Get_physgun"
+				"spawnflags" "1"
+				"StartDisabled" "1"
+				"OnTrigger" "lcs_gravgun01,Cancel,,0,-1"
+				"OnTrigger" "gravgun_prop,Kill,,0,-1"
+				"OnTrigger" "SS_Alyx_gravgunGet,CancelSequence,,0,-1"
+				"OnTrigger" "lcs_al_primary,Start,,1,-1"
+				"OnTrigger" "speaker_TakeGravGunNag,Kill,,0.1,-1"
+				"OnTrigger" "logic_TakeGravGunNag_filter,Disable,,0,-1"
+				"OnTrigger" "speaker_TakeGravGunNag,TurnOff,,0,-1"
+				"OnTrigger" "trigger_skip_training,Enable,,0,-1"
+				"OnTrigger" "trigger_skip_training_pregrav,Kill,,0,-1"
+				"OnTrigger" "Hudhint_physswap,ShowHudHint,,6,-1"
+
+			//	"OnTrigger" "command_physcannon,Command,give weapon_physcannon,0,-1" // ROFL
+
+				"OnTrigger" "edt_physcannon_equip,Enable,,0,-1"
+				"OnTrigger" "edt_physcannon_equip,EquipAllPlayers,,0,-1"
+			}
+		}
+
+		// give all players the physcannon
+		"create"
+		{
+			"classname"	"info_player_equip"
+			"origin"	"0 0 0"
+
+			"values"
+			{
+				"targetname"		"edt_physcannon_equip"
+				"StartDisabled"		"1"
+				"weapon_physcannon"	"1"
+			}
+		}
+
+		// when we come back through we need to activate a new checkpoint
+		"delete" { classname "trigger_once" origin "-588 1056 -2624" }
+		"create"
+		{
+			"classname" "trigger_once"
+			"origin" "-588 1056 -2624"
+
+			"values"
+			{
+				"model" "*19"
+				"targetname" "trigger_attack02"
+				"spawnflags" "1"
+				"StartDisabled" "1"
+				"OnTrigger" "lcs_attack01,Cancel,,0,-1"
+				"OnTrigger" "logic_turnon_airlockB_1,Trigger,,3,-1"
+				"OnTrigger" "airlock_south_door_exitb,Close,,0,-1"
+				"OnTrigger" "lcs_attack02,Start,,0.1,-1"
+				"OnTrigger" "airlock_south_door_exit,Close,,0,-1"
+				"OnTrigger" "ambient_attack_start_1,PlaySound,,1.5,-1"
+				"OnTrigger" "logic_battlefx_start_1,Trigger,,0,-1"
+				"OnTrigger" "logic_kill_scanners,Trigger,,0,-1"
+				"OnTrigger" "speaker_GoBackAirNag,TurnOff,,0,-1"
+				"OnTrigger" "soundscape_eli_02_lower_corridor_1,Enable,,0,-1"
+				"OnTrigger" "chopper_flyby_04,StartPatrol,,0,-1"
+				"OnTrigger" "chopper_flyby_04,FlyToSpecificTrackViaPath,fly2_4,0,-1"
+
+				"OnTrigger" "syn_spawn_manager,SetCheckpoint,syn_spawn_player_2,0,-1"
+				"OnTrigger" "syn_spawn_manager,MovePlayers,,0.1,-1"
+				OnTrigger "syn_global_settings,AddOutput,IsVehicleMap 1,0,-1"//enable static spawing
+			}
+		}
+
+		// do not block us here
+		"delete" { "targetname" "brush_doorAirlock_opened_PClip2" }
+
+		// do not let dog drop raven door
+		"delete" { "targetname" "trigger_RavenDoor_Drop" }
+
+		// remove annoying prop
+		"delete" { "classname" "prop_physics" "origin" "-3089.51 3400.07 -2947.89" }
+
+//Trav|Edt - Functionality check
+		create {classname "logic_relay" values {targetname "trav_functionality_d1_eli_02"} }
+	}
+}

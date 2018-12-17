@@ -1,0 +1,166 @@
+ep1_c17_02b
+{
+	entity
+	{
+//--Setup--
+		delete {targetname "global_newgame_spawner_ammo" }
+		delete {targetname "global_newgame_spawner_physcanon"}
+		delete {targetname "global_newgame_spawner_ar2"}
+		delete {targetname "global_newgame_spawner_suit"}
+		delete {targetname "global_newgame_spawner_shotgun"}
+		delete {targetname "global_newgame_spawner_smg"}
+		delete {classname "weapon_pistol"}
+		edit {classname "func_areaportal" values {targetname "syn_DisabledPortal" StartOpen "1"} }
+		edit {classname "func_areaportalwindow" values {targetname "syn_DisabledPortalWindow" FadeStartDist "1000" FadeDist "1500"} }
+
+//Prevent Backtracking
+		create {classname "trigger_push" origin "-56 0 0"
+			values {model "*156"
+				spawnflags "1"
+				speed "750"
+				pushdir "0 180 0"} }
+
+//--Starting Items--
+		create {classname "info_player_equip"
+			values {
+				item_suit			"1"
+				item_armor			"60"
+				weapon_physcannon	"1"
+				weapon_pistol		"1"
+				weapon_shotgun		"1"
+				weapon_smg1			"1"
+				weapon_ar2			"1"
+				weapon_frag			"1"
+				weapon_slam			"1"
+				ammo_pistol			"54"
+				ammo_buckshot		"12"
+				ammo_smg1			"45"
+				ammo_ar2			"30"
+				ammo_grenade		"1"
+			} }
+//New Weapons
+		create {classname "info_player_equip"
+			values {targetname "syn_new_weapons"
+				StartDisabled "1"
+				weapon_crossbow		"1"
+			} }
+
+		create {classname "trigger_multiple"
+			origin "-2041 2661.27 0"
+			values {model "*54" angles "0 90 0"
+				spawnflags "1"
+				targetname "syn_new_weapon_trigger"
+				StartDisabled "1"
+				filtername "syn_new_weapon_filter"
+				OnTrigger "syn_new_weapons,Enable,,0,1"
+				OnStartTouch "syn_new_weapons,EquipPlayer,,0.1,-1"
+				OnStartTouch "!activator,AddOutput,targetname syn_ep1_c17_02b_got_new_weapons,0.1,-1"} }
+
+		create {classname "filter_activator_name"
+			values {targetname "syn_new_weapon_filter"
+				Negated "1"
+				filtername "syn_ep1_c17_02b_got_new_weapons"} }
+
+		delete {classname "weapon_crossbow"}
+
+		create {classname "weapon_crossbow" origin "-1936 2672 39"
+			values {angles "0 15 0"
+				OnPlayerPickup "syn_new_weapon_trigger,Enable,,0.1,1"} }
+
+//--Spawns--
+		create {classname "info_spawn_manager"
+			values {targetname "syn_spawn_manager"} }
+//Intro
+		create {classname "info_player_coop" origin "-2022 2101 -86"
+			values {angles "0 135 0" targetname "syn_spawn_player_1"} }
+
+		create {classname "info_global_settings"
+			values {targetname "syn_global_settings" IsVehicleMap "0"} }
+
+//--Extra--
+
+//Trav|Edt - Doors: Open Only
+		edit {classname "prop_door_rotating" origin "713 1827 -202" values {spawnflags "0"} }
+		edit {targetname "crabpod_door_1" values {spawnflags "2048"} }
+		edit {targetname "door_zombietrap" values {spawnflags "2048"} }
+		edit {targetname "bld_a_frontdoor_1" values {spawnflags "18432"} }
+		edit {targetname "crabpod_door_2" values {spawnflags "6144"} }
+
+		delete {targetname "barneyscene_closedoor_rl"}
+
+		create { classname "info_intermission" origin "-1063 2977 99" values { target "backstreet_soldier_3_grenadetarget_1" } }
+
+//Trav|Edt add alot more combine on eastfront door
+		edit {targetname "eastfront_soldiers_respawn_counter" values {max "12"} }
+
+		create {classname "logic_relay"
+			values {spawnflags "1"
+				targetname "eastfront_begin_relay"
+				OnTrigger "eastfront_soldier_template_maker,ForceSpawn,,1,-1"
+				//OnTrigger "eastfront_soldier_template_maker,ForceSpawn,,2,-1"
+				OnTrigger "eastfront_soldier_template_maker,ForceSpawn,,3,-1"
+				OnTrigger "eastfront_soldier_template_maker,ForceSpawn,,6,-1"
+				OnTrigger "eastfront_soldier_template_maker,ForceSpawn,,8,-1"
+				//OnTrigger "eastfront_soldier_template_maker,ForceSpawn,,10,-1"
+				OnTrigger "eastfront_soldier_template_maker,ForceSpawn,,12,-1"} }
+
+//Trav|Edt - prevent players from getting infront of door opener manbearpig dude guy
+		create {classname "trigger_push"
+			origin "1131 2031.5 -219.88"
+			values {model "*134"
+				spawnflags "1"
+				targetname "trav_antistuck_push"
+				pushdir "0 90 0"
+				speed "450"} }
+
+		create {classname "logic_auto"
+			values {spawnflags "1"
+				OnMapSpawn "bld_a_frontdoor_1_ss_1,AddOutput,OnBeginSequence trav_antistuck_push:Disable::0:-1,8,-1"} }
+
+//Trav|Edt prevent tv bring being brokies
+		edit {targetname "breakable_tv1_screen" values {spawnflags "1"} }
+
+		edit {targetname "prop_tv1_body" values {spawnflags "8"} }
+
+		delete {classname "prop_physics" origin "987 1716 -235"}//984 1712 -235
+
+		create {classname "prop_physics_override"
+			origin "987 1716 -235"//984 1712 -235
+			values {spawnflags "10"
+				angles "0 90 0"
+				model "models/props_c17/FurnitureDrawer001a.mdl"
+				health "0"} }
+
+//Trav|Edt - keep barny's doors open
+		create {classname "logic_auto"
+			values {spawnflags "1"
+				OnMapSpawn "barney_door_2,AddOutput,OnOpen !self:Lock::0:-1,0,-1"} }
+
+//End of Trav|Edt
+
+		// when someone picks up the crowbar, give one to everyone else
+		create { classname "info_player_equip"
+			values {
+				targetname "crowbar_equip"
+				StartDisabled "1"
+
+				weapon_crowbar "1"
+			}
+		}
+
+		delete { targetname "crowbar" }
+		create { classname "weapon_crowbar" origin "987.934 1725 170"
+			values {
+				"spawnflags" "4"
+				"targetname" "crowbar"
+				"angles" "0 0 0"
+
+				"OnPlayerPickup" "crowbar_equip,EquipAllPlayers,,0.1,-1"
+				OnPlayerPickup "crowbar_equip,Enable,,0,-1"
+			}
+		}
+
+//Trav|Edt - Functionality check
+		create {classname "logic_relay" values {targetname "trav_functionality_ep1_c17_02b"} }
+	}
+}

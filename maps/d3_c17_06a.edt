@@ -1,0 +1,247 @@
+d3_c17_06a
+{
+	entity
+	{
+//--Setup--
+		delete {classname "logic_auto" origin "3555.74 -6799 -110.223"}
+		create {classname "logic_auto"
+			values {spawnflags "1"
+			OnMapSpawn "citizen_reinforcement_manager_2,Replenish,,0,-1"} }
+		edit {classname "func_areaportal" values {targetname "disabledPortal" StartOpen "1"} }
+
+//Prevent Backtracking
+		create {classname "syn_transition_wall" origin "3184 -6432 -144"}
+
+		//create {classname "trigger_push" origin "64 0 0"
+		//	values {model "*14"
+		//		spawnflags "1"
+		//		speed "750"
+		//		pushdir "0 0 0"} }
+
+//--Starting Items--
+		create {classname "info_player_equip"
+			values {
+				item_suit			"1"
+				item_armor			"60"
+				weapon_crowbar		"1"
+				weapon_pistol		"1"
+				weapon_smg1			"1"
+				weapon_frag			"1"
+				weapon_357			"1"
+				weapon_physcannon	"1"
+				weapon_shotgun		"1"
+				weapon_ar2			"1"
+				weapon_rpg			"1"
+				weapon_crossbow		"1"
+				weapon_bugbait		"1"
+				weapon_slam			"1"
+				weapon_stunstick	"1"
+				ammo_pistol			"54"//72
+				ammo_smg1			"45"
+				ammo_grenade		"1"
+				ammo_smg1_grenade	"1"
+				ammo_357			"6"
+				ammo_buckshot		"12"
+				ammo_ar2			"30"
+				ammo_ar2altfire		"1"
+				//ammo_rpg_round		"1"
+				//ammo_crossbow		"0"
+				//ammo_slam			"2"
+			} }
+
+//--Spawns--
+		create {classname "info_spawn_manager"
+			values {targetname "syn_spawn_manager"} }
+
+		create {classname "info_player_coop" origin "3202.31 -6775.45 -127.97"
+			values {angles "0 0 0" targetname "syn_spawn_player_1"} }
+
+		create {classname "info_global_settings"
+			values {IsVehicleMap "0" targetname "syn_global_settings"} }
+
+//--Extra--
+
+		// create intermission
+		"create" { "classname" "info_intermission" "origin" "3735.5625 -6378.59375 -208.625" "values" { "angles" "-5 80 0" } }
+
+//Trav|Edt - Doors: Open Only
+	//	edit {targetname "exitdoor" values {spawnflags "18432"} }
+	//	edit {classname "prop_door_rotating" values {spawnflags "0"} }
+
+// Don't let end door block hallway
+		create {classname "logic_auto"
+			values
+			{
+				spawnflags "1"
+				OnMapSpawn "exitdoor,AddOutput,opendir 2,0,-1"
+			}
+		}
+
+//Trav|Edt - mod manhack cleanup
+		delete {classname "trigger_once" origin "3035.5 -1623.5 -224.5"}
+
+		create {classname "trigger_once"
+			origin "3035.5 -1623.5 -224.5"
+			values {model "*24"
+				spawnflags "1"
+				OnTrigger "citizen_follow,Activate,,0,-1"
+				OnTrigger "manhack_2_maker_1,Spawn,,0,-1"} }
+
+//Trav|Edt - add crate (over broken fence)
+		create {classname "item_item_crate"
+			origin	"3105 -1833 -140"
+			values{ItemClass "item_dynamic_resupply"
+				ItemCount "5"} }
+
+//Trav|Edt - increase combine rapple numbers
+		edit {targetname "end_rappel_cop_1_maker"
+			values {MaxLiveChildren "2"
+				MaxNPCCount "16"} }
+
+		edit {targetname "end_rappel_cop_2_maker"
+			values {MaxLiveChildren "2"
+				MaxNPCCount "16"} }
+
+//Trav|Edt - wave of combine at turret defense, trigger teleport turret if existent
+		create {classname "npc_maker"
+			origin "3104 -1848 -280"//3544 -1688 -312//2768 -864 -280
+			values {spawnflags "16"
+				angles " 0 75 0"
+				targetname "trav_maker_combine1"
+				StartDisabled "1"
+				NPCTargetname "trav_combine1"
+				MaxNPCCount "24"
+				SpawnFrequency "3"
+				MaxLiveChildren "8"
+				NPCType "npc_combine_s"
+				additionalequipment "weapon_ar2"
+				NPCSquadname "rappelling_cop_squad"} }
+
+		create {classname "trigger_once"
+			origin "2950 1664 -284.83"
+			values {model "*43"
+				spawnflags "1"
+				//OnTrigger "trav_maker_combine1,Enable,,12,-1"
+				OnTrigger "trav_teleport_tturret,Teleport,,0,-1"
+				OnTrigger "syn_spawn_manager,MovePlayers,,0.1,-1"
+				OnTrigger "syn_spawn_manager,SetCheckpoint,trav_checkpoint_demoman,0,-1"
+				//manhack removel (from first section)
+				OnTrigger "manhack_2_maker_1,Kill,,0,-1"
+				OnTrigger "manhack_removal_aiss_1,StartSchedule,,0,-1"
+				OnTrigger "manhack_removal_aiss_1,StartSchedule,,5,-1"
+				OnTrigger "manhack_removal_aiss_1,StartSchedule,,10,-1"} }
+
+		create {classname "point_teleport"
+			origin "2936 1696 -320"
+			values {targetname "trav_teleport_tturret"
+				angles "0 270 0"
+				target "trav_turret"} }
+
+		create {classname "info_player_coop"
+			origin "3240 2104-312"
+			values {targetname "trav_checkpoint_demoman"
+				angles "0 180 0"
+				StartDisabled "1"} }
+
+//Trav|Edt - increase the time of the demoman and add stragglers after battle
+		delete {targetname "citizen_rubble_demolition_rl"}
+
+		create {classname "logic_relay"
+			values {spawnflags "1"
+				targetname "citizen_rubble_demolition_rl"
+				OnTrigger "citizen_rubble_cs_1,Start,,0,-1"
+				OnTrigger "citizen_rubble_cs_2,Start,,40,-1"//25
+				OnTrigger "citizen_rubble_cs_3,Start,,70,-1"//50
+				OnTrigger "citizen_rubble_cs_4,Start,,120,-1"//70
+				OnTrigger "citizen_rubble_danger_sound,InsertSound,300,122,-1"//72
+				OnTrigger "turret_manhack_regroup_aiss_2,StartSchedule,,125,-1"//75
+				OnTrigger "barricade_explosion_rl_1,Trigger,,125,-1"//75
+				OnTrigger "trav_maker_combine1,Enable,,12,-1"
+				OnTrigger "end_rappel_cop_*_maker,SetSpawnFrequency,25,174,-1"//pram15
+				OnTrigger "end_rappel_cop_*_maker,AddMaxChildren,10,175,-1"//pram3
+				OnTrigger "end_rappel_cop_*_maker,Enable,,176,-1"} }
+
+//Trav|Edt - only allow exitdoor_opened_vcd to play once
+		//create {classname "logic_auto"
+		//	values {spawnflags "1"
+		//		OnMapSpawn "exitdoor,AddOutput,OnOpen exitdoor_opened_vcd:Kill::5:-1,8,-1"} }
+
+		edit {targetname "exitdoor" values {spawnflags "18432"} }
+
+//Trav|Edt - prevent trav_turret from going into zombiepit
+		create {classname "func_clip_vphysics"
+			origin "3104 3284 -298"
+			values {model "*77"
+			targetname "trav_vphysclip_vent"
+			filtername "trav_turret_clip"} }
+
+		create {classname "filter_activator_class"
+			values {targetname "trav_turret_clip"
+				filterclass "npc_turret_floor" } }
+
+//Trav|Edt - make leftover combine go inside (needs testing)
+		create {classname "info_target" origin "2752 2944 -320"
+			values {targetname "syn_extracombine_target"} }
+
+		create {classname "aiscripted_schedule"
+			values {spawnflags "4"
+				targetname "syn_extracombine_enter"
+				m_iszEntity "npc_combine_s"
+				forcestate "2"
+				goalent "syn_extracombine_target"
+				m_flRadius "0"
+				interruptability "0"
+				schedule "2"} }
+
+		create {classname "logic_auto"
+			values {spawnflags "1"
+				OnMapSpawn "slime_cits_assault_triggers,AddOutput,OnStartTouch syn_extracombine_enter:StartSchedule:0:-1,0,-1"} }
+
+//Trav|Edt - make barricade_exp_1 hurt
+		edit {targetname "barricade_exp_1" values{spawnflags "0" iMagnitude "200"} }
+
+//Trav|Edt - antirush
+		create {classname "trigger_coop"
+			origin "2174.11 2860 -128"
+			values {model "*43"
+				spawnflags "1"
+				//StartDisabled "1"
+				targetname "syn_antirush_coop"
+				CountType "1"
+				UseHUD "1"
+				PlayerValue "50"
+				wait "1.5"
+				OnTrigger "syn_antirush_text,Display,,0,-1"
+				//OnPlayersIn "syn_antirush_push,Disable,,0,1"
+				OnPlayersIn "syn_antirush_wall,Kill,,0,1"
+				OnPlayersIn "!self,Disable,,1,1"} }
+
+		create {classname "syn_transition_wall" origin "1808 3056 -96" values {angles "0 270 0" targetname "syn_antirush_wall"} }
+
+		//create {classname "trigger_push"
+		//	origin "2144 3024 -82"
+		//	values {model "*68"
+		//		spawnflags "1"
+		//		targetname "syn_antirush_push"
+		//		pushdir "0 270 0"
+		//		speed "750"} }
+
+		create {classname "game_text"
+			values {spawnflags "0"
+				targetname "syn_antirush_text"
+				message "Need More Players to Continue. . ."
+				channel "0"
+				effect "2"
+				x "-1"
+				y "0.85"
+				color "100 100 100"
+				color2 "240 110 0"
+				fadein "0.03"
+				fadeout "1.25"
+				holdtime "2"
+				fxtime "0.25"} }
+
+//Trav|Edt - Functionality check
+		create {classname "logic_relay" values {targetname "trav_functionality_d3_c17_06a"} }
+	}
+}

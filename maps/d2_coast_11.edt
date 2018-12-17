@@ -1,0 +1,387 @@
+d2_coast_11
+{
+	console
+	{
+		sk_antlionguard_health 2560 //5120 //d-500
+		sk_antlionguard_dmg_charge 60 //20
+		sk_antlionguard_dmg_shove 25 //10
+		//sk_antlion_health 50//30
+	}
+	entity
+	{
+		// ----- spawn location -----
+		create { classname "info_player_coop" origin "4159 -11320 1602" values { angles "0 140 0" } }
+		create { classname "info_spawn_manager" values { targetname "PS_Manager" } }
+
+		// ----- spawn equipment -----
+		create { classname "info_player_equip"
+			values {targetname "syn_equipment_base"
+				item_suit "1"
+
+				weapon_physcannon "1"
+				weapon_crowbar "1"
+				weapon_pistol "1"
+				weapon_smg1 "1"
+				weapon_ar2 "1"
+				weapon_rpg "1"
+				"weapon_357"		"1"
+				"weapon_shotgun"	"1"
+				"weapon_frag" 		"1"
+				"weapon_crossbow"	"1"
+				"ammo_pistol"		"72"
+				"ammo_smg1"		"45"
+				"ammo_grenade"		"1"
+				"ammo_buckshot"		"12"
+				"ammo_ar2"		"30"
+				"ammo_rpg_round"	"1"
+				"ammo_smg1_grenade"	"1"
+				"ammo_357" "6"
+				"item_armor"		"60"
+			}
+		}
+
+//Trav|Edt - Respawning Weps/Items (Use sv_hl2dm_* for spawntimes)
+			//create { classname "logic_auto"
+			//	values { spawnflags "1"
+			//		OnMapSpawn "weapon_*,AddOutput,RespawnCount -1,0,-1"
+			//		OnMapSpawn "item_*,AddOutput,RespawnCount -1,0,-1" } }
+
+//Trav|Edt - allow portal_3 to close (better perf during guard battle)
+		//edit {targetname "portal_2ndarea" values {StartOpen "1" targetname "DisabledPortal"} }
+		//edit {targetname "portal_campentrance" values {StartOpen "1" targetname "DisabledPortal"} }
+		//edit {targetname "portal_firstcamp" values {StartOpen "1" targetname "DisabledPortal"} }
+		//edit {targetname "portal_startarea" values {StartOpen "1" targetname "DisabledPortal"} }
+		edit {targetname "portal_3" values {StartOpen "1" targetname "trav_portal_guard"} }
+
+//Trav|Edt - fix fail OMFG
+		delete {targetname "fall_trigger"}
+
+//Trav|Edt - make antlions hate sandwalkers more (TODO) [surfaceprop needs !activator support]
+		//create {classname "logic_auto"
+		//	values {spawnflags "1"
+		//		OnMapSpawn "trigger_expanse_sand_1,AddOutput,OnSurfaceChangedToTarget !activator:AddOutput:targetname syn_d2_coast_11_onsand:0:-1,0,-1"
+		//		OnMapSpawn "trigger_expanse_sand_1,AddOutput,OnSurfaceChangedFromTarget !activator:AddOutput:targetname syn_d2_coast_11_offsand:0:-1,0,-1"} }
+
+		create {classname "ai_relationship"
+			values {subject "npc_antlion"
+				target "syn_d2_coast_11_onsand"//HateMeAlot
+				targetname "trav_hate_sandwalkers"
+				disposition "1"
+				StartActive "1"
+				rank "9999"} }
+
+//Trav|Edt - Fix Tobias/lazlo from not scripting properly sometimes
+		delete {classname "logic_auto" origin "3066 -7253 1546"}
+
+		create {classname "logic_auto"	origin "3066 -7253 1546"
+			values {spawnflags "1"
+				OnMapSpawn "lcs_stanley_sees_gordon,Start,,10,-1"
+				OnMapSpawn "stanley,SetHealth,50,10,-1"
+				OnMapSpawn "tobias,StartScripting,,10,-1"
+				OnMapSpawn "trigger_expanse_sand_1,Disable,,10,-1"
+				OnMapSpawn "lcs_tobias,Start,,10,-1"} }
+
+//Trav|Edt - Add crates for no reason
+		create {classname "item_item_crate"
+			origin	"4305 -7769 1652"
+			values{ItemClass "item_dynamic_resupply"
+				ItemCount "5"
+				targetname "syn_vint"} }
+
+		create {classname "item_item_crate"
+			origin	"4365 -7769 1652"
+			values{ItemClass "item_dynamic_resupply"
+				ItemCount "5"
+				targetname "syn_vint"} }
+
+		create {classname "item_item_crate"
+			origin	"4365 -7809 1652"
+			values{ItemClass "item_dynamic_resupply"
+				ItemCount "5"
+				targetname "syn_vint"} }
+
+		create {classname "item_item_crate"
+			origin	"4305 -7809 1652"
+			values{ItemClass "item_dynamic_resupply"
+				ItemCount "5"
+				targetname "syn_vint"} }
+
+		create {classname "item_item_crate"
+			origin	"4273 -7801 1664"
+			values{ItemClass "item_dynamic_resupply"
+				ItemCount "5"
+				targetname "syn_vint"} }
+
+//Trav|Edt - Prevent stanley from bein killed
+		delete {targetname "lr_killtobias"}
+
+		create {classname "ai_relationship"
+			values{subject "npc_antlion"
+				target "stanley"
+				StartActive "1"
+				disposition "4"} }
+
+//Trav|Edt - increase antlioncount (for difficulty) TEST
+		edit {targetname "antlion_expanse_spawner_1" values {MaxLiveChildren "8"} }//5
+
+//Trav|Edt - make wooden bridge unbreakable
+		edit {classname "func_physbox" origin "4691.2 1355.48 613"
+			values {spawnflags "1025"
+				health "0"} }
+
+//Trav|Edt - add nice crates on secret house island
+		create {classname "item_ammo_crate"
+			origin "6292 -1356 409"
+			values {AmmoType "8"
+				fademaxdist "2500"
+				fademindist "2000"
+				targetname "syn_vint"} }
+
+		create {classname "item_ammo_crate"
+			origin "6236 -1532 403"
+			values {angles "0 270 0"
+				AmmoType "7"
+				fademaxdist "2500"
+				fademindist "2000"
+				targetname "syn_vint"} }
+
+//Trav|Edt - thumper button nontoggle
+		edit {targetname "generator_button" values {spawnflags "1025" wait "-1"} }
+
+//Trav|Edt - Antirush b4 guard
+		create {classname "trigger_coop"
+			origin "3808 6112.01 640"
+			values {model "*70"
+				spawnflags "1"
+				CountType "1"
+				UseHUD "1"
+				PlayerValue "50"
+				wait "1.5"//not keyvalue?
+				OnTrigger "syn_antirush_text,Display,,1,-1"
+				OnPlayersIn "!self,Kill,,2,1"
+				OnPlayersIn "syn_antirush_wall,Kill,,0,-1"
+				OnPlayersIn "syn_antirush_push,Disable,,0,-1"} }
+
+		create {classname "prop_dynamic" origin "4480 6560 583.55"
+			values {model "models/synergy/tools/syn_transition.mdl"
+				targetname "syn_antirush_wall"
+				angles "0 255 0"
+				solid "6"
+				DisableShadows "1"} }
+
+	//	create {classname "light_dynamic" origin "-6912 -14752 1152"
+	//		values {_light "170 255 170"
+	//			targetname "syn_antirush_light"
+	//			brightness "2"
+	//			distance "1024"
+	//			style "12"} }
+
+	//	create {classname "trigger_push"
+	//		origin "4361 6688 746.43"
+	//		values {model "*16"
+	//			spawnflags "1"
+	//			targetname "syn_antirush_push"
+	//			pushdir "0 270 0"
+	//			speed "450"} }
+
+		create {classname "game_text"
+			values {spawnflags "0"
+				targetname "syn_antirush_text"
+				message "Need More Players to Continue. . ."
+				channel "0"
+				effect "2"
+				x "-1"
+				y "0.85"
+				color "100 100 100"
+				color2 "240 110 0"
+				fadein "0.03"
+				fadeout "1.25"
+				holdtime "2"
+				fxtime "0.25"} }
+
+//Trav|Edt - move players (to guard arena)
+		create {classname "trigger_once"
+			origin "4416.99 7214.78 351.21"
+			values {model "*54"
+			spawnflags "1"
+				//OnTrigger "trav_tmaker_guard,Spawn,,0,-1"
+				//OnTrigger "citizen_ambush_guard,Unburrow,,1,-1"
+				//OnTrigger "music_antlionguard_2,PlaySound,,1,-1"
+				OnTrigger "PS_Manager,MovePlayers,,0,-1"
+				OnTrigger "trav_portal_guard,Close,,1,-1"
+				OnTrigger "trav_antireturn_push,Enable,,2,-1"} }
+//block
+		create {classname "trigger_push"
+			origin "4480 6816 456"
+			values {model "*79"
+				spawnflags "1"
+				targetname "trav_antireturn_push"
+				StartDisabled "1"
+				pushdir "0 90 0"
+				speed "300"} }
+
+//Trav|Edt - antguard ignore citizen
+		create {classname "ai_relationship"
+			values {subject "npc_antlionguard"
+				target "npc_citizen"
+				disposition "4"//nut
+				StartActive "1"} }
+
+//antiskip to skip guardbattle
+		create {classname "func_brush"
+			origin "4056 6916 948.86"
+			values {model "*67"
+				angles "0 90 0"
+				spawnflags "2"
+				targetname "trav_antiskip_brush_guard2"} }
+
+//Trav|Edt - add player brush here to prevent skiping
+		create {classname "func_brush"
+			origin "4900 9944 596.86"
+			values {model "*67"
+				spawnflags "2"
+				targetname "trav_antiskip_brush_guard"} }
+
+//wut happend to closedoor tirgger?
+		create {classname "trigger_once" origin "5429 9936 203.5"
+			values {model "*37"
+				spawnflags "2"
+				OnTrigger "camp_door,Close,,0,-1"
+				filtername "filter_npc_vortigaunt"} }
+
+//Trav|Edt - make vort not wait for us to die of old age before he leads into camp after extraction
+		//edit {targetname "leadgoal_vortigaunt" values {targetname "lawlz" WaitDistance "25600" LeadDistance "20000" RetrieveDistance "9600"} }//256,200,96
+		delete {targetname "leadgoal_vortigaunt"}//AI
+
+		delete {targetname "camp_setup"}
+
+		create {classname "logic_relay"
+			values {targetname "camp_setup"
+				OnTrigger "pt_enclave,ForceSpawn,,0,-1"
+				OnTrigger "antlions_buddies,TurnOn,,0,-1"
+				OnTrigger "camp_door_blocker,Disable,,0,-1"
+				OnTrigger "lcs_vort_in_camp_a,Start,,0,-1"
+				OnTrigger "trav_vortrusher_trigger,Enable,,0,-1"} }
+
+		create {classname "trigger_once" origin "5241 9920 219.5"
+			values {model "*37"
+				spawnflags "2"
+				targetname "trav_vortrusher_trigger"
+				StartDisabled "1"
+				filtername "filter_npc_vortigaunt"
+				OnTrigger "camp_door,Open,,0,-1"} }
+
+		create {classname "logic_auto"
+			values {spawnflags "1"
+				OnMapSpawn "citizen_ambush_vortspawner,AddOutput,OnEntitySpawned trav_vortrusher:Trigger::0:-1,0,-1"} }
+
+		create {classname "logic_relay"
+			values {spawnflags "1" targetname "trav_vortrusher"
+				OnTrigger "vortigaunt_bugbait,AddOutput,OnFinishedExtractingBugbait camp_setup:Trigger::3:-1,0,-1"//d6
+				OnTrigger "vortigaunt_bugbait,AddOutput,OnFinishedExtractingBugbait givebait:Enable::0:-1,0,-1"
+				OnTrigger "vortigaunt_bugbait,AddOutput,OnFinishedExtractingBugbait givebait:EquipAllPlayers::1:-1,0,-1"} }
+
+//Trav|Edt - Fix vorts convo not working properly with multiple players
+		delete {targetname "aisc_gordonlostinterest"}
+		create {classname "logic_auto"
+			values {spawnflags "1"
+				OnMapSpawn "trigger_vorts,AddOutput,OnTrigger lcs_vort_gossip:Resume::1.5:-1,8,-1"} }
+
+//Trav|Edt - replace ragdoll_dummy model
+		//edit {targetname "ragdoll_dummy"
+		//	values {model "models/breen.mdl"} }
+
+//Trav|Edt - Link to d2_coast_12_hdr
+	//	delete {classname "trigger_changelevel"}
+
+	//	create {classname "trigger_changelevel" origin "-2496 12960 480"
+	//		values {model "*60"
+	//			map "d2_coast_12_hdr_v4"
+	//			landmark "landmark_d2_coast_11-12"} }
+
+	//	edit {targetname "landmark_d2_coast_01-03" values {targetname "landmark_d2_coast_01-02"} }
+
+//return changelevel
+	//	create {classname "trigger_changelevel" origin "4448 -11456 1888"//3872 -11136 1760
+	//		values {model "*60"
+	//			spawnflags "2"
+	//			map "d2_coast_10"
+	//			landmark "landmark_d2_coast_10-11"} }
+
+//End of Trav|Edt
+
+		create {classname "info_player_equip" values { targetname "givebait" StartDisabled "1" weapon_bugbait "1"} }
+
+		delete { classname "logic_auto" origin "3391.3 -10174.3 1572" }
+
+		// ----- disable areaportals -----
+		edit { classname "func_areaportal" values { StartOpen "1" targetname "DisabledPortal" } }
+
+		edit { classname "func_areaportalwindow"
+			values {
+				"targetname" "DisabledPortalWindow"
+				"FadeStartDist" "1000"
+				"FadeDist" "1500"
+			}
+		}
+
+		// ----- level changes -----
+
+		// for some reason, having that flag on NPCs causes them to just stand there
+		// remove the WAIT_FOR_SCRIPT spawnflag so the Vortigaunt can come out and extract bugbait
+		edit { targetname "vortigaunt_bugbait"
+			values {
+				spawnflags "1030" // 1158 - SF_NPC_WAIT_FOR_SCRIPT (128)
+			}
+		}
+
+		// prevent access to previous level
+		create { classname "trigger_push" origin "-80 0 0"
+			values {
+				"pushdir" "0 150 0"
+				"speed" "750"
+				"spawnflags" "1"
+				"model" "*22"
+			}
+		}
+
+		// activate checkpoint when we are in the combat area
+//Trav|Edt - move spawn into battle area //4447 7006 290
+		create { classname "info_player_coop" origin "4256 7000 152" values { angles "0 60 0" targetname "PS_Combat" StartDisabled "1" } }
+
+		create { classname "trigger_once" origin "4398.67 7036 459.75"
+			values {
+				"model" "*27"
+				"spawnflags" "1"
+
+				"OnTrigger" "PS_Manager,SetCheckpoint,PS_Combat,0,-1"
+				//"OnTrigger" "PS_Manager,MovePlayers,,0.1,-1"
+			}
+		}
+
+		// keep these doors open
+		// guard door
+		"delete" { "targetname" "mc_both_in" }
+		"delete" { "classname" "trigger_once" "origin" "5344 9929 215.5" }
+
+		// camp door one
+		"delete" { "classname" "trigger_once" "origin" "584 11544 544.85" }
+
+		// make sure everyone gets bugbait
+		create { classname "trigger_once" origin "5036 9920 472"
+			values {
+				model "*61"
+				spawnflags "1"
+				//"OnTrigger" "givebait,Enable,,0,-1"
+				//"OnTrigger" "givebait,EquipAllPlayers,,0.1,-1"
+//Trav|Edt - kill antiskipper
+				OnTrigger "trav_antiskip_brush_guard,Kill,,0,-1"
+			}
+		}
+
+		edit { classname "npc_antlion_maker" values { "spawntarget" "!rndplayer" } }
+
+//Trav|Edt - Functionality check
+		create {classname "logic_relay" values {targetname "trav_functionality_d2_coast_11"} }
+	}
+}

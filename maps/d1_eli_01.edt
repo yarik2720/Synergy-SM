@@ -1,0 +1,374 @@
+d1_eli_01
+{
+	entity {
+//--Setup--
+		delete {classname "logic_auto" origin "179.7 4434.42 -1379"}
+		edit {classname "func_areaportal" values {targetname "disabledPortal" StartOpen "1"} }
+		edit {targetname "occluder_scrap_1" values {targetname "syn_occluder_scrap_1"} }
+
+//Enable Airboat Gun
+		create {classname "logic_auto"
+			values {spawnflags "1"
+				OnMapSpawn "prop_vehicle_airboat,EnableGun,1,3,-1"} }
+
+//--Starting Items--
+		create {classname "info_player_equip"
+			values {
+				targetname "syn_eqipment_base"
+				item_suit			"1"
+				item_armor			"60"
+				weapon_crowbar		"1"
+				weapon_pistol		"1"
+				weapon_smg1			"1"
+				weapon_frag			"1"
+				weapon_357			"2"
+				ammo_pistol			"54"//72
+				ammo_smg1			"45"
+				ammo_grenade		"1"
+				ammo_smg1_grenade	"1"
+				ammo_357			"6"
+//non-progressive
+				weapon_stunstick "1"
+				ammo_smg1_grenade "1"
+			} }
+
+//--Spawns--
+		create {classname "info_spawn_manager"
+			values {targetname "syn_spawn_manager"} }
+//Dam
+		create {classname "info_player_coop" origin "5248 8064 -1372"
+			values {angles "0 270 0" targetname "syn_spawn_player_0"} }
+//Docks
+		create {classname "info_player_coop" origin "124 4279 -1350"
+			values {angles "0 180 0" targetname "syn_spawn_player_1" StartDisabled "1"} }
+
+		create {classname "info_player_coop" origin "41.61 2340.86 -1279.97"
+			values {angles "0 -90 0" targetname "syn_spawn_player_2" StartDisabled "1"} }
+
+		create {classname "info_player_coop" origin "431.83 1894.65 -2735.97"
+			values {angles "0 90 0" targetname "syn_spawn_player_3" StartDisabled "1"} }
+
+		create {classname "info_global_settings"
+			values {IsVehicleMap "1" targetname "syn_global_settings"} }
+
+		create {classname "info_vehicle_spawn" origin "5120 7936 -1480"//y7552
+			values {targetname	"syn_spawn_vehicle_1"
+				angles "0 180 0"
+				StartEnabled "1"
+				RespawnVehicle "1"
+				VehicleType "2"
+				VehicleSize "164"
+				model "models/airboat.mdl"
+				VehicleScript "scripts/vehicles/airboat.txt"} }
+
+		create {classname "logic_auto"
+			values {spawnflags "1"
+				OnMapTransition "syn_spawn_manager,TeleportPlayers,syn_spawn_teleport,0.1,-1"} }
+
+		create {classname "info_teleport_destination" origin "5248 8064 -1372" values {targetname "syn_spawn_teleport" angles "0 270 0"} }
+
+//--Extra--
+		// lcs resume - so Alyx won't get stuck
+		create { classname "logic_timer"
+			values { startdisabled "0" refiretime "1"
+				OnTimer "lcs_alyxtour03*,resume,,0,-1"
+			}
+		}
+
+//enable syn_spawn_player_1
+		create {classname "trigger_once" origin "-384 4168 -1368"
+			values {model "*131"
+				spawnflags "1"
+				OnTrigger "syn_spawn_manager,SetCheckPoint,syn_spawn_player_1,0,-1"
+				OnTrigger "syn_global_settings,AddOutput,IsVehicleMap 0,0,-1"} }
+
+//Trav|Edt - delay sound
+		edit {targetname "song_dam" values {targetname "syn_song_dam"} }
+
+		create {classname "trigger_once" origin "-4500 -1024 -2400"
+			values {model "*22"
+				spawnflags "1"
+				OnTrigger "syn_song_dam,PlaySound,,10,-1"} }
+
+//Trav|Edt - disable physblocking inner_door
+		//edit {classname "prop_dynamic" origin "200 2086 -1280" values {solid "2"} }//6
+		create {classname "func_clip_vphysics"
+			origin "272 2105.99 -1226"
+			values {model "*108"
+				targetname "trav_inner_door_phys"} }
+
+		create {classname "logic_auto"
+			values {spawnflags "1"
+				OnMapSpawn "inner_door,AddOutPut,OnFullyOpen trav_inner_door_phys:Kill::2:-1,0,-1"} }
+
+//Trav|Edt - block phys props going into vator
+		create {classname "func_clip_vphysics"
+			origin "448 1761 -1232"
+			values {model "*6"} }
+
+//don't let actors die
+		create {classname "logic_auto"
+			values {spawnflags "1"
+				OnMapSpawn "npc_*,SetDamageFilter,syn_filter_null,0,-1"} }
+
+		create {classname "filter_activator_name"
+			values {targetname "syn_dfilter_null"
+				filtername "null"} }
+
+//Wait for players in airlock
+		delete {targetname "trigger_startScene"}
+		create {classname "trigger_coop" origin "0 2488 -1192"
+			values
+			{
+				model "*131"
+				spawnflags "1"
+				CountType "1"
+				UseHUD "1"
+				PlayerValue "50"
+				target "spottarget_M"
+				OnPlayersIn "logic_startScene,Trigger,,0,1"
+				OnPlayersIn "!self,TeleportPlayersNotTouching,,0,1"-72 2728 -1276 0 180 0
+				OnPlayersIn "!self,Disable,,1,1"
+			}
+		}
+
+//Trav|Edt - add gman 1
+		create {classname "npc_gman"
+			origin	"122 2760 -1248"
+			values {spawnflags "17044"
+				angles "0 180 0"
+				targetname "syn_vint_trav" } }
+
+		create {classname "scripted_sequence"
+			origin	"122 2760 -1248"
+			values {spawnflags	"96"
+				angles "0 180 0"
+				targetname "syn_vint_ss_trav"
+				m_iszEntity	"syn_vint_trav"
+				m_iszPlay	"tiefidget"
+				m_iszNextScript	"syn_vint_ss_trav1"} }
+
+		create {classname "scripted_sequence"
+			origin	"128 2624 -1248"
+			values {spawnflags	"96"
+				angles	"0 270 0"
+				targetname	"syn_vint_ss_trav1"
+				m_fMoveTo	"1"
+				OnEndSequence "syn_vint_trav,Kill,,-1,0-1" } }
+
+//Trav|Edt - trigger gman 1
+		create {classname "trigger_once"
+			origin "-70 2816 -1236"
+			values {model "*40"
+				spawnflags "1"
+				OnTrigger "syn_vint_ss_trav,BeginSequence,-1,16,-1"} }
+
+//Trav|Edt - add gman 2
+		create {classname "npc_gman"
+			origin	"1172 2540 -2480"
+			values {spawnflags "17044"
+				angles "0 180 0"
+				targetname "syn_vint_trav_2" } }
+
+		create {classname "scripted_sequence"
+			origin	"1172 2540 -2480"
+			values {spawnflags	"96"
+				targetname "syn_vint_ss_trav_2"
+				m_iszEntity	"syn_vint_trav_2"
+				m_iszPlay	"tiefidget"
+				m_iszNextScript	"syn_vint_ss_trav1_2"} }
+
+		create {classname "scripted_sequence"
+			origin	"1360 2544 -2480"
+			values {spawnflags	"96"
+				targetname	"syn_vint_ss_trav1_2"
+				m_fMoveTo	"1"
+				m_iszNextScript	"syn_vint_ss_trav2_2"} }
+
+		create {classname "scripted_sequence"
+			origin	"1360 2688 -2480"
+			values {spawnflags	"96"
+				angles "0 90 0"
+				targetname "syn_vint_ss_trav2_2"
+				m_fMoveTo	"1"
+				OnEndSequence "syn_vint_trav_2,Kill,,-1,0-1" } }
+
+//Trav|Edt - trigger gman 2
+		create {classname "trigger_once"
+			origin "720 2580 -2631.5"
+			values {model "*66"
+				spawnflags "1"
+				OnTrigger "syn_vint_ss_trav_2,BeginSequence,-1,2,-1" } }
+
+//Trav|Edt - add gman 3 + krazy synths for a convo piece XD
+		create {classname "prop_physics"
+			origin "460 1840 -1583"
+			values {spawnflags "652"
+				targetname "syn_vint_gman_krazystuff"
+				angles "0 270 0"
+				model "models/props_combine/breenchair.mdl" } }
+
+		create {classname "prop_dynamic"
+			origin "460 1818 -1582"
+			values {//spawnflags "17044"
+				angles "0 270 0"
+				targetname "syn_vint_gman_krazystuff"
+				model "models/gman.mdl"
+				DefaultAnim "sit_chair"
+				SetBodyGroup "1" } }
+				//targetname "trav_3"
+				//body "1"
+
+		//create {classname "scripted_sequence"
+		//	origin "488 2048 -1546"
+		//	values {spawnflags "112"
+		//		//targetname "ss_trav_3"
+		//		m_iszEntity "trav_3"
+		//		m_iszIdle "Sit_Chair"
+		//		m_isz_Play "G_blackmesa_sit_idle"
+		//		m_iszPostIdle "G_blackmesa_sit_idle" } }
+		//		//OnEndSequence "trav_3,Kill,-1,4,-1"
+
+//template of old version (maybe not, valve uses cyclers)
+		//create {classname "prop_dynamic"
+		//	origin "508 1845 -1533"
+		//	values {//spawnflags ""
+		//		angles "0 270 0"
+		//		targetname "gman_krazystuff"
+		//		DefaultAnim "idle"
+		//		model "models/mortarsynth.mdl" } }
+
+		//create {classname "prop_dynamic"
+		//	origin "416 1867 -1533"
+		//	values {//spawnflags ""
+		//		angles "0 90 0"
+		//		targetname "gman_krazystuff"
+		//		DefaultAnim "idle"
+		//		model "models/mortarsynth.mdl" } }
+
+//Trav|Edt - remove gman_krazystuff when vator is down
+		create {classname "logic_auto"
+			values {spawnflags "1"
+				OnMapSpawn "elevator_path_3,AddOutput,OnPass syn_vint_gman_krazystuff:Kill::0:-1,0,-1"} }
+
+
+//Trav|Edt - allow door to close after eli's lab
+		create {classname "trigger_coop"
+			origin "-327.99 2152 -2640"//415.99
+			values{model "*37"
+				spawnflags "1"
+				targetname "syn_vint_trav_coop_eli"
+				CountType "1"
+				PlayerValue "100"
+				OnPlayersIn "lab_exit_door_raven,Close,,0,1"} }
+
+//Trav|Edt - prevent vort from being killed
+		delete {targetname "logic_kitchenscene_kill"}
+
+//Trav|Edt - prevent trans exploit
+		create {classname "logic_auto"
+			values {spawnflags "1"
+				OnMapSpawn "trigger_alyxtour04b,AddOutput,OnTrigger changelevel_to_eli_02:Changelevel::4:-1,0,-1"} }
+
+//End of Trav|Edt
+
+		// fix door so it cannot lock players out
+		// this will also have to enable the checkpoint
+		delete {targetname "logic_startScene"}
+		create {classname "logic_relay" origin "22 2797 -1256"
+			values {targetname "logic_startScene"
+				spawnflags "0"
+				StartDisabled "0"
+				OnTrigger "logic_turrets_1_deploy,Trigger,,3.5,-1"
+				OnTrigger "logic_Airlock_TankSpotlights_Off,Trigger,,11,-1"
+				OnTrigger "logic_Airlock_spriteSpotlights_Off,Trigger,,11,-1"
+				OnTrigger "logic_AirlockScanner_StartSpray,Trigger,,12,-1"
+				OnTrigger "logic_Airlock_TankSpotlights_On,Trigger,,3,-1"
+				OnTrigger "lcs_airlock01,Start,,4,-1"
+				OnTrigger "doors_Airlock_Outside,Close,,0,-1"
+				OnTrigger "logic_Airlock_spriteSpotlights_On,Trigger,,2,-1"
+				OnTrigger "light_default_airlock1x,TurnOff,,0.8,-1"
+			//	OnTrigger "pclip_airlock_1_a,Enable,,0,-1"
+
+				OnTrigger "syn_spawn_manager,SetCheckpoint,syn_spawn_player_2,0,-1"
+				//OnTrigger "syn_spawn_manager,MovePlayers,,0.1,-1"
+			}
+		}
+
+		// do not let inner door close
+		delete {targetname "trigger_inner_door"}
+		create {classname "trigger_once" origin "414 1944 -1232"
+			values {model "*25"
+				spawnflags "1"
+				StartDisabled "1"
+				targetname "trigger_inner_door"
+				OnTrigger "logic_beams_elevator_1,Trigger,,0,-1"
+				OnTrigger "counter_lcs_mosstour03,Add,1,0,-1"
+				OnTrigger "logic_FollowMossNag0,Disable,,0,-1"
+				OnTrigger "speaker_FollowMossNag,TurnOff,,0.1,-1"
+			//	OnTrigger "inner_door,Close,,0,-1"
+			}
+		}
+
+		// activate the second checkpoint when the elevator starts to go down
+		delete {targetname "elevator_trigger_go_up_1"}
+		create {classname "trigger_once" origin "456 1665.99 -1226"
+			values {model "*108"
+				targetname "elevator_trigger_go_up_1"
+				spawnflags "1"
+				StartDisabled "1"
+				OnTrigger "prop_elevatordoor_top_1,SetAnimation,close,0,-1"
+				OnTrigger "brush_ele_door_PClip,Enable,,0,-1"
+				OnTrigger "logic_loungers_start,Trigger,,4,-1"
+				OnTrigger "logic_BGwalkersTopFloor_Kill,Trigger,,0,-1"
+				OnTrigger "logic_kitchenscene_start,Trigger,,6.5,-1"
+				OnTrigger "speaker_FollowMossNag,TurnOff,,0.1,-1"
+				OnTrigger "logic_FollowMossNag,Disable,,0,-1"
+				OnTrigger "lcs_mosstour05,Start,,0,-1"
+				OnTrigger "ele_door_R,Close,,0,-1"
+				OnTrigger "elevator_lab,Resume,,3,-1"
+				OnTrigger "ele_door_L,Close,,0,-1"
+				OnTrigger "logic_RepairmenScene_Start,Trigger,,14.2,-1"
+				OnTrigger "portal_elevator_ride_1,Open,,3,-1"
+				OnTrigger "elevator_link,TurnOff,,0,-1"
+
+				OnTrigger "syn_spawn_manager,SetCheckpoint,syn_spawn_player_3,0,-1"
+				OnTrigger "syn_spawn_manager,MovePlayers,,0.1,-1"
+			}
+		}
+
+		// do not let the raven doors close (set 1)
+		delete {targetname "trigger_alyxtour01"}
+		create {classname "trigger_once" origin "-164 2128 -2640"
+			values {model "*28"
+				targetname "trigger_alyxtour01"
+				spawnflags "1"
+				StartDisabled "1"
+				OnTrigger "logic_beams_elevator_1,Trigger,,0,-1"
+				OnTrigger "logic_Xen_BeamsKill,Trigger,,0,-1"
+				OnTrigger "lcs_alyxtour01,Start,,1,-1"
+				OnTrigger "logic_GoWithALyxNag,Disable,,0,-1"
+				OnTrigger "speaker_GoWithAlyxNag,TurnOff,,0.1,-1"
+				OnTrigger "logic_kitchenscene_kill,Trigger,,0,-1"
+
+			//	"OnTrigger" "lab_exit_door_raven,Close,,0,-1"
+			//	"OnTrigger" "brush_exit_door_raven_PClip,Enable,,0,-1"
+			}
+		}
+
+
+		// do not let the raven doors close (set 2)
+		delete {targetname "trigger_alyxtour01_door_close"}
+		
+		//prevent players from blocking the door
+		create {classname "logic_auto"
+			values {OnMapSpawn	"airlock_south_door,AddOutput,dmg 200,0,0"
+				OnMapSpawn	"airlock_south_doorb,AddOutput,dmg 200,0,0"
+			}
+		}
+
+//Trav|Edt - Functionality check
+		create {classname "logic_relay" values {targetname "trav_functionality_d1_eli_01"} }
+
+	}
+}

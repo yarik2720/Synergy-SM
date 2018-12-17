@@ -1,0 +1,218 @@
+d3_c17_04
+{
+	entity {
+//--Setup--
+		delete {targetname "player_spawn_items"}
+		edit {classname "func_areaportal" values {targetname "disabledPortal" StartOpen "1"} }
+
+//Prevent Backtracking
+		create {classname "syn_transition_wall" origin "-4288.01 -3600 -64"}
+
+		//create {classname "trigger_push" origin "64 0 0"
+		//	values {model "*13"
+		//		spawnflags "1"
+		//		speed "750"
+		//		pushdir "0 0 0"} }
+
+//--Starting Items--
+		create {classname "info_player_equip"
+			values {
+				item_suit			"1"
+				item_armor			"60"
+				weapon_crowbar		"1"
+				weapon_pistol		"1"
+				weapon_smg1			"1"
+				weapon_frag			"1"
+				weapon_357			"1"
+				weapon_physcannon	"1"
+				weapon_shotgun		"1"
+				weapon_ar2			"1"
+				weapon_rpg			"1"
+				weapon_crossbow		"1"
+				weapon_bugbait		"1"
+				weapon_slam			"1"
+				ammo_pistol			"54"//72
+				ammo_smg1			"45"
+				ammo_grenade		"1"
+				ammo_smg1_grenade	"1"
+				ammo_357			"6"
+				ammo_buckshot		"12"
+				ammo_ar2			"30"
+				ammo_ar2altfire		"1"
+				//ammo_rpg_round		"1"
+				//ammo_crossbow		"0"
+				//ammo_slam			"2"
+			} }
+
+//--Spawns--
+		create {classname "info_spawn_manager"
+			values {targetname "syn_spawn_manager"} }
+
+		create {classname "info_player_coop" origin "-4060.75 -3557.05 128.03"
+			values {angles "0 90 0" targetname "syn_spawn_player_1"} }
+
+		create {classname "info_global_settings"
+			values {IsVehicleMap "0" targetname "syn_global_settings"} }
+
+//--Extra--
+
+		// ---------- standard tasks ----------
+
+		// create intermission
+	//	"create" { "classname" "info_intermission" "origin" "" "values" { "angles" "" } }
+		// fix spawn items
+		"delete" { "classname" "point_template" "origin" "-4066.04 -3560.59 151.444" }
+		"create"
+		{
+			"classname" "point_template"
+			"origin" "-4066.04 -3560.59 151.444"
+			"values"
+			{
+				"spawnflags" "2"
+				"targetname" "player_spawn_template"
+
+			//	"Template02" "citizen"
+			//	"Template01" "player_spawn_items"
+
+				"Template01" "citizen"
+			}
+		}
+
+//Trav|Edt - Disable Enemy turrets when tipped (avoid player greif)
+		create {classname "logic_auto"
+			values {spawnflags "1"
+				OnMapSpawn "npc_turret_floor,AddOutput,OnTipped !self:SelfDestruct::0:-1,0,-1"} }//DepleteAmmo
+
+//Trav|Edt - add ground turret
+		//create {classname "npc_turret_ground"
+		//	origin "-1620 -5408 347"
+		//	values {spawnflags "516"
+		//		targetname "trav_turret_ground"
+		//		parentname "trav_turret_ground_parent"
+		//		angles "0 90 0"} }
+
+//Trav|Edt - add hidden turrets near end
+//hopperfield
+		create {classname "npc_turret_floor"
+			origin "-480 -5800 129"//-512 x x//
+			values {angles "0 0 0"} }
+
+//prehopperfield
+		create {classname "npc_turret_floor"
+			origin "-1624 -5384 320"
+			values {angles "0 90 0"} }
+
+//parent placeholder
+		//create {classname "func_brush"
+		//	values {model "*19"
+		//		spawnflags "1"
+		//		targetname "trav_turret_ground_parent"
+		//		rendermode "10"
+		//		Solidity "1"} }
+
+//Trav|Edt - add hoppers at end
+		create {classname "combine_mine" origin "-168 -5408 144"}//stairs
+		create {classname "combine_mine" origin "-736 -5280 200"}//first
+		create {classname "combine_mine" origin "-204 -6104 144"}//table
+		create {classname "combine_mine" origin "-248 -5592 144"}//dumpster
+		create {classname "combine_mine" origin "-440 -5400 144"}//wall
+		create {classname "combine_mine" origin "-416 -6168 144"}//stairs
+		create {classname "combine_mine" origin "-88 -6104 144"}//transroom
+
+//Trav|Edt - add more cops ad end
+		edit {targetname "end_cop_reinforcement" values {spawnflags "33556484"} }
+
+		create {classname "npc_template_maker"
+			origin "-152 -6312 136"
+			values {spawnflags "128"
+				angles " 0 270 0"
+				targetname "trav_maker_cops2"
+				StartDisabled "0"
+				MaxNPCCount "18"//24
+				SpawnFrequency "0.4"
+				MaxLiveChildren "12"
+				TemplateName "end_cop_reinforcement"} }
+//no air nodes for manhackies, may do later.
+	//	create {classname "npc_metropolice" origin "2496 6264 -160"
+	//		values {spawnflags "33556484"
+	//			targetname "syn_end_cop_reinforcement"
+	//			squadname "end_cops_squad"
+	//			additionalequipment "weapon_smg1"
+	//			manhacks "1"} }
+
+		//create {classname "npc_maker"
+		//	origin "-152 -6312 136"
+		//	values {spawnflags "16"
+		//		//angles " 0 0 0"
+		//		targetname "trav_maker_cops2"
+		//		StartDisabled "0"
+		//		NPCTargetname "trav_cops2"
+		//		MaxNPCCount "16"
+		//		SpawnFrequency "1"
+		//		MaxLiveChildren "12"
+		//		NPCType "npc_metropolice"
+		//		additionalequipment "weapon_smg1"
+		//		NPCSquadname "end_cops_squad"} }
+
+//Trav|Edt - autirush
+		create {classname "trigger_coop"
+			origin "28 -6042 183.5"
+			values {model "*46"
+				spawnflags "1"
+				//StartDisabled "1"
+				targetname "syn_antirush_coop"
+				CountType "1"
+				UseHUD "1"
+				PlayerValue "50"
+				wait "1.5"
+				OnTrigger "syn_antirush_text,Display,,0,-1"
+				//OnPlayersIn "syn_antirush_push,Kill,,0,1"
+				OnPlayersIn "syn_antirush_wall,Kill,,0,1"
+				OnPlayersIn "!self,Kill,,1,1"} }
+
+		create {classname "syn_transition_wall" origin "136 -5920 129" values {angles "0 180 0" targetname "syn_antirush_wall"} }
+
+		//create {classname "trigger_push"
+		//	origin "15.5 -5873.5 192"
+		//	values {model "*24"
+		//		spawnflags "1"
+		//		targetname "syn_antirush_push"
+		//		pushdir "0 270 0"
+		//		speed "750"} }
+
+		create {classname "game_text"
+			values {spawnflags "0"
+				targetname "syn_antirush_text"
+				message "Need More Players to Continue. . ."
+				channel "0"
+				effect "2"
+				x "-1"
+				y "0.85"
+				color "100 100 100"
+				color2 "240 110 0"
+				fadein "0.03"
+				fadeout "1.25"
+				holdtime "2"
+				fxtime "0.25"} }
+
+//End of Trav|Edt
+
+		// clear some room for spawn
+//Addback stuff
+		"delete" { "classname" "prop_physics" "origin" "-3913.00 -3265.00 133.00" }//hotfix for phys skipping [and just funny to watch rushers asplode]
+		//"delete" { "classname" "prop_physics" "origin" "-4060.00 -3252.00 36.00" }
+
+		//"delete" { "classname" "combine_mine" "origin" "-3958.00 -3260.00 5.16" }
+		//"delete" { "classname" "combine_mine" "origin" "-3912.00 -3248.00 5.16" }
+		//"delete" { "classname" "combine_mine" "origin" "-3904.00 -3280.00 5.16" }
+		//"delete" { "classname" "combine_mine" "origin" "-3872.00 -3264.00 5.16" }
+		//"delete" { "classname" "combine_mine" "origin" "-3888.00 -3216.00 5.16" }
+
+		//"delete" { "classname" "combine_mine" "origin" "-4048.00 -3000.00 5.16" }
+		//"delete" { "classname" "combine_mine" "origin" "-3904.00 -3176.00 5.16" }
+	//	"delete" { "classname" "combine_mine" "origin" "" }
+
+//Trav|Edt - Functionality check
+		create {classname "logic_relay" values {targetname "trav_functionality_d3_c17_04"} }
+	}
+}

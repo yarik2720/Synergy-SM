@@ -1,0 +1,789 @@
+// add a trigger_once to this at the beginning of 2nd part to fix server start at 03
+//^^ prolly kewl -krazy
+d1_town_02
+{
+	entity
+	{
+//--Setup--
+		delete {classname "logic_auto" origin "-760 840 -3431"}
+		edit {classname "func_areaportal" values {targetname "disabledPortal" StartOpen "1"} }
+
+//test darkness mode
+	//	create {classname "env_global"
+	//		values
+	//		{
+	//			spawnflags "1"
+	//			initialstate "1"
+	//			globalstate "ep_alyx_darknessmode"
+	//		}
+	//	}
+
+		create {classname "env_global"
+			values
+			{
+				//initialstate "0"
+				targetname "syn_global_357"
+				globalstate "syn_357_found"
+			}
+		}
+
+//Prevent Backtracking fro 01a
+		create {classname "prop_dynamic" origin "-656 1296 -3456"
+			values {model "models/synergy/tools/syn_transition.mdl"
+				angles "0 0 0"
+				solid "6"
+				DisableShadows "1"} }
+
+	//	create {classname "light_dynamic" origin "-664 971.99 -3376"
+	//		values {_light "170 255 170"
+	//			brightness "1"
+	//			distance "256"
+	//			style "12"} }
+
+	//	create {classname "trigger_push" origin "64 0 0"
+	//		values {model "*65"
+	//			spawnflags "1"
+	//			speed "750"
+	//			pushdir "0 0 0"} }
+//ally
+		create {classname "point_template"
+			values {spawnflags "3"
+				targetname "syn_wall_temp_ally"
+				Template01 "syn_antirush_wall_ally"
+				Template02 "syn_antirush_wall_ally_light"} }
+
+		create {classname "prop_dynamic" origin "-3408 -432 -3584"
+			values {model "models/synergy/tools/syn_transition.mdl"
+				angles "0 90 0"
+				targetname "syn_antirush_wall_ally"
+				//solid "6"
+				DisableShadows "1"} }
+
+		create {classname "light_dynamic" origin "-3648 -448 -3504"
+			values {_light "170 255 170"
+				brightness "1"
+				targetname "syn_antirush_wall_ally_light"
+				distance "256"
+				style "12"} }
+//on return
+		create {classname "trigger_push" origin "0 64 0"
+			values {model "*56"
+				StartDisabled "1"
+				targetname "edt_alley_push"
+				spawnflags "1"
+				speed "750"
+				pushdir "0 90 0"} }
+//window
+		create {classname "point_template"
+			values {spawnflags "3"
+				targetname "syn_wall_removeme_temp_t02"
+				Template01 "syn_wall_removeme_t02"} }
+
+		create {classname "prop_dynamic" origin "-3584 -640 -3392"
+			values {model "models/synergy/tools/syn_transition.mdl"
+				targetname "syn_wall_removeme_t02"
+				angles "0 90 0"
+				solid "6"
+				DisableShadows "1"} }
+
+		create {classname "light_dynamic" origin "-3920 -672 -3296.01"
+			values {_light "170 255 170"
+				targetname "syn_wall_removeme_t02"
+				brightness "0.5"
+				distance "256"
+				style "12"} }
+
+	//	create {classname "trigger_push" origin "0 64 0"
+	//		values {model "*57"
+	//			spawnflags "1"
+	//			speed "750"
+	//			pushdir "0 90 0"} }
+
+	//	create {classname "logic_auto"
+	//		values {spawnflags "1"
+	//			OnMapSpawn "syn_wall_removeme_t03,Kill,,0,-1"
+	//			OnMapSpawn "syn_wall_temp_ally,ForceSpawn,,0,-1"} }
+
+//--Starting Items--
+		create {classname "info_player_equip"
+			values {
+				targetname "syn_eqipment_base"
+				item_suit			"1"
+				item_armor			"25"
+				weapon_crowbar		"1"
+				weapon_pistol		"1"
+				weapon_smg1			"1"
+				weapon_frag			"1"
+				weapon_357			"1"
+				weapon_physcannon	"1"
+				ammo_pistol			"54"//72
+				ammo_smg1			"45"
+				//ammo_grenade		"1"//
+				//ammo_smg1_grenade	"1"//
+				ammo_357			"3"//6
+			} }
+//New Weapon Found
+		create {classname "info_player_equip"
+			values {StartDisabled "1"
+				targetname "syn_new_weapon"
+				weapon_shotgun "1"
+				ammo_buckshot "12"} }
+
+		create {classname "trigger_multiple"
+			origin "-2100 468 -2980"
+			values {model "*61"
+				spawnflags "1"
+				targetname "syn_new_weapon_trigger"
+				StartDisabled "1"
+				filtername "syn_new_weapon_got"
+				OnStartTouch "syn_new_weapon,EquipPlayer,,0,-1"
+				OnStartTouch "syn_new_weapon,Enable,,0.1,-1"
+				OnStartTouch "!activator,AddOutput,targetname syn_d1_town_02_received_new_weapon,0.1,-1"} }
+
+		create {classname "logic_auto"
+			values {spawnflags "1"
+				OnMapSpawn "shotgun_throw_shotgun,AddOutPut,OnPlayerPickup syn_new_weapon_trigger:Enable::0:-1,0,-1"
+				//OnMapSpawn "grigori_scene_balcony_02_trigger,AddOutput,OnTrigger syn_new_weapon_trigger:Enable::10:-1,0,-1"
+				} }
+
+		create {classname "filter_activator_name"
+			values {targetname "syn_new_weapon_got"
+				Negated "1"
+				filtername "syn_d1_town_02_received_new_weapon"} }
+
+//--Spawns--
+		create {classname "info_spawn_manager"
+			values {targetname "syn_spawn_manager"} }
+
+		create {classname "info_player_coop" origin "-736 864 -3388"
+			values {angles "0 180 0" targetname "syn_spawn_player_1"} }
+
+		create {classname "info_player_coop" origin "-3016 1128 -3520"
+			values {angles "0 270 0" targetname "syn_spawn_player_2" StartDisabled "1"} }
+
+		create {classname "info_player_coop" origin "-3920 -580 -3341"
+			values {angles "0 90 0" targetname "syn_spawn_player_3" StartDisabled "1"} }
+
+		create {classname "info_global_settings"
+			values {IsVehicleMap "0" targetname "syn_global_settings"} }
+
+//--Extra--
+
+//return trip trigger
+		create {classname "trigger_once" origin "-3760 20 -3400"
+			values {model "*126"
+				spawnflags "1"
+				"OnTrigger"		"edt_alley_push,Enable,,0,0"
+				OnTrigger "syn_wall_temp_ally,ForceSpawn,,1,-1"//delay to surpass mpantirush
+				OnTrigger "syn_wall_removeme_temp_t02,ForceSpawn,,0,-1"
+				"OnTrigger" 	"syn_spawn_manager,SetCheckPoint,syn_spawn_player_3,0,0"
+				//"OnTrigger" 	"edt_shotty_equip,Enable,,0,0"
+				OnTrigger "syn_vint_trav_gman,Kill,,0,-1"
+				OnTrigger "syn_wall_removeme_t03,Kill,,0,-1"
+				OnTrigger "syn_vint_stopplayerjump_1,Kill,,0,-1"} }
+//^^
+	//	//make it work if we start on 03
+	//	
+	//	"create"
+	//	{
+	///		"classname"	"trigger_once"
+	//		"origin"	"0 96 0"
+	//		"values"
+	//		{
+	//			"model"			"*57"
+	///			"spawnflags"	"1"
+	//			"StartDisabled"	"0"
+
+	//			"OnTrigger"		"edt_alley_push,Enable,,0,0"
+	//			OnTrigger "syn_wall_temp_ally,ForceSpawn,,0-1"
+	//			"OnTrigger" 	"syn_spawn_manager,SetCheckPoint,syn_spawn_player_3,0,0"
+	//			//"OnTrigger" 	"edt_shotty_equip,Enable,,0,0"
+	//			OnTrigger "trav_gman,Kill,,0,-1"
+	//		}
+	//	}
+		
+		"create"
+		{
+			"classname"	"trigger_once"
+			"origin"	"154 680 -128"
+			"values"
+			{
+				"model"			"*57"
+				"spawnflags"	"1"
+				"StartDisabled"	"0"
+
+				"OnTrigger"		"edt_alley_push,Enable,,0,0"
+				"OnTrigger" 	"syn_spawn_manager,SetCheckPoint,syn_spawn_player_3,0,0"
+				//"OnTrigger" 	"edt_shotty_equip,Enable,,0,0"
+			}
+		}
+
+//If dog's ball is carried over, keep invuln
+		create {classname "filter_activator_name"
+			values {targetname "syn_dfilter_null"
+				filtername "null"} }
+
+//Trav|Edt - Doors: Open Only
+		//edit {classname "prop_door_rotating" values {spawnflags "0"} }
+
+//Trav|Edt - Freeze pinned ragdolls to save a lot network usage and keep tickrate up
+		create {classname "logic_auto"
+			values {spawnflags "1"
+				OnMapSpawn "pinned_zombie_*,DisableMotion,-1,4,-1"} }//settle
+
+//Trav|Edt - dont let headcrabs be idle in first closetroom
+		create {classname "trigger_once" origin "-2113.13 481.13 -3268"
+			values {model "*78" angles "0 -45 0"
+				spawnflags "2"
+				OnTrigger "!activator,AddOutput,spawnflags 516,0,-1"} }
+
+//Trav|Edt - Create Shotguns + ammo cuz only one player gets it here.(maybe use info_player_equip or point_template if im not lazy)
+		//create {classname "weapon_shotgun"
+		//	origin "-2080 488 -3064"
+		//	values {//spawnflags "1"
+		//		targetname "trav_shotgun"
+		//		OnPlayerPickup "trav_point_temp_shotgun,ForceSpawn,,0,-1" } }
+
+		//create {classname "point_template"
+		//	values {spawnflags "2"
+		//		targetname "trav_point_temp_shotgun"
+		//		Template01 "trav_shotgun" } }
+
+//Trav|Edt - Trigger shotgun spawn
+		//delete {targetname "shotgun_throw_shotgun"}
+
+		//create {classname "weapon_shotgun"
+		//	origin "-2327 352 -2998"
+		//	values {angles "0 0 -90"
+		//		targetname "shotgun_throw_shotgun"
+		//		OnPlayerPickup "balcony_scene_b2,Start,,0,-1"
+		//		OnPlayerPickup "autosave_shotgun,Save,,0,-1"
+		//		OnPlayerPickup "monk_leave_noshotgun_relay,Kill,,0,-1"
+		//		OnPlayerPickup "roofzombie_maker2,Enable,,3,1"
+		//		OnPlayerPickup "roofzombie_maker6,Enable,,7,1"
+		//		OnPlayerPickup "roofzombie_maker8,Enable,,8,1"
+		//		OnPlayerPickup "trav_point_temp_shotgun,ForceSpawn,,0,-1"} }
+
+		//create { classname "weapon_shotgun"
+		//	 origin "-2079 488 -3063"
+		//	 values { spawnflags "4" } }
+
+		create { classname "weapon_shotgun"
+			 origin "-2959 1017 -3127"
+			 values { spawnflags "4" 
+				targetname "syn_vint"} }
+
+		create { classname "weapon_shotgun"
+			 origin "-2981 1056 -3512"
+			 values {angles " 0 0 -90"
+				targetname "syn_vint"} }
+
+		//create { classname "weapon_shotgun"
+		//	 origin "-2701 758 -3127"
+		//	 values { spawnflags "4" } }
+		
+		create { classname "item_box_buckshot"
+			 origin "-1968 496 -3060"
+			 values {targetname "syn_vint"} }
+
+		create { classname "item_box_buckshot"
+			 origin "-1968 518 -3060"
+			 values {targetname "syn_vint"} }
+
+		create { classname "item_box_buckshot"
+			 origin "-2972 1048 -3130"
+			 values {targetname "syn_vint"} }
+
+//Trav|Edt - kill players who jump down past elevator (fall not long enough for death and skip to end), add gman, add antirush props
+		create {classname "trigger_hurt"
+			origin "-3264 608 -3568"//-3208 672 -3480
+			values {model "*110"
+				spawnflags "1"
+				targetname "syn_vint_trav_trigger_hurt"
+				damage "5000"
+				damagetype "32"
+				nodmgforce "1"} }
+
+	//	create {classname "prop_dynamic"
+	//		origin "-3104 -27 -3553"
+	//		values {angles "0 180 0"
+	//			solid "6"
+	//			model "models/props_vehicles/car003b.mdl"} }
+
+		create {classname "prop_physics"
+			origin "-3048 -24 -3496"
+			values {spawnflags "256"
+			model "models/props_junk/wood_crate001a_damaged.mdl"
+				targetname "syn_vint"} }
+
+		create {classname "prop_physics"
+			origin "-3104 -24 -3496"
+			values {spawnflags "256"
+			model "models/props_junk/wood_crate001a_damaged.mdl"
+				targetname "syn_vint"} }
+
+		create {classname "prop_physics"
+			origin "-3152 -24 -3504"
+			values {spawnflags "256"
+			model "models/props_junk/wood_crate001a_damaged.mdl"
+				targetname "syn_vint"} }
+
+		create {classname "prop_physics"
+			origin "-3064 -24 -3448"
+			values {spawnflags "256"
+			model "models/props_junk/wood_crate001a_damaged.mdl"
+				targetname "syn_vint"} }
+
+		create {classname "prop_physics"
+			origin "-3112 -24 -3448"
+			values {spawnflags "256"
+			model "models/props_junk/wood_crate001a_damaged.mdl"
+				targetname "syn_vint"} }
+
+		create {classname "npc_gman"
+			origin "-3928 -206 -3584"
+			values {spawnflags "16532"
+				targetname "syn_vint_trav_gman"} }
+
+		create {classname "scripted_sequence"
+			origin "-3928 -206 -3584"
+			values {spawnflags "96"
+				targetname "syn_vint_trav_ss_gman_1"
+				m_iszEntity "syn_vint_trav_gman"
+				m_iszPlay "tiefidget"
+				m_iszNextScript "syn_vint_trav_ss_gman_2"} }
+
+		create {classname "scripted_sequence"
+			origin "-3928 56 -3456"
+			values {spawnflags "96"
+				angles "0 90 0"
+				targetname "syn_vint_trav_ss_gman_2"
+				m_fMoveTo "1"
+				OnEndSequence "syn_vint_trav_gman,Kill,,0,-1"
+				OnEndSequence "syn_vint_trav_ss_gman_1,Kill,,0,-1"
+				OnEndSequence "!self,Kill,,0.1,-1"} }
+
+		//create {classname "ambient_generic"
+		//	origin "-3920 -104 -3480"
+		//	values {spawnflags "48"
+		//		targetname "trav_gman_cough"
+		//		message "ambient\voices\cough2.wav"} }
+
+		create {classname "trigger_once"
+			origin "-3732 -212 -3526"
+			values {model "*136"
+				spawnflags "1"
+				OnTrigger "syn_vint_trav_ss_gman_1,BeginSequence,,4,-1"} }
+				//OnTrigger "trav_gman_cough,PlaySound,,7,-1"
+
+//Trav|Edt - add clip so players cant skip to next level (saw in speedvid)
+		create {classname "func_brush"
+			origin "-3384 632.01 -3196"
+			values {model "*74"
+				spawnflags "2"
+				targetname "syn_vint_stopplayerjump_1"} }
+
+//Trav|Edt - Teleport players to elevator
+		delete {targetname "freight_lift_button_2"}
+
+		create {classname "func_button"
+			origin "-2882 862 -3086"
+			values {model "*38"
+				spawnflags "1025"
+				targetname "freight_lift_button_2"
+				wait "1"
+				speed "5"
+				OnPressed "freight_lift_button_2,Lock,,0,-1"
+				OnPressed "freight_lift_down_relay,Trigger,,0,-1"
+				OnPressed "elevator_nodelink,TurnOff,,10,-1"
+
+				OnPressed "syn_spawn_manager,TeleportPlayers,trav_teleport_elevator,0.5,1"
+				OnPressed "syn_new_weapon,Enable,,2,-1"
+				OnPressed "syn_new_weapon,EquipAllPlayers,,3,-1"
+				OnPressed "autosave_shotgun,Save,,5,1"
+				OnPressed "syn_vint_trav_maker_zombies_elevator,Enable,,28,-1"
+				OnPressed "syn_vint_trav_trigger_hurt,Disable,,5,-1"
+				OnPressed "syn_spawn_manager,SetCheckpoint,syn_spawn_player_2,0,1"//old cp = inside? leftover? yea prolly. no worries
+				OnPressed "syn_vint_trav_maker_zombies_wait,AddMaxChildren,10,0,-1"//Add more zombies at end rush from roof(1st end)
+				OnPressed "syn_vint_trav_maker_zombies_wait,Enable,,0.1,-1"} }
+
+		create {classname "info_teleport_destination"
+			origin "-2944 896 -3092"
+			values {targetname "trav_teleport_elevator"
+				angles "0 270 0"} }
+
+//Trav|Edt - Add zombies wait for elevator
+		create {classname "logic_difficulty"
+			values {spawnflags "3"//TODO: dont only check on spawn
+				targetname "syn_vint_ld"
+				OnNormal "syn_vint_trav_maker_zombies_wait,SetMaxChildren,5,0,-1"
+				OnHard "syn_vint_trav_maker_zombies_wait,SetMaxChildren,8,0,-1"
+				OnNormal "syn_vint_trav_maker_zombies_elevator,SetMaxChildren,2,0,-1"
+				OnHard "syn_vint_trav_maker_zombies_elevator,SetMaxChildren,3,0,-1"
+				OnNormal "cavezombies_maker1,SetMaxChildren,4,0,-1"
+				OnHard "cavezombies_maker1,SetMaxChildren,8,0,-1"
+				OnNormal "cavezombies_maker2,SetMaxChildren,4,0,-1"
+				OnHard "cavezombies_maker2,SetMaxChildren,8,0,-1"} }
+
+		create {classname "npc_maker"
+			origin "-2859 1040 -3000"
+			values {spawnflags "16"
+				angles " 0 270 0"
+				targetname "syn_vint_trav_maker_zombies_wait"
+				StartDisabled "1"
+				NPCTargetname "syn_vint_trav_zombies_wait"
+				MaxNPCCount "2"//8 LD Scaled
+				SpawnFrequency "2"
+				MaxLiveChildren "-1"
+				NPCType "npc_fastzombie"
+				NPCSquadname "squad_trav_zombies_wait"
+				OnSpawnNPC "trav_aiscript_sched_zombies_wait,StartSchedule,,0.2,-1"} }
+
+		create {classname "aiscripted_schedule"
+			values {spawnflags "4"
+				targetname "trav_aiscript_sched_zombies_wait"
+				m_iszEntity "syn_vint_trav_zombies_wait"
+				schedule "2"
+				goalent "!player"} }
+
+		create {classname "trigger_once"
+			origin "-2748 916 -3080"
+			values {model "*98"
+				spawnflags "1"
+				OnTrigger "syn_vint_trav_maker_zombies_wait,Enable,,5,-1"} }
+
+//Trav|Edt - Add zombies end of elevator (vator button is trigger)
+		create {classname "npc_maker"
+			origin "-3264 928 -3576"
+			values {spawnflags "16"
+				angles " 0 270 0"
+				targetname "syn_vint_trav_maker_zombies_elevator"
+				StartDisabled "1"
+				NPCTargetname "syn_vint_trav_zombies_elevator"
+				MaxNPCCount "1"//3 LD Scaled
+				SpawnFrequency "0.1"
+				MaxLiveChildren "6"
+				NPCType "npc_zombie"
+				NPCSquadname "squad_trav_zombies_elevator"
+				OnSpawnNPC "syn_vint_trav_aiscript_sched_zombies_elevator,StartSchedule,,0.2,-1"} }
+
+		create {classname "aiscripted_schedule"
+			values {spawnflags "4"
+				targetname "syn_vint_trav_aiscript_sched_zombies_elevator"
+				m_iszEntity "syn_vint_trav_zombies_elevator"
+				schedule "2"
+				goalent "!player"} }
+
+//Trav|Edt - Add more fastzombies for roof and add more nodes to roof
+		edit {targetname "cavezombies_maker1"
+			values {spawnflags "48"
+				MaxLiveChildren "2"} }//Def 1; LD Scaled
+
+		edit {targetname "cavezombies_maker2"
+			values {spawnflags "48"
+				MaxLiveChildren "2"} }//Def 1; LD Scaled
+
+		create {classname "info_node_climb" origin "-4416 1408 -3000"}
+		create {classname "info_node_climb" origin "-4416 1408 -3424"}
+
+		create {classname "info_node_climb"
+			origin "-4120 1176 -3000"
+			values {angles "0 90 0"
+				nodeid "781"} }
+
+		create {classname "info_node_climb"
+			origin "-4120 1176 -3264"
+			values {angles "0 90 0"
+				nodeid "782"} }
+
+//Trav|Edt - prevent hatch from closing
+		//edit {classname "trigger_multiple"
+			//origin "-4064 1322 -2992"
+			//values {classname "trigger_once"} }
+
+		delete {classname "trigger_multiple" origin "-4064 1322 -2992"}
+
+		create {classname "trigger_once"//trigger_multiple
+			origin "-4064 1322 -2992"
+			values {model "*14"
+				spawnflags "1"
+				OnTrigger "monk_rock_scene_a1,Start,,0,-1"
+				OnTrigger "churchtram_lever,Lock,,0,-1"
+				OnTrigger "church_monk_conditions,Enable,,0,-1"
+				OnTrigger "syn_vint_ld,CheckSkill,,0,-1"} }
+
+//Trav|Edt - allow zombies to get up via player way (requires regen of new .AIN)
+		create {classname "info_node_climb"
+			origin "-4352 1480 -3128"
+			values {angles "0 270 0"
+				nodeid "783"} }
+
+		create {classname "info_node_climb"
+			origin "-4352 1480 -3000"
+			values {angles "0 270 0"
+				nodeid "784"} }
+
+//also on return latter
+		create {classname "info_node_climb"
+			origin "-3680 312 -3452"
+			values {angles "0 90 0"
+				nodeid "785"} }
+
+		create {classname "info_node_climb"
+			origin "-3680 312 -3324"
+			values {angles "0 90 0"
+				nodeid "786"} }
+
+//Trav|Edt - prevent fence walking
+		create {classname "func_brush"
+			origin "-4168 1480 -2724"
+			values {model "*147"
+				spawnflags "2"
+				targetname "syn_vint"} }
+
+		create {classname "func_brush"
+			origin "-4260 1560 -2784"
+			values {model "*75"
+				spawnflags "2"
+				targetname "syn_vint"} }
+
+		create {classname "func_brush"
+			origin "-4288 1562 -2724"
+			values {model "*147"
+				spawnflags "2"
+				targetname "syn_vint"} }
+
+		create {classname "func_brush"
+			origin "-4444 1500 -2786"
+			values {model "*75"
+				spawnflags "2"
+				targetname "syn_vint"} }
+//behind hatch
+		create {classname "func_brush"
+			origin "-4288 1528 -2816"
+			values {model "*147"
+				spawnflags "2"
+				targetname "syn_vint"} }
+
+//Trav|Edt - prevent standing on light
+		create {classname "trigger_push"
+			origin "-4012 1472 -3110"
+			values {model "*34"
+				spawnflags "1"
+				speed "400"
+				targetname "syn_vint"} }
+
+//Delay tram 2x (but do not if in vintage_mode
+//synvint
+		create {classname "logic_relay"
+			values {spawnflags "1"
+			targetname "synvint_init"
+				OnTrigger "synvint_manager,CancelPending,,4,-1"} }
+
+		create {classname "logic_relay"
+			values {//spawnflags "1"
+			targetname "synvint_manager"
+				OnSpawn "monk_rock_scene_b3,Kill,,5,-1"
+				OnSpawn "monk_rock_scene_b3_temp,ForceSpawn,,5,-1"
+				OnSpawn "synvint_init,Kill,,5,-1"} }
+
+		create {classname "point_template"
+			values {spawnflags "2"
+				targetname "monk_rock_scene_b3_temp"
+				Template01 "VINTTEMP_monk_rock_scene_b3"
+				OnEntitySpawned "VINTTEMP_monk_rock_scene_b3,AddOutput,targetname monk_rock_scene_b3,0,-1"} }
+
+		//delete {targetname "monk_rock_scene_b3"}
+
+		create {classname "logic_choreographed_scene"
+			values {targetname "VINTTEMP_monk_rock_scene_b3"
+				SceneFile "scenes/ravenholm/bucket_guardwell.vcd"
+				target1 "monk"
+				OnCompletion "cavezombies_enemyfinder,TurnOn,,1,-1"
+				OnCompletion "cavezombies_maker1,Enable,,1,-1"
+				OnCompletion "cavezombies_maker2,Enable,,1,-1"//6
+				OnCompletion "bucket_machine_wav1,PlaySound,,100,-1"//45
+				OnCompletion "bucket_machine_wav2,PlaySound,,100,-1"//45
+				OnCompletion "generator_monk_seq,CancelSequence,,120,-1"//60
+				OnCompletion "monk_wait_ss,BeginSequence,,120.5,-1"//60.5
+				OnCompletion "monk_relationship,RevertRelationship,,120.5,-1"//60.5
+				OnCompletion "generator_monk_assault,BeginAssault,,120.7,-1"//60.7
+				OnCompletion "monk_relationship,Kill,,120.7,-1"//60.7
+				OnCompletion "churchtram_up_relay,Trigger,,124,-1"//64
+				//OnCompletion "!player,SetHealth,69,0,-1"//for testing
+				} }
+
+//Trav|Edt - allow zombie to keep commin until tram goes w/ plrs
+		delete {targetname "bucket_occupied_tirigger"}
+
+		create {classname "trigger_once" origin "-4742 732 -3136"
+			values {model "*100"
+				spawnflags "1"
+				parentname "churchtram_tram"
+				targetname "bucket_occupied_tirigger"
+				OnEndTouch "bucket_occupied_relay,Disable,,0,-1"
+				OnEndTouch "bucket_occupied_relay,CancelPending,,0,-1"
+				OnStartTouch "bucket_occupied_relay,Enable,,0,-1"
+				OnTrigger "monk_rock_scene_c1,Start,,2,1"} }
+
+//Trav|Edt - add coop trigger for crate and only go down when most peopel are in tram
+		edit {targetname "churchtram_lever" values {targetname "trav_churchtram_lever"} }
+
+		edit {classname "prop_dynamic"
+			origin "-4313 1201 -2980"
+			values {parentname "trav_churchtram_lever"} }
+
+		create {classname "trigger_coop"
+			origin "-4742 732 -3136"
+			values {model "*100"
+				spawnflags "1"
+				targetname "trav_coop_bucket"
+				parentname "churchtram_tram"
+				CountType "1"
+				UseHUD "1"
+				PlayerValue "50"
+				//OnStartTouch "churchtram_lever,Lock,,0,1"
+				OnPlayersIn "trav_churchtram_lever,UnLock,,0,1"
+				OnPlayersIn "!self,Disable,,1,1"} }
+
+//Trav|Edt - keep clip until cart is close
+		edit {targetname "churchyard_playerclip" values {targetname "syn_churchyard_playerclip"} }
+
+		create {classname "trigger_once"
+			origin "-4550 925 -3014"
+			values {model "*55"
+				targetname "syn_churchyard_playerclip_trigger"
+				spawnflags "1"
+				startdisabled "1"
+				angles "0 32 0"//omfg
+				OnTrigger "syn_churchyard_playerclip,Kill,,0,-1"} }
+
+		create {classname "logic_auto"
+			values {spawnflags "1"
+				OnMapSpawn "trav_churchtram_lever,AddOutput,OnFullyOpen syn_churchyard_playerclip_trigger:Enable::6:-1,0,1"
+				OnMapSpawn "trav_churchtram_lever,AddOutput,OnFullyOpen cavezombies_away_timer:Enable::0:-1,0,1"} }
+
+//Trav|Edt add antirush at ally
+		create {classname "trigger_coop"
+			origin "-3536 -648 -3472"
+			values {model "*110"
+				spawnflags "1"
+				//StartDisabled "1"
+				targetname "syn_antirush_trav_town02_end_coop"
+				CountType "1"
+				UseHUD "1"
+				PlayerValue "50"
+				wait "1.5"
+				OnTrigger "syn_antirush_text,Display,,1,-1"
+				OnPlayersIn "syn_antirush_trav_town02_end_push,Disable,,0,1"
+				OnPlayersIn "syn_antirush_wall_ally*,Kill,,0,1"
+				OnPlayersIn "!self,Disable,,1,-1"} }
+
+		create {classname "trigger_push"
+			origin "-3648 -468 -3424"//-3648 -372 -3424
+			values {model "*143"
+				spawnflags "1"
+				targetname "syn_antirush_trav_town02_end_push"
+				pushdir "0 90 0"
+				speed "450"} }
+
+		create {classname "game_text"
+			values {spawnflags "0"
+				targetname "syn_antirush_text"
+				message "Need More Players to Continue. . ."
+				channel "0"
+				effect "2"
+				x "-1"
+				y "0.85"
+				color "100 100 100"
+				color2 "240 110 0"
+				fadein "0.03"
+				fadeout "1.25"
+				holdtime "2"
+				fxtime "0.25"} }
+
+//Antirush - Endlevel
+	//	create {classname "trigger_coop"
+	//		origin "-5344 2080 -3184"
+	//		values {model "*110"
+	//			spawnflags "1"
+	//			//StartDisabled "1"
+	//			targetname "syn_antirush_trav_town02_end_coop"
+	//			CountType "1"
+	//			UseHUD "1"
+	//			PlayerValue "50"
+	//			wait "1.5"
+	//			OnTrigger "syn_antirush_text,Display,,1,-1"
+	//			OnPlayersIn "syn_antirush_wall_end,Kill,,0,1"
+	//			OnPlayersIn "syn_antirush_light_end,Kill,,0,1"
+	//			OnPlayersIn "!self,Disable,,1,-1"} }
+
+		create {classname "trigger_once" origin "-5312 2240 -3184"
+			values {model "*110"
+				spawnflags "2"
+				OnTrigger "syn_antirush_wall_end,Kill,,0,1"
+				OnTrigger "syn_antirush_light_end,Kill,,0,1"} }
+
+		create {classname "prop_dynamic" origin "-5200 1784 -3256"
+			values {model "models/synergy/tools/syn_transition.mdl"
+				angles "0 270 0"
+				targetname "syn_antirush_wall_end"
+				solid "6"
+				DisableShadows "1"} }
+
+		create {classname "light_dynamic" origin "-5288 1792 -3104"
+			values {_light "170 255 170"
+				targetname "syn_antirush_light_end"
+				brightness "0.5"
+				distance "512"
+				style "12"} }
+
+	//	create {classname "game_text"
+	//		values {spawnflags "0"
+	//			targetname "syn_antirush_text"
+	//			message "Need More Players to Continue. . ."
+	//			channel "0"
+	//			effect "2"
+	//			x "-1"
+	//			y "0.85"
+	//			color "100 100 100"
+	//			color2 "240 110 0"
+	//			fadein "0.03"
+	//			fadeout "1.25"
+	//			holdtime "2"
+	//			fxtime "0.25"} }
+
+//End of Trav|Edt
+
+		//"create"
+		//{
+		//	"classname"	"info_player_equip"
+		//	"origin"	"0 0 0"
+		//	
+		//	"values"
+		//	{
+		//		"targetname"		"edt_shotty_equip"
+		//		"StartDisabled"		"1"
+		//		"weapon_shotgun"	"1"
+		//	}
+		//}
+		// when we leave through alley, change spawn position and block alley changelevel
+		//// "we"... I think some of Hankey's 1.5th person rubbed off on me
+		"create"
+		{
+			"classname"	"logic_auto"
+			"origin"	"0 0 0"
+			
+			"values"
+			{
+				"OnMapSpawn"	"trigger_changelevel,AddOutput,OnChangeLevel edt_alley_push:Enable::0:0,0,0"
+				"OnMapSpawn"	"trigger_changelevel,AddOutput,OnChangeLevel syn_spawn_manager:SetCheckPoint:syn_spawn_player_3:0:0,0,0"
+				//"OnMapSpawn"	"trigger_changelevel,AddOutput,OnChangeLevel edt_shotty_equip:Enable::0:0,0,0"
+			}
+		}
+		
+
+//Trav|Edt - Functionality check
+		create {classname "logic_relay" values {targetname "trav_functionality_d1_town_02"} }
+	}
+}

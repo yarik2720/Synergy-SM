@@ -1,0 +1,406 @@
+ep1_citadel_00
+{
+	console
+	{
+		mp_spawntime "0"
+		sv_test_scripted_sequences 0 // TODO
+	}
+	entity
+	{
+//--Setup--
+		delete {targetname "global_newgame_spawner_physcannon"}
+		edit {classname "func_areaportal" values {targetname "syn_DisabledPortal" StartOpen "1"} }
+		edit {classname "func_areaportalwindow" values {targetname "syn_DisabledPortalWindow" FadeStartDist "1000" FadeDist "1500"} }
+
+//--Starting Items--
+		create {classname "info_player_equip"
+			values {targetname "syn_equip_start" StartDisabled "1"
+				item_suit			"1"
+				item_armor			"8"
+			} }
+//new weapon
+		create {classname "info_player_equip"
+			values {targetname "syn_new_weapon" StartDisabled "1"
+				weapon_physcannon "1"
+			} }
+
+//--Spawns--
+		create {classname "info_spawn_manager"
+			values {targetname "syn_spawn_manager"} }
+//Intro: Darkness
+		create {classname "info_player_coop" origin "2088 -7640 -2016"
+			values {angles "0 270 0" targetname "syn_spawn_player_1"} }
+//Dog
+		create {classname "info_player_coop" origin "-8972 5777 -143"//-9008 5788 -143
+			values {angles "0 52 0" targetname "syn_spawn_player_2" StartDisabled "1"} }
+
+		create {classname "info_teleport_destination" origin "-8972 5777 -143" values {angles "0 52 0" targetname "syn_spawn_player_2TP" } }
+//Drop
+		create {classname "info_player_coop" origin "-7878.31 5427.06 -82.00"
+			values {angles "0 -25 0" targetname "syn_spawn_player_3" StartDisabled "1"} }
+//Exit Van
+		create {classname "info_player_coop" origin "4744 4176 -6352"//4503 3929 -6335
+			values {angles "0 255 0" targetname "syn_spawn_player_4" StartDisabled "1"} }//0 -20 0
+
+		create {classname "info_teleport_destination" origin "4744 4176 -6352" values {angles "0 255 0" targetname "syn_spawn_player_4TP" } }
+
+		create {classname "info_global_settings"
+			values {targetname "syn_global_settings" IsVehicleMap "1"} }//Enabled on Start
+
+//--Checkpoints--
+//delay gunship drop until players are down
+		delete {classname "trigger_once" origin "-7920 5444 84"}
+		delete {classname "trigger_once" origin "-7812 5404 -48"}
+//Dropdown (gunship)
+		create {classname "trigger_multiple" origin "-7916 5432 -128"
+			values {model "*10" angles "0 90 0"
+				spawnflags "1"
+				OnTrigger "trav_antideath_clip,Disable,,1,1"
+				OnTrigger "syn_spawn_manager,SetCheckpoint,syn_spawn_player_3,0,1"
+				OnTrigger "syn_spawn_manager,MovePlayers,,0.1,1"
+				OnTrigger "ss_dog_gunship_down,BeginSequence,,3,1"
+				OnTrigger "pclip_gunship_2,Enable,,0,1"
+				OnTrigger "syn_global_settings,Addoutput,IsVehicleMap 0,0,1"
+				OnTrigger "SS_alyx_pathedge_hopdown,BeginSequence,,5,1"
+				OnStartTouch "!activator,SetDamageFilter,,0,-1"//FailSafe for damagefilters
+				} }
+
+//--Extra--
+
+// env_zooms - all players
+		create {classname "logic_auto"
+			values
+			{
+				spawnflags "1"
+				OnMapSpawn "env_zoom,AddOutput,AllPlayers 1,0,-1"
+			}
+		}
+
+//Trav|Edt - Delay intro (wait for players to load) and allow all players to view dog scene
+		delete {classname "logic_auto" origin "3832 -6136 -1000"}
+		delete {targetname "lrelay_trains_debris"}//!10
+		delete {targetname "hurtme"}
+
+		create {classname "trigger_multiple" origin "2084 -7644 -1998"
+			values {model "*77"//*78
+				spawnflags "1"
+				targetname "trav_intro_trigger"
+				OnTrigger "trav_intro_hud,Start,45,0,1"
+				OnTrigger "viewcontrol_black,Enable,,0.1,1"//point_viewcontrol_01
+				//OnEndTouch "!activator,SetHealth,47,5,-1"
+				OnTrigger "vehicle_blackout,EnterVehicleImmediate,,1,-1"} }//force all players into vehicle to avoid mysterious stuff
+
+	//	create {classname "logic_relay"
+	//		values {targetname "relay_Intro_setup_view"
+	//			OnTrigger "vehicle_blackout,AddOutput,PlayerOff !activator:SetHealth:47:0:-1,0,-1"} }
+
+		create {classname "hud_timer"
+			values {targetname "trav_intro_hud"
+				TimerType "1"
+				TimerText "WAITING FOR PLAYERS"
+				OnTimer "intro_fx_1,Activate,,0,-1"//LA1
+				OnTimer "pvc_intro,Enable,,0,-1"
+				OnTimer "fade_black_1_1,Fade,,0,-1"
+				OnTimer "intro_fx_1,SetBlendMode,7,0.01,-1"
+				OnTimer "zoom_to_fov_180_snap,Zoom,,0.1,-1"
+				OnTimer "zoom_to_fov_75_snap,Zoom,,0.9,-1"
+				OnTimer "intro_fx_1,SetBlendMode,8,1,-1"
+				OnTimer "point_viewcontrol_01,Enable,,1.01,-1"
+				OnTimer "sound_logo_fx,PlaySound,,3.52,-1"
+				OnTimer "credits,ShowLogo,,4,-1"
+				OnTimer "relay_start_citadel_debris,Trigger,,8,-1"
+
+				OnTimer "lcs_create,Start,,12,-1"//!9
+				} }
+
+		create {classname "logic_relay"//!9
+			values {targetname "lrelay_trains_debris"
+				OnTrigger "ptemplate_trash_02,ForceSpawn,,0,-1"
+				OnTrigger "ltimer_splode,Enable,,1,-1"
+				OnTrigger "ptemplate_trash_03,ForceSpawn,,2,-1"
+				OnTrigger "zoom_to_fov_20_30,Zoom,,4,-1"
+				OnTrigger "ptemplate_trash_04,ForceSpawn,,5,-1"} }
+
+//--
+
+		// all players can use the cameras
+		edit { targetname "point_viewcontrol_01" values { spawnflags "156" } } // 24 Trav-Freeze player too (152)
+		edit { targetname "pvc_intro" values { spawnflags "156" } } // 28
+		edit { targetname "viewcontrol_black" values { spawnflags "140" } } // 8 Trav-Freeze player too (136)
+		edit { targetname "viewcontrol_final" values { spawnflags "140" } } // 8 Trav-Freeze player too (136)
+		edit { targetname "pvc_intro_start" values { spawnflags "156" } } // 28
+
+		create { classname "info_intermission" origin "-8360 6041 264" values { angles "25 -25 0" } }
+
+//Trav|Edt - Set Players health to 47 as is in singleplayer (now in code)
+		//create {classname "trigger_multiple"
+		//	origin "-9008 5792 -32"
+		//	values {model "*111"
+		//		spawnflags "1"
+		//		targetname "syn_ouchy"
+		//		//filtername "syn_ouchy_filter"
+		//		//OnStartTouch "!activator,SetHeath,47,0,-1"//??
+		//		OnStartTouch "!activator,AddOutput,health 47,0,-1"
+		//		//OnStartTouch "!activator,AddOutput,targetname syn_ep1_citadel_00_ouchy,0.1,-1"
+		//		//OnStartTouch "!self,Kill,,4,-1"
+		//		} }
+
+		create {classname "logic_relay"
+			values {targetname "relay_givegravgun_1"
+				OnTrigger "syn_ouchy,Disable,,0,-1"} }
+
+	//	create {classname "filter_activator_name"
+	//		values {targetname "syn_ouchy_filter"
+	//			Negated "1"
+	//			filtername "syn_ep1_citadel_00_ouchy"} }
+
+//Trav|Edt - Manage player filters (!player output does not affect all players)
+		delete {targetname "filter_invulnerable"}//player will still recieve input, but it's harmless [mostly]
+
+		create {classname "filter_activator_class"
+			values {targetname "syn_filter_invulnerable"
+			filterclass "null"} }
+
+		create {classname "trigger_multiple" origin "-6468 5906 -60"
+			values {model "*80"
+				spawnflags "1"
+				StartDisabled "1"
+				targetname "syn_invulnerable_van_start"
+				OnStartTouch "!activator,SetDamageFilter,syn_filter_invulnerable,1,-1"} }
+
+		create {classname "trigger_multiple" origin "4756 4118 -6292"
+			values {model "*80"
+				spawnflags "1"
+				//StartDisabled "1"
+				targetname "syn_invulnerable_van_end"
+				OnStartTouch "!activator,SetDamageFilter,,12,-1"
+				OnTrigger "syn_spawn_manager,SetCheckpoint,syn_spawn_player_4,0,1"
+				OnTrigger "syn_spawn_manager,TeleportPlayers,syn_spawn_player_4TP,2,1"
+				//OnTrigger "syn_van_kill,Enable,,3,1"
+				OnTrigger "syn_van_teleport,Enable,,2,1"
+				//OnTrigger "van,Lock,,2,1" //no workie? [code fix]
+				} }
+
+//fixup van reentering
+		create {classname "logic_auto"
+			values {spawnflags "1"
+				OnMapSpawn "van,AddOutput,PlayerOn van:Lock::0:1,0,-1"} }
+
+		delete {targetname "relay_vanride_endcrash_1"}
+		create {classname "logic_relay"
+			values {targetname "relay_vanride_endcrash_1"
+			"OnTrigger" "shake_vanride_endcrash_1,StartShake,,0,-1"
+			"OnTrigger" "sound_vanride_endcrash_1,PlaySound,,0,-1"
+			"OnTrigger" "ar2exp_vanride_endcrash_1,Explode,,0,-1"
+			"OnTrigger" "spark_vanslide_R1,StopSpark,,0,-1"
+			"OnTrigger" "spark_vanslide_L1,StopSpark,,0,-1"
+			//"OnTrigger" "Van,Unlock,,1.5,-1"
+			"OnTrigger" "autosave_1,Save,,2,-1"
+			"OnTrigger" "maker_Vanspawn,SetParentAttachment,attachment_van,0.1,-1"
+			"OnTrigger" "maker_Vanspawn,SetParent,shotput,0,-1"
+			"OnTrigger" "lcs_al_vanride_end01,Start,,1,-1"
+			"OnTrigger" "shadowcontrol,SetDistance,30,0,-1"
+			"OnTrigger" "shadowcontrol,SetAngles,80 10 0,0,-1"
+				} }
+
+//Trav|Edt - kill players who re-enter van (cant teleport) [no longer needed with code fix]
+//		create {classname "trigger_hurt" origin "-6781.92 7170 196"
+//			values {model "*80"
+//				spawnflags "1"
+//				StartDisabled "1"
+//				targetname "syn_van_kill"
+//				parentname "van"
+//				damage "1000"
+//				damagetype "32"
+//				nodmgforce "1"} }
+//
+//		create {classname "trigger_teleport"
+//			origin "-6781.92 7170 196"
+//			values {model "*80"
+//				spawnflags "1"
+//				targetname "syn_van_teleport"
+//				parentname "van"
+//				StartDisabled "1"
+//				target "syn_spawn_player_4TP"} }
+
+//Trav|Edt - fix progress being hindered by afk players
+		create {classname "logic_auto"
+			values {spawnflags "1"
+				//OnMapSpawn "ss_alyx_duckunder_2,AddOutput,OnEndSequence trigger_calldog:Enable::1:-1,0,-1"
+				OnMapSpawn "ss_alyx_duckunder_2,AddOutput,OnEndSequence syn_alyx_follow:StartSchedule::0:-1,0,-1"
+//Trav|Edt- dont allow players do die during van ride
+				//OnMapSpawn "Van,AddOutput,PlayerOn !player:SetDamageFilter:syn_filter_invulnerable:1:-1,0,-1"
+				OnMapSpawn "Van,AddOutput,PlayerOn syn_invulnerable_van_start:Enable::0:-1,0,-1"
+				OnMapSpawn "Van,AddOutput,PlayerOff syn_invulnerable_van_end:Enable::0:-1,0,-1"
+				} }
+
+		create {classname "aiscripted_schedule"
+			values {//spawnflags "2052"
+				targetname "syn_alyx_follow"
+				m_iszEntity "npc_alyx"
+				//forcestate "3"
+				goalent "mark_al_path_area2_1"
+				interruptability "2"
+				schedule "1"} }
+
+//Trav|Edt - do not let vehicle_blackout be removed
+	//	create {classname "logic_auto"
+	//		values {spawnflags "1"
+	//			OnMapSpawn "vehicle_blackout,AddOutput,PlayerOff vehicle_blackout:AddOutput:targetname syn_vehicle_blackout:1.5:-1,0,-1"} }
+
+		delete {targetname "vehicle_blackout"}
+		create {classname "prop_vehicle_choreo_generic" origin "-9001 5756.92 -141"
+			values {model "models/vehicles/vehicle_blackout_e1_dogintro.mdl"
+				targetname "vehicle_blackout"
+				solid "0"
+				disableshadows "1"
+				vehiclescript "scripts/vehicles/choreo_vehicle_ep1_dogintro.txt"
+				VehicleLocked "1"
+				parentname "blackout"
+				ignoremoveparent "1"
+				actionScale"1"} }
+
+//Trav|Edt - Antideath clip
+		create {classname "func_brush"
+			origin "-7929.13 5352.63 -36"//-7884 5356 -36
+			values {model "*112"
+				angles "0 15 0"
+				spawnflags "0"
+				//StartDisabled "1"
+				spawnflags "1"
+				rendermode "10"
+				excludednpc "npc_alyx"
+				targetname "trav_antideath_clip"} }
+
+		create {classname "func_brush"
+			origin "-7929.13 5352.63 84"//-7914.01 5314 152
+			values {model "*112"//*131
+				 angles "0 15 0"
+				spawnflags "0"
+				//StartDisabled "1"
+				spawnflags "1"
+				rendermode "10"
+				excludednpc "npc_alyx"
+				targetname "trav_antideath_clip"} }
+
+		create {classname "func_brush"
+			origin "-8030.69 5303.62 -36"//-7730.01 5418 -47.46
+			values {model "*112"//*131
+				 angles "0 300 0"
+				spawnflags "0"
+				//StartDisabled "1"
+				spawnflags "1"
+				rendermode "10"
+				excludednpc "npc_alyx"
+				targetname "trav_antideath_clip"} }
+//end
+		create {classname "func_brush"
+			origin "-7730.01 5418 -47.46"
+			values {model "*131"
+				 angles "0 300 0"
+				spawnflags "0"
+				//StartDisabled "1"
+				spawnflags "1"
+				rendermode "10"
+				excludednpc "npc_alyx"
+				targetname "trav_antideath_clip"} }
+
+		create {classname "func_brush"
+			origin "-8030.69 5303.62 84"//-8146.01 5458 -47.46
+			values {model "*112"//*131
+				 angles "0 300 0"
+				spawnflags "0"
+				//StartDisabled "1"
+				spawnflags "1"
+				rendermode "10"
+				excludednpc "npc_alyx"
+				targetname "trav_antideath_clip"} }
+
+			// valve appears to have some bad entity IOs!
+			// they disable the wrong viewcontrol, so add in this disable call too, just to be safe
+			delete { targetname "relay_disable_intro" }
+			create { classname "logic_relay" origin "3494.76 -6132.32 -1274"
+				values {
+					"spawnflags" "1"
+					"targetname" "relay_disable_intro"
+					"StartDisabled" "0"
+					"OnTrigger" "viewcontrol_final,Disable,,0,-1"
+					"OnTrigger" "intro_fx_1,Deactivate,,0,-1"
+					"OnTrigger" "viewcontrol_gman_wide_alt,SetOff,,0,-1"
+					"OnTrigger" "relay_start_dogintro_1,Trigger,,0,-1"
+
+					"OnTrigger" "viewcontrol_black,Disable,,0.05,-1"
+				}
+			}
+
+		// force all players to get into the DOG Intro CV
+			// done via code now
+
+		//edit {classname "scripted_sequence" origin "-9095 5755 -143" values {targetname "ss_DogIntro"} }
+
+		delete {classname "scripted_sequence" origin "-9095 5755 -143"}
+		create { classname "scripted_sequence" origin "-9095 5755 -143"
+			values {
+				"m_iszPostIdle" "e1_dogintro_postidle"
+				"spawnflags" "480"
+				"m_iszPlay" "e1_dogintro"
+				"m_iszIdle" "e1_dogintro_preidle"
+				"m_iszEntity" "blackout"
+				"maxdxlevel" "0"
+				"mindxlevel" "0"
+				"m_fMoveTo" "0"
+				"m_flRepeat" "0"
+				"m_flRadius" "0"
+				"targetname" "ss_DogIntro"
+				"angles" "0 270 0"
+					"OnScriptEvent01" "syn_vehicle_blackout,ExitVehicle,,0.1,-1"
+					"OnScriptEvent01" "syn_vehicle_blackout,Unlock,,0,-1"
+				"OnScriptEvent01" "vehicle_blackout,ExitVehicle,,0.1,-1"
+				"OnScriptEvent01" "vehicle_blackout,Unlock,,0,-1"} }
+
+
+		create {classname "logic_auto"
+			values {spawnflags "1"
+				OnMapSpawn "ss_DogIntro,AddOutput,OnScriptEvent01 syn_spawn_manager:SetCheckpoint:syn_spawn_player_2:0:-1,0,-1"
+				OnMapSpawn "ss_DogIntro,AddOutput,OnScriptEvent01 syn_equip_start:Enable::0:-1,0,-1"
+				OnMapSpawn "ss_DogIntro,AddOutput,OnScriptEvent01 syn_equip_start:EquipAllPlayers::0:-1,0,-1"
+				OnMapSpawn "ss_DogIntro,AddOutput,OnScriptEvent01 syn_spawn_manager:TeleportPlayers:syn_spawn_player_2TP:0.1:-1,0,-1"
+					OnMapSpawn "ss_DogIntro,AddOutput,OnScriptEvent01 ghostanim_DogIntro:Kill::0:-1,0,-1"
+				OnMapSpawn "ss_DogIntro,AddOutput,targetname ss_DogIntro,1,-1"
+				OnMapSpawn "lcs_ep1_intro_01,AddOutput,OnTrigger1 ss_DogIntro:BeginSequence::0:-1,0,-1"} }
+
+		// never stop the lcs ents
+		delete { targetname "relay_cancelVCDs" }//triggerd by trigger_falldeath
+
+		// fix damage filters here (useing !activator instead of !player and use syn filter)
+		delete { classname "trigger_multiple" origin "-7918 5582 72" }
+		create { classname "trigger_multiple" origin "-7918 5582 72"
+			values {
+				"model" "*131"
+				"spawnflags" "1"
+				"wait" "0"
+				"StartDisabled" "0"
+				"OnStartTouch" "!activator,SetDamageFilter,syn_filter_invulnerable,0,-1"//filter_invulnerable
+				"OnEndTouch" "!activator,SetDamageFilter,,0,-1"
+			}
+		}
+
+		create {classname "logic_relay"
+			values {//spawnflags "2"
+				targetname "relay_givegravgun_1"
+				OnTrigger "syn_new_weapon,Enable,,0,-1"
+				OnTrigger "syn_new_weapon,EquipAllPlayers,,0.1,-1"
+				OnTrigger "relay_take_grav_gun1Nag,kill,,0,0"
+				OnTrigger "speaker_TakeGravGun1Nag,TurnOff,,0,0"
+				OnTrigger "sprite_gravgun,kill,,0,0"
+				OnTrigger "speaker_TakeGravGun1Nag,kill,,0.1,0"} }
+
+	//	// fix fall death trigger
+		delete { targetname "trigger_falldeath" }
+
+		delete { classname "trigger_multiple" origin "-8592 5690 -83.33" }
+
+//Trav|Edt - Functionality check
+		create {classname "logic_relay" values {targetname "trav_functionality_ep1_citadel_00"} }
+	}
+}

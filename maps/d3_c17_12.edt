@@ -1,0 +1,119 @@
+//TODO: Reduce lag on this map
+d3_c17_12
+{
+	console
+	{
+//Trav|Edt - Max rpg carryness for rest of game(included in other maps).
+		//sk_max_rpg_round "5"
+	}
+	entity 
+	{
+//--Setup--
+		delete {classname "logic_auto" origin "1239.76 3372.93 772"}
+		edit {classname "func_areaportal" values {targetname "syn_disabledPortal" StartOpen "1"} }
+
+//--Starting Items--
+		create {classname "info_player_equip"
+			values {
+				item_suit			"1"
+				item_armor			"60"
+				weapon_crowbar		"1"
+				weapon_pistol		"1"
+				weapon_smg1			"1"
+				weapon_frag			"1"
+				weapon_357			"1"
+				weapon_physcannon	"1"
+				weapon_shotgun		"1"
+				weapon_ar2			"1"
+				weapon_rpg			"1"
+				weapon_crossbow		"1"
+				weapon_bugbait		"1"
+				weapon_slam			"1"
+				weapon_stunstick	"1"
+				ammo_pistol			"54"//72
+				ammo_smg1			"45"
+				ammo_grenade		"1"
+				ammo_smg1_grenade	"1"
+				ammo_357			"6"
+				ammo_buckshot		"12"
+				ammo_ar2			"30"
+				ammo_ar2altfire		"1"
+				ammo_rpg_round		"3"
+				//ammo_crossbow		"0"
+				//ammo_slam			"2"
+			} }
+
+//--Spawns--
+		create {classname "info_spawn_manager"
+			values {targetname "syn_spawn_manager"} }
+
+		create {classname "info_player_coop" origin "904.82 3193.55 832.03"
+			values {angles "0 70 0" targetname "syn_spawn_player_1"} }
+
+		create {classname "info_global_settings"
+			values {IsVehicleMap "0" targetname "syn_global_settings"} }
+
+//--Extra--
+
+//Trav|Edt - Attempt to reduce network lag
+		edit {targetname "bunker_ragdolls" values {targetname "syn_bunker_ragdolls"} }//remove from template
+
+		create {classname "logic_auto"
+			values {spawnflags "1"
+				OnMapSpawn "prop_ragdoll,DisableMotion,-1,10,-1"} }//settle
+
+		// create intermission
+		"create" { "classname" "info_intermission" "origin" "-2376.187500 8139.031250 183.250" "values" { "angles" "-10 -45 0" } }
+
+//Trav|Edt - Doors: Open Only
+		edit {targetname "bldg2_door2" values {spawnflags "0"} }
+
+//Trav|Edt - allow striders to stomp on players
+		edit {classname "npc_strider"
+			values {spawnflags "67588"} }
+
+//Trav|Edt - autirush
+		create {classname "trigger_coop"
+			origin "-2584.68 9027.5 -40"
+			values {model "*44"
+				spawnflags "1"
+				//StartDisabled "1"
+				targetname "syn_antirush_coop"
+				CountType "1"
+				UseHUD "1"
+				PlayerValue "50"
+				wait "1.5"
+				OnTrigger "syn_antirush_text,Display,,0,-1"
+				//OnPlayersIn "syn_antirush_push,Disable,,0,1"
+				OnPlayersIn "syn_antirush_wall,Kill,,0,1"
+				OnPlayersIn "!self,Disable,,1,1"} }
+
+		create {classname "syn_transition_wall" origin "-2952.01 9200 -328" values {angles "0 270 0" targetname "syn_antirush_wall"} }
+
+		//create {classname "trigger_push"
+		//	origin "-2687.5 9248 -65.5"
+		//	values {model "*28"
+		//		spawnflags "1"
+		//		targetname "syn_antirush_push"
+		//		pushdir "0 270 0"
+		//		speed "750"} }
+
+		create {classname "game_text"
+			values {spawnflags "0"
+				targetname "syn_antirush_text"
+				message "Need More Players to Continue. . ."
+				channel "0"
+				effect "2"
+				x "-1"
+				y "0.85"
+				color "100 100 100"
+				color2 "240 110 0"
+				fadein "0.03"
+				fadeout "1.25"
+				holdtime "2"
+				fxtime "0.25"} }
+
+//Trav|Edt - Functionality check
+		create {classname "logic_relay" values {targetname "trav_functionality_d3_c17_12"} }
+	}
+}

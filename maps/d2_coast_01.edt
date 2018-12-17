@@ -1,0 +1,413 @@
+d2_coast_01
+{
+	entity
+	{
+		// unlock warehouse doors
+		//create { "classname" "logic_auto"
+		//	values { "spawnflags" "0"
+		//		"OnMapSpawn" "warehouse_exitdoor,unlock,,5,-1"
+		//		"OnMapSpawn" "citizen_warehouse_door_0,unlock,,5,-1"//trav - should be on trans
+		//	}
+		//}
+
+//--Setup--
+		delete {classname "logic_auto" origin "-7805.71 -10085.9 931"}
+		delete {classname "trigger_once" origin "-2608 -4848 576"}
+		edit {classname "func_areaportal" values {targetname "disabledPortal" StartOpen "1"} }
+
+//--Starting Items--
+		create {classname "info_player_equip"
+			values {targetname "syn_equipment_base"
+				item_suit			"1"
+				item_armor			"60"
+				weapon_crowbar		"1"
+				weapon_pistol		"1"
+				weapon_smg1			"1"
+				weapon_frag			"1"
+				weapon_357			"1"
+				weapon_physcannon	"1"
+				weapon_shotgun		"1"
+				weapon_ar2			"1"
+				ammo_pistol			"54"//72
+				ammo_smg1			"45"
+				ammo_grenade		"1"
+				ammo_smg1_grenade	"1"
+				ammo_357			"6"
+				ammo_buckshot		"12"
+				ammo_ar2			"30"
+			} }
+
+//--Spawns--
+		create {classname "info_spawn_manager"
+			values {targetname "syn_spawn_manager"} }
+//Intro: Crane
+		create {classname "info_player_coop" origin "-7828.85 -10190.73 900"
+			values {angles "0 90 0" targetname "syn_spawn_player_1"} }
+//Post Jump
+		create {classname "info_player_coop" origin "-10718 462 1050"//-10208 920 1056
+			values {angles "0 -100 0" targetname "syn_spawn_player_2" StartDisabled "1"} }//0 240 0
+//Final House
+		create {classname "info_player_coop" origin "-12992 616 1524"
+			values {angles "0 30 0" targetname "syn_spawn_player_3" StartDisabled "1"} }
+
+		create {classname "info_global_settings"
+			values {IsVehicleMap "1" targetname "syn_global_settings"} }
+//Intro: Crane
+		create {classname "info_vehicle_spawn" origin "-6995.95 -9792 560"
+			values {targetname	"syn_spawn_vehicle_1"
+				angles "0 0 0"
+				StartEnabled "0"//Enabled after Crane sequence
+				RespawnVehicle "1"
+				StartGunEnabled "1"
+				VehicleType "4"//1&4 disalllows multiple players
+				VehicleSize "192"
+				model "models\vehicles\buggy_p2.mdl"//models/buggy.mdl
+				VehicleScript "scripts/vehicles/jeep_test.txt"} }
+//pre dysVS edt: ref
+				//VehicleType "4"
+				//VehicleSize "192"
+				//model "models/vehicles/buggy_p2.mdl"//models/vehicles/buggy_p2.mdl
+
+//--Checkpoints--
+		create {classname "trigger_once"
+			origin "-12638.7 248.6 1639.59"
+			values {model "*22"
+				spawnflags "32"
+				targetname "syn_checkpoint_3"
+				StartDisabled "1"
+				OnTrigger "syn_spawn_manager,SetCheckpoint,syn_spawn_player_3,0,-1"} }
+//--Extra--
+
+//Trav|Edt - Doors: Open Only
+		edit {classname "prop_door_rotating" values {returndelay "-1"} }
+//Only Open Outwardd
+		create {classname "logic_auto"
+			values {spawnflags "1"
+				OnMapSpawn "warehouse_exitdoor,AddOutput,opendir 2,0,-1"} }
+
+//Trav|Edt - Moar Antlions
+		create {classname "logic_difficulty"
+			values {spawnflags "3"
+				targetname "syn_vint_ld"
+				OnNormal "antlion_spawner,SetMaxLiveChildren,8,6,-1"
+				OnNormal "antlion_spawner,SetPoolRegenAmount,6,6,-1"
+				OnNormal "antlion_spawner,SetMaxPool,12,6,-1"
+				OnHard "antlion_spawner,SetMaxLiveChildren,12,6,-1"
+				OnHard "antlion_spawner,SetPoolRegenAmount,8,6,-1"
+				OnHard "antlion_spawner,SetMaxPool,16,6,-1"} }
+//for OnEasy
+		edit {targetname "antlion_spawner" values {pool_regen_amount "4" pool_max "8" MaxLiveChildren "6"} }//3,5,4
+
+//**Vintage Management
+		create {classname "logic_relay"
+			values {targetname "_syn_vint"
+				OnTrigger "vint_syn,CancelPending,,4,-1"} }
+//ignore player status for antlion spawner
+		create {classname "logic_relay"
+			values {targetname "vint_syn"
+				OnSpawn "antlion_spawner_onfoot_relay,Kill,,5,-1"
+				OnSpawn "antlion_spawner_injeep_relay,Kill,,5,-1"} }
+//**
+
+//Trav|Edt - manage saves and enable jeep
+		edit {targetname "autosave" values {targetname "syn_autosave"} }
+
+		create {classname "logic_relay"
+			values {targetname "logic_jeepflipped"
+				OnTrigger "syn_autosave,Save,,4,-1"
+				OnTrigger "syn_spawn_vehicle_1,Enable,,3,-1"} }//trav_2seater_temp,ForceSpawn
+
+//Trav|Edt - delete this tigger (removes stuff)
+		delete {targetname "trigger_once" origin "-5086.69 -455.6 1036"}
+
+//Trav|Edt - test custom spawner to enable use of 2-seater jeeps
+		//create {classname "point_template"
+		//	values {spawnflags "0"
+		//		targetname "trav_2seater_temp"
+		//		Template01 "trav_2seater"
+		//		OnEntitySpawned "trav_2seater_counter,Add,1,,-1"} }
+
+		//create {classname "prop_vehicle_jeep"
+		//	origin "-6995.95 -9792 560"
+		//	values {targetname "trav_2seater"
+		//	angles "0 0 0"
+		//	model "models/vehicles/buggy_p2.mdl"
+		//	vehiclescript "scripts/vehicles/jeep_test.txt"} }
+
+		//create {classname "math_counter"
+		//	values {targetname "trav_2seater_counter"
+		//		startvalue "0"
+		//		min "0"
+		//		max "10"
+		//		OnHitMax "trav_2seater_trigger,Disable,,0,-1"} }
+
+		//create {classname "trigger_multiple"
+		//	origin "-6928 -9896 652"
+		//	values {model "*26"
+		//		spawnflags "9"
+		//		targetname "trav_2seater_trigger"
+		//		wait "1"
+		//		//filtername "trav_2seater_filter"
+		//		OnEndTouchAll "trav_2seater_temp,ForceSpawn,,0,-1"} }
+
+//--
+
+		//create {classname "logic_auto"
+		//	values {spawnflags "1"
+		//		OnMapSpawn "trav_2seater,Lock,,1,-1"} }
+
+		//create {classname "phys_constraint" values {targetname "trav_2seater_freeze" attach1 "physbox_counterweight" attach2 "trav_2seater"} }
+
+		//create {classname "filter_multi"
+		//	values {targetname "trav_2seater_filter"
+		//		Negated "1"
+		//		//filtertype "1"
+		//		Filter01 "trav_2seater_filter1"
+		//		Filter02 "trav_2seater_filter2"} }
+
+		//create {classname "filter_activator_class"
+		//	values {targetname "trav_2seater_filter1"
+		//		filterclass "!player"} }
+
+		//create {classname "filter_activator_class"
+		//	values {targetname "trav_2seater_filter2"
+		//		filterclass "prop_vehicle_*"} }
+
+		//create {classname "point_antlion_repellant"
+		//	origin "-6995.95 -9792 560"
+		//	values {targetname "trav_2seater_repel" repelradius "756"} }
+
+//Trav|Edt - add pusher on hill
+		//create {classname "trigger_push"
+		//	origin "-11070.7 -3176.4 820"
+		//	values {model "*22"
+		//		spawnflags "1"
+		//		targetname "syn_antirush_push_hill"
+		//		pushdir "0 300 0"
+		//		speed "450"} }
+
+//Trav|Edt - fix jump
+		edit {targetname "vclip_jump_extra" values {targetname "trav_enable_ramp" } }
+		//edit {targetname "velsensor_car_superjump_01" values {target "jeep"} }
+
+//Trav|Edt - Add black van after jump
+		create {classname "prop_vehicle_mp"
+			origin "-12976 207.98 1520"//-10819 279 1096//-9592 584 1090
+			values {targetname "trav_SCAR"
+			angles "0 330 0"//135
+			model "models/vehicles/7seatvan.mdl"
+			vehiclescript "scripts/vehicles/van.txt"
+			skin "3"} }
+			//PlayerOn "trav_pmessage,Disable,,90,-1"
+//trav_SCAR
+//random color
+		create {classname "logic_auto"
+			values {spawnflags "1"
+				OnMapSpawn "trav_SCAR_color,PickRandom,,1,-1"} }
+
+		create {classname "logic_case"
+			values {targetname "trav_SCAR_color"
+				Case01 "orange"	//0
+				Case02 "grey"	//1
+				Case03 "brown"	//2
+				Case04 "black"	//3
+				Case05 "blue"	//4
+				OnCase01 "trav_SCAR,AddOutput,skin 0,0,-1"
+				OnCase02 "trav_SCAR,AddOutput,skin 1,0,-1"
+				OnCase03 "trav_SCAR,AddOutput,skin 2,0,-1"
+				OnCase04 "trav_SCAR,AddOutput,skin 3,0,-1"
+				OnCase05 "trav_SCAR,AddOutput,skin 4,0,-1"} }
+//disco van
+		create {classname "logic_timer"
+			values {targetname "trav_SCAR_disco"
+				RefireTime "0.1"
+				StartDisabled "1"
+				OnTimer "trav_SCAR_color,PickRandomShuffle,,0,-1"} }
+
+//Truck at end level
+		create {classname "prop_vehicle_mp"
+			origin "-12805.5 1013.4 1523.77"
+			values {targetname "trav_SCAR"
+			angles "0 250 0"
+			model "models/vehicles/8seattruck.mdl"
+			vehiclescript "scripts/vehicles/truck.txt"} }
+
+//teleport van OnLevelChange
+	//	create {classname "point_teleport" origin "-11840 6080 1664"
+	//		values {targetname "trav_SCAR_endlevel" angles "0 90 0"//0 90 0
+	//			target "trav_SCAR"} }
+//TODO: get this to work
+	//	create {classname "logic_auto"
+	//		values {spawnflags "1"
+	//			OnMapSpawn "trigger_changelevel,AddOutput,OnChangeLevel trav_SCAR_endlevel:Teleport::0:-1,1,-1"} }
+
+//Trav|Edt - checkpoint after jump
+		//create {classname "info_player_coop"
+		//	origin "-10208 920 1056"
+		//	values {targetname "trav_checkpoint_postjump"
+		//		angles "0 240 0"
+		//		StartDisabled "1"} }
+
+//Trav|Edt Readd/Fix checkpoint from original map (not in hdr version)
+		"create"
+		{
+			"classname" "trigger_once"
+			"origin" "-8806 929.7 1112"//-8879.000000 533.906250 1079.593750
+
+			"values"
+			{
+				"model" "*11"//*12
+				"wait" "1"
+				"spawnflags" "32"
+				"StartDisabled" "0"
+
+				//"OnTrigger" "edt_spawns,MovePlayers,,0,-1"
+				//OnTrigger "trav_gtext_votecar,Display,,2,-1"
+				//OnTrigger "edt_spawns,SetCheckpoint,trav_checkpoint_postjump,0,-1"
+				//OnTrigger "MPVS_SPAWN,Kill,,1,-1"
+				"OnTrigger" "syn_spawn_manager,SetCheckpoint,syn_spawn_player_2,0,-1"//MovePlayers
+				OnTrigger "syn_checkpoint_3,Enable,,1,-1"
+				//OnTrigger "syn_antirush_push_hill,Disable,,1,-1"
+			}
+		}
+
+//Trav|Edt - add crates in house near end
+		create {classname "item_item_crate"
+			origin	"-12879 567 1540"
+			values{ItemClass "item_dynamic_resupply"
+				ItemCount "5"
+				targetname "syn_vint"} }
+
+		create {classname "item_item_crate"
+			origin	"-12879 567 1572"
+			values{ItemClass "item_dynamic_resupply"
+				ItemCount "5"
+				targetname "syn_vint"} }
+
+//Trav|Edt - anti-rush
+		create {classname "trigger_coop"
+			origin "-12825.8 3782.29 1689"
+			values {model "*9"
+				spawnflags "1"
+				targetname "syn_antirush_coop"
+				CountType "1"
+				UseHUD "1"
+				PlayerValue "50"
+				wait "1.5"
+				OnTrigger "syn_antirush_text,Display,,1,-1"
+				//OnPlayersIn "trav_antirush_brush,Disable,,0,1"
+				OnPlayersIn "syn_antirush_prop,Kill,,0,1"
+				OnPlayersIn "syn_antirush_light,Kill,,0,1"
+				OnPlayersIn "!self,Disable,,1,1"} }
+
+		create {classname "prop_dynamic" origin "-11840 5048 1536"
+			values {model "models/synergy/tools/syn_transition.mdl"
+				targetname "syn_antirush_prop"
+				angles "0 270 0"
+				solid "6"
+				DisableShadows "1"} }
+
+		create {classname "light_dynamic" origin "-11840 5056 1696"
+			values {targetname "syn_antirush_light"
+				_light "170 255 170"
+				brightness "1"
+				distance "1024"
+				//_inner_cone "75"
+				//_cone "80"
+				style "12"} }
+//parent-to-player-flare
+		//create {classname "light_dynamic" origin "-11840 4992 1664"
+		//	values {targetname "syn_dlight_flare"
+		//		_light "255 70 0 200"
+		//		brightness "4"
+		//		spawnflags "2"
+		//		distance "512"
+		//		style "12"} }
+
+		//create {classname "func_brush"
+		//	origin "-12121.8 6566.29 1689"
+		//	values {model "*9"
+		//		spawnflags "2"
+		//		rendermode "2"
+		//		targetname "trav_antirush_brush"} }
+
+		create {classname "game_text"
+			values {spawnflags "0"
+				targetname "syn_antirush_text"
+				message "Need More Players to Continue. . ."
+				channel "0"
+				effect "2"
+				x "-1"
+				y "0.85"
+				color "100 100 100"
+				color2 "240 110 0"
+				fadein "0.03"
+				fadeout "1.25"
+				holdtime "2"
+				fxtime "0.25"} }
+
+//Trav|Edt - add my map between coast 01 and 03
+		//delete {classname "trigger_changelevel"}
+
+		//create {classname "trigger_changelevel" origin "-12049.8 6758.29 1689"//-11840 5088 1664
+		//	values {model "*9"
+		//		map "d2_coast_02"
+		//		landmark "landmark_d2_coast_01-02"} }
+
+		//edit {targetname "landmark_d2_coast_01-03" values {targetname "landmark_d2_coast_01-02"} }
+
+//town05-coast01
+		//create {classname "trigger_changelevel" origin "-7124.23 -12734 1096"//-11840 5088 1664
+		//	values {model "*10"
+		//		spawnflags "2"
+		//		map "d1_town_05"
+		//		landmark "d1_town-coast"} }
+
+//End of Trav|Edt
+
+		// lock the exit door
+		
+		//"edit" { "targetname" "warehouse_exitdoor" "values" { "spawnflags" "2048" } }
+		
+		"create"
+		{
+			"classname"	"logic_auto"
+			"origin"	"0 0 0"
+			
+			"values"
+			{
+				"OnNewGame"	"warehouse_exitdoor,lock,,0,0"
+			}
+		}
+
+		// turn the jeep into a twoseater
+		//"edit" { "targetname" "jeep" "values" { "model" "models/buggy_p2.mdl" } }
+
+//Trav|Edt - disable normal jeep spawn
+		//"create"
+		//{
+		//	"classname" "info_vehicle_spawn"
+		//	"origin" "-7768 -9008 960"
+		//	"values"
+		//	{
+		//		"angles" "0 0 0"
+		//		"StartEnabled" "0"
+		//		"targetname" "MPVS"
+		//		
+		//		"VehicleType" "1"
+		//		"model" "models/vehicles/buggy_p2.mdl"//models/vehicles/buggy_p2.mdl - make this work
+
+//End of Trav|Edt
+
+		//		"VehicleScript" "scripts/vehicles/jeep_test.txt"
+		//		"RespawnVehicle" "1"
+		//		"VehicleSize" "128"
+		//	}
+		//}
+
+		edit { classname "npc_antlion_maker" values { "spawntarget" "!rndplayer" } }
+
+//Trav|Edt - Functionality check
+		create {classname "logic_relay" values {targetname "trav_functionality_d2_coast_01"} }
+	}
+}

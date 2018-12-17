@@ -1,0 +1,75 @@
+ep1_citadel_02
+{
+	entity
+	{
+//--Setup--
+			delete {targetname "global_newgame_template_base_items"}
+			delete {targetname "global_newgame_spawner_suit"}
+			delete {targetname "global_newgame_spawner_physcannon"}
+			delete {targetname "reload"}
+		create {classname "point_template" //"origin" "-8488.31 949.535 870"
+			values {
+				spawnflags "2"
+				Template01 "Alyx"
+			//	Template03 "global_newgame_spawner_physcannon"
+			//	Template02 "Alyx"
+			//	Template01 "global_newgame_spawner_suit"
+				targetname "global_newgame_template_base_items"} }
+		edit {classname "func_areaportal" values {targetname "syn_DisabledPortal" StartOpen "1"} }
+		edit {classname "func_areaportalwindow" values {targetname "syn_DisabledPortalWindow" FadeStartDist "1000" FadeDist "1500"} }
+
+//Prevent Backtracking
+		create {classname "trigger_push" origin "0 -56 0"
+			values {model "*12"
+				spawnflags "1"
+				speed "750"
+				pushdir "0 270 0"} }
+
+//--Starting Items--
+		create {classname "info_player_equip"
+			values {
+				item_suit			"1"
+				item_armor			"45"
+				weapon_physcannon	"1"
+			} }
+
+//--Spawns--
+		create {classname "info_spawn_manager"
+			values {targetname "syn_spawn_manager"} }
+//Intro
+		create {classname "info_player_coop" origin "-8671.01 1342.66 800.09"
+			values {angles "0 270 0" targetname "syn_spawn_player_1"} }
+
+		create {classname "info_global_settings"
+			values {targetname "syn_global_settings" IsVehicleMap "0"} }
+
+//--Extra--
+
+//Trav|Edt - be strict on max ragdoll count to reduce lag
+		edit {classname "game_ragdoll_manager" values {MaxRagdollCount "2"} }//4
+
+		create { classname "info_intermission" origin "-7858 1193 938" values { angles "8 -22 0" } }
+
+	//	// fix trigger_fall
+	//	"delete" { "classname" "trigger_hurt" "origin" "-4864 896 400" }
+	//	"create"
+	//	{
+	//		"classname" "trigger_hurt"
+	//		"origin" "-4864 896 400"
+	//		"values"
+	//		{
+	//			"model" "*130"
+	//			"damagemodel" "0"
+	//			"damagetype" "0"
+	//			"damagecap" "1000"
+	//			"damage" "1000"
+	//			"targetname" "trigger_fall"
+	//			"spawnflags" "1"
+	//			"StartDisabled" "0"
+	//		//	"OnHurtPlayer" "reload,Reload,,0,-1"
+	//		}
+	//	}
+//Trav|Edt - Functionality check
+		create {classname "logic_relay" values {targetname "trav_functionality_ep1_citadel_02"} }
+	}
+}

@@ -1,0 +1,92 @@
+d3_citadel_01
+{
+	entity 
+	{
+//--Setup--
+		delete {classname "logic_auto" origin "6374 2858.83 -278"}
+			create {classname "logic_auto"
+			values {spawnflags "1"
+				OnNewGame "pt_newgame,ForceSpawn,,0,-1"} }
+		edit {classname "func_areaportal" values {targetname "syn_disabledPortal" StartOpen "1"} }
+
+//Prevent Backtracking - just in case
+		create {classname "trigger_push" origin "0 0 0"
+			values {model "*17"
+				spawnflags "1"
+				speed "750"
+				pushdir "90 0 0"} }
+
+//--Starting Items--
+		create {classname "info_player_equip"
+			values {
+				item_suit			"1"
+				item_armor			"60"
+				weapon_pistol		"1"
+				weapon_physcannon	"1"
+				ammo_pistol			"54"
+			} }
+
+//--Spawns--
+		create {classname "info_spawn_manager"
+			values {targetname "syn_spawn_manager"} }
+
+		create {classname "info_player_coop" origin "6392.42 2277.44 -260.66"
+			values {angles "0 90 0" targetname "syn_spawn_player_1"} }
+
+		create {classname "info_global_settings"
+			values {IsVehicleMap "0" targetname "syn_global_settings"} }
+
+//--Extra--
+
+		// create intermission
+	//	"create" { "classname" "info_intermission" "origin" "" "values" { "angles" "0 0 0" } }
+
+//End of Trav|Edt
+
+		// 33 4 42
+
+		 // remove model 33
+		"delete" { "classname" "trigger_once" "origin" "10624 4592 -1664" }
+
+		"create"
+		{
+			"classname" "trigger_once"
+		//	"origin" "10701.562500 5715.218750 -1627.250000" // 8
+			"origin" "10624 4592 -1664"
+
+			"values"
+			{
+				"model" "*33"
+				"spawnflags" "33"
+				"StartDisabled" "0"
+				"OnTrigger" "playerpod_resume_relay,Trigger,,0.1,-1"
+				"OnTrigger" "playerpod_ready_relay,Disable,,0,-1"
+				"OnTrigger" "pod_bay_track9,EnableAlternatePath,,0,-1"
+
+				// failsafe
+			//	"OnTrigger" "cit02cl,ChangeLevel,,26,-1" // 8 delay
+				"OnTrigger" "syn_spawn_manager,SetCheckpoint,PS_End,12,-1"
+				"OnTrigger" "syn_spawn_manager,TeleportPlayers,PSTP_End,12,-1"
+			}
+		}
+
+		// do not delete the diggers
+		"delete" { "classname" "trigger_multiple" "origin" "8992 3468 -1396" }
+
+		// fix gay fade
+//Trav|Edt - lol, remove compleately was "edit"
+		delete {classname "env_fade"}
+		//edit { "targetname" "zapper_fade" "values" { "holdtime" "1" } }
+
+		// move players into the change level once the pod hits the trigger
+		create { classname "info_teleport_destination" origin "11368 5897 -1775"
+			values { angles "0 0 0" targetname "PSTP_End" }
+		}
+
+		create { classname "info_player_coop" origin "11368 5897 -1775" values { targetname "PS_End" StartDisabled "1" } }
+
+
+//Trav|Edt - Functionality check
+		create {classname "logic_relay" values {targetname "trav_functionality_d3_citadel_01"} }
+	}
+}

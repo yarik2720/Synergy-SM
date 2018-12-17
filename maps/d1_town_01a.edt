@@ -1,0 +1,246 @@
+d1_town_01a
+{
+	entity
+	{
+//--Setup--
+		delete {classname "logic_auto" origin "223 288 -3300"}
+		edit {classname "func_areaportal" values {targetname "disabledPortal" StartOpen "1"} }
+
+//--Starting Items--
+		create {classname "info_player_equip"
+			values {
+				targetname "syn_eqipment_base"
+				item_suit			"1"
+				item_armor			"25"
+				weapon_crowbar		"1"
+				weapon_pistol		"1"
+				weapon_smg1			"1"
+				weapon_frag			"1"
+				weapon_357			"1"
+				weapon_physcannon	"1"
+				ammo_pistol			"54"//72
+				ammo_smg1			"45"
+				//ammo_grenade		"1"//
+				//ammo_smg1_grenade	"1"//
+				ammo_357			"3"//6
+			} }
+
+//--Spawns--
+		create {classname "info_spawn_manager"
+			values {targetname "syn_spawn_manager"} }
+
+		create {classname "info_player_coop" origin "160 504 -3284"
+			values {angles "0 270 0" targetname "syn_spawn_player_1"} }
+
+		create {classname "info_global_settings"
+			values {IsVehicleMap "0" targetname "syn_global_settings"} }
+
+//--Extra--
+
+		// add an intermission and its target
+		"create"
+		{
+			"classname"	"info_target"
+			"origin"	"-400 10 -3400"
+			"values"	{ "name" "edt_camtarg" }
+		}
+
+		"create"
+		{
+			"classname"	"info_intermission"
+			"origin"	"40 1032 -3080"
+			"values"	{ "target" "edt_camtarg" }
+		}
+
+
+		// lock door
+		"create"
+		{
+			"classname"	"logic_auto"
+			"origin"	"196 540 -3274"
+
+			"values"
+			{
+				"spawnflags"	"1"
+				"OnMapSpawn"	"start_door,Lock,,.2,0" //delay so it locks after it is closed
+			}
+		}
+
+//If dog's ball is carried over, keep invuln
+		create {classname "filter_activator_name"
+			values {targetname "syn_dfilter_null"
+				filtername "null"} }
+
+//Trav|Edt - Doors: Open Only
+		//edit {classname "prop_door_rotating" values {spawnflags "0"} }
+
+//Trav|Edt - Respawning Weps/Items (Use sv_hl2dm_* for spawntimes)
+			//create { classname "logic_auto"
+			//	values { spawnflags "1"
+			//		OnMapSpawn "weapon_*,AddOutput,RespawnCount -1,0,-1"
+			//		OnMapSpawn "item_*,AddOutput,RespawnCount -1,0,-1" } }
+
+//Trav|Edt - Add more zombies
+		create {classname "logic_difficulty"
+			values {spawnflags "3"
+				targetname "syn_vint_ld"
+				OnNormal "syn_vint_trav_temp_zombies1,SetMaxChildren,6,0,-1"
+				OnHard "syn_vint_trav_temp_zombies1,SetMaxChildren,10,0,-1"
+				OnNormal "syn_vint_trav_temp_zombies2,SetMaxChildren,3,0,-1"
+				OnHard "syn_vint_trav_temp_zombies2,SetMaxChildren,6,0,-1"} }
+
+		create {classname "npc_zombie"
+			origin "-480 16 -3576"
+			values {targetname "syn_vint_trav_zombies1"
+				spawnflags "2564"
+				squadname "squad_trav_zombies1"} }
+//street corner
+		create {classname "npc_template_maker"
+			origin "-480 16 -3576"
+			values {spawnflags "128"
+				angles " 0 45 0"
+				targetname "syn_vint_trav_temp_zombies1"
+				MaxNPCCount "4"//12 LD Scaled
+				SpawnFrequency "1"
+				TemplateName "syn_vint_trav_zombies1"} }
+
+		create {classname "npc_zombie"
+			origin "-440 888 -3432"
+			values {targetname "syn_vint_trav_zombies2"
+				spawnflags "2564"
+				squadname "transition_zombie_squad"} }
+//end
+		create {classname "npc_template_maker"
+			origin "-440 888 -3432"
+			values {spawnflags "128"
+				angles " 0 135 0"
+				targetname "syn_vint_trav_temp_zombies2"
+				MaxNPCCount "3"//6 LD Scaled
+				SpawnFrequency "1"
+				TemplateName "syn_vint_trav_zombies2"} }
+
+//Trav|Edt - Add crates
+		create {classname "item_item_crate"
+			origin	"-399 1063 -3564"
+			values{ItemClass "item_dynamic_resupply"
+				ItemCount "4"
+				targetname "syn_vint"} }
+
+		create {classname "item_item_crate"
+			origin	"-151 1311 -3244"
+			values{ItemClass "item_dynamic_resupply"
+				ItemCount "1"
+				targetname "syn_vint"} }
+
+		create {classname "item_item_crate"
+			origin	"-7 751 -3260"
+			values{ItemClass "item_dynamic_resupply"
+				ItemCount "2"
+				targetname "syn_vint"} }
+
+		create {classname "item_item_crate"
+			origin	"89 271 -3300"
+			values{ItemClass "item_dynamic_resupply"
+				ItemCount "2"
+				targetname "syn_vint"} }
+
+//Trav|Edt add antirush at endlevel
+		create {classname "trigger_coop"
+			origin "-360 784 -3422"
+			values {model "*38"
+				spawnflags "1"
+				//StartDisabled "1"
+				targetname "syn_antirush_trav_town01a_end_coop"
+				CountType "1"
+				UseHUD "1"
+				PlayerValue "50"
+				wait "1.5"
+				OnTrigger "syn_antirush_text,Display,,1,-1"
+				OnPlayersIn "syn_antirush_trav_town01a_end_push,Disable,,0,1"
+				OnPlayersIn "!self,Disable,,1,-1"} }
+
+		create {classname "trigger_push"
+			origin "-534 712 -3365"
+			values {model "*33"
+				spawnflags "1"
+				targetname "syn_antirush_trav_town01a_end_push"
+				pushdir "0 0 0"
+				speed "450"} }
+
+		create {classname "game_text"
+			values {spawnflags "0"
+				targetname "syn_antirush_text"
+				message "Need More Players to Continue. . ."
+				channel "0"
+				effect "2"
+				x "-1"
+				y "0.85"
+				color "100 100 100"
+				color2 "240 110 0"
+				fadein "0.03"
+				fadeout "1.25"
+				holdtime "2"
+				fxtime "0.25"} }
+
+//End of Trav|Edt
+
+		// prevent door from closing on players
+		"delete"
+		{
+			"classname"	"trigger_multiple"
+			"origin"	"192 496 -3270"
+		}
+
+		// prevent surfing on roof until reaching that point by normal means
+
+		"create"
+		{
+			"classname"	"trigger_push"
+
+			"values"
+			{
+				"model"			"*13"
+				"targetname"		"edt_surfpush"
+				"origin"		"20 499 -3290"
+				"spawnflags"		"1"
+				"StartDisabled"		"0"
+				"pushdir"		"0 270 0"
+				"speed"			"200"
+			}
+		}
+
+		"create"
+		{
+			"classname"	"trigger_once"
+
+			"values"
+			{
+				"model"			"*13"
+				"origin"		"-101 1086 -3230"
+				"spawnflags"		"1"
+				"StartDisabled"		"0"
+
+				"OnTrigger"		"edt_surfpush,kill,,0,0"
+			}
+		}
+
+		// change all goals to "player", and change those that weren't "!player" back
+		//Trav- not needed (?)
+
+		//"edit"
+		//{
+		//	"classname"	"aiscripted_schedule"
+		//	"values" { "goalent" "player" }
+		//}
+
+		"edit"
+		{
+			"classname"	"aiscripted_schedule"
+			"targetname"	"alley_wall_crab_aiss_1"
+			"values" { "goalent" "alley_wall_crab_path_1" }
+		} 						
+
+//Trav|Edt - Functionality check
+		create {classname "logic_relay" values {targetname "trav_functionality_d1_town_01a"} }
+	}
+}

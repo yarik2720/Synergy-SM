@@ -1,0 +1,367 @@
+d1_canals_07
+{
+	entity {
+//--Setup--
+		delete {classname "logic_auto" origin "7720 7943.31 -430.308"}
+		edit {classname "func_areaportal" values {targetname "disabledPortal" StartOpen "1" } }
+		edit {targetname "occluder_wall1" values {targetname "syn_DisabledOccluder"} }
+		edit {targetname "occluder_wall2" values {targetname "syn_DisabledOccluder"} }
+
+//Prevent Backtracking
+		create {classname "prop_dynamic" origin "7664 8064 -512"
+			values {model "models/synergy/tools/syn_transition.mdl"
+				angles "0 0 0"
+				solid "6"
+				DisableShadows "1"} }
+
+		create {classname "prop_dynamic" origin "7664 8832 -512"
+			values {model "models/synergy/tools/syn_transition.mdl"
+				angles "0 0 0"
+				solid "6"
+				DisableShadows "1"} }
+
+		create {classname "prop_dynamic" origin "7664 8064 -192"
+			values {model "models/synergy/tools/syn_transition.mdl"
+				angles "0 0 0"
+				solid "6"
+				DisableShadows "1"} }
+
+		create {classname "prop_dynamic" origin "7664 8832 -192"
+			values {model "models/synergy/tools/syn_transition.mdl"
+				angles "0 0 0"
+				solid "6"
+				DisableShadows "1"} }
+
+		//create {classname "trigger_push" origin "64 0 0"
+		//	values {model "*59"
+		//		spawnflags "1"
+		//		speed "750"
+		//		pushdir "0 0 0"} }
+
+		//create {classname "func_vehicleclip" origin "-64 -16 0"
+		//	values {model "*59"} }
+
+//Doors: Open Only
+		//edit {classname "prop_door_rotating" origin "10307 1545 -202" values {spawnflags "1"} }
+		//edit {classname "prop_door_rotating" values {spawnflags "0" returndelay "-1"} }
+
+//--Starting Items--
+		create {classname "info_player_equip"
+			values {
+				targetname "syn_eqipment_base"
+				item_suit			"1"
+				item_armor			"45"
+				weapon_crowbar		"1"
+				weapon_pistol		"1"
+				weapon_smg1			"1"
+				weapon_frag			"1"
+				ammo_pistol			"54"//72
+				ammo_smg1			"45"
+				ammo_grenade		"1"
+				ammo_smg1_grenade	"1"
+			} }
+
+//--Spawns--
+		create {classname "info_spawn_manager"
+			values {targetname "syn_spawn_manager"} }
+
+		create {classname "info_player_coop" origin "7740.00 7800.85 -400.67"
+			values {angles "0 40 0" targetname "syn_spawn_player_1"} }
+
+		create {classname "info_player_coop" origin "10776 1512 -256"
+			values {angles "0 0 0" targetname "syn_spawn_player_2" StartDisabled "1"} }
+
+		create {classname "info_global_settings"
+			values {IsVehicleMap "1" targetname "syn_global_settings"} }
+
+		create {classname "info_vehicle_spawn" origin "7888 8043.28 -479.33"
+			values {targetname	"syn_spawn_vehicle_1"
+				angles "0 270 0"
+				StartEnabled "1"
+				RespawnVehicle "1"
+				Ownership "1"
+				VehicleType "2"
+				VehicleSize "164"
+				model "models/airboat.mdl"
+				VehicleScript "scripts/vehicles/airboat.txt"} }
+
+		create {classname "info_vehicle_spawn" origin "11456 1202 -445"
+			values {targetname	"syn_spawn_vehicle_2"
+				angles "0 90 0"
+				StartEnabled "0"//Enabled in 'Exploits - Failsafe'
+				RespawnVehicle "1"
+				Ownership "1"
+				VehicleType "2"
+				VehicleSize "164"
+				model "models/airboat.mdl"
+				VehicleScript "scripts/vehicles/airboat.txt"} }
+
+		create {classname "logic_auto"
+			values {spawnflags "1"
+				OnMapTransition "syn_spawn_manager,TeleportPlayers,syn_spawn_teleport,0.1,-1"} }
+
+		create {classname "info_teleport_destination" origin "7740.00 7800.85 -400.67" values {targetname "syn_spawn_teleport" angles "0 40 0"} }
+
+//--Checkpoints--
+		create {classname "trigger_once"
+			origin "10752 928 -368"
+			values {model "*88"
+				spawnflags "1"
+				OnTrigger "syn_spawn_manager,SetCheckpoint,syn_spawn_player_2,0,-1"} }
+
+//--Exploits--
+//Failsafe -- prevent I-beam exploit
+		create {classname "logic_relay"
+			values {spawnflags "1"
+				targetname "ibeam_break_relay"
+				OnTrigger "base_gate1,EnableMotion,,5,1"
+				OnTrigger "base_gate2,EnableMotion,,5,1"
+				OnTrigger "syn_spawn_vehicle_2,Enable,,0,1"
+				} }
+//Clip -- over gate
+		create {classname "func_vehicleclip" origin "7776 433 -62" values {model "*65"} }
+		create {classname "func_vehicleclip" origin "7776 1071 98" values {model "*65"} }
+		create {classname "func_vehicleclip" origin "7776 1647 -62" values {model "*65"} }
+//Misc -- protect barrels
+		//create {classname "func_brush" origin "7265 1124 -61"
+		//	values {model "*65"//large
+		//		spawnflags "2"
+		//		rendermode "10"
+		//		targetname "syn_barrel_block"} }
+
+		//create {classname "func_brush"
+		//	origin "6838 1322 -252"
+		//	values {model "*79"
+		//		spawnflags "2"
+		//		rendermode "10"
+		//		targetname "syn_barrel_block"} }
+
+		//create {classname "func_brush"
+		//	origin "7153 1338 -252"
+		//	values {model "*79"
+		//		spawnflags "2"
+		//		rendermode "10"
+		//		targetname "syn_barrel_block"} }
+
+		create {classname "trigger_once" origin "6710.49 1280 -304"
+			values {model "*88" angles "0 90 0"
+				spawnflags "8"
+				StartDisabled "1"
+				targetname "syn_enable_ibeam"
+				filtername "syn_filter_prop_physics"
+				OnStartTouch "!activator,setdamagefilter,syn_dfilter_null,0,-1"
+				OnStartTouch "!activator,Disablemotion,,0.5,-1"} }
+
+		create {classname "trigger_once" origin "6710.49 1280 -304"
+			values {model "*88" angles "0 90 0"
+				spawnflags "8"
+				StartDisabled "1"
+				filtername "syn_filter_prop_physics"
+				targetname "syn_disable_ibeam"
+				OnStartTouch "!activator,setdamagefilter,none,0,-1"
+				OnStartTouch "!activator,EnableMotion,,0,-1"} }
+
+		create {classname "filter_activator_class"
+			values {targetname "syn_filter_prop_physics"
+				filterclass "prop_physics"} }
+
+		create {classname "logic_auto"
+			values {spawnflags "1"
+				OnMapSpawn "ibeam_board_*,setdamagefilter,syn_dfilter_null,0,-1"
+				OnMapSpawn "syn_enable_ibeam,Enable,,1,-1"} }//delay eet, otherwise phys not get inputs
+
+		create {classname "filter_activator_name"
+			values {targetname "syn_dfilter_null"
+				filtername "null"} }
+
+		create {classname "trigger_once"
+			origin "7402 1376 -200"
+			values {model "*156"
+				spawnflags "1"
+				OnTrigger "syn_barrel_block,Disable,,0,-1"
+				OnTrigger "ibeam_board_*,setdamagefilter,none,0,-1"
+				OnTrigger "syn_disable_ibeam,Enable,,1,-1"} }
+
+//--Extra--
+
+//Trav|Edt - remove player remove triggers... 0.o
+		delete {targetname "trigger_room7_clear_reinforcement_space"}
+
+//Trav|Edt - Extra cops around gate
+		create {classname "point_template"
+			values {spawnflags "2"
+				targetname "syn_vint_extrabridgecops_template"
+				Template01 "syn_vint_trav_extrabridgecops"} }
+
+		//create {classname "env_entity_maker" origin "7912 704 -256"
+		//	values {spawnflags "1"
+		//		angles "0 45 0"
+		//		targetname "syn_vint_extrabridgecops_spawnpoints"
+		//		EntityTemplate "syn_vint_extrabridgecops_template"
+		//		PostSpawnDirectionVariance "0"} }
+
+		create {classname "env_entity_maker" origin "7784 872 -128"
+			values {spawnflags "1"
+				targetname "syn_vint_extrabridgecops_spawnpoints"
+				EntityTemplate "syn_vint_extrabridgecops_template"
+				PostSpawnDirectionVariance "0.15"} }
+
+		//create {classname "env_entity_maker" origin "7784 1032 -128"
+		//	values {spawnflags "1"
+		//		targetname "syn_vint_extrabridgecops_spawnpoints"
+		//		EntityTemplate "syn_vint_extrabridgecops_template"
+		//		PostSpawnDirectionVariance "0.15"} }
+
+		create {classname "env_entity_maker" origin "7784 1216 -128"
+			values {spawnflags "1"
+				targetname "syn_vint_extrabridgecops_spawnpoints"
+				EntityTemplate "syn_vint_extrabridgecops_template"
+				PostSpawnDirectionVariance "0.15"} }
+
+		//create {classname "env_entity_maker" origin "7976 1400 -256"
+		//	values {spawnflags "1"
+		//		angles "0 -45 0"
+		//		targetname "syn_vint_extrabridgecops_spawnpoints"
+		//		EntityTemplate "syn_vint_extrabridgecops_template"
+		//		PostSpawnDirectionVariance "0"} }
+
+		//create {classname "npc_template_maker"
+		//	values {spawnflags "16"
+		//		targetname "syn_extrabridgecops_maker"
+		//		//StartDisabled "0"
+		//		TemplateName "trav_extrabridgecops"
+		//		MaxNPCCount "5"
+		//		MaxLiveChildren "5"
+		//		SpawnFrequency "0"
+		//		CriterionDistance "2"
+		//		CriterionVisibility "2"} }
+
+		//create {classname "info_npc_spawn_destination" origin "" values {angles "0 45 0"} }
+
+		create {classname "npc_metropolice" //origin "7912 704 -256"
+			values {spawnflags "33562628"
+				angles "0 30 0"
+				targetname "syn_vint_trav_extrabridgecops"
+				squadname "syn_squad_gate"
+				disableshadows "1"
+				ignoreunseenenemies "1"
+				additionalequipment "weapon_smg1"} }
+
+		//create {classname "npc_metropolice" origin "7784 872 -128"
+		//	values {spawnflags "33562628"
+		//		angles "0 0 0"
+		//		targetname "trav_extrabridgecops"
+		//		squadname "syn_squad_gate"
+		//		disableshadows "1"
+		//		ignoreunseenenemies "1"
+		//		additionalequipment "weapon_smg1"} }
+
+//Trav|Edt - Add cops in gatekeeper room
+		create {classname "npc_template_maker"
+			origin "7360 2264 -376"
+			values {spawnflags "128"
+				targetname "syn_vint_trav_temp_cops_gateroom"
+				angles " 0 270 0"
+				MaxNPCCount "4"//8
+				SpawnFrequency "0.2"
+				StartDisabled "1"
+				TemplateName "syn_vint_trav_cops_gateroom"} }
+
+		create {classname "npc_metropolice"
+			origin "7360 2264 -376"
+			values {spawnflags "33687556"
+				targetname "syn_vint_trav_cops_gateroom"
+				squadname "squad_trav_cops_gateroom"
+				additionalequipment "weapon_pistol"} }
+
+		create {classname "trigger_once"
+			origin "7992 1808 -192"
+			values {model "*120"
+				spawnflags "1"
+				targetname "syn_vint"
+				OnTrigger "syn_vint_trav_temp_cops_gateroom,Enable,,0,-1"} }
+
+//Trav|Edt - add extra cops on bridge (post building [JonnyQuattro request])
+		create {classname "point_template"
+			values {spawnflags "2"
+				targetname "syn_vint_trav_extrabridgecops_temp_"
+				Template01 "syn_vint_trav_extrabridgecops_2"} }
+
+		create {classname "npc_metropolice" origin "4704 -4224 -160"
+			values {spawnflags "655620"
+				angles "0 90 0"
+				targetname "syn_vint_trav_extrabridgecops_2"
+				squadname "squad1"
+				additionalequipment "weapon_smg1"} }
+
+		create {classname "npc_metropolice" origin "4864 -4224 -160"
+			values {spawnflags "655620"
+				angles "0 90 0"
+				targetname "syn_vint_trav_extrabridgecops_2"
+				squadname "squad1"
+				additionalequipment "weapon_smg1"} }
+
+		create {classname "npc_metropolice" origin "5152 -4224 -160"
+			values {spawnflags "655620"
+				angles "0 90 0"
+				targetname "syn_vint_trav_extrabridgecops_2"
+				squadname "squad1"
+				additionalequipment "weapon_smg1"} }
+
+		create {classname "trigger_once"
+			origin "7136 943 -318"
+			values {model "*65"
+				spawnflags "1"
+				targetname "syn_vint"
+				OnTrigger "syn_vint_trav_extrabridgecops_temp_,ForceSpawn,,0,-1"} }
+
+//Trav|Edt - anti-rush
+		create {classname "trigger_coop"
+			origin "-7864.93 -4192.01 -950"
+			values {model "*80" angles "0 90 -21"
+				spawnflags "1"
+				targetname "syn_antirush_coop"
+				CountType "1"
+				UseHUD "1"
+				PlayerValue "50"
+				wait "1.5"
+				OnTrigger "syn_antirush_text,Display,,1,-1"
+				OnPlayersIn "syn_antirush_prop,Kill,,0,1"
+				OnPlayersIn "syn_end_light,TurnOff,,0,1"
+				OnPlayersIn "!self,Disable,,1,1"} }
+
+		create {classname "prop_dynamic" origin "-7320 -4224 -1056"
+			values {model "models/synergy/tools/syn_transition.mdl"
+				targetname "syn_antirush_prop"
+				angles "0 180 0"
+				solid "6"
+				DisableShadows "1"} }
+
+	//	create {classname "light_dynamic" origin "-7264 -4224 -896"
+	//		values {targetname "syn_end_light"
+	//			_light "170 255 170"
+	//			brightness "2"
+	//			distance "1024"
+	//			//_inner_cone "75"
+	//			//_cone "80"
+	//			style "12"} }
+
+		create {classname "game_text"
+			values {spawnflags "0"
+				targetname "syn_antirush_text"
+				message "Need More Players to Continue. . ."
+				channel "0"
+				effect "2"
+				x "-1"
+				y "0.85"
+				color "100 100 100"
+				color2 "240 110 0"
+				fadein "0.03"
+				fadeout "1.25"
+				holdtime "2"
+				fxtime "0.25"} }
+
+//Trav|Edt - Functionality check
+		create {classname "logic_relay" values {targetname "trav_functionality_d1_canals_07"} }
+	}
+}

@@ -1,0 +1,263 @@
+d3_c17_01
+{
+	entity {
+//--Setup--
+		delete {classname "logic_auto" origin "-7419.37 -1134 12"}
+		delete {classname "logic_auto" origin "-7152.46 -1192 56"}
+		create {classname "logic_auto"
+			values {spawnflags "1"
+				OnMapSpawn "corkboard01,SetParentAttachment,corkboard_attachment,0,-1"
+				//OnMapSpawn "lcs_k_lab02_01,Start,,5,-1"
+				//OnMapSpawn "alyx,StartScripting,,1,-1"
+				OnMapSpawn "window_shutters_1,SetAnimation,close,0,-1"
+				OnMapSpawn "teleport_to_lab,Enable,,2,-1"} }
+			//	"OnNewGame" "global_newgame_template_base_items,ForceSpawn,,0,1"
+			//	"OnNewGame" "global_newgame_template_local_items,ForceSpawn,,0.2,1"
+			//	"OnNewGame" "global_newgame_template_ammo,ForceSpawn,,0.5,1"
+
+		edit {classname "func_areaportal" values {targetname "disabledPortal" StartOpen "1"} }
+
+//--Starting Items--
+		create {classname "info_player_equip"
+			values {
+				item_suit			"1"
+				item_armor			"60"
+				weapon_crowbar		"1"
+				weapon_pistol		"1"
+				weapon_smg1			"1"
+				weapon_frag			"1"
+				weapon_357			"1"
+				weapon_physcannon	"1"
+				weapon_shotgun		"1"
+				weapon_ar2			"1"
+				weapon_rpg			"1"
+				weapon_crossbow		"1"
+				weapon_bugbait		"1"
+				weapon_slam			"1"
+				ammo_pistol			"54"//72
+				ammo_smg1			"45"
+				ammo_grenade		"1"
+				ammo_smg1_grenade	"1"
+				ammo_357			"6"
+				ammo_buckshot		"12"
+				ammo_ar2			"30"
+				ammo_ar2altfire		"1"
+				//ammo_rpg_round		"1"
+				//ammo_crossbow		"0"
+				//ammo_slam			"2"
+			} }
+
+//--Spawns--
+		create {classname "info_spawn_manager"
+			values {targetname "syn_spawn_manager"} }
+
+		create {classname "info_player_coop" origin "-7202 -1164 24"
+			values {angles "0 284 0" targetname "syn_spawn_player_1"} }
+
+		create {classname "info_global_settings"
+			values {IsVehicleMap "0" targetname "syn_global_settings"} }
+
+//--Extra--
+//Delay Intro: wait for a player before begining sequences
+		delete {classname "logic_auto" origin "-7288 -1272 232"}
+
+		create {classname "hud_timer"
+			values {targetname "syn_intro_hud_timer"
+				TimerType "1"
+				TimerText "WAITING FOR PLAYERS"
+				OnTimer "syn_intro_relay,Trigger,,0,-1"} }
+
+		create {classname "trigger_once"
+			origin "-7152 -1360 72"
+			values {model "*34"
+				spawnflags "1"
+				OnTrigger "syn_intro_hud_timer,Start,10,0.1,-1"} }
+
+		create {classname "logic_relay"
+			values {targetname "syn_intro_relay"
+				OnTrigger "lcs_k_lab02_01,Start,,5,-1"
+				OnTrigger "alyx,StartScripting,,1,-1"
+
+				OnTrigger "syn_intro_viewcontrol,Disable,,0,-1"
+				OnTrigger "teleport_screenoverlay_Kleiner_1,StartOverlays,,0,-1"
+				OnTrigger "teleport_all_flash_1,Fade,,0,-1"
+				OnTrigger "logic_startstop_rings,Trigger,,0,-1"
+				OnTrigger "sound_suck_in_2,PlaySound,,0,-1"
+				OnTrigger "sound_breathing,PlaySound,,0,-1"
+				OnTrigger "sound_heartbeat,PlaySound,,0,-1"
+				OnTrigger "telelightning_Main_All_return_1,Trigger,,0,-1"
+				OnTrigger "global_friendly_encounter,TurnOn,,0,-1"
+				OnTrigger "teleport_all_flash_1,Fade,,0.4,-1"
+				OnTrigger "teleport_all_flash_1,Fade,,1.2,-1"
+				OnTrigger "teleporting_sound_1,PlaySound,,1.85,-1"
+				OnTrigger "teleport_screenoverlay_Kleiner_1,StopOverlays,,2,-1"
+				OnTrigger "teleport_all_flash_1,Fade,,2,-1"
+				OnTrigger "teleporter_window_powerdown,PlaySound,,2,-1"
+				OnTrigger "logic_intro_flash_1,Trigger,,2,-1"
+				OnTrigger "sound_heartbeat,StopSound,,2.2,-1"
+				OnTrigger "sound_breathing,StopSound,,2.2,-1"
+				OnTrigger "song_lab,PlaySound,,4,-1"} }
+
+		create {classname "point_viewcontrol" origin "-7423 -1115 48"
+			values {spawnflags "140"
+				targetname "syn_intro_viewcontrol"} }
+
+		create {classname "logic_auto"
+			values {spawnflags "1"
+				OnMapSpawn "syn_intro_viewcontrol,Enable,,0,-1"} }
+
+		// create intermission
+	//	"create" { "classname" "info_intermission" "origin" "" "values" { "angles" "" } }
+
+//Trav|Edt - add super kewl stuff
+		//create {classname "point_template"
+		//	targetname	"crate_respawner"
+		//	spawnflags	"3"
+		//	values {Template01 "crate" } }
+
+		//edit   {classname "item_item_crate"
+		//	targetname	"crate"
+		//	values {OnBreak "crate_respawner,ForceSpawn,-1,5,-1" } }
+
+		//edit {classname "item_item_crate"
+		//      values {OnBreak "AddOutput,RespawnCount -1,0,-1" } }
+
+		//create {classname "npc_turret_floor"
+		//	origin	"-6544 -376 32"
+		//	values {spawnflags "640"
+		//		angles	"0 90 0"
+		//	OnPhysGunPickup "!activator,Enable,-1,0,-1" } }
+
+		//create {classname "npc_turret_floor"
+		//	origin	"-6512 -376 32"
+		//	values {spawnflags "640"
+		//		angles	"0 90 0"
+		//	OnPhysGunPickup "!activator,Enable,-1,0,-1" } }
+
+		//create {classname "npc_turret_floor"
+		//	origin	"-6480 -376 32"
+		//	values {spawnflags "640"
+		//		angles	"0 90 0"
+		//	OnPhysGunPickup "!activator,Enable,-1,0,-1" } }
+
+		//create {classname "npc_turret_floor"
+		//	origin	"-6448 -376 32"
+		//	values {spawnflags "640"
+		//		angles	"0 90 0"
+		//	OnPhysGunPickup "!activator,Enable,-1,0,-1" } }
+
+		//create {classname "npc_turret_floor"
+		//	origin	"-6416 -376 32"
+		//	values {spawnflags "640"
+		//		angles	"0 90 0"
+		//	OnPhysGunPickup "!activator,Enable,-1,0,-1" } }
+
+		//create {classname "npc_turret_floor"
+		//	origin	"-6384 -376 32"
+		//	values {spawnflags "640"
+		//		angles	"0 90 0"
+		//	OnPhysGunPickup "!activator,Enable,-1,0,-1" } }
+
+		create {classname "item_ammo_crate"
+			origin	"-6372 -576 17"
+			values {angles	"0 180 0"
+				AmmoType	"2" } }
+
+		create {classname "item_ammo_crate"
+			origin	"-6372 -672 17"
+			values {angles	"0 180 0"
+				AmmoType	"4" } }
+
+		create {classname "item_ammo_crate"
+			origin	"-6572 -548 17"
+			values {AmmoType	"6" } }//0 (pistol)
+
+		create {classname "item_ammo_crate"
+			origin	"-6460 -356 17"
+			values {angles "0 270 0"
+				AmmoType	"5"} }
+
+		create {classname "item_healthcharger"
+			origin	"-6400 -723 52"
+			values {angles	"0 180 0" } }
+
+		create {classname "item_suitcharger"
+			origin	"-6400 -756 48"
+			values {angles	"0 180 0" } }
+
+		//edit {classname "prop_physics"
+		//      origin	"-6425 -805 21"
+		//      values {spawnflags	"8" } }
+
+		create {classname "weapon_crossbow"
+			origin	"-6561 -1044 10"
+			values {spawnflags	"4"
+				angles "0 0 0" } }
+
+		create {classname "item_ammo_ar2_altfire"
+			origin	"-6583 -512 50"}
+
+		create {classname "item_ammo_smg1_grenade"
+			origin	"-6584 -496 53"}
+
+		create {classname "item_ammo_crossbow"
+			origin	"-6375 -612 12"
+			values {angles	"60 270 0" } }
+
+		create {classname "weapon_slam"
+			origin	"-6576 -592 10"
+			values {spawnflags	"4" } }
+
+		create {classname "weapon_slam"
+			origin	"-6576 -612 10"
+			values {spawnflags	"4" } }
+
+		create {classname "weapon_slam"
+			origin	"-6576 -632 10"
+			values {spawnflags	"4" } }
+
+		create {classname "infodecal"
+			origin "-6516 -336 65"
+			values {texture "decals/lambdaspray_2a"} }
+
+		create {classname "item_suitcharger"
+			origin "-6624 -1584 48"
+			values {angles "0 180 0"} }
+
+		create {classname "item_suitcharger"
+			origin "-7152 -1536 48"
+			values {angles "0 90 -7"} }
+
+//End of Trav|Edt
+
+		// clear some room for the spawns
+		//"delete" { "classname" "prop_physics" "origin" "-7214.00 -1504.00 18.00" }
+
+		// leave teleporter door open
+		"delete" { "targetname" "trigger_closeTPDoor" }
+
+		// leave dog door open
+		"delete" { "classname" "trigger_once" "origin" "-6480 -624 56" }
+		"create"
+		{
+			"classname" "trigger_once"
+			"origin" "-6480 -624 56"
+			"values"
+			{
+				"model" "*34"
+				"targetname" "trigger_leave_dog_door"
+				"spawnflags" "1"
+				"StartDisabled" "1"
+			//	"OnTrigger" "logic_nag_leave_1,Kill,,0,-1"
+			//	"OnTrigger" "timer_nag_leave_1,Kill,,0,-1"
+			//	"OnTrigger" "doors_elevator_1,Close,,0.4,-1"
+			//	"OnTrigger" "doors_elevator_2,Close,,0,-1"
+			//	"OnTrigger" "spark_elevator_shaft_light,StartSpark,,0,-1"
+				"OnTrigger" "global_friendly_encounter,TurnOff,,1,-1"
+			}
+		}
+
+//Trav|Edt - Functionality check
+		create {classname "logic_relay" values {targetname "trav_functionality_d3_c17_01"} }
+	}
+}

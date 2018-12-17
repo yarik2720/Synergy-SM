@@ -1,0 +1,180 @@
+ep1_citadel_01
+{
+	entity
+	{
+//--Setup--
+		delete {classname "logic_auto" origin "-6136 6400 2664"}
+		create {classname "logic_auto" origin "-6136 6400 2664"
+			values {
+				spawnflags "1"
+			//	OnNewGame "global_newgame_template_base_items,ForceSpawn,,0,1"
+				OnNewGame "template_alyx,ForceSpawn,,0.1,-1"
+				OnNewGame "relay_Mapstart,Trigger,,0,1"
+				OnMapTransition "relay_Mapstart,Trigger,,0,1"} }
+		edit {classname "func_areaportal" values {targetname "syn_DisabledPortal" StartOpen "1"} }
+		edit {classname "func_areaportalwindow" values {targetname "syn_DisabledPortalWindow" FadeStartDist "1000" FadeDist "1500"} }
+
+//Prevent Backtracking
+		create {classname "trigger_push" origin "0 -56 0"
+			values {model "*7"
+				spawnflags "1"
+				speed "750"
+				pushdir "0 270 0"} }
+
+//--Starting Items--
+		create {classname "info_player_equip"
+			values {
+				item_suit			"1"
+				item_armor			"45"
+				weapon_physcannon	"1"
+			} }
+
+//--Spawns--
+		create {classname "info_spawn_manager"
+			values {targetname "syn_spawn_manager"} }
+//Intro
+		create {classname "info_player_coop" origin "-6306.06 6654.31 2648.03"
+			values {angles "0 270 0" targetname "syn_spawn_player_1"} }
+//Advisor Area
+		create {classname "info_player_coop" origin "-5016 1656 2464"
+			values {angles "0 315 0" targetname "syn_spawn_player_2" StartDisabled "1"} }
+//Rollermine Area
+		create {classname "info_player_coop" origin "-2733 1361 2468"
+			values {angles "0 0 0" targetname "syn_spawn_player_3" StartDisabled "1"} }
+
+		create {classname "info_global_settings"
+			values {targetname "syn_global_settings" IsVehicleMap "0"} }
+
+//--Extra--
+
+		create { classname "info_intermission" origin "-5002 1616 2623" values { angles "16 -18 0" } }
+
+//Trav|Edt - move players into advisor room and set checkpoint
+		create {classname "trigger_once" origin "-4584 1504 2468"
+			values {model "*211"
+				spawnflags "1"
+				targetname "syn_checkpoint_01"
+				StartDisabled "1"
+				OnTrigger "syn_spawn_manager,MovePlayers,,0.1,-1"
+				OnTrigger "syn_spawn_manager,SetCheckPoint,syn_spawn_player_2,0,-1"} }
+
+		create {classname "logic_auto"
+			values {spawnflags "1"
+				OnMapSpawn "ss_jump_gravroom_1,AddOutput,OnEndSequence:syn_checkpoint_01:Enable::0:-1,0,-1"} }
+
+//Trav|Edt - keep DEGG in stripper area
+		create {classname "func_clip_vphysics"
+			origin "-2916 1328 2560"
+			values {model "*142"
+				filtername "syn_filter_DEGG"} }
+
+		create {classname "func_clip_vphysics"
+			origin "-2408 1332 2560"
+			values {model "*138"
+				filtername "syn_filter_DEGG"} }
+
+		create {classname "func_clip_vphysics"
+			origin "-2674 1377 2768.86"
+			values {model "*145"
+				filtername "syn_filter_DEGG"} }
+
+		create {classname "filter_activator_class"
+			values {targetname "syn_filter_DEGG"
+				filterclass "weapon_physcannon"} }
+
+//End of Trav|Edt
+
+//TODO: use trigger_coop
+		// do not close rollertraining door
+		delete { targetname "counter_rollerdoor_close" }
+		create { classname "math_counter" origin "-4585 7507.29 2593.99"
+			values {
+				"targetname" "counter_rollerdoor_close"
+				"max" "2"
+				"min" "0"
+				"startvalue" "0"
+			//	"OnHitMax" "door_rollertraining,SetAnimation,idle_close,5,-1"
+			//	"OnHitMax" "door_rollertraining,SetAnimation,close,0,-1"
+			//	"OnHitMax" "trigger_player_closedoor,Kill,,0,-1"
+			//	"OnHitMax" "clip_rollerdoor,Enable,,0,-1"
+				"OnHitMax" "clip_rollerdoor,Kill,,5,-1"
+			}
+		}
+
+		// activate a checkpoint during weapon strip
+		delete { classname "trigger_once" origin "-2658 1377 2576.86" }
+		create { classname "trigger_once" origin "-2658 1377 2576.86"
+			values {
+				"model" "*145"
+				"spawnflags" "1"
+				"StartDisabled" "0"
+				"OnStartTouch" "logic_weapon_strip_announce,Trigger,,1.5,-1"
+				"OnStartTouch" "weapon_strip_motion_disable_player,Enable,,1,-1"
+				"OnStartTouch" "relay_combineshieldwall2_on1,Trigger,,0,-1"
+				"OnStartTouch" "lcs_al_citadel_01_gravcharge_01,Start,,0,-1"
+				"OnStartTouch" "ambient_holdfield_loop,PlaySound,,2,-1"
+
+				"OnStartTouch" "syn_spawn_manager,SetCheckpoint,syn_spawn_player_3,0.05,-1"
+				"OnStartTouch" "syn_spawn_manager,MovePlayers,,0.1,-1"
+			}
+		}
+
+		// rollermine training
+		// enable player trigger after rollermine trigger
+		delete { targetname "trigger_player_holdmine" }
+		create { classname "trigger_once" origin "-4716 7688 2648"
+			values {
+				"model" "*155"
+				"wait" "0"
+				"targetname" "trigger_player_holdmine"
+				"spawnflags" "1"
+				"StartDisabled" "1"
+
+				"OnTrigger" "math_bringroller,Add,1,0,-1"
+			}
+		}
+
+		delete { targetname "trigger_roller_holdmine" }
+		create { classname "trigger_multiple" origin "-4716 7688 2648"
+			values {
+				"model" "*156"
+				"filtername" "filter_rollermine"
+				"wait" "0"
+				"targetname" "trigger_roller_holdmine"
+				"spawnflags" "64"
+				"StartDisabled" "0"
+
+				"OnStartTouch" "relay_math_bringroller_add,Disable,,0.01,-1"
+				"OnStartTouch" "relay_math_bringroller_add,Trigger,,0,-1"
+				"OnStartTouch" "trigger_player_holdmine,Enable,,0,-1"
+
+				"OnEndTouchAll" "relay_math_bringroller_add,Enable,,0,-1"
+				"OnEndTouchAll" "math_bringroller,Subtract,1,0,-1"
+				"OnEndTouchAll" "trigger_player_holdmine,Disable,,0,-1"
+			}
+		}
+
+		// do not allow the field to go back up after player and rollermine triggers
+		delete { targetname "clip_combineshieldwall6" }
+
+		delete { targetname "lcs_al_citadel_01_rollertraining_02" }
+		create { classname "logic_choreographed_scene" origin "-4616 7752 2600"
+			values {
+				"busyactor" "1"
+				"target2" "target_hackingconsole_01"
+				"target1" "mark_roller_console_01"
+				"SceneFile" "scenes/episode_1/al_citadel_01_rollertraining_02.vcd"
+				"targetname" "lcs_al_citadel_01_rollertraining_02"
+				"OnCompletion" "relay_al_scripting_start,Enable,,0.1,-1"
+				"OnCompletion" "relay_al_scripting_stop,Enable,,0.1,-1"
+				"OnCompletion" "relay_al_scripting_stop2,Trigger,,0.2,-1"
+			//	"OnTrigger2" "relay_combineshieldwall3_on,Trigger,,0,-1"
+				"OnStart" "alyx,StartScripting,,0,-1"
+			}
+		}
+
+
+//Trav|Edt - Functionality check
+		create {classname "logic_relay" values {targetname "trav_functionality_ep1_citadel_01"} }
+	}
+}

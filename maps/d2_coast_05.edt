@@ -1,0 +1,400 @@
+d2_coast_05
+{
+	entity {
+//--Setup--
+		delete {classname "logic_auto" origin "7805.21 -12184 1840.88"}
+		delete {classname "player_loadsaved"}
+		delete {targetname "fall_trigger"}
+		edit {classname "func_areaportal" values {targetname "disabledPortal" StartOpen "1"} }
+		edit {classname "func_areaportalwindow" values {targetname "DisabledPortalWindow" FadeStartDist "1000" FadeDist "1500"} }
+
+//Prevent Backtracking
+		create {classname "prop_dynamic" origin "9968 -12032 1792"
+			values {model "models/synergy/tools/syn_transition.mdl"
+				angles "0 180 0"
+				solid "6"
+				DisableShadows "1"} }
+
+		create {classname "light_dynamic" origin "9984 -12032 1888"
+			values {_light "170 255 170"
+				brightness "2"
+				distance "1024"
+				style "12"} }
+
+	//	create {classname "trigger_push" origin "-80 0 0"
+	//		values {model "*97"//*97 - Pre 2010 Update
+	//			spawnflags "65"
+	//			speed "750"
+	//			pushdir "0 180 0"} }
+
+		create {classname "func_vehicleclip" origin "-80 0 0"
+			values {model "*97"} }//*97 - Pre 2010 Update
+
+//--Starting Items--
+		create {classname "info_player_equip"
+			values {targetname "syn_equipment_base"
+				item_suit			"1"
+				item_armor			"60"
+				weapon_crowbar		"1"
+				weapon_pistol		"1"
+				weapon_smg1			"1"
+				weapon_frag			"1"
+				weapon_357			"1"
+				weapon_physcannon	"1"
+				weapon_shotgun		"1"
+				weapon_ar2			"1"
+				weapon_rpg			"1"
+				ammo_pistol			"54"//72
+				ammo_smg1			"45"
+				ammo_grenade		"1"
+				ammo_smg1_grenade	"1"
+				ammo_357			"6"
+				ammo_buckshot		"12"
+				ammo_ar2			"30"
+				ammo_rpg_round		"1"
+			} }
+
+		create {classname "info_player_equip"
+			values {targetname "syn_newweapon" StartDisabled "1" weapon_crossbow "1" ammo_crossbow "4"} }
+
+//--Spawns--
+		create {classname "info_spawn_manager"
+			values {targetname "syn_spawn_manager"} }
+//Intro: Tunnel
+		create {classname "info_player_coop" origin "9194.50 -11947.53 1792.03"
+			values {angles "0 180 0" targetname "syn_spawn_player_1"} }
+//First House
+		create {classname "info_player_coop" origin "-4928 -11816 696"
+			values {angles "0 255 0" targetname "syn_spawn_player_2" StartDisabled "1"} }
+//Crossbow Truck
+		create {classname "info_player_coop" origin "-4040 -5024 1088"
+			values {angles "0 150 0" targetname "syn_spawn_player_3" StartDisabled "1"} }
+//Gas Station Workhouse
+		create {classname "info_player_coop" origin "-5512 -160 1104"
+			values {angles "0 15 0" targetname "syn_spawn_player_4" StartDisabled "1"} }
+
+		create {classname "info_global_settings"
+			values {IsVehicleMap "1" targetname "syn_global_settings"} }
+
+		create {classname "info_vehicle_spawn" origin "7600 -12160 1792"
+			values {targetname "syn_spawn_vehicle_1"
+				angles "0 90 0"
+				StartEnabled "1"//
+				StartGunEnabled "1"
+				RespawnVehicle "1"
+				VehicleType "4"//1&4 disalllows multiple players
+				VehicleSize "192"
+				model "models\vehicles\buggy_p2.mdl"//models/buggy.mdl
+				VehicleScript "scripts/vehicles/jeep_test.txt"} }
+//First House
+		create {classname "info_vehicle_spawn" origin "-4928 -12224 736"//-6703.96 -12144 711.99
+			values {targetname "syn_spawn_vehicle_2"
+				angles "0 90 0"//y345
+				StartEnabled "0"//
+				StartGunEnabled "1"
+				RespawnVehicle "1"
+				VehicleType "4"//1&4 disalllows multiple players
+				VehicleSize "192"
+				model "models\vehicles\buggy_p2.mdl"//models/buggy.mdl
+				VehicleScript "scripts/vehicles/jeep_test.txt"} }
+//Crossbow Truck
+		create {classname "info_vehicle_spawn" origin "-4544 -4672 1104"//-5165.88 -4768.01 1088
+			values {targetname "syn_spawn_vehicle_3"
+				angles "0 15 0"//0 345 0
+				StartEnabled "0"//
+				StartGunEnabled "1"
+				RespawnVehicle "1"
+				VehicleType "4"//1&4 disalllows multiple players
+				VehicleSize "192"
+				model "models\vehicles\buggy_p2.mdl"//models/buggy.mdl
+				VehicleScript "scripts/vehicles/jeep_test.txt"} }
+//Gas Station Workhouse
+		create {classname "info_vehicle_spawn" origin "-5304.01 -40.04 1112"
+			values {targetname "syn_spawn_vehicle_4"
+				angles "0 255 0"
+				StartEnabled "0"//
+				StartGunEnabled "1"
+				RespawnVehicle "1"
+				VehicleType "4"//1&4 disalllows multiple players
+				VehicleSize "192"
+				model "models\vehicles\buggy_p2.mdl"//models/buggy.mdl
+				VehicleScript "scripts/vehicles/jeep_test.txt"} }
+
+//--Checkpoints--
+		create {classname "trigger_once"
+			origin "-4611.95 -11929.1 708"
+			values {model "*100"
+				spawnflags "1"
+				OnTrigger "syn_spawn_manager,SetCheckpoint,syn_spawn_player_2,0,-1"
+				OnTrigger "syn_spawn_vehicle_2,Enable,,0,-1"
+				OnTrigger "syn_checkpoint_3,Enable,,1,-1"} }
+//xbow
+		create {classname "trigger_once"
+			origin "-3520 -4880 1542.86"
+			values {model "*88"
+				spawnflags "1"
+				targetname "syn_checkpoint_3"
+				StartDisabled "1"
+				OnTrigger "syn_spawn_manager,SetCheckpoint,syn_spawn_player_3,0,-1"
+				OnTrigger "syn_spawn_vehicle_3,Enable,,0,-1"
+				OnTrigger "syn_checkpoint_3,Enable,,1,-1"
+				OnTrigger "syn_autosave,Save,,1,-1"//only save
+				OnTrigger "syn_newweapon_give,Enable,,30,-1"} }//failsafe
+
+		create {classname "logic_relay"
+			values {targetname "logic_gate_shutdown"
+				OnTrigger "syn_checkpoint_*,Disable,,0,-1"
+				OnTrigger "syn_spawn_manager,SetCheckpoint,syn_spawn_player_4,0,-1"
+				OnTrigger "syn_spawn_vehicle_4,Enable,,0,-1"
+} }
+
+//--Extra--
+
+//Trav|Edt - Doors: Open Only
+	//	edit {classname "prop_door_rotating" values {spawnflags "0" returndelay "-1"} }
+
+//Trav|Edt - manage saves (only save @ xbow area)
+		edit {targetname "autosave" values {targetname "syn_autosave"} }
+
+//Trav|Edt - TEST rollermine teamkill
+	//	edit {classname "npc_rollermine" values {spawnflags "131076"} }
+
+//Trav|Edt - test custom spawner to enable use of 2-seater jeeps
+		//create {classname "point_template"
+		//	values {spawnflags "1"
+		//		targetname "trav_2seater_temp"
+		//		Template01 "trav_2seater"
+		//		OnEntitySpawned "trav_2seater_counter,Add,1,,-1"} }
+
+		//create {classname "prop_vehicle_jeep"
+		//	origin "7600 -12160 1792"
+		//	values {targetname "trav_2seater"
+		//	angles "0 90 0"
+		//	model "models/vehicles/buggy_p2.mdl"
+		//	vehiclescript "scripts/vehicles/jeep_test.txt"} }
+
+		//create {classname "math_counter"
+		//	values {targetname "trav_2seater_counter"
+		//		startvalue "0"
+		//		min "0"
+		//		max "12"
+		//		OnHitMax "trav_2seater_trigger,Disable,,0,-1"} }
+
+		//create {classname "trigger_multiple"
+		//	origin "7600 -12176 1824"
+		//	values {model "*123"
+		//		spawnflags "9"
+		//		targetname "trav_2seater_trigger"
+		//		wait "1"
+		//		//filtername "trav_2seater_filter"
+		//		OnEndTouchAll "trav_2seater_temp,ForceSpawn,,0,-1"} }
+
+//Trav|Edt - prevent combine form being trigger killed
+		delete {targetname "kill_house_soldiers"}
+
+//Trav|Edt - move crossbow so ppl dont accidently shoot it off. (also only allow relay to trigger once)
+		//delete {classname "weapon_crossbow" origin "-3876 -4104 1330"}
+
+		//create {classname "weapon_crossbow"
+		//	origin "-3810 -4248 1306"
+		//	values {angles "0 225 0" RespawnCount "1"
+		//		OnPlayerPickup "logic_crossbow_pickup,Trigger,,0,1"
+		//		OnPlayerPickup "syn_newweapon,Enable,,0,1"} }
+
+		create {classname "logic_relay"
+			values {spawnflags "1"
+				targetname "logic_crossbow_pickup"
+				OnTrigger "syn_newweapon_give,Enable,,1,-1"
+				OnTrigger "syn_newweapon,Enable,,1,-1"} }
+
+		create {classname "trigger_multiple"
+			origin "-3785 -4148.5 1358.37"
+			values {model "*104"
+				spawnflags "1"
+				targetname "syn_newweapon_give"
+				StartDisabled "1"
+				filtername "syn_newweapon_got"
+				OnStartTouch "syn_newweapon,EquipPlayer,,0,-1"
+				OnStartTouch "!activator,AddOutput,targetname syn_d2_coast_05_IHasGunz,0.1,-1"} }
+
+		create {classname "filter_activator_name"
+			values {targetname "syn_newweapon_got"
+				Negated "1"
+				filtername "syn_d2_coast_05_IHasGunz"} }
+
+		edit {targetname "logic_crossbow_pickup" values {spawnflags "1"} }
+
+		create {classname "item_ammo_crate"
+			origin	"-3904 -4232 1272"
+			values {angles	"0 60 0"
+				AmmoType	"7"
+				DisableShadows "1"
+				fademindist "2000"
+				fademaxdist "2500"} }
+
+//Trav|Edt - add more combine
+
+		create {classname "npc_combine_s"
+			origin "-4192 -512 1112"
+			values {spawnflags "2572"
+				targetname "syn_vint_trav_combine1"
+				hintgroup "gas_station"
+				squadname "squad_trav_combine1"
+				additionalequipment "weapon_ar2" } }
+
+		create {classname "npc_template_maker"
+			origin "-4192 -512 1112"
+			values {spawnflags "128"
+				angles " 0 180 0"
+				targetname "syn_vint_trav_tmaker_combine1"
+				StartDisabled "1"
+				MaxNPCCount "4"
+				SpawnFrequency "2"
+				TemplateName "syn_vint_trav_combine1"
+				OnSpawnNPC "syn_vint_trav_aiscript_sched_combine1,StartSchedule,,0.2,-1"} }
+
+		create {classname "aiscripted_schedule"
+			values {spawnflags "4"
+				targetname "syn_vint_trav_aiscript_sched_combine1"
+				m_iszEntity "syn_vint_trav_combine1"
+				schedule "2"
+				goalent "!player"} }
+
+		create {classname "trigger_once"
+			origin "-4803.99 -1346 1188"
+			values {model "*106"
+				spawnflags "1"
+				OnTrigger "syn_vint_trav_tmaker_combine1,Enable,,0,-1"} }
+
+//Trav|Edt - If xbow becomes unreachable, respawn xbow (probs with mprespawn weps TODO:set up game w/o auto respawning items)
+		//delete {classname "weapon_crossbow" origin ""-3865 -4102 1331}
+
+		//create {classname "weapon_crossbow"
+		//	origin "-3865 -4102 1331"
+		//	values {angles " 0 225 0"
+		//		targetname "trav_crossbow"
+		//		OnPlayerPickup "logic_crossbow_pickup,Trigger,,0,1"
+		//		OnPlayerPickup "trav_crossbow_tempalte,ForceSpawn,,0,-1"} }
+
+		//create {classname "point_template"
+		//	values {spawnflags "3"
+		//		targetname "trav_crossbow_tempalte"
+		//		Template01 "trav_crossbow"} }
+
+		//create {classname "filter_activator_name"
+		//	values {targetname "trav_crossbow_filter"
+		//		Negated "0"
+		//		filtername "trav_crossbow"} }
+
+		//create {classname "trigger_multiple"
+		//	origin "-3776 -4096 1336"
+		//	values {model "*118"
+		//	spawnflags "64"
+		//	wait "1"
+		//	filtername "trav_crossbow_filter"
+		//	OnEndTouch "trav_crossbow_tempalte,ForceSpawn,,0,-1"} }
+
+//End of Trav|Edt
+
+		// remove old jeep and create the new
+		delete { targetname "jeep" }
+
+//Trav|Edt - disable normal jeep spawn
+//Trav|Edt - move jeep (ORIGINAL ORIGIN "8929 -12070 1820")
+		//create { classname "info_vehicle_spawn" origin "6486.43 -12088 1784"
+		//	values
+		//	{
+		//		"angles" "0 90 0"
+		//		"StartEnabled" "1"
+		//		"targetname" "MPVS"
+
+		//		"VehicleType" "1"
+		//		"model" "models/vehicles/buggy_p2.mdl"
+
+		//		"VehicleScript" "scripts/vehicles/jeep_test.txt"
+		//		"RespawnVehicle" "1"
+		//		"VehicleSize" "128"
+		//	}
+		//}
+
+
+//Trav|Edt - anti-rush
+		create {classname "trigger_coop"
+			origin "9408 12224 2075.25"
+			values {model "*99"
+				spawnflags "1"
+				targetname "syn_antirush_trigger"
+				CountType "1"
+				UseHUD "1"
+				PlayerValue "50"
+				wait "1.5"
+				OnTrigger "syn_antirush_text,Display,,1,-1"
+				//OnPlayersIn "trav_antirush_brush,Disable,,0,1"
+				OnPlayersIn "syn_antirush_blocker,Kill,,0,1"
+				OnPlayersIn "syn_antirush_light,TurnOff,,0,1"
+				OnPlayersIn "!self,Disable,,1,1"} }
+
+		create {classname "prop_dynamic" origin "2088 5592 1344"
+			values {model "models/synergy/tools/syn_transition.mdl"
+				targetname "syn_antirush_blocker"
+				angles "0 210 0"
+				solid "6"
+				DisableShadows "1"} }
+
+		create {classname "light_dynamic" origin "2088 5592 1472"
+			values {targetname "syn_antirush_light"
+				_light "170 255 170"
+				brightness "2"
+				distance "1024"
+				//_inner_cone "75"
+				//_cone "80"
+				style "12"} }
+
+		//create {classname "func_brush"
+		//	origin "-2796.8 10544 2144"
+		//	values {model "*27"
+		//		spawnflags "2"
+		//		rendermode "2"
+		//		targetname "trav_antirush_brush"} }
+
+		create {classname "game_text"
+			values {spawnflags "0"
+				targetname "syn_antirush_text"
+				message "Need More Players to Continue. . ."
+				channel "0"
+				effect "2"
+				x "-1"
+				y "0.85"
+				color "100 100 100"
+				color2 "240 110 0"
+				fadein "0.03"
+				fadeout "1.25"
+				holdtime "2"
+				fxtime "0.25"} }
+
+		// changes made by valve for the episodic code has broken this
+		// fix the phys_lengthconstraint
+		delete { classname "phys_lengthconstraint" origin "-3014 395 1129" }
+		create { classname "phys_lengthconstraint" origin "-3014 395 1129"
+			values {
+			//	"attach1" "apc2"
+			//	"attach2" "gate_cable_cutme1"
+
+				"attach2" "apc2"
+
+				"attachpoint" "-3014 395 1129"
+				"minlength" "0"
+				"addlength" "240"
+				"torquelimit" "0"
+				"forcelimit" "100"
+				"spawnflags" "0"
+				"OnBreak" "logic_gate_shutdown,Trigger,,0,-1"
+			}
+		}
+
+		edit { classname "npc_antlion_maker" values { "spawntarget" "!rndplayer" } }
+
+//Trav|Edt - Functionality check
+		create {classname "logic_relay" values {targetname "trav_functionality_d2_coast_05"} }
+	}
+}

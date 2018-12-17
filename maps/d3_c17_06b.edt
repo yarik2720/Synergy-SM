@@ -1,0 +1,186 @@
+d3_c17_06b
+{
+	entity {
+//--Setup--
+		delete {classname "logic_auto" origin "1940.74 1776 16.7772"}
+		create {classname "logic_auto"
+			values {spawnflags "1"
+			OnMapSpawn "citizen_reinforcement_manager_2,Replenish,,0,-1"} }
+		edit {classname "func_areaportal" values {targetname "syn_disabledPortal" StartOpen "1"} }
+		edit {classname "func_areaportalwindow" values {targetname "syn_disabledPortalWindow" FadeStartDist "512" FadeDist "640"} }
+		edit {classname "env_lightglow" values {MinDist "192" MaxDist "768" OuterMaxDist "1024"} }//32,512,768
+		edit {targetname "building_b_occluder" values {StartActive "0" targetname "syn_building_b_occluder"} }
+		edit {targetname "building_d_occluder" values {StartActive "0" targetname "syn_building_d_occluder"} }
+
+//Prevent Backtracking
+		create {classname "syn_transition_wall" origin "1440 1632 -360" values {angles "0 90 0"} }
+
+		//create {classname "trigger_push" origin "0 64 0"
+		//	values {model "*109"
+		//		spawnflags "1"
+		//		speed "750"
+		//		pushdir "0 90 0"} }
+
+//--Starting Items--
+		create {classname "info_player_equip"
+			values {
+				item_suit			"1"
+				item_armor			"60"
+				weapon_crowbar		"1"
+				weapon_pistol		"1"
+				weapon_smg1			"1"
+				weapon_frag			"1"
+				weapon_357			"1"
+				weapon_physcannon	"1"
+				weapon_shotgun		"1"
+				weapon_ar2			"1"
+				weapon_rpg			"1"
+				weapon_crossbow		"1"
+				weapon_bugbait		"1"
+				weapon_slam			"1"
+				weapon_stunstick	"1"
+				ammo_pistol			"54"//72
+				ammo_smg1			"45"
+				ammo_grenade		"1"
+				ammo_smg1_grenade	"1"
+				ammo_357			"6"
+				ammo_buckshot		"12"
+				ammo_ar2			"30"
+				ammo_ar2altfire		"1"
+				//ammo_rpg_round		"1"
+				//ammo_crossbow		"0"
+				//ammo_slam			"2"
+			} }
+
+//--Spawns--
+		create {classname "info_spawn_manager"
+			values {targetname "syn_spawn_manager"} }
+
+		create {classname "info_player_coop" origin "1442.38 1680.32 -127.97"
+			values {angles "0 90 0" targetname "syn_spawn_player_1"} }
+
+		create {classname "info_global_settings"
+			values {IsVehicleMap "0" targetname "syn_global_settings"} }
+
+//--Extra--
+
+		// create intermission
+		"create" { "classname" "info_intermission" "origin" "3213.988770 1422.587524 452.169678" "values" { "angles" "17.786997 -5.535820 0" } }
+
+//Trav|Edt - Doors: Open Only
+		edit {targetname "sol_room_1_door" values {spawnflags "0"} }
+		edit {targetname "bld_a_frontdoor_1" values {spawnflags "2048"} }
+		edit {targetname "bld_b_frontdoor_1" values {spawnflags "2048"} }
+
+//Trav|Edt - Add crates for trap :D
+		create {classname "item_item_crate"
+			origin	"2187 1135 20"
+			values {ItemClass "item_dynamic_resupply"
+				ItemCount "5"} }
+
+		create {classname "item_item_crate"
+			origin	"2187 1135 44"
+			values {ItemClass "item_dynamic_resupply"
+				ItemCount "5"} }
+
+//Trav|Edt - open door if timeout fails (common stuck area with multiple peeps)
+		create {classname "trigger_once"
+			origin "3447 1277 17"
+			values {model "*97"
+				spawnflags "1"
+				OnTrigger "bld_a_frontdoor_1,UnLock,,30,-1"//def 45 delay
+				OnTrigger "bld_a_frontdoor_1,Open,,30.1,-1"} }
+
+//Trav|Edt - dont let players troll with bridges
+		edit {targetname "wench_1_lever_1" values {spawnflags "122"} }
+
+		delete {classname "func_button" origin "4344 1624.5 408"}
+		create {classname "func_button" origin "4349 1585.6 408"
+			values {model "*138" angles "0 -45 0"
+				spawnflags "1025"
+				targetname "syn_buttonfor_wench_2_lever_1"
+				OnPressed "wench_2_lever_1,Toggle,,0,1"} }
+
+//Trav|Edt - close first door do players wont get lost on way around [happens to often]
+		create {classname "logic_auto"
+			values {spawnflags "1"
+				OnMapSpawn "bld_b_frontdoor_1,AddOutput,OnOpen bld_a_frontdoor_1:Close::0:1,0,-1"
+				OnMapSpawn "bld_b_frontdoor_1,AddOutput,OnOpen bld_a_frontdoor_1:Lock::0.1:1,0,-1"} }
+
+//Trav|Edt - push players tryin to jump over fence
+		create {classname "trigger_push"
+			origin "3852 1480 166.5"
+			values {model "*61"
+				targetname "trav_wallpush"
+				spawnflags "1"
+				speed "750"
+				pushdir "0 180 0"} }
+
+		create {classname "trigger_push"
+			origin "3800 1555 138"//3800 1556 194
+			values {model "*46"
+				targetname "trav_wallpush"
+				spawnflags "1"
+				speed "750"
+				pushdir "0 270 0"} }
+
+		create {classname "trigger_once"
+			origin "3580 1392 281.5"
+			values {model "*61"
+				spawnflags "1"
+				OnTrigger "trav_wallpush,Kill,,0,-1"} }
+
+//Trav|Edt - autirush
+		create {classname "trigger_coop"
+			origin "5240 1488 186.5"
+			values {model "*3"
+				spawnflags "1"
+				targetname "syn_antirush_coop"
+				CountType "1"
+				UseHUD "1"
+				PlayerValue "50"
+				wait "1.5"
+				OnTrigger "syn_antirush_text,Display,,0,-1"
+				//OnPlayersIn "syn_antirush_push,Disable,,0,1"
+				OnPlayersIn "syn_antirush_wall,Kill,,0,1"
+				OnPlayersIn "!self,Disable,,1,1"} }
+
+		create {classname "syn_transition_wall" origin "5655.99 1664 56" values {angles "0 270 0" targetname "syn_antirush_wall"} }
+
+		//create {classname "trigger_push"
+		//	origin "5330.68 1653 300"
+		//	values {model "*126"
+		//		spawnflags "1"
+		//		targetname "syn_antirush_push"
+		//		pushdir "0 270 0"
+		//		speed "450"} }
+
+		create {classname "game_text"
+			values {spawnflags "0"
+				targetname "syn_antirush_text"
+				message "Need More Players to Continue. . ."
+				channel "0"
+				effect "2"
+				x "-1"
+				y "0.85"
+				color "100 100 100"
+				color2 "240 110 0"
+				fadein "0.03"
+				fadeout "1.25"
+				holdtime "2"
+				fxtime "0.25"} }
+
+		// fix the plank
+		"edit"
+		{
+			"targetname" "long_plank_1_rotator"
+			"values"
+			{
+				"speed" "20"
+			}
+		}
+
+//Trav|Edt - Functionality check
+		create {classname "logic_relay" values {targetname "trav_functionality_d3_c17_06b"} }
+	}
+}

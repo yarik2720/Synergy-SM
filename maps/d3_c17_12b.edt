@@ -1,0 +1,161 @@
+d3_c17_12b
+{
+	console
+	{
+//Trav|Edt - Max rpg carryness for rest of game(included in other maps).
+		//sk_max_rpg_round "5"
+	}
+	entity 
+	{
+//--Setup--
+		delete {classname "logic_auto" origin "-8352 -1383.23 -88.096"}
+		edit {classname "func_areaportal" values {targetname "syn_disabledPortal" StartOpen "1"} }
+
+//Prevent Backtracking
+		create {classname "syn_transition_wall" origin "-8368 -1704 -136" values {angles "0 90 0"} }
+
+		//create {classname "trigger_push" origin "0 64 0"
+		//	values {model "*33"
+		//		spawnflags "1"
+		//		speed "750"
+		//		pushdir "0 90 0"} }
+
+//--Starting Items--
+		create {classname "info_player_equip"
+			values {
+				item_suit			"1"
+				item_armor			"60"
+				weapon_crowbar		"1"
+				weapon_pistol		"1"
+				weapon_smg1			"1"
+				weapon_frag			"1"
+				weapon_357			"1"
+				weapon_physcannon	"1"
+				weapon_shotgun		"1"
+				weapon_ar2			"1"
+				weapon_rpg			"1"
+				weapon_crossbow		"1"
+				weapon_bugbait		"1"
+				weapon_slam			"1"
+				weapon_stunstick	"1"
+				ammo_pistol			"54"//72
+				ammo_smg1			"45"
+				ammo_grenade		"1"
+				ammo_smg1_grenade	"1"
+				ammo_357			"6"
+				ammo_buckshot		"12"
+				ammo_ar2			"30"
+				ammo_ar2altfire		"1"
+				ammo_rpg_round		"3"
+				//ammo_crossbow		"0"
+				//ammo_slam			"2"
+			} }
+
+//--Spawns--
+		create {classname "info_spawn_manager"
+			values {targetname "syn_spawn_manager"} }
+
+		create {classname "info_player_coop" origin "-8344 -1600 -128"
+			values {angles "0 90 0" targetname "syn_spawn_player_1"} }
+
+		create {classname "info_global_settings"
+			values {IsVehicleMap "0" targetname "syn_global_settings"} }
+
+//--Extra--
+
+		// create intermission
+		"create" { "classname" "info_intermission" "origin" "-6092.812500 -1113.562500 56.062500" "values" { "angles" "5 50 0" } }
+
+//Trav|Edt - allow strider to stomp on players
+		edit {classname "npc_strider"
+			values {spawnflags "67590"} }
+
+//Trav|Edt - autirush
+//TODO: move this a bit bro
+		create {classname "trigger_coop"
+			origin "-4534 552 126"
+			values {model "*20"
+				spawnflags "1"
+				//StartDisabled "1"
+				targetname "syn_antirush_coop"
+				CountType "1"
+				UseHUD "1"
+				PlayerValue "50"
+				wait "1.5"
+				OnTrigger "syn_antirush_text,Display,,1,-1"
+				//OnPlayersIn "syn_antirush_push,Disable,,0,1"
+				OnPlayersIn "syn_antirush_wall,Kill,,0,1"
+				OnPlayersIn "!self,Disable,,1,1"} }
+
+		create {classname "syn_transition_wall" origin "-4376 1128 -88" values {targetname "syn_antirush_wall"} }
+
+		//create {classname "trigger_push"
+		//	origin "-4390 808 151.5"
+		//	values {model "*37"
+		//		spawnflags "1"
+		//		targetname "syn_antirush_push"
+		//		pushdir "0 0 0"
+		//		speed "450"} }
+
+		create {classname "game_text"
+			values {spawnflags "0"
+				targetname "syn_antirush_text"
+				message "Need More Players to Continue. . ."
+				channel "0"
+				effect "2"
+				x "-1"
+				y "0.85"
+				color "100 100 100"
+				color2 "240 110 0"
+				fadein "0.03"
+				fadeout "1.25"
+				holdtime "2"
+				fxtime "0.25"} }
+
+//End of Trav|Edt
+//TODO: make this fall down when all players are out [when im not lazy]
+		//create {classname "trigger_coop"
+		//	origin "-8485 -1634 -154"
+		//	values {model ""
+		//		spawnflags "1"
+		//		targetname "syn_intro_coop"
+		//		CountType "1"
+		//		PlayerValue "100"
+		//		OnPlayersIn "syn_antirush_push,Disable,,0,1"
+		//		OnPlayersIn "!self,Disable,,1,1"} }
+
+		//create {classname "trigger_teleport"
+		//	origin "-8485 -1634 -154"
+		//	values {model ""
+		//		spawnflags "1"
+		//		targetname "syn_intro_teleporter"
+		//		StartDisabled "1"
+		//		target "trav_teleport_dest"} }
+
+		//create {classname "info_teleport_destination" origin "-9176 -1320 -256" values {targetname "trav_teleport_dest" angles "0 30 0"} }
+
+		// leave the doorway open
+		"delete" { "classname" "trigger_once" "origin" "-7888 -912 -136" }
+		"create"
+		{
+			"classname" "trigger_once"
+			"values"
+			{
+				"model" "*19"
+				"origin" "-7888 -912 -136"
+				"spawnflags" "1"
+				"StartDisabled" "0"
+				"OnTrigger" "tunnel_strider_1,SetRelationship,!player D_LI 9999,0,-1"
+				"OnTrigger" "tunnel_strider_1,SetCannonTarget,tunnel_1_bullseye_1,0,-1"
+				"OnTrigger" "strider_start_relationship,RevertRelationship,,0,-1"
+				"OnTrigger" "scanner_start_relationship,RevertRelationship,,0,-1"
+			//	"OnTrigger" "entry_ceiling_debris_clip_1,Enable,,0,-1"
+			}
+		}
+
+		"delete" { "targetname" "entry_ceiling_debris_1" }
+
+//Trav|Edt - Functionality check
+		create {classname "logic_relay" values {targetname "trav_functionality_d3_c17_12b"} }
+	}
+}

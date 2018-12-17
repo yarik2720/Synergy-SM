@@ -1,0 +1,125 @@
+d1_overboard_01 {
+	console { sk_plr_dmg_rpg_round 500 sk_npc_dmg_rpg_round 250 }
+	entity {
+		// fix choreo VOs
+		edit { "targetname" "HenleyScene1" values { "SceneFile" "scenes/rock24/henleyboat01.vcd" } }
+		edit { "targetname" "HenleyScene2" values { "SceneFile" "scenes/rock24/henleyboat02.vcd" } }
+		edit { "targetname" "RichardScene1" values { "SceneFile" "scenes/rock24/richboat1.vcd" } }
+
+		// intro delay trigger - borrow TriggerCabinscape *10 brush
+		create { "classname" "trigger_multiple"
+			values {
+				"targetname" "mapedit_shot_clock_trigger"
+				"model" "*10"
+				"spawnflags" "1"
+				"StartDisabled" "0"
+				"wait" "0"
+				"OnStartTouch" "mapedit_shot_clock,Start,60,0,-1"
+				"OnStartTouch" "mapedit_viewcontrol,Enable,,0,-1"
+				"OnEndTouchAll" "mapedit_shot_clock,Stop,,0,-1"
+			}
+		}
+		create { "classname" "point_viewcontrol" "origin" "45.965786 -373.606384 -59.175583"
+			values {
+				"targetname" "mapedit_viewcontrol"
+				"angles" "19.668007 -119.586159 0.000000"
+				"spawnflags" "140"
+				"target" "Henley"
+			}
+		}
+		create { "classname" "hud_timer"
+			values {
+				"targetname" "mapedit_shot_clock"
+				"TimerType" "1"
+				"TimerText" "WAITING FOR PLAYERS"
+				"OnTimer" "mapedit_shot_clock_trigger,Disable,,0,-1"
+				"OnTimer" "mapedit_viewcontrol,Disable,,0.1,-1"
+				"OnTimer" "mapedit_starter,Trigger,,0.1,-1"
+				"OnTimer" "mapedit_player_count_trigger,Disable,,0,-1"
+			}
+		}
+		create { "classname" "trigger_coop"
+			values {
+				"targetname" "mapedit_player_count_trigger"
+				"model" "*10"
+				"spawnflags" "1"
+				"StartDisabled" "0"
+				"CountType" "0"
+				"UseHud" "1"
+				"PlayerValue" "2"
+				"OnPlayersIn" "mapedit_shot_clock_trigger,Disable,,0,-1"
+				"OnPlayersIn" "mapedit_shot_clock,Stop,,0.1,-1"
+				"OnPlayersIn" "mapedit_viewcontrol,Disable,,0.2,-1"
+				"OnPlayersIn" "mapedit_starter,Trigger,,0.2,-1"
+				"OnPlayersIn" "!self,Disable,,0.2,-1"
+			}
+		}
+		create { "classname" "logic_relay"
+			values {
+				"targetname" "mapedit_starter"
+				"spawnflags" "1"
+				"OnTrigger" "BoatFlyBytrack01,EnablePath,,0,1"
+				"OnTrigger" "Boat_point_viewcontrol,Enable,,0,1"
+				"OnTrigger" "Boat_point_viewcontrol,Disable,,54,-1"
+				"OnTrigger" "IntroText1,Display,,12,-1"
+				"OnTrigger" "GeorgeBoatPatrol,BeginSequence,,3,-1"
+				"OnTrigger" "JamesMove,BeginSequence,,10,-1"
+				"OnTrigger" "JamestoScanner,RevertRelationship,,11,-1"
+				"OnTrigger" "MarcusWork,BeginSequence,,0,-1"
+				"OnTrigger" "MarcusWork2,BeginSequence,,48,-1"
+				"OnTrigger" "JamesScanners,PlaySound,,10,-1"
+				"OnTrigger" "LevelTitle,Display,,5,-1"
+				"OnTrigger" "HenleyScene1,Start,,56,-1"
+				"OnTrigger" "EntercabinFade,Fade,,52,-1"
+				"OnTrigger" "LevelTitle2,Display,,52,-1"
+				"OnTrigger" "keyboardtypesound,PlaySound,,17,-1"
+				"OnTrigger" "keyboardtypesound,StopSound,,29,-1"
+				"OnTrigger" "IntroMusic,PlaySound,,4,1"
+				"OnTrigger" "EntercabinFadeIn,Fade,,0,-1"
+			}
+		}
+		delete { "classname" "logic_auto" }
+
+		// info_player_spawn
+		edit { "classname" "info_player_start" values { "classname" "info_player_coop" } }
+
+		// fix area portals
+		edit { "classname" "func_areaportal" values { "targetname" "disabled-areaportal" "StartOpen" "1" } }
+
+		// fix level change method to prevent players from being dropped
+		// don't really need transitions here anyway
+		// you're suposed to start the next map as a captured prisoner with nothing
+		delete { "classname" "env_fade" "origin" "112 416 352" }
+		create { "classname" "env_fade" "origin" "112 416 352"
+			values {
+				"spawnflags" "8"
+				"targetname" "OverboardFade3"
+				"rendercolor" "0 0 0"
+				"renderamt" "255"
+				"holdtime" "4"
+				"duration" "2"
+				"OnBeginFade" "LoadNextLevelCommand,Command,changelevel d1_wakeupcall_02,7,-1"
+				"OnBeginFade" "Loadingmessage,Display,,0,-1"
+			}
+		}
+
+		// viewcontrol - All Players
+		edit { "classname" "point_viewcontrol" values { "spawnflags" "172" } }
+
+		// fix newgame items
+		create { "classname" "info_player_equip" "origin" "0 0 0"
+			values { "targetname" "mapedit_equiper" "spawnflags" "0" "StartDisabled" "1" "item_suit" "1" "weapon_rpg" "1" "item_rpg_round" "3" }
+		}
+		delete { "classname" "item_suit" }
+		create { "classname" "logic_auto"
+			values { "spawnflags" "1"
+				"OnMapSpawn" "weapon_rpg,AddOutput,OnPlayerPickup mapedit_equiper:enable::0:-1,0,-1"
+				"OnMapSpawn" "weapon_rpg,AddOutput,OnPlayerPickup mapedit_equiper:EquipAllPlayers::0.1:-1,0,-1"
+
+				// stop the CabinDoor from locking players in
+				"OnMapSpawn" "CabinDoor,AddOutput,OnOpen !self:AddOutput:targetname CabinDoor-disabled,0,-1"
+				"OnMapSpawn" "TriggerCabinescape,AddOutput,OnStartTouch CabinDoor-disabled:Kill::9:-1,0,-1"
+			}
+		}
+	}
+}

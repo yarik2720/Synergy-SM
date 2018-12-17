@@ -1,0 +1,192 @@
+d1_trainstation_04
+{
+	console
+	{
+		sv_player_push "0"
+	}
+
+	entity
+	{
+		edit{classname "func_areaportal" values {targetname "trav_disabled_aportal" StartOpen "1"} }
+
+		// prevent backtracking if new game
+		create {classname "logic_auto"
+			values {spawnflags "1"
+				OnMapTransition "trav_newgameblocker_prop,Kill,,0,-1"
+				//TODO: add doorman if newgame
+				OnMapTransition "trav_teleport,Teleport,,0,-1"
+			}
+		}
+
+		// fix doorman's pos
+		create {classname "point_teleport"
+			origin "-3078.3 -3528.6 384"
+			values {targetname "trav_teleport"
+				angles "0 135 0"
+				target "citizen_DoorBracer"} }
+
+		create {classname "prop_dynamic" origin "-3104 -3424 192"
+			values
+			{
+				targetname "trav_newgameblocker_prop"
+				model "models/synergy/tools/syn_transition.mdl"
+				angles "0 180 0"
+				solid "6"
+				DisableShadows "1"
+				fademindist "512"
+			}
+		}
+
+		// --Spawns--
+		create {classname "info_spawn_manager"
+			values {targetname "syn_spawn_manager"} }
+
+		create {classname "info_player_coop" origin "-3216 -3544 384"
+			values {angles "0 285 0" targetname "syn_spawn_player_1"} }
+
+	//	create {classname "info_player_coop" origin "-7530.05 -4056.76 -250.97"
+	//		values {angles "0 160 0" targetname "syn_spawn_player_2" StartDisabled "1"} }
+
+		//Trav|Edt - don't spawn intro cops until all players are out of area
+		delete {classname "trigger_once" origin "-3464 -3584 624"}
+
+		create {classname "trigger_multiple"
+			origin "-3042.47 -3473.67 524"
+			values {//model "*56"
+				edt_getbspmodelfor_targetname "trigger_knockout_teleport"
+				spawnflags "1"
+				OnEndTouchAll "ss_DoorBracer_Struggle,Kill,,0,1"
+				OnEndTouchAll "kickdown_relay,Trigger,,0,1"
+				OnEndTouchAll "!self,Kill,,1,-1"} }
+
+		// nodmgforce on fall killer
+		edit {classname "trigger_hurt" origin "-7340 -4415 -20" values {nodmgforce "1"} }
+
+		// diff
+		create {classname "logic_difficulty"
+			values {spawnflags "1"
+				targetname "syn_vint_ld_1"
+				OnLow "syn_vint_diff_npc_*,Kill,,0,-1"
+				OnNotHigh "syn_vint_diff_npc_2,Kill,,0,-1"} }
+
+		delete {targetname "street_cop_template_2"}
+
+		create {classname "point_template"
+			values {spawnflags "2"
+				targetname "street_cop_template_2"
+				Template01 "street_cop_3"
+				Template02 "syn_vint_diff_npc_1"
+				Template02 "syn_vint_diff_npc_2"
+				OnEntitySpawned "street_cop_chase_2,StartSchedule,,0.1,-1"
+				OnEntitySpawned "syn_vint_ld_1,CheckSkill,,0.15,-1"} }
+
+		create {classname "npc_metropolice"
+			origin "-7552.01 -5216 65"
+			values {spawnflags "8196"
+				targetname "syn_vint_diff_npc_1"
+				additionalequipment "weapon_pistol"} }
+
+		create {classname "npc_metropolice"
+			origin "-7536 -5248 65"
+			values {spawnflags "33562628"
+				targetname "syn_vint_diff_npc_2"
+				additionalequipment "weapon_smg1"} }
+
+		// remove Player clip
+		delete {targetname "window_player_clip"}
+
+		//Trav|Edt - Don't Spawn cops upstairs
+		delete {targetname "npc_knockout_cop_upstairs"}
+
+		//TODO: start ragdoll cops in endpos
+		//edit {targetname "ragdoll_cop_1" values{angleOverride ""} }
+		//edit {targetname "ragdoll_cop_2" values{angleOverride ""} }
+		//edit {targetname "ragdoll_cop_3" values{angleOverride ""} }
+		//edit {targetname "ragdoll_cop_4" values{angleOverride ""} }
+		//edit {targetname "ragdoll_cop_5" values{angleOverride ""} }
+		//edit {targetname "ragdoll_cop_6" values{angleOverride ""} }
+
+		//Trav|Edt - teleport players behind alyx scene during sequence
+		create {classname "logic_relay"
+			values {spawnflags "1"
+				targetname "logic_fade_view"
+				OnTrigger "trav_teleport_players_prealyx,Teleport,,1,-1"} }
+
+		create {classname "point_teleport"
+			origin "-7104 -3944 392"
+			values {targetname "trav_teleport_players_prealyx"
+				angles "0 180 0"
+				target "!player"} }
+
+		//Trav|Edt - change the fade color to black so I won't go blind by age 60
+		//not vintaged, cuz of bitter hatred <3
+		edit {targetname "fade" values {rendercolor "0 0 0"} }
+
+		//Trav|Edt - allow everyone to see alyxface
+		edit {targetname "blackout_viewcontroller" values {edt_addspawnflags "128"} }
+
+//Trav|Edt - teleport players to alyx after scene
+		create {classname "logic_auto"
+			values
+			{
+				spawnflags "1"
+				OnMapSpawn "blackout,AddOutput,OnAnimationDone trav_teleport_players:Teleport::0:-1,8,-1"
+			}
+		}
+
+		create {classname "point_teleport"
+			origin "-7544 -3981 387"
+			values {targetname "trav_teleport_players"
+				angles "0 180 0"
+				target "!player"} }
+
+//Trav edt| Re-enable alyx tele !NVM didnt do neything q.q !!Everyone timed out on next map transistion?
+//		"delete" { "classname" "trigger_teleport" "origin" "-7149.47 -3935.67 540" }
+//
+//		"create"
+//		{
+//			"classname" "trigger_once"
+//			"origin" "-7149.47 -3935.67 540"
+//
+//			"values"
+//			{
+//				"model" "*56"
+//				"targetname" "trigger_knockout_teleport"
+//				"target" "destination_knockout_1"
+//				"origin" "-7149.47 -3935.67 540"
+//				"spawnflags" "1"
+//				"StartDisabled" "1"
+//				"OnTrigger" "trigger_knockout_teleport,Disable,,0,-1"
+//				"OnTrigger" "blackout_viewcontroller,Disable,,0,-1"
+//				"OnTrigger" "blackout_viewcontroller,Kill,,0.2,-1"
+//				"OnTrigger" "blackout,Kill,,0.2,-1"
+//				"OnTrigger" "alyx,StartScripting,,0,-1"
+//			}
+//		}
+
+		//end waiter
+		create {classname "trigger_coop" origin "-7749.01 -3960 438"
+			values {//model "*57"
+				edt_getbspmodelfor_targetname "trigger_elevator_go_down"
+				spawnflags "1"
+				targetname "trigger_elevator_go_down"//syn
+				CountType "1"
+				UseHUD "1"
+				target "syn_end_vatorwait_coop_target"//syn
+				StartDisabled "1"
+				PlayerValue "50"
+				OnPlayersIn "!self,TeleportPlayersNotTouching,,0,-1"
+				OnPlayersIn "syn_trigger_elevator_go_down,Enable,,0,-1"
+				OnPlayersIn "!self,Disable,,1,1"} }
+
+		create {classname "info_target" origin "-7772 -3960 392" values {targetname "syn_end_vatorwait_coop_target"} }
+
+		edit {targetname "trigger_elevator_go_down" values {targetname "syn_trigger_elevator_go_down"} }
+
+		// prevent post-vator secret door from closing
+		delete {classname "trigger_once" origin "-7818 -4128 -176"}
+
+//Trav|Edt - Functionality check
+		create {classname "logic_relay" values {targetname "trav_functionality_d1_trainstation_04"} }
+	}
+}

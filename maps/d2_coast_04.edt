@@ -1,0 +1,410 @@
+d2_coast_04
+{
+console
+	{
+	sk_gunship_health_increments 12 //4
+	}
+	entity {
+	// TODO: make this map use a different vehicle script so the jeeps can get over the bridge
+		//create { classname "info_intermission" origin "2396 1381 330" values { angles "3 -72 0" } }
+//--Setup--
+		delete {classname "logic_auto" origin "-9784.2 -391.9 84"}
+		delete {classname "player_loadsaved"}
+		delete {targetname "fall_trigger"}
+		edit {classname "func_areaportal" values {targetname "disabledPortal" StartOpen "1"} }
+		edit {classname "func_areaportalwindow" values {targetname "DisabledPortalWindow"} }
+//outoflevel fail
+		delete {classname "trigger_once" origin "10496 -6144 -20"}
+//Prevent Backtracking
+		create {classname "trigger_push" origin "0 80 0"
+			values {model "*74"//*75 - Pre 2010 Update
+				spawnflags "65"
+				speed "750"
+				pushdir "0 90 0"} }
+
+		create {classname "func_vehicleclip" origin "0 80 0"
+			values {model "*74"} }//*75 - Pre 2010 Update
+
+//--Starting Items--
+		create {classname "info_player_equip"
+			values {targetname "syn_equipment_base"
+				item_suit			"1"
+				item_armor			"60"
+				weapon_crowbar		"1"
+				weapon_pistol		"1"
+				weapon_smg1			"1"
+				weapon_frag			"1"
+				weapon_357			"1"
+				weapon_physcannon	"1"
+				weapon_shotgun		"1"
+				weapon_ar2			"1"
+				weapon_rpg			"1"
+				ammo_pistol			"54"//72
+				ammo_smg1			"45"
+				ammo_grenade		"1"
+				ammo_smg1_grenade	"1"
+				ammo_357			"6"
+				ammo_buckshot		"12"
+				ammo_ar2			"30"
+				ammo_rpg_round		"1"
+			} }
+
+//--Spawns--
+		create {classname "info_spawn_manager"
+			values {targetname "syn_spawn_manager"} }
+
+		create {classname "info_player_coop" origin "-9635.41 -1970.43 6.19"
+			values {angles "0 80 0" targetname "syn_spawn_player_1"} }
+//dark area
+		create {classname "info_player_coop" origin "1824 -3048 256"
+			values {angles "0 45 0" targetname "syn_spawn_player_1b" StartDisabled "1"} }
+//Crane
+		create {classname "info_player_coop" origin "4256 -1560 672"
+			values {angles "0 345 0" targetname "syn_spawn_player_2" StartDisabled "1"} }
+//Warehouse
+		create {classname "info_player_coop" origin "5600 -4576 416"
+			values {angles "0 75 0" targetname "syn_spawn_player_3" StartDisabled "1"} }
+//Pre-jump
+		create {classname "info_player_coop" origin "-1888 -2304 1024"
+			values {angles "0 90 0" targetname "syn_spawn_player_3b" StartDisabled "1"} }
+//Post-jump
+		create {classname "info_player_coop" origin "-2032 3072 1000"
+			values {angles "0 345 0" targetname "syn_spawn_player_4" StartDisabled "1"} }
+
+		create {classname "info_global_settings"
+			values {IsVehicleMap "1" targetname "syn_global_settings"} }
+
+		create {classname "info_vehicle_spawn" origin "-9600 -432 112"
+			values {targetname "syn_spawn_vehicle_1"
+				angles "0 270 0"
+				StartEnabled "1"
+				StartGunEnabled "1"
+				RespawnVehicle "1"
+				VehicleType "4"//1&4 disalllows multiple players -v27
+				VehicleSize "192"
+				model "models/vehicles/buggy_p2.mdl"//models/vehicles/buggy_p2.mdl
+				VehicleScript "scripts/vehicles/jeep_test.txt"} }
+//Warehouse
+		create {classname "info_vehicle_spawn" origin "6031.99 -3216.01 392"
+			values {targetname "syn_spawn_vehicle_2"
+				angles "0 180 0"
+				StartEnabled "0"//
+				StartGunEnabled "1"
+				RespawnVehicle "1"
+				VehicleType "4"//1&4 disalllows multiple players
+				VehicleSize "192"
+				model "models\vehicles\buggy_p2.mdl"//models/buggy.mdl
+				VehicleScript "scripts/vehicles/jeep_test.txt"} }
+//Prejump
+		create {classname "info_vehicle_spawn" origin "-2080 -2240 1056"
+			values {targetname "syn_spawn_vehicle_3"
+				angles "0 345 0"
+				StartEnabled "0"//Enabled after window broken
+				StartGunEnabled "1"
+				RespawnVehicle "1"
+				VehicleType "4"//1&4 disalllows multiple players
+				VehicleSize "192"
+				model "models\vehicles\buggy_p2.mdl"//models/buggy.mdl
+				VehicleScript "scripts/vehicles/jeep_test.txt"} }
+//Post-jump
+		create {classname "info_vehicle_spawn" origin "-1887.99 3016 1000"
+			values {targetname "syn_spawn_vehicle_4"
+				angles "0 270 0"
+				StartEnabled "0"//
+				StartGunEnabled "1"
+				RespawnVehicle "1"
+				VehicleType "4"//1&4 disalllows multiple players
+				VehicleSize "192"
+				model "models\vehicles\buggy_p2.mdl"//models/buggy.mdl
+				VehicleScript "scripts/vehicles/jeep_test.txt"} }
+
+//--Checkpoints--
+		create {classname "trigger_once"
+			origin "4352 -1728 720"
+			values {model "*97"
+				spawnflags "1"
+				OnTrigger "syn_spawn_manager,SetCheckpoint,syn_spawn_player_2,0,-1"} }
+//1b
+		create {classname "trigger_once" origin "2600 -1816 323.54"
+			values {model "*84"
+				spawnflags "1"
+				OnTrigger "syn_spawn_manager,SetCheckpoint,syn_spawn_player_1b,0,-1"} }
+
+//3rd Checkpoint enabled in 'extra combine'
+//4th Checkpoint enabled in 'end'
+
+//--Extra--
+
+//Trav|Edt - fix walkway to heaven; fix free falls
+		create {classname "trigger_waterydeath" origin "1056 5760 -512" values {model "*54" spawnflags "3"} }
+		create {classname "trigger_hurt" origin "3091.2 2607.99 736" values {model "*25" spawnflags "1" angles "0 90 0" damage "1000" nodmgforce "1"} }
+
+//Trav|Edt - kill players who fall at bridge (avoids frustration of re-crane & will spawn at bridge)
+		create {classname "trigger_multiple" origin "-1873.95 1088 592"
+			values {model "*102"
+				spawnflags "1"
+				OnStartTouch "!activator,SetHealth,0,1,-1"} }
+
+//Trav|Edt - manage saves (only save on bridge fall)
+		edit {targetname "autosave" values {targetname "syn_autosave"} }
+
+		create {classname "trigger_once" origin "4723.5 -2688 394.5"
+			values {model "*59"
+				spawnflags "8"
+				filtername "catwalk_filter"
+				OnTrigger "syn_autosave,Save,,1,-1"} }
+
+//TODO: add non phys model for prop_physics equivalent??
+//Trav|Edt - save major network usage by removeing prop_ragdoll cars
+		create {classname "filter_activator_class"
+			values {targetname "syn_filter_prop_ragdoll"
+				filterclass "prop_ragdoll"} }
+
+		create {classname "trigger_once" origin "2464 3744 1120"
+			values {model "*90"
+				spawnflags "8"
+				filtername "syn_filter_prop_ragdoll"
+				OnStartTouch "!activator,Kill,,0,-1"} }
+
+		create {classname "logic_auto"
+			values {spawnflags "1"
+				OnMapSpawn "prop_ragdoll,DisableMotion,,10,-1"} }
+
+		//edit {classname "prop_ragdoll" origin "2661.9 3360.3 1150.1" values {classname "prop_physics"} }
+		//delete {classname "prop_ragdoll" origin "2661.9 3360.3 1150.1"}
+		//delete {classname "prop_ragdoll" origin "2793 3331 1093"}
+		//delete {classname "prop_ragdoll" origin "2593 3461 1161"}
+		//delete {classname "prop_ragdoll" origin "2596 3530 1241"}
+		//delete {classname "prop_ragdoll" origin "2584 3639 1091"}
+		//delete {classname "prop_ragdoll" origin "2741 3868 1083"}
+		//delete {classname "prop_ragdoll" origin "2679 4002 1072"}
+
+		//create {classname "prop_physics" origin "2661 3360 1150"
+		//	values {angles "-51.3889 115.695 -177.607"
+		//		model "models/props_vehicles/car001b_phy.mdl"
+		//		skin "3"
+		//		fademindist "4000"
+		//		fademaxdist "4500"} }
+
+
+
+//Trav|Edt - Doors: Open Only
+	//	edit {classname "prop_door_rotating" values {returndelay "-1"} }
+
+//Trav|Edt - test custom spawner to enable use of 2-seater jeeps
+		//create {classname "point_template"
+		//	values {spawnflags "1"
+		//		targetname "trav_2seater_temp"
+		//		Template01 "trav_2seater"
+		//		OnEntitySpawned "trav_2seater_counter,Add,1,,-1"} }
+
+		//create {classname "prop_vehicle_jeep"
+		//	origin "-9400 -432 112"
+		//	values {targetname "trav_2seater"
+		//	angles "0 270 0"
+		//	model "models/vehicles/buggy_p2.mdl"
+		//	vehiclescript "scripts/vehicles/jeep_test.txt"} }
+
+		//create {classname "math_counter"
+		//	values {targetname "trav_2seater_counter"
+		//		startvalue "0"
+		//		min "0"
+		//		max "12"
+		//		OnHitMax "trav_2seater_trigger,Disable,,0,-1"} }
+
+		//create {classname "trigger_multiple"
+		//	origin "-9168 -431.99 -40"
+		//	values {model "*47"
+		//		spawnflags "9"
+		//		targetname "trav_2seater_trigger"
+		//		wait "1"
+		//		//filtername "trav_2seater_filter"
+		//		OnEndTouchAll "trav_2seater_temp,ForceSpawn,,0,-1"} }
+
+//Trav|Edt - stop solider from bein removed
+		delete {targetname "crane_soldier_kill"}
+
+//Trav|Edt - prevent players from running up hill to skip level.
+		create {classname "trigger_push"
+			origin "1696 1376 736"
+			values {model "*75"
+				spawnflags "1"
+				targetname "syn_vint_trav_hill_push"
+				pushdir "10 270 0"
+				speed "350"} }
+
+//Trav|Edt - fix jump (hdr system)
+		edit {targetname "vclip_jump_extra" values {targetname "trav_enable_ramp" } }
+		//edit {targetname "velsensor_car_superjump_01" values {target "jeep"} }
+
+//Trav|Edt - add more combine in warehouse
+		create {classname "npc_template_maker"
+			origin "5592 -4448 424"
+			values {spawnflags "128"
+				angles " 0 90 0"
+				targetname "syn_vint_trav_tmaker_combine_warehouse"
+				//StartDisabled "1"
+				MaxNPCCount "6"//16
+				SpawnFrequency "0.5"
+				MaxLiveChildren "6"//8
+				TemplateName "warehouse1_soldier1"
+				OnAllSpawnedDead "syn_spawn_manager,SetCheckpoint,syn_spawn_player_3,0,-1"
+				//OnAllSpawnedDead "syn_spawn_vehicle_2,Enable,,1,-1"
+				} }
+
+//Trav|Edt - Require a vehicle to enable spawn
+		create {classname "trigger_once" origin "5900 -3528 448"
+			values {model "*68"
+				spawnflags "32"//vehicle only
+				OnTrigger "syn_spawn_vehicle_2,Enable,,1,-1"} }
+
+//Trav|Edt - Allow any vehicles to break glass window and add save
+		delete {targetname "jeepwindow_jeepfilter"}
+
+		create {classname "filter_activator_class"
+			values {targetname "jeepwindow_jeepfilter"
+				filterclass "prop_vehicle_*"} }
+
+		//edit {targetname "jeepwindow_jeepfilter"
+		//	values {classname "filter_activator_class"
+		//		filterclass "prop_vehicle_*"} }
+
+		create {classname "logic_relay"
+			values {spawnflags "1"
+				targetname "jeepwindow_breakrelay"
+				OnTrigger "autosave,save,,3,-1"
+				OnTrigger "syn_spawn_vehicle_3,Enable,,0,-1"
+				OnTrigger "syn_spawn_manager,SetCheckpoint,syn_spawn_player_3b,0,-1"} }
+
+//Trav|Edt - Add truck after jump
+		create {classname "prop_vehicle_mp"
+			origin "1927.99 2576.01 1032"
+			values {targetname "trav_SCAR2"
+			angles " 0 285 0"
+			model "models/vehicles/8seattruck.mdl"
+			vehiclescript "scripts/vehicles/truck.txt"
+			//skin "1"
+			} }
+
+//Trav|Edt - anti-rush
+		create {classname "trigger_coop"
+			origin "-3808 13440 2304"//-1761.95 10976 1952
+			values {model "*54"//*102
+				spawnflags "1"
+				targetname "syn_antirush_coop"
+				CountType "1"
+				UseHUD "1"
+				PlayerValue "50"
+				wait "1.5"
+				OnTrigger "syn_antirush_text,Display,,1,-1"
+				//OnPlayersIn "trav_antirush_brush,Disable,,0,1"
+				OnPlayersIn "syn_antirush_prop,Kill,,0,1"
+				OnPlayersIn "syn_end_light,TurnOff,,0,1"
+				OnPlayersIn "!self,Disable,,1,1"} }
+
+		create {classname "prop_dynamic" origin "-3320 10496 1792"
+			values {model "models/synergy/tools/syn_transition.mdl"
+				targetname "syn_antirush_prop"
+				solid "6"
+				DisableShadows "1"} }
+
+		create {classname "light_dynamic" origin "-3328 10496 1888"
+			values {targetname "syn_end_light"
+				_light "170 255 170"
+				brightness "2"
+				distance "1024"
+				//_inner_cone "75"
+				//_cone "80"
+				style "12"} }
+
+		//create {classname "func_brush"
+		//	origin "-2796.8 10544 2144"
+		//	values {model "*27"
+		//		spawnflags "2"
+		//		rendermode "2"
+		//		targetname "trav_antirush_brush"} }
+
+		create {classname "game_text"
+			values {spawnflags "0"
+				targetname "syn_antirush_text"
+				message "Need More Players to Continue. . ."
+				channel "0"
+				effect "2"
+				x "-1"
+				y "0.85"
+				color "100 100 100"
+				color2 "240 110 0"
+				fadein "0.03"
+				fadeout "1.25"
+				holdtime "2"
+				fxtime "0.25"} }
+
+//End of Trav|Edt
+
+		// create the new vehicles
+		delete { targetname "jeep" }
+
+//Trav|Edt - disable normal jeep spawn
+		//create { classname "info_vehicle_spawn" origin "-9831.631836 -1693.813354 85.815460"
+		//	values
+		//	{
+		//		"angles" "0 0 0"
+		//		"StartEnabled" "1"
+		//		"targetname" "MPVS"
+
+		//		"VehicleType" "1"
+		//		"model" "models/vehicles/buggy_p2.mdl"
+
+		//		"VehicleScript" "scripts/vehicles/jeep_test.txt"
+		//		"RespawnVehicle" "1"
+		//		"VehicleSize" "128"
+		//	}
+		//}
+
+
+		// checkpoint after bridge jump
+		"delete" { "classname" "trigger_multiple" "origin" "-1792 1472 1088" }
+		"create"
+		{
+			"classname" "trigger_multiple"
+			"origin" "-1792 1472 1088"
+
+			"values"
+			{
+				"model" "*47"
+				"spawnflags" "1"
+				"wait" "1"
+				"StartDisabled" "0"
+				"OnTrigger" "gunship,ChooseNearestPathPoint,,0,1"
+				"OnTrigger" "gunship,StopPatrol,,0,1"
+				"OnTrigger" "gunship,SetTrack,path_d_1,0,1"
+				"OnTrigger" "wussy_relay,Kill,,0,-1"
+			//	"OnTrigger" "fall_trigger,Enable,,0,1"
+//Trav|Edt - add save
+				OnTrigger "autosave,Save,,0,-1"
+				OnTrigger "syn_spawn_manager,SetCheckpoint,syn_spawn_player_4,0,-1"
+				OnTrigger "syn_spawn_vehicle_4,Enable,,0,-1"
+				//OnTrigger "MPVS_SPAWN,Kill,,1,-1"
+				"OnTrigger" "CP01,SetCheckpoint,,0,1"
+				"OnTrigger" "CP01,MovePlayers,1,0.1,1"
+			}
+		}
+
+		create { classname "info_player_coop" origin "-2569 2701 1023" values { angles "0 -25 0" StartDisabled "1" targetname "CP01" } }
+
+		// fix filtername
+		//delete { targetname "jeepwindow_jeepfilter" }
+		//create { classname "filter_activator_class" origin "4184 -5636 703.126"
+		//	values {
+		//		"filterclass" "prop_vehicle_jeep"
+		//		"targetname" "jeepwindow_jeepfilter"
+		//		"Negated" "0"
+		//	}
+		//}
+
+		edit { classname "npc_antlion_maker" values { "spawntarget" "!rndplayer" } }
+
+//Trav|Edt - Functionality check
+		create {classname "logic_relay" values {targetname "trav_functionality_d2_coast_04"} }
+	}
+}

@@ -1,0 +1,124 @@
+d3_citadel_02
+{
+	entity 
+	{
+//--Setup--
+		delete {classname "logic_auto" origin "-6272 6592 2624"}
+		//edit {classname "func_areaportal" values {targetname "syn_disabledPortal" StartOpen "1"} }//not needed?
+
+//--Starting Items--
+		create {classname "info_player_equip"
+			values {
+				item_suit			"1"
+				item_armor			"60"
+				weapon_crowbar		"1"
+				weapon_pistol		"1"
+				weapon_physcannon	"1"
+				ammo_pistol			"54"
+			} }
+
+//--Spawns--
+		create {classname "info_spawn_manager"
+			values {targetname "syn_spawn_manager"} }
+
+		create {classname "info_player_coop" origin "-6410.47 6660.32 2646"
+			values {angles "0 0 0" targetname "syn_spawn_player_1"} }
+
+		create {classname "info_global_settings"
+			values {IsVehicleMap "0" targetname "syn_global_settings"} }
+
+//--Extra--
+
+		// create intermission
+	//	"create" { "classname" "info_intermission" "origin" "" "values" { "angles" "0 0 0" } }
+
+		create { classname "info_teleport_destination" origin "-6410.47 6660.32 2646" values { angles "0 0 0" StartDisabled "1" targetname "MPVS_SPAWN_TP" } }
+
+		"create"
+		{
+			"classname"	"trigger_multiple"			
+			"values"
+			{
+				"StartDisabled"	"0"
+				"spawnflags"	"512"
+				"model"			"*78"
+				"origin"		"-6410.47 6660.32 2646"
+				
+			//	"OnStartTouch" "citadel_fade_in,Fade,,0,-1"
+			//	"OnStartTouch"	"pod_player,Unlock,,0.2,-1"
+				"OnStartTouch" "pod_player,EnterVehicleImmediate,,0.3,1"
+			//	"OnStartTouch" "pod_player,Lock,,0.4,-1"
+			}
+		}
+
+		// fix spawn items
+		"delete" { "classname" "logic_auto" "origin" "-6272 6592 2624" }
+		"create"
+		{
+			"classname" "logic_auto"
+			"origin" "-6272 6592 2624"
+			"values"
+			{
+				"spawnflags" "1"
+				"OnMapSpawn" "podride_song,PlaySound,,1,-1"
+				"OnMapSpawn" "logic_podtrains_L_start_1,Trigger,,0.2,-1"
+			//	"OnNewGame" "global_newgame_template_local_items,ForceSpawn,,0.1,1"
+			//	"OnNewGame" "global_newgame_template_base_items,ForceSpawn,,0,1"
+
+				// when the map starts, set the checkpoint
+				// so no one is left behind
+				"OnMapSpawn" "syn_spawn_manager,SetCheckpoint,MPVS_SPAWN,0,1"
+				"OnMapSpawn" "syn_spawn_manager,TeleportPlayers,MPVS_SPAWN_TP,0.1,1"
+			}
+		}
+
+		// disable areaportals
+		//"edit" { "classname" "func_areaportal" "values" { "targetname" "disabledPortal" "StartOpen" "1" } }
+
+
+		// ---------- level tasks -------------
+
+		// remove brush that starts the fade
+		"delete" { "classname" "trigger_once" "origin" "-6156 6640 2624.14" }
+
+		// remove fog trigger
+		"delete" { "classname" "trigger_once" "origin" "3885 13408 3915" }
+
+		// when we hit the trigger to eject us out of the pod
+		// activate checkpoint and prepare to change level
+		"delete" { "targetname" "track_dump" }
+		"create"
+		{
+			"classname" "trigger_once"
+			"origin" "3842.79 13352 4324"
+
+			"values"
+			{
+				"model" "*78"
+				"targetname" "track_dump"
+				"spawnflags" "1"
+				"StartDisabled" "1"
+				"delay" "2"
+				"OnTrigger" "pod_player,Open,,0,1"		// only once
+				"OnTrigger" "pod_player,Unlock,,0,1"	// only once
+				"OnTrigger" "pod_player,ExitVehicle,,1,-1"
+
+				"OnTrigger" "syn_spawn_manager,SetCheckPoint,PS_End,0,-1"
+				"OnTrigger" "syn_spawn_manager,TeleportPlayers,PS_End_TP,1.2,-1"
+			}
+		}
+
+		create { classname "info_player_coop" origin "3860 13421 4243" values { targetname "PS_End" angles "80 90 0" StartDisabled "1" } }
+
+		create { classname "info_teleport_destination" origin "3860 13421 4243"
+			values {
+				targetname "PS_End_TP"
+				angles "80 90 0"
+			}
+		}
+
+
+//Trav|Edt - Functionality check
+		create {classname "logic_relay" values {targetname "trav_functionality_d3_citadel_02"} }
+	}
+}

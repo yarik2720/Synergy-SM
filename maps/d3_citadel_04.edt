@@ -1,0 +1,162 @@
+d3_citadel_04
+{
+	console
+	{
+		//physcannon_mega_enabled "1"
+	}
+	entity
+	{
+//--Setup--
+		delete {classname "logic_auto" origin "650.468 -352 2396"}
+		create {classname "logic_auto"
+			values {spawnflags "1"
+			OnMapSpawn "relay_ballspawner1_on,Trigger,,0,-1"} }
+		edit {classname "func_areaportal" values {targetname "syn_disabledPortal" StartOpen "1"} }
+//Prevent Backtracking
+		create {classname "trigger_push" origin "-50 0 0"
+			values {model "*81"
+				spawnflags "1"
+				speed "750"
+				pushdir "0 180 0"} }
+//--Starting Items--
+		create {classname "info_player_equip"
+			values {
+				item_suit			"1"
+				item_armor			"60"
+				weapon_physcannon	"1"
+			} }
+
+//--Spawns--
+		create {classname "info_spawn_manager"
+			values {targetname "syn_spawn_manager"} }
+
+		create {classname "info_player_coop" origin "707 -321 2369"
+			values {angles "0 180 0" targetname "syn_spawn_player_1"} }
+
+		create {classname "info_player_coop" origin "258 835 6405"
+			values {angles "0 -90 0" targetname "syn_spawn_player_2" StartDisabled "1"} }
+
+		create {classname "info_global_settings"
+			values {IsVehicleMap "0" targetname "syn_global_settings"} }
+
+//--Extra--
+
+//Trav|Edt - lower ragdoll count
+		edit {classname "game_ragdoll_manager" values {MaxRagdollCount "2"} }//4
+
+		// stop combine from flooding the map
+		edit { "targetname" "trigger_stasis_assault" values { "classname" "trigger_once" } }
+
+		// create intermission
+		"create" { "classname" "info_intermission" "origin" "733.750000 1176.968750 2931.968750" "values" { "angles" "45 -155 0" } }
+
+//Trav|Edt - Fix triggers to use OnTrigger instead of OnStartTouch... [spams a shitload of combine]
+		delete {classname "trigger_once" origin "272 832 3680"}
+		delete {classname "trigger_once" origin "272 832 4192"}
+		delete {classname "trigger_once" origin "272 832 5520"}
+		delete {classname "trigger_once" origin "272 832 5984"}
+		delete {classname "trigger_once" origin "272 832 6464"}
+
+		create {classname "trigger_once"
+			origin "272 832 3680"
+			values {model "*46"
+				spawnflags "1"
+				OnTrigger "relay_wake_soldiers3,Trigger,,0,-1"
+				OnTrigger "citadel_script_sold_hall1_1,ForceSpawn,,0,-1"
+				OnTrigger "elevator_soldier_assault1_soldier*,Kill,,0,-1"
+				OnTrigger "elevator_soldier_assault2_soldier*,Kill,,0,-1"
+				OnTrigger "elevator_soldier_assault3_soldier*,Kill,,0,-1"
+				OnTrigger "elevator_soldier_assault4_soldier*,Kill,,0,-1"
+				OnTrigger "elevator_soldier_assault5_soldier*,Kill,,0,-1"
+				OnTrigger "citadel_npc_sold_twoone*,Kill,,0,-1"
+				OnTrigger "relay_wake_soldiers2,Trigger,,0,-1"
+				OnTrigger "citadel_npc_mh_elev*,Kill,,0,-1"} }
+
+		create {classname "trigger_once"
+			origin "272 832 4192"
+			values {model "*61"
+				spawnflags "1"
+				OnTrigger "citadel_train_lift01_1,Toggle,,0,-1"
+				OnTrigger "citadel_npc_sold_elev_high,Kill,,0,-1"
+				OnTrigger "relay_ballspawner1_off,Trigger,,0,-1"
+				OnTrigger "citadel_spawner_sold_bay1_1,ForceSpawn,,7,-1"
+				OnTrigger "citadel_train_lift01_1,Toggle,,7,-1"} }
+
+		create {classname "trigger_once"
+			origin "272 832 5520"
+			values {model "*48"
+				spawnflags "1"
+				OnTrigger "citadel_script_sold_2cats_1,StartSchedule,,0,-1"
+				OnTrigger "citadel_npc_sold_hall*,Kill,,0,-1"
+				OnTrigger "soldier_elev1,Kill,,0,-1"
+				OnTrigger "logic_ballgenerator1_enabled,Trigger,,0,-1"
+				OnTrigger "citadel_script_sold_2cats_2,StartSchedule,,2,-1"} }
+
+		create {classname "trigger_once"
+			origin "272 832 5984"
+			values {model "*62"
+				spawnflags "1"
+				OnTrigger "citadel_train_lift01_1,Toggle,,0,-1"
+				OnTrigger "citadel_spawner_codahall_sold0_1,ForceSpawn,,4,-1"
+				OnTrigger "citadel_train_lift01_1,Toggle,,4,-1"} }
+
+		create {classname "trigger_once"
+			origin "272 832 6464"
+			values {model "*56"
+				spawnflags "1"
+				OnTrigger "citadel_npc_sold_bay*,Kill,,0,-1"} }
+
+//Trav|Edt - hurt players who block lift
+		create {classname "logic_auto"
+			values {spawnflags "1"
+				OnMapSpawn "citadel_train_lift01_1,AddOutput,dmg 100,0,-1"} }
+
+//Trav|Edt - prevent suit charger from being removed
+		edit {targetname "Killme" origin "-1359 -2034 6448" values {targetname "trav_dunkillmaiplz"} }
+
+//Trav|Edt - keep monintor on
+		delete {targetname "relay_turn_off_monitor_worthit"}
+
+		create {classname "logic_relay"
+			values {targetname "relay_turn_off_monitor_worthit"
+				OnTrigger "mic_breencast_jumbotron11,Disable,,0,-1"} }
+
+//End of Trav|Edt
+
+		// once the elevator has been activated, activate the checkpoint
+		"delete" { "targetname" "citadel_trigger_elevatorride_up" }
+		"create"
+		{
+			"classname" "trigger_once"
+			"origin" "256 832 2367"
+			"values"
+			{
+				"model" "*52"
+				"targetname" "citadel_trigger_elevatorride_up"
+				"spawnflags" "1"
+				"StartDisabled" "1"
+				"OnTrigger" "citadel_ballspawner_elev1_1,Enable,,0,-1"
+				"OnTrigger" "citadel_ballspawner_elev1_3,Enable,,0,-1"
+				"OnTrigger" "citadel_train_lift01_1,StartBackward,,0.5,-1"
+				"OnTrigger" "citadel_brush_elevcage1_1,SetParent,citadel_train_lift01_1,0.1,1"
+				"OnTrigger" "citadel_brush_elevcage1_1,Enable,,0,1"
+				"OnTrigger" "citadel_brush_elevcage1_2,Enable,,0,1"
+				"OnTrigger" "citadel_brush_elevcage1_2,SetParent,citadel_train_lift01_1,0.1,1"
+				"OnTrigger" "template_spawn_elev_soldiers,ForceSpawn,,0,-1"
+				"OnTrigger" "citadel_script_mh_elev1_flee,StartSchedule,,0.01,-1"
+				"OnTrigger" "citadel_script_mh_elev2_flee,StartSchedule,,0.01,-1"
+				"OnTrigger" "relationship_manhack_like_player,ApplyRelationship,,0,-1"
+				"OnTrigger" "timer_elevdown1,Disable,,0,-1"
+				"OnTrigger" "citadel_script_mh_elev*,Kill,,10,-1"
+
+				// activate checkpoint
+				"OnTrigger" "syn_spawn_manager,SetCheckpoint,syn_spawn_player_2,0,-1"
+				"OnTrigger" "syn_spawn_manager,MovePlayers,,0.2,-1"
+			}
+		}
+
+
+//Trav|Edt - Functionality check
+		create {classname "logic_relay" values {targetname "trav_functionality_d3_citadel_04"} }
+	}
+}

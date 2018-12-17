@@ -1,0 +1,107 @@
+d3_citadel_03
+{
+	entity
+	{
+//--Setup--
+		delete {classname "logic_auto" origin "7703.56 -1419.75 2140"}
+		edit {classname "func_areaportal" values {targetname "syn_disabledPortal" StartOpen "1"} }
+
+//--Starting Items--
+		create {classname "info_player_equip"
+			values {
+				item_suit			"1"
+				item_armor			"60"
+				weapon_physcannon	"1"
+			} }
+
+//--Spawns--
+		create {classname "info_spawn_manager"
+			values {targetname "syn_spawn_manager"} }
+
+		create {classname "info_player_coop" origin "7728 -1344 2672"
+			values {angles "0 90 0" targetname "syn_spawn_player_1"} }
+
+		create {classname "info_global_settings"
+			values {IsVehicleMap "1" targetname "syn_global_settings"} }
+//make players spread out on spawn
+	//	create {classname "logic_auto"
+	//		values {spawnflags "1"
+	//			OnMapTransition "syn_spawn_manager,TeleportPlayers,syn_spawn_teleport,0.1,-1"} }
+
+	//	create {classname "info_teleport_destination" origin "7744 -1344 2432" values {targetname "syn_spawn_teleport" angles "0 90 0"} }
+
+//--Extra--
+
+//Trav|Edt - lower ragdoll count
+		edit {classname "game_ragdoll_manager" values {MaxRagdollCount "2"} }//5
+
+		// create intermission
+		"create" { "classname" "info_intermission" "origin" "6784 -716 2121" "values" { "angles" "-26 102 0" } }
+
+//Trav|Edt - keep DEGG in stripper area
+		create {classname "func_clip_vphysics"
+			origin "7680 -1084 2208"
+			values {model "*8"
+				filtername "syn_filter_DEGG"} }
+
+		create {classname "func_clip_vphysics"
+			origin "7684 -1584 2208"
+			values {model "*2"
+				filtername "syn_filter_DEGG"} }
+
+		create {classname "func_clip_vphysics"
+			origin "7723 -1337 2392.86"
+			values {model "*91"
+				filtername "syn_filter_DEGG"} }
+
+		create {classname "filter_activator_class"
+			values {targetname "syn_filter_DEGG"
+				filterclass "weapon_physcannon"} }
+
+//Trav|Edt - remove weapons (players could still pick them up afterwords) and setup spawn
+create { classname "info_player_coop" origin "7728 -1344 2672" values {angles "0 90 0"} }
+
+		create {classname "logic_relay"
+			values {spawnflags "1"
+				targetname "relay_combineshieldwall2_off"
+				OnTrigger "trav_remover,Disable,,0,-1"
+				OnTrigger "syn_global_settings,AddOutput,IsVehicleMap 0,0,-1"} }
+
+		create {classname "trigger_remove"
+			origin "7725 -1337 2216.86"
+			values {model "*78"
+				spawnflags "8"
+				targetname "trav_remover"
+				filtername "trav_filter_physgun"} }
+
+		create {classname "filter_activator_class"
+			values {targetname "trav_filter_physgun"
+				Negated "1"
+				filterclass "weapon_physcannon"} }
+
+//Trav|Edt - fix charger not recharging
+		edit {targetname "charger" values {targetname "trav_charger"} }
+
+//End of Trav|Edt
+
+		// fix dissolver
+		"delete" { "targetname" "weapon_dissolve" }
+		"create"
+		{
+			"classname" "trigger_weapon_dissolve"
+			"origin" "7725 -1321 2208.72"
+			"values"
+			{
+				"model" "*86"
+				"emittername" "weapon_dissolve_conduit"
+				"targetname" "weapon_dissolve"
+				"spawnflags" "64"
+				"StartDisabled" "1"
+				"OnChargingPhyscannon" "logic_weapon_strip_physcannon_start,Trigger,,0,1" // -1
+			}
+		}
+
+//Trav|Edt - Functionality check
+		create {classname "logic_relay" values {targetname "trav_functionality_d3_citadel_03"} }
+	}
+}

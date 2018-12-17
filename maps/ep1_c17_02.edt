@@ -1,0 +1,123 @@
+ep1_c17_02
+{
+	console
+	{
+		sk_antlionguard_health 2560
+	}
+	entity
+	{
+//--Setup--
+		delete {targetname "global_newgame_spawner_smg"}
+		delete {targetname "global_newgame_spawner_shotgun"}
+		delete {targetname "global_newgame_spawner_physcannon"}
+		delete {targetname "global_newgame_spawner_suit"}
+		delete {targetname "global_newgame_spawner_ammo"}
+		delete {classname "weapon_pistol"}
+		edit {classname "func_areaportal" values {targetname "syn_DisabledPortal" StartOpen "1"} }
+		edit {classname "func_areaportalwindow" values {targetname "syn_DisabledPortalWindow" FadeStartDist "1000" FadeDist "1500"} }
+
+//Prevent Backtracking
+		create {classname "trigger_push" origin "-56 0 0"
+			values {model "*18"
+				spawnflags "1"
+				speed "750"
+				pushdir "0 180 0"} }
+
+//--Starting Items--
+		create {classname "info_player_equip"
+			values {
+				item_suit			"1"
+				item_armor			"60"
+				weapon_physcannon	"1"
+				weapon_pistol		"1"
+				weapon_shotgun		"1"
+				weapon_smg1			"1"
+				ammo_pistol			"54"
+				ammo_buckshot		"12"
+				ammo_smg1			"45"
+			} }
+//New Weapons
+		create {classname "info_player_equip"
+			values {targetname "syn_new_weapons"
+				StartDisabled "1"
+				weapon_ar2			"1"
+				weapon_frag			"1"
+				weapon_slam			"1"
+				ammo_ar2			"30"
+				ammo_grenade		"1"
+			} }
+
+		create {classname "trigger_multiple"
+			origin "1311.5 -162 36.5"
+			values {model "*44"
+				spawnflags "1"
+				targetname "syn_new_weapon_trigger"
+				StartDisabled "1"
+				filtername "syn_new_weapon_filter"
+				OnTrigger "syn_new_weapons,Enable,,0,1"
+				OnStartTouch "syn_new_weapons,EquipPlayer,,0.1,-1"
+				OnStartTouch "!activator,AddOutput,targetname syn_ep1_c17_02_got_new_weapons,0.1,-1"} }
+
+		create {classname "filter_activator_name"
+			values {targetname "syn_new_weapon_filter"
+				Negated "1"
+				filtername "syn_ep1_c17_02_got_new_weapons"} }
+
+		create {classname "logic_auto"
+			values {spawnflags "1"
+				OnMapSpawn "counter_garrison_death,AddOutput,OnHitMax syn_new_weapon_trigger:Enable::0:-1,0,-1"} }
+
+//--Spawns--
+		create {classname "info_spawn_manager"
+			values {targetname "syn_spawn_manager"} }
+//Intro
+		create {classname "info_player_coop" origin "1824 -329 56"
+			values {angles "0 135 0" targetname "syn_spawn_player_1"} }
+
+		create {classname "info_global_settings"
+			values {targetname "syn_global_settings" IsVehicleMap "0"} }
+
+//--Extra--
+
+		create { classname "info_intermission" origin "-920 1740 200" values { target "target_player_look_wall" } }
+
+//Trav|Edt - moveplayers into guard battle
+		create {classname "logic_auto"
+			values {spawnflags "1"
+				OnMapSpawn "alyx_teleport_trigger,AddOutput,OnTrigger syn_spawn_manager:MovePlayers::0:1,0,-1"} }
+
+//Trav|Edt fix alinement of guard brush (i think valve messed it up)
+		edit {targetname "guard_clip" values origin "-208 415 195.5" {origin "-224 415 195.5"} }
+
+//End of Trav|Edt
+
+		// change some things
+		create { classname "logic_auto" origin "0 0 10"
+			values {
+				"spawnflags"	"1"
+
+				// prevent door from locking
+				"OnMapSpawn" "alyx_briefingroom_exitdoor,AddOutput,OnClose !self:Unlock::1:0,0,0"
+
+				// make sure guard is not permanently invincible
+				"OnMapSpawn" "apc_1,AddOutput,OnDeath timer_give_guard_health:kill::0:0,0,0"
+			}
+		}
+
+		// this is a valve map bug
+		// filter_alyx does not exist in the level
+		// and since synergy does not return true if the filter cannot be found...
+		// we are required to create the filter
+		create { classname "filter_activator_name"
+			values {
+				"filtername" "alyx"
+				"Negated" "0"
+				"targetname" "filter_alyx"
+			}
+		}
+
+
+//Trav|Edt - Functionality check
+		create {classname "logic_relay" values {targetname "trav_functionality_ep1_c17_02"} }
+	}
+}

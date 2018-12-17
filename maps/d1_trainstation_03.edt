@@ -1,0 +1,166 @@
+d1_trainstation_03
+{
+	console
+	{
+		sk_npc_dmg_stunstick  "500" // "knockout"
+	}
+	entity
+	{
+		edit {classname "func_areaportal" values {targetname "trav_disabled_aportal" StartOpen "1"} }
+		edit {classname "func_areaportalwindow" values {FadeStartDist "512" FadeDist "1024"} }
+
+		// prevent backtracking
+		create {classname "prop_dynamic" origin "-4984 -4164 -4"// -5175.99 -4376 0
+			values
+			{
+				model "models/synergy/tools/syn_transition.mdl"
+				angles "0 270 0"
+				solid "6"
+				DisableShadows "1"
+				fademindist "256"
+			}
+		}
+
+// hotfix pushy door
+		create {classname "logic_auto"
+			values
+			{
+				spawnflags "1"
+				OnMapSpawn "door_bracerprop,disableplayercollision,,1,-1"
+			}
+		}
+
+		// Changelevels do not have origins, so get by landmark and mapname - disable
+		edit {classname "trigger_changelevel" values {edt_landmark "landmark_trainstation_02-03" edt_map "d1_trainstation_02" edt_addspawnflags "2"} }
+
+		//Trav|Edt - Prevent fast-skip exploit
+		edit {targetname "brush_staircase_block" values {Solidity "0"} }//2
+
+		//Trav|Edt - Enable end cop clip
+		//edit {targetname "brush_prevent_cops_getting_to_bracer" values {StartDisabled "1"} }
+
+		//--Spawns--
+		create {classname "info_spawn_manager"
+			values {targetname "syn_spawn_manager"} }
+ 
+		create {classname "info_player_coop" origin "-4964 -4252 1"
+			values {angles "0 135 0" targetname "syn_spawn_player_1"} }
+
+		// -- Wait01 --
+		//delete {targetname "knockout_fade"}
+		// Give name / disable
+		edit {classname "trigger_once" origin "-4150 -4768 314" values {targetname "syn_wait01_trig1" StartDisabled "1"} }
+		edit {classname "trigger_once" origin "-3740 -4612 314" values {targetname "syn_wait01_trig2" StartDisabled "1"} }
+
+		// Blocking stairs
+		create {classname "prop_dynamic" origin "-3592 -4232 264"
+			values
+			{
+				model "models/synergy/tools/syn_transition.mdl"
+				angles "0 180 0"
+				solid "6"
+				targetname "syn_wait01_blocker"
+				DisableShadows "1"
+				fademindist "512"
+			}
+		}
+
+		create {classname "trigger_coop" origin "-3475 -4659 314"
+			values
+			{
+				edt_getbspmodelfor_targetname "trigger_breakin_knockout1"
+				spawnflags "1"
+				targetname "syn_wait01_coop"
+				target "syn_wait01_coop_target"
+				UseHUD "1"
+				CountType "1"
+				PlayerValue "51"
+				OnPlayersIn "syn_wait01_blocker,Kill,,0,1"
+				OnPlayersIn "syn_wait01_trig1,Trigger,,0,1"
+				OnPlayersIn "syn_wait01_trig2,Trigger,,0.5,1"
+				OnPlayersIn "!self,TeleportPlayersNotTouching,,0,1"
+				OnPlayersIn "!self,,,0,1"
+				OnPlayersIn "!self,Disable,,0,1"TeleportPlayersNotTouching
+			}
+		}
+
+		create {classname "info_target" origin "-3680 -4600 257" values {targetname "syn_wait01_coop_target" angles "0 0 0"} }
+
+		// -- Wait02 --
+		edit {targetname "trigger_PreRaid_Peeker_retreat" values {StartDisabled "1"} }
+
+		create {classname "trigger_coop" origin "-4078 -4488 442"
+			values
+			{
+				edt_getbspmodelfor_targetname "trigger_breakin_knockout1"
+				spawnflags "1"
+				targetname "syn_wait02_coop"
+				target "syn_wait02_coop_target"
+				UseHUD "1"
+				CountType "1"
+				PlayerValue "51"
+				OnPlayersIn "syn_wait02_blocker,Kill,,0,1"
+				OnPlayersIn "!self,TeleportPlayersNotTouching,,0,1"
+				OnPlayersIn "trigger_PreRaid_Peeker_retreat,Trigger,1,0,1"// TODO remove flag
+				OnPlayersIn "trigger_rush_start,Trigger,,1,1"
+				OnPlayersIn "!self,Disable,,0,1"
+			}
+		}
+
+		create {classname "info_target" origin "-4024 -4608 385" values {targetname "syn_wait02_coop_target" angles "0 180 0"} }
+
+		//Trav|Edt - move players near end (hotfix until more thorough one is done later)
+		//create {classname "trigger_once"
+		//	origin "-4772 -4612 440"
+		//	values {model "*133"
+		//		//targetname "syn_mplrs_1"
+		//		spawnflags "1"
+		//		OnTrigger "syn_spawn_manager,MovePlayers,,0,-1"} }
+
+		// remove these npcs so players can get through without going through the whole map
+	//	"delete" { "classname" "npc_metropolice" "origin" "-5008.00 -4636.00 384.58" } // TEST: commented line
+	//	"delete" { "classname" "npc_metropolice" "origin" "-5008.00 -4480.00 289.00" }
+	//	"delete" { "classname" "npc_metropolice" "origin" "-3568.00 -4752.00 393.00" }
+
+		// close doorman when everyone is in
+		edit {classname "trigger_once" origin "-4948 -4740 576" values {targetname "syn_end_trig" StartDisabled "1"} }
+		create {classname "trigger_coop" origin "-5052 -5129 570"
+			values {//model "*117"
+				edt_getbspmodelfor_targetname "trigger_breakin_knockout1"
+				spawnflags "1"
+				CountType "1"
+				PlayerValue "100"
+				OnPlayersIn "syn_end_trig,Trigger,,0,1"
+				OnPlayersIn "!self,Disable,,0,1"} }
+
+		delete {targetname "attic_door_push"}
+
+		// remove tv triggers
+		delete {targetname "trigger_tv_turnoffall"}
+		delete {targetname "trigger_tv_turnonall"}
+
+		// fix cops blocking
+		//delete {classname "trigger_once" origin "-3740 -4612 314"}
+		//"create"
+		//{
+		//	"classname" "trigger_once"
+		//	"origin" "-3740 -4612 314"
+		//	"values"
+		//	{
+		//		"model" "*129"
+		//		"spawnflags" "1"
+		//		"StartDisabled" "0"
+		//	//	"OnTrigger" "lcs_cits_consoling_couple,Kill,,2,-1"
+		//		"OnTrigger" "miscount_announcement,PlaySound,,1,-1"
+		//		"OnTrigger" "lcs_cit_PreRaid_Beckon,Start,,0,-1"
+		//	//	"OnTrigger" "script_cond_PreRaid_Beckon,Enable,,0,-1"
+		//	//	"OnTrigger" "npc_breakincop3,SetPoliceGoal,ai_breakin_cop3goal4,0,-1"
+		//		"OnTrigger" "relay_rush_downstairscops,Trigger,,0,1"
+		//	//	"OnTrigger" "ai_breakin_cop3goal4_blockplayer,Enable,,0,-1"
+		//	}
+		//}
+
+		//Trav|Edt - Functionality check
+		create {classname "logic_relay" values {targetname "trav_functionality_d1_trainstation_03"} }
+	}
+}

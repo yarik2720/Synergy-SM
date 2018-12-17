@@ -1,0 +1,222 @@
+d1_canals_12
+{
+	entity {
+//--Setup--
+		delete {classname "logic_auto" origin "11992 9489.1 569"}
+		edit {classname "func_areaportal" values {targetname "disabledPortal" StartOpen "1"} }
+
+//Prevent Backtracking
+		create {classname "prop_dynamic" origin "11920 8975.96 464"
+			values {model "models/synergy/tools/syn_transition.mdl"
+				angles "0 90 0"
+				solid "6"
+				DisableShadows "1"} }
+
+		create {classname "light_dynamic" origin "11920 8976 640"
+			values {_light "170 255 170"
+				brightness "1"
+				distance "256"
+				style "12"} }
+//remove extra cops if not killed from previous level
+		create {classname "logic_auto"
+			values {spawnflags "1"
+				OnMapTransition "metrocop_assault4_metrocop*,Kill,,0,-1"
+				OnMapTransition "canals_npc_exitbarreldump1_3*,Kill,,0,-1"} }
+
+		//create {classname "trigger_push" origin "0 128 0"//y64
+		//	values {model "*82"
+		//		spawnflags "65"
+		//		speed "750"
+		//		pushdir "0 90 0"} }
+
+		//create {classname "func_vehicleclip" origin "0 64 0"
+		//	values {model "*82"} }
+
+//Enable Airboat Gun
+		create {classname "logic_auto"
+			values {spawnflags "1"
+				OnMapSpawn "prop_vehicle_airboat,EnableGun,1,3,-1"} }
+
+//--Starting Items--
+		create {classname "info_player_equip"
+			values {
+				targetname "syn_eqipment_base"
+				item_suit			"1"
+				item_armor			"45"
+				weapon_crowbar		"1"
+				weapon_pistol		"1"
+				weapon_smg1			"1"
+				weapon_frag			"1"
+				weapon_357			"1"
+				ammo_pistol			"54"//72
+				ammo_smg1			"45"
+				ammo_grenade		"1"
+				ammo_smg1_grenade	"1"
+				ammo_357			"6"
+			} }
+
+//--Spawns--
+		create {classname "info_spawn_manager"
+			values {targetname "syn_spawn_manager"} }
+
+		create {classname "info_player_coop" origin "12112 9424 599"//12104.57 9003.84 610.03
+			values {angles "0 135 0" targetname "syn_spawn_player_1"} }//y90
+
+		create {classname "info_player_coop" origin "-2720 5600 416"
+			values {angles "0 255 0" targetname "syn_spawn_player_2" StartDisabled "1"} }
+
+		create {classname "info_player_coop" origin "-20 236 192"
+			values {angles "0 240 0" targetname "syn_spawn_player_3" StartDisabled "1"} }
+
+		create {classname "info_global_settings"
+			values {IsVehicleMap "1" targetname "syn_global_settings"} }
+
+		create {classname "info_vehicle_spawn" origin "11877.6 9601.4 551.98"
+			values {targetname	"syn_spawn_vehicle_1"
+				angles "0 0 0"
+				StartEnabled "1"
+				StartGunEnabled "1"
+				RespawnVehicle "1"
+				Ownership "1"
+				VehicleType "2"
+				VehicleSize "164"
+				model "models/airboat.mdl"
+				VehicleScript "scripts/vehicles/airboat.txt"} }
+
+		create {classname "info_vehicle_spawn" origin "-2784 5200 288"
+			values {targetname	"syn_spawn_vehicle_2"
+				angles "0 165 0"
+				StartEnabled "0"
+				StartGunEnabled "1"
+				RespawnVehicle "1"
+				Ownership "1"
+				VehicleType "2"
+				VehicleSize "164"
+				model "models/airboat.mdl"
+				VehicleScript "scripts/vehicles/airboat.txt"} }
+
+		create {classname "info_vehicle_spawn" origin "-224 -16 160"//-256 240 160 Bunpy 0.o
+			values {targetname	"syn_spawn_vehicle_3"
+				angles "0 180 0"
+				StartEnabled "0"
+				StartGunEnabled "1"
+				RespawnVehicle "1"
+				Ownership "1"
+				VehicleType "2"
+				VehicleSize "164"
+				model "models/airboat.mdl"
+				VehicleScript "scripts/vehicles/airboat.txt"} }
+
+		//create {classname "info_vehicle_spawn" origin "5024 9664.01 -448"
+		//	values {targetname	"syn_spawn_vehicle_3"
+		//		angles "0 90 0"
+		//		StartEnabled "0"
+		//		RespawnVehicle "1"
+		//		VehicleType "2"
+		//		VehicleSize "164"
+		//		model "models/airboat.mdl"
+		//		VehicleScript "scripts/vehicles/airboat.txt"} }
+
+		create {classname "logic_auto"
+			values {spawnflags "1"
+				OnMapTransition "syn_spawn_manager,TeleportPlayers,syn_spawn_teleport,0.1,-1"} }
+
+		create {classname "info_teleport_destination" origin "12104.57 9003.84 610.03" values {targetname "syn_spawn_teleport" angles "0 90 0"} }
+
+//--Checkpoints--
+		create {classname "trigger_once" origin "-3552 4352 384"
+			values {model "*8"
+				spawnflags "1"
+				OnTrigger "syn_spawn_manager,SetCheckpoint,syn_spawn_player_2,0,-1"
+				OnTrigger "syn_spawn_vehicle_2,Enable,,0,-1"} }
+
+		create {classname "trigger_once" origin "-960 -256 352"
+			values {model "*34"
+				spawnflags "1"
+				OnTrigger "syn_spawn_manager,SetCheckpoint,syn_spawn_player_3,0,-1"
+				OnTrigger "syn_spawn_vehicle_3,Enable,,0,-1"} }
+
+//--Exploits--
+//block pedestrians from climbing past jump
+		create {classname "trigger_push" origin "1232 -4288 544"
+			values {model "*34"
+				angles "0 90 0"
+				spawnflags "1"
+				targetname "syn_endjump_pusher"
+				speed "450"
+				pushdir "0 90 0"} }
+
+		create {classname "trigger_once" origin "1232 -4432 544"
+			values {model "*34"
+				angles "0 90 0"
+				spawnflags "32"
+				OnTrigger "syn_endjump_pusher,Disable,,0,-1"} }
+
+//--Extra--
+//Trav|Edt - prevent players from skiping barrelroll part
+		create {classname "func_vehicleclip"
+			origin "-3768 3168 608"
+			values {model "*95"
+				targetname "syn_vint"} }
+
+		create {classname "func_vehicleclip"
+			origin "-4664 3168 608"
+			values {model "*95"
+				targetname "syn_vint"} }
+
+//Trav|Edt - fix waterline at end
+		create {classname "func_brush"
+			origin "2400 -7808 71"
+			values {model "*10"
+				rendermode "10"
+				spawnflags "2"
+				targetname "syn_vint"} }
+
+//Trav|Edt - add few extra cops
+		create {classname "npc_metropolice" origin "8352 7840 704"
+			values {spawnflags "34210048"
+				angles "0 90 0"
+				targetname "syn_vint"
+				additionalequipment "weapon_smg1"} }
+
+		create {classname "npc_metropolice" origin "7792 7824 704"
+			values {spawnflags "34210048"
+				angles "0 90 0"
+				targetname "syn_vint"
+				additionalequipment "weapon_smg1"} }
+
+//Trav|Edt - Auti-rush
+		create {classname "trigger_coop"
+			origin "4164 -5188 177"
+			values {model "*24" angles "0 270 0"
+				spawnflags "1"
+				//StartDisabled "1"
+				targetname "syn_antirush_coop"
+				CountType "1"
+				UseHUD "1"
+				PlayerValue "50"
+				wait "1.5"
+				OnTrigger "syn_antirush_text,Display,,1,-1"
+				OnPlayersIn "syn_antirush_wall,Kill,,0,1"
+				OnPlayersIn "syn_antirush_light,Kill,,0,1"
+				OnPlayersIn "syn_antirush_push,Disable,,0,1"
+				OnPlayersIn "!self,Disable,,1,1"} }
+
+		create {classname "prop_dynamic" origin "2431.99 -8032 96"
+			values {model "models/synergy/tools/syn_transition.mdl"
+				targetname "syn_antirush_wall"
+				angles "0 90 0"
+				solid "6"
+				DisableShadows "1"} }
+
+		create {classname "light_dynamic" origin "2432 -8032 272"
+			values {_light "170 255 170"
+				targetname "syn_antirush_light"
+				brightness "1"
+				distance "384"
+				style "12"} }
+
+//Trav|Edt - Functionality check
+		create {classname "logic_relay" values {targetname "trav_functionality_d1_canals_12"} }
+	}
+}

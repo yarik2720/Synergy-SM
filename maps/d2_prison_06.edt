@@ -1,0 +1,435 @@
+//problems from .lmps(dun think any exist for hdr maps yet)?
+d2_prison_06
+{
+	console
+	{
+		// sv_test_scripted_sequences 1 // TEST ME FIRST to see if this is the prob -hotfix for alyx getting stuck
+	}
+	entity
+	{
+//--Setup--
+		delete {classname "logic_auto" origin "1947.1 1517.97 -404"}
+		create {classname "logic_auto" //origin "1947.1 1517.97 -404"
+			values {spawnflags "1"
+				OnMapSpawn "logic_Train_effects_start_1,Trigger,,0,-1"
+				OnMapSpawn "logic_podtrains_L_start_1,Trigger,,0,-1"
+				OnMapSpawn "sound_Train_horn_start_1,PlaySound,,8,-1"} }
+		edit {classname "func_areaportal" values {targetname "syn_disabledPortal" StartOpen "1"} }
+//door_controlroom_1 's areaportal is not renamed for some reason
+		create {classname "logic_auto"
+			values {spawnflags "1"
+				OnMapSpawn "func_areaportal,AddOutPut,targetname syn_disabledPortal,0,-1"
+				OnMapSpawn "func_areaportal,AddOutPut,StartOpen 1,0,-1"
+				} }
+
+//prevent potential backtracking
+		create {classname "syn_transition_wall" origin "1800 2064 -304"}
+
+//--Starting Items--
+		create {classname "info_player_equip"
+			values {
+				item_suit			"1"
+				item_armor			"60"
+				weapon_crowbar		"1"
+				weapon_pistol		"1"
+				weapon_smg1			"1"
+				weapon_frag			"1"
+				weapon_357			"1"
+				weapon_physcannon	"1"
+				weapon_shotgun		"1"
+				weapon_ar2			"1"
+				weapon_rpg			"1"
+				weapon_crossbow		"1"
+				weapon_bugbait		"1"
+				weapon_stunstick	"1"
+				weapon_slam			"1"
+				ammo_pistol			"54"//72
+				ammo_smg1			"45"
+				ammo_grenade		"1"
+				ammo_smg1_grenade	"1"
+				ammo_357			"6"
+				ammo_buckshot		"12"
+				ammo_ar2			"30"
+				ammo_rpg_round		"1"
+				//ammo_crossbow		"0"
+				//	ammo_slam		"2"
+			} }
+
+//--Spawns--
+		create {classname "info_spawn_manager"
+			values {targetname "syn_spawn_manager"} }
+
+		create {classname "info_player_coop" origin "2034.58 1763.71 -447.97"
+			values {angles "0 -90 0" targetname "syn_spawn_player_1"} }
+
+		create {classname "info_player_coop" origin "1333.47 643.60 -190"
+			values {angles "0 180 0" targetname "syn_spawn_player_2" StartDisabled "1"} }
+
+		create {classname "info_player_coop" origin "1180 -1344 -128"
+			values {angles "0 270 0" targetname "syn_spawn_player_3" StartDisabled "1"} }
+
+		create {classname "info_global_settings"
+			values {IsVehicleMap "0" targetname "syn_global_settings"} }
+
+
+
+// [-PeaNuT-] - Looked into Alyx bug and it seems sometimes lcs_cell_01b does indeed fail to trigger the "OnCompleted" output.
+//		There are random pauses within the .vcd files themselves and that seems to be part of the issue. I say part because
+//		HL2 works just fine... When exactly the scene is considered "complete" is also defined on a timeline in faceposer
+//		so it almost seems like they're not being read properly. lcs_np_cell01b fires a trigger OnCompleted to enable, so
+//		if Synergy can't detect when that is, the trigger won't enable and you can't continue.
+//
+//		In the case of lcs_np_cell02 now, that is caused by a scene pause since it's all one file. Delete the pause in the
+//		.vcd and it flows properly. I just don't understand why there are pauses to begin with. And how, in HL2, do they
+//		resume?	They have no time limits, they are indefinite pauses.
+//
+//		Anyway, it seems to work about 90% of the time for the time being, as it is right now.
+
+//--Extra--	
+//exit this a bit to allow monitors to work properly while trying to fix alyx - krazy
+//		// lcs resume - so Alyx won't get stuck
+//		create { classname "logic_timer" targetname "syn_alyx_bully"
+//			values {startdisabled "1" refiretime "1"//enabled later
+//				OnTimer "lcs_np_cell02,resume,,0,-1"
+//			}
+//		}
+
+//Trav|Edt - attempt to fix alyx getting stuck at eli place
+//me suspects lcs_np_cell01b fails to complete sometimes (needs testing)
+//		create {classname "logic_auto"
+//			values {spawnflags "1"
+//				OnMapSpawn "lcs_np_cell01b,AddOutput,OnStart lcs_np_cell02:Start::20:-1,0,-1"
+//				OnMapSpawn "lcs_np_cell01b,AddOutput,OnStart lcs_np_cell02:Resume::21:-1,0,-1"} }
+
+//attempt to fix alyx .. not sure why it works sometimes but doesnt the others, .vvd issues? - krazy
+		//edit {targetname "lcs_np_cell02" values {busyactor "0"} }
+
+//Trav|Edt - Doors: Open Only
+		edit {classname "prop_door_rotating" origin "372 -501 -10" values {spawnflags "0"} }
+		edit {classname "prop_door_rotating" values {returndelay "-1"} }
+
+//Trav|Edt - block phys props going into vator
+		create {classname "func_clip_vphysics" origin "1440 664 -560" values {model "*143"} }
+		create {classname "func_clip_vphysics" origin "1440 688 -560" values {model "*143"} }
+
+//Trav|Edt - Disable Enemy turrets when tipped (avoid player greif)
+		create {classname "logic_auto"
+			values {spawnflags "1"
+				OnMapSpawn "npc_turret_floor,AddOutput,OnTipped !self:SelfDestruct::0:-1,0,-1"} }//DepleteAmmo
+
+//Trav|Edt - increase combine tripmines damage
+		edit {targetname "slam_exp_1" values {iMagnitude "200"} }
+
+//Trav|Edt - add secrete crates
+		create {classname "item_item_crate"
+			origin "1334 352 -568"
+			values{ItemClass "item_dynamic_resupply"
+				ItemCount "5"} }
+
+		create {classname "item_item_crate"
+			origin "1334 352 -536"
+			values{ItemClass "item_dynamic_resupply"
+				ItemCount "5"} }
+
+//Trav|Edt - allow introom_door_1 to close //lcs_np_cell02
+		delete {targetname "int_door_close_inside_1"}
+		create {classname "trigger_coop"
+			origin "544 8 48"
+			values {model "*101"
+				spawnflags "1"
+				StartDisabled "1"
+				targetname "int_door_close_inside_1"
+				CountType "1"
+				PlayerValue "100"
+				OnPlayersIn "introom_door_1,SetAnimation,close,0,1"
+				OnPlayersIn "pClip_introom_door_1,Enable,,0,1"
+				//OnTrigger "syn_alyx_bully,Enable,,0,1"
+				//OnTrigger "syn_alyx_bully,Disable,,120,1"
+				} }
+
+//Trav|Edt - impulse to block peeps from putting props in vent to block players
+		create {classname "func_clip_vphysics"
+			origin "910 -1144 20"
+			values {model "*70"
+			targetname "trav_vphysclip_vent"
+			filtername "trav_vphysclip_vent_filter"} }
+
+		create {classname "filter_multi"
+			values {targetname "trav_vphysclip_vent_filter"
+				Negated "1"
+				Filter01 "trav_vphysclip_vent_filter1"
+				Filter02 "trav_train_filter2"} }
+
+		create {classname "filter_activator_class"
+			values {targetname "trav_vphysclip_vent_filter1"
+				filterclass "npc_grenade_frag"} }
+
+		create {classname "filter_activator_class" //items seem to ignore filters
+			values {targetname "trav_vphysclip_vent_filter1"
+				filterclass "item*"} }
+
+//Trav|Edt - add more crabs
+		create {classname "npc_template_maker"
+			origin "1032 -2136 -232"
+			values {spawnflags "128"
+				//angles " 0 0 0"
+				targetname "trav_maker_headcrabs1"
+				StartDisabled "1"
+				//NPCTargetname "trav_headcrabs1"
+				MaxNPCCount "14"
+				SpawnFrequency "2"
+				MaxLiveChildren "-1"
+				//NPCType "npc_headcrab_fast"
+				//NPCSquadname "squad_trav_headcrabs1"
+				TemplateName "trav_fheadcrabs"} }
+
+		create {classname "trigger_once"
+			origin "1180 -1778 -116"
+			values {model "*119"
+				spawnflags "1"
+				OnTrigger "trav_maker_headcrabs1,Enable,,0,-1"
+				//OnTrigger "syn_spawn_manager,MovePlayers,,0,-1"
+				} }
+
+		create {classname "ai_relationship"
+			values{subject "npc_turret_floor"
+				target "npc_headcrab_fast"
+				StartActive "1"
+				Reciprocal "1"
+				disposition "4"} }
+
+		create {classname "npc_headcrab_fast"
+			origin "1152 -2064 -240"
+			values {spawnflags "2560"
+				targetname "trav_fheadcrabs"} }
+
+//Trav|Edt - moveplayers on dropdown in vent
+		create {classname "trigger_once"
+			origin "1180 -1338 -52"
+			values {model "*119"
+				spawnflags "1"
+				OnTrigger "syn_spawn_manager,TeleportPlayers,syn_spawn_player_3_teleport,0.1,-1"
+				OnTrigger "syn_spawn_manager,SetCheckpoint,syn_spawn_player_3,0,-1"} }
+
+		create {classname "info_teleport_destination"
+			origin "1180 -1344 -128"
+			values {targetname "syn_spawn_player_3_teleport"
+				angles "0 270 0"} }
+
+//Trav - valve accidently messed up on Disable input instead of enable? makes the default int_door_close_outside_1 trigger useless
+		//create {classname "trigger_coop"
+		//	origin "544 148 44"
+		//	values {model "*100"
+		//		spawnflags "1"
+		//		StartDisabled "1"
+		//		targetname "trav_int_door_close_outside_1"
+		//		CountType "1"
+		//		PlayerValue "100"
+		//		OnPlayersOut "introom_door_1,SetAnimation,close,0,1"
+		//		OnPlayersOut "pClip_introom_door_1,Enable,,0,1"} }
+
+		//create {classname "logic_relay"
+		//	values{targetname "int_door_close_outside_1"
+		//		OnTrigger "trav_int_door_close_outside_1,Enable,,0,-1"} }
+
+//Trav|Edt - autirush
+		create {classname "trigger_coop"
+			origin "272 -2544 -176"
+			values {model "*96"
+				spawnflags "1"
+				targetname "syn_antirush_coop"
+				CountType "1"
+				UseHUD "1"
+				PlayerValue "50"
+				wait "1.5"
+				OnTrigger "syn_antirush_text,Display,,0,-1"
+				OnPlayersIn "syn_antirush_wall,Kill,,0,1"
+				//OnPlayersIn "syn_antirush_light,TurnOff,,0,1"
+				OnPlayersIn "!self,Disable,,1,1"} }
+
+		create {classname "syn_transition_wall" origin "72 -2560 -250" values {angles "0 0 0" targetname "syn_antirush_wall"} }
+
+		//create {classname "light_dynamic" origin "-3384 6048 64"
+		//	values {targetname "syn_antirush_light"
+		//		_light "170 255 170"
+		//		brightness "1"
+		//		distance "300"
+		//		//_inner_cone "75"
+		//		//_cone "80"
+		//		style "12"} }
+
+		create {classname "game_text"
+			values {spawnflags "0"
+				targetname "syn_antirush_text"
+				message "Need More Players to Continue. . ."
+				channel "0"
+				effect "2"
+				x "-1"
+				y "0.85"
+				color "100 100 100"
+				color2 "240 110 0"
+				fadein "0.03"
+				fadeout "1.25"
+				holdtime "2"
+				fxtime "0.25"} }
+
+//End of Trav|Edt
+
+
+		// -------------------------
+
+
+		create {classname "logic_auto"
+			values {spawnflags "1"
+				OnMapSpawn "elevator_trigger_go_up_1,AddOutput,OnTrigger syn_spawn_manager:SetCheckpoint:syn_spawn_player_2:0:-1,0,-1"
+				OnMapSpawn "elevator_trigger_go_up_1,AddOutput,OnTrigger syn_spawn_manager:MovePlayers:syn_spawn_player_2:0:-1,0,-1"} }
+
+				//"OnTrigger" "syn_spawn_manager,SetCheckpoint,syn_spawn_player_2,0,-1" //delay def 1
+//Trav|Edt - remove moveplayers delay... dunno why its here
+				//"OnTrigger" "syn_spawn_manager,MovePlayers,syn_spawn_player_2,0.1,-1"//def 12.1
+
+		// clear some room for the checkpoint
+		//"delete" { "classname" "prop_physics" "origin" "1309.75 818.76 -170.92" }
+		//"delete" { "classname" "prop_physics" "origin" "1311.98 829.51 -130.99" }
+
+		// remove this trigger, make it part of the trigger below
+		//"delete" { "classname" "trigger_once" "origin" "1568 680 -200" }
+
+		// activate checkpoint after elevator goes up
+		//"create" { "classname" "info_player_coop" origin "1346 828 -190" values { StartDisabled "1" targetname "syn_spawn_player_2" "angles" "0 -150 0" } }
+
+		//"delete" { "targetname" "elevator_trigger_go_up_1" }
+		//"create"
+		//{
+		//	"classname" "trigger_once"
+		//	"origin" "1560 680 -650"
+
+		//	"values"
+		//	{
+		//		"model" "*89"
+		//		"targetname" "elevator_trigger_go_up_1"
+		//		"spawnflags" "1"
+		//		"StartDisabled" "1"
+
+		//		"OnTrigger" "ele_innerdoor_T_1,Close,,0,-1"
+		//		"OnTrigger" "ele_innerdoor_B_1,Close,,0.2,-1"
+		//		"OnTrigger" "introom_elevator_doors_1,Close,,1,-1"
+		//		"OnTrigger" "prop_elevatordoor_bottom_1,SetAnimation,close,1,-1"
+		//		"OnTrigger" "pclip_ele_door_B_1,Enable,,0,-1"
+
+				//"OnTrigger" "syn_spawn_manager,SetCheckpoint,syn_spawn_player_2,0,-1" //delay def 1
+//Trav|Edt - remove moveplayers delay... dunno why its here
+				//"OnTrigger" "syn_spawn_manager,MovePlayers,syn_spawn_player_2,0.1,-1"//def 12.1
+
+		//		// trigger the other entity events so we do not need to ride all the way up
+		//		// the delay is 10 seconds
+		//		"OnTrigger" "razortrain_horn_wav,Kill,,11,-1" // 1
+		//		"OnTrigger" "areaportal_entrance,Close,,10,-1" // 0
+		//		"OnTrigger" "secroom_areaportal_1,Open,,10,-1" // 0
+		//		"OnTrigger" "metro_elevatortop_AI_SS_2,StartSchedule,,16,-1" // 6
+		//		"OnTrigger" "ele_innerdoor_B_2,Open,,17,-1" // 7
+		//		"OnTrigger" "ele_innerdoor_T_2,Open,,12,-1" // 2
+		//		"OnTrigger" "metro_elevatortop_AI_SS_1,StartSchedule,,13,-1" // 3
+		//		"OnTrigger" "maker_croom1_1,Spawn,,10,-1" // 0
+		//		"OnTrigger" "maker_croom1_3,Spawn,,15,-1" // 5
+		//		"OnTrigger" "alyx_goal_follow_1,Activate,,14,-1" // 4
+		//		"OnTrigger" "alyx,StopScripting,,14,-1" // 4
+		//		"OnTrigger" "introom_elevator_doors_1,Open,,13.5,-1" // 3.5
+		//		"OnTrigger" "prop_elevatordoor_bottom_1,SetAnimation,open,13.5,-1" // 3.5
+		//		"OnTrigger" "areaportal_coverup,Enable,,11,-1" // 1
+		//		"OnTrigger" "elevator_link,TurnOn,,17,-1" // 7
+		//		"OnTrigger" "sound_Train_pass_car_2b,StopSound,,10,-1" // 0
+		//		"OnTrigger" "razortrain_horn_wav,StopSound,,10,-1" // 0
+		//	}
+		//}
+
+		// create the elevator checkpoint
+
+		//"create"
+		//{
+		//	"classname" "info_player_checkpoint"
+		//	"origin" "1333.47 643.60 -190"
+
+		//	"values"
+		//	{
+		//		"targetname" "syn_spawn_player_2"
+		//		"StartDisabled" "1"
+		//		"angles" "0 -180 0"
+		//	}
+		//}
+
+		// do not let the door close when you enter the eli room
+		"delete" { "targetname" "int_door_close_inside_1" }
+		"create"
+		{
+			"classname" "trigger_once"
+			"origin" "544 8 48"
+
+			"values"
+			{
+				"model" "*101"
+				"targetname" "int_door_close_inside_1"
+				"spawnflags" "1"
+				"StartDisabled" "1"
+				"OnTrigger" "speaker_EIntRoomNags,Kill,,0.2,-1"
+				"OnTrigger" "speaker_EIntRoomNags,TurnOff,,0,-1"
+				"OnTrigger" "logic_EIntRoomNags,Kill,,0.2,-1"
+				"OnTrigger" "logic_EIntRoomNags,CancelPending,,0,-1"
+				"OnTrigger" "lcs_np_cell02,Start,,0.1,-1"
+				OnTrigger "lcs_np_cell02,Resume,,15,-1"//failsafe for alyx getting stuck
+				"OnTrigger" "lcs_np_cell01b,Cancel,,0,-1"
+
+			//	"OnTrigger" "introom_door_1,SetAnimation,close,0,-1"
+			//	"OnTrigger" "pClip_introom_door_1,Enable,,0,-1"
+			}
+		}
+
+		// alyx does not need to lock this door
+		//"delete" { "targetname" "logic_alyx_gauntlet_start_1" }
+		//"create"
+		//{
+		//	"classname" "logic_relay"
+		//	"origin" "272 -205 105"
+
+		//	"values"
+		//	{
+		//		"spawnflags" "0"
+		//		"targetname" "logic_alyx_gauntlet_start_1"
+		//		"StartDisabled" "0"
+		//		"OnTrigger" "speaker_IntRoomNags,Kill,,0.1,-1"
+		//		"OnTrigger" "speaker_IntRoomNags,TurnOff,,0,-1"
+		//		"OnTrigger" "sound_alyxmon_1,PlaySound,,14.7,-1"
+		//		"OnTrigger" "monitor_room0,Enable,,2,-1"
+		//		"OnTrigger" "logic_alyx_controlroom_1,Trigger,,0,-1"
+		//		"OnTrigger" "camera_alyxmon_1,SetOnAndTurnOthersOff,,0,-1"
+		//		"OnTrigger" "lcs_np_cell03a,Start,,0,-1"
+		//		"OnTrigger" "alyx_security_console_mic_1,Enable,,0,-1"
+		//	//	"OnTrigger" "door_controlroom_1,Lock,,0.2,-1"
+		//	//	"OnTrigger" "door_controlroom_1,Close,,0,-1"
+		//	}
+		//}
+
+//Trav|Edt - simplify above
+		//edit {targetname "door_controlroom_1" values {targetname "syn_door_controlroom_1"} }
+//why didnt that work? ^^
+		create {classname "logic_relay"
+			values {//spawnflags "0"
+				targetname "logic_alyx_EMP_3"
+				OnSpawn "door_controlroom_1,AddOutput,targetname syn_door_controlroom_1,0,-1"
+				OnTrigger "syn_door_controlroom_1,UnLock,,1.5,-1"
+				OnTrigger "syn_door_controlroom_1,Open,,1.75,-1"} }
+
+		// do not close the gate
+		"delete" { "classname" "trigger_multiple" "origin" "512 -992 36" }
+
+		// ignore this trigger where alyx finds eli
+	//	"delete" { "targetname" "Trigger_security_scene" }
+		"delete" { "classname" "trigger_once" "origin" "860 648 -128" }
+
+		// fix the alyx eli scene
+		"delete" { "targetname" "int_door_close_outside_1" } // door does not close when you leave
+
+//Trav|Edt - Functionality check
+		create {classname "logic_relay" values {targetname "trav_functionality_d2_prison_06"} }
+	}
+}

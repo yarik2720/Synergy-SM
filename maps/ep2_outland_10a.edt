@@ -1,0 +1,186 @@
+ep2_outland_10a
+{
+	entity
+	{
+//--Setup--
+		delete {targetname "spawnitems"}
+		edit {classname "func_areaportal" values {targetname "syn_DisabledPortal" StartOpen "1"} }
+		edit {classname "func_areaportalwindow" values {targetname "syn_DisabledPortalWindow" FadeStartDist "1000" FadeDist "1500"} }
+
+//--Prevent Backtracking--
+		create {classname "trigger_push" origin "-96 0 0"
+			values {spawnflags "1"
+				model "*9"
+				pushdir "0 180 0"
+				speed "500"} }
+
+		create {classname "func_vehicleclip" origin "-96 0 0"
+			values {model "*9"} }
+
+
+//--Starting Items--
+		create {classname "info_player_equip"
+			values {
+				item_suit			"1"
+				item_armor			"60"
+				weapon_physcannon	"1"
+				weapon_crowbar		"1"
+				weapon_shotgun		"1"
+					ammo_buckshot	"12"
+				weapon_pistol		"1"
+					ammo_pistol		"54"
+				weapon_frag			"1"
+					ammo_grenade	"1"
+				weapon_357			"1"
+					ammo_357		"6"
+				weapon_smg1			"1"
+					ammo_smg1			"45"
+					ammo_smg1_grenade	"1"
+				weapon_ar2			"1"
+					ammo_ar2		"30"
+				weapon_crossbow		"1"
+
+				weapon_slam			"1"
+				//	ammo_slam		""
+				weapon_stunstick	"1"
+			} }
+
+//--Spawns--
+		create {classname "info_spawn_manager"
+			values {targetname "syn_spawn_manager"} }
+//Intro
+		create {classname "info_player_coop" origin "5340.08 -5955.16 -1536.00"
+			values {angles "0 160 0" targetname "syn_spawn_player_1"} }
+
+		//create {classname "info_player_coop" origin ""
+		//	values {angles "0 0 0" targetname "syn_spawn_player_2" StartDisabled "1"} }
+
+		create {classname "info_global_settings"
+			values {targetname "syn_global_settings" IsVehicleMap "0"} }
+
+//Intro
+		create {classname "info_vehicle_spawn" origin "4352 -5760 -1536"
+			values {targetname "syn_spawn_vehicle_1"
+				angles "0 90 0"
+				StartEnabled "1"
+				RespawnVehicle "1"
+				VehicleType "4"
+				VehicleSize "192"
+				model "models/vehicles/buggy_p2.mdl"
+				VehicleScript "scripts/vehicles/jeep_test.txt"} }
+//Dog
+		create {classname "info_vehicle_spawn" origin "2352.01 -815.95 -1936"
+			values {targetname "syn_spawn_vehicle_2"
+				angles "0 345 0"
+				StartEnabled "0"//
+				RespawnVehicle "1"
+				VehicleType "4"
+				VehicleSize "192"
+				model "models/vehicles/buggy_p2.mdl"
+				VehicleScript "scripts/vehicles/jeep_test.txt"} }
+
+		create {classname "logic_auto"
+			values {spawnflags "1"
+				OnMapSpawn "alyx_approachdog,AddOutput,OnEndSequence syn_spawn_vehicle_2:Enable::0:-1,0,-1"} }
+
+//cruel way of disableing gun
+		create {classname "logic_timer"
+			values {RefireTime "5"
+				OnTimer "prop_vehicle_jeep,AddOutput,EnableGun 0,0,-1"} }
+
+//--Extra--
+
+//Trav|Edt - Add gnome if NewGame (could use some more work)
+		create {classname "logic_auto"
+			values {spawnflags "1"
+				OnNewGame "brain_spawner,Kill,,0,-1"
+				OnNewGame "strider_brain,Kill,,0,-1"
+				OnNewGame "dog_template,AddOutput,OnEntitySpawned syn_new_gnome_spawner:SetParent:dog:0.1:-1,0,-1"
+				OnNewGame "dog_template,AddOutput,OnEntitySpawned syn_new_gnome_spawner:SetParentSetParentAttachment:bigPhys_attachment:0.2:-1,0,-1"
+				OnNewGame "strider_wakeup,AddOutput,OnScriptEvent03 syn_new_gnome_spawner:ForceSpawn::0:-1,0,-1"} }
+
+			create {classname "point_template" origin "1447 -1409 -1409"
+				values {spawnflags "2"
+					targetname "syn_new_gnome"
+					Template01 "gnome"} }
+
+		create {classname "env_entity_maker" origin "1526 -1406 -1427"
+			values {targetname "syn_new_gnome_spawner"
+				parentname "dog"
+				angles "3 54 0"
+				EntityTemplate "syn_new_gnome"
+				PostSpawnSpeed "500"
+				PostSpawnDirection "-130 25 0"} }
+
+		create {classname "prop_physics" origin "1447 -1409 -1409"
+			values {model "models/props_junk/gnome.mdl"
+				angles "0 0 0"
+				targetname "gnome"} }
+
+//Trav|Edt - moveplayers at dog scene
+		create {classname "trigger_once"
+			origin "2304 -1664 -1728"
+			values {model "*84"
+				spawnflags "1"
+				OnTrigger "syn_spawn_manager,MovePlayers,,0,-1"} }
+
+		// convert to episodic buggy
+		edit { classname "prop_vehicle_jeep" values { classname "prop_vehicle_jeep_episodic" } }
+
+		// remove the blocker brushes
+		delete { targetname "playertrapped_brush" }
+
+		// move all players to the end of the map before we change level
+		// we need to change this up a bit to work with multiple players
+		// the trigger that the player is going to touch is going to be activated
+		// by the math_counter OnHitMax output (when DOG and Alyx are ready)
+		create { classname "info_teleport_destination" origin "4959 11158 186" values { targetname "PS_EndMap_TP" angles "0 90 0" } }
+
+		delete { classname "trigger_multiple" origin "4928 11184 303.69" }
+		create { classname "trigger_once" origin "4928 11184 303.69"
+			values {
+				"model" "*25"
+				"wait" "0"
+				"targetname" "base_playertrigger_1"
+				"StartDisabled" "1"
+				"spawnflags" "1"
+				"hammerid" "2696662"
+
+				"OnTrigger" "alyx_base_lead,Deactivate,,0,-1"
+				"OnTrigger" "alyx_follow,Deactivate,,0,-1"
+				"OnTrigger" "base_transition_door,Close,,0,-1"
+				"OnTrigger" "base_transition_brush,Enable,,0,-1"
+
+				"OnTrigger" "syn_spawn_manager,TeleportPlayers,PS_EndMap_TP,0.1,-1"
+
+				"OnTrigger" "changelevel_to_11_trigger,Enable,,2,-1"
+			}
+		}
+
+		delete { targetname "base_transition_counter" }
+		create { classname "math_counter" origin "5024 11240 216"
+			values {
+				"targetname" "base_transition_counter"
+				"startvalue" "0"
+				"min" "0"
+				"max" "2"
+				"hammerid" "2696379"
+
+				"OnHitMax" "base_playertrigger_1,Enable,,0,-1"
+			}
+		}
+
+		// create additional vehicle
+		create { classname "prop_vehicle_mp" origin "2516 -2536 -1865"
+			values {
+				"vehiclescript" "scripts/vehicles/van.txt"
+				"model" "models/vehicles/7seatvan.mdl"
+				"angles" "0 20 0"
+				"targetname" "theYellowVan"
+				"skin" "2"
+			}
+		}
+//Trav|Edt - Functionality check
+		create {classname "logic_relay" values {targetname "trav_functionality_ep2_outland_10a"} }
+	}
+}

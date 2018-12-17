@@ -1,0 +1,206 @@
+d2_prison_01
+{
+	console
+	{
+		sk_gunship_health_increments 12 //4
+		sk_antlion_health 75 //30
+	}
+	entity
+	{
+//--Setup--
+		delete {classname "logic_auto" origin "4158.9 -4440.75 1116"}
+		edit {classname "func_areaportal" values {targetname "syn_disabledPortal" StartOpen "1"} }
+
+//Prevent Backtracking
+		create {classname "prop_dynamic" origin "4152 -5088 848"
+			values {model "models/synergy/tools/syn_transition.mdl"
+				angles "0 90 0"
+				solid "6"
+				DisableShadows "1"} }
+
+		//create {classname "trigger_push" origin "0 64 0"
+		//	values {model "*41"
+		//		spawnflags "1"
+		//		speed "750"
+		//		pushdir "0 90 0"} }
+
+//--Starting Items--
+		create {classname "info_player_equip"
+			values {
+				item_suit			"1"
+				item_armor			"60"
+				weapon_crowbar		"1"
+				weapon_pistol		"1"
+				weapon_smg1			"1"
+				weapon_frag			"1"
+				weapon_357			"1"
+				weapon_physcannon	"1"
+				weapon_shotgun		"1"
+				weapon_ar2			"1"
+				weapon_rpg			"1"
+				weapon_crossbow		"1"
+				weapon_bugbait		"1"
+					weapon_stunstick	"1"
+				ammo_pistol			"54"//72
+				ammo_smg1			"45"
+				ammo_grenade		"1"
+				ammo_smg1_grenade	"1"
+				ammo_357			"6"
+				ammo_buckshot		"12"
+				ammo_ar2			"30"
+				ammo_rpg_round		"1"
+				//ammo_crossbow		"0"
+			} }
+
+
+//--Spawns--
+		create {classname "info_spawn_manager"
+			values {targetname "syn_spawn_manager"} }
+
+		create {classname "info_player_coop" origin "4159.33 -5041.15 1036"
+			values {angles "0 90 0" targetname "syn_spawn_player_1"} }
+
+		create {classname "info_global_settings"
+			values {IsVehicleMap "0" targetname "syn_global_settings"} }
+
+//--Extra--
+
+		// create intermission
+		"create" { "classname" "info_intermission" "origin" "4517 -4357 1502" "values" { "angles" "0 155 0" } }
+
+//Trav|Edt - Doors: Open Only
+		edit {targetname "door_2" values {spawnflags "2048" returndelay "-1"} }
+		edit {classname "prop_door_rotating" values {spawnflags "0"} }
+
+//Trav|Edt - freeze ragdolls in water when near
+		create {classname "trigger_once"
+			origin "2024 -3680 1152"
+			values {model "*31"
+				spawnflags "1"
+				OnTrigger "corpse,DisableMotion,,0,-1"} }
+
+//Trav|Edt - aid station changes
+		edit {classname "prop_physics" origin "3234 -1922 1426"
+			values {spawnflags "8"} }
+
+		create {classname "item_suitcharger" origin "3176 -1784 1456"}
+
+//Trav|Edt - insrease fire damage at end
+		edit {targetname "piperoom_valve1_hurt" values {damage "200" nodmgforce "0"} }
+		edit {targetname "piperoom_valve2_hurt" values {damage "200" nodmgforce "0"} }
+
+//Trav|Edt - autirush
+//		create {classname "trigger_coop"
+//			origin "1400 -1516 1664"
+//			values {model "*60"
+//				spawnflags "1"
+//				targetname "syn_antirush_trigger"
+//				CountType "1"
+//				UseHUD "1"
+//				PlayerValue "50"
+//				wait "1.5"
+//				OnTrigger "syn_antirush_text,Display,,0,-1"
+//				OnPlayersIn "syn_antirush_blocker,Kill,,0,1"
+//				OnPlayersIn "syn_antirush_light,TurnOff,,0,1"
+//				OnPlayersIn "!self,Disable,,1,1"} }
+//
+//		create {classname "prop_dynamic" origin "1392 -1648 1424"
+//			values {model "models/synergy/tools/syn_transition.mdl"
+//				targetname "syn_antirush_blocker"
+//				angles "0 270 0"
+//				solid "6"
+//				DisableShadows "1"} }
+//
+////		create {classname "light_dynamic" origin "9280 8536 2144"
+////			values {targetname "syn_antirush_light"
+////				_light "170 255 170"
+////				brightness "1"
+////				distance "256"
+////				//_inner_cone "75"
+////				//_cone "80"
+////				style "12"} }
+//
+//		create {classname "game_text"
+//			values {spawnflags "0"
+//				targetname "syn_antirush_text"
+//				message "Need More Players to Continue. . ."
+//				channel "0"
+//				effect "2"
+//				x "-1"
+//				y "0.85"
+//				color "100 100 100"
+//				color2 "240 110 0"
+//				fadein "0.03"
+//				fadeout "1.25"
+//				holdtime "2"
+//				fxtime "0.25"} }
+
+//end collaspe
+		delete {classname "trigger_once" origin "1064 -1536 1664"}
+
+		create {classname "trigger_coop"
+			origin "920 -1452 1664"
+			values {model "*60"
+				spawnflags "1"
+				targetname "syn_antirush_trigger2"
+				CountType "1"
+				UseHUD "1"
+				PlayerValue "50"
+				target "syn_antirush2_target"
+				wait "1.5"
+				OnPlayersIn "!self,TeleportPlayersNotTouching,,0,1"
+				OnPlayersIn "relay_start_rockfall,Trigger,,0,1"
+				OnPlayersIn "!self,Disable,,1,1"} }
+
+		create {classname "info_target" origin "1024 -1496 1608" values {targetname "syn_antirush2_target" angles "0 180 0"} }
+
+		create {classname "prop_dynamic" origin "592 -1602 1601"
+			values {model "models/synergy/tools/syn_transition.mdl"
+				targetname "syn_antirush_blocker2"
+				angles "0 90 0"
+				solid "6"
+				DisableShadows "1"} }
+
+//Trav|Edt - moveplayers past collaspe (required if antirush is disabled)
+		create {classname "logic_relay"
+			values {spawnflags "1"
+				targetname "_syn_antirush"
+				OnTrigger "syn_endmoveplayers,Enable,,0,-1"} }
+
+		create {classname "trigger_once"
+			origin "1064 -1536 1664"
+			values {model "*17"
+				spawnflags "1"
+				StartDisabled "1"
+				targetname "syn_endmoveplayers"
+				OnTrigger "syn_spawn_manager,MovePlayers,,0,-1"} }
+
+//Trav|Edt - Link from d2_coast_12_hdr
+	//	delete {classname "trigger_changelevel"}
+
+	//	create {classname "trigger_changelevel" origin "4160 -5112 1086"
+	//		values {model "*45"
+	//			spawnflags "2"
+	//			map "d2_coast_12_hdr_v4"
+	//			landmark "landmark_coast_12_to_prison_01"} }
+
+	//	edit {targetname "landmark_d2_coast_01-03" values {targetname "landmark_d2_coast_01-02"} }
+
+//changelevel p01-p02
+	//	create {classname "trigger_changelevel" origin "656 -1536 1660"
+	//		values {model "*45"
+	//			targetname "changelevel_01-02"
+	//			spawnflags "2"
+	//			map "d2_prison_02"
+	//			landmark "prison1_to_2"} }
+
+//End of Trav|Edt
+
+		// create some RPGs
+		"create" { "classname" "weapon_rpg" "origin" "2133.69 -1437.23 1624" }
+		"create" { "classname" "weapon_rpg" "origin" "2148.58 -1510.38 1624" }
+
+//Trav|Edt - Functionality check
+		create {classname "logic_relay" values {targetname "trav_functionality_d2_prison_01"} }
+	}
+}

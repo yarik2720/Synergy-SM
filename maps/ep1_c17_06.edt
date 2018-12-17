@@ -1,0 +1,154 @@
+ep1_c17_06
+{
+	console
+	{
+	sk_strider_num_missiles1 12
+	sk_strider_num_missiles1 16
+	sk_strider_num_missiles1 20
+	}
+	entity
+	{
+//--Setup--
+		delete { targetname "global_newgame_template" }
+		delete { targetname "global_newgame_spawner_xbow" }
+		delete { targetname "global_newgame_spawner_dynamic" }
+		delete { targetname "global_newgame_spawner_physgun" }
+		delete { targetname "global_newgame_spawner_rpg" }
+		delete { targetname "global_newgame_spawner_ar2" }
+		delete { targetname "global_newgame_spawner_smg" }
+		delete { targetname "global_newgame_spawner_shotgun" }
+		delete { targetname "global_newgame_spawner_crowbar" }
+		delete { targetname "global_newgame_spawner_suit" }
+		create { classname "point_template" origin "9899.66 9630.34 -706.783"
+			values {//	"Template11" "global_newgame_spawner_xbow"
+			//	"Template08" "global_newgame_spawner_dynamic"
+			//	"Template07" "global_newgame_spawner_physgun"
+			//	"Template06" "global_newgame_spawner_rpg"
+			//	"Template05" "global_newgame_spawner_ar2"
+			//	"Template04" "global_newgame_spawner_smg"
+			//	"Template03" "global_newgame_spawner_shotgun"
+			//	"Template02" "global_newgame_spawner_crowbar"
+			//	"Template01" "global_newgame_spawner_suit"
+				"Template04" "citizen_refugees_1"
+				"Template03" "citizen_refugees_2"
+				"Template02" "alyx"
+				"Template01" "barney"
+				"spawnflags" "2"
+				"targetname" "global_newgame_template"} }
+		edit {classname "func_areaportal" values {targetname "syn_DisabledPortal" StartOpen "1"} }
+		edit {classname "func_areaportalwindow" values {targetname "syn_DisabledPortalWindow" FadeStartDist "1000" FadeDist "1500"} }
+
+//--Starting Items--
+		create {classname "info_player_equip"
+			values {
+				item_suit			"1"
+				item_armor			"60"
+				weapon_physcannon	"1"
+				weapon_pistol		"1"
+				weapon_shotgun		"1"
+				weapon_smg1			"1"
+				weapon_ar2			"1"
+				weapon_frag			"1"
+				weapon_slam			"1"
+				weapon_crossbow		"1"
+				weapon_crowbar		"1"
+				ammo_pistol			"54"
+				ammo_buckshot		"12"
+				ammo_smg1			"45"
+				ammo_ar2			"30"
+				ammo_grenade		"1"
+				weapon_rpg			"1"
+				//ammo_crossbow		"0"
+			} }
+//New Weapons
+	//	create {classname "info_player_equip"
+	//		values {targetname "syn_new_weapons"
+	//			StartDisabled "1"
+	//			weapon_rpg			"1"
+	//		} }
+
+//--Spawns--
+		create {classname "info_spawn_manager"
+			values {targetname "syn_spawn_manager"} }
+//Intro
+		create {classname "info_player_coop" origin "9728.86 9760.48 -730.97"
+			values {angles "0 -50 0" targetname "syn_spawn_player_1"} }
+
+		create {classname "info_global_settings"
+			values {targetname "syn_global_settings" IsVehicleMap "0"} }
+
+//--Extra--
+		create { classname "info_intermission" origin "9886.656250 8583.562500 -435.375000" values { angles "3 16 0" } }
+
+//Delay Barney Intro (so most players can load)
+		delete {classname "logic_auto" origin "9764 9417 -611"}
+
+		create {classname "trigger_once" origin "9872 9596 -718"
+			values {model "*84"
+				spawnflags "1"
+				OnTrigger "assault_cit1_lasttrain,Activate,,8.1,-1"
+				OnTrigger "assault_cit2_lasttrain,Activate,,8.1,-1"
+				OnTrigger "lcs_train_departure_alyx_barney,Start,,10,-1"} }
+
+//Trav|Edt - no rpgs
+	//	create {classname "trigger_multiple"
+	//		origin "11239 8102 -413"
+	//		values {model "*37"
+	//			spawnflags "1"
+	//			targetname "syn_new_weapon_trigger"
+	//			//StartDisabled "1"
+	//			filtername "syn_new_weapon_filter"
+	//			OnTrigger "syn_new_weapons,Enable,,0,1"
+	//			OnStartTouch "syn_new_weapons,EquipPlayer,,0,-1"
+	//			OnStartTouch "!activator,AddOutput,targetname syn_ep1_c17_02a_got_new_weapons,0.1,-1"} }
+
+	//	create {classname "filter_activator_name"
+	//		values {targetname "syn_new_weapon_filter"
+	//			Negated "1"
+	//			filtername "syn_ep1_c17_06_got_new_weapons"} }
+
+//TODO: players fall out of train
+//Trav|Edt - move all players to outrotrain and disable ff and push
+		create {classname "trigger_once"
+			origin "11986 8409 -759"
+			values {model "*37"
+				spawnflags "1"
+				targetname "trigger_playerontrain"//outro_train_1
+				StartDisabled "1"
+				OnTrigger "syn_spawn_manager,MovePlayers,,0,-1"
+				OnTrigger "clip_playertrain_close,Enable,,0,-1"} }
+
+//End of Trav|Edt
+
+		delete { targetname "citfx_glowtrack3" }
+		create { classname "path_track" origin "-2742 -3396 -13352"
+			values {
+				"speed" "350"
+				"spawnflags" "0"
+				"target" "citfx_glowtrack2"
+				"targetname" "citfx_glowtrack3"
+				"orientationtype" "1"
+				"angles" "0 0 0"
+				"OnPass" "fade_out,Fade,,1,1"
+				"OnPass" "soundscape_silence,Enable,,2,1"
+				"OnPass" "fade_out_credits,Fade,,7,1"
+				"OnPass" "credits,RollOutroCredits,,11,1"
+				"OnPass" "fog,SetStartDist,-501,0,-1"
+				"OnPass" "fog,SetEndDist,-500,4,-1"
+				"OnPass" "pvc_credits,Enable,,6.9,-1"
+				"OnPass" "fog,SetColor,255 255 255,4,-1"
+				"OnPass" "weaponstrip,StripWeaponsAndSuit,,7,-1"
+				"OnPass" "sound_outro_finale_02,PlaySound,,7,-1"
+				"OnPass" "fog,SetColorSecondary,255 255 255,4,-1"
+
+				"OnPass" "theEndCmd,Command,changelevel ep2 ep2_outland_01,7.8,-1"
+				"OnPass" "theEnd,EndGame,,8,1"
+			}
+		}
+
+		create { classname "point_servercommand" values { targetname "theEndCmd" } }
+		create { classname "game_end" values { targetname "theEnd" } }
+//Trav|Edt - Functionality check
+		create {classname "logic_relay" values {targetname "trav_functionality_ep1_c17_06"} }
+	}
+}

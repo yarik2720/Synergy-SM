@@ -1,0 +1,121 @@
+d3_c17_11
+{
+	entity 
+	{
+//--Setup--
+		delete {classname "logic_auto" origin "768 7864 969"}
+		create {classname "logic_auto"
+			values {spawnflags "1"
+			OnNewGame "citizen_1_maker,Spawn,,0,-1"
+			OnNewGame "citizen_2_maker,Spawn,,0,-1"} }
+		edit {classname "func_areaportal" values {targetname "syn_disabledPortal" StartOpen "1"} }
+
+//--Starting Items--
+		create {classname "info_player_equip"
+			values {
+				item_suit			"1"
+				item_armor			"60"
+				weapon_crowbar		"1"
+				weapon_pistol		"1"
+				weapon_smg1			"1"
+				weapon_frag			"1"
+				weapon_357			"1"
+				weapon_physcannon	"1"
+				weapon_shotgun		"1"
+				weapon_ar2			"1"
+				weapon_rpg			"1"
+				weapon_crossbow		"1"
+				weapon_bugbait		"1"
+				weapon_slam			"1"
+				weapon_stunstick	"1"
+				ammo_pistol			"54"//72
+				ammo_smg1			"45"
+				ammo_grenade		"1"
+				ammo_smg1_grenade	"1"
+				ammo_357			"6"
+				ammo_buckshot		"12"
+				ammo_ar2			"30"
+				ammo_ar2altfire		"1"
+				//ammo_rpg_round	"1"
+				//ammo_crossbow		"0"
+				//ammo_slam			"2"
+			} }
+
+//--Spawns--
+		create {classname "info_spawn_manager"
+			values {targetname "syn_spawn_manager"} }
+
+		create {classname "info_player_coop" origin "560.64 7997.22 256.03"
+			values {angles "0 -90 0" targetname "syn_spawn_player_1"} }
+
+		create {classname "info_global_settings"
+			values {IsVehicleMap "0" targetname "syn_global_settings"} }
+
+//--Extra--
+
+		// create intermission
+	//	"create" { "classname" "info_intermission" "origin" "" "values" { "angles" "" } }
+
+//Trav|Edt - Doors: Open Only
+		//edit {targetname "stairwell_door" values {spawnflags "0"} }//but allow return (delay 5)
+
+//Trav|Edt - add antiskipper
+		create {classname "func_brush"
+			origin "1052 5908 1040"
+			values {model "*44"
+				spawnflags "1"
+				targetname "trav_antiskip_brush_dropshipdoor"} }
+
+		create {classname "func_brush"
+			origin "1012 5908 1040"
+			values {model "*44"
+				spawnflags "1"
+				targetname "trav_antiskip_brush_dropshipdoor"} }
+
+//Trav|Edt - add more combine at end of bridge
+		create {classname "logic_auto"
+			values {spawnflags "1"
+				OnMapSpawn "skybridge_group_a_soldiers_maker,MaxLiveChildren,5,10,-1"
+				OnMapSpawn "skybridge_group_a_soldiers_maker,AddMaxChildren,5,10,-1"} }
+
+//Trav|Edt - Prevent door(s) from autoclosing
+		//edit {classname "prop_door_rotating"
+		//	values {returndelay "-1"} }
+
+//Trav|Edt - autirush
+		create {classname "trigger_coop"
+			origin "1352 3216 1024"
+			values {model "*42"
+				angles "0 0 90"
+				spawnflags "1"
+				//StartDisabled "1"
+				targetname "syn_antirush_coop"
+				CountType "1"
+				UseHUD "1"
+				PlayerValue "50"
+				wait "1.5"
+				OnTrigger "syn_antirush_text,Display,,0,-1"
+				OnPlayersIn "syn_antirush_wall,Kill,,0,1"
+				OnPlayersIn "!self,Disable,,1,1"} }
+
+		create {classname "syn_transition_wall" origin "1272 3064 961" values {targetname "syn_antirush_wall"} }
+
+		create {classname "game_text"
+			values {spawnflags "0"
+				targetname "syn_antirush_text"
+				message "Need More Players to Continue. . ."
+				channel "0"
+				effect "2"
+				x "-1"
+				y "0.85"
+				color "100 100 100"
+				color2 "240 110 0"
+				fadein "0.03"
+				fadeout "1.25"
+				holdtime "2"
+				fxtime "0.25"} }
+
+//Trav|Edt - Functionality check
+		create {classname "logic_relay" values {targetname "trav_functionality_d3_c17_11"} }
+	}
+}

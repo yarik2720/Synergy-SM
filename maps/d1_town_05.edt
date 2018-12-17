@@ -1,0 +1,422 @@
+d1_town_05
+{
+	entity
+	{
+//--Setup--
+		delete {classname "logic_auto" origin "-10772 4208 924"}
+		edit {classname "func_areaportal" values {targetname "disabledPortal" StartOpen "1"} }
+		edit {classname "func_areaportalwindow" values {targetname "DisabledPortalWindow" FadeStartDist "1250" FadeDist "1350"} }//FadeStartDist "1000" FadeDist "1500"
+
+//Prevent Backtracking
+		create {classname "prop_dynamic" origin "-10008 4352 880"
+			values {model "models/synergy/tools/syn_transition.mdl"
+				angles "0 180 0"
+				solid "6"
+				DisableShadows "1"} }
+
+		create {classname "light_dynamic" origin "-10000 4352 960"
+			values {_light "170 255 170"
+				brightness "1"
+				distance "512"
+				style "12"} }
+
+	//	create {classname "trigger_push" origin "-64 0 0"
+	//		values {model "*1"
+	//			spawnflags "1"
+	//			speed "750"
+	//			pushdir "0 180 0"} }
+
+//--Starting Items--
+		create {classname "info_player_equip"
+			values {
+				targetname "syn_eqipment_base"
+				item_suit			"1"
+				item_armor			"45"
+				weapon_crowbar		"1"
+				weapon_pistol		"1"
+				weapon_smg1			"1"
+				weapon_frag			"1"
+				weapon_357			"1"
+				weapon_physcannon	"1"
+				weapon_shotgun		"1"
+				ammo_pistol			"54"//72
+				ammo_smg1			"45"
+				ammo_grenade		"1"
+				//ammo_smg1_grenade	"1"
+				ammo_357			"6"
+				ammo_buckshot		"12"
+			} }
+
+//New Weapon Found
+		create {classname "info_player_equip"
+			values {StartDisabled "1"
+				targetname "syn_new_weapon"
+				weapon_ar2 "1"
+				ammo_ar2 "30"} }
+
+//--Spawns--
+		create {classname "info_spawn_manager"
+			values {targetname "syn_spawn_manager"} }
+
+		create {classname "info_player_coop" origin "-10391 4254 896"
+			values {angles "0 180 0" targetname "syn_spawn_player_1"} }
+
+		create {classname "info_player_coop" origin "-3904 7672 912"
+			values {angles "0 0 0" targetname "syn_spawn_player_2" StartDisabled "1"} }
+
+		create {classname "info_global_settings"
+			values {IsVehicleMap "0" targetname "syn_global_settings"} }
+
+//--Checkpoints--
+		create {classname "trigger_once"
+			origin "-3330 7488 960"//-3090 7380 960
+			values {model "*14"//*53 - trigger_autosave model
+				spawnflags "1"
+				OnTrigger "syn_vint_trav_tmaker_combine1,Enable,,2,-1"
+				OnTrigger "syn_spawn_manager,SetCheckpoint,syn_spawn_player_2,,0-1"
+				//OnTrigger "syn_spawn_manager,MovePlayers,,0,-1"
+				OnTrigger "syn_vint_syn_warehouse_backtrack,Enable,,2,-1"
+				//OnTrigger "syn_vint_syn_warehouse_backtrack,EnableCollision,,2,-1"
+				//OnTrigger "syn_warehouse_rush,Disable,,120,-1"
+				OnTrigger "syn_new_weapon,EquipAllPlayers,,0.5,-1"
+				OnTrigger "syn_new_weapon,Enable,,0,-1"} }
+//dislodge for mp_teleport_disable
+		create {classname "trigger_once" origin "-3330 7488 960"
+			values {model "*14"
+				spawnflags "1"
+				targetname "syn_mplrs"
+				OnTrigger "syn_spawn_manager,MovePlayers,,0,-1"} }
+
+//--Extra--
+
+		// add an intermission
+		"create"
+		{
+			"classname"	"info_intermission"
+			"origin"	"-7872 7472 992"
+			"values" { "target" "sniper_2" }
+		}
+
+//If dog's ball is carried over, keep invuln
+		create {classname "filter_activator_name"
+			values {targetname "syn_dfilter_null"
+				filtername "null"} }
+
+//Trav|Edt - Doors: Open Only
+		//edit {classname "prop_door_rotating" values {spawnflags "2048" returndelay "-1"} }
+//Only Open Outwardd (last door)
+		create {classname "logic_auto"
+			values {spawnflags "1"
+				OnMapSpawn "warehouse_exitdoor,AddOutput,opendir 2,0,-1"} }
+
+//Trav|Edt - delay music (players not loaded won't hear it)
+		delete {classname "trigger_once" origin "-11254 4352 952"}
+		create {classname "trigger_once" origin "-11254 4352 952"
+			values {model "*44"
+				spawnflags "1"
+				OnTrigger "start_music,PlaySound,,30,-1" //0
+				OnTrigger "start_gulls_rel,RevertRelationship,,0,-1"} }
+
+//Trav|Edt - Disable Enemy turrets when tipped (avoid player greif)
+		create {classname "logic_auto"
+			values {spawnflags "1"
+				OnMapSpawn "npc_turret_floor,AddOutput,OnTipped !self:SelfDestruct::0:-1,0,-1"} }//DepleteAmmo
+
+//Trav|Edt - add crates in fence ally
+		create {classname "item_item_crate"
+			origin	"-11928 3608 936"
+			values{ItemClass "item_dynamic_resupply"
+				ItemCount "5"
+				targetname "syn_vint"} }
+
+		create {classname "item_item_crate"
+			origin	"-11928 3608 968"
+			values{ItemClass "item_dynamic_resupply"
+				ItemCount "5"
+				targetname "syn_vint"} }
+
+//Trav|Edt - increase sniper diff
+		delete {targetname "sniper_1"}
+		delete {targetname "sniper_2"}
+
+		create {classname "npc_sniper"
+			origin "-11034 7041 1319"
+			values {spawnflags "3211264"
+				angles "0 0 0"
+				targetname "sniper_1"
+				beambrightness "150"
+				ignoreunseenenemies "1"} }
+
+		create {classname "npc_sniper"
+			origin "-6446 8030 1242"
+			values {spawnflags "3997696"
+				angles "0 179 0"
+				targetname "sniper_2"
+				beambrightness "150"
+				ignoreunseenenemies "1"} }
+
+//Trav|Edt - freeze logs so players wont be killed when they hide under em
+		create {classname "logic_auto"
+			values {spawnflags "1"
+				OnMapSpawn "logholder_barrel_1,AddOutput,OnBreak logs:DisableMotion::8:-1,0,-1"} }
+
+//Trav|Edt - add a combine soldier on roof
+		create {classname "npc_combine_s"
+			origin "-1992 8904 1032"
+			values {targetname "syn_vint_trav_combine_roofscout"
+				angles "0 240 0"
+				spawnflags "772"
+				squadname "squad_trav_combine1"
+				ignoreunseenenemies "1"
+				additionalequipment "weapon_ar2"} }
+
+//Trav|Edt - add more combine at warehouse
+		create {classname "npc_combine_s"
+			origin "-2170 8896 904"
+			values {targetname "syn_vint_trav_combine1"
+				spawnflags "2564"
+				squadname "squad_trav_combine1"
+				additionalequipment "weapon_ar2"
+				OnDeath "warehouse_deadcombine_counter,Add,1,0,-1"} }
+
+		create {classname "logic_difficulty"
+			values {spawnflags "3"
+				targetname "syn_vint_ld"
+				OnNormal "syn_vint_trav_tmaker_combine1,SetMaxChildren,11,0,-1"
+				OnHard "syn_vint_trav_tmaker_combine1,SetMaxChildren,16,0,-1"
+				//OnEasy "warehouse_deadcombine_counter,AddOutput,max 12,0,-1"//done with edit below
+				OnNormal "warehouse_deadcombine_counter,AddOutput,max 15,0,-1"//-1 for checker
+				OnHard "warehouse_deadcombine_counter,AddOutput,max 20,0,-1"} }
+
+//Trav|Edt - Mod counter to adhere for extra enemies
+		edit {targetname"warehouse_deadcombine_counter"
+			values {max "11"} }//23//24//11? should work
+
+		create {classname "npc_template_maker"
+			origin "-2170 8896 904"
+			values {spawnflags "128"
+				//angles " 0 45 0"
+				targetname "syn_vint_trav_tmaker_combine1"
+				MaxNPCCount "8"//20 LD Saled
+				MaxLiveChildren "7"//10
+				SpawnFrequency "0.2"
+				TemplateName "syn_vint_trav_combine1"
+				OnSpawnNPC "trav_aiscript_sched_combine1,StartSchedule,,0.5,0"} }
+
+		create {classname "aiscripted_schedule"
+			values {spawnflags "4"
+				targetname "trav_aiscript_sched_combine1"
+				m_iszEntity "syn_vint_trav_combine1"
+				schedule "6"
+				goalent "!player"} }
+
+//prevent rushing into warehouse
+		create {classname "trigger_push" origin "-2016 8880 950"
+			values {model "*36"
+				spawnflags "1"
+				speed "450"
+					StartDisabled "1"//disabled for now
+				pushdir "0 270 0"
+				targetname "syn_warehouse_rush"} }
+
+//Prevent backtracking
+		create {classname "trigger_push" origin "-4573.31 8082.94 1013.62"
+			values {model "*19"
+				angles "0 14 0"
+				spawnflags "1"
+				StartDisabled "1"
+				speed "450"
+				pushdir "0 14 0"
+				targetname "syn_vint_syn_warehouse_backtrack"} }
+
+//		create {classname "logic_auto"
+//			values {spawnflags "1"
+//				OnMapSpawn "syn_vint_syn_warehouse_backtrack,DisableCollision,,0,-1"} }
+
+		create {classname "prop_dynamic" origin "-4516 8048 892"
+			values {model "models/synergy/tools/syn_transition.mdl"
+				angles "0 14 0"
+				StartDisabled "1"
+				solid "0"
+				DisableShadows "1"
+				targetname "syn_vint_syn_warehouse_backtrack"
+				} }
+
+//first
+		create {classname "npc_turret_floor"
+			origin "-2944 8192 896"//-2880 7936 896
+			values {angles "0 270 0"
+				targetname "syn_vint"} }
+
+//fence
+		create {classname "npc_turret_floor"
+			origin "-1024 8576 896"
+			values {angles "0 240 0"
+				targetname "syn_vint"} }
+
+//hidden
+		create {classname "npc_turret_floor"
+			origin "-664 8280 898"
+			values {angles "0 180 0"
+				targetname "syn_vint"} }
+
+//Trav|Edt - wilson messup failsafe (sorta-notrly)
+		//create {classname "trigger_multiple"
+		//	origin "-1212 10002 932"
+		//	values {model "*42"
+		//		spawnflags "2"
+		//		OnTrigger "warehouse_deadcombine_counter,Add,1,0,-1" } }
+
+//synvint
+		create {classname "logic_relay"
+			values {spawnflags "1"
+			targetname "_syn_vint"
+				OnTrigger "warehouse_deadcombine_counter,AddOutput,max 4,0,-1"} }
+
+//Trav|Edt - stop leon from waiting forever (use trigger instead?)
+		delete {targetname "aisc_leaonwait1"}
+		create {classname "logic_auto"
+			values {spawnflags "1"
+				OnMapSpawn "warehouse_leonleads_lcs,AddOutput,OnTrigger2 !self:Resume::1.5:-1,0,-1"} }
+
+		//edit {targetname "aisc_leaonwait1"
+		//	values {ActorSeePlayer "2"
+		//		PlayerActorProximity "0"
+		//		PlayerActorFOV "70"
+		//		PlayerActorLOS "2"} }
+
+//Trav|Edt - Add aid station
+		create {classname "item_suitcharger" origin "-1728 10712 952"
+			values {targetname "syn_vint"} }
+
+		create {classname "item_healthcharger"
+			origin "-1588 10849 952"
+			values {angles "0 270 0"
+				targetname "syn_vint"} }
+
+// TEST FIXME: Fix alyx getting stuck (ai_script_conditions) WIP
+		edit {targetname "sc_alyx_zombineIntro"
+			values {PlayerActorProximity "0"} }
+
+//Trav|Edt - Close door when all in
+		//delete {targetname "trigger_close_door"}
+
+		create {classname "trigger_coop"
+			origin "-1696 10752 928.23"
+			values {model "*57"
+				spawnflags "1"
+				//StartDisabled "1"
+				targetname "syn_vint_trav_enddoor_coop"
+				CountType "1"
+				UseHUD "0"
+				PlayerValue "100"
+				OnPlayersIn "citizen_warehouse_door_1,Close,,0,1"
+				OnPlayersIn "citizen_warehouse_door_1,Lock,,0.1,1"
+				OnPlayersIn "syn_vint_trav_enddoor_clip,Enable,,0,1"
+				OnPlayersIn "syn_vint_trav_enddoor_clip,Disable,,0.8,1"
+				OnPlayersIn "!self,Disable,,1,1"} }
+
+		create {classname "func_brush"
+			origin "-1108 10282 932"
+			values {model "*42"
+				spawnflags "2"
+				rendermode "10"
+				StartDisabled "1"
+				targetname "syn_vint_trav_enddoor_clip"} }
+
+//Trav|Edt - Prevent door(s) from autoclosing (coast01 levelchanged door.
+	//	edit {classname "prop_door_rotating"
+	//		values {returndelay "-1"} }
+
+		// prevent door	from locking
+		// don't remove npcs and close door
+		delete {targetname "trigger_close_door"}
+
+//Trav|Edt - autirush (now modded end changelevel [see below])
+	//	create {classname "trigger_coop"
+	//		origin "-1684 10824 972"
+	//		values {model "*41"
+	//			spawnflags "1"
+	//			//StartDisabled "1"
+	//			targetname "syn_antirush_coop"
+	//			CountType "1"
+	//			UseHUD "1"
+	//			PlayerValue "50"
+	//			OnPlayersIn "syn_antirush_push,Disable,,0,1"
+	//			OnPlayersIn "!self,Disable,,1,1"} }
+
+	//	create {classname "trigger_push"
+	//		origin "-1684 11008 972"
+	//		values {model "*41"
+	//			spawnflags "1"
+	//			targetname "syn_antirush_push"
+	//			pushdir "0 270 0"
+	//			speed "450"} }
+
+	//	create {classname "game_text"
+	//		values {spawnflags "0"
+	//			targetname "syn_antirush_text"
+	//			message "Need More Players to Continue. . ."
+	//			channel "0"
+	//			effect "2"
+	//			x "-1"
+	//			y "0.85"
+	//			color "100 100 100"
+	//			color2 "240 110 0"
+	//			fadein "0.03"
+	//			fadeout "1.25"
+	//			holdtime "2"
+	//			fxtime "0.25"} }
+
+//Change changelevel trigger to enable rather than instata switch
+		//edit {classname "trigger_changelevel"//targetname "d1_town-coast_changelevel"
+		//	values {origin "0 640 0"//no workie (relative)
+		//		StartDisabled "1"//no workie
+		//		spawnflags "0"//workie
+		//		} }
+
+		//create {classname "logic_auto"
+		//	values {spawnflags "1"
+		//		OnMapSpawn "d1_town-coast_changelevel,Disable,,0,-1"//enabled below
+		//		OnMapSpawn "d1_town-coast_changelevel,AddOutput,origin 0 640 0,0,-1"} }
+
+		// Offset changelevel to be in proper location, allow touching
+		edit {targetname "d1_town-coast_changelevel" values { edt_removespawnflags "2" origin "0 640 0"} }
+
+	//	create {classname "trigger_once" origin "-1680 10970 952"
+	//		values {model "*40"
+	//			spawnflags "1"
+	//			OnTrigger "citizen_warehouse_door_0,Lock,,0,-1"
+	//			OnTrigger "citizen_warehouse_door_0,Close,,0,-1"
+	//			OnTrigger "d1_town-coast_changelevel,Enable,,0,-1"} }
+
+		// DEVIN-TESTING:  swap this with a dont care value
+		// originally the value is 1 (yes)
+	//	edit { targetname "aisc_leaonwait1" values { ActorSeePlayer "2" } }
+
+		// help we're stuck!
+		// move players in the transition room before level changes
+//		create { classname "info_teleport_destination" origin "-1678 10928 897" values { angles "0 90 0" targetname "PS_ExitMap_TP" } }
+//		create { classname "info_player_coop" origin "-1678 10928 897" values { angles "0 90 0" StartDisabled "1" targetname "PS_ExitMap" } }
+
+		// Delete trigger that changes the level instantly
+		delete {targetname "trigger_changelevel"}
+//		create { classname "trigger_once" origin "-1680 10970 952"
+//			values {
+//				"model" "*40"
+//				"targetname" "trigger_changelevel"
+//				"spawnflags" "1"
+//				"StartDisabled" "0"
+//				//"OnTrigger" "citizen_warehouse_door_0,Lock,,0,-1"//was on; below 1 also
+//				//"OnTrigger" "citizen_warehouse_door_0,Close,,0,-1"
+//				"OnTrigger" "syn_spawn_manager,SetCheckPoint,PS_ExitMap,0,-1"//delay was 1 (trav)
+//				//"OnTrigger" "syn_spawn_manager,TeleportPlayers,PS_ExitMap_TP,1,-1"//this may be causing players getting stuck in ground at same origin sometimes
+//	//			"OnTrigger" "d1_town-coast_changelevel,ChangeLevel,,3,1"//d3
+//				OnTrigger "d1_town-coast_changelevel,Enable,,0.1,-1"
+//			}
+//		}
+
+//Trav|Edt - Functionality check
+		create {classname "logic_relay" values {targetname "trav_functionality_d1_town_05"} }
+	}
+}
