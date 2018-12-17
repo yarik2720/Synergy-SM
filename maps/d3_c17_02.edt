@@ -75,8 +75,8 @@ d3_c17_02
 		"create" { "classname" "info_intermission" "origin" "-8806.531250 -5789.062500 290.156250" "values" { "angles" "3.463973 -17.247749 0" } }
 
 //Trav|Edt - allow cool dog-dropship scene, and teleport payers after close
-		create {classname "info_spawn_manager"
-			values {targetname "trav_spawn_manager"} }
+		// create {classname "info_spawn_manager"
+			// values {targetname "trav_spawn_manager"} }
 
 		create {classname "info_teleport_destination" origin "-5424 -5568 36"
 			values {angles "0 180 0"
@@ -86,7 +86,7 @@ d3_c17_02
 			origin "-5504 -5636 30"
 			values {model "*40"
 				spawnflags "1"
-				OnTrigger "trav_spawn_manager,TeleportPlayers,trav_teleport,0,-1"} }
+				OnTrigger "syn_spawn_manager,TeleportPlayers,trav_teleport,0,-1"} }
 
 //Trav|Edt - allow gman tv to not turn off
 		delete {classname "trigger_look" origin "-4940.56 -4874 60"}

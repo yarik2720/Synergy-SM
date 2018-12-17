@@ -46,9 +46,9 @@ d2_prison_08
 				ammo_357			"6"
 				ammo_buckshot		"12"
 				ammo_ar2			"30"
-				ammo_ar2altfire		"1"
+				ammo_ar2altfire		"10"
 				//ammo_rpg_round		"1"
-				//ammo_crossbow		"0"
+				ammo_crossbow		"100"
 				//ammo_slam			"2"
 			} }
 
@@ -166,7 +166,7 @@ d2_prison_08
 			origin "96 240 996"
 			values {model "*30"
 				spawnflags "1"
-				OnTrigger "edt_spawns,SetCheckpoint,syn_spawn_player_3,0,-1"} }
+				OnTrigger "syn_spawn_manager,SetCheckpoint,syn_spawn_player_3,0,-1"} }
 
 //Trav|Edt - add more combine
 		//edit {targetname "ambush_ar2_reinforcement_maker"
@@ -430,9 +430,9 @@ d2_prison_08
 				"OnStartTouch" "logic_door_comb_1_close,Trigger,,0,-1"
 
 				// activate checkpoint here
-				"OnTrigger" "edt_spawns,SetCheckpoint,syn_spawn_player_2,0,-1"//def 2.2
+				"OnTrigger" "syn_spawn_manager,SetCheckpoint,syn_spawn_player_2,0,-1"//def 2.2
 //Trav|Edt - decrease teleport time to aviod players being crushed by door 
-				"OnTrigger" "edt_spawns,MovePlayers,syn_spawn_player_2,0.1,-1"//def 2.3
+				"OnTrigger" "syn_spawn_manager,MovePlayers,syn_spawn_player_2,0,-1"//def 2.3
 //Trav|Edt - teleport any bought turrets
 				OnTrigger "trav_turrets_teleport,Enable,,0,-1"
 				OnTrigger "trav_turrets_teleport,Disable,,2,-1"
@@ -441,12 +441,12 @@ d2_prison_08
 
 		// create checkpoint to activate after bigdoor has closed
 
-		"create"
-		{
-			"classname"	"info_spawn_manager"
-			"origin"	"0 0 0"
-			"values" { "targetname" "edt_spawns" }
-		}
+		// "create"
+		// {
+			// "classname"	"info_spawn_manager"
+			// "origin"	"0 0 0"
+			// "values" { "targetname" "edt_spawns" }
+		// }
 
 		// do not let the mossman door close
 		"delete" { "targetname" "trigger_close_console_door_1" }
