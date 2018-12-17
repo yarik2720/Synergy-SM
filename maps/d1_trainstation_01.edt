@@ -53,9 +53,32 @@ d1_trainstation_01
 		// Gman
 		create {classname "info_player_coop" origin "-14576 -14208 -1300"
 			values {angles "0 0 0" targetname "syn_spawn_player_1"} }
-
+			
+		//intro text
+		create {classname "game_text"
+			values {spawnflags "1"
+				targetname "text_chapter"
+				message "HL2_Chapter1_Title"
+				effect "2"
+				x "-1"
+				y "0.60"
+				color "100 100 100"
+				color2 "240 110 0"
+				fadein "0.03"
+				fadeout "1.25"
+				holdtime "7"
+				fxtime "0.35"} }
+		create {
+			classname "trigger_coop"
+			"origin" "-5385 -1968 16"
+			values {
+				model "*33"
+				spawnflags "1"
+				"OnTrigger" "text_chapter,Display,,0,-1"
+			}
+		}
 		// Outside train
-		create {classname "info_player_coop" origin "-5392 -1968 16"
+		create {classname "info_player_coop" origin "-5385 -1968 16"
 			values {angles "0 0 0" targetname "syn_spawn_player_2" StartDisabled "1"} }
 
 		// Intro wait camera

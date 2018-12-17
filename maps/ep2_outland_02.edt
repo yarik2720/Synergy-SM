@@ -2,7 +2,7 @@ ep2_outland_02
 {
 	console
 	{
-	sk_antlionguard_health "1280" //500
+	sk_antlionguard_health "5280" //500
 	}
 	entity
 	{
@@ -31,6 +31,30 @@ ep2_outland_02
 
 				weapon_stunstick	"1"
 			} }
+			
+		//intro text
+		create {classname "game_text"
+			values {spawnflags "0"
+				targetname "text_chapter"
+				message "ep2_Chapter2_Title"
+				effect "2"
+				x "-1"
+				y "0.60"
+				color "100 100 100"
+				color2 "240 110 0"
+				fadein "0.03"
+				fadeout "1.25"
+				holdtime "7"
+				fxtime "0.35"} }
+		create {
+			classname "trigger_coop"
+			"origin" "-2156.32 -8267.77 -413.28"
+			values {
+				model "*57"
+				spawnflags "1"
+				"OnTrigger" "text_chapter,Display,,1,-1"
+			}
+		}
 //New Weapon(s)
 		create {classname "info_player_equip"
 			values {targetname "syn_new_weapon" StartDisabled "1"
@@ -41,7 +65,8 @@ ep2_outland_02
 		create {classname "logic_auto"
 			values {spawnflags "1"
 				OnMapSpawn "smg,AddOutput,OnPlayerPickup syn_new_weapon:Enable::0:-1,0,-1"
-				OnMapSpawn "smg,AddOutput,OnPlayerPickup syn_new_weapon:EquipAllPlayers::0.1:-1,0,-1"} }
+				OnMapSpawn "smg,AddOutput,OnPlayerPickup syn_new_weapon:EquipAllPlayers::0.1:-1,0,-1"
+				OnMapSpawn "lcs_gman_scene,AddOutput,OnTrigger14 syn_g1:Teleport::3.3:-1,0,-1"} }
 
 // env_zooms - all players
 		create {classname "logic_auto"
@@ -469,6 +494,7 @@ ep2_outland_02
 
 		// -----------------
 		//create { classname "info_player_coop" origin "-3089 -9460 -3110" values { angles "0 -90 0" targetname "PS_TransEle" StartDisabled "1" } }
+		create {classname "point_teleport" origin "-856 -12781 -1096" values {targetname "syn_g1" target "gman" angles "0 180 0"} }
 
 		create { classname "info_teleport_destination" origin "-3120 -9309 -899" values { angles "0 -50 0" targetname "syn_spawn_player_3_TP" } }
 

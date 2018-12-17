@@ -53,8 +53,32 @@ d2_coast_09
 				ammo_buckshot		"12"
 				ammo_ar2			"30"
 				ammo_rpg_round		"1"
-				//ammo_crossbow		"0"
+				ammo_crossbow		"800"
 			} }
+			
+		//intro text
+		create {classname "game_text"
+			values {spawnflags "1"
+				targetname "text_chapter"
+				message "HL2_Chapter8_Title"
+				effect "2"
+				x "-1"
+				y "0.60"
+				color "100 100 100"
+				color2 "240 110 0"
+				fadein "0.03"
+				fadeout "1.25"
+				holdtime "7"
+				fxtime "0.35"} }
+		create {
+			classname "trigger_coop"
+			"origin" "-14080 10584 576"
+			values {
+				model "*22"
+				spawnflags "1"
+				"OnTrigger" "text_chapter,Display,,0,-1"
+			}
+		}
 
 //--Spawns--
 		create {classname "info_spawn_manager"

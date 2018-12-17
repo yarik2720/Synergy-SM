@@ -9,7 +9,31 @@ d1_trainstation_05
 		//Trav|Edt - fix breakables from breaking, messes with IO
 		edit {targetname "lamarr_break_tech_1" values {spawnflags "519"} }
 		edit {targetname "lamarr_break_grate_1" values {spawnflags "36865"} }
-
+			
+		//intro text
+		create {classname "game_text"
+			values {spawnflags "1"
+				targetname "text_chapter"
+				message "HL2_Chapter2_Title"
+				effect "2"
+				x "-1"
+				y "0.60"
+				color "100 100 100"
+				color2 "240 110 0"
+				fadein "0.03"
+				fadeout "1.25"
+				holdtime "7"
+				fxtime "0.35"} }
+		create {
+			classname "trigger_coop"
+			"origin" "-5627 -863 128"
+			values {
+				model "*33"
+				spawnflags "1"
+				"OnTrigger" "text_chapter,Display,,0,-1"
+			}
+		}
+		
 		//Trav|Edt - make viewcontrol_ickycam fo all players
 		edit {targetname "viewcontrol_ickycam" values {edt_spawnflags "164"} }
 

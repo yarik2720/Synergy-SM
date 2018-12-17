@@ -37,6 +37,30 @@ ep2_outland_01
 				OnMapSpawn "syn_start_timer,Start,45,0,-1"
 			}
 		}
+			
+		//intro text
+		create {classname "game_text"
+			values {spawnflags "0"
+				targetname "text_chapter"
+				message "ep2_Chapter1_Title"
+				effect "2"
+				x "-1"
+				y "0.60"
+				color "100 100 100"
+				color2 "240 110 0"
+				fadein "0.03"
+				fadeout "1.25"
+				holdtime "7"
+				fxtime "0.35"} }
+		create {
+			classname "trigger_coop"
+			"origin" "410.16 -748.34 206.93"
+			values {
+				model "*127"
+				spawnflags "1"
+				"OnTrigger" "text_chapter,Display,,0,-1"
+			}
+		}
 
 // Countdown timer
 		create { classname "hud_timer"

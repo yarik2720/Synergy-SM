@@ -32,10 +32,10 @@ d2_prison_02
 				ammo_grenade		"1"
 				ammo_smg1_grenade	"1"
 				ammo_357			"6"
-				ammo_buckshot		"12"
+				ammo_buckshot		"80"
 				ammo_ar2			"30"
 				ammo_rpg_round		"1"
-				//ammo_crossbow		"0"
+				ammo_crossbow		"800"
 			} }
 //New Weapon Found
 		create {classname "info_player_equip"
@@ -44,6 +44,30 @@ d2_prison_02
 				weapon_slam "1"
 				//ammo_slam "2"
 				} }
+			
+		//intro text
+		create {classname "game_text"
+			values {spawnflags "1"
+				targetname "text_chapter"
+				message "HL2_Chapter9_Title"
+				effect "2"
+				x "-1"
+				y "0.60"
+				color "100 100 100"
+				color2 "240 110 0"
+				fadein "0.03"
+				fadeout "1.25"
+				holdtime "7"
+				fxtime "0.35"} }
+		create {
+			classname "trigger_coop"
+			"origin" "-1132 3296 448"
+			values {
+				model "*22"
+				spawnflags "1"
+				"OnTrigger" "text_chapter,Display,,0,-1"
+			}
+		}
 
 		create {classname "trigger_multiple"
 			origin "-1080 3388 440"

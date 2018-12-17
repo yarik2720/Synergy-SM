@@ -25,6 +25,30 @@ d3_citadel_01
 				weapon_physcannon	"1"
 				ammo_pistol			"54"
 			} }
+			
+		//intro text
+		create {classname "game_text"
+			values {spawnflags "0"
+				targetname "text_chapter"
+				message "HL2_Chapter12_Title"
+				effect "2"
+				x "-1"
+				y "0.60"
+				color "100 100 100"
+				color2 "240 110 0"
+				fadein "0.03"
+				fadeout "1.25"
+				holdtime "7"
+				fxtime "0.35"} }
+		create {
+			classname "trigger_coop"
+			"origin" "6410 2952 -239.96"
+			values {
+				model "*94"
+				spawnflags "1"
+				"OnTrigger" "text_chapter,Display,,0,-1"
+			}
+		}
 
 //--Spawns--
 		create {classname "info_spawn_manager"

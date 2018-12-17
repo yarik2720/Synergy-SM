@@ -48,6 +48,30 @@ d3_breen_01
 		create {classname "info_teleport_destination" origin "-2436.75 -1405.8 -1463" values {targetname "syn_spawn_teleport" angles "0 150 0"} }
 
 		edit {targetname "trans_cit05_breen01" values {origin "-2432 -1392 -512"} }
+			
+		//intro text
+		create {classname "game_text"
+			values {spawnflags "0"
+				targetname "text_chapter"
+				message "HL2_Chapter13_Title"
+				effect "2"
+				x "-1"
+				y "0.60"
+				color "100 100 100"
+				color2 "240 110 0"
+				fadein "0.03"
+				fadeout "1.25"
+				holdtime "7"
+				fxtime "0.35"} }
+		create {
+			classname "trigger_coop"
+			"origin" "-2445.64 -1323.29 671.19"
+			values {
+				model "*87"
+				spawnflags "1"
+				"OnTrigger" "text_chapter,Display,,0,-1"
+			}
+		}
 
 //--Extra--
 
@@ -198,6 +222,13 @@ d3_breen_01
 				"targetname" "TeleportInBlack"
 			}
 		}
+		
+		//balimbanana fix
+		create {classname "func_tracktrain" origin "-2436 -1406 159" values {targetname "syn_podtrain" target "syn_podpath1" angles "90 -90 0" speed "70" orientationtype "1"} }
+		edit {targetname "pod" values {DisableShadows "1" parentname "syn_podtrain"} }
+		create {classname "path_track" origin "-2430 -1386 110" values {targetname "syn_podpath1" angles "0 0 0" target "syn_podpath2"} }
+		create {classname "path_track" origin "-2430 -1386 667" values {targetname "syn_podpath2" angles "0 0 0" target "syn_podpath3" OnPass "pod,SetParent,Breen_arm_player,1,-1" OnPass "pod,SetParentAttachment,eli_pod_inner_attachment,1.1,-1"} }
+
 
 		// do not do the getup scene
 		"delete" { "targetname" "logic_fade_view" }

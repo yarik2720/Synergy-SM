@@ -48,12 +48,36 @@ d2_prison_06
 				ammo_grenade		"1"
 				ammo_smg1_grenade	"1"
 				ammo_357			"6"
-				ammo_buckshot		"12"
+				ammo_buckshot		"80"
 				ammo_ar2			"30"
 				ammo_rpg_round		"1"
-				//ammo_crossbow		"0"
+				ammo_crossbow		"800"
 				//	ammo_slam		"2"
 			} }
+			
+		//intro text
+		create {classname "game_text"
+			values {spawnflags "0"
+				targetname "text_chapter"
+				message "HL2_Chapter9a_Title"
+				effect "2"
+				x "-1"
+				y "0.60"
+				color "100 100 100"
+				color2 "240 110 0"
+				fadein "0.03"
+				fadeout "1.25"
+				holdtime "7"
+				fxtime "0.35"} }
+		create {
+			classname "trigger_coop"
+			"origin" "2120 260.8 -696.0"
+			values {
+				model "*157"
+				spawnflags "1"
+				"OnTrigger" "text_chapter,Display,,0,-1"
+			}
+		}
 
 //--Spawns--
 		create {classname "info_spawn_manager"

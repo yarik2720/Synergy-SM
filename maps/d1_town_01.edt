@@ -12,6 +12,30 @@ d1_town_01
 				angles "0 90 90"
 				solid "6"
 				DisableShadows "1"} }
+			
+		//intro text
+		create {classname "game_text"
+			values {spawnflags "1"
+				targetname "text_chapter"
+				message "HL2_Chapter6_Title"
+				effect "2"
+				x "-1"
+				y "0.60"
+				color "100 100 100"
+				color2 "240 110 0"
+				fadein "0.03"
+				fadeout "1.25"
+				holdtime "7"
+				fxtime "0.35"} }
+		create {
+			classname "trigger_coop"
+			"origin" "4513 -2666 -3703"
+			values {
+				model "*33"
+				spawnflags "1"
+				"OnTrigger" "text_chapter,Display,,0,-1"
+			}
+		}
 
 	//	create {classname "light_dynamic" origin "4256.01 -2912 -3712"
 	//		values {_light "170 255 170"
