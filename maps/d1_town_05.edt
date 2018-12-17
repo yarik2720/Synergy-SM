@@ -249,16 +249,16 @@ d1_town_05
 				targetname "syn_vint"} }
 
 //fence
-		create {classname "npc_turret_floor"
-			origin "-1024 8576 896"
-			values {angles "0 240 0"
-				targetname "syn_vint"} }
+//		create {classname "npc_turret_floor"
+//			origin "-1024 8576 896"
+//			values {angles "0 240 0"
+//				targetname "syn_vint"} }
 
 //hidden
-		create {classname "npc_turret_floor"
-			origin "-664 8280 898"
-			values {angles "0 180 0"
-				targetname "syn_vint"} }
+//		create {classname "npc_turret_floor"
+//			origin "-664 8280 898"
+//			values {angles "0 180 0"
+//				targetname "syn_vint"} }
 
 //Trav|Edt - wilson messup failsafe (sorta-notrly)
 		//create {classname "trigger_multiple"
@@ -400,7 +400,7 @@ d1_town_05
 //		create { classname "info_player_coop" origin "-1678 10928 897" values { angles "0 90 0" StartDisabled "1" targetname "PS_ExitMap" } }
 
 		// Delete trigger that changes the level instantly
-		delete {targetname "trigger_changelevel"}
+//		delete {targetname "trigger_changelevel"}
 //		create { classname "trigger_once" origin "-1680 10970 952"
 //			values {
 //				"model" "*40"
@@ -415,7 +415,21 @@ d1_town_05
 //				OnTrigger "d1_town-coast_changelevel,Enable,,0.1,-1"
 //			}
 //		}
-
+        delete {targetname "d1_town-coast_changelevel"}
+        edit {targetname "trigger_changelevel"
+            values
+            {
+                classname "trigger_changelevel"
+                targetname "trigger_changeleveledt"
+                spawnflags "0"
+                map "d2_coast_01"
+                landmark "d1_town-coast"
+                startdisabled "0"
+            }
+        }
+        delete {targetname "d1_town-coast"}
+        create {classname "info_landmark" origin "-1472 10752 928" values {targetname "d1_town-coast"} }
+        create {classname "trigger_transition" origin "-1680 10970 952" values {targetname "d1_town-coast" edt_getbspmodelfor_targetname "trigger_changelevel"} }
 //Trav|Edt - Functionality check
 		create {classname "logic_relay" values {targetname "trav_functionality_d1_town_05"} }
 	}
