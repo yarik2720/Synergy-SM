@@ -2,9 +2,9 @@ ep1_c17_06
 {
 	console
 	{
-	sk_strider_num_missiles1 12
-	sk_strider_num_missiles1 16
-	sk_strider_num_missiles1 20
+	sk_strider_num_missiles1 22
+	sk_strider_num_missiles1 26
+	sk_strider_num_missiles1 34
 	}
 	entity
 	{
@@ -90,6 +90,13 @@ ep1_c17_06
 				OnTrigger "assault_cit2_lasttrain,Activate,,8.1,-1"
 				OnTrigger "lcs_train_departure_alyx_barney,Start,,10,-1"} }
 
+//Killed strider fix
+		edit {classname "trigger_once" origin "11047.5 8174.98 -670.23" values {targetname "syn_striderdead" startdisabled "1"} }
+		create {classname "logic_auto"
+			values {spawnflags "1"
+				OnMapSpawn "syn_striderdead,AddOutput,OnTrigger relay_striderBattleOver:Trigger::1:-1,0,-1"
+				OnMapSpawn "strider,AddOutput,OnDeath syn_striderdead:Enable::0:-1,0,-1"} }
+				
 //Trav|Edt - no rpgs
 	//	create {classname "trigger_multiple"
 	//		origin "11239 8102 -413"
