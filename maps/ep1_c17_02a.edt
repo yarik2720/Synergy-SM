@@ -186,7 +186,7 @@ ep1_c17_02a
 				OnTrigger "syn_spawn_manager,SetCheckpoint,syn_spawn_player_3,0,-1"
 				//OnTrigger "syn_global_settings,AddOutput,IsVehicleMap 1,0,-1"
 				OnTrigger "trav_tmaker_zombies*,Enable,,15,-1"
-				OnTrigger "trav_antirush_door,UnLock,,120,-1"//150
+				OnTrigger "trav_antirush_door,UnLock,,20,-1"//150
 				OnTrigger "syn_global_settings,AddOutput,IsVehicleMap 0,150,-1"} }
 
 //TraV|Edt - prevent running past zombie battle so early
