@@ -226,7 +226,21 @@ console
 
 //Trav|Edt - prevent players from running up hill to skip level.
 		create {classname "trigger_push"
-			origin "1696 1376 736"
+			origin "1696 1476 736"
+			values {model "*75"
+				spawnflags "1"
+				targetname "syn_vint_trav_hill_push"
+				pushdir "10 270 0"
+				speed "350"} }
+		create {classname "trigger_push"
+			origin "700 1476 736"
+			values {model "*75"
+				spawnflags "1"
+				targetname "syn_vint_trav_hill_push"
+				pushdir "10 270 0"
+				speed "350"} }
+		create {classname "trigger_push"
+			origin "2571 1476 736"
 			values {model "*75"
 				spawnflags "1"
 				targetname "syn_vint_trav_hill_push"
