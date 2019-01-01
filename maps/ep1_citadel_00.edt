@@ -39,13 +39,24 @@ ep1_citadel_00
 				holdtime "7"
 				fxtime "0.35"} }
 		create {
-			classname "trigger_coop"
+			classname "trigger_multiple"
 			"origin" "-9022.81 5691.63 -132.62"
 			values {
 				model "*87"
 				spawnflags "1"
-				"OnTrigger" "text_chapter,Display,,0,-1"
+				filtername "syn_plyonce"
+				OnTrigger "text_chapter,Display,,1,-1"
+				OnTrigger "!activator,AddOutput,targetname gotchapter,0,-1"
 			}
+		}
+		create {
+			classname "filter_activator_name" 
+			values {
+				targetname "syn_plyonce" 
+				filtername "gotchapter" 
+				filtertype "0" 
+				Negated "1"
+			} 
 		}
 
 //--Spawns--

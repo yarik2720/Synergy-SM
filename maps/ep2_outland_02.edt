@@ -47,13 +47,24 @@ ep2_outland_02
 				holdtime "7"
 				fxtime "0.35"} }
 		create {
-			classname "trigger_coop"
+			classname "trigger_multiple"
 			"origin" "-2156.32 -8267.77 -413.28"
 			values {
 				model "*57"
 				spawnflags "1"
-				"OnTrigger" "text_chapter,Display,,1,-1"
+				filtername "syn_plyonce"
+				OnTrigger "text_chapter,Display,,1,-1"
+				OnTrigger "!activator,AddOutput,targetname gotchapter,0,-1"
 			}
+		}
+		create {
+			classname "filter_activator_name" 
+			values {
+				targetname "syn_plyonce" 
+				filtername "gotchapter" 
+				filtertype "0" 
+				Negated "1"
+			} 
 		}
 //New Weapon(s)
 		create {classname "info_player_equip"
