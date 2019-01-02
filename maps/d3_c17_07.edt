@@ -75,6 +75,19 @@ d3_c17_07
 		create {classname "logic_auto"
 			values {spawnflags "1"
 				OnMapSpawn "turretroom_doorbreak_conditions,AddOutPut,OnConditionsSatisfied !self:Kill::0:-1,0,-1"} }
+				
+//prevent players rushing before alyx sequence
+		create {classname "trigger_push"
+			origin "4575 735 192"
+			values {model "*89"
+				spawnflags "1"
+				targetname "syn_antirush_push"
+				pushdir "0 90 0"
+				speed "450"} }
+
+		create {classname "logic_auto"
+			values {spawnflags "1"
+				OnMapSpawn "alyx_doorbreak_seq,AddOutput,OnBeginSequence syn_antirush_push:Disable::0:-1,8,-1"} }
 
 //Trav|Edt - Disable Enemy turrets when tipped (avoid player greif) make sure this doesnt hurt trav_turret
 		create {classname "logic_auto"
