@@ -1,5 +1,10 @@
 ep2_outland_04
 {
+	console
+	{
+		sk_antlionguard_health 25600
+	}
+	
 	entity
 	{
 //--Setup--

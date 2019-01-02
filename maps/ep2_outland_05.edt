@@ -4,7 +4,7 @@ ep2_outland_05
 	{
 		sk_antlionguard_dmg_shove "15"
 		sk_antlionguard_dmg_charge "40"
-		sk_antlionguard_health "1536" //500
+		sk_antlionguard_health "25600" //500
 	}
 	entity
 	{

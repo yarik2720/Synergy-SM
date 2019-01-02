@@ -2,7 +2,7 @@ d2_coast_11
 {
 	console
 	{
-		sk_antlionguard_health 2560 //5120 //d-500
+		sk_antlionguard_health 25600 //5120 //d-500
 		sk_antlionguard_dmg_charge 60 //20
 		sk_antlionguard_dmg_shove 25 //10
 		//sk_antlion_health 50//30
