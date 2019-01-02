@@ -125,7 +125,18 @@ ep2_outland_04
 				spawnflags "1"
 				OnTrigger "syn_spawn_manager,MovePlayers,,0,-1"
 //fix elevator_fall_trigger from killing players caught by barnacle
-				OnTrigger "elevator_fall_trigger,Kill,,3,-1"} }
+				OnTrigger "elevator_fall_trigger,Kill,,3,-1"
+				OnTrigger "syn_elevator_fall,Disable,,3,-1"} }
+				
+//Trav|Edt - Stop crap from stopping elevator		
+		edit {targetname "syn_elevator_fall" values {classname "func_brush"} }
+
+		create {classname "func_brush"
+			origin "5048 -1608 -381"
+			values {model "*127"
+				spawnflags "2"
+				rendermode "10"
+				targetname "syn_elevator_fall"} }
 
 //keep players here until guard finishes
 		edit {targetname "guard_exit_floor_board" values {classname "prop_physics_override"} }
