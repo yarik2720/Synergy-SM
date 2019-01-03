@@ -102,6 +102,13 @@ ep2_outland_06
 				speed "450"
 				pushdir "0 90 0"} }
 
+//prevent skipping by rocketjump
+		create {classname "trigger_push" origin "400 950 912"
+			values {model "*150"
+				spawnflags "1"
+				speed "9999"
+				pushdir "-45 180 0"} }
+				
 //Trav|Edt - teleport players down, so they cannot stay with alyx, and set checkpoint
 		create {classname "trigger_once"
 			origin "256 416 828"
