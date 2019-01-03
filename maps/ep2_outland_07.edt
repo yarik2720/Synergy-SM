@@ -207,7 +207,17 @@ ep2_outland_07
 				"filtername" "alyx"
 			}
 		}
+//prevent players going back
+		create {classname "trigger_push"
+			origin "-10034 -9456 88"
+			values {model "*99"
+				spawnflags "1"
+				StartDisabled "1"
+				targetname "syn_antirush_push"
+				pushdir "0 -90 0"
+				speed "950"} }
 
+				
 		// remove wonky triggers
 		delete { targetname "alyx_check_end_trigger" }
 		delete { targetname "alyx_check_trigger2" }
@@ -221,6 +231,7 @@ ep2_outland_07
 
 				"OnTrigger" "syn_spawn_manager,SetCheckPoint,syn_spawn_player_2,0,-1"
 				"OnTrigger" "syn_spawn_manager,MovePlayers,,0.1,-1"
+				OnTrigger "syn_antirush_push,Enable,,1,-1"
 				OnTrigger "syn_spawn_vehicle_2,Enable,,120,-1"//eh
 			}
 		}
