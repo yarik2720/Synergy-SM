@@ -266,11 +266,57 @@ console
 				//OnAllSpawnedDead "syn_spawn_vehicle_2,Enable,,1,-1"
 				} }
 
+//tell people that they need a car
+		create {classname "trigger_push"
+			origin "6048 -3634 448"
+			values {model "*64"
+				spawnflags "1"
+				StartEnabled "1"
+				targetname "syn_carreq_push"
+				pushdir "0 90 0"
+				speed "450"} }
+				
+		create {
+			classname "trigger_multiple"
+			"origin" "6048 -3634 448"
+			values {
+				model "*64"
+				spawnflags "1"
+				targetname "syn_carreq_alert"
+				OnTrigger "syn_carreq_text,Display,,1,-1"
+			}
+		}
+		
+		create {classname "prop_dynamic" origin "6270 -3684 370"
+			values {model "models/synergy/tools/syn_transition.mdl"
+				targetname "syn_carreq_prop"
+				angles "0 90 0"
+				solid "6"
+				DisableShadows "1"} }
+				
+		create {classname "game_text"
+			values {spawnflags "0"
+				targetname "syn_carreq_text"
+				message "You need a car"
+				channel "0"
+				effect "2"
+				x "-1"
+				y "0.85"
+				color "100 100 100"
+				color2 "240 110 0"
+				fadein "0.03"
+				fadeout "1.25"
+				holdtime "2"
+				fxtime "0.25"} }
+
 //Trav|Edt - Require a vehicle to enable spawn
 		create {classname "trigger_once" origin "5900 -3528 448"
 			values {model "*68"
 				spawnflags "32"//vehicle only
-				OnTrigger "syn_spawn_vehicle_2,Enable,,1,-1"} }
+				OnTrigger "syn_spawn_vehicle_2,Enable,,1,-1"
+				OnTrigger "syn_carreq_push,Disable,,1,-1"
+				OnTrigger "syn_carreq_alert,Disable,,1,-1"
+				OnTrigger "syn_carreq_prop,Kill,,0,1"} }
 
 //Trav|Edt - Allow any vehicles to break glass window and add save
 		delete {targetname "jeepwindow_jeepfilter"}
