@@ -41,7 +41,7 @@ d1_canals_06
 			classname "trigger_multiple"
 			"origin" "11000 9065 -168"
 			values {
-				model "*33"
+				model "*143"
 				spawnflags "1"
 				filtername "syn_plyonce"
 				OnTrigger "text_chapter,Display,,1,-1"
@@ -148,10 +148,18 @@ d1_canals_06
 //--Exploits--
 //wall skip
 		create {classname "func_brush"
-			origin "1344 -288 288"
+			origin "550 -288 288"
 			values {model "*146"
 				spawnflags "2"
 				rendermode "10"} }
+				
+//close dat wall
+		create {classname "trigger_push"
+			origin "-544.37 6000 200"
+			values {model "*143"
+				spawnflags "1"
+				pushdir "0 0 0"
+				speed "450"} }} }
 
 // lock in bluebarrels in proper area
 //N
