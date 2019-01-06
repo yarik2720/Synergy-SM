@@ -115,17 +115,17 @@ d3_c17_02
 //End of Trav|Edt
 
 		// start dog off automatically
-		//"delete" { "classname" "trigger_once" "origin" "-10448 -5312 -16" }
+		"delete" { "classname" "trigger_once" "origin" "-10448 -5312 -16" }
 
-		//"create"
-		//{
-		//	"classname" "logic_auto"
-		//	"origin" "0 0 0"
-		//	"values"
-		//	{
-		//		"OnMapSpawn" "ss_dog_KLabExit,BeginSequence,,2,1"
-		//	}
-		//}
+		"create"
+		{
+			"classname" "logic_auto"
+			"origin" "0 0 0"
+			"values"
+			{
+				"OnMapSpawn" "ss_dog_KLabExit,BeginSequence,,4,1"
+			}
+		}
 
 		// after dog has opened the gate, leave it open
 //Trav|Edt - reallow
