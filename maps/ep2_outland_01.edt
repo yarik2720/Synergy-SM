@@ -54,7 +54,7 @@ ep2_outland_01
 				fxtime "0.35"} }
 		create {
 			classname "trigger_multiple"
-			"origin" "410.16 -748.34 206.93"
+			"origin" "195.47 -816.66 -0.80"
 			values {
 				model "*127"
 				spawnflags "1"
