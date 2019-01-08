@@ -71,6 +71,9 @@ d1_canals_07
 		create {classname "info_player_coop" origin "10776 1512 -256"
 			values {angles "0 0 0" targetname "syn_spawn_player_2" StartDisabled "1"} }
 
+		create {classname "info_player_coop" origin "7395.16 1834 -256"
+			values {angles "0 0 0" targetname "syn_spawn_player_3" StartDisabled "1"} }
+
 		create {classname "info_global_settings"
 			values {IsVehicleMap "1" targetname "syn_global_settings"} }
 
@@ -108,6 +111,13 @@ d1_canals_07
 			values {model "*88"
 				spawnflags "1"
 				OnTrigger "syn_spawn_manager,SetCheckpoint,syn_spawn_player_2,0,-1"} }
+				
+		create {classname "trigger_once"
+			origin "7360 1648 -256"
+			values {model "*64"
+				spawnflags "1"
+				OnTrigger "syn_spawn_manager,SetCheckpoint,syn_spawn_player_3,0,-1"
+				OnTrigger "syn_spawn_manager,MovePlayers,,0,-1"} }
 
 //--Exploits--
 //Failsafe -- prevent I-beam exploit
