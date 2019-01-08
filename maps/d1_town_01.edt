@@ -296,6 +296,16 @@ d1_town_01
 			values {targetname "syn_vint_trav_zombies4"
 				spawnflags "2564"
 				squadname "squad_trav_zombies4"} }
+				
+// prevent skipping puzzle
+		create {classname "trigger_push"
+			origin "1146.47 -607.50 -3543.82"
+			values {model "*34"
+				angles "0 35 0"
+				spawnflags "1"
+				speed "350"
+				pushdir "0 180 0"} }
+
 //fireroom
 		create {classname "npc_template_maker"
 			origin "1344 -576 -3768"
