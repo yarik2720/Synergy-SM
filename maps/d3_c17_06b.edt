@@ -115,6 +115,21 @@ d3_c17_06b
 				spawnflags "1"
 				speed "750"
 				pushdir "0 180 0"} }
+				
+		create {classname "trigger_push"
+			origin "3731 1382 213.87"
+			values {model "*61"
+				spawnflags "1"
+				speed "750"
+				pushdir "0 180 0"} }
+				
+		create {classname "trigger_push"
+			origin "3562 1233 200"
+			values {model "*61"
+				angles "0 90 0"
+				spawnflags "1"
+				speed "750"
+				pushdir "0 90 0"} }
 
 		create {classname "trigger_push"
 			origin "3800 1555 138"//3800 1556 194
