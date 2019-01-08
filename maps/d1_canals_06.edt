@@ -159,7 +159,7 @@ d1_canals_06
 			values {model "*143"
 				spawnflags "1"
 				pushdir "0 0 0"
-				speed "450"} }} }
+				speed "450"} }
 
 // lock in bluebarrels in proper area
 //N

@@ -111,6 +111,15 @@ d1_town_02a
 				spawnflags "1"
 				//pushdir "0 270 0"
 				speed "450"} }
+				
+
+//modi - block skipping
+		create {classname "trigger_push"
+			origin "-6768.48 1375.84 -3198.01"
+			values {model "*48"
+				spawnflags "1"
+				pushdir "0 90 0"
+				speed "950"} }
 
 //Trav|Edt - add crates in secreat area
 		create {classname "item_item_crate"
