@@ -234,6 +234,15 @@ d3_c17_07
 				OnTrigger "northfront_soldier_template_maker,ForceSpawn,,4,-1"
 				OnTrigger "trav_air_cops_vs_turret,RevertRelationship,,0,-1"} }
 
+// prevent skipping	
+		create {classname "trigger_push"
+			origin "7235 1530 310"
+			values {model "*7"
+				angles "-45 0 0"
+				spawnflags "1"
+				speed "350"
+				pushdir "0 180 0"} }
+
 //Trav|Edt - make balcony cop keep comming //nvm(too lazy to remove !self kill RAWR)
 		delete {targetname "balcony_cop1_maker"}
 
