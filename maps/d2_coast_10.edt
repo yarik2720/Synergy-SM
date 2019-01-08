@@ -364,13 +364,13 @@ d2_coast_10
 		create {classname "trigger_push" origin "2546 -4357 1607"
 			values {model "*113"
 				spawnflags "1"//65
-				speed "3050"
+				speed "950"
 				pushdir "0 270 0"} }
 				
 		create {classname "trigger_push" origin "1610 -4330 1668"
 			values {model "*121" angles "90 0 0"
 				spawnflags "1"//65
-				speed "3050"
+				speed "950"
 				pushdir "0 270 0"} }
 				
 		create {classname "trigger_push" origin "790 3096 1810"
@@ -390,6 +390,12 @@ d2_coast_10
 				spawnflags "1"//65
 				speed "3050"
 				pushdir "0 270 0"} }
+				
+		create {classname "trigger_push" origin "5300 2650 1500"
+			values {model "*121" angles "90 0 0"
+				spawnflags "1"//65
+				speed "450"
+				pushdir "0 0 0"} }
 
 //End of Trav|Edt
 
