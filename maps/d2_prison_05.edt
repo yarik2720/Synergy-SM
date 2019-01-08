@@ -58,6 +58,9 @@ d2_prison_05
 
 		create {classname "info_player_coop" origin "1512 520 384"//v2004 1509.48 459.28 384.03 0 90 0
 			values {angles "0 105 0" targetname "syn_spawn_player_1"} }
+			
+		create {classname "info_player_coop" origin "-2054.05 580.05 733.39"
+			values {angles "0 0 0" targetname "syn_spawn_player_2" StartDisabled "1"} }
 
 		create {classname "info_global_settings"
 			values {IsVehicleMap "0" targetname "syn_global_settings"} }
@@ -148,6 +151,13 @@ d2_prison_05
 		//		pushdir "0 90 0"
 		//		speed "750"} }
 
+//checkpoint
+		create {classname "trigger_once"
+			origin "-2204 512 704.2"
+			values {model "*69"
+				spawnflags "1"
+				OnTrigger "syn_spawn_manager,SetCheckpoint,syn_spawn_player_2,0,-1"
+				OnTrigger "syn_spawn_manager,MovePlayers,,0,-1"} }
 
 		create {classname "syn_transition_wall" origin "-3104 440 536" values {angles "0 90 0" targetname "trav_guardnotdead_push"} }
 
