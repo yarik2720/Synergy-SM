@@ -260,6 +260,23 @@ d1_town_05
 //			values {angles "0 180 0"
 //				targetname "syn_vint"} }
 
+// prevent escaping out of the map
+		create {classname "trigger_push"
+			origin "-2700 8658 1490"
+			values {model "*57"
+				angles "0 45 -90"
+				spawnflags "1"
+				pushdir "0 270 0"
+				speed "950"} }
+		create {classname "trigger_push"
+			origin "-1750 8946 1390"
+			values {model "*57"
+				angles "0 0 -90"
+				spawnflags "1"
+				pushdir "0 270 0"
+				speed "950"} }
+
+
 //Trav|Edt - wilson messup failsafe (sorta-notrly)
 		//create {classname "trigger_multiple"
 		//	origin "-1212 10002 932"
