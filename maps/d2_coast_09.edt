@@ -302,8 +302,7 @@ d2_coast_09
 				spawnflags "1"
 				OnStartTouch "!activator,SetFogController,trav_fog_outside,0,-1"
 				OnTrigger "syn_spawn_manager,SetCheckpoint,syn_spawn_player_2,0,1"
-				OnTrigger "syn_spawn_vehicle_2,Enable,,0,1"
-				OnTrigger "syn_autosave,Save,,1,-1"} }
+				OnTrigger "syn_spawn_vehicle_2,Enable,,0,1"} }
 
 //Trav|Edt - fix house occluder with multiple players
 		delete {classname "trigger_multiple" origin "1076 -6716 -592"}//*225
