@@ -118,7 +118,7 @@ d1_town_02a
 			origin "-6768.48 1375.84 -3198.01"
 			values {model "*48"
 				spawnflags "1"
-				pushdir "0 90 0"
+				pushdir "0 180 0"
 				speed "950"} }
 
 //Trav|Edt - add crates in secreat area
