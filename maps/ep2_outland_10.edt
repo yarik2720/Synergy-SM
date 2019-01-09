@@ -53,6 +53,8 @@ ep2_outland_10
 //Trap
 		create {classname "info_player_coop" origin "2894 -635 -127"
 			values {angles "0 -20 0" targetname "syn_spawn_player_2" StartDisabled "1"} }
+		
+		create {classname "info_teleport_destination" origin "2894 -635 -127" values {angles "0 -20 0" targetname "syn_spawn_player_2TP" } }
 //Before Shields
 		create {classname "info_player_coop" origin "724.52 -2281.79 160.03"
 			values {angles "0 180 0" targetname "syn_spawn_player_3" StartDisabled "1"} }
@@ -196,13 +198,29 @@ ep2_outland_10
 		// convert to episodic buggy
 		edit { classname "prop_vehicle_jeep" values { classname "prop_vehicle_jeep_episodic" } }
 
+// teleport Alyx in trap
+		create {classname "point_teleport"
+			origin "3448 -384 0.05"
+			values {targetname "syn_teleport_alyx_2"
+				angles "0 180 0"
+				target "alyx"} }
+				
+		create {classname "point_teleport"
+			origin "3448 -384 0.05"
+			values {targetname "syn_teleport_jeep"
+				angles "0 0 0"
+				target "jeep"} }
+
 		// activate checkpoint once the trap is setup
 		create { classname "trigger_once" origin "3448 -384 0.05"
 			values {
 				"spawnflags" "1"
 				"model" "*67"
+				"OnTrigger" "syn_teleport_alyx_2,Teleport,,0.1,-1"
+				"OnTrigger" "jeep,DisablePhysGun,,0,-1"
+				"OnTrigger" "jeep,Lock,,0,-1"
 				"OnTrigger" "syn_spawn_manager,SetCheckPoint,syn_spawn_player_2,0,-1"
-				"OnTrigger" "syn_spawn_manager,MovePlayers,,0.1,-1"
+				"OnTrigger" "syn_spawn_manager,TeleportPlayers,syn_spawn_player_2TP,1,-1"
 			}
 		}
 
@@ -221,6 +239,9 @@ ep2_outland_10
 				"OnTrigger" "garage_shield1_on_relay,Trigger,,0,-1"
 				"OnTrigger" "lcs_alyx_puzzle,Cancel,,0,-1"
 				"OnTrigger" "garage_shield2_on_relay,Trigger,,0,-1"
+				"OnTrigger" "syn_teleport_jeep,Teleport,,0.5,-1"
+				"OnTrigger" "jeep,Unlock,,3,-1"
+				"OnTrigger" "jeep,EnablePhysGun,,3,-1"
 
 				"OnTrigger" "syn_spawn_manager,SetCheckPoint,syn_spawn_player_3,0,-1"
 				"OnTrigger" "syn_spawn_manager,MovePlayers,,0.1,-1"
