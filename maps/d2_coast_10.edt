@@ -3,6 +3,7 @@ d2_coast_10
 	console
 	{
 		sk_gunship_health_increments 12 //4
+		sk_dropship_container_health 999999
 	}
 	entity
 	{
@@ -139,6 +140,8 @@ d2_coast_10
 		create {classname "filter_activator_class"
 			values {targetname "trav_filter_dropship_invulnerable"
 				filterclass "null" } }
+				
+		edit {classname "npc_combinedropship" values {Invulnerable "1"} }
 
 		create {classname "trigger_once"
 			origin "-2722 -3624 1560"
