@@ -74,6 +74,9 @@ ep1_citadel_02b
 			values {targetname "trav_teleport_players"
 				angles "0 180 0"
 				target "!player"} }
+				
+//balimbanana fix
+		delete {targetname "entry_transition_door"}
 
 //End of Trav|Edt
 

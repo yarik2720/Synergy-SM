@@ -126,6 +126,16 @@ ep1_citadel_03
 		}
 
 		create { classname "info_intermission" origin "2430.906250 12803.875000 5438.968750" values { angles "33 -90 0" } }
+				
+//balimbanana fix
+		edit {classname "env_sprite" values {GlowProxySize "256"} }
+		edit {classname "env_lightglow" values {GlowProxySize "64"} }
+		delete {classname "logic_achievement"}
+		edit {classname "trigger_multiple" origin "1619 11688 4272" values {targetname "syn_soundonce"} }
+		create {classname "logic_auto"
+			values {spawnflags "1"
+				OnMapSpawn "syn_soundonce,AddOutput,OnStartTouch sound_radiation_warning:kill::1:1,0,-1"} }
+
 
 //Trav|Edt - dont move players until after alyx gets in end vator
 		create {classname "logic_auto"

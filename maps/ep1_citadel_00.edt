@@ -100,6 +100,11 @@ ep1_citadel_00
 				OnStartTouch "!activator,SetDamageFilter,,0,-1"//FailSafe for damagefilters
 				} }
 
+//balimbanana fixes
+		edit {targetname "SS_alyx_pathedge_hopdown" values {origin "-7952 5484 80"} }
+		edit {classname "trigger_once" origin "-6960 5424 -96" values {origin "-6960 5416 -96"} }
+		
+		
 //--Extra--
 
 // env_zooms - all players

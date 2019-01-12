@@ -84,6 +84,14 @@ ep1_citadel_01
 
 //End of Trav|Edt
 
+//balimbanana disable skipping
+		create {classname "syn_transition_wall" 
+			origin "-4265 6528 2464" 
+			values {solid "6" startdisabled "1" DisableShadows "1"} }
+		create {classname "syn_transition_wall" 
+			origin "-4265 6528 2784" 
+			values {solid "6" startdisabled "1" DisableShadows "1"} }
+
 //TODO: use trigger_coop
 		// do not close rollertraining door
 		delete { targetname "counter_rollerdoor_close" }
