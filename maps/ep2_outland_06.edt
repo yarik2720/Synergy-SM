@@ -109,6 +109,13 @@ ep2_outland_06
 				speed "9999"
 				pushdir "-45 180 0"} }
 				
+		create {classname "trigger_push" origin "170 1410 670"
+			values {model "*150"
+				angles "0 90 0"
+				spawnflags "1"
+				speed "400"
+				pushdir "0 -90 0"} }
+				
 //Trav|Edt - teleport players down, so they cannot stay with alyx, and set checkpoint
 		create {classname "trigger_once"
 			origin "256 416 828"
