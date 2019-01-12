@@ -62,14 +62,14 @@ ep2_outland_10a
 		create {classname "info_vehicle_spawn" origin "4352 -5760 -1536"
 			values {targetname "syn_spawn_vehicle_1"
 				angles "0 90 0"
-				StartEnabled "1"
+				StartEnabled "0"
 				RespawnVehicle "1"
 				VehicleType "4"
 				VehicleSize "192"
 				model "models/vehicles/buggy_p2.mdl"
 				VehicleScript "scripts/vehicles/jeep_test.txt"} }
 //Dog
-		create {classname "info_vehicle_spawn" origin "2352.01 -815.95 -1936"
+		create {classname "info_vehicle_spawn" origin "2824.13 -2786.72 -1800"
 			values {targetname "syn_spawn_vehicle_2"
 				angles "0 345 0"
 				StartEnabled "0"//
@@ -81,7 +81,19 @@ ep2_outland_10a
 
 		create {classname "logic_auto"
 			values {spawnflags "1"
-				OnMapSpawn "alyx_approachdog,AddOutput,OnEndSequence syn_spawn_vehicle_2:Enable::0:-1,0,-1"} }
+				OnMapSpawn "alyx_approachdog,AddOutput,OnEndSequence syn_spawn_vehicle_2:Enable::0:-1,10,-1"} }
+// teleport Alyx and car
+		create {classname "point_teleport"
+			origin "2296 -1991 -1830"
+			values {targetname "syn_teleport_alyx_2"
+				angles "0 180 0"
+				target "alyx"} }
+				
+		create {classname "point_teleport"
+			origin "2527 -2004 -1810"
+			values {targetname "syn_teleport_jeep"
+				angles "0 0 0"
+				target "jeep"} }
 
 //cruel way of disableing gun
 		create {classname "logic_timer"
@@ -122,7 +134,9 @@ ep2_outland_10a
 			origin "2304 -1664 -1728"
 			values {model "*84"
 				spawnflags "1"
-				OnTrigger "syn_spawn_manager,MovePlayers,,0,-1"} }
+				OnTrigger "syn_spawn_manager,MovePlayers,,0,-1"
+				OnTrigger "syn_teleport_alyx_2,Teleport,,0.1,-1"
+				OnTrigger "syn_teleport_jeep,Teleport,,0.5,-1"} }
 
 		// convert to episodic buggy
 		edit { classname "prop_vehicle_jeep" values { classname "prop_vehicle_jeep_episodic" } }
