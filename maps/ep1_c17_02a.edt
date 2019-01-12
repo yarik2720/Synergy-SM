@@ -133,6 +133,7 @@ ep1_c17_02a
 				OnMapSpawn "func_rot_button_2,AddOutput,OnOpen trav_teleport_water:Disable::1.5:-1,0,-1"
 				OnMapSpawn "func_rot_button_2,AddOutput,OnOpen syn_global_settings:AddOutput:IsVehicleMap 1:0:-1,0,-1"
 				OnMapSpawn "func_rot_button_2,AddOutput,OnOpen syn_spawn_manager:SetCheckpoint:syn_spawn_player_2:0:-1,0,-1"
+				OnMapSpawn "func_rot_button_2,AddOutput,OnOpen syn_spawn_manager:MovePlayers::0.1:-1,0,-1"
 				OnMapSpawn "prop_barrel,DisableMotion,,5,-1"} }
 //players beind that are falling into water
 		create {classname "trigger_teleport"
