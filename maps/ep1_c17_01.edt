@@ -76,6 +76,9 @@ ep1_c17_01
 //Post Combinewall
 		create {classname "info_player_coop" origin "2592 -1344 36"
 			values {angles "0 105 0" targetname "syn_spawn_player_2" StartDisabled "1"} }
+//after solving puzzle
+		create {classname "info_player_coop" origin "1859 1906 23"
+			values {angles "0 105 0" targetname "syn_spawn_player_2_1" StartDisabled "1"} }
 //Post Broken Stairs
 		create {classname "info_player_coop" origin "-678 127 102"
 			values {angles "0 180 0" targetname "syn_spawn_player_3" StartDisabled "1"} }
@@ -176,6 +179,17 @@ ep1_c17_01
 
 				"OnTrigger"	"building_door,Unlock,,.4,-1"
 				"OnTrigger"	"building_door,Open,,.6,-1"
+			}
+		}
+		
+		
+		create { classname "trigger_once"
+			values {
+				"origin" "1720 2240 188"
+				"spawnflags" "1"
+				"model" "*110"
+				"OnTrigger"	"syn_spawn_manager,SetCheckpoint,syn_spawn_player_2_1,0,0"
+				"OnTrigger"	"syn_spawn_manager,MovePlayers,,0.2,0"
 			}
 		}
 
