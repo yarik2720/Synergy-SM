@@ -103,6 +103,16 @@ ep1_c17_00
 	//	create {classname "logic_auto"
 	//		values {spawnflags "1"
 	//			OnMapSpawn "train_2_ambush_zombine,AddOutput,angles 0 0 0,5,-1"} }
+				
+		create {classname "info_teleport_destination" origin "4424 -2477 -70"
+			values {angles "0 180 0"
+				targetname "trav_teleport_modi"} }
+
+		create {classname "trigger_once"
+			origin "4530 -2465 -10"
+			values {model "*83"
+				spawnflags "1"
+				OnTrigger "syn_spawn_manager,TeleportPlayers,trav_teleport_modi,2,-1"} }	
 
 //Trav|Edt - make alyx not shoot idle barnicles
 		delete {classname "trigger_multiple" origin "1784 1176 179"}
