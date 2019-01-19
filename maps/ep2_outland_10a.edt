@@ -81,7 +81,7 @@ ep2_outland_10a
 
 		create {classname "logic_auto"
 			values {spawnflags "1"
-				OnMapSpawn "alyx_approachdog,AddOutput,OnEndSequence syn_spawn_vehicle_2:Enable::0:-1,10,-1"} }
+				OnMapSpawn "alyx_approachdog,AddOutput,OnEndSequence syn_spawn_vehicle_2:Enable::20:-1,0,-1"} }
 // teleport Alyx and car
 		create {classname "point_teleport"
 			origin "2296 -1991 -1830"
@@ -184,16 +184,6 @@ ep2_outland_10a
 			}
 		}
 
-		// create additional vehicle
-		create { classname "prop_vehicle_mp" origin "2516 -2536 -1865"
-			values {
-				"vehiclescript" "scripts/vehicles/van.txt"
-				"model" "models/vehicles/7seatvan.mdl"
-				"angles" "0 20 0"
-				"targetname" "theYellowVan"
-				"skin" "2"
-			}
-		}
 //Trav|Edt - Functionality check
 		create {classname "logic_relay" values {targetname "trav_functionality_ep2_outland_10a"} }
 	}
