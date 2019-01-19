@@ -446,6 +446,14 @@ d2_coast_07
 				damage "1000"
 				//damagetype "262144"//rad
 				nodmgforce "1"} }
+				
+		create {classname "trigger_hurt" origin "3328 4377 2176"
+			values {model "*136"
+				spawnflags "1"
+				targetname "trav_antiskip_hurt_ext"
+				damage "1000"
+				//damagetype "262144"//rad
+				nodmgforce "1"} }
 
 //Trav|Edt - Stop crap from stopping train and allow to hurt players
 		create {classname "trigger_hurt"
@@ -673,6 +681,7 @@ d2_coast_07
 				OnTrigger "syn_spawn_manager,SetCheckpoint,syn_spawn_player_4,0,-1"
 				OnTrigger "syn_spawn_vehicle_3,Enable,,0,-1"
 				OnTrigger "trav_antiskip_hurt,Disable,,0,-1"
+				OnTrigger "trav_antiskip_hurt_ext,Disable,,0,-1"
 				OnTrigger "bridge_door_2,Close,,1,-1"
 				OnTrigger "bridge_door_2,Lock,,2,-1"
 				OnTrigger "field_trigger,Disable,,0,-1"//stop annoying sound >.>
