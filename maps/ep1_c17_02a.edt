@@ -74,6 +74,24 @@ ep1_c17_02a
 				OnTrigger "syn_new_weapons,Enable,,0,1"
 				OnStartTouch "syn_new_weapons,EquipPlayer,,0,-1"
 				OnStartTouch "!activator,AddOutput,targetname syn_ep1_c17_02a_got_new_weapons,0.1,-1"} }
+		
+		create {classname "point_teleport"
+			origin "2234 7592 -2390"
+			values {targetname "syn_teleport_alyx_2"
+				angles "0 180 0"
+				target "alyx"} }
+				
+		create {classname "info_teleport_destination" origin "2247 7905 -2280"
+			values {angles "0 180 0"
+				targetname "trav_teleport_2"} }
+		
+		create {classname "trigger_once"
+			origin "2183 7528 -2449.5"
+			values {model "*217"
+				spawnflags "1"
+				//StartDisabled "1"
+				OnTrigger "syn_teleport_alyx_2,Teleport,,0.1,-1"
+				OnTrigger "syn_spawn_manager,TeleportPlayers,trav_teleport_2,0.3,-1"} }
 
 		create {classname "filter_activator_name"
 			values {targetname "syn_new_weapon_filter"
@@ -123,6 +141,10 @@ ep1_c17_02a
 				//OnTrigger "ptemplate_hos_start,ForceSpawn,,7,-1"
 				//OnTrigger "ptemplate_hos_start,ForceSpawn,,8,-1"
 				OnTrigger "ptemplate_hos_start,ForceSpawn,,9,-1"} }
+				
+		create {classname "info_teleport_destination" origin "-760 8896 -2840"
+			values {angles "0 0 0"
+				targetname "trav_teleport"} }
 
 //Trav|Edt - Manage players not killing eachother here
 		create {classname "logic_auto"
@@ -133,7 +155,7 @@ ep1_c17_02a
 				OnMapSpawn "func_rot_button_2,AddOutput,OnOpen trav_teleport_water:Disable::1.5:-1,0,-1"
 				OnMapSpawn "func_rot_button_2,AddOutput,OnOpen syn_global_settings:AddOutput:IsVehicleMap 1:0:-1,0,-1"
 				OnMapSpawn "func_rot_button_2,AddOutput,OnOpen syn_spawn_manager:SetCheckpoint:syn_spawn_player_2:0:-1,0,-1"
-				OnMapSpawn "func_rot_button_2,AddOutput,OnOpen syn_spawn_manager:MovePlayers::0.1:-1,0,-1"
+				OnMapSpawn "func_rot_button_2,AddOutput,OnOpen syn_spawn_manager:TeleportPlayers:trav_teleport:2:-1,0,-1"
 				OnMapSpawn "prop_barrel,DisableMotion,,5,-1"} }
 //players beind that are falling into water
 		create {classname "trigger_teleport"
