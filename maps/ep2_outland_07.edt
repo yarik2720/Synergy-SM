@@ -233,6 +233,13 @@ ep2_outland_07
 				spawnflags "1"
 				pushdir "0 -90 0"
 				speed "450"} }
+				
+		create {classname "trigger_hurt"
+			origin "-3752 -11433 909"
+			values {model "*105"
+				angles "0 90 0"
+				spawnflags "1"
+				damage "1000"} }
 
 				
 		// remove wonky triggers
