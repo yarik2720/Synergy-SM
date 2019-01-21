@@ -175,7 +175,10 @@ ep2_outland_10
 				//OnPlayersIn "trav_antirush_brush_end,Kill,,0,1"
 				OnPlayersIn "syn_antirush_prop,Kill,,0,-1"
 				//OnPlayersIn "syn_end_light,TurnOff,,0,-1"
-				OnPlayersIn "!self,Disable,,1,1"} }
+				OnPlayersIn "!self,Disable,,1,1"
+				OnPlayersIn "syn_teleport_alyx_end,Teleport,,0.1,-1"
+				OnPlayersIn "syn_teleport_jeep_end,Teleport,,0.5,-1"
+				OnPlayersIn "alyx,EnterVehicle,jeep,0.6,-1"} }
 
 		create {classname "prop_dynamic" origin "2832 7968 -1536"
 			values {model "models/synergy/tools/syn_transition.mdl"
@@ -195,6 +198,19 @@ ep2_outland_10
 
 //--
 
+// teleport Alyx and car
+		create {classname "point_teleport"
+			origin "2300 8000 -1470"
+			values {targetname "syn_teleport_alyx_end"
+				angles "0 180 0"
+				target "alyx"} }
+				
+		create {classname "point_teleport"
+			origin "2300 8000 -1470"
+			values {targetname "syn_teleport_jeep_end"
+				angles "0 0 0"
+				target "jeep"} }
+
 		// convert to episodic buggy
 		edit { classname "prop_vehicle_jeep" values { classname "prop_vehicle_jeep_episodic" } }
 
@@ -210,6 +226,7 @@ ep2_outland_10
 			values {targetname "syn_teleport_jeep"
 				angles "0 0 0"
 				target "jeep"} }
+				
 
 		// activate checkpoint once the trap is setup
 		create { classname "trigger_once" origin "3448 -384 0.05"
@@ -242,11 +259,41 @@ ep2_outland_10
 				"OnTrigger" "syn_teleport_jeep,Teleport,,0.5,-1"
 				"OnTrigger" "jeep,Unlock,,3,-1"
 				"OnTrigger" "jeep,EnablePhysGun,,3,-1"
+				
+				"OnTrigger" "syn_antirush_coop_on_trap,Enable,,0.1,-1"
+				"OnTrigger" "syn_antirush_prop_on_trap,Enable,,0.1,-1"
 
 				"OnTrigger" "syn_spawn_manager,SetCheckPoint,syn_spawn_player_3,0,-1"
 				"OnTrigger" "syn_spawn_manager,MovePlayers,,0.1,-1"
 			}
 		}
+		
+		create {classname "trigger_push"
+			origin "3408 -838 115"
+			values {model "*155"
+				spawnflags "1"
+				speed "450"
+				pushdir "90 0 0"}}
+		
+		create {classname "trigger_coop"
+			origin "3428 -838 -50"
+			values {model "*155"
+				spawnflags "1"
+				targetname "syn_antirush_coop_on_trap"
+				StartDisabled "1"
+				CountType "1"
+				UseHUD "1"
+				PlayerValue "50"
+				OnPlayersIn "syn_antirush_prop_on_trap,Kill,,0,-1"
+				OnPlayersIn "!self,Disable,,1,1"} }
+
+		create {classname "prop_dynamic" origin "3448 -241.5 -120"
+			values {model "models/synergy/tools/syn_transition.mdl"
+				targetname "syn_antirush_prop_on_trap"
+				StartDisabled "1"
+				angles "0 -90 0"
+				solid "6"
+				DisableShadows "1"} }
 
 		// fix a few triggers
 		delete { targetname "hunter_hates_outside_player_trigger" }
