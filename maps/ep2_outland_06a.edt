@@ -112,9 +112,16 @@ ep2_outland_06a
 			values {RefireTime "5"
 				OnTimer "prop_vehicle_jeep,AddOutput,EnableGun 0,0,-1"} }
 				
-		create {classname "trigger_hurt" origin "-6637 -3432 -1725"
-			values {model "*249"
-				angles "90 90 0"
+		create {classname "trigger_hurt" origin "-5800 -5000 -1100"
+			values {model "*196"
+				angles "0 270 0"
+				spawnflags "1"
+				targetname "modi_antiskip_hurt"
+				damage "1000"
+				nodmgforce "1"} }				
+		create {classname "trigger_hurt" origin "-7300 -7000 -450"
+			values {model "*196"
+				angles "0 270 0"
 				spawnflags "1"
 				targetname "modi_antiskip_hurt"
 				damage "1000"
