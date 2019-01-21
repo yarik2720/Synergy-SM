@@ -139,6 +139,15 @@ d1_trainstation_04
 			values {targetname "trav_teleport_players"
 				angles "0 180 0"
 				target "!player"} }
+				
+						
+		create {classname "trigger_push"
+			origin "-7703 -4278 -196"
+			values {model "*39"
+				angles "0 90 0"
+				spawnflags "1"
+				speed "450"
+				pushdir "0 0 0"}}
 
 //Trav edt| Re-enable alyx tele !NVM didnt do neything q.q !!Everyone timed out on next map transistion?
 //		"delete" { "classname" "trigger_teleport" "origin" "-7149.47 -3935.67 540" }
