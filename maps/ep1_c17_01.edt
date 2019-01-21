@@ -158,6 +158,10 @@ ep1_c17_01
 //Trav|Edt - dont let sniper_wall_1 disappear
 		edit {targetname "sniper_wall_1" values {targetname "syn_sniper_wall_1" StartDisabled "0"} }
 
+		
+//make fire deal more damage
+		edit {targetname "hellskitchen_hurtbrush_1" values {"damage" "1000" "damagecap" "1000"} }
+
 //End of Trav|Edt
 
 		create { classname "logic_relay" origin "0 0 10"
