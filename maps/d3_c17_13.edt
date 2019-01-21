@@ -15,6 +15,7 @@ d3_c17_13
 				OnMapSpawn "citizen_story,StartScripting,,0.5,-1"
 				OnMapSpawn "citizen_fears_strider_relationship,ApplyRelationship,,1,-1"} }
 		edit {classname "func_areaportal" values {targetname "syn_disabledPortal" StartOpen "1"} }
+		edit {targetname "citizen_story" values {"origin" "4700 -2704 0"} }
 
 //--Starting Items--
 		create {classname "info_player_equip"
@@ -107,6 +108,14 @@ d3_c17_13
 			values {model "*103"//model i wanted is not showing?? maybe same as one i wanted D:
 				spawnflags "1"
 				OnTrigger "syn_spawn_manager,MovePlayers,,0,-1"} }
+				
+		create {classname "trigger_push"
+			origin "6013 56 232"
+			values {model "*72"
+				angles "0 45 0"
+				spawnflags "1"
+				speed "450"
+				pushdir "0 -30 0"}}
 
 //End of Trav|Edt
 //Trav|EDt - no reason to start these automaticallyz
