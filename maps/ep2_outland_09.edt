@@ -237,7 +237,10 @@ ep2_outland_09
 				//OnPlayersIn "trav_antirush_brush_end,Kill,,0,1"
 				OnPlayersIn "syn_antirush_prop,Kill,,0,-1"
 				OnPlayersIn "syn_end_light,TurnOff,,0,-1"
-				OnPlayersIn "!self,Disable,,1,1"} }
+				OnPlayersIn "!self,Disable,,1,1"
+				OnPlayersIn "syn_teleport_alyx_end,Teleport,,0.1,-1"
+				OnPlayersIn "syn_teleport_jeep_end,Teleport,,0.5,-1"
+				OnPlayersIn "alyx,EnterVehicle,jeep,0.6,-1"} }
 
 		create {classname "prop_dynamic" origin "3328 9808 192"
 			values {model "models/synergy/tools/syn_transition.mdl"
@@ -245,6 +248,19 @@ ep2_outland_09
 				angles "0 270 0"
 				solid "6"
 				DisableShadows "1"} }
+				
+// teleport Alyx and car
+		create {classname "point_teleport"
+			origin "3200 9950 256"
+			values {targetname "syn_teleport_alyx_end"
+				angles "0 180 0"
+				target "alyx"} }
+				
+		create {classname "point_teleport"
+			origin "3300 9900 256"
+			values {targetname "syn_teleport_jeep_end"
+				angles "0 0 0"
+				target "jeep"} }
 
 		create {classname "light_dynamic" origin "3328 9808 352"
 			values {targetname "syn_end_light"
