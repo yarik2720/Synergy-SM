@@ -121,7 +121,7 @@ ep1_citadel_02b
 				"spawnflags" "1"
 
 				"OnTrigger" "syn_spawn_manager,SetCheckpoint,syn_spawn_player_2,0,-1"
-				"OnTrigger" "syn_teleport_alyx2,Teleport,,0.2,-1"
+				"OnTrigger" "syn_teleport_alyx2,Teleport,,0,-1"
 				"OnTrigger" "syn_spawn_manager,MovePlayers,,0.05,-1"
 //				"OnTrigger" "trigger_explode_elevator_test,Enable,,0,-1"
 			}
