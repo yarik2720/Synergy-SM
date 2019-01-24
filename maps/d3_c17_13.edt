@@ -11,11 +11,13 @@ d3_c17_13
 		delete {classname "logic_auto" origin "4684.48 -2482.66 11.876"}
 		create {classname "logic_auto"
 			values {spawnflags "1"
-				OnMapSpawn "citizen_story_seq_0,BeginSequence,,0.5,-1"
-				OnMapSpawn "citizen_story,StartScripting,,0.5,-1"
+				OnMapSpawn "citizen_story_seq_0,BeginSequence,,0,-1"
+				OnMapSpawn "citizen_story,StartScripting,,0,-1"
+				OnMapSpawn "lcs_story_impatientplayer,Start,,0,-1"
 				OnMapSpawn "citizen_fears_strider_relationship,ApplyRelationship,,1,-1"} }
 		edit {classname "func_areaportal" values {targetname "syn_disabledPortal" StartOpen "1"} }
 		edit {targetname "citizen_story" values {"origin" "4700 -2704 0"} }
+		edit {targetname "story_lcs" values {"SceneFile" ""} }
 
 //--Starting Items--
 		create {classname "info_player_equip"
