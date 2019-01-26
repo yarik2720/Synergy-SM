@@ -73,6 +73,13 @@ ep1_c17_06
 //Intro
 		create {classname "info_player_coop" origin "9728.86 9760.48 -730.97"
 			values {angles "0 -50 0" targetname "syn_spawn_player_1"} }
+			
+		create {classname "info_player_coop" origin "12214 8208 -661"
+			values {angles "0 -50 0" targetname "syn_spawn_player_2" StartDisabled "1"} }
+			
+		edit {"origin" "11047.5 8174.98 -670.23" values {"OnTrigger" "syn_spawn_manager,SetCheckPoint,syn_spawn_player_2,0,-1"} }
+			
+		create {classname "info_teleport_destination" origin "11986 8409 -759" values {angles "0 0 0" targetname "syn_spawn_player_2TP" } }
 
 		create {classname "info_global_settings"
 			values {targetname "syn_global_settings" IsVehicleMap "0"} }
@@ -108,6 +115,14 @@ ep1_c17_06
 	//			Negated "1"
 	//			filtername "syn_ep1_c17_06_got_new_weapons"} }
 
+
+		create { classname "trigger_once" origin "11047.5 8174.98 -670.23"
+			values {
+				"spawnflags" "1"
+				"model" "*85"
+				"OnTrigger" "syn_spawn_manager,SetCheckPoint,syn_spawn_player_2,0,-1"
+			}
+		}
 //TODO: players fall out of train
 //Trav|Edt - move all players to outrotrain and disable ff and push
 		create {classname "trigger_once"
@@ -116,7 +131,7 @@ ep1_c17_06
 				spawnflags "1"
 				targetname "trigger_playerontrain"//outro_train_1
 				StartDisabled "1"
-				OnTrigger "syn_spawn_manager,MovePlayers,,0,-1"
+				OnTrigger "syn_spawn_manager,TeleportPlayers,syn_spawn_player_2TP,0,-1"
 				OnTrigger "clip_playertrain_close,Enable,,0,-1"} }
 
 //End of Trav|Edt
