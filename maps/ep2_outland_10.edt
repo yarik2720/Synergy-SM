@@ -155,7 +155,8 @@ ep2_outland_10
 		create {classname "trigger_once" origin "880 -2312 208"
 			values {model "*182"
 				spawnflags "1"
-				OnTrigger "syn_teleport_alyx,Teleport,,0,-1"} }
+				OnTrigger "syn_teleport_alyx,Teleport,,0,-1"
+				OnTrigger "syn_spawn_manager,MovePlayers,,0.1,-1"} }
 
 		create {classname "point_teleport"
 			origin "1016 -2384 152"
@@ -176,8 +177,8 @@ ep2_outland_10
 				OnPlayersIn "syn_antirush_prop,Kill,,0,-1"
 				//OnPlayersIn "syn_end_light,TurnOff,,0,-1"
 				OnPlayersIn "!self,Disable,,1,1"
-				OnPlayersIn "syn_teleport_alyx_end,Teleport,,0.1,-1"
-				OnPlayersIn "syn_teleport_jeep_end,Teleport,,0.5,-1"
+				OnPlayersIn "syn_teleport_alyx_end_10,Teleport,,0.1,-1"
+				OnPlayersIn "syn_teleport_jeep_end_10,Teleport,,0.5,-1"
 				OnPlayersIn "alyx,EnterVehicle,jeep,0.6,-1"} }
 
 		create {classname "prop_dynamic" origin "2832 7968 -1536"
@@ -201,13 +202,13 @@ ep2_outland_10
 // teleport Alyx and car
 		create {classname "point_teleport"
 			origin "2300 8000 -1470"
-			values {targetname "syn_teleport_alyx_end"
+			values {targetname "syn_teleport_alyx_end_10"
 				angles "0 180 0"
 				target "alyx"} }
 				
 		create {classname "point_teleport"
 			origin "2300 8000 -1470"
-			values {targetname "syn_teleport_jeep_end"
+			values {targetname "syn_teleport_jeep_end_10"
 				angles "0 0 0"
 				target "jeep"} }
 
@@ -234,6 +235,7 @@ ep2_outland_10
 				"spawnflags" "1"
 				"model" "*67"
 				"OnTrigger" "syn_teleport_alyx_2,Teleport,,0.1,-1"
+				"OnTrigger" "syn_teleport_jeep,Teleport,,5,-1"
 				"OnTrigger" "jeep,DisablePhysGun,,0,-1"
 				"OnTrigger" "jeep,Lock,,0,-1"
 				"OnTrigger" "syn_spawn_manager,SetCheckPoint,syn_spawn_player_2,0,-1"
