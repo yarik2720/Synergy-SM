@@ -3,6 +3,7 @@ ep2_outland_01
 	console
 	{
 		sv_test_scripted_sequences 1 // hotfix for alyx getting stuck
+		sv_allow_stuck 0
 	}
 	entity
 	{
@@ -20,7 +21,7 @@ ep2_outland_01
 		edit {classname "logic_auto" origin "-528 -64 912" values {classname "syn_logic_auto"} }
 		edit {classname "logic_auto" origin "-56 32 410" values {classname "syn_logic_auto"} }
 
-		edit {targetname "camera_intro" values {spawnflags "148" origin "2700 -578 2280" angles "-10 270 0"} }
+		edit {targetname "camera_intro" values {spawnflags "148" origin "1056 502 1238" angles "-14 -88 0"} }
 
 		//create {classname "env_fade"
 		//	values {
