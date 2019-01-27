@@ -145,15 +145,15 @@ d1_canals_02
 		//delete {classname "prop_physics" origin "367 70 -846"}
 
 		create {classname "trigger_push"
-			origin "128 -592 -515"
+			origin "128 -592 -615"
 			values {model "*37"
 				spawnflags "1"
 				targetname "trav_antiskip_push"
-				pushdir "0 270 0"
+				pushdir "0 180 0"
 				speed "450"} }
 
 		create {classname "trigger_push"
-			origin "528 72 -600"
+			origin "455 72 -740"
 			values {model "*45"
 				spawnflags "1"
 				targetname "trav_antiskip_push"
@@ -161,8 +161,17 @@ d1_canals_02
 				speed "450"} }
 
 		create {classname "trigger_push"
-			origin "244 -352 -668"
+			origin "228 -202 -668"
 			values {model "*35"
+				spawnflags "1"
+				targetname "trav_antiskip_push"
+				//pushdir "0 180 0"
+				speed "200"} }
+
+		create {classname "trigger_push"
+			origin "168 -292 -668"
+			values {model "*35"
+				angles "0 -15 0"
 				spawnflags "1"
 				targetname "trav_antiskip_push"
 				//pushdir "0 180 0"
