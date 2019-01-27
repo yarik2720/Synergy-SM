@@ -307,6 +307,18 @@ ep2_outland_02
 				angles "0 225 0"
 				targetname "syn_antlionguard"
 				startburrowed "1"} }
+				
+		create {classname "npc_antlionguard" origin "-915 -9603 -712"
+			values {spawnflags "131588"
+				angles "0 225 0"
+				targetname "syn_antlionguard"
+				startburrowed "1"} }
+				
+		create {classname "npc_antlionguard" origin "-2971 -11043 -712"
+			values {spawnflags "131588"
+				angles "0 225 0"
+				targetname "syn_antlionguard"
+				startburrowed "1"} }
 
 //only attack players
 		create {classname "ai_relationship"
