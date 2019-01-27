@@ -171,6 +171,23 @@ ep2_outland_01
 
 				OnTrigger "syn_gnome_teleport,Teleport,,5,-1"} }
 
+		create { classname "trigger_push" origin "-3412 1573 612"
+			values {
+				"model"			"*121"
+				"pushdir"		"0 180 0"
+				"speed"			"500"
+				"spawnflags"	"1"
+			}
+		}
+		create { classname "trigger_push" origin "-3772 970 460"
+			values {
+				"model"			"*121"
+				"pushdir"		"0 90 0"
+				"speed"			"500"
+				"spawnflags"	"1"
+			}
+		}
+		
 //--Extra--
 
 //Doors: Prevent Closing
