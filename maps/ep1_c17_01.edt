@@ -207,6 +207,15 @@ ep1_c17_01
 				"OnTrigger"	"syn_spawn_manager,SetCheckpoint,syn_spawn_player_3,0,0"
 				"OnTrigger"	"syn_spawn_manager,MovePlayers,,0.2,0"
 			}
+		}	
+		
+		create { classname "trigger_once"
+			values {
+				"origin" "-3135 406 32"
+				"spawnflags" "1"
+				"model" "*76"
+				"OnTrigger"	"syn_spawn_manager,MovePlayers,,0.2,0"
+			}
 		}
 
 //Trav|Edt - Functionality check
