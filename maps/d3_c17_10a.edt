@@ -164,6 +164,19 @@ d3_c17_10a
 				//OnTrigger "field1_breakable_plug_bit,EnableDamageForces,,10,-1"
 				OnTrigger "field1_plug,EnablePhyscannonPickup,,60,-1"} }//MUST DAMAGE
 
+//modi tp barney
+		create {classname "point_teleport"
+			origin "-2890 6445 576"
+			values {targetname "syn_teleport_barney01"
+				angles "0 180 0"
+				target "barney"} }
+
+		create {classname "trigger_once"
+			origin "-2968 6476 576"
+			values {model "*38"
+				spawnflags "1"
+				OnTrigger "syn_spawn_manager,MovePlayers,,0.1,-1"
+				OnTrigger "syn_teleport_barney01,Teleport,,0,-1"} }
 //End of Trav|Edt
 
 		delete {targetname "lobby_frontdoors_assault"}
