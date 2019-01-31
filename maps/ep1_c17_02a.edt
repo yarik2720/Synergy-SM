@@ -91,7 +91,7 @@ ep1_c17_02a
 				spawnflags "1"
 				//StartDisabled "1"
 				OnTrigger "syn_teleport_alyx_2,Teleport,,0.1,-1"
-				OnTrigger "syn_spawn_manager,TeleportPlayers,trav_teleport_2,0.3,-1"} }
+				OnTrigger "syn_spawn_manager,TeleportPlayers,trav_teleport_2,2,-1"} }
 
 		create {classname "filter_activator_name"
 			values {targetname "syn_new_weapon_filter"
