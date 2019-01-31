@@ -108,7 +108,7 @@ ep1_citadel_02b
 		}
 
 		create {classname "point_teleport"
-			origin "3261 4647 2600"
+			origin "3272 4745 2600"
 			values {targetname "syn_teleport_alyx2"
 				angles "0 180 0"
 				target "alyx"} }
@@ -121,9 +121,17 @@ ep1_citadel_02b
 				"spawnflags" "1"
 
 				"OnTrigger" "syn_spawn_manager,SetCheckpoint,syn_spawn_player_2,0,-1"
-				"OnTrigger" "syn_teleport_alyx2,Teleport,,0,-1"
 				"OnTrigger" "syn_spawn_manager,MovePlayers,,0.05,-1"
 //				"OnTrigger" "trigger_explode_elevator_test,Enable,,0,-1"
+			}
+		}
+		create { classname "trigger_once" origin "3258 4649 2509"
+			values {
+				"model" "*72"
+				"spawnflags" "1"
+				"OnTrigger" "syn_teleport_alyx2,Teleport,,0,-1"
+				"OnTrigger" "alyx_follow_player,Deactivate,,0,-1"
+				"OnTrigger" "alyx_clip_1,Enable,,0,-1"
 			}
 		}
 
