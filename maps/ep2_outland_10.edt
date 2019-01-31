@@ -268,10 +268,10 @@ ep2_outland_10
 		}
 		
 		create {classname "trigger_push"
-			origin "3408 -838 115"
+			origin "3412 -900 90"
 			values {model "*155"
 				spawnflags "1"
-				speed "450"
+				speed "1950"
 				pushdir "90 0 0"}}
 
 		// fix a few triggers
