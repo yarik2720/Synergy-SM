@@ -120,6 +120,12 @@ d1_town_02a
 				spawnflags "1"
 				pushdir "0 180 0"
 				speed "950"} }
+				
+		create {classname "trigger_hurt"
+			origin "-6550 1000 -2965"
+			values {model "*30"
+				spawnflags "1"
+				damage "950"} }
 
 //Trav|Edt - add crates in secreat area
 		create {classname "item_item_crate"
