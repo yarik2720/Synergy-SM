@@ -157,6 +157,26 @@ d3_c17_09
 				damagefilter "trav_filter_sniper_grenade"
 				ignoreunseenenemies "1"} }
 
+//modi prevent skipping
+		create {classname "trigger_hurt"
+			origin "8260 7430 250"
+			values {model "*2"
+				angles "0 90 0"
+				spawnflags "1"
+				damage "950"} }
+		create {classname "trigger_hurt"
+			origin "7860 7430 250"
+			values {model "*2"
+				angles "0 90 0"
+				spawnflags "1"
+				damage "950"} }
+		create {classname "trigger_hurt"
+			origin "8100 7550 450"
+			values {model "*2"
+				angles "0 90 0"
+				spawnflags "1"
+				damage "950"} }
+				
 //Trav|Edt - add another sniper and edit others
 		create {classname "npc_sniper"
 			origin "5800 7308 300"
