@@ -60,6 +60,31 @@ d3_c17_08
 
 //--Extra--
 
+//prevent client crashes
+		delete {targetname "barrier2_board03"}
+		delete {targetname "barrier2_board04"}
+		delete {targetname "barrier2_board06"}
+		delete {targetname "barrier2_board08"}
+		delete {targetname "barrier2_board09"}
+		delete {targetname "barrier2_board10"}
+		delete {targetname "barrier2_board11"}
+		delete {targetname "barrier2_board19"}
+		delete {targetname "barrier2_board21"}
+		delete {targetname "barrier2_board22"}
+		delete {targetname "barrier2_board24"}
+		delete {targetname "tram_board03"}
+		delete {targetname "tram_board04"}
+		delete {targetname "tram_board06"}
+		delete {targetname "tram_board08"}
+		delete {targetname "tram_board10"}
+		delete {targetname "tram_board11"}
+		delete {targetname "tram_board19"}
+		delete {targetname "tram_board20"}
+		delete {targetname "tram_board22"}
+		delete {targetname "tram_board23"}
+		delete {targetname "tram_board24"}
+
+
 		// create intermission
 		"create" { "classname" "info_intermission" "origin" "1039.476563 600.825745 971.505188" "values" { "angles" "28 -60 0" } }
 
