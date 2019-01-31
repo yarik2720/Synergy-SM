@@ -86,6 +86,9 @@ ep1_c17_00
 //Intro
 		create {classname "info_player_coop" origin "4695 -5767 -70"
 			values {angles "0 328 0" targetname "syn_spawn_player_1"} }
+			
+		create {classname "info_player_coop" origin "4156 -4.81 -58"
+			values {angles "0 0 0" targetname "syn_spawn_player_2" StartDisabled "1"} }
 
 		create {classname "info_global_settings"
 			values {targetname "syn_global_settings" IsVehicleMap "0"} }
@@ -113,6 +116,27 @@ ep1_c17_00
 			values {model "*83"
 				spawnflags "1"
 				OnTrigger "syn_spawn_manager,TeleportPlayers,trav_teleport_modi,2,-1"} }	
+				
+//tp alyx before scene
+		create {classname "point_teleport"
+			origin "4544 -338.7 -91.6"
+			values {targetname "syn_teleport_alyx1"
+				angles "0 180 0"
+				target "alyx"} }
+				
+		create {classname "trigger_once"
+			origin "4410 -295 -44.5"
+			values {model "*120"
+				spawnflags "1"
+				OnTrigger "syn_spawn_manager,MovePlayers,,0,-1"
+				OnTrigger "syn_teleport_alyx1,Teleport,,0,-1"} }	
+				
+		create {classname "trigger_once"
+			origin "4333 153.5 -62.5"
+			values {model "*24"
+				spawnflags "1"
+				"OnTrigger" "syn_spawn_manager,SetCheckpoint,syn_spawn_player_2,0,-1"
+				"OnTrigger" "syn_spawn_manager,MovePlayers,syn_spawn_player_2,0.05,-1"} }	
 
 //Trav|Edt - make alyx not shoot idle barnicles
 		delete {classname "trigger_multiple" origin "1784 1176 179"}
