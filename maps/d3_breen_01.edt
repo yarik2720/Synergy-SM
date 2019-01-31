@@ -31,10 +31,15 @@ d3_breen_01
 
 		create {classname "info_player_coop" origin "-1729.093750 543.218750 631.562500"
 			values {angles "0 -130 0" targetname "syn_spawn_player_2" StartDisabled "1"} }
-
+		
+		create {classname "info_teleport_destination" origin "-1729.093750 543.218750 631.562500" values {angles "0 0 0" targetname "syn_spawn_player_2TP" } }
+		
 		create {classname "info_player_coop" origin "-1703 0 1346"
 			values {angles "0 0 0" targetname "syn_spawn_player_3" StartDisabled "1"} }
-
+		
+		create {classname "info_teleport_destination" origin "-1703 0 1346" values {angles "0 0 0" targetname "syn_spawn_player_3TP" } }
+		
+		create {classname "info_teleport_destination" origin "-996 0 -252" values {angles "0 0 0" targetname "syn_spawn_player_4TP" } }
 		create {classname "info_player_coop" origin "-996 0 -252"
 			values {angles "0 0 0" targetname "syn_spawn_player_4" StartDisabled "1"} }
 
@@ -244,13 +249,6 @@ d3_breen_01
 		// do not do the getup scene
 		"delete" { "targetname" "logic_fade_view" }
 
-		"create"
-		{
-			"classname"	"info_spawn_manager"
-			"origin"	"0 0 0"
-			"values" { "targetname" "syn_spawn_manager" }
-		}
-
 		// create a special checkpoint when we exit the vehicle
 		"delete" { "targetname" "logic_playerExitPod" }
 		"create"
@@ -267,6 +265,7 @@ d3_breen_01
 				"OnTrigger" "pod,ExitVehicle,,0.75,-1"
 
 				"OnTrigger" "syn_spawn_manager,SetCheckpoint,syn_spawn_player_2,0.5,-1"
+				"OnTrigger" "syn_spawn_manager,TeleportPlayers,syn_spawn_player_2TP,3,-1"
 				"OnTrigger" "MPVS_SPAWN,Kill,,0.48,-1"
 			}
 		}
@@ -293,11 +292,22 @@ d3_breen_01
 				"OnTrigger" "logic_goto_teleport,Trigger,,0,-1"
 				"OnTrigger" "lcs_br_controlroom,Start,,0,-1"
 
-				"OnTrigger" "syn_spawn_manager,SetCheckpoint,syn_spawn_player_4,0,-1"
+				"OnTrigger" "syn_spawn_manager,SetCheckpoint,syn_spawn_player_3,0,-1"
 //Trav|Edt - make moveplayers instant delay was 8
-				"OnTrigger" "syn_spawn_manager,MovePlayers,syn_spawn_player_4,0,-1" // 4
+				"OnTrigger" "syn_spawn_manager,MovePlayers,,0,-1" // 4
 				//OnTrigger "syn_get_physcannon,Enable,,0,-1"//give physcannon
 				//OnTrigger "syn_get_physcannon,EquipAllPlayers,,1,-1"
+			}
+		}
+		"create"
+		{
+			"classname" "trigger_once"
+			"origin" "-896 0 -192"
+			"values"
+			{
+				"model" "*28"
+				"OnTrigger" "syn_spawn_manager,SetCheckpoint,syn_spawn_player_4,0,-1"
+				"OnTrigger" "syn_spawn_manager,TeleportPlayers,syn_spawn_player_4TP,0,-1"
 			}
 		}
 
