@@ -306,6 +306,7 @@ d3_breen_01
 			"values"
 			{
 				"model" "*28"
+				"spawnflags" "1"
 				"OnTrigger" "syn_spawn_manager,SetCheckpoint,syn_spawn_player_4,0,-1"
 				"OnTrigger" "syn_spawn_manager,TeleportPlayers,syn_spawn_player_4TP,0,-1"
 			}
