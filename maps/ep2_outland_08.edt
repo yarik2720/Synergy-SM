@@ -195,7 +195,7 @@ ep2_outland_08
 
 		// move all players inside the transition here when a player gets in
 		create { classname "info_teleport_destination" origin "-2952 1898 73" values { angles "0 160 0" targetname "PS_End_TP" } }
-
+		delete { classname "prop_door_rotating" origin "-3251 2026 126.281"}
 	//	delete { targetname "door_08_to_09" }
 	//	create { classname "prop_door_rotating" origin "-2865 1971 126.281"
 	//		values {
