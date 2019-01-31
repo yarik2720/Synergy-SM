@@ -92,6 +92,32 @@ ep1_citadel_01
 			origin "-4265 6528 2784" 
 			values {solid "6" startdisabled "1" DisableShadows "1"} }
 
+//modi serios of teleport for alyx fixing
+		create { classname "trigger_once" origin "-5200 6416 2720"
+			values {
+				"model" "*79"
+				"spawnflags" "1"
+				"OnTrigger" "syn_spawn_manager,MovePlayers,,0.1,-1"
+				"OnTrigger" "goalfollow_alyx,Activate,,0,-1"
+			}
+		}
+		create { classname "trigger_once" origin "-4960 6724 2580"
+			values {
+				"model" "*79"
+				"spawnflags" "1"
+				"OnTrigger" "syn_spawn_manager,MovePlayers,,0.1,-1"
+				"OnTrigger" "goalfollow_alyx,Activate,,0,-1"
+			}
+		}
+		create { classname "trigger_once" origin "-4792 7696 2648"
+			values {
+				"model" "*16"
+				"spawnflags" "1"
+				"OnTrigger" "syn_spawn_manager,MovePlayers,,0.1,-1"
+				"OnTrigger" "goalfollow_alyx,Activate,,0,-1"
+			}
+		}
+
 //TODO: use trigger_coop
 		// do not close rollertraining door
 		delete { targetname "counter_rollerdoor_close" }
