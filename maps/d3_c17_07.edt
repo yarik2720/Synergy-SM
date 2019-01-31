@@ -242,6 +242,22 @@ d3_c17_07
 				spawnflags "1"
 				speed "350"
 				pushdir "0 180 0"} }
+				
+		create {classname "trigger_push"
+			origin "7100 1530 400"
+			values {model "*7"
+				angles "90 0 0"
+				spawnflags "1"
+				speed "3950"
+				pushdir "90 180 0"} }
+				
+		create {classname "trigger_push"
+			origin "6655 1040 400"
+			values {model "*7"
+				angles "90 0 0"
+				spawnflags "1"
+				speed "3950"
+				pushdir "90 180 0"} }
 
 //Trav|Edt - make balcony cop keep comming //nvm(too lazy to remove !self kill RAWR)
 		delete {targetname "balcony_cop1_maker"}
