@@ -38,6 +38,9 @@ ep1_citadel_01
 //Advisor Area
 		create {classname "info_player_coop" origin "-5016 1656 2464"
 			values {angles "0 315 0" targetname "syn_spawn_player_2" StartDisabled "1"} }
+//Before Advisor Area
+		create {classname "info_player_coop" origin "-4871 5178 2656"
+			values {angles "0 315 0" targetname "syn_spawn_player_2_1" StartDisabled "1"} }
 //Rollermine Area
 		create {classname "info_player_coop" origin "-2733 1361 2468"
 			values {angles "0 0 0" targetname "syn_spawn_player_3" StartDisabled "1"} }
@@ -54,13 +57,13 @@ ep1_citadel_01
 			values {model "*211"
 				spawnflags "1"
 				targetname "syn_checkpoint_01"
-				StartDisabled "1"
+				//StartDisabled "1"
 				OnTrigger "syn_spawn_manager,MovePlayers,,0.1,-1"
 				OnTrigger "syn_spawn_manager,SetCheckPoint,syn_spawn_player_2,0,-1"} }
 
-		create {classname "logic_auto"
-			values {spawnflags "1"
-				OnMapSpawn "ss_jump_gravroom_1,AddOutput,OnEndSequence:syn_checkpoint_01:Enable::0:-1,0,-1"} }
+		// create {classname "logic_auto"
+			// values {spawnflags "1"
+				// OnMapSpawn "ss_jump_gravroom_1,AddOutput,OnEndSequence:syn_checkpoint_01:Enable::0:-1,0,-1"} }
 
 //Trav|Edt - keep DEGG in stripper area
 		create {classname "func_clip_vphysics"
@@ -98,7 +101,7 @@ ep1_citadel_01
 				"model" "*79"
 				"spawnflags" "1"
 				"OnTrigger" "syn_spawn_manager,MovePlayers,,0.1,-1"
-				"OnTrigger" "goalfollow_alyx,Activate,,0,-1"
+				"OnTrigger" "follow_alyx,Activate,,0,-1"
 			}
 		}
 		create { classname "trigger_once" origin "-4960 6724 2580"
@@ -106,7 +109,7 @@ ep1_citadel_01
 				"model" "*79"
 				"spawnflags" "1"
 				"OnTrigger" "syn_spawn_manager,MovePlayers,,0.1,-1"
-				"OnTrigger" "goalfollow_alyx,Activate,,0,-1"
+				"OnTrigger" "follow_alyx,Activate,,0,-1"
 			}
 		}
 		create { classname "trigger_once" origin "-4792 7696 2648"
@@ -114,7 +117,30 @@ ep1_citadel_01
 				"model" "*16"
 				"spawnflags" "1"
 				"OnTrigger" "syn_spawn_manager,MovePlayers,,0.1,-1"
-				"OnTrigger" "goalfollow_alyx,Activate,,0,-1"
+				"OnTrigger" "follow_alyx,Activate,,0,-1"
+			}
+		}
+		create { classname "trigger_once" origin "-4354.4 5226 2372"
+			values {
+				"model" "*104"
+				"spawnflags" "1"
+				"OnTrigger" "syn_spawn_manager,SetCheckPoint,syn_spawn_player_2_1,0,-1"
+				"OnTrigger" "follow_alyx,Activate,,0,-1"
+			}
+		}
+		create { classname "trigger_once" origin "-4882 5144 2656"
+			values {
+				"model" "*225"
+				"spawnflags" "1"
+				"OnTrigger" "syn_spawn_manager,MovePlayers,syn_spawn_player_2_1,0,-1"
+				"OnTrigger" "follow_alyx,Activate,,0,-1"
+			}
+		}
+		create { classname "trigger_once" origin "-5184 2880 2640"
+			values {
+				"model" "*202"
+				"spawnflags" "1"
+				"OnTrigger" "follow_alyx,Activate,,0,-1"
 			}
 		}
 
