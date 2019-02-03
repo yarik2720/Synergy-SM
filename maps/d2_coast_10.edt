@@ -164,6 +164,7 @@ d2_coast_10
 				OnTrigger "lighthouse_secret_door,Close,,0.1,-1"
 				OnTrigger "trav_antideath_clip,Enable,,0,-1"
 				OnTrigger "trav_antideath_clip,Disable,,4,-1"
+				OnTrigger "syn_antirusher_hurt,Disable,,0,-1"
 				OnTrigger "lighthouse_secret_door,Addoutput,speed 100,0,-1"} }
 
 //door speed increase ^^
@@ -232,8 +233,7 @@ d2_coast_10
 				OnTrigger "syn_global_settings,AddOutput,IsVehicleMap 0,0,-1"//Disable Static Spawning thus enabling dynamic spawning near players
 				OnTrigger "garage_door,Close,,3.25,-1"
 				OnTrigger "prop_vehicle_*,Lock,,2.1,-1"
-				OnTrigger "prop_vehicle_*,TurnOff,,2.5,-1"
-				OnTrigger "syn_antirusher_hurt,Disable,,0,-1"} }
+				OnTrigger "prop_vehicle_*,TurnOff,,2.5,-1"} }
 				//OnTrigger "prop_vehicle_*,Kill,,30,-1"//Crashes
 
 //Trav|Edt - teleporter for stragglers
@@ -254,14 +254,14 @@ d2_coast_10
 				//angles " 0 0 0"
 				targetname "syn_vint_trav_maker_combine1"
 				StartDisabled "1"
-				//NPCTargetname "trav_combine1"
-				TemplateName "lighthouse_soldier_3"
+				NPCTargetname "trav_combine1"
+				//TemplateName "road_soldier_3"
 				MaxNPCCount "8"//12
 				SpawnFrequency "3"
 				MaxLiveChildren "8"
-				//NPCType "npc_combine_s"
-				//NPCSquadname "soldier_squad"
-				//additionalequipment "weapon_ar2"
+				NPCType "npc_combine_s"
+				NPCSquadname "soldier_squad"
+				additionalequipment "weapon_ar2"
 				OnSpawnNPC "trav_aiscript_sched_combine1,StartSchedule,,0.2,-1"} }
 
 		create {classname "aiscripted_schedule"
