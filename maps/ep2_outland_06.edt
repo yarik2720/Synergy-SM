@@ -139,7 +139,7 @@ ep2_outland_06
 				spawnflags "1"
 				OnTrigger "syn_spawn_manager,SetCheckpoint,syn_spawn_player_3,0,-1"
 				//OnTrigger "syn_global_settings,AddOutput,IsVehicleMap 1,0,-1"
-				//OnTrigger "syn_spawn_manager,MovePlayers,,0,-1"
+				OnTrigger "syn_spawn_manager,MovePlayers,,0,-1"
 				} }
 
 //Trav|Edt - prevent cleanup in first goopit
