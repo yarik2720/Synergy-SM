@@ -131,10 +131,10 @@ d2_prison_06
 
 //Trav|Edt - attempt to fix alyx getting stuck at eli place
 //me suspects lcs_np_cell01b fails to complete sometimes (needs testing)
-//		create {classname "logic_auto"
-//			values {spawnflags "1"
-//				OnMapSpawn "lcs_np_cell01b,AddOutput,OnStart lcs_np_cell02:Start::20:-1,0,-1"
-//				OnMapSpawn "lcs_np_cell01b,AddOutput,OnStart lcs_np_cell02:Resume::21:-1,0,-1"} }
+		create {classname "logic_auto"
+			values {spawnflags "1"
+				OnMapSpawn "lcs_np_cell01b,AddOutput,OnStart lcs_np_cell02:Start::20:-1,0,-1"
+				OnMapSpawn "lcs_np_cell01b,AddOutput,OnStart lcs_np_cell02:Resume::21:-1,0,-1"} }
 
 //attempt to fix alyx .. not sure why it works sometimes but doesnt the others, .vvd issues? - krazy
 		//edit {targetname "lcs_np_cell02" values {busyactor "0"} }
