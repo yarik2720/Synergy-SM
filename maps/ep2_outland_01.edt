@@ -154,7 +154,7 @@ ep2_outland_01
 			values {model "*29"
 				spawnflags "1"
 				OnTrigger "syn_spawn_manager,SetCheckPoint,syn_spawn_player_4,0,-1"
-				//OnTrigger "syn_spawn_manager,MovePlayers,,0.2,-1"
+				OnTrigger "syn_spawn_manager,MovePlayers,,0.2,-1"
 				} }
 
 		create {classname "logic_auto"
