@@ -132,20 +132,17 @@ ep2_outland_04
 //Trav|Edt - Stop crap from stopping elevator		
 		create {classname "trigger_hurt"
 			origin "5048 -1608 -381"
-			values {model "*51"
-				spawnflags "3"
-				damage "1000"
-				damagetype "32"//fall
-				nodmgforce "1"
+			values {model "*55"
+				spawnflags "1"
+				damage "10000"
 				targetname "syn_elevator_fall"} }
 				
 		create {classname "trigger_hurt"
 			origin "4930 -1610 366"
 			values {model "*169"
 				targetname "syn_elevator_kill_players"
-				spawnflags "8"
-				damage "1000"
-				damagetype "1"
+				spawnflags "1"
+				damage "10000"
 				parentname "elevator"} }
 
 //modi - stop blocking elevator!!!
@@ -155,6 +152,7 @@ ep2_outland_04
 				spawnflags "2"
 				rendermode "3"
 				parentname "elevator"
+				targetname "syn_modi_elevator_clip"
 				filtername "trav_train_filter"} }
 
 		create {classname "filter_multi"
@@ -247,7 +245,8 @@ ep2_outland_04
 				"OnTrigger" "elevator_door_1_close_rl,Trigger,,0,1"		// 0
 				"OnTrigger" "vort_elevator_dialog_lcs,Start,,1,-1"		// 0
 				"OnTrigger" "elevator_moving_shake,StartShake,,2.5,-1"	// 1.5
-				"OnTrigger" "elevator,StartForward,,2.5,1"				// 1.5
+				"OnTrigger" "elevator,StartForward,,2.5,1"	// 1.5
+				"OnTrigger" "syn_modi_elevator_clip,Kill,,2.5,1"
 
 				"OnTrigger" "syn_spawn_manager,SetCheckPoint,PS_End,0,-1"
 			//	"OnTrigger" "syn_spawn_manager,MovePlayers,,0.1,-1"
