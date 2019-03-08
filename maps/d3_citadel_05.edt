@@ -91,7 +91,37 @@ d3_citadel_05
 				"OnTrigger" "playerpod7_train,Resume,,0,-1"
 			}
 		}
+		
+//modi: teleport all players on pod, todo: all players are visible after teleport, need solution
+		create {classname "logic_auto"
+			values {
+				spawnflags "1"
+				OnMapSpawn "playerpod1_trigger,AddOutput,OnStartTouch playerpod1_vehicle:EnterVehicleImmediate::1:-1,0,-1"
+				OnMapSpawn "playerpod1_trigger,AddOutput,OnStartTouch playerpod1_vehicle:Lock::0:0,0,-1"
+				OnMapSpawn "playerpod2_trigger,AddOutput,OnStartTouch playerpod2_vehicle:EnterVehicleImmediate::1:-1,0,-1"
+				OnMapSpawn "playerpod2_trigger,AddOutput,OnStartTouch playerpod2_vehicle:Lock::0:0,0,-1"
+				OnMapSpawn "playerpod3_trigger,AddOutput,OnStartTouch playerpod3_vehicle:EnterVehicleImmediate::1:-1,0,-1"
+				OnMapSpawn "playerpod3_trigger,AddOutput,OnStartTouch playerpod3_vehicle:Lock::0:0,0,-1"
+				OnMapSpawn "playerpod4_trigger,AddOutput,OnStartTouch playerpod4_vehicle:EnterVehicleImmediate::1:-1,0,-1"
+				OnMapSpawn "playerpod4_trigger,AddOutput,OnStartTouch playerpod4_vehicle:Lock::0:0,0,-1"
+				OnMapSpawn "playerpod5_trigger,AddOutput,OnStartTouch playerpod5_vehicle:EnterVehicleImmediate::1:-1,0,-1"
+				OnMapSpawn "playerpod5_trigger,AddOutput,OnStartTouch playerpod5_vehicle:Lock::0:0,0,-1"
+				OnMapSpawn "playerpod6_trigger,AddOutput,OnStartTouch playerpod6_vehicle:EnterVehicleImmediate::1:-1,0,-1"
+				OnMapSpawn "playerpod6_trigger,AddOutput,OnStartTouch playerpod6_vehicle:Lock::0:0,0,-1"
+				OnMapSpawn "playerpod7_trigger,AddOutput,OnStartTouch playerpod7_vehicle:EnterVehicleImmediate::1:-1,0,-1"
+				OnMapSpawn "playerpod7_trigger,AddOutput,OnStartTouch playerpod7_vehicle:Lock::0:0,0,-1"
+			} 
+		}
 
+		edit {targetname "playerpod1_trigger" values {model "*14"}}
+		edit {targetname "playerpod2_trigger" values {model "*14"}}
+		edit {targetname "playerpod3_trigger" values {model "*14"}}
+		edit {targetname "playerpod4_trigger" values {model "*14"}}
+		edit {targetname "playerpod5_trigger" values {model "*14"}}
+		edit {targetname "playerpod6_trigger" values {model "*14"}}
+		edit {targetname "playerpod7_trigger" values {model "*14"}}
+
+		
 		// let the pods return from tne end of the map to the start again
 		"delete" { "targetname" "pod_player56" }
 		"create"
