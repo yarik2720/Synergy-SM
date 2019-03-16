@@ -87,7 +87,7 @@ d3_c17_12b
 				OnPlayersIn "syn_antirush_wall,Kill,,0,1"
 				OnPlayersIn "!self,Disable,,1,1"} }
 
-		create {classname "syn_transition_wall" origin "-4376 1128 -88" values {targetname "syn_antirush_wall"} }
+		create {classname "syn_transition_wall" origin "-4376 1128 -88" values {targetname "syn_antirush_wall" solid "6"} }
 
 		//create {classname "trigger_push"
 		//	origin "-4390 808 151.5"

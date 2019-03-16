@@ -243,7 +243,7 @@ d3_c17_09
 				OnPlayersIn "syn_antirush_wall,Kill,,0,1"
 				OnPlayersIn "!self,Disable,,1,1"} }
 
-		create {classname "syn_transition_wall" origin "9216.01 7104 -8" values {angles "0 180 0" targetname "syn_antirush_wall"} }
+		create {classname "syn_transition_wall" origin "9216.01 7104 -8" values {angles "0 180 0" targetname "syn_antirush_wall" solid "6"} }
 
 		create {classname "game_text"
 			values {spawnflags "0"

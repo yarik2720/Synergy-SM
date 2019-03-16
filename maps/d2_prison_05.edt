@@ -244,7 +244,7 @@ d2_prison_05
 			values {spawnflags "1"
 				OnMapSpawn "combine_crusherwall2_ss,AddOutput,OnEndSequence syn_antirush_coop:Enable::0:-1,0,-1"} }
 
-		create {classname "syn_transition_wall" origin "-4368 -1336 632" values {angles "0 180 0" targetname "syn_antirush_wall"} }
+		create {classname "syn_transition_wall" origin "-4368 -1336 632" values {angles "0 180 0" targetname "syn_antirush_wall" solid "6"} }
 
 		//create {classname "trigger_push"
 		//	origin "-4296 -1096 712"//z816

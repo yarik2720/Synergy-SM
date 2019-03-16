@@ -216,7 +216,7 @@ d3_c17_06a
 				OnPlayersIn "syn_antirush_wall,Kill,,0,1"
 				OnPlayersIn "!self,Disable,,1,1"} }
 
-		create {classname "syn_transition_wall" origin "1808 3056 -96" values {angles "0 270 0" targetname "syn_antirush_wall"} }
+		create {classname "syn_transition_wall" origin "1808 3056 -96" values {angles "0 270 0" targetname "syn_antirush_wall" solid "6"} }
 
 		//create {classname "trigger_push"
 		//	origin "2144 3024 -82"

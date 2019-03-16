@@ -286,7 +286,7 @@ d3_c17_08
 				OnTrigger "trav_teleport2,Teleport,,0,1"
 				OnTrigger "trav_trigger_multicheckpoint,Kill,,0,1"} }//Disable
 
-		create {classname "syn_transition_wall" origin "2528 -416 480" values {angles "0 180 0" targetname "syn_antirush_wall"} }
+		create {classname "syn_transition_wall" origin "2528 -416 480" values {angles "0 180 0" targetname "syn_antirush_wall" solid "6"} }
 
 		//create {classname "trigger_push"
 		//	origin "2632 -432 556"
