@@ -228,6 +228,14 @@ d3_c17_01
 			origin "-7152 -1536 48"
 			values {angles "0 90 -7"} }
 
+		create {classname "syn_transition_wall" 
+			origin "-7500 -1215 100" 
+			values {
+				angles "0 90 0"
+				solid "6"
+				DisableShadows "1"
+				rendermode "10"} }
+
 //End of Trav|Edt
 
 		// clear some room for the spawns
