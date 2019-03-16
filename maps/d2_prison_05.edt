@@ -61,6 +61,9 @@ d2_prison_05
 			
 		create {classname "info_player_coop" origin "-2054.05 580.05 733.39"
 			values {angles "0 0 0" targetname "syn_spawn_player_2" StartDisabled "1"} }
+			
+		create {classname "info_player_coop" origin "-4632.32 -768.45 704"
+			values {angles "0 0 0" targetname "syn_spawn_player_3" StartDisabled "1"} }
 
 		create {classname "info_global_settings"
 			values {IsVehicleMap "0" targetname "syn_global_settings"} }
@@ -242,7 +245,9 @@ d2_prison_05
 
 		create {classname "logic_auto"
 			values {spawnflags "1"
-				OnMapSpawn "combine_crusherwall2_ss,AddOutput,OnEndSequence syn_antirush_coop:Enable::0:-1,0,-1"} }
+				OnMapSpawn "combine_crusherwall2_ss,AddOutput,OnEndSequence syn_antirush_coop:Enable::0:-1,0,-1"
+				OnMapSpawn "combine_crusherwall2_ss,AddOutput,OnEndSequence syn_spawn_manager:SetCheckpoint:syn_spawn_player_3:0:-1,0,-1"
+				OnMapSpawn "combine_crusherwall2_ss,AddOutput,OnEndSequence syn_spawn_manager:MovePlayers::0:-1,0,-1"} }
 
 		create {classname "syn_transition_wall" origin "-4368 -1336 632" values {angles "0 180 0" targetname "syn_antirush_wall" solid "6"} }
 
