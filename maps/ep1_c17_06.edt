@@ -96,7 +96,28 @@ ep1_c17_06
 				OnTrigger "assault_cit1_lasttrain,Activate,,8.1,-1"
 				OnTrigger "assault_cit2_lasttrain,Activate,,8.1,-1"
 				OnTrigger "lcs_train_departure_alyx_barney,Start,,10,-1"} }
-
+//modi: prevent escaping
+		create {classname "syn_transition_wall" 
+			origin "10900 9186.80 -600" 
+			values {
+				angles "90 90 0"
+				solid "6"
+				DisableShadows "1"
+				rendermode "10"} }
+		create {classname "syn_transition_wall" 
+			origin "10957 9523.07 -600" 
+			values {
+				angles "0 90 0"
+				solid "6"
+				DisableShadows "1"
+				rendermode "10"} }
+		create {classname "syn_transition_wall" 
+			origin "11616 8459.07 -600" 
+			values {
+				angles "0 90 0"
+				solid "6"
+				DisableShadows "1"
+				rendermode "10"} }
 				
 //Trav|Edt - no rpgs
 	//	create {classname "trigger_multiple"
