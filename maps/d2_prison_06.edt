@@ -98,10 +98,20 @@ d2_prison_06
 			values {angles "0 -90 0" targetname "syn_spawn_player_1"} }
 
 		create {classname "info_player_coop" origin "1333.47 643.60 -190"
-			values {angles "0 180 0" targetname "syn_spawn_player_2" StartDisabled "1"} }
+			values {angles "0 180 0" targetname "syn_spawn_player_2" StartDisabled "1"} } //after elevator
 
 		create {classname "info_player_coop" origin "1180 -1344 -128"
-			values {angles "0 270 0" targetname "syn_spawn_player_3" StartDisabled "1"} }
+			values {angles "0 270 0" targetname "syn_spawn_player_3" StartDisabled "1"} } //on vents
+
+		create {classname "info_player_coop" origin "312 -256 30"
+			values {angles "0 270 0" targetname "syn_spawn_player_4" StartDisabled "1"} } //after eli scene
+
+		create {classname "info_player_coop" origin "500 88 30"
+			values {angles "0 270 0" targetname "syn_spawn_player_5" StartDisabled "1"} } //eli scene
+
+		create {classname "info_player_coop" origin "967 529 -160"
+			values {angles "0 270 0" targetname "syn_spawn_player_6" StartDisabled "1"} } //finding eli
+
 
 		create {classname "info_global_settings"
 			values {IsVehicleMap "0" targetname "syn_global_settings"} }
@@ -141,7 +151,7 @@ d2_prison_06
 
 //Trav|Edt - Doors: Open Only
 		edit {classname "prop_door_rotating" origin "372 -501 -10" values {spawnflags "0"} }
-		edit {classname "prop_door_rotating" values {returndelay "-1"} }
+		//edit {classname "prop_door_rotating" values {returndelay "-1"} }
 
 //Trav|Edt - block phys props going into vator
 		create {classname "func_clip_vphysics" origin "1440 664 -560" values {model "*143"} }
@@ -181,6 +191,19 @@ d2_prison_06
 				//OnTrigger "syn_alyx_bully,Enable,,0,1"
 				//OnTrigger "syn_alyx_bully,Disable,,120,1"
 				} }
+				
+		create {classname "trigger_once"
+			origin "312 -256 8"
+			values {model "*119"
+				spawnflags "1"
+				OnTrigger "syn_spawn_manager,TeleportPlayers,syn_spawn_player_4_teleport,0.1,-1"
+				OnTrigger "syn_spawn_manager,SetCheckpoint,syn_spawn_player_4,0,-1"} }
+
+		create {classname "info_teleport_destination"
+			origin "312 -256 30"
+			values {targetname "syn_spawn_player_4_teleport"
+				angles "0 270 0"} }
+
 
 //Trav|Edt - impulse to block peeps from putting props in vent to block players
 		create {classname "func_clip_vphysics"
@@ -317,7 +340,13 @@ d2_prison_06
 		create {classname "logic_auto"
 			values {spawnflags "1"
 				OnMapSpawn "elevator_trigger_go_up_1,AddOutput,OnTrigger syn_spawn_manager:SetCheckpoint:syn_spawn_player_2:0:-1,0,-1"
-				OnMapSpawn "elevator_trigger_go_up_1,AddOutput,OnTrigger syn_spawn_manager:MovePlayers:syn_spawn_player_2:0:-1,0,-1"} }
+				OnMapSpawn "elevator_trigger_go_up_1,AddOutput,OnTrigger syn_spawn_manager:TeleportPlayers:syn_spawn_player_2_teleport:0:-1,0.1,-1"} }
+				
+		
+		create {classname "info_teleport_destination"
+			origin "1557.90 704.46 -670"
+			values {targetname "syn_spawn_player_2_teleport"
+				angles "0 0 0"} }
 
 				//"OnTrigger" "syn_spawn_manager,SetCheckpoint,syn_spawn_player_2,0,-1" //delay def 1
 //Trav|Edt - remove moveplayers delay... dunno why its here
@@ -413,9 +442,31 @@ d2_prison_06
 				"OnTrigger" "lcs_np_cell02,Start,,0.1,-1"
 				OnTrigger "lcs_np_cell02,Resume,,15,-1"//failsafe for alyx getting stuck
 				"OnTrigger" "lcs_np_cell01b,Cancel,,0,-1"
+				OnTrigger "syn_spawn_manager,TeleportPlayers,syn_spawn_player_5_teleport,0.1,-1"
+				OnTrigger "syn_spawn_manager,SetCheckpoint,syn_spawn_player_5,0,-1"
 
 			//	"OnTrigger" "introom_door_1,SetAnimation,close,0,-1"
 			//	"OnTrigger" "pClip_introom_door_1,Enable,,0,-1"
+			}
+		}
+		
+
+		create {classname "info_teleport_destination"
+			origin "500 88 30"
+			values {targetname "syn_spawn_player_5_teleport"
+				angles "0 0 0"} }
+				
+
+		"create"
+		{
+			"classname" "trigger_once"
+			"origin" "960 416 -128"
+			"values"
+			{
+				"model" "*96"
+				"spawnflags" "1"
+				OnTrigger "syn_spawn_manager,SetCheckpoint,syn_spawn_player_6,0,-1"
+				OnTrigger "syn_spawn_manager,MovePlayers,syn_spawn_player_6,0.1,-1"
 			}
 		}
 
@@ -447,12 +498,12 @@ d2_prison_06
 //Trav|Edt - simplify above
 		//edit {targetname "door_controlroom_1" values {targetname "syn_door_controlroom_1"} }
 //why didnt that work? ^^
-		create {classname "logic_relay"
-			values {//spawnflags "0"
-				targetname "logic_alyx_EMP_3"
-				OnSpawn "door_controlroom_1,AddOutput,targetname syn_door_controlroom_1,0,-1"
-				OnTrigger "syn_door_controlroom_1,UnLock,,1.5,-1"
-				OnTrigger "syn_door_controlroom_1,Open,,1.75,-1"} }
+		// create {classname "logic_relay"
+			// values {//spawnflags "0"
+				// targetname "logic_alyx_EMP_3"
+				// OnSpawn "door_controlroom_1,AddOutput,targetname syn_door_controlroom_1,0,-1"
+				// OnTrigger "syn_door_controlroom_1,UnLock,,1.5,-1"
+				// OnTrigger "syn_door_controlroom_1,Open,,1.75,-1"} }
 
 		// do not close the gate
 		"delete" { "classname" "trigger_multiple" "origin" "512 -992 36" }
