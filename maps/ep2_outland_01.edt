@@ -3,7 +3,6 @@ ep2_outland_01
 	console
 	{
 		sv_test_scripted_sequences 1 // hotfix for alyx getting stuck
-		sv_allow_stuck 0
 	}
 	entity
 	{

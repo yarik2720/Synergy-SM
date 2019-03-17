@@ -111,13 +111,6 @@ ep1_c17_06
 				solid "6"
 				DisableShadows "1"
 				rendermode "10"} }
-		create {classname "syn_transition_wall" 
-			origin "11616 8459.07 -600" 
-			values {
-				angles "0 90 0"
-				solid "6"
-				DisableShadows "1"
-				rendermode "10"} }
 				
 //Trav|Edt - no rpgs
 	//	create {classname "trigger_multiple"
