@@ -116,6 +116,24 @@ ep2_outland_06
 				speed "400"
 				pushdir "0 -90 0"} }
 				
+		edit {"targetname" "trigger_killPlayer02" values 
+			{
+				damagecap "2000"
+				damage "10000"
+			}
+		}
+		edit {"targetname" "trigger_killPlayer01" values 
+			{
+				damagecap "2000"
+				damage "10000"
+			}
+		}
+		edit {"targetname" "trigger_killPlayer00" values 
+			{
+				damagecap "2000"
+				damage "10000"
+			}
+		}
 //Trav|Edt - teleport players down, so they cannot stay with alyx, and set checkpoint
 		create {classname "trigger_once"
 			origin "256 416 828"
