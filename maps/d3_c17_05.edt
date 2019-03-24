@@ -238,7 +238,7 @@ d3_c17_05
 
 //Trav|Edt - autirush
 		create {classname "trigger_coop"
-			origin "2527.5 -3622.12 -68"
+			origin "2530 -3622.12 -68"
 			values {model "*28"
 				spawnflags "1"
 				//StartDisabled "1"

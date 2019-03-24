@@ -147,7 +147,7 @@ d3_c17_06b
 
 //Trav|Edt - autirush
 		create {classname "trigger_coop"
-			origin "5240 1488 186.5"
+			origin "5440 1495 240"
 			values {model "*3"
 				spawnflags "1"
 				targetname "syn_antirush_coop"

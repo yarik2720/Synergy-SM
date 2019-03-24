@@ -57,6 +57,9 @@ d3_c17_13
 		create {classname "info_player_coop" origin "5020.53 -3099.43 0.03"
 			values {angles "0 90 0" targetname "syn_spawn_player_1"} }
 
+		create {classname "info_player_coop" origin "6251 -1461 30"
+			values {angles "0 315 0" targetname "syn_spawn_player_2" StartDisabled "1"} }
+
 		create {classname "info_global_settings"
 			values {IsVehicleMap "0" targetname "syn_global_settings"} }
 
@@ -103,6 +106,67 @@ d3_c17_13
 				fogcolor2 "131 180 180"
 				fogdir "90 0 0"} }
 
+//modi: teleport players before striders move wall
+		create {classname "trigger_once"
+			origin "0 0 0"
+			values {model "*35"
+				spawnflags "1"
+				OnTrigger "syn_spawn_manager,SetCheckpoint,syn_spawn_player_2,0,-1"
+				OnTrigger "syn_spawn_manager,MovePlayers,,0.1,-1"} }
+
+//Nocona Fixes - Killing strider prevents progression - https://gitlab.com/SynergyMod/Synergy/issues/6
+		
+		"create"
+		{
+			"classname" "logic_auto"
+			"origin" "0 0 0"
+			"values"
+			{
+				"OnMapSpawn" "strider1_start_maker,addoutput,OnSpawnNPC nocona_strider1_config:Trigger::0:-1,0,-1"
+				"OnMapSpawn" "bigdestroy2_relay,addoutput,OnTrigger strider1:SetDamageFilter::0:-1,0,-1"
+				"OnMapSpawn" "bigdestroy2_relay,addoutput,OnTrigger nocona_failsafe_bigdestroy2_timer:Kill::0:-1,0,-1"
+				"OnMapSpawn" "bigdestroy2_relay,addoutput,OnTrigger !self:Kill::0:-1"
+			}
+		}
+		"create" //strider configure
+		{
+			"classname" "logic_relay"
+			"origin" "0 0 0"
+			"values"
+			{
+				"targetname" "nocona_strider1_config"
+				"OnTrigger" "strider1,SetDamageFilter,filter_strider1,1,-1"
+				"OnTrigger" "strider1,addoutput,OnDeath bigdestroy2_relay:Trigger::0:-1,1,-1"
+				"OnTrigger" "strider1_bigdestroy2_trigger,addoutput,OnTrigger nocona_failsafe_bigdestroy2_timer:Enable::0:-1,0,1"
+			}
+		}
+		"create" //timer
+		{
+			"classname" "logic_timer"
+			"origin" "176 976 -16"
+			"values"
+			{
+				"RefireTime" "60"
+				"spawnflags" "0"
+				"StartDisabled" "1"
+				"targetname" "nocona_failsafe_bigdestroy2_timer"
+				"UseRandomTime" "0"
+				"OnTimer" "strider1,SetDamageFilter,,0,-1"
+				"OnTimer" "!self,Kill,,0,-1"
+			}
+		}
+		//edit
+		//{
+		//	"targetname" "bigdestroy2_relay"
+		//	"values"
+		//	{
+		//		"spawnflags" "1"
+		//		"OnTrigger" "strider1,SetDamageFilter,,0,-1"
+		//		"OnTrigger" "nocona_failsafe_bigdestroy2_timer,Kill,,0,-1"
+		//	}
+		//}
+//End Nocona's Magic
+
 //Trav|Edt - teleport players and let dog drop combinewall part
 
 		create {classname "trigger_once"
@@ -118,7 +182,6 @@ d3_c17_13
 				spawnflags "1"
 				speed "450"
 				pushdir "0 -30 0"}}
-
 //End of Trav|Edt
 //Trav|EDt - no reason to start these automaticallyz
 		// clear some room for spawn
