@@ -160,7 +160,7 @@ ep1_c17_01
 
 		
 //make fire deal more damage
-		edit {targetname "hellskitchen_hurtbrush_1" values {"damage" "1000" "damagecap" "1000"} }
+		edit {targetname "hellskitchen_hurtbrush_1" values {"damage" "10000" "damagecap" "10000"} }
 
 //End of Trav|Edt
 
