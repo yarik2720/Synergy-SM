@@ -35,13 +35,16 @@ ep1_citadel_01
 //Intro
 		create {classname "info_player_coop" origin "-6306.06 6654.31 2648.03"
 			values {angles "0 270 0" targetname "syn_spawn_player_1"} }
+//Stalkers Area
+		create {classname "info_player_coop" origin "-4800 7750 2550"
+			values {angles "0 270 0" targetname "syn_spawn_player_1_1" StartDisabled "1"} }
 //Advisor Area
 		create {classname "info_player_coop" origin "-5016 1656 2464"
 			values {angles "0 315 0" targetname "syn_spawn_player_2" StartDisabled "1"} }
 //Before Advisor Area
 		create {classname "info_player_coop" origin "-4871 5178 2656"
 			values {angles "0 315 0" targetname "syn_spawn_player_2_1" StartDisabled "1"} }
-//Rollermine Area
+//Weapon Strip Area
 		create {classname "info_player_coop" origin "-2733 1361 2468"
 			values {angles "0 0 0" targetname "syn_spawn_player_3" StartDisabled "1"} }
 
@@ -117,6 +120,7 @@ ep1_citadel_01
 				"model" "*16"
 				"spawnflags" "1"
 				"OnTrigger" "syn_spawn_manager,MovePlayers,,0.1,-1"
+				"OnTrigger" "syn_spawn_manager,SetCheckPoint,syn_spawn_player_1_1,0,-1"
 				"OnTrigger" "follow_alyx,Activate,,0,-1"
 			}
 		}
@@ -143,23 +147,36 @@ ep1_citadel_01
 				"OnTrigger" "follow_alyx,Activate,,0,-1"
 			}
 		}
+		//modi: don't stop alyx scenarios on player fall
+		delete {classname "trigger_once" origin "-3584 6384 2384"}
+		delete {classname "trigger_once" origin "-4640 5018 2480"}
 
-//TODO: use trigger_coop
-		// do not close rollertraining door
-		delete { targetname "counter_rollerdoor_close" }
-		create { classname "math_counter" origin "-4585 7507.29 2593.99"
-			values {
-				"targetname" "counter_rollerdoor_close"
-				"max" "2"
-				"min" "0"
-				"startvalue" "0"
-			//	"OnHitMax" "door_rollertraining,SetAnimation,idle_close,5,-1"
-			//	"OnHitMax" "door_rollertraining,SetAnimation,close,0,-1"
-			//	"OnHitMax" "trigger_player_closedoor,Kill,,0,-1"
-			//	"OnHitMax" "clip_rollerdoor,Enable,,0,-1"
-				"OnHitMax" "clip_rollerdoor,Kill,,5,-1"
+//close dat door
+		create
+		{
+			"classname" "logic_auto"
+			"origin" "0 0 0"
+			"values"
+			{
+				"OnMapSpawn" "lcs_al_citadel_01_rollertraining_01,addoutput,OnStart counter_rollerdoor_close:Enable::0:-1,0,-1"
 			}
 		}
+
+		delete { targetname "counter_rollerdoor_close" }
+		create {classname "trigger_coop"
+			origin "-4792 7696 2648"
+			values {model "*16"
+				spawnflags "1"
+				StartDisabled "1"
+				targetname "counter_rollerdoor_close"
+				CountType "1"
+				PlayerValue "100"
+				OnPlayersIn "door_rollertraining,SetAnimation,idle_close,5,-1"
+				OnPlayersIn "door_rollertraining,SetAnimation,close,0,-1"
+				OnPlayersIn "trigger_player_closedoor,Kill,,0,-1"
+				OnPlayersIn "clip_rollerdoor,Enable,,0,-1"
+				OnPlayersIn "clip_rollerdoor,Kill,,5,-1"
+				} }
 
 		// activate a checkpoint during weapon strip
 		delete { classname "trigger_once" origin "-2658 1377 2576.86" }
