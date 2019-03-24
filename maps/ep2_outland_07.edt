@@ -256,6 +256,12 @@ ep2_outland_07
 				angles "0 90 0"
 				spawnflags "1"
 				damage "1000"} }
+				
+		create {classname "func_brush"
+			origin "-9617.21 -9392.74 430"
+			values {model "*120"
+				DisableShadows "1"
+				rendermode "10"} }
 
 				
 		// remove wonky triggers
