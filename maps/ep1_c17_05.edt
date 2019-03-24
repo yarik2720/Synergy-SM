@@ -136,6 +136,9 @@ ep1_c17_05
 //Intro
 		create {classname "info_player_coop" origin "9852 12341 -625"
 			values {angles "0 0 0" targetname "syn_spawn_player_1"} }
+//Barney Meeting
+		create {classname "info_player_coop" origin "10362 11829 -675"
+			values {angles "0 -130 0" targetname "syn_spawn_player_1_1" StartDisabled "1"} }
 
 		create {classname "info_global_settings"
 			values {targetname "syn_global_settings" IsVehicleMap "0"} }
@@ -164,6 +167,15 @@ ep1_c17_05
 			values {targetname "trav_crowbar_equip"
 				StartDisabled "1"
 				weapon_crowbar "1"} }
+
+		create { classname "trigger_once" origin "10176 11968 -641"
+			values {
+				"model" "*84"
+				"spawnflags" "1"
+				"OnTrigger" "syn_spawn_manager,MovePlayers,,0.2,-1"
+				"OnTrigger" "syn_spawn_manager,SetCheckPoint,syn_spawn_player_1_1,0,-1"
+			}
+		}
 //TODO: make him only killable via non-rpgs? (like in d3_c17_09
 //Trav|Edt - make sniper harder
 		delete {targetname "sniper"}
