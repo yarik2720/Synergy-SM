@@ -373,19 +373,22 @@ ep2_outland_02
 			values {spawnflags "8"
 				angles "0 90 90"
 				model "models/props_debris/wood_board05a.mdl"
-				health "19999"} }
+				health "99999"
+				targetname "syn_end_boards"} }
 
 		create {classname "prop_physics_override" origin "-4048 -9554 219"
 			values {spawnflags "8"
 				angles "0.646857 86.9149 -104.986"
 				model "models/props_debris/wood_board05a.mdl"
-				health "19999"} }
+				health "99999"
+				targetname "syn_end_boards"} }
 
 		create {classname "prop_physics_override" origin "-4049 -9558 178"
 			values {spawnflags "8"
 				angles "0 86.5 90"
 				model "models/props_debris/wood_board05a.mdl"
-				health "19999"} }
+				health "99999"
+				targetname "syn_end_boards"} }
 
 	//	edit {classname "prop_physics" origin "-4049 -9554 250" values {classname "prop_physics_override" spawnflags "8"} }
 	//	edit {classname "prop_physics" origin "-4048 -9554 219" values {classname "prop_physics_override" spawnflags "8"} }
