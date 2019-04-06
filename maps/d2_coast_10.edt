@@ -148,7 +148,7 @@ d2_coast_10
 			values {model "*121"
 				spawnflags "2"
 				filtername "trav_filter_gunship"
-				OnTrigger "trav_trigger_lighthousedoor,Enable,-1,60,-1" } }
+				OnTrigger "trav_trigger_lighthousedoor,Enable,-1,1,-1" } }
 
 		create {classname "filter_activator_class"
 			values {targetname "trav_filter_gunship"
@@ -248,14 +248,22 @@ d2_coast_10
 			values {targetname "syn_teleport_stragglers_destination" angles "0 0 0"} }
 
 //Trav|Edt - Add a wave of combine
+
+		create {classname "npc_combine_s"
+			origin "4640 840 924"
+			values {spawnflags "2572"
+				targetname "modi_hoise_combine2"
+				hintgroup "cliff_shooter"
+				squadname "squad_modi_combine2"
+				additionalequipment "weapon_ar2" } }
+				
 		create {classname "npc_template_maker"
 			origin "4640 840 924"
 			values {spawnflags "128"
 				//angles " 0 0 0"
 				targetname "syn_vint_trav_maker_combine1"
 				StartDisabled "1"
-				NPCTargetname "trav_combine1"
-				//TemplateName "road_soldier_3"
+				TemplateName "modi_hoise_combine2"
 				MaxNPCCount "8"//12
 				SpawnFrequency "3"
 				MaxLiveChildren "8"
@@ -267,7 +275,7 @@ d2_coast_10
 		create {classname "aiscripted_schedule"
 			values {spawnflags "4"
 				targetname "trav_aiscript_sched_combine1"
-				m_iszEntity "trav_combine1"
+				m_iszEntity "modi_hoise_combine2"
 				schedule "2"
 				goalent "!player"} }
 
