@@ -96,6 +96,41 @@ ep1_c17_01
 				spawnflags "2"
 				targetname "syn_bouncyvatorness"
 				rendermode "10"} }
+				
+//modi - fix crank locking
+//synvint - modi: idk why it uses on d1_canals_05
+		create {classname "logic_relay"
+			values {spawnflags "1"
+			targetname "_syn_vint"
+				OnTrigger "button_crank_a,AddOutput,spawnflags 1153,0,-1"
+				OnTrigger "synvint_gatecontroller,CancelPending,,1,-1"} }
+				
+		create {classname "logic_relay"
+			values {
+				targetname "synvint_gatecontroller"
+				OnSpawn "button_crank_a,AddOutput,OnPressed !self:SetPosition:1:0.1:-1,5,-1"
+				OnSpawn "button_crank_a,AddOutput,OnPressed !self:Lock::0:-1,5,-1"
+				OnSpawn "button_crank,AddOutput,OnPressed !self:SetPosition:1:0.1:-1,5,-1"
+				OnSpawn "button_crank,AddOutput,OnPressed !self:Lock::0:-1,5,-1"} }
+		edit {
+			targetname "button_crank_a" 
+			values {
+				spawnflags "1185"
+				speed "140"
+			}
+		}
+		edit {
+			targetname "physbox_crank_beans"
+			values {
+				OnPhysGunDrop "trigger_crank*,Enable,,0,-1"
+			}
+		}
+		edit {
+			targetname "trigger_crank"
+			values {
+				StartDisabled "0"
+			}
+		}
 //for trans
 		create {classname "logic_auto"
 			values {spawnflags "1"
