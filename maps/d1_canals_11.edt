@@ -49,10 +49,26 @@ d1_canals_11
 				OnMapSpawn "hopper_physics_trigger,AddOutput,OnTrigger syn_enable_vehiclespawn:Add:1:0:1,0,-1"
 				OnMapSpawn "lock_lever_button,AddOutput,OnPressed syn_enable_vehiclespawn:Add:1:0:1,0,-1"} }
 
-		create {classname"math_counter"
+		create {classname "math_counter"
 			values {targetname "syn_enable_vehiclespawn"
 				max "2"
-				OnHitMax "syn_spawn_vehicle_1,Enable,,0,-1"} }
+				OnHitMax "syn_spawn_vehicle_1,Enable,,0,-1"
+				OnHitMax "modi_antiblock_push,Enable,,0,-1"} }
+				
+		create {
+			classname "trigger_push"
+			origin "8869 7925 -890"
+			values {
+				targetname "modi_antiblock_push"
+				StartDisabled "1"
+				model "*55"
+				angles "0 0 90"
+				parentname "ramp"
+				spawnflags "1"
+				pushdir "0 0 0"
+				speed "450"
+			}
+		}
 
 //--Starting Items--
 		create {classname "info_player_equip"
@@ -166,14 +182,14 @@ d1_canals_11
 		delete {classname "trigger_once" origin "7477.99 4867.84 -924"}
 //AR
 		create {classname "trigger_coop"
-			origin "7744 4896 -928" //7808 4864 -928
-			values {model "*127"//GBMdl
+			origin "6935 4896 -892" //7808 4864 -928
+			values {model "*52"//GBMdl
 				spawnflags "1"
 				//StartDisabled "1"
 				//targetname "syn_antirush_coop"
 				CountType "1"
 				UseHUD "1"
-				PlayerValue "50"//66//75
+				PlayerValue "37"//66//75
 				wait "1.5"
 				OnTrigger "syn_antirush_text,Display,,1,-1"
 				OnPlayersIn "!self,Disable,,1,1"
@@ -195,6 +211,20 @@ d1_canals_11
 				fadeout "1.25"
 				holdtime "2"
 				fxtime "0.25"} }
+				
+						
+		create {
+			classname "trigger_push"
+			origin "6740 4926.5 -804"
+			values {
+				model "*119"
+				angles "0 0 0"
+				parentname "door_guncave_entrance"
+				spawnflags "1"
+				pushdir "0 0 0"
+				speed "450"
+			}
+		}
 
 //--Extra-
 //Trav|Edt - add second heli (test)
@@ -291,8 +321,8 @@ d1_canals_11
 
 //Trav|Edt - Auti-rush
 		create {classname "trigger_coop"
-			origin "-9934 -2570 -944"
-			values {model "*134"
+			origin "-11520 -1376 -872"
+			values {model "*52"
 				spawnflags "1"
 				//StartDisabled "1"
 				targetname "syn_antirush_coop"
