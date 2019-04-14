@@ -166,24 +166,36 @@ ep2_outland_04
 		create {classname "filter_multi"
 			values {targetname "trav_train_filter"
 				FilterType "1"
+				Negated "0"
 				Filter01 "trav_train_filter1"
 				Filter02 "trav_train_filter2"
 				Filter03 "trav_train_filter3"} }
 
 		create {classname "filter_activator_class"
 			values {targetname "trav_train_filter1"
-				Negated "0"
 				filterclass "prop_physics"} }
 //todo: fix filtering dropped weapons and healthkits
 		create {classname "filter_activator_class"
 			values {targetname "trav_train_filter2"
-				Negated "0"
-				filterclass "item_"} }
+				filterclass "item_*"} }
 
 		create {classname "filter_activator_class"
 			values {targetname "trav_train_filter3"
-				Negated "0"
 				filterclass "item_health_drop"} }
+				
+//fix vort position on elevator
+		edit {
+			targetname "vort_standOnElevator_to_ride_down"
+			values {
+				origin "4925 -1632 384"
+			}
+		}
+		edit {
+			targetname "vort_standOnElevator_to_exit"
+			values {
+				origin "4925 -1632 384"
+			}
+		}
 //keep players here until guard finishes
 		edit {targetname "guard_exit_floor_board" values {classname "prop_physics_override"} }
 
