@@ -87,8 +87,9 @@ ep2_outland_03
 				OnTrigger "syn_spawn_manager,MovePlayers,,0,-1"} }
 
 //Trav|Edt - move back vort-generator trigger for easier initiation
-		edit {targetname "exit_gate_door_trigger" values {origin "1008 -4934.5 -863.49"} }//DEF-O 1378 -4933.5 -863.49
-
+		edit {targetname "exit_gate_door_trigger" values {origin "1008 -4934.5 -863.49" OnEndTouch ""} }//DEF-O 1378 -4933.5 -863.49
+//modi make vort-generator quicker
+		edit {targetname "vort_exit_generator_trigger" values {origin "1008 -4933.5 -910.49"} }//def 1382.5 -4933.5 -910.49
 //End of Trav|Edt
 
 		// ----- level changes -----
