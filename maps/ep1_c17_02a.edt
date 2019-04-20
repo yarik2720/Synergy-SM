@@ -72,7 +72,7 @@ ep1_c17_02a
 				//StartDisabled "1"
 				filtername "syn_new_weapon_filter"
 				OnTrigger "syn_new_weapons,Enable,,0,1"
-				OnStartTouch "syn_new_weapons,EquipPlayer,,0,-1"
+				OnStartTouch "syn_new_weapons,EquipAllPlayers,,0,-1"
 				OnStartTouch "!activator,AddOutput,targetname syn_ep1_c17_02a_got_new_weapons,0.1,-1"} }
 		
 		create {classname "point_teleport"
