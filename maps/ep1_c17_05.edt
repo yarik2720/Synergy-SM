@@ -199,6 +199,13 @@ ep1_c17_05
 		create {classname "logic_auto"
 			values {spawnflags "1"
 				OnMapSpawn "door_rollertraining,AddOutput,targetname syn_door_rollertraining,5,-1"} }
+				
+//changelevel after 800 seconds if there is no progression				
+//todo: remove changinglevel after another fix appears
+		create {classname "logic_auto"
+			values {spawnflags "1"
+				OnMapSpawn "theEndCmd,Command,changelevel ep1 ep1_c17_06,800,-1"} }
+		create { classname "point_servercommand" values { targetname "theEndCmd" } }
 
 //Trav|Edt - remove trigger_serverragdoll
 		delete {classname "trigger_serverragdoll"}
