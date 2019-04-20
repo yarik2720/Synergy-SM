@@ -62,7 +62,9 @@ ep1_citadel_01
 				targetname "syn_checkpoint_01"
 				//StartDisabled "1"
 				OnTrigger "syn_spawn_manager,MovePlayers,,0.1,-1"
-				OnTrigger "syn_spawn_manager,SetCheckPoint,syn_spawn_player_2,0,-1"} }
+				OnTrigger "syn_spawn_manager,SetCheckPoint,syn_spawn_player_2,0,-1"
+				OnTrigger "follow_alyx,Activate,,0,-1"
+				OnTrigger "syn_teleport_alyx_cit01,Teleport,,0,-1"} }
 
 		// create {classname "logic_auto"
 			// values {spawnflags "1"
@@ -137,8 +139,16 @@ ep1_citadel_01
 				"model" "*225"
 				"spawnflags" "1"
 				"OnTrigger" "syn_spawn_manager,MovePlayers,syn_spawn_player_2_1,0,-1"
-				"OnTrigger" "follow_alyx,Activate,,0,-1"
+				"OnTrigger" "follow_alyx,Activate,,0.1,-1"
 			}
+		}
+		create {classname "point_teleport"
+			origin "-5223 1460 2620"
+			values {
+				targetname "syn_teleport_alyx_cit01"
+				angles "0 180 0"
+				target "alyx"
+			} 
 		}
 		create { classname "trigger_once" origin "-5184 2880 2640"
 			values {
