@@ -40,6 +40,8 @@ ep1_citadel_02b
 
 //Trav|Edt - disable fading on player fall
 		delete {classname "trigger_once" origin "3008 4392 -8796"}
+		
+		delete {classname "logic_autosave" targetname "citadel_autosave_elevshaft1"}
 
 //Trav|Edt - hurt players who block lift
 		create {classname "logic_auto"
