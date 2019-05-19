@@ -51,6 +51,8 @@ ep1_c17_00a
 		edit {targetname "logic_timer_elevator_start"
 			values {LowerRandomBound "120"//79
 				UpperRandomBound "121"} }//80
+				
+		delete {classname "func_brush" origin "4508 3580 558"}
 
 //Trav|Edt - failsafe for alyx spazzing out
 		create {classname "logic_auto"
