@@ -137,6 +137,13 @@ ep2_outland_04
 				damage "10000"
 				targetname "syn_elevator_fall"} }
 				
+		create {classname "trigger_weapon_strip"
+			origin "4990 -1650 -280"
+			values {model "*55"
+				KillWeapons "1"
+				spawnflags "1"
+				targetname "syn_elevator_fall"} }
+				
 		create {classname "trigger_hurt"
 			origin "4930 -1610 366"
 			values {model "*169"
@@ -181,7 +188,7 @@ ep2_outland_04
 
 		create {classname "filter_activator_class"
 			values {targetname "trav_train_filter3"
-				filterclass "item_health_drop"} }
+				filterclass "weapon_*"} }
 				
 //fix vort position on elevator
 		edit {
