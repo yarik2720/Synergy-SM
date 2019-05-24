@@ -55,11 +55,22 @@ ep1_c17_00a
 		delete {classname "func_brush" origin "4508 3580 558"}
 
 //Trav|Edt - failsafe for alyx spazzing out
+		delete {classname "prop_physics" origin "3149.5 3266.34 460.235"}
+		create {classname "prop_physics_override" origin "3149.5 3266.34 460.235"
+			values {spawnflags "8"
+				angles "-0.669866 0.025724 -89.9889"
+				model "models/props_debris/wood_board03a.mdl"
+				health "99999"
+				targetname "bar"
+				OnBreak "bar_rl,Trigger,,0,-1"} }
+		
 		create {classname "logic_auto"
 			values {spawnflags "1"
 				OnMapSpawn "trigger_elevator_player,AddOutput,OnTrigger npc_template_maker:Kill::0:-1,0,1"
 				OnMapSpawn "trigger_elevator_player,AddOutput,OnTrigger syn_teleport_alyx_relay:Trigger::0:-1,0,1"
-				OnMapSpawn "trigger_elevator_alyx,AddOutput,OnTrigger syn_teleport_alyx:CancelPending::0:-1,0,1"} }
+				OnMapSpawn "trigger_elevator_alyx,AddOutput,OnTrigger syn_teleport_alyx:CancelPending::0:-1,0,1"
+				OnMapSpawn "lcs_elevator_00a,AddOutput,OnStart bar:SetHealth:10:0:-1,0,1"
+				OnMapSpawn "lcs_elevator_00a,AddOutput,OnStart bar:EnableMotion::0:-1,0,1"} }
 
 		create {classname "logic_relay"
 			values {targetname "syn_teleport_alyx_relay"
