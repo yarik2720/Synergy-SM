@@ -238,7 +238,7 @@ ep1_c17_00a
 			values {
 				"targetname" "player_elev_filter"
 				"filterclass" "player"
-				"Negated" "Allow entities that match criteria"
+				"Negated" "0"
 				"OnPass" "trigger_elevator_start,,,0,-1"
 			}
 		}
@@ -261,7 +261,7 @@ ep1_c17_00a
 				"StartDisabled" "0"
 				"OnStartTouch" "counter_elevator,Add,1,0,-1"
 				"OnEndTouch" "counter_elevator,Subtract,1,0,-1"
-				"OnStartTouch" "clip_alyx_inelev,//Enable,,0,1"
+				//"OnStartTouch" "clip_alyx_inelev,//Enable,,0,1"
 				"OnStartTouch" "compare_lcs,SetValue,1,0,-1"
 				"OnStartTouch" "alyx,SetLightingOriginHack,relative_elevator_lighting,0,1"
 
@@ -282,7 +282,7 @@ ep1_c17_00a
 				"OnHitMax" "ele_door_B_R,Close,,0,1"
 				"OnHitMax" "prop_elevatordoor_bottom_1,SetAnimation,close,0,1"
 				"OnHitMax" "ai_sched_final wave,StartSchedule,,0,-1"
-				"OnHitMax" "player_elev_clip,Enable,,0,-1"
+				//"OnHitMax" "player_elev_clip,Enable,,0,-1"
 				"OnHitMax" "lcs_elevator_05,Resume,,0.01,1"
 				"OnHitMax" "alyx,StartScripting,,0,1"
 				"OnHitMax" "compare_lcs,SetValueCompare,2,1,-1"
