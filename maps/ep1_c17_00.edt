@@ -24,41 +24,6 @@ ep1_c17_00
 				ammo_pistol			"54"
 				ammo_buckshot		"12"
 			} }
-			
-		//intro text
-		create {classname "game_text"
-			values {spawnflags "0"
-				targetname "text_chapter"
-				message "episodic_Chapter3_Title"
-				effect "2"
-				x "-1"
-				y "0.60"
-				color "100 100 100"
-				color2 "240 110 0"
-				fadein "0.03"
-				fadeout "1.25"
-				holdtime "7"
-				fxtime "0.35"} }
-		create {
-			classname "trigger_multiple"
-			"origin" "4642 -5898.2 -44.5"
-			values {
-				model "*8"
-				spawnflags "1"
-				filtername "syn_plyonce"
-				OnTrigger "text_chapter,Display,,1,-1"
-				OnTrigger "!activator,AddOutput,targetname gotchapter,0,-1"
-			}
-		}
-		create {
-			classname "filter_activator_name" 
-			values {
-				targetname "syn_plyonce" 
-				filtername "gotchapter" 
-				filtertype "0" 
-				Negated "1"
-			} 
-		}
 
 		create {classname "trigger_multiple"
 			origin "4294.5 -2819 -99"// 4409.5 -2691 -99

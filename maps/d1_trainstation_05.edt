@@ -10,41 +10,6 @@ d1_trainstation_05
 		edit {targetname "lamarr_break_tech_1" values {spawnflags "519"} }
 		edit {targetname "lamarr_break_grate_1" values {spawnflags "36865"} }
 			
-		//intro text
-		create {classname "game_text"
-			values {spawnflags "1"
-				targetname "text_chapter"
-				message "HL2_Chapter2_Title"
-				effect "2"
-				x "-1"
-				y "0.60"
-				color "100 100 100"
-				color2 "240 110 0"
-				fadein "0.03"
-				fadeout "1.25"
-				holdtime "7"
-				fxtime "0.35"} }
-		create {
-			classname "trigger_multiple"
-			"origin" "-5627 -863 128"
-			values {
-				model "*33"
-				spawnflags "1"
-				filtername "syn_plyonce"
-				OnTrigger "text_chapter,Display,,1,-1"
-				OnTrigger "!activator,AddOutput,targetname gotchapter,0,-1"
-			}
-		}
-		create {
-			classname "filter_activator_name" 
-			values {
-				targetname "syn_plyonce" 
-				filtername "gotchapter" 
-				filtertype "0" 
-				Negated "1"
-			} 
-		}
-		
 		//Trav|Edt - make viewcontrol_ickycam fo all players
 		edit {targetname "viewcontrol_ickycam" values {edt_spawnflags "164"} }
 

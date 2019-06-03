@@ -13,41 +13,6 @@ d1_town_01
 				solid "6"
 				DisableShadows "1"} }
 			
-		//intro text
-		create {classname "game_text"
-			values {spawnflags "1"
-				targetname "text_chapter"
-				message "HL2_Chapter6_Title"
-				effect "2"
-				x "-1"
-				y "0.60"
-				color "100 100 100"
-				color2 "240 110 0"
-				fadein "0.03"
-				fadeout "1.25"
-				holdtime "7"
-				fxtime "0.35"} }
-		create {
-			classname "trigger_multiple"
-			"origin" "4513 -2666 -3703"
-			values {
-				model "*33"
-				spawnflags "1"
-				filtername "syn_plyonce"
-				OnTrigger "text_chapter,Display,,1,-1"
-				OnTrigger "!activator,AddOutput,targetname gotchapter,0,-1"
-			}
-		}
-		create {
-			classname "filter_activator_name" 
-			values {
-				targetname "syn_plyonce" 
-				filtername "gotchapter" 
-				filtertype "0" 
-				Negated "1"
-			} 
-		}
-
 	//	create {classname "light_dynamic" origin "4256.01 -2912 -3712"
 	//		values {_light "170 255 170"
 	//			brightness "1"

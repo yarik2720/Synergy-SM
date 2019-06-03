@@ -22,41 +22,6 @@ d1_canals_06
 				brightness "1"
 				distance "512"
 				style "12"} }
-			
-		//intro text
-		create {classname "game_text"
-			values {spawnflags "1"
-				targetname "text_chapter"
-				message "HL2_Chapter4_Title"
-				effect "2"
-				x "-1"
-				y "0.60"
-				color "100 100 100"
-				color2 "240 110 0"
-				fadein "0.03"
-				fadeout "1.25"
-				holdtime "7"
-				fxtime "0.35"} }
-		create {
-			classname "trigger_multiple"
-			"origin" "11000 9065 -168"
-			values {
-				model "*143"
-				spawnflags "1"
-				filtername "syn_plyonce"
-				OnTrigger "text_chapter,Display,,1,-1"
-				OnTrigger "!activator,AddOutput,targetname gotchapter,0,-1"
-			}
-		}
-		create {
-			classname "filter_activator_name" 
-			values {
-				targetname "syn_plyonce" 
-				filtername "gotchapter" 
-				filtertype "0" 
-				Negated "1"
-			} 
-		}
 
 	//	create {classname "trigger_push" origin "-64 -16 0"
 	//		values {model "*59"

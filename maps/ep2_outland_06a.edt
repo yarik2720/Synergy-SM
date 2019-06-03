@@ -32,41 +32,6 @@ ep2_outland_06a
 				//	ammo_slam		""
 				weapon_stunstick	"1"
 			} }
-			
-		//intro text
-		create {classname "game_text"
-			values {spawnflags "0"
-				targetname "text_chapter"
-				message "ep2_Chapter4_Title"
-				effect "2"
-				x "-1"
-				y "0.60"
-				color "100 100 100"
-				color2 "240 110 0"
-				fadein "0.03"
-				fadeout "1.25"
-				holdtime "7"
-				fxtime "0.35"} }
-		create {
-			classname "trigger_multiple"
-			"origin" "2639 1021 -2409"
-			values {
-				model "*67"
-				spawnflags "1"
-				filtername "syn_plyonce"
-				OnTrigger "text_chapter,Display,,1,-1"
-				OnTrigger "!activator,AddOutput,targetname gotchapter,0,-1"
-			}
-		}
-		create {
-			classname "filter_activator_name" 
-			values {
-				targetname "syn_plyonce" 
-				filtername "gotchapter" 
-				filtertype "0" 
-				Negated "1"
-			} 
-		}
 
 //--Spawns--
 		create {classname "info_spawn_manager"
