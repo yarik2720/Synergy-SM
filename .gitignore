@@ -10,6 +10,7 @@
 *.tmp
 *.vpk
 *.vbsp
+*.html
 
 //folders
 bin/
@@ -26,4 +27,3 @@ save/
 scripts/
 sound/
 workshop/
-*.html
