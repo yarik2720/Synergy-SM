@@ -101,6 +101,31 @@ d1_canals_06
 
 //delete acid hurt trig at intro
 	delete {classname "trigger_hurt" origin "12832 9088 -239"}
+	
+//modi: prevent vehicle spawn block				
+		create {classname "filter_activator_class"
+			values {targetname "modi_airboat_filer"
+				filterclass "prop_vehicle_airboat"} }
+				
+		create {classname "trigger_multiple" origin "12290 9150 -248.02"
+			values {model "*91"
+				spawnflags "72"
+				targetname "modi_spawn_antiblock"
+				filtername "modi_airboat_filer"
+				OnStartTouch "modi_player_remover,Disable,,0,-1"
+				OnEndTouch "modi_player_remover,Enable,,0,-1"} }
+
+		create {classname "trigger_hurt"
+			origin "12290 9150 -218.02"
+			values {model "*150"
+				angles "0 0 90"
+				spawnflags "1"
+				StartDisabled "0"
+				targetname "modi_player_remover"
+				damage "10"
+				damagecap "5"
+				damagetype "262144"} }
+//modi: end of editions
 
 //--Checkpoints--
 		create {classname "trigger_once"
