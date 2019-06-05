@@ -112,6 +112,53 @@ d1_canals_09
 				OnTrigger "syn_spawn_vehicle_2,Enable,,0,-1"} }
 
 //--Extra--
+	
+//modi: prevent vehicle spawn block				
+		create {classname "filter_activator_class"
+			values {targetname "modi_airboat_filer"
+				filterclass "prop_vehicle_airboat"} }
+				
+		create {classname "trigger_multiple" origin "7488 9920 -480.02"
+			values {model "*19"
+				angles "0 -90 45"
+				spawnflags "72"
+				targetname "modi_spawn_antiblock"
+				filtername "modi_airboat_filer"
+				OnStartTouch "modi_player_remover,Disable,,0,-1"
+				OnEndTouch "modi_player_remover,Enable,,0,-1"} }
+
+		create {classname "trigger_hurt"
+			origin "7488 9920 -480.02"
+			values {model "*19"
+				angles "0 -90 45"
+				spawnflags "1"
+				StartDisabled "0"
+				targetname "modi_player_remover"
+				damage "10"
+				damagecap "5"
+				damagetype "262144"} }
+				
+		create {classname "trigger_multiple" origin "7872 9920 -480.02"
+			values {model "*19"
+				angles "0 90 45"
+				spawnflags "72"
+				targetname "modi_spawn_antiblock2"
+				filtername "modi_airboat_filer"
+				OnStartTouch "modi_player_remover2,Disable,,0,-1"
+				OnEndTouch "modi_player_remover2,Enable,,0,-1"} }
+
+		create {classname "trigger_hurt"
+			origin "7872 9920 -480.02"
+			values {model "*19"
+				angles "0 90 45"
+				spawnflags "1"
+				StartDisabled "0"
+				targetname "modi_player_remover2"
+				damage "10"
+				damagecap "5"
+				damagetype "262144"} }
+//modi: end of editions
+
 //Trav|Edt - add second heli (test)
 		create {classname "npc_helicopter" origin "10256 12288 -25"
 			values {spawnflags "3408132"

@@ -153,6 +153,43 @@ d1_canals_12
 				OnTrigger "syn_endjump_pusher,Disable,,0,-1"} }
 
 //--Extra--
+	
+//modi: prevent vehicle spawn block				
+		create {classname "filter_activator_class"
+			values {targetname "modi_airboat_filer"
+				filterclass "prop_vehicle_airboat"} }
+				
+		create {classname "trigger_multiple" origin "11877.6 9601.4 551.98"
+			values {model "*107"
+				angles "90 90 0"
+				spawnflags "72"
+				targetname "modi_spawn_antiblock"
+				filtername "modi_airboat_filer"
+				OnStartTouch "modi_player_remover,Disable,,0,-1"
+				OnEndTouch "modi_player_remover,Enable,,0,-1"} }
+
+		create {classname "trigger_hurt"
+			origin "11847.6 9631.4 551.98"
+			values {model "*107"
+				angles "90 90 0"
+				spawnflags "1"
+				StartDisabled "0"
+				targetname "modi_player_remover"
+				damage "10"
+				damagecap "5"
+				damagetype "262144"} }
+
+		create {classname "trigger_hurt"
+			origin "11907.6 9631.4 551.98"
+			values {model "*107"
+				angles "90 90 0"
+				spawnflags "1"
+				StartDisabled "0"
+				targetname "modi_player_remover"
+				damage "10"
+				damagecap "5"
+				damagetype "262144"} }
+//modi: end of editions
 //Trav|Edt - prevent players from skiping barrelroll part
 		create {classname "func_vehicleclip"
 			origin "-3768 3168 608"
