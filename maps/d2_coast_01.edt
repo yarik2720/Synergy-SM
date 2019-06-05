@@ -77,6 +77,33 @@ d2_coast_01
 				StartDisabled "1"
 				OnTrigger "syn_spawn_manager,SetCheckpoint,syn_spawn_player_3,0,-1"} }
 //--Extra--
+	
+//modi: prevent vehicle spawn block				
+		create {classname "filter_activator_class"
+			values {targetname "modi_jeep_filer"
+				filterclass "prop_vehicle_*"} }
+				
+		create {classname "trigger_multiple" origin "-6995.95 -9792 560"
+			values {model "*26"
+				angles "0 0 0"
+				spawnflags "72"
+				targetname "modi_spawn_antiblock"
+				filtername "modi_jeep_filer"
+				OnStartTouch "modi_player_remover,Disable,,0,-1"
+				OnEndTouch "modi_player_remover,Enable,,0,-1"} }
+
+		create {classname "trigger_hurt"
+			origin "-6995.95 -9792 560"
+			values {model "*26"
+				angles "0 0 0"
+				spawnflags "1"
+				StartDisabled "1"
+				targetname "modi_player_remover"
+				damage "10"
+				damagecap "5"
+				damagetype "262144"} }
+//modi: end of editions
+
 
 //Trav|Edt - Doors: Open Only
 		edit {classname "prop_door_rotating" values {returndelay "-1"} }
