@@ -222,7 +222,18 @@ d1_canals_08
 				OnEndTouch "modi_player_remover,Enable,,0,-1"} }
 
 		create {classname "trigger_hurt"
-			origin "7592.31 -11315.3 -410"
+			origin "7572.31 -11305.3 -410"
+			values {model "*71"
+				angles "90 90 0"
+				spawnflags "1"
+				StartDisabled "0"
+				targetname "modi_player_remover"
+				damage "10"
+				damagecap "5"
+				damagetype "262144"} }
+
+		create {classname "trigger_hurt"
+			origin "7592.31 -11335.3 -410"
 			values {model "*71"
 				angles "90 90 0"
 				spawnflags "1"
