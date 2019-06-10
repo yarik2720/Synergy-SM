@@ -40,8 +40,6 @@ ep1_citadel_02b
 
 //Trav|Edt - disable fading on player fall
 		delete {classname "trigger_once" origin "3008 4392 -8796"}
-		
-		delete {classname "logic_autosave" targetname "citadel_autosave_elevshaft1"}
 
 //Trav|Edt - hurt players who block lift
 		create {classname "logic_auto"
@@ -76,6 +74,42 @@ ep1_citadel_02b
 			values {targetname "trav_teleport_players"
 				angles "0 180 0"
 				target "!player"} }
+				
+//delay autosaving
+		
+		delete {targetname "citadel_path_lift01_20"}
+		create 
+		{
+			classname "path_track"
+			origin "3264 4648 -1816"
+			values {
+				spawnflags "0"
+				orientationtype "1"
+				angles "0 0 0"
+				target "citadel_path_lift01_14"
+				targetname "citadel_path_lift01_20"
+				OnPass "citadel_train_lift01_1,SetSpeedReal,180,0,-1"
+				OnPass "alyx_elevator_movingfast_rl_1,Trigger,,0,-1"
+				OnPass "autosave_trigger,Enable,,5,-1"
+			}
+		}
+		
+		delete {targetname "citadel_path_lift01_18"}
+		create 
+		{
+			classname "path_track"
+			origin "3264 4648 168"
+			values {
+				spawnflags "0"
+				orientationtype "1"
+				angles "0 0 0"
+				target "citadel_path_lift01_12"
+				targetname "citadel_path_lift01_18"
+				classname "path_track"
+				OnPass "alyx_elevator_proceed_vcd_3,Start,,0,-1"
+				OnPass "autosave_trigger,enable,,5,-1"
+			}
+		}
 				
 //balimbanana fix
 		delete {targetname "entry_transition_door"}
