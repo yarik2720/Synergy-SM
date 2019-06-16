@@ -103,7 +103,24 @@ d1_trainstation_03
 				OnPlayersIn "!self,TeleportPlayersNotTouching,,0,1"
 				OnPlayersIn "trigger_PreRaid_Peeker_retreat,Trigger,1,0,1"// TODO remove flag
 				OnPlayersIn "trigger_rush_start,Trigger,,1,1"
+				OnPlayersIn "song25_Teleporter,PlaySound,,2,-1"
 				OnPlayersIn "!self,Disable,,0,1"
+			}
+		}
+		
+		create 
+		{
+			classname "ambient_generic"
+			values 
+			{
+				origin "-4078 -4488 442"
+				pitchstart "100"
+				pitch "100"
+				health "10"
+				message "song25" // HL2_song25_teleporter - Miscount Detected
+				targetname "song25_Teleporter"
+				spawnflags "49"
+				radius "1250"
 			}
 		}
 
