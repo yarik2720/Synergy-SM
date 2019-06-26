@@ -384,5 +384,133 @@ d2_coast_11
 
 //Trav|Edt - Functionality check
 		create {classname "logic_relay" values {targetname "trav_functionality_d2_coast_11"} }
+		//new
+		create {classname "prop_dynamic" origin "4480 6560 903.55"
+			values {model "models/synergy/tools/syn_transition.mdl"
+				targetname "syn_antirush_wall"
+				angles "0 255 0"
+				solid "6"
+				StartDisabled "1"
+				DisableShadows "1"} }
+		create {classname "prop_dynamic" origin "4480 6560 1220.55"
+			values {model "models/synergy/tools/syn_transition.mdl"
+				targetname "syn_antirush_wall"
+				angles "0 255 0"
+				solid "6"
+				StartDisabled "1"
+				DisableShadows "1"} }
+		create {classname "prop_dynamic" origin "4480 6560 1540.55"
+			values {model "models/synergy/tools/syn_transition.mdl"
+				targetname "syn_antirush_wall"
+				angles "0 255 0"
+				solid "6"
+				StartDisabled "1"
+				DisableShadows "1"} }
+		create {classname "prop_dynamic" origin "3744 6754 583.55"
+			values {model "models/synergy/tools/syn_transition.mdl"
+				targetname "syn_antirush_wall"
+				angles "0 255 0"
+				solid "6"
+				StartDisabled "1"
+				DisableShadows "1"} }
+		create {classname "prop_dynamic" origin "3744 6754 903.55"
+			values {model "models/synergy/tools/syn_transition.mdl"
+				targetname "syn_antirush_wall"
+				angles "0 255 0"
+				solid "6"
+				StartDisabled "1"
+				DisableShadows "1"} }
+		create {classname "prop_dynamic" origin "3744 6754 1223.55"
+			values {model "models/synergy/tools/syn_transition.mdl"
+				targetname "syn_antirush_wall"
+				angles "0 255 0"
+				solid "6"
+				StartDisabled "1"
+				DisableShadows "1"} }
+		create {classname "prop_dynamic" origin "3744 6754 1543.55"
+			values {model "models/synergy/tools/syn_transition.mdl"
+				targetname "syn_antirush_wall"
+				angles "0 255 0"
+				solid "6"
+				StartDisabled "1"
+				DisableShadows "1"} }
+				
+		create {classname "prop_dynamic" origin "5180 9909 740"
+			values {model "models/synergy/tools/syn_transition.mdl"
+				targetname "syn_antirush_nowall"
+				angles "0 0 0"
+				solid "6"
+				StartDisabled "1"
+				DisableShadows "1"} }
+		create {classname "prop_dynamic" origin "5180 9909 950"
+			values {model "models/synergy/tools/syn_transition.mdl"
+				targetname "syn_antirush_nowall"
+				angles "-45 0 0"
+				solid "6"
+				StartDisabled "1"
+				DisableShadows "1"} }
+				
+		create {classname "prop_dynamic" origin "-427 11925 545"
+			values {model "models/synergy/tools/syn_transition.mdl"
+				targetname "syn_antirush_nowall"
+				angles "0 0 0"
+				solid "6"
+				StartDisabled "1"
+				DisableShadows "1"} }
+		create {classname "prop_dynamic" origin "-417 11925 865"
+			values {model "models/synergy/tools/syn_transition.mdl"
+				targetname "syn_antirush_nowall"
+				angles "0 0 0"
+				solid "6"
+				StartDisabled "1"
+				DisableShadows "1"} }
+		create {classname "game_text"
+			values
+			{
+				targetname "skiptutorial"
+				message "If the bugbait is broken, press the button next to the gate"
+				x "-1"
+				y "0.60"
+				effect "2"
+				color "100 100 100"
+				color2 "240 110 0"
+				fadein "0.03"
+				fadeout "1.25"
+				holdtime "6.0"
+				spawnflags "1"
+				fxtime "0.75"
+			}
+		}
+		create {classname "trigger_once" origin "760 11800 125"
+			values
+			{
+				model "*37"
+				spawnflags "2"
+				OnTrigger "skiptutorial,Display,,1,-1"
+				OnTrigger "skipdoor,Unlock,,1,-1"
+				filtername "filter_npc_vortigaunt"
+			}
+		}
+		create {classname "func_button" origin "-404 12075 275"
+			values
+			{
+				spawnflags "3073"
+				sounds "1"
+				wait "3"
+				angles "0 -90 0"
+				DisableShadows "1"
+				targetname "skipdoor"
+				OnPressed "gate_mover_blocker,Disable,,0,-1"
+				OnPressed "gate_linear,Open,,0,-1"
+				OnPressed "!self,kill,,1,-1"
+			}
+		}
+		create {classname "prop_dynamic" origin "-405 12075 275"
+			values
+			{
+				model "models/props_lab/freightelevatorbutton.mdl"
+				angles "0 -5 0"
+			}
+		}
 	}
 }
