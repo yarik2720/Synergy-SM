@@ -267,8 +267,23 @@ ep1_c17_00a
 				"OnStartTouch" "compare_lcs,SetValue,1,0,-1"
 				"OnStartTouch" "alyx,SetLightingOriginHack,relative_elevator_lighting,0,1"
 
-				"OnStartTouch" "trigger_elevator_player,Enable,,0,-1"
-				"OnEndTouch" "trigger_elevator_player,Disable,,0,-1"
+				"OnStartTouch" "modi_enable_elevator_on_coop,Enable,,0,-1"
+				"OnEndTouch" "modi_enable_elevator_on_coop,Disable,,0,-1"
+			}
+		}
+		
+		create { classname "trigger_coop" origin "4644 3584 481.5"
+			values {
+				"model" "*13"
+				"wait" "1"
+				"targetname" "modi_enable_elevator_on_coop"
+				"StartDisabled" "1"
+				"spawnflags" "1"
+				CountType "1"
+				PlayerValue "50"
+				UseHud "1"
+				"OnPlayersIn" "counter_elevator,Add,1,0,-1"
+				"OnPlayersOut" "counter_elevator,Subtract,,0,1"
 			}
 		}
 
@@ -288,6 +303,8 @@ ep1_c17_00a
 				"OnHitMax" "lcs_elevator_05,Resume,,0.01,1"
 				"OnHitMax" "alyx,StartScripting,,0,1"
 				"OnHitMax" "compare_lcs,SetValueCompare,2,1,-1"
+				
+				"OnHitMax" "modi_enable_elevator_on_coop,Kill,0,1,-1"
 
 				"OnHitMax" "syn_spawn_manager,SetCheckPoint,syn_spawn_player_3,0,-1"
 				"OnHitMax" "syn_spawn_manager,MovePlayers,,0.05,-1"
