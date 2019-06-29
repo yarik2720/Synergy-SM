@@ -46,7 +46,16 @@ ep1_c17_00a
 			values {targetname "syn_global_settings" IsVehicleMap "0"} }
 
 //--Extra--
-
+//prevent blocking the exit valve after the first antlion encounter
+        edit {targetname "gate2_wheel" values {spawnflags "1185"} }
+        create {classname "logic_auto"
+            values
+            {
+                spawnflags "1"
+                OnMapSpawn "gate2_wheel,AddOutput,OnPressed !self:Lock::0:-1,0,-1"
+                OnMapSpawn "gate2_wheel,AddOutput,OnPressed !self:SetPosition:1:0:-1,0,-1"
+            }
+        }
 //Increase Zombie battle time
 		edit {targetname "logic_timer_elevator_start"
 			values {LowerRandomBound "120"//79
