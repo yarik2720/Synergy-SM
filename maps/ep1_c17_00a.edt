@@ -255,9 +255,18 @@ ep1_c17_00a
 		edit { targetname "trigger_elevator_player"
 			values {
 				"StartDisabled" "1"
-				"classname" "trigger_once"
+				"classname" "trigger_coop"
+				"target" "syn_elevatortp"
+				"filtername" ""
 			}
 		}
+		
+		create {classname "info_target" origin "4590 3575 -50"
+			values {
+				targetname "syn_elevatortp" angles "0 180 0" parentname "elevator_garage"
+			}
+		}
+		
 		delete { classname "func_brush" origin "4508 3580 558"}
 		delete { targetname "alyx_elev_clip" }
 
@@ -275,11 +284,11 @@ ep1_c17_00a
 				//"OnStartTouch" "clip_alyx_inelev,//Enable,,0,1"
 				"OnStartTouch" "compare_lcs,SetValue,1,0,-1"
 				"OnStartTouch" "alyx,SetLightingOriginHack,relative_elevator_lighting,0,1"
-				"OnStartTouch" "trigger_elevator_player,Enable,1,0,-1"
+				"OnStartTouch" "trigger_elevator_player,Enable,0,0,-1"
 				"OnEndTouch" "trigger_elevator_player,Disable,,0,1"
 				
 				"OnStartTouch" "syn_spawn_manager,SetCheckPoint,syn_spawn_player_3,0,-1"
-				"OnStartTouch" "syn_spawn_manager,MovePlayers,,0.05,-1"
+				"OnStartTouch" "trigger_elevator_player,TeleportPlayersNotTouching,,1.5,1"
 
 				// "OnStartTouch" "modi_enable_elevator_on_coop,Enable,,0,-1"
 				// "OnEndTouch" "modi_enable_elevator_on_coop,Disable,,0,-1"
@@ -296,8 +305,8 @@ ep1_c17_00a
 				// CountType "1"
 				// PlayerValue "50"
 				// UseHud "1"
-				// "OnPlayersIn" "trigger_elevator_player,Add,1,0,-1"
-				// "OnPlayersOut" "trigger_elevator_player,Subtract,,0,1"
+				// "OnPlayersIn" "counter_elevator,Add,1,0,-1"
+				// "OnPlayersOut" "counter_elevator,Subtract,,0,1"
 			// }
 		// }
 
