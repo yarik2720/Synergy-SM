@@ -149,8 +149,35 @@ d1_canals_02
 			values {model "*37"
 				spawnflags "1"
 				targetname "trav_antiskip_push"
-				pushdir "0 180 0"
+				pushdir "0 0 0"
 				speed "450"} }
+				
+		create {classname "trigger_hurt"
+			origin "330 241 -540"
+			values {model "*37"
+				angles "90 90 0"
+				spawnflags "1"
+				targetname "trav_antiskip_push"
+				damage "5000"
+				damagetype "32"} }
+				
+		create {classname "trigger_hurt"
+			origin "330 0 -540"
+			values {model "*37"
+				angles "90 90 0"
+				spawnflags "1"
+				targetname "trav_antiskip_push"
+				damage "5000"
+				damagetype "32"} }
+				
+		create {classname "trigger_hurt"
+			origin "220 -240 -540"
+			values {model "*37"
+				angles "90 0 0"
+				spawnflags "1"
+				targetname "trav_antiskip_push"
+				damage "5000"
+				damagetype "32"} }
 
 		create {classname "trigger_push"
 			origin "455 72 -740"
