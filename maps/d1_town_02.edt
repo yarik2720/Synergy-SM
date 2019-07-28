@@ -53,7 +53,7 @@ d1_town_02
 				speed "1000"
 				pushdir "0 90 0"} }
 				
-		create {classname "trigger_push" origin "-3847 -290 -3115"
+		create {classname "trigger_push" origin "-3847 -290 -3015"
 			values {model "*140" angles "0 0 0"
 				spawnflags "1"//65
 				speed "1000"
@@ -65,7 +65,7 @@ d1_town_02
 				Template01 "syn_antirush_wall_ally"
 				Template02 "syn_antirush_wall_ally_light"} }
 
-		create {classname "prop_dynamic" origin "-3408 -432 -3584"
+		create {classname "prop_dynamic" origin "-3408 -450 -3584"
 			values {model "models/synergy/tools/syn_transition.mdl"
 				angles "0 90 0"
 				targetname "syn_antirush_wall_ally"
@@ -176,6 +176,9 @@ d1_town_02
 
 		create {classname "info_player_coop" origin "-3920 -580 -3341"
 			values {angles "0 90 0" targetname "syn_spawn_player_3" StartDisabled "1"} }
+//after tram lever
+		create {classname "info_player_coop" origin "-4980 -760 -3200"
+			values {angles "0 90 0" targetname "syn_spawn_player_4" StartDisabled "1"} }
 
 		create {classname "info_global_settings"
 			values {IsVehicleMap "0" targetname "syn_global_settings"} }
@@ -657,8 +660,96 @@ d1_town_02
 				PlayerValue "50"
 				//OnStartTouch "churchtram_lever,Lock,,0,1"
 				OnPlayersIn "trav_churchtram_lever,UnLock,,0,1"
+				OnPlayersIn "syn_modi_antiskip,Kill,,0,1"
 				OnPlayersIn "!self,Disable,,1,1"} }
+				
+//modi - fix playing around with tram lever
+		delete {targetname "churchtram_up_relay"}
+		delete {targetname "churchtram_down_relay"}
+		create 
+		{
+			"classname" "logic_relay"
+			"origin" "-4320 1376 -2983"
+			values
+			{
+				"spawnflags" "0"
+				"targetname" "churchtram_up_relay"
+				"StartDisabled" "0"
+				"OnTrigger" "churchtram_tram,StartForward,,0,-1"
+				"OnTrigger" "churchtram_wheels_top2_spinner,StartBackward,,0,-1"
+				"OnTrigger" "churchtram_wheels_lower3_spinner,StartBackward,,0,-1"
+				"OnTrigger" "churchtram_wheels_top1_spinner,StartForward,,0,-1"
+				"OnTrigger" "churchtram_wheels_top3_spinner,StartBackward,,0,-1"
+				"OnTrigger" "churchtram_wheels_lower2_spinner,StartBackward,,0,-1"
+				"OnTrigger" "churchtram_wheels_lower1_spinner,StartForward,,0,-1"
+				"OnTrigger" "trav_churchtram_lever,Lock,,0,-1"
+				"OnTrigger" "bucket_wheels_wav,PlaySound,,0,-1"
+			}
+		}
+		create 
+		{
+			"classname" "logic_relay"
+			"origin" "-4352 1344 -2999"
+			values
+			{
+				"targetname" "churchtram_down_relay"
+				"StartDisabled" "0"
+				"OnTrigger" "monk_wait,Start,,0,-1"
+				"OnTrigger" "churchtram_wheels_top2_spinner,StartForward,,0,-1"
+				"OnTrigger" "churchtram_wheels_lower3_spinner,StartForward,,0,-1"
+				"OnTrigger" "churchtram_wheels_top1_spinner,StartBackward,,0,-1"
+				"OnTrigger" "churchtram_wheels_top3_spinner,StartForward,,0,-1"
+				"OnTrigger" "churchtram_wheels_lower2_spinner,StartForward,,0,-1"
+				"OnTrigger" "churchtram_wheels_lower1_spinner,StartBackward,,0,-1"
+				"OnTrigger" "trav_churchtram_lever,Lock,,0,-1"
+				"OnTrigger" "churchtram_tram,StartBackward,,0,-1"
+				"OnTrigger" "bucket_wheels_wav,PlaySound,,0,-1"
+				"OnTrigger" "monk_beginfollow_ss,BeginSequence,,10,-1"
+				"OnTrigger" "monk_wait,Pause,,1,-1"
+			}
+		}
 
+//modi - antiskip				
+		create 
+		{
+			classname "trigger_hurt"
+			origin "-4841 800 -3100"
+			values 
+			{
+				model "*105"
+				angles "0 0 0"
+				spawnflags "1"
+				targetname "syn_modi_antiskip"
+				damage "5000"
+				damagetype "32"
+			} 
+		}
+
+//modi - tp players after tram
+		create
+		{
+			"classname"	"trigger_once"
+			"origin"	"-4841 800 -3200"
+			"values"
+			{
+				"model"			"*105"
+				"spawnflags"	"1"
+				"StartDisabled"	"0"
+				"OnTrigger" 	"syn_spawn_manager,SetCheckPoint,syn_spawn_player_4,0,0"
+				"OnTrigger" 	"syn_spawn_manager,TeleportPlayers,syn_modi_teleport_aftertram,0.5,1"
+			}
+		}
+		create 
+		{
+			classname "info_teleport_destination"
+			origin "-4980 760 -3200"
+			values 
+			{
+				targetname "syn_modi_teleport_aftertram"
+				angles "0 90 0"
+			} 
+		}
+		
 //Trav|Edt - keep clip until cart is close
 		edit {targetname "churchyard_playerclip" values {targetname "syn_churchyard_playerclip"} }
 
