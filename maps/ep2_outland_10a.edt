@@ -81,7 +81,9 @@ ep2_outland_10a
 
 		create {classname "logic_auto"
 			values {spawnflags "1"
-				OnMapSpawn "alyx_approachdog,AddOutput,OnEndSequence syn_spawn_vehicle_2:Enable::20:-1,0,-1"} }
+				OnMapSpawn "alyx_approachdog,AddOutput,OnEndSequence syn_spawn_vehicle_2:Enable::20:-1,0,-1"
+				OnMapSpawn "ss_dog_gate,AddOutput,OnScriptEvent01 synvehiclemap:Trigger::0:-1,0,-1"} }
+		create {classname "logic_relay" values {targetname "synvehiclemap" OnTrigger "syn_global_settings,AddOutput,IsVehicleMap 1,0,-1"} }
 // teleport Alyx and car
 		create {classname "point_teleport"
 			origin "2296 -1991 -1830"
