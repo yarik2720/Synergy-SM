@@ -312,7 +312,7 @@ d1_town_02
 
 //Trav|Edt - kill players who jump down past elevator (fall not long enough for death and skip to end), add gman, add antirush props
 		create {classname "trigger_hurt"
-			origin "-3264 608 -3568"//-3208 672 -3480
+			origin "-3264 550 -3568"//-3208 672 -3480
 			values {model "*110"
 				spawnflags "1"
 				targetname "syn_vint_trav_trigger_hurt"
