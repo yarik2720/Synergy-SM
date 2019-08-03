@@ -661,6 +661,7 @@ d1_town_02
 				//OnStartTouch "churchtram_lever,Lock,,0,1"
 				OnPlayersIn "trav_churchtram_lever,UnLock,,0,1"
 				OnPlayersIn "syn_modi_antiskip,Kill,,0,1"
+				OnPlayersIn "syn_modi_checkpoint_gregory,Enable,,0,1"
 				OnPlayersIn "!self,Disable,,1,1"} }
 				
 //modi - fix playing around with tram lever
@@ -734,7 +735,8 @@ d1_town_02
 			{
 				"model"			"*105"
 				"spawnflags"	"1"
-				"StartDisabled"	"0"
+				"targetname"	"syn_modi_checkpoint_gregory"
+				"StartDisabled"	"1"
 				"OnTrigger" 	"syn_spawn_manager,SetCheckPoint,syn_spawn_player_4,0,0"
 				"OnTrigger" 	"syn_spawn_manager,TeleportPlayers,syn_modi_teleport_aftertram,0.5,1"
 			}
