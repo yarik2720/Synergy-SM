@@ -160,7 +160,7 @@ d1_town_02a
 
 //Trav|Edt add antirush at endlevel
 		create {classname "trigger_coop"
-			origin "-6584 -528 -3216.14"
+			origin "-6584 -578 -3216.14"
 			values {model "*47"
 				spawnflags "1"
 				//StartDisabled "1"
