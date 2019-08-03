@@ -77,7 +77,7 @@ d1_town_05
 				//OnTrigger "syn_spawn_manager,MovePlayers,,0,-1"
 				OnTrigger "syn_vint_syn_warehouse_backtrack,Enable,,2,-1"
 				//OnTrigger "syn_vint_syn_warehouse_backtrack,EnableCollision,,2,-1"
-				//OnTrigger "syn_warehouse_rush,Disable,,120,-1"
+				OnTrigger "syn_warehouse_rush,Disable,,60,-1"
 				OnTrigger "syn_new_weapon,EquipAllPlayers,,0.5,-1"
 				OnTrigger "syn_new_weapon,Enable,,0,-1"} }
 //dislodge for mp_teleport_disable
@@ -215,7 +215,7 @@ d1_town_05
 			values {model "*36"
 				spawnflags "1"
 				speed "450"
-					StartDisabled "1"//disabled for now
+				StartDisabled "0"
 				pushdir "0 270 0"
 				targetname "syn_warehouse_rush"} }
 
@@ -262,20 +262,33 @@ d1_town_05
 
 // prevent escaping out of the map
 		create {classname "trigger_push"
-			origin "-2700 8658 1490"
+			origin "-2700 8558 1490"
 			values {model "*57"
 				angles "0 45 -90"
 				spawnflags "1"
 				pushdir "0 270 0"
 				speed "950"} }
 		create {classname "trigger_push"
-			origin "-1750 8946 1390"
+			origin "-1750 8840 1490"
 			values {model "*57"
 				angles "0 0 -90"
 				spawnflags "1"
 				pushdir "0 270 0"
 				speed "950"} }
-
+		create {classname "trigger_push"
+			origin "-650 9300 1490"
+			values {model "*57"
+				angles "0 45 -90"
+				spawnflags "1"
+				pushdir "0 270 0"
+				speed "950"} }
+		create {classname "trigger_push"
+			origin "-3184 7515 1550"
+			values {model "*57"
+				angles "0 90 -90"
+				spawnflags "1"
+				pushdir "0 0 0"
+				speed "950"} }
 
 //Trav|Edt - wilson messup failsafe (sorta-notrly)
 		//create {classname "trigger_multiple"
