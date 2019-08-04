@@ -77,7 +77,7 @@ d1_town_05
 				//OnTrigger "syn_spawn_manager,MovePlayers,,0,-1"
 				OnTrigger "syn_vint_syn_warehouse_backtrack,Enable,,2,-1"
 				//OnTrigger "syn_vint_syn_warehouse_backtrack,EnableCollision,,2,-1"
-				OnTrigger "syn_warehouse_rush,Disable,,60,-1"
+				OnTrigger "syn_warehouse_rush,Disable,,40,-1"
 				OnTrigger "syn_new_weapon,EquipAllPlayers,,0.5,-1"
 				OnTrigger "syn_new_weapon,Enable,,0,-1"} }
 //dislodge for mp_teleport_disable
