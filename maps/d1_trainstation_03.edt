@@ -74,7 +74,7 @@ d1_trainstation_03
 				target "syn_wait01_coop_target"
 				UseHUD "1"
 				CountType "1"
-				PlayerValue "51"
+				PlayerValue "50"
 				OnPlayersIn "syn_wait01_blocker,Kill,,0,1"
 				OnPlayersIn "syn_wait01_trig1,Trigger,,0,1"
 				OnPlayersIn "syn_wait01_trig2,Trigger,,0.5,1"
@@ -98,7 +98,7 @@ d1_trainstation_03
 				target "syn_wait02_coop_target"
 				UseHUD "1"
 				CountType "1"
-				PlayerValue "51"
+				PlayerValue "50"
 				OnPlayersIn "syn_wait02_blocker,Kill,,0,1"
 				OnPlayersIn "!self,TeleportPlayersNotTouching,,0,1"
 				OnPlayersIn "trigger_PreRaid_Peeker_retreat,Trigger,1,0,1"// TODO remove flag
