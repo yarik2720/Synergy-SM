@@ -116,7 +116,7 @@ console
 				VehicleType "4"//1&4 disalllows multiple players
 				VehicleSize "192"
 				model "models/vehicles/buggy_elite.mdl"//models/vehicles/buggy_p2.mdl
-				VehicleScript "scripts/vehicles/jeep_test.txt"} }
+				VehicleScript "scripts/vehicles/jeep_elite.txt"} }
 
 //--Checkpoints--
 		create {classname "trigger_once"

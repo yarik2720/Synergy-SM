@@ -136,7 +136,7 @@ d2_coast_03
 				VehicleType "4"
 				VehicleSize "192"
 				model "models/vehicles/buggy_elite.mdl"//models/vehicles/buggy_p2.mdl
-				VehicleScript "scripts/vehicles/jeep_test.txt"} }
+				VehicleScript "scripts/vehicles/jeep_elite.txt"} }
 //Boathouse Speical
 		create {classname "prop_vehicle_mp"
 			origin "-200 8832 112"
