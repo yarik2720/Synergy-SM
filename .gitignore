@@ -27,3 +27,4 @@ save/
 scripts/
 sound/
 workshop/
+*.log
