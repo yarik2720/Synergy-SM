@@ -88,6 +88,69 @@ ep1_c17_02
 
 //Trav|Edt fix alinement of guard brush (i think valve messed it up)
 		edit {targetname "guard_clip" values origin "-208 415 195.5" {origin "-224 415 195.5"} }
+		
+//modi: teleport alyx in combines room
+		create {
+			classname "point_teleport"
+			origin "1390 -380 45"
+			values 
+			{
+				targetname "syn_teleport_alyx_room"
+				angles "0 90 0"
+				target "alyx"
+			} 
+		}
+		
+		create 
+		{
+			classname "trigger_once" 
+			origin "1311.5 -162 36.5"
+			values 
+			{
+				model "*44"
+				spawnflags "1"
+				OnTrigger "syn_teleport_alyx_room,Teleport,,0.1,-1"
+			} 
+		}
+		
+//modi: fixing long waiting after guard death, turret for alyx only,disable car motion after blocking antions spawn holes
+		edit 
+		{
+			targetname "turret_1" 
+			values 
+			{
+				spawnflags "38144"
+			} 
+		}
+		delete {targetname "burrow_1_spawner"}
+		create 
+		{
+			classname "npc_antlion_template_maker"
+			origin "-1272 1432 56"
+			values
+			{
+				"createspores" "1"
+				"pool_regen_time" "25"
+				"pool_regen_amount" "6"
+				"pool_max" "6"
+				"pool_start" "4"
+				"ignorebugbait" "1"
+				"vehicledistance" "1"
+				"StartDisabled" "1"
+				"targetname" "burrow_1_spawner"
+				"spawngroup" "burrow_1_spawn_node"
+				"spawnflags" "9216"
+				"TemplateName" "antlion_burrower"
+				"spawnradius" "12000"
+				"MaxLiveChildren" "3"
+				"SpawnFrequency" ".01"
+				"MaxNPCCount" "4"
+				"angles" "0 0 0"
+				"OnSpawnNPC" "counter_antlions_neutralized,Subtract,1,0,-1"
+				"OnAllBlocked" "counter_antlions_neutralized,Add,1,0,-1"
+				"OnAllBlocked" "car,DisableMotion,,0.5,-1"
+			}
+		}
 
 //End of Trav|Edt
 
