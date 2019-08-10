@@ -78,11 +78,11 @@ ep1_c17_02a
 		create {classname "point_teleport"
 			origin "2234 7592 -2390"
 			values {targetname "syn_teleport_alyx_2"
-				angles "0 180 0"
+				angles "0 90 0"
 				target "alyx"} }
 				
 		create {classname "info_teleport_destination" origin "2247 7905 -2280"
-			values {angles "0 180 0"
+			values {angles "0 90 0"
 				targetname "trav_teleport_2"} }
 		
 		create {classname "trigger_once"
@@ -91,7 +91,25 @@ ep1_c17_02a
 				spawnflags "1"
 				//StartDisabled "1"
 				OnTrigger "syn_teleport_alyx_2,Teleport,,0.1,-1"
-				OnTrigger "syn_spawn_manager,TeleportPlayers,trav_teleport_2,2,-1"} }
+				OnTrigger "syn_spawn_manager,TeleportPlayers,trav_teleport_2,0,-1"
+				OnTrigger "syn_antihide_push,Enable,,0,-1"} }
+				
+		
+		create 
+		{
+			classname "trigger_push"
+			origin "2190 7450 -2420"
+			values 
+			{
+				model "*218"
+				angles "0 90 0"
+				spawnflags "1"
+				StartDisabled "1"
+				targetname "syn_antihide_push"
+				pushdir "0 0 0"
+				speed "550"
+			} 
+		}
 
 		create {classname "filter_activator_name"
 			values {targetname "syn_new_weapon_filter"
