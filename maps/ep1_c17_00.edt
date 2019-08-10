@@ -102,6 +102,17 @@ ep1_c17_00
 				spawnflags "1"
 				"OnTrigger" "syn_spawn_manager,SetCheckpoint,syn_spawn_player_2,0,-1"
 				"OnTrigger" "syn_spawn_manager,MovePlayers,syn_spawn_player_2,0.05,-1"} }	
+				
+//modi - open gate automatically
+		edit {targetname "gate3_wheel" values {spawnflags "1121"} }
+		create {classname "logic_auto"
+            values
+            {
+                spawnflags "1"
+                OnMapSpawn "gate3_wheel,AddOutput,OnPressed !self:Lock::0:-1,0,-1"
+                OnMapSpawn "gate3_wheel,AddOutput,OnPressed !self:SetPosition:1:0:-1,0,-1"
+            }
+        }
 
 //Trav|Edt - make alyx not shoot idle barnicles
 		delete {classname "trigger_multiple" origin "1784 1176 179"}
