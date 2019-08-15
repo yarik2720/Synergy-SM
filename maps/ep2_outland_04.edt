@@ -50,6 +50,17 @@ ep2_outland_04
 //Intro
 		create {classname "info_player_coop" origin "3482.45 -1763.13 384.03"
 			values {angles "0 10 0" targetname "syn_spawn_player_1"} }
+//into the cave
+		create {classname "info_player_coop" origin "6594.28 -3583.99 -179"
+			values {angles "0 -90 0" targetname "syn_spawn_player_2" StartDisabled "1"} }
+//meet the guardian
+		create {classname "info_player_coop" origin "4432 -1227 -1430"
+			values {angles "0 90 0" targetname "syn_spawn_player_3" StartDisabled "1"} }
+
+//bye guardian
+		create {classname "info_player_coop" origin "5319 -4283 -2236"
+			values {angles "0 90 0" targetname "syn_spawn_player_4" StartDisabled "1"} }
+
 //Shaft Lift
 	//	create {classname "info_player_coop" origin "808.38 -4910.19 -959.97"
 	//		values {angles "0 -25 0" targetname "syn_spawn_player_" StartDisabled "1"} }//PS_AboveShaft
@@ -86,6 +97,9 @@ ep2_outland_04
 
 //Trav|Edt - dont shutup vort if someone falls
 		delete {targetname "player_death_fall_trigger"}
+		
+//modi - don't disable rotating of fanblade if one player comes through
+		delete {classname "trigger_once" origin "4984 -2348 271.5"}
 
 //TraV|Edt - disable fan motion when one player passes
 		create {classname "trigger_once" origin "4984 -2348 271.5"
@@ -93,6 +107,70 @@ ep2_outland_04
 				spawnflags "1"
 				OnTrigger "tunnel_fanblade_1,AddOutput,spawnflags 265,0,-1"
 				OnTrigger "tunnel_fanblade_1,DisableMotion,,0.05,-1"} }//329
+
+//modi checkpoint into the cave
+		create 
+		{
+			classname "trigger_once" 
+			origin "6575 -3585 -179"
+			values
+			{
+				model "*52"
+				StartDisabled "0"
+				spawnflags "1"
+				OnTrigger "syn_spawn_player_2,Enable,,0,-1"
+			}
+		}
+				
+		create 
+		{
+			classname "trigger_once" 
+			origin "6575 -3585 -243"
+			values
+			{
+				model "*52"
+				StartDisabled "0"
+				spawnflags "1"
+				OnTrigger "syn_spawn_manager,TeleportPlayers,modi_teleport_into_cave,0,-1"
+			}
+		}
+		
+		create 
+		{
+			classname "info_teleport_destination"
+			origin "6575 -3585 -243"
+			values {
+				targetname "modi_teleport_into_cave"
+				angles "72 -93 0"
+			} 
+		}
+
+//modi - meet the guardian
+		
+		create 
+		{
+			classname "info_teleport_destination"
+			origin "4432 -1227 -1430"
+			values {
+				targetname "modi_teleport_meet_guardian"
+				angles "0 90 0"
+			} 
+		}
+		
+		create 
+		{
+			classname "trigger_once" 
+			origin "4395.72 -1251.07 -1275"
+			values
+			{
+				model "*24"
+				StartDisabled "0"
+				spawnflags "1"
+				OnTrigger "syn_spawn_player_3,Enable,,0,-1"
+				OnTrigger "syn_spawn_manager,TeleportPlayers,modi_teleport_meet_guardian,0,-1"
+			}
+		}
+
 
 //Trav|Edt teleport all players when at top, and frez //wut?
 
@@ -125,6 +203,7 @@ ep2_outland_04
 			values {model "*25"//*55
 				spawnflags "1"
 				OnTrigger "syn_spawn_manager,MovePlayers,,0,-1"
+				OnTrigger "syn_spawn_player_4,Enable,,3,-1"
 //fix elevator_fall_trigger from killing players caught by barnacle
 				OnTrigger "elevator_fall_trigger,Kill,,3,-1"
 				OnTrigger "syn_elevator_fall,Disable,,3,-1"} }
@@ -210,30 +289,18 @@ ep2_outland_04
 			values {spawnflags "1"
 				OnMapSpawn "guard_exit_floor_board,AddOutput,health 0,0,-1"} }
 
-//Trav|Edt - if vort is ontop of vator for somreason, teleport him down
+//Trav|Edt - if vort is ontop of vator for somreason/stucked in elevator, teleport him down
 		create {classname "logic_relay"
 			values {spawnflags "1"
 				targetname "elevator_door_1_open_rl"
-				OnTrigger "trav_antistucker_vort_vator,Enable,,0,-1"} }
-
-		create {classname "trigger_once"
-			origin "4992 -1656 -2096"
-			values {model "*131"
-				spawnflags "2"
-				targetname "trav_antistucker_vort_vator"
-				StartDisabled "1"
 				OnTrigger "trav_teleport_vort_vator,Teleport,,0,-1"} }
 
 		create {classname "point_teleport"
-			origin "5024 -1544 -2240"
+			origin "4947 -1627 -2240"
 			values {targetname "trav_teleport_vort_vator"
-				angles "0 270 0"
+				angles "0 0 0"
 				target "vort"} }
 
-//^^If vort teleport is not needed, disable
-		create {classname "logic_auto"
-			values {spawnflags "1"
-				OnMapSpawn "vort_chant_for_essence_ss,AddOutput,OnBeginSequence trav_antistucker_vort_vator:Disable::0:-1,0,-1"} }
 
 		//edit {targetname "gnome_clip" values {filtername ""} }
 
