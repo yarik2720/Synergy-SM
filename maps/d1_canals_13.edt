@@ -12,7 +12,9 @@ d1_canals_13
 //Enable Airboat Gun
 		create {classname "logic_auto"
 			values {spawnflags "1"
-				OnMapSpawn "prop_vehicle_airboat,EnableGun,1,3,-1"} }
+				OnMapSpawn "prop_vehicle_airboat,EnableGun,1,3,-1"
+				OnMapSpawn "syn_vint_rmvintrestore,Trigger,,0,-1"
+				OnMapSpawn "syn_helicopter_resethealth,Trigger,,1,1"} }
 
 //Trav|Edt - Doors: Open Only
 		//edit {targetname "canals_door_helipadhouse01" values {spawnflags "0" returndelay "-1"} }
@@ -90,6 +92,24 @@ d1_canals_13
 		create {classname "func_vehicleclip" origin "-1024 -6144 17" values {model "*16"} }//57 WS!!
 		create {classname "func_vehicleclip" origin "512 -5824 -46.92" values {model "*16" targetname "trav_antiskip"} }
 
+		
+//Vint fix
+		create {classname "logic_relay"
+			values
+			{
+				targetname "syn_vint_rmvintrestore"
+				OnTrigger "syn_helicopter_resethealth,kill,,0,-1"
+			}
+		}
+		create {classname "logic_relay"
+			values
+			{
+				targetname "syn_helicopter_resethealth"
+				OnTrigger "canals_npc_reservoircopter01,SetHealth,5600,0,1"
+				OnTrigger "canals_npc_reservoircopter01,AddOutput,max_health 5600,0,1"
+			}
+		}
+		
 //--Extra--
 	
 //modi: prevent vehicle spawn block				
