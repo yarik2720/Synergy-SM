@@ -28,3 +28,4 @@ scripts/
 sound/
 workshop/
 *.log
+*.vdf
