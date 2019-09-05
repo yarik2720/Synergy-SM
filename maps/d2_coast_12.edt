@@ -171,16 +171,23 @@ d2_coast_12
 				OnTrigger "syn_vint_trav_tmaker_combine3,Enable,,0,-1"
 				//OnTrigger "syn_vint_trav_combine3_timer,Enable,,0,-1"
 				OnTrigger "assault_template_spawner,ForceSpawn,,0,-1"
+				OnTrigger "syn_vint_additionalfspawn,Trigger,,0,-1"
+				OnTrigger "trav_bigassault_counter,Enable,,5,-1"} }
+		create {classname "logic_relay"
+			values
+			{
+				targetname "syn_vint_additionalfspawn"
 				OnTrigger "assault_template_spawner,ForceSpawn,,2,-1"
 				OnTrigger "assault_template_spawner,ForceSpawn,,4,-1"
-				OnTrigger "trav_bigassault_counter,Enable,,5,-1"} }
+			}
+		}
 //!!
 //Trav|Edt ^ test big assault (needs refining)
 		create {classname "logic_auto"
 			values {spawnflags "1"
 				//OnMapSpawn "assault_soldier_*,AddOutput,OnDeath trav_bigassault_counter:Subtract:1:0:-1,0,-1"
 				//OnMapSpawn "assault_template_spawner,AddOutput,OnEntitySpawned trav_bigassault_counter:Add:4:0:-1,0,-1"
-				OnMapSpawn "assault_template_spawner,AddOutput,OnEntitySpawned trav_bigassault_setuper:Trigger::0:-1,0,-1"} }
+				OnMapSpawn "assault_template_spawner,AddOutput,OnEntitySpawned syn_vint_trav_bigassault_setuper:Trigger::0:-1,0,-1"} }
 //additional waves
 		create {classname"math_counter"
 			values {targetname "trav_bigassault_counter_total"
@@ -196,7 +203,7 @@ d2_coast_12
 				OnHitMin "trav_bigassault_counter_total,Add,1,,-1"} }
 //on squad spawn
 		create {classname "logic_relay"
-			values {targetname "trav_bigassault_setuper"
+			values {targetname "syn_vint_trav_bigassault_setuper"
 				OnTrigger "trav_bigassault_counter,Add,4,0,-1"
 				OnTrigger "assault_soldier_*,AddOutput,OnDeath trav_bigassault_counter:Subtract:1:0:-1,0.1,-1"
 				OnTrigger "assault_soldier_*,AddOutput,targetname syn_assault_soldier,0.2,-1"} }

@@ -210,7 +210,30 @@ d2_coast_11
 				//OnTrigger "music_antlionguard_2,PlaySound,,1,-1"
 				OnTrigger "PS_Manager,MovePlayers,,0,-1"
 				OnTrigger "trav_portal_guard,Close,,1,-1"
-				OnTrigger "trav_antireturn_push,Enable,,2,-1"} }
+				OnTrigger "trav_antireturn_push,Enable,,2,-1"
+				OnTrigger "syn_vint_reset,Trigger,,0,1"
+				OnTrigger "syn_restorevint,Trigger,,1,1"} }
+		
+//Restore antlion guards original health for vintage
+		create {classname "logic_relay"
+			values
+			{
+				targetname "syn_restorevint"
+				OnTrigger "npc_antlionguard,SetHealth,500,0,1"
+				OnTrigger "npc_antlionguard,AddOutput,max_health 500,0,1"
+				OnTrigger "skipdoor,kill,,0,-1"
+				OnTrigger "skipdoorprop,kill,,0,-1"
+				OnTrigger "skiptutorial,kill,,0,-1"
+			}
+		}
+		create {classname "logic_relay"
+			values
+			{
+				targetname "syn_vint_reset"
+				OnTrigger "syn_restorevint,kill,,0,-1"
+			}
+		}
+		
 //block
 		create {classname "trigger_push"
 			origin "4480 6816 456"
@@ -508,6 +531,7 @@ d2_coast_11
 		create {classname "prop_dynamic" origin "-405 12075 275"
 			values
 			{
+				targetname "skipdoorprop"
 				model "models/props_lab/freightelevatorbutton.mdl"
 				angles "0 -5 0"
 			}
