@@ -798,7 +798,7 @@
 	"volume"		"0.75"
 	"pitch"			"100"
 	"soundlevel"	"SNDLVL_90db"
-	"wave"			"ambient/objects/spin_trap/sputter1.wav"
+	"wave"			"ambient/machines/sputter1.wav"
 }
 
 "Town.d1_town_04_metal_large_debris1"
