@@ -238,6 +238,15 @@ d2_prison_03
 			values {model "*84"
 				spawnflags "1"
 				OnTrigger "trav_tmaker_combine3,Enable,,0,-1"} }
+				
+//close overjump
+		create {classname "prop_dynamic" origin "-3525 5550 130"
+			values {model "models/synergy/tools/syn_transition.mdl"
+				targetname "syn_antirush_nowall"
+				angles "0 0 0"
+				solid "6"
+				StartDisabled "1"
+				DisableShadows "1"} }
 
 //Trav|Edt - autirush
 		create {classname "trigger_coop"
