@@ -398,6 +398,15 @@ d1_town_02
 			values {model "*74"
 				spawnflags "2"
 				targetname "syn_vint_stopplayerjump_1"} }
+				
+		create {classname "trigger_push"
+			origin "-4500 56 -2900"
+			values {angles "90 0 0"
+				model "*110"
+				spawnflags "1"
+				targetname "syn_vint_trigger_jump"
+				pushdir "0 0 0"
+				speed "850"} }
 
 //Trav|Edt - Teleport players to elevator
 		delete {targetname "freight_lift_button_2"}
