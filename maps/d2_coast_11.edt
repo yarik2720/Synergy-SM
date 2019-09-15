@@ -509,7 +509,7 @@ d2_coast_11
 			{
 				model "*37"
 				spawnflags "2"
-				OnTrigger "skiptutorial,Display,,1,-1"
+				//OnTrigger "skiptutorial,Display,,1,-1"
 				OnTrigger "skipdoor,Unlock,,1,-1"
 				filtername "filter_npc_vortigaunt"
 			}
