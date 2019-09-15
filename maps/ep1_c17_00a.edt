@@ -73,6 +73,22 @@ ep1_c17_00a
 				filtername "null"} }
 				
 		edit {targetname "alyx" values {damagefilter "syn_dfilter_null"} }
+		
+//close safe-zone
+		create {classname "prop_dynamic" origin "4175 3612 662"
+			values {model "models/synergy/tools/syn_transition.mdl"
+				targetname "syn_antirush_nowall"
+				angles "90 0 0"
+				solid "6"
+				StartDisabled "1"
+				DisableShadows "1"} }
+		create {classname "prop_dynamic" origin "3390 3100 550"
+			values {model "models/synergy/tools/syn_transition.mdl"
+				targetname "syn_antirush_nowall"
+				angles "90 90 0"
+				solid "6"
+				StartDisabled "1"
+				DisableShadows "1"} }
 
 //Trav|Edt - failsafe for alyx spazzing out
 		delete {classname "prop_physics" origin "3149.5 3266.34 460.235"}
