@@ -109,7 +109,7 @@ d1_eli_01
 //don't let actors die
 		create {classname "logic_auto"
 			values {spawnflags "1"
-				OnMapSpawn "npc_*,SetDamageFilter,syn_filter_null,0,-1"} }
+				OnMapSpawn "npc_*,SetDamageFilter,syn_dfilter_null,0,-1"} }
 
 		create {classname "filter_activator_name"
 			values {targetname "syn_dfilter_null"
