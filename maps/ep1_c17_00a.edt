@@ -62,6 +62,17 @@ ep1_c17_00a
 				UpperRandomBound "121"} }//80
 				
 		delete {classname "func_brush" origin "4508 3580 558"}
+		
+//make Alyx invencible (preventing elevator disappear)
+		create {classname "logic_auto"
+			values {spawnflags "1"
+				OnMapSpawn "alyx,SetDamageFilter,syn_dfilter_null,10,-1"} }
+
+		create {classname "filter_activator_name"
+			values {targetname "syn_dfilter_null"
+				filtername "null"} }
+				
+		edit {targetname "alyx" values {damagefilter "syn_dfilter_null"} }
 
 //Trav|Edt - failsafe for alyx spazzing out
 		delete {classname "prop_physics" origin "3149.5 3266.34 460.235"}
