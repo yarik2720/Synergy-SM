@@ -167,6 +167,23 @@ d2_prison_08
 			values {model "*30"
 				spawnflags "1"
 				OnTrigger "syn_spawn_manager,SetCheckpoint,syn_spawn_player_3,0,-1"} }
+				
+		
+//close spawn-kill zone
+		create {classname "prop_dynamic" origin "-134 -310 1150"
+			values {model "models/synergy/tools/syn_transition.mdl"
+				targetname "syn_antirush_nowall"
+				angles "0 90 0"
+				solid "6"
+				StartDisabled "1"
+				DisableShadows "1"} }
+		create {classname "prop_dynamic" origin "315 -700 1150"
+			values {model "models/synergy/tools/syn_transition.mdl"
+				targetname "syn_antirush_nowall"
+				angles "0 0 0"
+				solid "6"
+				StartDisabled "1"
+				DisableShadows "1"} }
 
 //Trav|Edt - add more combine
 		//edit {targetname "ambush_ar2_reinforcement_maker"
