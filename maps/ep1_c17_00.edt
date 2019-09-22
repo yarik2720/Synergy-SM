@@ -62,6 +62,14 @@ ep1_c17_00
 			values {targetname "syn_global_settings" IsVehicleMap "0"} }
 
 //--Extra--
+//close skip
+		create {classname "prop_dynamic" origin "4580 -5877 25"
+			values {model "models/synergy/tools/syn_transition.mdl"
+				targetname "syn_antirush_nowall"
+				angles "90 0 0"
+				solid "6"
+				StartDisabled "1"
+				DisableShadows "1"} }
 
 //Doors: Open Only
 		edit {targetname "barnacle_exit_door" values {spawnflags "0"} }

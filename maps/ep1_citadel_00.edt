@@ -72,6 +72,15 @@ ep1_citadel_00
 		
 //--Extra--
 
+//close skip
+		create {classname "prop_dynamic" origin "-8383 5421 170"
+			values {model "models/synergy/tools/syn_transition.mdl"
+				targetname "syn_antirush_nowall"
+				angles "0 0 0"
+				solid "6"
+				StartDisabled "1"
+				DisableShadows "1"} }
+
 // env_zooms - all players
 		create {classname "logic_auto"
 			values
