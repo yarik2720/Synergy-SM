@@ -112,7 +112,9 @@ ep1_citadel_03
 				spawnflags "1"
 				StartDisabled "1"
 				targetname "trav_trigger_moveplayers_vator_end"
-				OnTrigger "syn_spawn_manager,MovePlayers,,0,-1"} }
+				OnTrigger "syn_spawn_manager,TeleportPlayers,syn_spawn_player_7TP,0,-1"} }
+				
+		create {classname "info_teleport_destination" origin "1195 13654 5312" values {angles "0 255 0" targetname "syn_spawn_player_7TP" } }
 
 //End of Trav|Edt
 
