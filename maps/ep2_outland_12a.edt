@@ -41,6 +41,24 @@ ep2_outland_12a
 //Intro
 		create {classname "info_player_coop" origin "-573.442 -936.58 -1570"
 			values {angles "0 270 0" targetname "syn_spawn_player_1"} }
+		
+// elevator
+		create { classname "info_player_coop" origin "-400 -2205 -1189" 
+			values { angles "0 65 0" targetname "syn_spawn_player_2" StartDisabled "1" } }
+			
+		create {classname "info_teleport_destination"
+			origin "-400 -2178 -1540"
+			values {targetname "syn_spawn_player_2_teleport"
+				angles "0 65 0"} }
+			
+// outro elevator
+		create { classname "info_player_coop" origin "1818 -2506 -1140" 
+			values { angles "0 0 0" targetname "syn_spawn_player_3" StartDisabled "1" } }
+			
+		create {classname "info_teleport_destination"
+			origin "1818 -2506 -1140"
+			values {targetname "syn_spawn_player_3_teleport"
+				angles "0 0 0"} }
 
 		create {classname "info_global_settings"
 			values {targetname "syn_global_settings" IsVehicleMap "0"} }
@@ -50,7 +68,8 @@ ep2_outland_12a
 //Trav|Edt - moveplayers into elevator
 		create {classname "logic_auto"
 			values {spawnflags "1"
-				OnMapSpawn "trigger_start_lift_1,AddOutput,OnTrigger syn_spawn_manager:MovePlayers::0:-1,0,-1"} }
+				OnMapSpawn "trigger_start_lift_1,AddOutput,OnTrigger syn_spawn_manager:SetCheckPoint:syn_spawn_player_3:0:-1,0,-1"
+				OnMapSpawn "trigger_start_lift_1,AddOutput,OnTrigger syn_spawn_manager:TeleportPlayers:syn_spawn_player_3_teleport:0:-1,0,-1"} }
 
 //Trav|Edt - make npc's invencibles from player exploits
 		create {classname "filter_activator_name"
@@ -102,9 +121,6 @@ ep2_outland_12a
 			}
 		}
 
-		// activate checkpoint when we enter the elevator
-		create { classname "info_player_coop" origin "-400 -2205 -1189" values { angles "0 65 0" targetname "PS_DownEle" StartDisabled "1" } }
-
 		delete { classname "trigger_once" origin "-372 -2189.01 -1514" }
 		create { classname "trigger_once" origin "-372 -2189.01 -1514"
 			values {
@@ -119,8 +135,8 @@ ep2_outland_12a
 				"OnTrigger" "lcs.al.elevator.during,Start,,0.1,-1"
 				"OnTrigger" "lcs.launch.pre,Cancel,,0,-1"
 
-				"OnTrigger" "syn_spawn_manager,SetCheckPoint,PS_DownEle,0,-1"
-				"OnTrigger" "syn_spawn_manager,MovePlayers,,0.1,-1"
+				"OnTrigger" "syn_spawn_manager,SetCheckPoint,syn_spawn_player_2,0,-1"
+				"OnTrigger" "syn_spawn_manager,TeleportPlayers,syn_spawn_player_2_teleport,0.1,-1"
 			}
 		}
 
@@ -145,7 +161,7 @@ ep2_outland_12a
 
 		create { classname "logic_auto"
 			values {
-				"OnMapSpawn" "lcs_hangar,AddOutput,OnCompletion end_the_game:EndGame:5:-1,0,-1"
+				"OnMapSpawn" "lcs_hangar,AddOutput,OnCompletion end_the_game:EndGame:15:-1,0,-1"
 			}
 		}
 
