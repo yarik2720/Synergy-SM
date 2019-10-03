@@ -64,6 +64,33 @@ d3_c17_10a
 				"OnTrigger" "player_spawn_items_maker,ForceSpawn,,0,-1"
 			}
 		}
+			
+//Game Over text
+		delete {targetname "barney_dead_text"}
+		create {classname "logic_auto"
+			values {
+				spawnflags "1"
+				OnMapSpawn "barney,AddOutput,OnDeath syn_gameover_message:Display::0:-1,1,-1"
+			}
+		}
+		create {
+			classname "game_text"
+			values {
+				"y" "-1"
+				"x" "-1"
+				"targetname" "syn_gameover_message"
+				"spawnflags" "1"
+				"message" "HL2_GameOver_Ally"
+				"holdtime" "5"
+				"fxtime" "0.25"
+				"fadeout" "0.5"
+				"fadein" "1.5"
+				"effect" "0"
+				"color2" "240 110 0"
+				"color" "100 100 100"
+				"channel" "1"
+			}
+		}
 
 //Trav|Edt - Doors: Open Only
 		edit {targetname "bldg1_door2" values {spawnflags "0"} }

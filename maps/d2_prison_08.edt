@@ -75,6 +75,33 @@ d2_prison_08
 
 		// create intermission
 	//	"create" { "classname" "info_intermission" "origin" "" "values" { "angles" "" } }
+			
+//Game Over text
+		delete {targetname "text_alyx_died"}
+		create {classname "logic_auto"
+			values {
+				spawnflags "1"
+				OnMapSpawn "alyx,AddOutput,OnDeath syn_gameover_message:Display::0:-1,1,-1"
+			}
+		}
+		create {
+			classname "game_text"
+			values {
+				"y" "-1"
+				"x" "-1"
+				"targetname" "syn_gameover_message"
+				"spawnflags" "1"
+				"message" "HL2_GameOver_Ally"
+				"holdtime" "5"
+				"fxtime" "0.25"
+				"fadeout" "0.5"
+				"fadein" "1.5"
+				"effect" "0"
+				"color2" "240 110 0"
+				"color" "100 100 100"
+				"channel" "1"
+			}
+		}
 
 //Trav|Edt - have turets use citizen code state
 		edit {classname "npc_turret_floor" values {spawnflags "704"} }
