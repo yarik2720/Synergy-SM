@@ -95,6 +95,19 @@ d3_c17_13
 		//		StartDisabled "1"
 		//		targetname "escape_attempt_killtrigger"
 		//		OnTrigger "!activator,SetHealth,0,0,-1"} }
+		
+//modi: make this trigger do damage to anyone who enters it
+		create {classname "trigger_hurt"
+			origin "5080 -25.26 336"
+			values {model "*73"
+				spawnflags "1"
+				StartDisabled "1"
+				wait "1"
+				targetname "escape_attempt_killtrigger"
+				damage "70"
+				damagecap "90"
+				damagetype "64"} }
+
 
 //Trav|Edt make fog controller(s) dynamic (fog seems fine...??)
 		create {classname "env_fog_controller"
