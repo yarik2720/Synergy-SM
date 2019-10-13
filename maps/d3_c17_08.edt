@@ -130,8 +130,24 @@ d3_c17_08
 		create {classname "logic_relay"
 			values {targetname "platform_lower_relay"
 				OnTrigger "crane_control_lever,Lock,,0,-1"
+				OnTrigger "syn_antirush_disablerelay,Trigger,,1,1"
+				OnTrigger "unlocker,Trigger,,2,-1"
 				//OnTrigger "crane_control_lever,UnLock,,60,-1"
 				} }
+		create {classname "logic_relay"
+			values
+			{
+				targetname "syn_antirush_disablerelay"
+				OnTrigger "unlocker,kill,,0,-1"
+			}
+		}
+		create {classname "logic_relay"
+			values
+			{
+				targetname "unlocker"
+				OnTrigger "crane_control_lever,Unlock,,28,-1"
+			}
+		}
 
 		create {classname "logic_relay"
 			values {targetname "platform_raise_relay"
