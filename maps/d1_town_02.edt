@@ -400,7 +400,7 @@ d1_town_02
 				targetname "syn_vint_stopplayerjump_1"} }
 				
 		create {classname "trigger_push"
-			origin "-4500 56 -2900"
+			origin "-4480 -180 -2900"
 			values {angles "90 0 0"
 				model "*110"
 				spawnflags "1"
@@ -445,6 +445,8 @@ d1_town_02
 				OnHard "syn_vint_trav_maker_zombies_wait,SetMaxChildren,8,0,-1"
 				OnNormal "syn_vint_trav_maker_zombies_elevator,SetMaxChildren,2,0,-1"
 				OnHard "syn_vint_trav_maker_zombies_elevator,SetMaxChildren,3,0,-1"
+				OnNormal "syn_vint_modi_maker_zombies_monk,SetMaxChildren,2,0,-1"
+				OnHard "syn_vint_modi_maker_zombies_monk,SetMaxChildren,3,0,-1"
 				OnNormal "cavezombies_maker1,SetMaxChildren,4,0,-1"
 				OnHard "cavezombies_maker1,SetMaxChildren,8,0,-1"
 				OnNormal "cavezombies_maker2,SetMaxChildren,4,0,-1"
@@ -521,6 +523,29 @@ d1_town_02
 			values {angles "0 90 0"
 				nodeid "782"} }
 
+//modi - Add more zombie spawn point
+		create {classname "npc_maker"
+			origin "-3643 1890 -3071"
+			values {spawnflags "48"
+				angles "0 270 0"
+				targetname "syn_vint_modi_maker_zombies_monk"
+				StartDisabled "1"
+				NPCTargetname "syn_vint_modi_zombies_monk"
+				MaxNPCCount "6"
+				SpawnFrequency "2"
+				MaxLiveChildren "6"
+				NPCType "npc_fastzombie"
+				NPCSquadname "squad_modi_maker_zombies_monk"
+				OnSpawnNPC "syn_vint_aiscript_sched_modi_maker_zombies_monk,StartSchedule,,0.2,-1"
+				OnSpawnNPC "monk_relationship,ApplyRelationship,,0.5,-1"} }
+
+		create {classname "aiscripted_schedule"
+			values {spawnflags "4"
+				targetname "syn_vint_aiscript_sched_modi_maker_zombies_monk"
+				m_iszEntity "syn_vint_modi_zombies_monk"
+				schedule "2"
+				goalent "!player"} }
+				
 //Trav|Edt - prevent hatch from closing
 		//edit {classname "trigger_multiple"
 			//origin "-4064 1322 -2992"
@@ -627,6 +652,7 @@ d1_town_02
 				OnCompletion "cavezombies_enemyfinder,TurnOn,,1,-1"
 				OnCompletion "cavezombies_maker1,Enable,,1,-1"
 				OnCompletion "cavezombies_maker2,Enable,,1,-1"//6
+				OnCompletion "syn_vint_modi_maker_zombies_monk,Enable,,1,-1"
 				OnCompletion "bucket_machine_wav1,PlaySound,,100,-1"//45
 				OnCompletion "bucket_machine_wav2,PlaySound,,100,-1"//45
 				OnCompletion "generator_monk_seq,CancelSequence,,120,-1"//60
