@@ -541,10 +541,11 @@ d1_town_02
 
 		create {classname "aiscripted_schedule"
 			values {spawnflags "4"
+				origin "-3696 1448 -3166"
 				targetname "syn_vint_aiscript_sched_modi_maker_zombies_monk"
 				m_iszEntity "syn_vint_modi_zombies_monk"
 				schedule "2"
-				goalent "!player"} }
+				goalent "syn_vint_aiscript_sched_modi_maker_zombies_monk"} }
 				
 //Trav|Edt - prevent hatch from closing
 		//edit {classname "trigger_multiple"
