@@ -138,7 +138,7 @@ d3_c17_06a
 				target "trav_turret"} }
 
 		create {classname "info_player_coop"
-			origin "3240 2104-312"
+			origin "3138 2138 -290"
 			values {targetname "trav_checkpoint_demoman"
 				angles "0 180 0"
 				StartDisabled "1"} }
