@@ -26,7 +26,7 @@ d1_trainstation_01
 				// Enable DD settings
 				OnMapSpawn "logic_start_train,AddOutput,OnTrigger syn_vint_ld_1:CheckSkill::0:-1,0,-1"
 				// Move everyone to the train (failsafe)
-				OnMapSpawn "trigger_lcs_trainride_geton,AddOutput,OnTrigger syn_spawn_manager:TeleportPlayers:modi_teleport_into_train:0:-1,0,-1"
+				OnMapSpawn "logic_start_train,AddOutput,OnTrigger syn_spawn_manager:TeleportPlayers:modi_teleport_into_train:0:-1,0,-1"
 				// barney_door_2
 				OnMapSpawn "syn_barney_door_2,AddOutput,OnFullyClosed !self:Lock::0:-1,0,-1"
 				OnMapSpawn "syn_barney_door_2,AddOutput,OnBlockedClosing !self:Close::1:-1,0,-1"
@@ -58,10 +58,10 @@ d1_trainstation_01
 		create 
 		{
 			classname "info_teleport_destination"
-			origin "-9258.63 -2436.73 25"
+			origin "-9419 -2483 22"
 			values {
 				targetname "modi_teleport_into_train"
-				angles "0 18 0"
+				angles "0 15 0"
 			} 
 		}
 
