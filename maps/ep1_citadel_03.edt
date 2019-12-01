@@ -108,7 +108,8 @@ ep1_citadel_03
 				OnMapSpawn "lcs_alyx_powerdown,AddOutput,OnStart trav_trigger_moveplayers_vator_end:Enable::0:-1,0,-1"
 				OnMapSpawn "syn_trigtimerball,AddOutput,OnStartTouch timer_ball_tube1nodisable:Enable::0:-1,0,-1"
 				OnMapSpawn "trigger_socket_5,AddOutput,OnTrigger trigger_alyx_reunion:Enable::0:-1,0,-1"
-				OnMapSpawn "trigger_socket_5,AddOutput,OnTrigger lcs_alyx_corecomplete:Start::0:1,0,-1"} }
+				OnMapSpawn "trigger_socket_5,AddOutput,OnTrigger lcs_alyx_corecomplete:Start::0:1,0,-1"
+				OnMapSpawn "lcs_mossman_scene,AddOutput,OnStart lcs_alyx_corecomplete:Cancel::0:1,0,-1"} }
 
 		create { classname "trigger_once" origin "1152 13654 5312"
 			values {model "*197"
