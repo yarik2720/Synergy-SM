@@ -165,6 +165,36 @@ ep1_c17_05
 			values {spawnflags "1"
 				OnMapSpawn "door_rollertraining,AddOutput,targetname syn_door_rollertraining,5,-1"} }
 				
+//modi - faster combine spawns
+//todo - remade it to support vanilla mode
+		delete {targetname "relay_parkinglot_right_wait"}
+		delete {targetname "relay_repairroom_soldiers_wait"}
+		delete {targetname "relay_parkinglot_roof_wait"}
+		create {
+			classname "logic_relay"
+			values {
+				targetname "relay_parkinglot_right_wait"
+				origin "10659.3 12321.6 -496"
+				OnTrigger "relay_spawn_parkinglot_right,Trigger,,1,-1"
+			}
+		}
+		create {
+			classname "logic_relay"
+			values {
+				targetname "relay_repairroom_soldiers_wait"
+				origin "8919 10513.4 -738.935"
+				OnTrigger "relay_spawn_repairroom_soldiers,Trigger,,1,-1"
+			}
+		}
+		create {
+			classname "logic_relay"
+			values {
+				targetname "relay_repairroom_soldiers_wait"
+				origin "8919 10513.4 -738.935"
+				OnTrigger "relay_spawn_parkinglot_roof,Trigger,,1,-1"
+			}
+		}
+				
 //changelevel after 800 seconds if there is no progression				
 //todo: remove changinglevel after another fix appears
 		create {classname "logic_auto"
