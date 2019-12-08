@@ -50,14 +50,14 @@ ep1_citadel_02
 
 		create { classname "info_intermission" origin "-7858 1193 938" values { angles "8 -22 0" } }
 //alyx becomes too slow or didn't appear on scene with dropship		
-		create {classname "trigger_once" origin "0 -808 888"
+		create {classname "trigger_once" origin "-789.22 -587 888"
 			values {model "*129"
 				spawnflags "1"
 				OnTrigger "syn_spawn_manager,MovePlayers,,0.1,-1"
 				OnTrigger "syn_teleport_alyx_cit02,Teleport,,0,-1"} }
 		
 		create {classname "point_teleport"
-			origin "-190 -870 860"
+			origin "-776.45 -85.84 860"
 			values {
 				targetname "syn_teleport_alyx_cit02"
 				angles "0 0 0"
