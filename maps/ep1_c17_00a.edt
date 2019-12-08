@@ -35,6 +35,9 @@ ep1_c17_00a
 //Intro
 		create {classname "info_player_coop" origin "863 2600 350"
 			values {angles "0 93 0" targetname "syn_spawn_player_1"} }
+//waterroom
+		create {classname "info_player_coop" origin "1605 4375 400"
+			values {angles "0 0 0" targetname "syn_spawn_player_4" StartDisabled "1"} }
 //DarkRoom
 		create {classname "info_player_coop" origin "2912 4000 452"
 			values {angles "0 0 0" targetname "syn_spawn_player_2" StartDisabled "1"} }
@@ -212,6 +215,30 @@ ep1_c17_00a
 				spawnflags "16"
 				CriterionVisibility "2"
 				CriterionDistance "1"} }
+				
+
+//tp players to waterroom
+		create { classname "trigger_once" origin "1696.28 4331.06 406.5"
+			values {
+				"model" "*46"
+				"targetname" "syn_modi_tpwaterroom"
+				"wait" "1"
+				"spawnflags" "1"
+				"StartDisabled" "0"
+				"OnTrigger" "syn_spawn_manager,SetCheckPoint,syn_spawn_player_4,0,-1"
+				"OnTrigger" "syn_spawn_manager,MovePlayers,,0.1,-1"
+				"OnTrigger" "syn_teleport_alyx_waterroom,Teleport,,0.1,-1"
+			}
+		}
+				
+		create {classname "point_teleport"
+			origin "1593 4481 406"
+			values {
+				targetname "syn_teleport_alyx_waterroom"
+				angles "0 0 0"
+				target "alyx"
+			} 
+		}
 
 //End of Trav|Edt
 
