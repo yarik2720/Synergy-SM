@@ -115,7 +115,7 @@ ep1_c17_02b
 
 		create {classname "logic_auto"
 			values {spawnflags "1"
-				OnMapSpawn "bld_a_frontdoor_1_ss_1,AddOutput,OnBeginSequence trav_antistuck_push:Disable::0:-1,8,-1"} }
+				OnMapSpawn "bld_a_frontdoor_1,AddOutput,OnFullyOpen trav_antistuck_push:Disable::0:-1,1,-1"} }
 				
 //prevent players skipping whole part
 		create {classname "trigger_hurt"
