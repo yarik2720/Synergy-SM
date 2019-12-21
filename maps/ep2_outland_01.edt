@@ -167,27 +167,21 @@ ep2_outland_01
 			values {targetname "syn_gnome_teleport"
 				target "gnome"} }
 
-//Trav|Edt - antirush at end so vort can play out
-		delete {classname "trigger_once" origin "-6304 3551.01 -202"}
-		create {classname "trigger_once" origin "-6704 3551.01 -202"
-			values {model "*31"
-				spawnflags "2"
-				OnTrigger "syn_antirush_prop,Kill,,0,1"
-				OnTrigger "lcs_vort_elevator,Start,,2,-1"} }
+//Trav|Edt - antirush at end
 
-		//create {classname "trigger_coop"
-		//	origin "-6304 3551.01 -202"
-		//	values {model "*31"
-		//		spawnflags "1"
-		//		targetname "syn_antirush_coop"
-		//		CountType "1"
-		//		UseHUD "1"
-		//		PlayerValue "50"
-		//		wait "1.5"
-		//		OnTrigger "syn_antirush_text,Display,,1,-1"
-		//		OnPlayersIn "syn_antirush_prop,Kill,,0,1"
-		//		//OnPlayersIn "syn_end_light,TurnOff,,0,1"
-		//		OnPlayersIn "!self,Disable,,1,1"} }
+		create {classname "trigger_coop"
+			origin "-6304 3551.01 -202"
+			values {model "*31"
+				spawnflags "1"
+				targetname "syn_antirush_coop"
+				CountType "1"
+				UseHUD "1"
+				PlayerValue "50"
+				wait "1.5"
+				OnTrigger "syn_antirush_text,Display,,1,-1"
+				OnPlayersIn "syn_antirush_prop,Kill,,0,1"
+				//OnPlayersIn "syn_end_light,TurnOff,,0,1"
+				OnPlayersIn "!self,Disable,,1,1"} }
 
 		create {classname "prop_dynamic" origin "-6464 3752 -384"
 			values {model "models/synergy/tools/syn_transition.mdl"
