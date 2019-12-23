@@ -79,8 +79,8 @@ d1_town_02
 				distance "256"
 				style "12"} }
 //on return
-		create {classname "trigger_push" origin "0 64 0"
-			values {model "*56"
+		create {classname "trigger_push" origin "-3648 -400 -3424"
+			values {model "*143"
 				StartDisabled "1"
 				targetname "edt_alley_push"
 				spawnflags "1"
@@ -196,7 +196,8 @@ d1_town_02
 				//"OnTrigger" 	"edt_shotty_equip,Enable,,0,0"
 				OnTrigger "syn_vint_trav_gman,Kill,,0,-1"
 				OnTrigger "syn_wall_removeme_t03,Kill,,0,-1"
-				OnTrigger "syn_vint_stopplayerjump_1,Kill,,0,-1"} }
+				OnTrigger "syn_vint_stopplayerjump_1,Kill,,0,-1"
+				OnTrigger "syn_vint_trav_trigger_hurt,Disable,,0,-1"} }
 //^^
 	//	//make it work if we start on 03
 	//	
@@ -719,7 +720,7 @@ d1_town_02
 			}
 		}
 
-//modi - antiskip				
+//modi - antiskip
 		create 
 		{
 			classname "trigger_hurt"
