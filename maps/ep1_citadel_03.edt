@@ -45,6 +45,12 @@ ep1_citadel_03
 //Core Top
 		create {classname "info_player_coop" origin "3055.281250 12575.795898 5567.541016"
 			values {angles "0 90 0" targetname "syn_spawn_player_6" StartDisabled "1"} }
+//Last camera
+		create {classname "info_player_coop" origin "2166 13188 5376"
+			values {angles "0 -140 0" targetname "syn_spawn_player_7" StartDisabled "1"} }
+//Near Core
+		create {classname "info_player_coop" origin "1978 11772 5056"
+			values {angles "0 -140 0" targetname "syn_spawn_player_8" StartDisabled "1"} }
 
 		create {classname "info_global_settings"
 			values {targetname "syn_global_settings" IsVehicleMap "0"} }
@@ -82,11 +88,11 @@ ep1_citadel_03
 		// this prevents a player trap from occuring after the core arms are lowered
 		create { classname "trigger_once" origin "3080 12666.6 5613.5"
 			values { "model" "*206" "spawnflags" "1" "StartDisabled" "0"
-				OnTrigger "checkpoint-syn_spawn_player_6,enable,,0,-1"
-				OnTrigger "syn_spawn_manager,SetCheckpoint,checkpoint-syn_spawn_player_6,0,-1"
-				OnTrigger "syn_spawn_player_3,disable,,0,-1"
+				OnTrigger "syn_spawn_player_6,enable,,0,-1"
+				OnTrigger "syn_spawn_manager,SetCheckpoint,syn_spawn_player_6,0,-1"
+				OnTrigger "syn_spawn_player_8,disable,,0,-1"
 				//OnTrigger "syn_spawn_manager,MovePlayers,,0.1,-1"
-				OnTrigger "syn_spawn_player_3,kill,,0.1,-1"
+				OnTrigger "syn_spawn_player_8,kill,,0.1,-1"
 			}
 		}
 
@@ -97,9 +103,27 @@ ep1_citadel_03
 		edit {classname "env_lightglow" values {GlowProxySize "48"} }
 		delete {classname "logic_achievement"}
 		edit {classname "trigger_multiple" origin "1619 11688 4272" values {targetname "syn_soundonce"} }
-		create {classname "logic_auto"
+		create {classname "logic_auto" origin "3080 12666.6 5613.5"
 			values {spawnflags "1"
 				OnMapSpawn "syn_soundonce,AddOutput,OnStartTouch sound_radiation_warning:kill::1:1,0,-1"} }
+
+//set checkpoint for last camera
+		create { classname "trigger_once" origin "1880.46 12932.3 5444"
+			values { "model" "*195" "spawnflags" "1" "StartDisabled" "0"
+				OnTrigger "syn_spawn_manager,SetCheckpoint,syn_spawn_player_7,0,-1"
+				OnTrigger "syn_spawn_player_6,disable,,0,-1"
+				OnTrigger "syn_spawn_player_6,kill,,0.1,-1"
+			}
+		}
+
+//set checkpoint near deadly core
+		create { classname "trigger_once" origin "2496 11360 5088"
+			values { "model" "*202" "spawnflags" "1" "StartDisabled" "0"
+				OnTrigger "syn_spawn_manager,SetCheckpoint,syn_spawn_player_8,0,-1"
+				OnTrigger "syn_spawn_player_3,disable,,0,-1"
+				OnTrigger "syn_spawn_player_3,kill,,0.1,-1"
+			}
+		}
 
 
 //Trav|Edt - dont move players until after alyx gets in end vator
