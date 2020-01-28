@@ -88,6 +88,9 @@ d3_breen_01
 
 		create { classname "info_teleport_destination" origin "-2436.75 -1405.8 -1463" values { targetname "MPVS_SPAWN_TP" } }
 
+//fix players GUI breaking
+		delete {classname "trigger_multiple" origin "256 0 -1920"}
+
 //Trav|Edt - lower ragdoll count
 		edit {classname "game_ragdoll_manager" values {MaxRagdollCount "2"} }//4
 
