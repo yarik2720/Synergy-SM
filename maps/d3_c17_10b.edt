@@ -122,8 +122,16 @@ d3_c17_10b
 				spawnflags "1"
 				OnTrigger "syn_spawn_manager,MovePlayers,,0,-1"
 				OnTrigger "trav_teleport_barney_trap,Teleport,,0,-1"
-				OnTrigger "syn_spawn_manager,SetCheckpoint,syn_spawn_player_2,0,-1"} }
+				OnTrigger "syn_spawn_manager,SetCheckpoint,syn_spawn_player_2,0,-1"
+				OnTrigger "syn_antirush_trap,Disable,,5,-1"} }
 
+		create {classname "trigger_push" origin "2577 925 597"
+			values {model "*41"
+				targetname "syn_antirush_trap"
+				spawnflags "1"
+				speed "750"
+				pushdir "0 0 0"} }
+				
 		create {classname "point_teleport"
 			origin "3264 1136 520"
 			values {targetname "trav_teleport_barney_trap"
