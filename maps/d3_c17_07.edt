@@ -106,7 +106,7 @@ d3_c17_07
 //prevent players rushing before alyx sequence
 		create {classname "trigger_push"
 			origin "4575 735 192"
-			values {model "*89"
+			values {model "*52"
 				spawnflags "1"
 				targetname "syn_antirush_push"
 				pushdir "0 90 0"
