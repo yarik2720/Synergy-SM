@@ -21,10 +21,12 @@
 	+ Vitage mode fixes
 	+ Fixed stucking on synergy transition wall and changed synergy coop counter positions
 	+ Antlion Guard health moved out from edt files, set needed health in file `synergy\cfg\skill_mod.cfg`, example:
-	> // Default health in Synergy 2560, in Half Life 2 - 500
-	>	sk_antlionguard_health "2560"
-	>	sk_antlionguard_dmg_charge "60"
-	>	sk_antlionguard_dmg_shove "25"
+        ```
+    	// Default health in Synergy 2560, in Half Life 2 - 500
+    	sk_antlionguard_health "2560"
+    	sk_antlionguard_dmg_charge "60"
+    	sk_antlionguard_dmg_shove "25"
+        ```
 
 - Map specific changes:
 + ##### Half Life 2
