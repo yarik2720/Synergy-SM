@@ -2,7 +2,7 @@ ep1_c17_02
 {
 	console
 	{
-		sk_antlionguard_health 7100
+		//sk_antlionguard_health 7100
 	}
 	entity
 	{

@@ -20,6 +20,11 @@
 	+ Damage players on vehicle spawn places who blocks spawning
 	+ Vitage mode fixes
 	+ Fixed stucking on synergy transition wall and changed synergy coop counter positions
+	+ Antlion Guard health moved out from edt files, set needed health in file `synergy\cfg\skill_mod.cfg`, example:
+	> // Default health is 500
+		sk_antlionguard_health "2560"
+		sk_antlionguard_dmg_charge "60"
+		sk_antlionguard_dmg_shove "25"
 
 - Map specific changes:
 + ##### Half Life 2

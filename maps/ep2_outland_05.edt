@@ -2,9 +2,9 @@ ep2_outland_05
 {
 	console
 	{
-		sk_antlionguard_dmg_shove "15"
-		sk_antlionguard_dmg_charge "40"
-		sk_antlionguard_health 7100 //500
+		//sk_antlionguard_dmg_shove "15"
+		//sk_antlionguard_dmg_charge "40"
+		//sk_antlionguard_health 7100 //500
 	}
 	entity
 	{

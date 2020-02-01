@@ -2,7 +2,8 @@ ep2_outland_02
 {
 	console
 	{
-		sk_antlionguard_health 7100 //500
+		//sk_antlionguard_health 7100 //500
+		mp_player_death_items 0
 	}
 	entity
 	{
