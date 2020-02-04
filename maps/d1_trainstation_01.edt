@@ -58,10 +58,11 @@ d1_trainstation_01
 		create 
 		{
 			classname "info_teleport_destination"
-			origin "-9419 -2483 22"
+			origin "-5520 -1858 55"
 			values {
 				targetname "modi_teleport_into_train"
-				angles "0 15 0"
+				angles "0 -18 0"
+				parentname "intro_train_2"
 			} 
 		}
 
@@ -441,7 +442,7 @@ d1_trainstation_01
 				OnTrigger "syn_barney_door_2,UnLock,,15,1"
 				OnTrigger "syn_barney_door_2,Close,,15.1,1"
 				OnTrigger "syn_barney_door_2,Lock,,16,1"
-				OnTrigger "!self,Disable,,1,1"
+				OnTrigger "!self,Disable,,16,1"
 			}
 		}
 
