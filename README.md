@@ -32,6 +32,7 @@
 + ##### Half Life 2
 	+ d1_trainstation_01
 		+ fixed players teleportation into the train after Gman scene
+		+ Changed Barney room teleport trigger to disable after TeleportPlayersNotTouching so it isn't a jarring teleport.
 	+ d1_trainstation_03
 		+ enabled never used track "Miscount Detected"
 		+ changed player percentage on trigger_coop
@@ -60,6 +61,7 @@
 		+ antiskip triggers fixed and more added
 		+ disabled trigger hurt after coming back from d1_town_03
 		+ fixed preventing backtracking to d1_town_03
+		+ added trigger to disable zombie spawns at lift section when standing near them (grind block).
 	+ d1_town_02a
 		+ antiskip trigger added
 		+ proper trigger coop position
