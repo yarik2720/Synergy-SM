@@ -97,6 +97,8 @@ d1_canals_08
 			values {targetname "syn_neweapon_got"
 				Negated "1"
 				filtername "syn_d1_canals_08_IHasGunz"} }
+		
+		edit {targetname "ai_warehouse_357cop" values {goalent "syn_d1_canals_08_IHasGunz"} }
 
 //--Spawns--
 //maybe unness
