@@ -97,6 +97,8 @@ d1_canals_08
 			values {targetname "syn_neweapon_got"
 				Negated "1"
 				filtername "syn_d1_canals_08_IHasGunz"} }
+		
+		edit {targetname "ai_warehouse_357cop" values {goalent "syn_d1_canals_08_IHasGunz"} }
 
 //--Spawns--
 //maybe unness
@@ -326,7 +328,10 @@ d1_canals_08
 //Trav|Edt - Auti-rush
 		create {classname "trigger_coop"
 			origin "-9024 8288 -544"
-			values {model "*81"
+			values {
+				//model "*81"
+				edt_mins "-200 -500 -50"
+				edt_maxs "200 350 250"
 				spawnflags "1"
 				//StartDisabled "1"
 				targetname "syn_antirush_coop"
