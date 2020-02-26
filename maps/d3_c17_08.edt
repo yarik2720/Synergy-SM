@@ -332,6 +332,16 @@ d3_c17_08
 				fadeout "1.25"
 				holdtime "2"
 				fxtime "0.25"} }
+		
+		create {classname "logic_auto"
+			values
+			{
+				spawnflags "1"
+				OnMapSpawn "ambush_soldier_1_ss_1,AddOutput,OnBeginSequence ambush_soldier_1:ThrowGrenadeAtTarget:syn_breakcatwalktarg:0:-1,0,-1"
+			}
+		}
+		edit {targetname "ambush_soldier_1_ss_1" values {m_iszPlay ""} }
+		create {classname "info_target" origin "933 -135 65" values {targetname "syn_breakcatwalktarg"} }
 
 //Trav|Edt - Functionality check
 		create {classname "logic_relay" values {targetname "trav_functionality_d3_c17_08"} }
