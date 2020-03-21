@@ -82,7 +82,7 @@ d2_coast_07
 		create {classname "info_global_settings"
 			values {IsVehicleMap "1" targetname "syn_global_settings"} }
 //Intro: Tunnel
-		create {classname "info_vehicle_spawn" origin "-7456 5952 1632"//-3936 6048 1600.95//-6016 6032 1600.95
+		create {classname "info_vehicle_spawn" origin "-7456 5952 1732"//-3936 6048 1600.95//-6016 6032 1600.95
 			values {targetname "syn_spawn_vehicle_1"
 				angles "0 285 0"//y285//y270
 				StartEnabled "1"
@@ -91,7 +91,42 @@ d2_coast_07
 				VehicleType "4"//1&4 disalllows multiple players -v27
 				VehicleSize "192"
 				model "models/vehicles/buggy_p2.mdl"//models/vehicles/buggy_p2.mdl
+				VehicleScript "scripts/vehicles/jeep_test.txt"
+				OnSpawnVehicle "syn_moreplayers,CheckSkill,,5,-1"} }
+		
+		create {classname "info_vehicle_spawn" origin "-7846 5792 1732"
+			values {targetname "syn_spawn_vehicle_1_med"
+				angles "0 285 0"
+				StartEnabled "0"
+				StartGunEnabled "1"
+				RespawnVehicle "1"
+				VehicleType "4"
+				VehicleSize "192"
+				model "models/vehicles/buggy_p2.mdl"
 				VehicleScript "scripts/vehicles/jeep_test.txt"} }
+		
+		create {classname "logic_difficulty"
+			values
+			{
+				targetname "syn_moreplayers"
+				LowerPlayer "10"
+				UpperPlayer "20"
+				OnMed "syn_spawn_vehicle_1_med,Enable,,0,-1"
+				OnHigh "syn_spawn_vehicle_1_med,Enable,,0,-1"
+			}
+		}
+		
+		create {classname "logic_difficulty"
+			values
+			{
+				targetname "syn_moreplayersthird"
+				LowerPlayer "10"
+				UpperPlayer "20"
+				OnMed "syn_spawn_vehicle_3_med,Enable,,0,1"
+				OnHigh "syn_spawn_vehicle_3_med,Enable,,0,1"
+				OnHigh "syn_spawn_vehicle_3_high,Enable,,0,1"
+			}
+		}
 //Small house
 		create {classname "info_vehicle_spawn" origin "-928 8968.01 1680"
 			values {targetname "syn_spawn_vehicle_2"
@@ -108,6 +143,29 @@ d2_coast_07
 			values {targetname "syn_spawn_vehicle_3"
 				angles "0 165 0"
 				StartEnabled "0"//
+				StartGunEnabled "1"
+				RespawnVehicle "1"
+				VehicleType "4"
+				VehicleSize "192"
+				model "models/vehicles/buggy_p2.mdl"
+				VehicleScript "scripts/vehicles/jeep_test.txt"
+				OnSpawnVehicle "syn_moreplayersthird,CheckSkill,,0,-1"} }
+		
+		create {classname "info_vehicle_spawn" origin "3825 7325 2064"
+			values {targetname "syn_spawn_vehicle_3_med"
+				angles "0 165 0"
+				StartEnabled "0"
+				StartGunEnabled "1"
+				RespawnVehicle "1"
+				VehicleType "4"
+				VehicleSize "192"
+				model "models/vehicles/buggy_p2.mdl"
+				VehicleScript "scripts/vehicles/jeep_test.txt"} }
+		
+		create {classname "info_vehicle_spawn" origin "3625 7325 2064"
+			values {targetname "syn_spawn_vehicle_3_high"
+				angles "0 165 0"
+				StartEnabled "0"
 				StartGunEnabled "1"
 				RespawnVehicle "1"
 				VehicleType "4"

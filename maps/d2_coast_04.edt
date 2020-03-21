@@ -83,17 +83,95 @@ console
 				VehicleType "4"//1&4 disalllows multiple players -v27
 				VehicleSize "192"
 				model "models/vehicles/buggy_p2.mdl"//models/vehicles/buggy_p2.mdl
-				VehicleScript "scripts/vehicles/jeep_test.txt"} }
-//Warehouse
-		create {classname "info_vehicle_spawn" origin "6031.99 -3216.01 392"
-			values {targetname "syn_spawn_vehicle_2"
-				angles "0 180 0"
-				StartEnabled "0"//
+				VehicleScript "scripts/vehicles/jeep_test.txt"
+				OnSpawnVehicle "syn_moreplayers,CheckSkill,,5,-1"} }
+		
+		create {classname "info_vehicle_spawn" origin "-9600 -632 112"
+			values {targetname "syn_spawn_vehicle_1_med"
+				angles "0 270 0"
+				StartEnabled "0"
 				StartGunEnabled "1"
 				RespawnVehicle "1"
-				VehicleType "4"//1&4 disalllows multiple players
+				VehicleType "4"
 				VehicleSize "192"
-				model "models\vehicles\buggy_p2.mdl"//models/buggy.mdl
+				model "models/vehicles/buggy_p2.mdl"
+				VehicleScript "scripts/vehicles/jeep_test.txt"} }
+		
+		create {classname "info_vehicle_spawn" origin "-9800 -432 112"
+			values {targetname "syn_spawn_vehicle_1_high"
+				angles "0 270 0"
+				StartEnabled "0"
+				StartGunEnabled "1"
+				RespawnVehicle "1"
+				VehicleType "4"
+				VehicleSize "192"
+				model "models/vehicles/buggy_p2.mdl"
+				VehicleScript "scripts/vehicles/jeep_test.txt"} }
+		
+		create {classname "logic_difficulty"
+			values
+			{
+				targetname "syn_moreplayers"
+				LowerPlayer "10"
+				UpperPlayer "20"
+				OnMed "syn_spawn_vehicle_1_med,Enable,,0,-1"
+				OnHigh "syn_spawn_vehicle_1_med,Enable,,0,-1"
+				OnHigh "syn_spawn_vehicle_1_high,Enable,,0,-1"
+			}
+		}
+		
+		create {classname "logic_difficulty"
+			values
+			{
+				targetname "syn_moreplayerssec"
+				LowerPlayer "10"
+				UpperPlayer "20"
+				OnMed "syn_spawn_vehicle_2_med,Enable,,0,-1"
+				OnHigh "syn_spawn_vehicle_2_med,Enable,,0,-1"
+			}
+		}
+		create {classname "logic_difficulty"
+			values
+			{
+				targetname "syn_moreplayersthird"
+				LowerPlayer "10"
+				UpperPlayer "20"
+				OnMed "syn_spawn_vehicle_3_med,Enable,,0,-1"
+				OnHigh "syn_spawn_vehicle_3_med,Enable,,0,-1"
+				OnHigh "syn_spawn_vehicle_3_high,Enable,,0,-1"
+			}
+		}
+		create {classname "logic_difficulty"
+			values
+			{
+				targetname "syn_moreplayersfourth"
+				LowerPlayer "10"
+				UpperPlayer "20"
+				OnMed "syn_spawn_vehicle_4_med,Enable,,0,-1"
+				OnHigh "syn_spawn_vehicle_4_med,Enable,,0,-1"
+			}
+		}
+//Warehouse
+		create {classname "info_vehicle_spawn" origin "6140 -3216.01 392"
+			values {targetname "syn_spawn_vehicle_2"
+				angles "0 180 0"
+				StartEnabled "0"
+				StartGunEnabled "1"
+				RespawnVehicle "1"
+				VehicleType "4"
+				VehicleSize "192"
+				model "models\vehicles\buggy_p2.mdl"
+				VehicleScript "scripts/vehicles/jeep_test.txt"} }
+		
+		create {classname "info_vehicle_spawn" origin "5968 -3216.01 392"
+			values {targetname "syn_spawn_vehicle_2_med"
+				angles "0 180 0"
+				StartEnabled "0"
+				StartGunEnabled "1"
+				RespawnVehicle "1"
+				VehicleType "4"
+				VehicleSize "192"
+				model "models\vehicles\buggy_p2.mdl"
 				VehicleScript "scripts/vehicles/jeep_test.txt"} }
 //Prejump
 		create {classname "info_vehicle_spawn" origin "-2080 -2240 1056"
@@ -106,6 +184,28 @@ console
 				VehicleSize "192"
 				model "models\vehicles\buggy_p2.mdl"//models/buggy.mdl
 				VehicleScript "scripts/vehicles/jeep_test.txt"} }
+		
+		create {classname "info_vehicle_spawn" origin "-2080 -2470 1056"
+			values {targetname "syn_spawn_vehicle_3_med"
+				angles "0 -5 0"
+				StartEnabled "0"
+				StartGunEnabled "1"
+				RespawnVehicle "1"
+				VehicleType "4"
+				VehicleSize "192"
+				model "models\vehicles\buggy_p2.mdl"
+				VehicleScript "scripts/vehicles/jeep_test.txt"} }
+		
+		create {classname "info_vehicle_spawn" origin "-2280 -2470 1056"
+			values {targetname "syn_spawn_vehicle_3_high"
+				angles "0 -10 0"
+				StartEnabled "0"
+				StartGunEnabled "1"
+				RespawnVehicle "1"
+				VehicleType "4"
+				VehicleSize "192"
+				model "models\vehicles\buggy_p2.mdl"
+				VehicleScript "scripts/vehicles/jeep_test.txt"} }
 //Post-jump
 		create {classname "info_vehicle_spawn" origin "-1887.99 3016 1000"
 			values {targetname "syn_spawn_vehicle_4"
@@ -116,6 +216,17 @@ console
 				VehicleType "4"//1&4 disalllows multiple players
 				VehicleSize "192"
 				model "models/vehicles/buggy_elite.mdl"//models/vehicles/buggy_p2.mdl
+				VehicleScript "scripts/vehicles/jeep_elite.txt"} }
+		
+		create {classname "info_vehicle_spawn" origin "-2135 2795 1000"
+			values {targetname "syn_spawn_vehicle_4_med"
+				angles "0 270 0"
+				StartEnabled "0"
+				StartGunEnabled "1"
+				RespawnVehicle "1"
+				VehicleType "4"
+				VehicleSize "192"
+				model "models/vehicles/buggy_elite.mdl"
 				VehicleScript "scripts/vehicles/jeep_elite.txt"} }
 
 //--Checkpoints--
@@ -361,6 +472,7 @@ console
 			values {model "*68"
 				spawnflags "32"//vehicle only
 				OnTrigger "syn_spawn_vehicle_2,Enable,,1,-1"
+				OnTrigger "syn_moreplayerssec,CheckSkill,,1,-1"
 				OnTrigger "syn_carreq_push,Disable,,1,-1"
 				OnTrigger "syn_carreq_alert,Disable,,1,-1"
 				OnTrigger "syn_carreq_prop,Kill,,0,1"} }
@@ -380,6 +492,7 @@ console
 			values {spawnflags "1"
 				targetname "jeepwindow_breakrelay"
 				OnTrigger "autosave,save,,3,-1"
+				OnTrigger "syn_moreplayersthird,CheckSkill,,0,-1"
 				OnTrigger "syn_spawn_vehicle_3,Enable,,0,-1"
 				OnTrigger "syn_spawn_manager,SetCheckpoint,syn_spawn_player_3b,0,-1"} }
 
@@ -491,6 +604,7 @@ console
 				OnTrigger "autosave,Save,,0,-1"
 				OnTrigger "syn_spawn_manager,SetCheckpoint,syn_spawn_player_4,0,-1"
 				OnTrigger "syn_spawn_vehicle_4,Enable,,0,-1"
+				OnTrigger "syn_moreplayersfourth,CheckSkill,,0,-1"
 				//OnTrigger "MPVS_SPAWN,Kill,,1,-1"
 				"OnTrigger" "CP01,SetCheckpoint,,0,1"
 				"OnTrigger" "CP01,MovePlayers,1,0.1,1"

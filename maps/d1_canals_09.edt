@@ -64,7 +64,7 @@ d1_canals_09
 		create {classname "info_global_settings"
 			values {IsVehicleMap "1" targetname "syn_global_settings"} }
 
-		create {classname "info_vehicle_spawn" origin "7488 9920 -480.02"//7718.65 9928.35 -480.02
+		create {classname "info_vehicle_spawn" origin "7480 9920 -480.02"//7718.65 9928.35 -480.02
 			values {targetname	"syn_spawn_vehicle_1"
 				angles "0 0 0"
 				StartEnabled "1"
@@ -73,9 +73,10 @@ d1_canals_09
 				VehicleType "2"
 				VehicleSize "164"
 				model "models/airboat.mdl"
-				VehicleScript "scripts/vehicles/airboat.txt"} }
+				VehicleScript "scripts/vehicles/airboat.txt"
+				OnSpawnVehicle "syn_moreplayers,CheckSkill,,5,-1"} }
 
-		create {classname "info_vehicle_spawn" origin "7872 9920 -480.02"
+		create {classname "info_vehicle_spawn" origin "7880 9920 -480.02"
 			values {targetname	"syn_spawn_vehicle_1"
 				angles "0 0 0"
 				StartEnabled "1"
@@ -84,10 +85,55 @@ d1_canals_09
 				VehicleType "2"
 				VehicleSize "164"
 				model "models/airboat.mdl"
+				VehicleScript "scripts/vehicles/airboat.txt"
+				OnSpawnVehicle "syn_moreplayers,CheckSkill,,5,-1"} }
+		
+		create {classname "info_vehicle_spawn" origin "7680 9920 -480.02"
+			values {targetname	"syn_spawn_vehicle_1_med"
+				angles "0 0 0"
+				StartEnabled "0"
+				RespawnVehicle "1"
+				Ownership "1"
+				VehicleType "2"
+				VehicleSize "164"
+				model "models/airboat.mdl"
 				VehicleScript "scripts/vehicles/airboat.txt"} }
+		
+		create {classname "logic_difficulty"
+			values
+			{
+				targetname "syn_moreplayers"
+				LowerPlayer "10"
+				UpperPlayer "20"
+				OnMed "syn_spawn_vehicle_1_med,Enable,,0,-1"
+				OnHigh "syn_spawn_vehicle_1_med,Enable,,0,-1"
+			}
+		}
+		
+		create {classname "logic_difficulty"
+			values
+			{
+				targetname "syn_moreplayerssec"
+				LowerPlayer "10"
+				UpperPlayer "20"
+				OnMed "syn_spawn_vehicle_2_med,Enable,,0,-1"
+				OnHigh "syn_spawn_vehicle_2_med,Enable,,0,-1"
+			}
+		}
 
 		create {classname "info_vehicle_spawn" origin "13152 -1632 -480"
 			values {targetname	"syn_spawn_vehicle_2"
+				angles "0 90 0"
+				StartEnabled "0"
+				RespawnVehicle "1"
+				Ownership "1"
+				VehicleType "2"
+				VehicleSize "164"
+				model "models/airboat.mdl"
+				VehicleScript "scripts/vehicles/airboat.txt"} }
+		
+		create {classname "info_vehicle_spawn" origin "13152 -1800 -480"
+			values {targetname	"syn_spawn_vehicle_2_med"
 				angles "0 90 0"
 				StartEnabled "0"
 				RespawnVehicle "1"
@@ -109,6 +155,7 @@ d1_canals_09
 			values {model "*19"
 				spawnflags "1"
 				OnTrigger "syn_spawn_manager,SetCheckpoint,syn_spawn_player_2,0,-1"
+				OnTrigger "syn_moreplayerssec,CheckSkill,,0,1"
 				OnTrigger "syn_spawn_vehicle_2,Enable,,0,-1"} }
 
 //--Extra--
