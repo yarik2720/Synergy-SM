@@ -75,7 +75,7 @@ d2_coast_10
 			create {classname "info_global_settings"
 			values {IsVehicleMap "1" targetname "syn_global_settings"} }
 
-		create {classname "info_vehicle_spawn" origin "-3184.01 -4880 1440"
+		create {classname "info_vehicle_spawn" origin "-3184.01 -4880 1540"
 			values {targetname "syn_spawn_vehicle_1"
 				angles "0 210 0"
 				StartEnabled "1"

@@ -71,12 +71,66 @@ ep2_outland_10
 				VehicleType "4"
 				VehicleSize "192"
 				model "models/vehicles/buggy_p2.mdl"
+				VehicleScript "scripts/vehicles/jeep_test.txt"
+				OnSpawnVehicle "syn_moreplayers,CheckSkill,,1,-1"} }
+		
+		create {classname "info_vehicle_spawn" origin "5092 -9930 -960"
+			values {targetname "syn_spawn_vehicle_1_med"
+				angles "0 345 0"
+				StartEnabled "0"
+				RespawnVehicle "1"
+				VehicleType "4"
+				VehicleSize "192"
+				model "models/vehicles/buggy_p2.mdl"
 				VehicleScript "scripts/vehicles/jeep_test.txt"} }
+		
+		create {classname "info_vehicle_spawn" origin "4990 -10185 -960"
+			values {targetname "syn_spawn_vehicle_1_high"
+				angles "0 345 0"
+				StartEnabled "0"
+				RespawnVehicle "1"
+				VehicleType "4"
+				VehicleSize "192"
+				model "models/vehicles/buggy_p2.mdl"
+				VehicleScript "scripts/vehicles/jeep_test.txt"} }
+		
+		create {classname "logic_difficulty"
+			values
+			{
+				targetname "syn_moreplayers"
+				LowerPlayer "10"
+				UpperPlayer "20"
+				OnMed "syn_spawn_vehicle_1_med,Enable,,0,-1"
+				OnHigh "syn_spawn_vehicle_1_med,Enable,,0,-1"
+				OnHigh "syn_spawn_vehicle_1_high,Enable,,0,-1"
+			}
+		}
+		
+		create {classname "logic_difficulty"
+			values
+			{
+				targetname "syn_moreplayerssec"
+				LowerPlayer "10"
+				UpperPlayer "20"
+				OnMed "syn_spawn_vehicle_2_med,Enable,,0,-1"
+				OnHigh "syn_spawn_vehicle_2_med,Enable,,0,-1"
+			}
+		}
 
 		create {classname "info_vehicle_spawn" origin "3488 -64 -128"
 			values {targetname "syn_spawn_vehicle_2"
-				angles "0 345 0"
-				StartEnabled "0"//
+				angles "0 0 0"
+				StartEnabled "0"
+				RespawnVehicle "1"
+				VehicleType "4"
+				VehicleSize "192"
+				model "models/vehicles/buggy_p2.mdl"
+				VehicleScript "scripts/vehicles/jeep_test.txt"} }
+		
+		create {classname "info_vehicle_spawn" origin "3668 -64 -128"
+			values {targetname "syn_spawn_vehicle_2_med"
+				angles "0 0 0"
+				StartEnabled "0"
 				RespawnVehicle "1"
 				VehicleType "4"
 				VehicleSize "192"
@@ -85,6 +139,7 @@ ep2_outland_10
 
 		create {classname "logic_relay"
 			values {targetname "logic_ballgenerator1_disabled"
+				OnTrigger "syn_moreplayerssec,CheckSkill,,0,1"
 				OnTrigger "syn_spawn_vehicle_2,Enable,,0,-1"} }
 
 //cruel way of disableing gun

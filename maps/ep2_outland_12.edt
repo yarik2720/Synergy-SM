@@ -56,7 +56,40 @@ ep2_outland_12
 				VehicleType "4"
 				VehicleSize "192"
 				model "models/vehicles/buggy_p2.mdl"
+				VehicleScript "scripts/vehicles/jeep_test.txt"
+				OnSpawnVehicle "syn_moreplayers,CheckSkill,,1,-1"} }
+		
+		create {classname "info_vehicle_spawn" origin "-940 -6330 -288"
+			values {targetname "syn_spawn_vehicle_1_med"
+				angles "0 -60 0"
+				StartEnabled "0"
+				RespawnVehicle "1"
+				VehicleType "4"
+				VehicleSize "192"
+				model "models/vehicles/buggy_p2.mdl"
 				VehicleScript "scripts/vehicles/jeep_test.txt"} }
+		
+		create {classname "info_vehicle_spawn" origin "-940 -6330 -288"
+			values {targetname "syn_spawn_vehicle_1_high"
+				angles "0 -20 0"
+				StartEnabled "0"
+				RespawnVehicle "1"
+				VehicleType "4"
+				VehicleSize "192"
+				model "models/vehicles/buggy_p2.mdl"
+				VehicleScript "scripts/vehicles/jeep_test.txt"} }
+		
+		create {classname "logic_difficulty"
+			values
+			{
+				targetname "syn_moreplayers"
+				LowerPlayer "10"
+				UpperPlayer "20"
+				OnMed "syn_spawn_vehicle_1_med,Enable,,0,-1"
+				OnHigh "syn_spawn_vehicle_1_med,Enable,,0,-1"
+				OnHigh "syn_spawn_vehicle_1_high,Enable,,0,-1"
+			}
+		}
 
 	//	create {classname "trigger_once" origin "-704 -7122 -232"
 	//		values {model "*221"
