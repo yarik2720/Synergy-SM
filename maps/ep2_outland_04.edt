@@ -325,27 +325,26 @@ ep2_outland_04
 		// the level will change once the elevator reaches the top
 		// however we need to make sure that all the players are in the elevator
 		// or they wont be saved
-		create { classname "info_player_coop" origin "4916 -1588 -2245" values { angles "0 -20 0" targetname "PS_End" StartDisabled "1" } }
-		create { classname "info_teleport_destination" origin "4916 -1588 -2245" values { angles "0 -20 0" targetname "PS_EndTP" } }
+		create { classname "info_player_coop" origin "4926 -1585 398" values { angles "0 -20 0" targetname "PS_End" StartDisabled "1" parentname "elevator" } }
+		create { classname "info_teleport_destination" origin "4926 -1585 398" values { angles "0 -20 0" targetname "PS_EndTP" parentname "elevator" } }
 
 		delete { targetname "elevator_exit_trigger" }
 		create { "classname" "trigger_once" "origin" "4911.5 -1607 420"
 			values {
-				"model" "*74"
-				"targetname" "elevator_exit_trigger"
-				"StartDisabled" "1"
-				"spawnflags" "1"
-				"parentname" "elevator"
-				"hammerid" "1413592"
-				"OnTrigger" "elevator_door_1_close_rl,Trigger,,0,1"		// 0
-				"OnTrigger" "vort_elevator_dialog_lcs,Start,,1,-1"		// 0
-				"OnTrigger" "elevator_moving_shake,StartShake,,2.5,-1"	// 1.5
-				"OnTrigger" "elevator,StartForward,,2.5,1"	// 1.5
-				"OnTrigger" "syn_modi_elevator_clip,Kill,,2.5,1"
+				edt_getbspmodelfor_targetname "elevator_exit_trigger"
+				targetname "elevator_exit_trigger"
+				StartDisabled "1"
+				spawnflags "1"
+				parentname "elevator"
+				OnTrigger "elevator_door_1_close_rl,Trigger,,0,1"
+				OnTrigger "vort_elevator_dialog_lcs,Start,,1,-1"
+				OnTrigger "elevator_moving_shake,StartShake,,2.5,-1"
+				OnTrigger "elevator,StartForward,,2.5,1"
+				OnTrigger "syn_modi_elevator_clip,Kill,,2.5,1"
 
-				"OnTrigger" "syn_spawn_manager,SetCheckPoint,PS_End,0,-1"
-			//	"OnTrigger" "syn_spawn_manager,MovePlayers,,0.1,-1"
-				"OnTrigger" "syn_spawn_manager,TeleportPlayers,PS_EndTP,0.1,-1"
+				OnTrigger "syn_spawn_manager,SetCheckPoint,PS_End,0,-1"
+			//	OnTrigger "syn_spawn_manager,MovePlayers,,0.1,-1"
+				OnTrigger "syn_spawn_manager,TeleportPlayers,PS_EndTP,0.1,-1"
 			}
 		}
 //Trav|Edt - Functionality check
