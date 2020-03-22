@@ -5,14 +5,18 @@
 *.doc
 *.dt
 *.inf
+*.html
+*.log
 *.rad
+*.tga
 *.txt
 *.tmp
 *.vpk
 *.vbsp
-*.html
+*.vdf
 
 //folders
+addons/
 bin/
 cache/
 cfg/
@@ -22,11 +26,17 @@ downloadlists/
 ent_cache/
 graphs/
 materials/
+maps/sxpmgrav/
+models/
 resource/
 save/
+save1/
+save2/
 scripts/
 sound/
 workshop/
-*.log
-*.vdf
-*.tga
+user_custom
+user_custom/
+
+//some files
+maps/remount.inc
