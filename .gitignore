@@ -5,6 +5,7 @@
 *.doc
 *.dt
 *.inf
+*.inc
 *.html
 *.log
 *.rad
@@ -32,11 +33,10 @@ resource/
 save/
 save1/
 save2/
+SDK/
 scripts/
 sound/
 workshop/
 user_custom
 user_custom/
 
-//some files
-maps/remount.inc
