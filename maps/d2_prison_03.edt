@@ -249,9 +249,11 @@ d2_prison_03
 				DisableShadows "1"} }
 
 //Trav|Edt - autirush
-		create {classname "trigger_coop"
-			origin "-3572.5 6048 66"
-			values {model "*3"
+		create {classname "trigger_coop" origin "-3572.5 6048 66"
+			values
+			{
+				edt_mins "-200 -90 -50"
+				edt_maxs "200 90 50"
 				spawnflags "1"
 				targetname "syn_antirush_coop"
 				CountType "1"
@@ -261,7 +263,9 @@ d2_prison_03
 				OnTrigger "syn_antirush_text,Display,,0,-1"
 				OnPlayersIn "syn_antirush_blocker,Kill,,0,1"
 				//OnPlayersIn "syn_antirush_light,TurnOff,,0,1"
-				OnPlayersIn "!self,Disable,,1,1"} }
+				OnPlayersIn "!self,Disable,,1,1"
+			}
+		}
 
 		create {classname "prop_dynamic" origin "-3440 6336 -8"
 			values {model "models/synergy/tools/syn_transition.mdl"
