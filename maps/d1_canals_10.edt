@@ -64,8 +64,8 @@ d1_canals_10
 		create {classname "info_global_settings"
 			values {IsVehicleMap "1" targetname "syn_global_settings"} }
 
-		create {classname "info_vehicle_spawn" origin "11777 -12120 -536"
-			values {targetname	"syn_spawn_vehicle_1"
+		create {classname "info_vehicle_spawn" origin "11777 -12120 -436"
+			values {targetname "syn_spawn_vehicle_1"
 				angles "0 0 0"
 				StartEnabled "1"
 				RespawnVehicle "1"
@@ -76,8 +76,8 @@ d1_canals_10
 				VehicleScript "scripts/vehicles/airboat.txt"
 				OnSpawnVehicle "syn_moreplayers,CheckSkill,,5,-1"} }
 		
-		create {classname "info_vehicle_spawn" origin "11720 -12344 -536"
-			values {targetname	"syn_spawn_vehicle_1_med"
+		create {classname "info_vehicle_spawn" origin "11720 -12344 -436"
+			values {targetname "syn_spawn_vehicle_1_med"
 				angles "0 0 0"
 				StartEnabled "0"
 				RespawnVehicle "1"
@@ -87,8 +87,8 @@ d1_canals_10
 				model "models/airboat.mdl"
 				VehicleScript "scripts/vehicles/airboat.txt"} }
 		
-		create {classname "info_vehicle_spawn" origin "11848 -11895 -525"
-			values {targetname	"syn_spawn_vehicle_1_high"
+		create {classname "info_vehicle_spawn" origin "11848 -11895 -425"
+			values {targetname "syn_spawn_vehicle_1_high"
 				angles "0 0 0"
 				StartEnabled "0"
 				RespawnVehicle "1"
@@ -134,7 +134,7 @@ d1_canals_10
 		}
 
 		create {classname "info_vehicle_spawn" origin "11592 1136 -432"
-			values {targetname	"syn_spawn_vehicle_2"
+			values {targetname "syn_spawn_vehicle_2"
 				angles "0 30 0"
 				StartEnabled "0"
 				RespawnVehicle "1"
@@ -146,7 +146,7 @@ d1_canals_10
 				OnSpawnVehicle "syn_moreplayerssec,CheckSkill,,5,-1"} }
 		
 		create {classname "info_vehicle_spawn" origin "11400 1136 -432"
-			values {targetname	"syn_spawn_vehicle_2_med"
+			values {targetname "syn_spawn_vehicle_2_med"
 				angles "0 30 0"
 				StartEnabled "0"
 				RespawnVehicle "1"
@@ -157,7 +157,7 @@ d1_canals_10
 				VehicleScript "scripts/vehicles/airboat.txt"} }
 
 		create {classname "info_vehicle_spawn" origin "5024 9664.01 -448"
-			values {targetname	"syn_spawn_vehicle_3"
+			values {targetname "syn_spawn_vehicle_3"
 				angles "0 90 0"
 				StartEnabled "0"
 				RespawnVehicle "1"
@@ -169,7 +169,7 @@ d1_canals_10
 				OnSpawnVehicle "syn_moreplayersthird,CheckSkill,,0,-1"} }
 		
 		create {classname "info_vehicle_spawn" origin "5024 9494.01 -448"
-			values {targetname	"syn_spawn_vehicle_3_med"
+			values {targetname "syn_spawn_vehicle_3_med"
 				angles "0 90 0"
 				StartEnabled "0"
 				RespawnVehicle "1"
@@ -180,7 +180,7 @@ d1_canals_10
 				VehicleScript "scripts/vehicles/airboat.txt"} }
 		
 		create {classname "info_vehicle_spawn" origin "5264 9494.01 -448"
-			values {targetname	"syn_spawn_vehicle_3_high"
+			values {targetname "syn_spawn_vehicle_3_high"
 				angles "0 90 0"
 				StartEnabled "0"
 				RespawnVehicle "1"
