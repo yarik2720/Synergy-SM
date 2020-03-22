@@ -17,6 +17,7 @@
 - Changes over all maps (or almost all):
 	+ Notifications of mission failure (will be removed when next version releases)
 	+ Added Elite Jeep spawn on some hl2 and ep2 maps (also fix for Jeep Elite included in `scripts` folder)
+	+ Increased vehicle spawns for more players
 	+ Damage players on vehicle spawn places who blocks spawning
 	+ Vitage mode fixes
 	+ Fixed stucking on synergy transition wall and changed synergy coop counter positions
@@ -45,10 +46,19 @@
 		+ closed skip through wall
 	+ d1_canals_07
 		+ added checkpoint before gates opening
+	+ d1_canals_08
+		+ extended trigger_coop size while waiting other players
+	+ d1_canals_09
+		+ extended trigger_coop size while waiting other players
+	+ d1_canals_10
+		+ extended trigger_coop size while waiting other players
 	+ d1_canals_11
 		+ preventing blocking ramp
 		+ fixes for trigger_coop
 		+ preventing blocking gates opening
+		+ extended trigger_coop size while waiting other players
+	+ d1_canals_12
+		+ extended trigger_coop size while waiting other players
 	+ d1_canals_13
 		+ fixed helicopter health in vintage mode
 	+ d1_eli_01
@@ -118,6 +128,7 @@
 	+ d3_c17_08
 		+ remove all wooden boards near manhacks to prevent clients crashes by exploding them (this also still crashes original hl2)
 		+ fix mp_antirush_disable breaking elevator on vanilla mode
+		+ fix catwalk grenade throw sequence
 	+ d3_c17_09
 		+ prevent skip without waiting for Barney
 	+ d3_c17_10a
@@ -207,6 +218,7 @@
 		+ added checkpoints on the map
 	+ ep2_outland_06
 		+ antiskip triggers
+		+ Alyx sniper invulnerable
 		+ reenabled players teleport after forklift
 	+ on maps ep2_outland_06a - ep2_outland_10a made Alyx and jalopy teleporting at the end so they will be on next map after changelevel
 	+ ep2_outland_06a
