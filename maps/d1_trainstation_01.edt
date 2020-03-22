@@ -27,6 +27,8 @@ d1_trainstation_01
 				OnMapSpawn "logic_start_train,AddOutput,OnTrigger syn_vint_ld_1:CheckSkill::0:-1,0,-1"
 				// Move everyone to the train (failsafe)
 				OnMapSpawn "logic_start_train,AddOutput,OnTrigger syn_spawn_manager:TeleportPlayers:modi_teleport_into_train:0:-1,0,-1"
+				// Fix late zoom not un-zooming
+				OnMapSpawn "logic_start_train,AddOutput,OnTrigger env_zoom:UnZoom::0:-1,0,-1"
 				// barney_door_2
 				OnMapSpawn "syn_barney_door_2,AddOutput,OnFullyClosed !self:Lock::0:-1,0,-1"
 				OnMapSpawn "syn_barney_door_2,AddOutput,OnBlockedClosing !self:Close::1:-1,0,-1"
@@ -37,7 +39,7 @@ d1_trainstation_01
 				// storage room
 				OnMapSpawn "trigger_storage_close_door_1,AddOutput,target syn_barneyroom_wait_target2,0,-1"
 				OnMapSpawn "trigger_storage_close_door_1,AddOutput,OnPlayersIn !self:TeleportPlayersNotTouching::0:1,0,-1"
-				OnMapSpawn "trigger_storage_close_door_1,AddOutput,OnPlayersIn !self:Disable::0:1,0,-1"
+				OnMapSpawn "trigger_storage_close_door_1,AddOutput,OnPlayersIn !self:Disable::0.1:1,0,-1"
 				OnMapSpawn "storage_room_door,AddOutput,OnFullyClosed syn_end_ladder:Enable::0:1,0,-1"
 				// ?
 				OnMapSpawn "syn_barney_door_2,AddOutput,OnClose trav_barney_room_blocker:Enable::0:-1,8,-1"
