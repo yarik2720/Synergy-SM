@@ -142,6 +142,9 @@ ep2_outland_03
 				"overridescript" "mass,1800" // 2000
 			}
 		}
+		
+		edit {targetname "cave_entry_gate" values {overridescript "mass,8000"} }
+		edit {targetname "cave_gate" values {overridescript "mass,8000"} }
 
 		// do not let players get stuck down below
 		// activate a checkpoint here
