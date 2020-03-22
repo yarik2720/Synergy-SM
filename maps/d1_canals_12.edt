@@ -323,8 +323,11 @@ d1_canals_12
 
 //Trav|Edt - Auti-rush
 		create {classname "trigger_coop"
-			origin "4164 -5188 177"
-			values {model "*24" angles "0 270 0"
+			origin "2438 -7560 160" //4164 -5188 177
+			values {
+				//model "*24" angles "0 270 0"
+				edt_mins "-200 -500 -50"
+				edt_maxs "200 500 250"
 				spawnflags "1"
 				//StartDisabled "1"
 				targetname "syn_antirush_coop"
