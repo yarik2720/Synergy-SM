@@ -317,11 +317,12 @@ d1_canals_05
 				spawnflags "2"} }
 
 //Trav|Edt - Auti-rush
-		create {classname "trigger_coop"
-			origin "2048 -640 -464"
-			values {model "*58"
+		create {classname "trigger_coop" origin "-3715 -2070 -400"
+			values
+			{
+				edt_mins "-600 -600 -200"
+				edt_maxs "600 600 200"
 				spawnflags "1"
-				//StartDisabled "1"
 				targetname "syn_antirush_coop"
 				CountType "1"
 				UseHUD "1"
@@ -331,7 +332,9 @@ d1_canals_05
 				OnPlayersIn "syn_antirush_wall,Kill,,0,1"
 				OnPlayersIn "syn_antirush_light,Kill,,0,1"
 				OnPlayersIn "syn_antirush_push,Disable,,0,1"
-				OnPlayersIn "!self,Disable,,1,1"} }
+				OnPlayersIn "!self,Disable,,1,1"
+			}
+		}
 
 		create {classname "prop_dynamic" origin "-4080 -2304 -528"
 			values {model "models/synergy/tools/syn_transition.mdl"
