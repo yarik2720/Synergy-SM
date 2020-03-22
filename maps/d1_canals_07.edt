@@ -438,7 +438,6 @@ d1_canals_07
 			{
 				edt_mins "-1000 -600 -200"
 				edt_maxs "1000 600 200"
-				angles "0 90 -21"
 				spawnflags "1"
 				targetname "syn_antirush_coop"
 				CountType "1"
