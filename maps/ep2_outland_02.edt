@@ -43,6 +43,7 @@ ep2_outland_02
 			values {spawnflags "1"
 				OnMapSpawn "smg,AddOutput,OnPlayerPickup syn_new_weapon:Enable::0:-1,0,-1"
 				OnMapSpawn "smg,AddOutput,OnPlayerPickup syn_new_weapon:EquipAllPlayers::0.1:-1,0,-1"
+				OnMapSpawn "relay_gman_scene_end,AddOutput,OnTrigger zoomtodefault:Zoom::0:-1,0,-1"
 				OnMapSpawn "lcs_gman_scene,AddOutput,OnTrigger14 syn_g1:Teleport::3.3:-1,0,-1"} }
 
 // env_zooms - all players
@@ -546,8 +547,8 @@ ep2_outland_02
 		edit { targetname "pvc5" values { spawnflags "140" } }
 		edit { targetname "pvc2" values { spawnflags "188" } } // 60
 		edit { targetname "pvc4" values { spawnflags "140" } }
-
-		// TODO: env_zoom
+		
+		create {classname "env_zoom" values {targetname "zoomtodefault" Rate "1.0" fov "90" allplayers "1"} }
 
 		// remove this trigger and have it trigger its contents in the player_in_elevator_trigger (see above)
 		delete { classname "trigger_once" origin "-3124 -9469 56.5" }
