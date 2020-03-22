@@ -113,6 +113,10 @@ ep2_outland_06
 		edit {targetname "warehouse_exitdoor" values {spawnflags "16384"} }
 		edit {targetname "door_portal_02" values {spawnflags "0"} }
 		edit {targetname "door_portal_01" values {spawnflags "0"} }
+		
+//Alyx sniper invulnerable
+		edit {targetname "alyx_sniper" values {damagefilter "syn_null"} }
+		create {classname "filter_activator_class" values {targetname "syn_null" negated "0" filterclass "null"} }
 
 //Trav|Edt - prevent skip of entire level to physjump over building
 		create {classname "func_brush"
