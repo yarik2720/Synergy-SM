@@ -228,7 +228,6 @@
 		+ antiskip triggers
 	+ ep2_outland_08
 		+ removed door that can make transition to another map (looks bad, maybe I'll remade it later)
-		+ added ammo crate with rpg, sometimes helicopter doesn't throw grenades
 	+ ep2_outland_10
 		+ teleport jalopy, players and Alyx on trap, also locks jalopy before trap is not opened
 		+ more antirush events to prevent breaking game
