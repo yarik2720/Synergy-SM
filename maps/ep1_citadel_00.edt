@@ -33,6 +33,9 @@ ep1_citadel_00
 //Dog
 		create {classname "info_player_coop" origin "-8972 5777 -143"//-9008 5788 -143
 			values {angles "0 52 0" targetname "syn_spawn_player_2" StartDisabled "1"} }
+		
+		create {classname "info_player_coop" origin "-9025 5800 -110"
+			values {angles "0 30 0" targetname "syn_spawnpoint_02after" StartDisabled "1"} }
 
 		create {classname "info_teleport_destination" origin "-8972 5777 -143" values {angles "0 52 0" targetname "syn_spawn_player_2TP" } }
 //Drop
@@ -367,10 +370,11 @@ ep1_citadel_00
 				"m_flRadius" "0"
 				"targetname" "ss_DogIntro"
 				"angles" "0 270 0"
-					"OnScriptEvent01" "syn_vehicle_blackout,ExitVehicle,,0.1,-1"
-					"OnScriptEvent01" "syn_vehicle_blackout,Unlock,,0,-1"
+				"OnScriptEvent01" "syn_vehicle_blackout,ExitVehicle,,0.1,-1"
+				"OnScriptEvent01" "syn_vehicle_blackout,Unlock,,0,-1"
 				"OnScriptEvent01" "vehicle_blackout,ExitVehicle,,0.1,-1"
-				"OnScriptEvent01" "vehicle_blackout,Unlock,,0,-1"} }
+				"OnScriptEvent01" "vehicle_blackout,Unlock,,0,-1"
+				"OnScriptEvent01" "syn_spawn_manager,SetCheckPoint,syn_spawnpoint_02after,1,1"} }
 
 
 		create {classname "logic_auto"
@@ -379,7 +383,7 @@ ep1_citadel_00
 				OnMapSpawn "ss_DogIntro,AddOutput,OnScriptEvent01 syn_equip_start:Enable::0:-1,0,-1"
 				OnMapSpawn "ss_DogIntro,AddOutput,OnScriptEvent01 syn_equip_start:EquipAllPlayers::0:-1,0,-1"
 				OnMapSpawn "ss_DogIntro,AddOutput,OnScriptEvent01 syn_spawn_manager:TeleportPlayers:syn_spawn_player_2TP:0.1:1,0,1"
-					OnMapSpawn "ss_DogIntro,AddOutput,OnScriptEvent01 ghostanim_DogIntro:Kill::0:-1,0,-1"
+				OnMapSpawn "ss_DogIntro,AddOutput,OnScriptEvent01 ghostanim_DogIntro:Kill::0:-1,0,-1"
 				OnMapSpawn "ss_DogIntro,AddOutput,targetname ss_DogIntro,1,-1"
 				OnMapSpawn "lcs_ep1_intro_01,AddOutput,OnTrigger1 ss_DogIntro:BeginSequence::0:-1,0,-1"} }
 
