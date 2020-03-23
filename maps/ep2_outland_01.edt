@@ -123,7 +123,21 @@ ep2_outland_01
 
 		create {classname "logic_auto"
 			values {spawnflags "1"
+				OnMapSpawn "relay_fade_in,AddOutput,OnTrigger syn_forcevehicle:Enable::0:1,0,-1"
+				OnMapSpawn "relay_bulleye_dead,AddOutput,OnTrigger syn_forcevehicle:kill::0:-1,0,-1"
 				OnMapSpawn "trigger.alyx.death,AddOutput,OnTrigger syn_spawn_manager:MovePlayers::0:-1,0,-1"} }
+		
+		create {classname "trigger_multiple" origin "-5498 4583 -135"
+			values
+			{
+				edt_mins "-50 -50 -50"
+				edt_maxs "50 50 50"
+				spawnflags "512"
+				targetname "syn_forcevehicle"
+				startdisabled "1"
+				OnTrigger "coreo_vehicle_01,EnterVehicleImmediate,,0,-1"
+			}
+		}
 
 //Elevator Fall
 		create {classname "logic_relay"
