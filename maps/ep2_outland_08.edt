@@ -98,7 +98,7 @@ ep2_outland_08
 		}
 
 		create {classname "info_vehicle_spawn" origin "-12576 -10240 448"
-			values {targetname	"syn_vint_spawn_vehicle_1"
+			values {targetname "syn_vint_spawn_vehicle_1"
 				angles "0 0 0"
 				StartEnabled "0"
 				RespawnVehicle "1"
@@ -138,41 +138,7 @@ ep2_outland_08
 			values {model "models/props_junk/gnome.mdl"
 				angles "0 270 0" spawnflags "1"
 				targetname "gnome"} }
-				
-//modi - add ammo crate with rpg, sometimes helicopter doesn't throw grenades
-		create 
-		{
-			classname "item_ammo_crate"
-			origin "-2810 870 196.5"
-			values 
-			{
-				angles "0 180 0"
-				AmmoType "3" 
-			}
-		}
-				
-		create 
-		{
-			classname "weapon_rpg" 
-			origin "-2840 870 196.5" 
-			values 
-			{
-				angles "0 45 0" 
-				OnPlayerPickup "syn_new_weapons,Enable,,0,1"
-				OnPlayerPickup "syn_new_weapons,EquipAllPlayers,,0.1,-1"
-			}
-		}
 		
-		create 
-		{
-			classname "info_player_equip"
-			values 
-			{
-				targetname "syn_new_weapons"
-				StartDisabled "1"
-				weapon_rpg "1"
-			} 
-		}
 //Trav|Edt - Remove bully brush
 		delete {targetname "brush_clip_trans"}
 
