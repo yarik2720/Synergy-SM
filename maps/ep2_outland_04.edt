@@ -214,6 +214,7 @@ ep2_outland_04
 			values {model "*55"
 				spawnflags "1"
 				damage "10000"
+				damagetype "32"
 				targetname "syn_elevator_fall"} }
 				
 		create {classname "trigger_weapon_strip"
@@ -229,6 +230,7 @@ ep2_outland_04
 				targetname "syn_elevator_kill_players"
 				spawnflags "1"
 				damage "10000"
+				damagetype "32"
 				parentname "elevator"} }
 
 //modi - stop blocking elevator!!!
