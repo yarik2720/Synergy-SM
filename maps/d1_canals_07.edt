@@ -89,7 +89,7 @@ d1_canals_07
 				VehicleScript "scripts/vehicles/airboat.txt"
 				OnSpawnVehicle "syn_moreplayers,CheckSkill,,5,-1"} }
 		
-		create {classname "info_vehicle_spawn" origin "7888 7873 -450"
+		create {classname "info_vehicle_spawn" origin "7888 8204 -340"
 			values {targetname	"syn_spawn_vehicle_1_med"
 				angles "0 270 0"
 				StartEnabled "0"
@@ -100,7 +100,7 @@ d1_canals_07
 				model "models/airboat.mdl"
 				VehicleScript "scripts/vehicles/airboat.txt"} }
 		
-		create {classname "info_vehicle_spawn" origin "7888 8204 -450"
+		create {classname "info_vehicle_spawn" origin "7888 8404 -340"
 			values {targetname	"syn_spawn_vehicle_1_high"
 				angles "0 270 0"
 				StartEnabled "0"
@@ -157,7 +157,7 @@ d1_canals_07
 				model "models/airboat.mdl"
 				VehicleScript "scripts/vehicles/airboat.txt"} }
 		
-		create {classname "info_vehicle_spawn" origin "11710 1202 -445"
+		create {classname "info_vehicle_spawn" origin "11250 1202 -445"
 			values {targetname	"syn_spawn_vehicle_2_high"
 				angles "0 90 0"
 				StartEnabled "0"
@@ -433,9 +433,11 @@ d1_canals_07
 				OnTrigger "syn_vint_trav_extrabridgecops_temp_,ForceSpawn,,0,-1"} }
 
 //Trav|Edt - anti-rush
-		create {classname "trigger_coop"
-			origin "-7864.93 -4192.01 -950"
-			values {model "*80" angles "0 90 -21"
+		create {classname "trigger_coop" origin "-8155 -4190 -885"
+			values
+			{
+				edt_mins "-1000 -600 -200"
+				edt_maxs "1000 600 200"
 				spawnflags "1"
 				targetname "syn_antirush_coop"
 				CountType "1"
@@ -445,7 +447,9 @@ d1_canals_07
 				OnTrigger "syn_antirush_text,Display,,1,-1"
 				OnPlayersIn "syn_antirush_prop,Kill,,0,1"
 				OnPlayersIn "syn_end_light,TurnOff,,0,1"
-				OnPlayersIn "!self,Disable,,1,1"} }
+				OnPlayersIn "!self,Disable,,1,1"
+			}
+		}
 
 		create {classname "prop_dynamic" origin "-7320 -4224 -1056"
 			values {model "models/synergy/tools/syn_transition.mdl"

@@ -52,13 +52,25 @@ ep2_outland_03
 
 		create {classname "logic_auto"
 			values {spawnflags "1"
+				OnMapSpawn "holdout_elevator_2_vort_exit_aiss_timer,AddOutput,OnTimer syn_vorttp:Teleport::0:1,0,-1"
+				OnMapSpawn "thumper_arena_ragdolls,DisableMotion,,10,-1"
 				OnMapSpawn "counterweight_room_ragdolls,DisableMotion,,10,-1"} }
+		
+		create {classname "point_teleport" origin "1152 -9211 -465" values {targetname "syn_vorttp" target "vort" angles "0 0 0" parentname "holdout_elevator_2"} }
+//No need to teleport if vort has reached the correct zone
+		create {classname "trigger_once" origin "1195 -9135 -1785"
+			values
+			{
+				edt_mins "-90 -90 -100"
+				edt_maxs "250 250 100"
+				filtername "vortfilter"
+				spawnflags "2"
+				OnTrigger "syn_vorttp,kill,,0,1"
+			}
+		}
+		create {classname "filter_activator_name" values {filtername "vort" targetname "vortfilter" Negated "0"} }
 
 		delete {targetname "thumper_arena_ragdoll_template"}
-
-		create {classname "logic_auto"
-			values {spawnflags "1"
-				OnMapSpawn "thumper_arena_ragdolls,DisableMotion,,10,-1"} }
 
 //Trav|Edt - Add gnome if NewGame
 		create {classname "logic_auto"

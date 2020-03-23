@@ -44,6 +44,8 @@ ep2_outland_02
 				OnMapSpawn "smg,AddOutput,OnPlayerPickup syn_new_weapon:Enable::0:-1,0,-1"
 				OnMapSpawn "smg,AddOutput,OnPlayerPickup syn_new_weapon:EquipAllPlayers::0.1:-1,0,-1"
 				OnMapSpawn "relay_gman_scene_end,AddOutput,OnTrigger zoomtodefault:Zoom::0:-1,0,-1"
+				OnMapSpawn "pathTrack_elevator_alyx_stop,AddOutput,OnPass vort_healsAlyx:CancelSequence::1:1,0,-1"
+				OnMapSpawn "pathTrack_elevator_alyx_stop,AddOutput,OnPass vort_healsAlyx:kill::1.1:1,0,-1"
 				OnMapSpawn "lcs_gman_scene,AddOutput,OnTrigger14 syn_g1:Teleport::3.3:-1,0,-1"} }
 
 // env_zooms - all players

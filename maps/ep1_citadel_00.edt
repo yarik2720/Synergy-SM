@@ -33,6 +33,9 @@ ep1_citadel_00
 //Dog
 		create {classname "info_player_coop" origin "-8972 5777 -143"//-9008 5788 -143
 			values {angles "0 52 0" targetname "syn_spawn_player_2" StartDisabled "1"} }
+		
+		create {classname "info_player_coop" origin "-9025 5800 -110"
+			values {angles "0 30 0" targetname "syn_spawnpoint_02after" StartDisabled "1"} }
 
 		create {classname "info_teleport_destination" origin "-8972 5777 -143" values {angles "0 52 0" targetname "syn_spawn_player_2TP" } }
 //Drop
@@ -96,20 +99,36 @@ ep1_citadel_00
 		delete {targetname "hurtme"}
 
 		create {classname "trigger_multiple" origin "2084 -7644 -1998"
-			values {model "*77"//*78
+			values
+			{
+				edt_mins "-200 -200 -200"
+				edt_maxs "200 200 200"
 				spawnflags "1"
 				targetname "trav_intro_trigger"
-				OnTrigger "trav_intro_hud,Start,45,0,1"
+				OnTrigger "syn_hudtimer,Start,45,0,1"
 				OnTrigger "viewcontrol_black,Enable,,0.1,1"//point_viewcontrol_01
 				//OnEndTouch "!activator,SetHealth,47,5,-1"
-				OnTrigger "vehicle_blackout,EnterVehicleImmediate,,1,-1"} }//force all players into vehicle to avoid mysterious stuff
+				OnTrigger "vehicle_blackout,EnterVehicleImmediate,,1,-1"//force all players into vehicle to avoid mysterious stuff
+			}
+		}
+		create {classname "trigger_teleport" origin "2084 -7644 -1998"
+			values
+			{
+				edt_mins "-50 -50 -50"
+				edt_maxs "50 50 50"
+				spawnflags "1"
+				startdisabled "1"
+				targetname "syn_teleportlateintro"
+				target "syn_spawn_player_2TP"
+			}
+		}
 
 	//	create {classname "logic_relay"
 	//		values {targetname "relay_Intro_setup_view"
 	//			OnTrigger "vehicle_blackout,AddOutput,PlayerOff !activator:SetHealth:47:0:-1,0,-1"} }
 
 		create {classname "hud_timer"
-			values {targetname "trav_intro_hud"
+			values {targetname "syn_hudtimer"
 				TimerType "1"
 				TimerText "WAITING FOR PLAYERS"
 				OnTimer "intro_fx_1,Activate,,0,-1"//LA1
@@ -355,33 +374,37 @@ ep1_citadel_00
 		delete {classname "scripted_sequence" origin "-9095 5755 -143"}
 		create { classname "scripted_sequence" origin "-9095 5755 -143"
 			values {
-				"m_iszPostIdle" "e1_dogintro_postidle"
-				"spawnflags" "480"
-				"m_iszPlay" "e1_dogintro"
-				"m_iszIdle" "e1_dogintro_preidle"
-				"m_iszEntity" "blackout"
-				"maxdxlevel" "0"
-				"mindxlevel" "0"
-				"m_fMoveTo" "0"
-				"m_flRepeat" "0"
-				"m_flRadius" "0"
-				"targetname" "ss_DogIntro"
-				"angles" "0 270 0"
-					"OnScriptEvent01" "syn_vehicle_blackout,ExitVehicle,,0.1,-1"
-					"OnScriptEvent01" "syn_vehicle_blackout,Unlock,,0,-1"
-				"OnScriptEvent01" "vehicle_blackout,ExitVehicle,,0.1,-1"
-				"OnScriptEvent01" "vehicle_blackout,Unlock,,0,-1"} }
+				m_iszPostIdle "e1_dogintro_postidle"
+				spawnflags "480"
+				m_iszPlay "e1_dogintro"
+				m_iszIdle "e1_dogintro_preidle"
+				m_iszEntity "blackout"
+				maxdxlevel "0"
+				mindxlevel "0"
+				m_fMoveTo "0"
+				m_flRepeat "0"
+				m_flRadius "0"
+				targetname "ss_DogIntro"
+				angles "0 270 0"
+				OnScriptEvent01 "syn_vehicle_blackout,ExitVehicle,,0.1,-1"
+				OnScriptEvent01 "syn_vehicle_blackout,Unlock,,0,-1"
+				OnScriptEvent01 "vehicle_blackout,ExitVehicle,,0.1,-1"
+				OnScriptEvent01 "vehicle_blackout,Unlock,,0,-1"
+				OnScriptEvent01 "trav_intro_trigger,kill,,0.1,-1"
+				OnScriptEvent01 "syn_teleportlateintro,Enable,,0,1"
+				OnScriptEvent01 "syn_spawn_manager,SetCheckPoint,syn_spawnpoint_02after,1,1"
+				OnScriptEvent01 "syn_spawn_player_1,kill,,0,-1"
+				OnScriptEvent01 "syn_equip_start,Enable,,0,-1"
+				OnScriptEvent01 "syn_equip_start,EquipAllPlayers,,0,-1"
+				OnScriptEvent01 "syn_spawn_manager,TeleportPlayers,syn_spawn_player_2TP,0.1,1,0,1"
+				OnScriptEvent01 "ghostanim_DogIntro,Kill,,0,-1"} }
 
 
 		create {classname "logic_auto"
 			values {spawnflags "1"
-				OnMapSpawn "ss_DogIntro,AddOutput,OnScriptEvent01 syn_spawn_manager:SetCheckpoint:syn_spawn_player_2:0:-1,0,-1"
-				OnMapSpawn "ss_DogIntro,AddOutput,OnScriptEvent01 syn_equip_start:Enable::0:-1,0,-1"
-				OnMapSpawn "ss_DogIntro,AddOutput,OnScriptEvent01 syn_equip_start:EquipAllPlayers::0:-1,0,-1"
-				OnMapSpawn "ss_DogIntro,AddOutput,OnScriptEvent01 syn_spawn_manager:TeleportPlayers:syn_spawn_player_2TP:0.1:-1,0,-1"
-					OnMapSpawn "ss_DogIntro,AddOutput,OnScriptEvent01 ghostanim_DogIntro:Kill::0:-1,0,-1"
-				OnMapSpawn "ss_DogIntro,AddOutput,targetname ss_DogIntro,1,-1"
-				OnMapSpawn "lcs_ep1_intro_01,AddOutput,OnTrigger1 ss_DogIntro:BeginSequence::0:-1,0,-1"} }
+				OnMapSpawn "lcs_ep1_intro_01,AddOutput,OnTrigger1 ss_DogIntro:BeginSequence::0:-1,0,-1"
+				OnMapSpawn "lcs_ep1_intro_01,AddOutput,OnTrigger1 syn_spawn_manager:SetCheckpoint:syn_spawn_player_2:0:-1,0,-1"
+				OnMapSpawn "lcs_ep1_intro_01,AddOutput,OnTrigger1 syn_spawn_player_1:kill::0:-1,0,-1"} }
 
 		// never stop the lcs ents
 		delete { targetname "relay_cancelVCDs" }//triggerd by trigger_falldeath

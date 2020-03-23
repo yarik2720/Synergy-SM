@@ -69,8 +69,8 @@ d1_canals_13
 		create {classname "info_global_settings"
 			values {IsVehicleMap "1" targetname "syn_global_settings"} }
 
-		create {classname "info_vehicle_spawn" origin "-10754 2911 -421"
-			values {targetname	"syn_spawn_vehicle_1"
+		create {classname "info_vehicle_spawn" origin "-10754 2911 -321"
+			values {targetname "syn_spawn_vehicle_1"
 				angles "0 180 0"
 				StartEnabled "1"
 				StartGunEnabled "1"
@@ -83,8 +83,8 @@ d1_canals_13
 				OnSpawnVehicle "syn_moreplayers,CheckSkill,,1,1"
 				OnSpawnVehicle "syn_moreplayers,CheckSkill,,5,-1"} }
 		
-		create {classname "info_vehicle_spawn" origin "-10850 3110 -421"
-			values {targetname	"syn_spawn_vehicle_1_med"
+		create {classname "info_vehicle_spawn" origin "-10850 3110 -321"
+			values {targetname "syn_spawn_vehicle_1_med"
 				angles "0 180 0"
 				StartEnabled "0"
 				StartGunEnabled "1"
@@ -95,8 +95,8 @@ d1_canals_13
 				model "models/airboat.mdl"
 				VehicleScript "scripts/vehicles/airboat.txt"} }
 		
-		create {classname "info_vehicle_spawn" origin "-10650 3110 -421"
-			values {targetname	"syn_spawn_vehicle_1_high"
+		create {classname "info_vehicle_spawn" origin "-10650 3110 -321"
+			values {targetname "syn_spawn_vehicle_1_high"
 				angles "0 180 0"
 				StartEnabled "0"
 				StartGunEnabled "1"
