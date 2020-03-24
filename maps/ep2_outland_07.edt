@@ -154,6 +154,7 @@ ep2_outland_07
 //Trav|Edt - Add gnome if NewGame
 		create {classname "logic_auto"
 			values {spawnflags "1"
+				OnMapSpawn "relay_start_player_vehicle,AddOutput,OnTrigger syn_forcevehicle:Enable::0.2:1,0,-1"
 				OnNewGame "syn_new_gnome,ForceSpawn,,0,-1"} }
 
 		create {classname "point_template"
@@ -334,6 +335,56 @@ ep2_outland_07
 				OnTrigger "syn_antirush_push,Enable,,1,-1"
 			}
 		}
+//Force players back in to vehicle while scene is running
+		create {classname "trigger_multiple" origin "-10066 -9898 128"
+			values
+			{
+				edt_mins "-50 -50 -50"
+				edt_maxs "50 50 50"
+				spawnflags "1"
+				targetname "syn_forcevehicle"
+				startdisabled "1"
+				OnTrigger "cvehicle_barn1,EnterVehicleImmediate,,0,-1"
+			}
+		}
+		delete {classname "scripted_sequence" origin "-9488 -9776 63.1209"}
+		create {classname "scripted_sequence" origin "-9488 -9776 63.1209"
+			values
+			{
+				targetname "ss_advisor_start"
+				spawnflags "224"
+				mindxlevel "0"
+				maxdxlevel "0"
+				m_iszPlay "ep2_barn_advisor"
+				m_iszEntity "furniture_barn1"
+				m_fMoveTo "0"
+				m_flRepeat "0"
+				m_flRadius "0"
+				angles "0 270 0"
+				hammerid "1560743"
+				OnScriptEvent03 "relay_wall_hit,Trigger,,0,-1"
+				OnScriptEvent02 "relay_start_player_vehicle,Trigger,,0,-1"
+				OnScriptEvent04 "relay_pull_player,Trigger,,0,-1"
+				OnScriptEvent05 "relay_drop_player,Trigger,,0,-1"
+				OnScriptEvent02 "console,Skin,1,0,-1"
+				OnScriptEvent02 "particle_advisor_debris,Stop,,0,-1"
+				OnScriptEvent06 "crushbarrel,SetAnimation,crush,0,-1"
+				OnScriptEvent02 "console_inner,Skin,1,0,-1"
+				OnScriptEvent03 "zoom on impact,Zoom,,0,-1"
+				OnScriptEvent04 "zoom out,Zoom,,0.3,-1"
+				OnScriptEvent03 "shake on impact,StartShake,,0,-1"
+				OnScriptEvent04 "shake on impact,StopShake,,0,-1"
+				OnScriptEvent03 "grab_overlay,StartOverlays,,0,-1"
+				OnScriptEvent04 "grab_overlay,StopOverlays,,0,-1"
+				OnScriptEvent05 "speedmod_player,ModifySpeed,1,0,-1"
+				OnScriptEvent05 "cvehicle_barn1,ExitVehicle,,0.1,-1"
+				OnScriptEvent05 "cvehicle_barn1,Unlock,,0,-1"
+				OnScriptEvent05 "syn_forcevehicle,kill,,0,-1"
+				OnScriptEvent05 "syn_restorespeedmod,ModifySpeed,1,0.1,-1"
+				OnScriptEvent06 "convert_barrel,ConvertTarget,,1.2,-1"
+			}
+		}
+		create {classname "player_speedmod" values {targetname "syn_restorespeedmod" spawnflags "0"} }
 		
 		create { classname "trigger_once" origin "-7456 -10592 160"
 			values {
