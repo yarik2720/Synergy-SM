@@ -2,12 +2,14 @@ ep1_c17_02a
 {
 	console
 	{
-		sk_gunship_health_increments 12 //4
+		sk_gunship_health_increments "12"
+		mp_player_death_items "0"
 	}
 	entity
 	{
 //--Setup--
 		delete {targetname "global_newgame_template_base_items"}
+		delete {targetname "global_newgame_template_ammo"}
 		delete {targetname "global_newgame_spawner_crowbar"}
 		delete {targetname "global_newgame_spawner_pistol"}
 		delete {targetname "global_newgame_spawner_smg"}
@@ -15,6 +17,7 @@ ep1_c17_02a
 		delete {targetname "global_newgame_spawner_physcannon"}
 		delete {targetname "global_newgame_spawner_suit"}
 		delete {targetname "global_newgame_spawner_ammo"}
+		delete {classname "info_player_start"}
 		create {classname "point_template" origin "5298.9 6475.59 -2479.5"
 			values {//	"Template08" "global_newgame_spawner_crowbar"
 			//	"Template06" "global_newgame_spawner_pistol"
@@ -91,6 +94,7 @@ ep1_c17_02a
 				spawnflags "1"
 				//StartDisabled "1"
 				//OnTrigger "syn_teleport_alyx_2,Teleport,,0.1,-1"
+				OnTrigger "syn_spawn_manager,SetCheckPoint,syn_spawn_player_1a,0,1"
 				OnTrigger "syn_spawn_manager,TeleportPlayers,trav_teleport_2,0,-1"
 				OnTrigger "syn_antihide_push,Enable,,0,-1"} }
 				
@@ -127,6 +131,9 @@ ep1_c17_02a
 //Intro
 		create {classname "info_player_coop" origin "5494.15 6463.63 -2547.97"
 			values {angles "0 180 0" targetname "syn_spawn_player_1"} }
+//Gunship area
+		create {classname "info_player_coop" origin "2245 7565 -2420"
+			values {angles "-30 90 0" targetname "syn_spawn_player_1a" StartDisabled "1"} }
 //Water Area (switch)
 		create {classname "info_player_coop" origin "-760 8896 -2840"
 			values {angles "0 0 0" targetname "syn_spawn_player_2" StartDisabled "1"} }
@@ -164,9 +171,13 @@ ep1_c17_02a
 			values {angles "0 0 0"
 				targetname "trav_teleport"} }
 
+		delete {classname "logic_auto" origin "5280 6448 -2517.5"}
+		delete {classname "logic_auto" origin "5280 6432 -2517.5"}
 //Trav|Edt - Manage players not killing eachother here
 		create {classname "logic_auto"
 			values {spawnflags "1"
+				OnNewGame "global_newgame_template_base_items,ForceSpawn,,0.1,1"
+				OnMapTransition "follow_alyx,Activate,,0.1,1"
 				OnMapSpawn "func_rot_button_2,AddOutput,OnOpen !self:Lock::0:-1,0,-1"
 				OnMapSpawn "func_rot_button_2,AddOutput,OnOpen trav_teleport_water_fall:Enable::0:-1,0,-1"
 				OnMapSpawn "func_rot_button_2,AddOutput,OnOpen trav_teleport_water:Enable::0:-1,0,-1"
@@ -321,6 +332,79 @@ ep1_c17_02a
 
 		// create an extra RPG near the gunship battle
 		//create { classname "weapon_rpg" origin "2529 8615 -2545" values { angles "0 45 0" } }
+//Clean up a few ents for edict limit on larger player counts
+		delete {classname "prop_physics" origin "1777.31 8114.34 -2556.09"}
+		delete {classname "prop_physics" origin "1761.11 8135.87 -2557.9"}
+		delete {classname "prop_physics" origin "2022.08 7864.6 -2552.97"}
+		delete {classname "prop_physics" origin "2004.4 7848.34 -2552.99"}
+		delete {classname "prop_physics" origin "2274.24 7914.96 -2368.43"}
+		delete {classname "prop_physics" origin "2282.16 7931.09 -2366.64"}
+		delete {classname "prop_physics" origin "2410.3 8367.28 -2557.88"}
+		delete {classname "prop_physics" origin "2403.34 8357.51 -2557.88"}
+		delete {classname "prop_physics" origin "-46.6422 8484.59 -2833"}
+		delete {classname "prop_physics" origin "-2081.6 8490.54 -2797.52"}
+		delete {classname "prop_physics" origin "371.22 8675.62 -2836.11"}
+		delete {classname "prop_physics" origin "-209.598 8717.16 -2700.6"}
+		delete {classname "prop_physics" origin "-919.196 9100.49 -2693.92"}
+		delete {classname "prop_physics" origin "-905.807 9108.29 -2693.9"}
+		delete {classname "prop_physics" origin "-1165.08 7844.82 -2524.8"}
+		delete {classname "prop_physics" origin "2619.15 7882.32 -2557.91"}
+		delete {classname "prop_physics" origin "4815.38 7137.67 -2535.63"}
+		delete {classname "prop_physics" origin "4816.01 6944.01 -2534.11"}
+		delete {classname "prop_physics" origin "5704.96 6901.96 -2533.56"}
+		delete {classname "prop_physics" origin "5647.98 6730 -2533.56"}
+		delete {classname "env_fire" origin "5566.61 6970 -2535.1"}
+		delete {classname "env_fire" origin "5566 6986 -2535.1"}
+		delete {classname "env_fire" origin "5578 6954 -2535.1"}
+		delete {classname "light" origin "5566 6970 -2515.1"}
+		delete {classname "move_rope" origin "5585 6477.93 -2356.95"}
+		delete {classname "move_rope" origin "5681 6382.93 -2356.95"}
+		delete {classname "move_rope" origin "5681 6348.93 -2356.95"}
+		delete {classname "move_rope" origin "5759 6477.93 -2356.95"}
+		delete {classname "move_rope" origin "-389.441 7728.44 -2433.99"}
+		delete {classname "move_rope" origin "-389.441 7684.44 -2433.99"}
+		edit {targetname "room_wire_01a8" values {NextKey ""} }
+		delete {classname "move_rope" origin "-435.441 9050.57 -2434.99"}
+		delete {classname "move_rope" origin "-435.441 9091.57 -2433.99"}
+		delete {classname "move_rope" origin "-1161.55 8038 -2411.56"}
+		delete {classname "move_rope" origin "-1097.55 8038 -2405.56"}
+		delete {classname "move_rope" origin "-1225.55 8038 -2405.56"}
+		delete {classname "move_rope" origin "-1088.43 8052 -2413.56"}
+		delete {classname "move_rope" origin "-1152.43 8052 -2413.56"}
+		delete {classname "move_rope" origin "-1024.43 8052 -2413.56"}
+		delete {classname "move_rope" origin "-472.441 8524.57 -2391.99"}
+		delete {classname "move_rope" origin "-473.441 8582.57 -2392.99"}
+		delete {classname "move_rope" origin "-473.441 8788.57 -2391.99"}
+		delete {classname "move_rope" origin "-472 8944 -2391.99"}
+		delete {classname "move_rope" origin "648.99 8679.99 -2499.99"}
+		delete {classname "move_rope" origin "647.99 8723.99 -2499.99"}
+		delete {classname "move_rope" origin "648.99 8691.99 -2499.99"}
+		delete {classname "move_rope" origin "630.99 8679.99 -2499.99"}
+		delete {classname "move_rope" origin "631.99 8723.99 -2499.99"}
+		delete {classname "move_rope" origin "630.99 8691.99 -2499.99"}
+		delete {classname "move_rope" origin "-216.01 8496.99 -2499.99"}
+		delete {classname "move_rope" origin "-172.01 8497.99 -2499.99"}
+		delete {classname "move_rope" origin "-204.01 8496.99 -2499.99"}
+		delete {classname "move_rope" origin "216.01 7734.99 -2499.99"}
+		delete {classname "move_rope" origin "172.01 7735.99 -2499.99"}
+		delete {classname "move_rope" origin "204.01 7734.99 -2499.99"}
+		delete {classname "move_rope" origin "-1112.01 8972.01 -2499.99"}
+		delete {classname "move_rope" origin "-1068.01 8971.01 -2499.99"}
+		delete {classname "move_rope" origin "-1100.01 8972.01 -2499.99"}
+		delete {classname "move_rope" origin "-2241.01 8577.44 -2773.99"}
+		delete {classname "move_rope" origin "-2039.01 8729.99 -2812"}
+		delete {classname "move_rope" origin "-2197.01 8576.44 -2773.99"}
+		delete {classname "move_rope" origin "-2229.01 8577.44 -2773.99"}
+		delete {classname "move_rope" origin "-2557.99 9112.01 -2773.99"}
+		delete {classname "move_rope" origin "-2558.99 9068.01 -2773.99"}
+		delete {classname "move_rope" origin "-2557.99 9100.01 -2773.99"}
+		delete {classname "move_rope" origin "-2557.21 9051.01 -2773"}
+		delete {targetname "spark_rag_1"}
+		delete {targetname "contraint_rag_rope_03"}
+		delete {targetname "physbox_rag_rope_03"}
+		delete {targetname "physbox_rag_rope_4"}
+		delete {targetname "contraint_rag_rope_4"}
+		delete {targetname "spark_rag_2"}
 
 		// remove weird black wall
 		delete { targetname "brush_fall" }
