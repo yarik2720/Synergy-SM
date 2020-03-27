@@ -15,7 +15,7 @@ d2_prison_08
 		edit {classname "func_areaportal" values {targetname "disabledPortal" StartOpen "1"} }
 
 //Prevent Backtracking
-		create {classname "trigger_push" origin "64 0 0"
+		create {classname "trigger_push" origin "-2780 3025 1000"
 			values {
 				//model "*90"
 				edt_mins "-20 -100 -80"
