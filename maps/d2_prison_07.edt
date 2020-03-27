@@ -93,7 +93,10 @@ d2_prison_07
 //Trav|Edt - Close gate if all in (and move checkpoint)
 		create {classname "trigger_coop"
 			origin "-44.5 -3672 -91.5"
-			values {model "*23"
+			values
+			{
+				//model "*23"
+				edt_getbspmodelfor_targetname "trigger_ensure_no_combine_left"
 				spawnflags "1"
 				CountType "1"
 				UseHUD "0"
@@ -569,9 +572,13 @@ d2_prison_07
 
 //Trav|Edt - autirush
 		create {classname "trigger_coop"
-			origin "4041 -4312 -676"
-			values {model "*95"
-				angles "0 90 0"
+			origin "4155 -4345 -655"
+			values
+			{
+				//angles "0 90 0"
+				//model "*95"
+				edt_mins "-750 -300 -100"
+				edt_maxs "500 100 80"
 				spawnflags "1"
 				targetname "syn_antirush_coop"
 				CountType "1"
