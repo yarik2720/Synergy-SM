@@ -75,7 +75,10 @@ d2_prison_01
 //Trav|Edt - freeze ragdolls in water when near
 		create {classname "trigger_once"
 			origin "2024 -3680 1152"
-			values {model "*31"
+			values {
+				//model "*31"
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "2024 -3680 1152"
 				spawnflags "1"
 				OnTrigger "corpse,DisableMotion,,0,-1"} }
 
@@ -140,7 +143,10 @@ d2_prison_01
 
 		create {classname "trigger_coop"
 			origin "920 -1452 1664"
-			values {model "*60"
+			values {
+				//model "*60"
+				edt_mins "-400 -150 -100"
+				edt_maxs "410 240 100"
 				spawnflags "1"
 				targetname "syn_antirush_trigger2"
 				CountType "1"
@@ -169,7 +175,10 @@ d2_prison_01
 
 		create {classname "trigger_once"
 			origin "1064 -1536 1664"
-			values {model "*17"
+			values {
+				//model "*17"
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "1064 -1536 1664"
 				spawnflags "1"
 				StartDisabled "1"
 				targetname "syn_endmoveplayers"
