@@ -257,8 +257,11 @@ d1_canals_11
 		delete {classname "trigger_once" origin "7477.99 4867.84 -924"}
 //AR
 		create {classname "trigger_coop"
-			origin "6935 4896 -892" //7808 4864 -928
-			values {model "*52"//GBMdl
+			origin "7250 4860 -860" //"6935 4896 -892" //7808 4864 -928
+			values {
+				//model "*52"//GBMdl
+				edt_mins "-550 -250 -150"
+				edt_maxs "550 250 150"
 				spawnflags "1"
 				//StartDisabled "1"
 				//targetname "syn_antirush_coop"
