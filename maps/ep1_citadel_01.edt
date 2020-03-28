@@ -99,6 +99,7 @@ ep1_citadel_01
 		create {classname "syn_transition_wall" 
 			origin "-4265 6528 2784" 
 			values {solid "6" startdisabled "1" DisableShadows "1"} }
+		edit {classname "trigger_changelevel" values {edt_map "ep1_citadel_00" edt_landmark "landmark_00to01" spawnflags "6" startdisabled "1"} }
 
 //modi serios of teleport for alyx fixing
 		create { classname "trigger_once" origin "-5200 6416 2720"
