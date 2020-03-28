@@ -24,6 +24,7 @@ ep1_citadel_02
 				spawnflags "1"
 				speed "750"
 				pushdir "0 270 0"} }
+		edit {classname "trigger_changelevel" values {edt_map "ep1_citadel_01" edt_landmark "ep1_citadel_01_to_02" spawnflags "6" startdisabled "1"} }
 
 //--Starting Items--
 		create {classname "info_player_equip"
