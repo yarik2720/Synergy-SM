@@ -63,6 +63,8 @@ ep1_citadel_04
 
 //End of Trav|Edt
 
+		//Add previous chapter SF and startdisabled
+		edit {classname "trigger_changelevel" values {edt_map "ep1_citadel_03" edt_landmark "03_to_04" spawnflags "6" startdisabled "1"} }
 		// leave airlock door open
 		delete { targetname "trigger_alyx_close_airlock" }
 
