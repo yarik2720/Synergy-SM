@@ -119,6 +119,23 @@ d2_prison_08
 		delete {targetname "relationship_turrets_vs_eli_like"}
 		delete {targetname "relationship_manhack_vs_turret_hate"}
 
+//todo: remove after code optimisations made -- modi: fix weird teleportations caused by lag compensation on func_breakable (while player shoots on them)
+		edit {targetname "destruction_wall_big_gibs_L_1" values {"spawnflags" "3073‬"}}
+		edit {targetname "destruction_wall_big_gibs_R_1" values {"spawnflags" "3073‬"}}
+		edit {targetname "destruction_wall_big_break_R_1" values {"spawnflags" "3073‬"}}
+		edit {targetname "destruction_wall_big_break_R_1" values {"spawnflags" "3073‬"}}
+		edit {targetname "destruction_wall_R_1" values {"spawnflags" "3073‬"}}
+		edit {targetname "destruction_wall_R_2" values {"spawnflags" "3073‬"}}
+		edit {targetname "destruction_wall_R_3" values {"spawnflags" "3073‬"}}
+		edit {targetname "destruction_wall_R_4" values {"spawnflags" "3073‬"}}
+		edit {targetname "destruction_wall_R_5" values {"spawnflags" "3073‬"}}
+		edit {targetname "destruction_wall_L_1" values {"spawnflags" "3073‬"}}
+		edit {targetname "destruction_wall_L_2" values {"spawnflags" "3073‬"}}
+		edit {targetname "destruction_wall_L_3" values {"spawnflags" "3073‬"}}
+		edit {targetname "destruction_wall_L_4" values {"spawnflags" "3073‬"}}
+		edit {targetname "moss_eli_teleport_gibs_1" values {"spawnflags" "3073‬"}}
+		edit {targetname "teleport_assault_door_L" values {"spawnflags" "3073‬"}}
+
 //Trav|Edt - Fix weird lighting on start
 		delete {classname "trigger_once" origin "-2416 3040 1015.5"}
 
