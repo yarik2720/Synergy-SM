@@ -14,10 +14,40 @@ d1_trainstation_04
 			values {spawnflags "1"
 				OnMapTransition "trav_newgameblocker_prop,Kill,,0,-1"
 				//TODO: add doorman if newgame
+				//Balimbanana - Added newgame doorman and zoom fix:
+				OnNewGame "syn_newgamespawn,ForceSpawn,,0,1"
+				OnMapSpawn "blackout,AddOutput,OnAnimationDone trav_teleport_players:Teleport::0:-1,8,-1"
+				OnMapSpawn "logic_fade_view,AddOutput,OnTrigger trav_teleport_players_prealyx:Teleport::1:-1,0,-1"
+				OnMapSpawn "env_zoom,AddOutput,AllPlayers 1,0,-1"
+				//Balimbanana - This is already Unzoomed, but slightly later on which is a bit janky so I made it sooner.
+				OnMapSpawn "lcs_alyxgreet01,AddOutput,OnTrigger1 zoom:Unzoom::2.2:-1,0,-1"
 				OnMapTransition "trav_teleport,Teleport,,0,-1"
 			}
 		}
 
+		//Balimbanana - Newgame spawn positions for cit and door.
+		create {classname "npc_citizen" origin "-3078.3 -3528.6 384"
+			values
+			{
+				targetname "citizen_DoorBracer"
+				damagefilter "filter_noCops"
+				physdamagescale "0.001"
+				spawnflags "132"
+				angles "0 135 0"
+				model "models/humans/group01/male_03.mdl"
+			}
+		}
+		create {classname "npc_furniture" origin "-3052 -3522 438"
+			values
+			{
+				targetname "door_bracerProp"
+				angles "0 90 0"
+				spawnflags "0"
+				model "models/props_doors/door01_dynamic.mdl"
+			}
+		}
+		create {classname "point_template" values {targetname "syn_newgamespawn" Template01 "citizen_DoorBracer" Template02 "door_bracerProp" spawnflags "2"} }
+		
 		// fix doorman's pos
 		create {classname "point_teleport"
 			origin "-3078.3 -3528.6 384"
@@ -107,10 +137,11 @@ d1_trainstation_04
 		//edit {targetname "ragdoll_cop_6" values{angleOverride ""} }
 
 		//Trav|Edt - teleport players behind alyx scene during sequence
-		create {classname "logic_relay"
-			values {spawnflags "1"
-				targetname "logic_fade_view"
-				OnTrigger "trav_teleport_players_prealyx,Teleport,,1,-1"} }
+		//Balimbanana - Added this output via logic_auto
+		//create {classname "logic_relay"
+		//	values {spawnflags "1"
+		//		targetname "logic_fade_view"
+		//		OnTrigger "trav_teleport_players_prealyx,Teleport,,1,-1"} }
 
 		create {classname "point_teleport"
 			origin "-7104 -3944 392"
@@ -126,13 +157,14 @@ d1_trainstation_04
 		edit {targetname "blackout_viewcontroller" values {edt_addspawnflags "128"} }
 
 //Trav|Edt - teleport players to alyx after scene
-		create {classname "logic_auto"
-			values
-			{
-				spawnflags "1"
-				OnMapSpawn "blackout,AddOutput,OnAnimationDone trav_teleport_players:Teleport::0:-1,8,-1"
-			}
-		}
+//Balimbanana - Consolidated this added output to the first logic_auto.
+		//create {classname "logic_auto"
+		//	values
+		//	{
+		//		spawnflags "1"
+		//		OnMapSpawn "blackout,AddOutput,OnAnimationDone trav_teleport_players:Teleport::0:-1,8,-1"
+		//	}
+		//}
 
 		create {classname "point_teleport"
 			origin "-7544 -3981 387"
@@ -143,7 +175,9 @@ d1_trainstation_04
 						
 		create {classname "trigger_push"
 			origin "-7703 -4278 -196"
-			values {model "*39"
+			values {//model "*39"
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "-6974 -4250 584"
 				angles "0 90 0"
 				spawnflags "1"
 				speed "450"
