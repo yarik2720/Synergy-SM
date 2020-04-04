@@ -27,9 +27,6 @@ d2_coast_05
 	//			speed "750"
 	//			pushdir "0 180 0"} }
 
-		create {classname "func_vehicleclip" origin "9968 -12032 1855"
-			values {edt_mins "-15 -270 -100" edt_maxs "15 270 150"} }//*97 - Pre 2010 Update
-
 //--Starting Items--
 		create {classname "info_player_equip"
 			values {targetname "syn_equipment_base"
