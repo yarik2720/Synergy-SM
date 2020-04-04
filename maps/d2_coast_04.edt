@@ -25,8 +25,8 @@ d2_coast_04
 				speed "750"
 				pushdir "0 90 0"} }
 
-		create {classname "syn_transition_wall" origin "-9765 -2155 0" values {angles "0 70 0" startdisabled "1" solid "6" DisableShadows "1"} }
-		create {classname "syn_transition_wall" origin "-10487 -1893 0" values {angles "0 70 0" startdisabled "1" solid "6" DisableShadows "1"} }
+		create {classname "prop_dynamic" origin "-9765 -2155 0" values {angles "0 70 0" startdisabled "1" solid "6" DisableShadows "1" model "models/synergy/tools/syn_transition.mdl"} }
+		create {classname "prop_dynamic" origin "-10487 -1893 0" values {angles "0 70 0" startdisabled "1" solid "6" DisableShadows "1" model "models/synergy/tools/syn_transition.mdl"} }
 
 //--Starting Items--
 		create {classname "info_player_equip"
