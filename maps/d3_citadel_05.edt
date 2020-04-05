@@ -246,9 +246,11 @@ d3_citadel_05
 
 		edit { targetname "cit05_to_breen01_changelevel" values { spawnflags "1" } }
 
-		create { classname "trigger_once" origin "0 0 0"
+		create { classname "trigger_once" origin "14335 -9855 10310"
 			values {
-				"model" "*22"
+				//"model" "*22"
+				"edt_mins" "-300 -300 -100"
+				"edt_maxs" "300 300 100"
 				"spawnflags" "1"
 				"OnTrigger" "PS_Manager,TeleportPlayers,PSTP_EndUp,0,-1"
 				"OnTrigger" "cit05_to_breen01_changelevel,ChangeLevel,,0.1,-1"
