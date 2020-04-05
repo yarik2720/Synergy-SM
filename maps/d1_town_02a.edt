@@ -42,7 +42,10 @@ d1_town_02a
 
 //--Checkpoints--
 		create {classname "trigger_once" origin "-7504 -304 -3344"
-			values {model "*27"
+			values {
+				//model "*27"
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "-7504 -304 -3344"
 				spawnflags "1"
 				targetname "syn_checkpoint_5"
 				OnTrigger "syn_spawn_manager,SetCheckpoint,syn_spawn_player_2,0,-1"
@@ -87,7 +90,10 @@ d1_town_02a
 
 		create {classname "trigger_once"
 			origin "-7560 400 -3336"
-			values {model "*29"
+			values {
+				//model "*29"
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "-7576 784 -3320"
 				spawnflags "1"
 				targetname "syn_vint"
 				OnTrigger "graveyard_crypt_zombie_maker,Disable,,0,-1"} }
@@ -126,7 +132,10 @@ d1_town_02a
 //Trav|Edt - block worldwalk path
 		create {classname "trigger_push"
 			origin "-7796 1376.01 -3256"
-			values {model "*48"
+			values {
+				//model "*48"
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "-6268 2144 -3264"
 				spawnflags "1"
 				//pushdir "0 270 0"
 				speed "450"} }
@@ -135,14 +144,20 @@ d1_town_02a
 //modi - block skipping
 		create {classname "trigger_push"
 			origin "-6768.48 1375.84 -3198.01"
-			values {model "*48"
+			values {
+				//model "*48"
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "-6268 2144 -3264"
 				spawnflags "1"
 				pushdir "0 180 0"
 				speed "950"} }
 				
 		create {classname "trigger_hurt"
 			origin "-6550 1000 -2965"
-			values {model "*30"
+			values {
+				//model "*30"
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "-7924 -128 -3320"
 				spawnflags "1"
 				damage "950"} }
 
@@ -180,7 +195,10 @@ d1_town_02a
 //Trav|Edt add antirush at endlevel
 		create {classname "trigger_coop"
 			origin "-6584 -578 -3216.14"
-			values {model "*47"
+			values {
+				//model "*47"
+				edt_getbspmodelfor_classname "trigger_multiple"
+				edt_getbspmodelfor_origin "-8128 688 -3359.87"
 				spawnflags "1"
 				//StartDisabled "1"
 				targetname "syn_antirush_trav_town02a_end_coop"
