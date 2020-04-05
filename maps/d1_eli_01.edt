@@ -52,7 +52,7 @@ d1_eli_01
 			values {IsVehicleMap "1" targetname "syn_global_settings"} }
 
 		create {classname "info_vehicle_spawn" origin "5120 7936 -1480"//y7552
-			values {targetname	"syn_spawn_vehicle_1"
+			values {targetname "syn_spawn_vehicle_1"
 				angles "0 180 0"
 				StartEnabled "1"
 				RespawnVehicle "1"
@@ -77,7 +77,10 @@ d1_eli_01
 
 //enable syn_spawn_player_1
 		create {classname "trigger_once" origin "-384 4168 -1368"
-			values {model "*131"
+			values {
+				//model "*131"
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "-384 4168 -1368"
 				spawnflags "1"
 				OnTrigger "syn_spawn_manager,SetCheckPoint,syn_spawn_player_1,0,-1"
 				OnTrigger "syn_global_settings,AddOutput,IsVehicleMap 0,0,-1"} }
@@ -86,7 +89,9 @@ d1_eli_01
 		edit {targetname "song_dam" values {targetname "syn_song_dam"} }
 
 		create {classname "trigger_once" origin "-4500 -1024 -2400"
-			values {model "*22"
+			values {
+				//model "*22"
+				edt_getbspmodelfor_targetname "canals_trigger_elitrans"
 				spawnflags "1"
 				OnTrigger "syn_song_dam,PlaySound,,10,-1"} }
 
@@ -94,7 +99,9 @@ d1_eli_01
 		//edit {classname "prop_dynamic" origin "200 2086 -1280" values {solid "2"} }//6
 		create {classname "func_clip_vphysics"
 			origin "272 2105.99 -1226"
-			values {model "*108"
+			values {
+				//model "*108"
+				edt_getbspmodelfor_targetname "elevator_trigger_go_up_1"
 				targetname "trav_inner_door_phys"} }
 
 		create {classname "logic_auto"
@@ -104,7 +111,7 @@ d1_eli_01
 //Trav|Edt - block phys props going into vator
 		create {classname "func_clip_vphysics"
 			origin "448 1761 -1232"
-			values {model "*6"} }
+			values {edt_getbspmodelfor_classname "trigger_multiple" edt_getbspmodelfor_origin "448 1749 -1232"} }//model "*6"
 
 //don't let actors die
 		create {classname "logic_auto"
@@ -120,7 +127,9 @@ d1_eli_01
 		create {classname "trigger_coop" origin "0 2488 -1192"
 			values
 			{
-				model "*131"
+				//model "*131"
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "-384 4168 -1368"
 				spawnflags "1"
 				CountType "1"
 				UseHUD "1"
@@ -159,7 +168,10 @@ d1_eli_01
 //Trav|Edt - trigger gman 1
 		create {classname "trigger_once"
 			origin "-70 2816 -1236"
-			values {model "*40"
+			values {
+				//model "*40"
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "-70 2816 -1236"
 				spawnflags "1"
 				OnTrigger "syn_vint_ss_trav,BeginSequence,-1,16,-1"} }
 
@@ -196,7 +208,9 @@ d1_eli_01
 //Trav|Edt - trigger gman 2
 		create {classname "trigger_once"
 			origin "720 2580 -2631.5"
-			values {model "*66"
+			values {
+				//model "*66"
+				edt_getbspmodelfor_targetname "trigger_lcs_labtalk02"
 				spawnflags "1"
 				OnTrigger "syn_vint_ss_trav_2,BeginSequence,-1,2,-1" } }
 
@@ -255,7 +269,9 @@ d1_eli_01
 //Trav|Edt - allow door to close after eli's lab
 		create {classname "trigger_coop"
 			origin "-327.99 2152 -2640"//415.99
-			values{model "*37"
+			values{
+				//model "*37"
+				edt_getbspmodelfor_targetname "trigger_alyxtour03b"
 				spawnflags "1"
 				targetname "syn_vint_trav_coop_eli"
 				CountType "1"
@@ -298,7 +314,9 @@ d1_eli_01
 		// do not let inner door close
 		delete {targetname "trigger_inner_door"}
 		create {classname "trigger_once" origin "414 1944 -1232"
-			values {model "*25"
+			values {
+				//model "*25"
+				edt_getbspmodelfor_targetname "trigger_inner_door"
 				spawnflags "1"
 				StartDisabled "1"
 				targetname "trigger_inner_door"
@@ -313,7 +331,9 @@ d1_eli_01
 		// activate the second checkpoint when the elevator starts to go down
 		delete {targetname "elevator_trigger_go_up_1"}
 		create {classname "trigger_once" origin "456 1665.99 -1226"
-			values {model "*108"
+			values {
+				//model "*108"
+				edt_getbspmodelfor_targetname "elevator_trigger_go_up_1"
 				targetname "elevator_trigger_go_up_1"
 				spawnflags "1"
 				StartDisabled "1"
@@ -340,7 +360,9 @@ d1_eli_01
 		// do not let the raven doors close (set 1)
 		delete {targetname "trigger_alyxtour01"}
 		create {classname "trigger_once" origin "-164 2128 -2640"
-			values {model "*28"
+			values {
+				//model "*28"
+				edt_getbspmodelfor_targetname "trigger_alyxtour01"
 				targetname "trigger_alyxtour01"
 				spawnflags "1"
 				StartDisabled "1"
