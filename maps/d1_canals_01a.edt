@@ -266,11 +266,11 @@ d1_canals_01a
 
 //Trav|Edt - Auti-rush
 		create {classname "trigger_coop"
-			origin "-5844.42 9213.5 132.07"
+			origin "-5470 9210 80"
 			values {
 				//model "*83"
-				edt_getbspmodelfor_classname "trigger_multiple"
-				edt_getbspmodelfor_origin "1739.59 6397.5 29.5"
+				edt_mins "-120 -70 -100"
+				edt_maxs "400 80 100"
 				spawnflags "1"
 				//StartDisabled "1"
 				targetname "syn_antirush_coop"
