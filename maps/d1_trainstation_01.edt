@@ -97,6 +97,7 @@ d1_trainstation_01
 				TimerText "STARTING GAME"
 				//OnTimer "syn_intro_trigger_post_tempfix,Enable,,0,-1"
 				OnTimer "syn_logic_auto,Go,,0,-1"
+				OnTimer "fire_all,Trigger,,0,1"
 				OnTimer "syn_vint_diff_cosmetic_ent_temp,ForceSpawn,,1,-1"
 			}
 		}
