@@ -62,13 +62,19 @@ d3_c17_11
 //Trav|Edt - add antiskipper
 		create {classname "func_brush"
 			origin "1052 5908 1040"
-			values {model "*44"
+			values {
+				//model "*44"
+				edt_getbspmodelfor_classname "func_brush"
+				edt_getbspmodelfor_origin "1548 3204 1024"
 				spawnflags "1"
 				targetname "trav_antiskip_brush_dropshipdoor"} }
 
 		create {classname "func_brush"
 			origin "1012 5908 1040"
-			values {model "*44"
+			values {
+				//model "*44"
+				edt_getbspmodelfor_classname "func_brush"
+				edt_getbspmodelfor_origin "1548 3204 1024"
 				spawnflags "1"
 				targetname "trav_antiskip_brush_dropshipdoor"} }
 
@@ -85,7 +91,10 @@ d3_c17_11
 //Trav|Edt - autirush
 		create {classname "trigger_coop"
 			origin "1352 3216 1024"
-			values {model "*42"
+			values {
+				//model "*42"
+				edt_getbspmodelfor_classname "trigger_multiple"
+				edt_getbspmodelfor_origin "-2048 9152 608"
 				angles "0 0 90"
 				spawnflags "1"
 				//StartDisabled "1"
