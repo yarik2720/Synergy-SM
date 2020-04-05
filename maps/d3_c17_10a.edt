@@ -8,8 +8,11 @@ d3_c17_10a
 //Prevent Backtracking
 		//create {classname "syn_transition_wall" origin "-4168 6464 -8"}
 
-		create {classname "trigger_push" origin "64 0 0"
-			values {model "*32"
+		create {classname "trigger_push" origin "-4130 6788 60"
+			values {
+				//model "*32"
+				edt_mins "-10 -60 -60"
+				edt_maxs "10 50 150"
 				spawnflags "1"
 				speed "750"
 				pushdir "0 0 0"} }
@@ -111,7 +114,10 @@ d3_c17_10a
 
 //Trav|Edt - block window
 		create {classname "func_brush" origin "-2424 7488 580"
-			values {model "*53"//or *129 for LOS
+			values {
+				//model "*53"//or *129 for LOS
+				edt_getbspmodelfor_classname "func_brush"
+				edt_getbspmodelfor_origin "-2424 7488 580"
 				spawnflags "2"} }
 
 //Trav|Edt - increase magnitude of mortar
@@ -185,7 +191,10 @@ d3_c17_10a
 
 		create {classname "trigger_once"
 			origin "-460 6272 256"
-			values {model "*22"
+			values {
+				//model "*22"
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "-460 6272 256"
 				spawnflags "1"
 				OnTrigger "field1_breakable_plug_bit,SetDamageFilter,,45,-1"
 				//OnTrigger "field1_breakable_plug_bit,EnableDamageForces,,10,-1"
@@ -200,7 +209,10 @@ d3_c17_10a
 
 		create {classname "trigger_once"
 			origin "-2968 6476 576"
-			values {model "*38"
+			values {
+				//model "*38"
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "-2968 6476 576"
 				spawnflags "1"
 				OnTrigger "syn_spawn_manager,MovePlayers,,0.2,-1"
 				OnTrigger "syn_teleport_barney01,Teleport,,0,-1"} }
@@ -216,7 +228,10 @@ d3_c17_10a
 
 		create {classname "trigger_multiple"
 			origin "252 6344 316"
-			values {model "*33"
+			values {
+				//model "*33"
+				edt_getbspmodelfor_classname "trigger_multiple"
+				edt_getbspmodelfor_origin "-2692 7528 572"
 				spawnflags "2"
 				targetname "trav_combine_capitol_allout"
 				//StartDisabled "1"
@@ -230,7 +245,10 @@ d3_c17_10a
 
 		create {classname "trigger_push"
 			origin "268 6272 316"
-			values {model "*33"
+			values {
+				//model "*33"
+				edt_getbspmodelfor_classname "trigger_multiple"
+				edt_getbspmodelfor_origin "-2692 7528 572"
 				spawnflags "1"
 				targetname "trav_push_capitol"
 				pushdir "0 180 0"
@@ -254,7 +272,10 @@ d3_c17_10a
 //Trav|Edt - autirush
 		create {classname "trigger_coop"
 			origin "376 4880 356"
-			values {model "*24"
+			values {
+				//model "*24"
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "-2488 6040 220"
 				spawnflags "1"
 				//StartDisabled "1"
 				targetname "syn_antirush_coop"
