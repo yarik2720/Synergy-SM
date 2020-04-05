@@ -105,7 +105,10 @@ d2_coast_01
 //--Checkpoints--
 		create {classname "trigger_once"
 			origin "-12638.7 248.6 1639.59"
-			values {model "*22"
+			values {
+				//model "*22"
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "-5086.69 -455.6 1036"
 				spawnflags "32"
 				targetname "syn_checkpoint_3"
 				StartDisabled "1"
@@ -118,7 +121,9 @@ d2_coast_01
 				filterclass "prop_vehicle_*"} }
 				
 		create {classname "trigger_multiple" origin "-6995.95 -9792 560"
-			values {model "*26"
+			values {
+				//model "*26"
+				edt_getbspmodelfor_targetname "push_car_superjump_01"
 				angles "0 0 0"
 				spawnflags "72"
 				targetname "modi_spawn_antiblock"
@@ -128,7 +133,9 @@ d2_coast_01
 
 		create {classname "trigger_hurt"
 			origin "-6995.95 -9792 560"
-			values {model "*26"
+			values {
+				//model "*26"
+				edt_getbspmodelfor_targetname "push_car_superjump_01"
 				angles "0 0 0"
 				spawnflags "1"
 				StartDisabled "1"
@@ -318,7 +325,8 @@ d2_coast_01
 
 			"values"
 			{
-				"model" "*11"//*12
+				//"model" "*11"//*12
+				edt_getbspmodelfor_targetname "turbo_hudhint_trigger"
 				"wait" "1"
 				"spawnflags" "32"
 				"StartDisabled" "0"
@@ -349,7 +357,9 @@ d2_coast_01
 //Trav|Edt - anti-rush
 		create {classname "trigger_coop"
 			origin "-12825.8 3782.29 1689"
-			values {model "*9"
+			values {
+				//model "*9"
+				edt_getbspmodelfor_targetname "trigger_didntgetinjeep"
 				spawnflags "1"
 				targetname "syn_antirush_coop"
 				CountType "1"

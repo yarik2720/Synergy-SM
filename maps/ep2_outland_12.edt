@@ -107,7 +107,9 @@ ep2_outland_12
 //Trav|Edt - freeze crane logs (network savings)
 		create {classname "logic_auto"
 			values {spawnflags "1"
-				OnMapSpawn "crane*_logpile,DisableMotion,,0,-1"} }
+				OnMapSpawn "crane*_logpile,DisableMotion,,0,-1"
+				OnMapSpawn "alyx_victory_lcs_1_conditions,AddOutput,OnConditionsSatisfied alyx_victory_follow:Deactivate::5:1,0,-1"
+				OnMapSpawn "alyx_victory_lcs_1_conditions,AddOutput,OnConditionsSatisfied alyx_victory_lead:Activate::5.1:1,0,-1"} }
 
 //Trav|Edt Decrease fog distance to save a wittle network lag
 		//edit {targetname "fog_controller" values {fogmaxdensity "1" farz "5120"} }

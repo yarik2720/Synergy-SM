@@ -45,21 +45,30 @@ d1_trainstation_06
 //prevent players rushing without crowbar
 		create {classname "trigger_push"
 			origin "-9836 -3235 497"
-			values {model "*19"
+			values {
+				//model "*19"
+				edt_getbspmodelfor_classname "trigger_multiple"
+				edt_getbspmodelfor_origin "-6120 -2863 358.5"
 				angles "0 90 0"
 				spawnflags "1"
 				pushdir "0 -90 0"
 				speed "350"} }
 		create {classname "trigger_push"
 			origin "-9465 -3179 541"
-			values {model "*19"
+			values {
+				//model "*19"
+				edt_getbspmodelfor_classname "trigger_multiple"
+				edt_getbspmodelfor_origin "-6120 -2863 358.5"
 				angles "0 90 0"
 				spawnflags "1"
 				pushdir "0 -90 0"
 				speed "1150"} }
 		create {classname "trigger_push"
 			origin "-9248 -3301 493"
-			values {model "*19"
+			values {
+				//model "*19"
+				edt_getbspmodelfor_classname "trigger_multiple"
+				edt_getbspmodelfor_origin "-6120 -2863 358.5"
 				spawnflags "1"
 				pushdir "0 -180 0"
 				speed "1150"} }
@@ -133,15 +142,18 @@ d1_trainstation_06
 
 		create {classname "trigger_multiple"
 			origin "-8001 -734 -113.5"
-			values {model "*16"
+			values {
+				//model "*16"
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "-8000 -3171 207.5"
 				spawnflags "1"
 				targetname "syn_vint_endtrigger"
 				OnStartTouch "syn_vint_endprops_bullseye_ai,ApplyRelationship,,0,-1"
 				OnEndTouchAll "syn_vint_endprops_bullseye_ai,RevertToDefaultRelationship,,0,-1" } }
 
 //Trav|Edt - prevent funky train door phys (makes harder for players to get through, but whatevs... fornow
-		create {classname "func_clip_vphysics" origin "-8776 -2832 62" values {model "*65" filtername "syn_funkydoor_filt" targetname "syn_funkydoor"} }
-		create {classname "func_clip_vphysics" origin "-8656 -2800 62" values {model "*65" filtername "syn_funkydoor_filt" targetname "syn_funkydoor"} }
+		create {classname "func_clip_vphysics" origin "-8776 -2832 62" values {edt_getbspmodelfor_classname "trigger_multiple" edt_getbspmodelfor_origin "-6168 -2560 -2" filtername "syn_funkydoor_filt" targetname "syn_funkydoor"} }//model "*65"
+		create {classname "func_clip_vphysics" origin "-8656 -2800 62" values {edt_getbspmodelfor_classname "trigger_multiple" edt_getbspmodelfor_origin "-6168 -2560 -2" filtername "syn_funkydoor_filt" targetname "syn_funkydoor"} }
 
 		create {classname "filter_activator_name"
 			values {targetname "syn_funkydoor_filt"
@@ -157,7 +169,10 @@ d1_trainstation_06
 
 		create {classname "trigger_once"
 			origin "-7784 -1520 -44"
-			values {model "*18"
+			values {
+				//model "*18"
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "-7784 -1520 -44"
 				spawnflags "512"
 				OnTrigger "rappeller_cop_2_maker,Spawn,,0,-1"
 				OnTrigger "rappeller_cop_2_maker_2,Spawn,,0.75,-1"
@@ -220,7 +235,10 @@ d1_trainstation_06
 //Trav|Edt - autirush
 		create {classname "trigger_coop"
 			origin "-8480 -568 -320.5"//-8387 -418 -190
-			values {model "*52"//*17
+			values {
+				//model "*52"//*17
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "-6720 -1944 64.5"
 				spawnflags "1"
 				//StartDisabled "1"
 				targetname "syn_antirush_coop"
@@ -286,11 +304,13 @@ d1_trainstation_06
 		"create"
 		{
 			"classname" "trigger_push"
-			"origin" "0 52 0"
+			"origin" "-9920 -4014 384"
 
 			"values"
 			{
-				"model" "*6"
+				//"model" "*6"
+				"edt_mins" "-100 -60 -100"
+				"edt_maxs" "70 60 100"
 				"spawnflags" "1"
 				"StartDisabled" "0"
 				"pushdir" "0 90 0"

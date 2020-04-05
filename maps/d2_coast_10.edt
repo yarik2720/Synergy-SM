@@ -145,7 +145,9 @@ d2_coast_10
 
 		create {classname "trigger_once"
 			origin "-2722 -3624 1560"
-			values {model "*121"
+			values {
+				//model "*121"
+				edt_getbspmodelfor_targetname "trigger_lighthouse_check"
 				spawnflags "2"
 				filtername "trav_filter_gunship"
 				OnTrigger "trav_trigger_lighthousedoor,Enable,-1,1,-1" } }
@@ -156,7 +158,10 @@ d2_coast_10
 
 		create {classname "trigger_once"
 			origin "8224 1944 1024"//8224 1802 1024
-			values {model "*126"
+			values {
+				//model "*126"
+				edt_getbspmodelfor_classname "trigger_multiple"
+				edt_getbspmodelfor_origin "8224 1832 1024"
 				spawnflags "1"
 				StartDisabled "1"
 				targetname "trav_trigger_lighthousedoor"
@@ -173,7 +178,10 @@ d2_coast_10
 //Trav|Edt - player clip post lighthouse door
 		create {classname "func_brush"
 			origin "8264 2016 976"
-			values {model "*126"
+			values {
+				//model "*126"
+				edt_getbspmodelfor_classname "trigger_multiple"
+				edt_getbspmodelfor_origin "8224 1832 1024"
 				spawnflags "0"
 				StartDisabled "1"
 				spawnflags "1"
@@ -182,7 +190,10 @@ d2_coast_10
 
 		create {classname "func_brush"
 			origin "8088 2248 912"
-			values {model "*89"
+			values {
+				//model "*89"
+				edt_getbspmodelfor_classname "trigger_multiple"
+				edt_getbspmodelfor_origin "7200 1568 1152"
 				spawnflags "0"
 				StartDisabled "1"
 				spawnflags "1"
@@ -191,7 +202,10 @@ d2_coast_10
 
 		create {classname "func_brush"
 			origin "7944 2112 912"
-			values {model "*89"
+			values {
+				//model "*89"
+				edt_getbspmodelfor_classname "trigger_multiple"
+				edt_getbspmodelfor_origin "7200 1568 1152"
 				spawnflags "0"
 				StartDisabled "1"
 				spawnflags "1"
@@ -221,7 +235,10 @@ d2_coast_10
 //Trav|Edt - Manage vehicles,checkpoint, and extra combine
 		create {classname "trigger_once"
 			origin "4773 -228 976"
-			values {model "*115"
+			values {
+				//model "*115"
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "4773 -228 976"
 				spawnflags "8"
 				filtername "jeep_filter"
 				//OnTrigger "trav_gtext_dropshipwarning,Display,,5,-1"
@@ -238,7 +255,10 @@ d2_coast_10
 
 //Trav|Edt - teleporter for stragglers
 		create { classname "trigger_teleport" origin "148.21 -6856 1439"
-			values {model "*83" angles "0 90 0"
+			values {
+				//model "*83"
+				edt_getbspmodelfor_targetname "fall_trigger"
+				angles "0 90 0"
 				spawnflags "1"
 				StartDisabled "1"
 				targetname "syn_teleport_stragglers"
@@ -286,7 +306,7 @@ d2_coast_10
 //Trav|Edt - add a vehicleclip wall outside garage side entrance (for player teleport checkpoint)nvm bsp single ent not possible, need trigger model)
 		create {classname "func_vehicleclip"
 			origin "4960 -416 1000"
-			values {model "*85"} }
+			values {edt_getbspmodelfor_classname "trigger_once" edt_getbspmodelfor_origin "7744 1728 800"} }//model "*85"
 
 //Trav|Edt - Add failsafe for door opener
 		create {classname "logic_relay"
@@ -342,7 +362,11 @@ d2_coast_10
 
 //2011 - make this delete the combine inside (works fine on localhost 0.o mostly)
 		create {classname "trigger_remove" origin "6496 2456 1184"
-			values {model "*124" angles "0 -10 0"
+			values {
+				//model "*124"
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "2848 -5120 1504"
+				angles "0 -10 0"
 				spawnflags "64"
 				StartDisabled "1"
 				targetname "trav_dropship4_antistucker"
@@ -360,50 +384,74 @@ d2_coast_10
 //Trav|Edt - antirush hurt
 		create {classname "trigger_hurt"
 			origin "4880 2872 520.01"
-			values {model "*124"
+			values {
+				//model "*124"
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "2848 -5120 1504"
 				spawnflags "1"
 				targetname "syn_antirusher_hurt"
 				damage "1000"} }
 
 //antirush pushes				
 		create {classname "trigger_push" origin "4860 2034 1203"
-			values {model "*113"
+			values {
+				//model "*113"
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "5104 -480 944"
 				spawnflags "1"//65
 				speed "3050"
 				pushdir "0 270 0"} }
 				
 		create {classname "trigger_push" origin "2546 -4357 1607"
-			values {model "*113"
+			values {
+				//model "*113"
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "5104 -480 944"
 				spawnflags "1"//65
 				speed "950"
 				pushdir "0 270 0"} }
 				
 		create {classname "trigger_push" origin "1610 -4330 1668"
-			values {model "*121" angles "90 0 0"
+			values {
+				//model "*121"
+				edt_getbspmodelfor_targetname "trigger_lighthouse_check"
+				angles "90 0 0"
 				spawnflags "1"//65
 				speed "950"
 				pushdir "0 270 0"} }
 				
 		create {classname "trigger_push" origin "790 3096 1810"
-			values {model "*121" angles "90 0 0"
+			values {
+				//model "*121"
+				edt_getbspmodelfor_targetname "trigger_lighthouse_check"
+				angles "90 0 0"
 				spawnflags "1"//65
 				speed "3050"
 				pushdir "0 270 0"} }
 				
 		create {classname "trigger_push" origin "2464 3096 1674"
-			values {model "*121" angles "90 0 0"
+			values {
+				//model "*121"
+				edt_getbspmodelfor_targetname "trigger_lighthouse_check"
+				angles "90 0 0"
 				spawnflags "1"//65
 				speed "3050"
 				pushdir "0 270 0"} }
 				
 		create {classname "trigger_push" origin "3190 2471 1674"
-			values {model "*121" angles "90 0 0"
+			values {
+				//model "*121"
+				edt_getbspmodelfor_targetname "trigger_lighthouse_check"
+				angles "90 0 0"
 				spawnflags "1"//65
 				speed "3050"
 				pushdir "0 270 0"} }
 				
 		create {classname "trigger_push" origin "5300 2650 1500"
-			values {model "*121" angles "90 0 0"
+			values {
+				//model "*121"
+				edt_getbspmodelfor_targetname "trigger_lighthouse_check"
+				angles "90 0 0"
 				spawnflags "1"//65
 				speed "450"
 				pushdir "0 0 0"} }

@@ -128,7 +128,10 @@ d2_coast_12
 
 		create {classname "trigger_once"
 			origin "2144 -304 728.5"//1904 272 728.5
-			values {model "*24"//*22
+			values {
+				//model "*24"//*22
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "2144 -304 728.5"
 				spawnflags "1"
 				OnTrigger "syn_vint_trav_tmaker_combine2,Enable,,0,-1"
 				OnTrigger "syn_spawn_manager,SetCheckpoint,syn_spawn_player_2,0,-1"
@@ -164,7 +167,10 @@ d2_coast_12
 
 		create {classname "trigger_once"
 			origin "5152 4112 720"
-			values {model "*33"
+			values {
+				//model "*33"
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "5152 4112 720"
 				spawnflags "1"
 				OnTrigger "antspawn_nodes_10,EnableHint,,0,-1"
 				OnTrigger "ragdoll_manager,SetMaxRagdollCount,2,0,-1"
@@ -237,7 +243,10 @@ d2_coast_12
 //Trav|Edt - autirush
 		create {classname "trigger_coop"
 			origin "9174 8302 2118"
-			values {model "*73"
+			values {
+				//model "*73"
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "9278 7778 2010"
 				angles "0 90 0"
 				spawnflags "1"
 				targetname "syn_antirush_trigger"

@@ -299,7 +299,10 @@ d2_prison_06
 //Trav|Edt - autirush
 		create {classname "trigger_coop"
 			origin "272 -2544 -176"
-			values {model "*96"
+			values {
+				//model "*96"
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "960 416 -128"
 				spawnflags "1"
 				targetname "syn_antirush_coop"
 				CountType "1"

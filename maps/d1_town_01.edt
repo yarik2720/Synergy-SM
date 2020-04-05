@@ -106,7 +106,10 @@ d1_town_01
 		delete {classname "trigger_once" origin "4512 -2676 -3728.77"}
 
 		create {classname "trigger_once" origin "4512 -2676 -3728.77"
-			values {model "*106"
+			values {
+				//model "*106"
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "4512 -2676 -3728.77"
 				spawnflags "1"
 				OnTrigger "start_music,PlaySound,,20,-1"} }//30/45 (ppl loading faster and faster these days :P)
 
@@ -128,7 +131,10 @@ d1_town_01
 //Trav|Edt - disable blades when applicable
 		create {classname "trigger_once"
 			origin "2457.5 -1170.5 -3719.66"
-			values {model "*69"
+			values {
+				//model "*69"
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "2457.5 -1170.5 -3719.66"
 				spawnflags "1"
 				targetname "syn_vint"
 				OnTrigger "propeller_01_lever_01,Lock,,0.01,-1"
@@ -140,7 +146,10 @@ d1_town_01
 
 		create {classname "trigger_once"
 			origin "1917 -1787.5 -3712"
-			values {model "*70"
+			values {
+				//model "*70"
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "1917 -1787.5 -3712"
 				spawnflags "1"
 				targetname "syn_vint"
 				OnTrigger "propeller_03_lever_01,Lock,,0.01,-1"
@@ -157,7 +166,10 @@ d1_town_01
 
 		create {classname "trigger_multiple"
 			origin "680 -572 -3602.72"
-			values {model "*54"
+			values {
+				//model "*54"
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "1000 -1460 -3676"
 				spawnflags "1"
 				targetname "syn_vint"
 				OnStartTouch "hallfire_1_trap_1_ignition_button_1,Lock,,0,-1"
@@ -241,7 +253,10 @@ d1_town_01
 
 		create {classname "trigger_once"
 			origin "2718.5 -1324 -3758.07"
-			values {model "*49"
+			values {
+				//model "*49"
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "2718.5 -1324 -3758.07"
 				spawnflags "1"
 				//OnTrigger "intro_zombie_1_spawner_1,Enable,,0,-1"
 				//OnTrigger "intro_zombie_2_spawner_1,Enable,,0,-1"
@@ -265,7 +280,10 @@ d1_town_01
 // prevent skipping puzzle
 		create {classname "trigger_push"
 			origin "1146.47 -607.50 -3543.82"
-			values {model "*34"
+			values {
+				//model "*34"
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "1514 -1242 -3707.73"
 				angles "0 35 0"
 				spawnflags "1"
 				speed "350"
@@ -301,7 +319,10 @@ d1_town_01
 
 //Trav|Edt - lock levers when players are on cars
 		create {classname "trigger_multiple" origin "1160 41.5 -3542"
-			values {model "*118"
+			values {
+				//model "*118"
+				edt_getbspmodelfor_classname "trigger_multiple"
+				edt_getbspmodelfor_origin "1160 41.5 -3542"
 				spawnflags "1"
 				parentname "crushtrap_01_weight_car"
 				StartDisabled "1"
@@ -310,7 +331,11 @@ d1_town_01
 				OnEndTouchAll "crushtrap_01_switch_01,Unlock,,0,-1"} }
 
 		create {classname "trigger_multiple" origin "760 248.5 -3542"
-			values {model "*118" angles "0 45 0"
+			values {
+				//model "*118"
+				edt_getbspmodelfor_classname "trigger_multiple"
+				edt_getbspmodelfor_origin "1160 41.5 -3542"
+				angles "0 45 0"
 				spawnflags "1"
 				parentname "crushtrap_02_weight_car"
 				StartDisabled "1"
@@ -326,7 +351,10 @@ d1_town_01
 //Trav|Edt add antirush at endlevel
 		create {classname "trigger_coop"
 			origin "174.5 592.5 -3252"
-			values {model "*46"
+			values {
+				//model "*46"
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "525.5 -138.5 -3316"
 				spawnflags "1"
 				//StartDisabled "1"
 				targetname "syn_antirush_trav_town01_end_coop"
