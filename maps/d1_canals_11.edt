@@ -62,7 +62,9 @@ d1_canals_11
 			values {
 				targetname "modi_antiblock_push"
 				StartDisabled "1"
-				model "*55"
+				//model "*55"
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "6341.08 4859.53 -964"
 				angles "0 0 90"
 				parentname "ramp"
 				spawnflags "1"
@@ -248,7 +250,10 @@ d1_canals_11
 				OnTrigger "syn_original_vintage_trigger,Enable,,0,-1"} }
 //original trigger for vintage mode
 		create {classname "trigger_once" origin "7477.99 4867.84 -924"
-			values {model "*109"
+			values {
+				//model "*109"
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "7477.99 4867.84 -924"
 				targetname "syn_original_vintage_trigger"
 				spawnflags "41"
 				StartDisabled "1"
@@ -295,7 +300,9 @@ d1_canals_11
 			classname "trigger_push"
 			origin "6740 4926.5 -804"
 			values {
-				model "*119"
+				//model "*119"
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "6591.1 4926.51 -964"
 				angles "0 0 0"
 				parentname "door_guncave_entrance"
 				spawnflags "1"
@@ -312,7 +319,10 @@ d1_canals_11
 				filterclass "prop_vehicle_airboat"} }
 				
 		create {classname "trigger_multiple" origin "9941.34 8931.36 -945.70"
-			values {model "*138"
+			values {
+				//model "*138"
+				edt_getbspmodelfor_classname "trigger_multiple"
+				edt_getbspmodelfor_origin "9984 6778 -930"
 				angles "0 0 0"
 				spawnflags "72"
 				StartDisabled "1"
@@ -323,7 +333,10 @@ d1_canals_11
 
 		create {classname "trigger_hurt"
 			origin "9941.34 8931.36 -945.70"
-			values {model "*138"
+			values {
+				//model "*138"
+				edt_getbspmodelfor_classname "trigger_multiple"
+				edt_getbspmodelfor_origin "9984 6778 -930"
 				angles "0 0 0"
 				spawnflags "1"
 				StartDisabled "1"
@@ -333,7 +346,10 @@ d1_canals_11
 				damagetype "262144"} }
 				
 		create {classname "trigger_multiple" origin "6363 4874 -959"
-			values {model "*138"
+			values {
+				//model "*138"
+				edt_getbspmodelfor_classname "trigger_multiple"
+				edt_getbspmodelfor_origin "9984 6778 -930"
 				angles "0 90 0"
 				spawnflags "72"
 				StartDisabled "1"
@@ -344,7 +360,10 @@ d1_canals_11
 
 		create {classname "trigger_hurt"
 			origin "6363 4864 -959"
-			values {model "*138"
+			values {
+				//model "*138"
+				edt_getbspmodelfor_classname "trigger_multiple"
+				edt_getbspmodelfor_origin "9984 6778 -930"
 				angles "0 90 0"
 				spawnflags "1"
 				StartDisabled "1"
@@ -436,12 +455,15 @@ d1_canals_11
 				targetname "syn_vint"} }
 
 //Trav|Edt - move cop trigger (sooner)-NP- BbrushReq [gate early]
-		edit {classname "trigger_once" origin "1792 -7680 -768" values {origin "5083 -6801 -928" model "*134"} }//4736 -5760 -736
+		edit {classname "trigger_once" origin "1792 -7680 -768" values {origin "5083 -6801 -928" edt_getbspmodelfor_classname "trigger_hurt" edt_getbspmodelfor_origin "-9934 -2570 -991"} }//4736 -5760 -736 model "*134"
 //keep gate2 trigger ORI
 		edit {targetname "gate2" values {targetname "trav_gate2"} }
 		create {classname "trigger_once"
 			origin "1792 -7680 -768"
-			values {model "*58"
+			values {
+				//model "*58"
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "1792 -7680 -768"
 				spawnflags "1"
 				OnTrigger "trav_gate2,EnableMotion,,0.5,-1"} }
 
