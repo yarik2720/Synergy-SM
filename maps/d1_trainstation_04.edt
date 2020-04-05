@@ -71,8 +71,8 @@ d1_trainstation_04
 		create {classname "info_spawn_manager"
 			values {targetname "syn_spawn_manager"} }
 
-		create {classname "info_player_coop" origin "-3216 -3544 384"
-			values {angles "0 285 0" targetname "syn_spawn_player_1"} }
+		create {classname "info_player_coop" origin "-3210 -3670 384"
+			values {angles "-15 180 0" targetname "syn_spawn_player_1"} }
 
 	//	create {classname "info_player_coop" origin "-7530.05 -4056.76 -250.97"
 	//		values {angles "0 160 0" targetname "syn_spawn_player_2" StartDisabled "1"} }
