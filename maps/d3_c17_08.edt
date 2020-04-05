@@ -95,7 +95,10 @@ d3_c17_08
 //Trav|Edt - delay intro music
 		delete {classname "trigger_once" origin "-2232 -2904 92"}
 		create {classname "trigger_once" origin "-2232 -2904 92"
-			values {model "*96"
+			values {
+				//model "*96"
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "-2232 -2904 92"
 				spawnflags "1"
 				OnTrigger "song_hl1_14,PlaySound,,45,-1"} }
 
@@ -180,7 +183,10 @@ d3_c17_08
 //Trav|Edt - antirush for platform
 		create {classname "trigger_coop"
 			origin "1432 360 464"
-			values {model "*81"
+			values {
+				//model "*81"
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "46 -1670 -263.5"
 				spawnflags "1"
 				//StartDisabled "1"
 				targetname "syn_antirush_coop"
@@ -200,37 +206,55 @@ d3_c17_08
 
 		create {classname "func_clip_vphysics"
 			origin "1724.5 46.5 287.91"
-			values {model "*99"
+			values {
+				//model "*99"
+				edt_getbspmodelfor_classname "trigger_multiple"
+				edt_getbspmodelfor_origin "-1413.5 -1422.5 156.91"
 				targetname "trav_platform_vphysclips"
 				filtername "trav_filter_platform"} }
 
 		create {classname "func_clip_vphysics"
 			origin "1724.5 -334.5 287.91"
-			values {model "*99"
+			values {
+				//model "*99"
+				edt_getbspmodelfor_classname "trigger_multiple"
+				edt_getbspmodelfor_origin "-1413.5 -1422.5 156.91"
 				targetname "trav_platform_vphysclips"
 				filtername "trav_filter_platform"} }
 
 		create {classname "func_clip_vphysics"
 			origin "1724.5 -334.5 191.91"
-			values {model "*99"
+			values {
+				//model "*99"
+				edt_getbspmodelfor_classname "trigger_multiple"
+				edt_getbspmodelfor_origin "-1413.5 -1422.5 156.91"
 				targetname "trav_platform_vphysclips"
 				filtername "trav_filter_platform"} }
 
 		create {classname "func_clip_vphysics"
 			origin "1075.5 46.5 287.91"
-			values {model "*99"
+			values {
+				//model "*99"
+				edt_getbspmodelfor_classname "trigger_multiple"
+				edt_getbspmodelfor_origin "-1413.5 -1422.5 156.91"
 				targetname "trav_platform_vphysclips"
 				filtername "trav_filter_platform"} }
 
 		create {classname "func_clip_vphysics"
 			origin "1075.5 -334.5 287.91"
-			values {model "*99"
+			values {
+				//model "*99"
+				edt_getbspmodelfor_classname "trigger_multiple"
+				edt_getbspmodelfor_origin "-1413.5 -1422.5 156.91"
 				targetname "trav_platform_vphysclips"
 				filtername "trav_filter_platform"} }
 
 		create {classname "func_clip_vphysics"
 			origin "1075.5 -334.5 191.91"
-			values {model "*99"
+			values {
+				//model "*99"
+				edt_getbspmodelfor_classname "trigger_multiple"
+				edt_getbspmodelfor_origin "-1413.5 -1422.5 156.91"
 				targetname "trav_platform_vphysclips"
 				filtername "trav_filter_platform"} }
 
@@ -245,7 +269,10 @@ d3_c17_08
 
 		create {classname "trigger_multiple"
 			origin "992 712 460"
-			values {model "*96"
+			values {
+				//model "*96"
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "-2232 -2904 92"
 				spawnflags "1"
 				targetname "trav_trigger_multicheckpoint"
 				wait "180"//5
@@ -264,21 +291,33 @@ d3_c17_08
 
 //Trav|Edt - kill players who fall (lazy method)
 		create {classname "trigger_multiple" origin "1126 166 344.5"
-			values {model "*81" angles "0 90 0"
+			values {
+				//model "*81"
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "46 -1670 -263.5"
+				angles "0 90 0"
 				targetname "syn_killfallers"
 				StartDisabled "1"
 				spawnflags "1"
 				OnStartTouch "!activator,SetHealth,0,1.25,-1"} }
 
 		create {classname "trigger_multiple" origin "1418 170 344.5"
-			values {model "*81" angles "0 90 0"
+			values {
+				//model "*81"
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "46 -1670 -263.5"
+				angles "0 90 0"
 				targetname "syn_killfallers"
 				StartDisabled "1"
 				spawnflags "1"
 				OnStartTouch "!activator,SetHealth,0,1.25,-1"} }
 
 		create {classname "trigger_multiple" origin "1418 -382 344.5"
-			values {model "*81" angles "0 90 0"
+			values {
+				//model "*81"
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "46 -1670 -263.5"
+				angles "0 90 0"
 				targetname "syn_killfallers"
 				StartDisabled "1"
 				spawnflags "1"
@@ -287,7 +326,10 @@ d3_c17_08
 //Trav|Edt - autirush
 		create {classname "trigger_coop"
 			origin "2282 -350 519.5"
-			values {model "*81"
+			values {
+				//model "*81"
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "46 -1670 -263.5"
 				spawnflags "1"
 				//StartDisabled "1"
 				targetname "syn_antirush_coop"
