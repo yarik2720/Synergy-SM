@@ -210,8 +210,8 @@ d1_canals_02
 			origin "455 72 -740"
 			values {
 				//model "*45"
-				edt_getbspmodelfor_classname "trigger_once"
-				edt_getbspmodelfor_origin "2952 -1952 -552"
+				edt_mins "-360 -20 -20"
+				edt_maxs "80 30 200"
 				spawnflags "1"
 				targetname "trav_antiskip_push"
 				pushdir "0 270 0"
