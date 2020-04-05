@@ -227,8 +227,8 @@ d1_canals_01
 		create {classname "trigger_once" origin "-576 -7360 320"
 			values {
 				//model "*106"
-				edt_getbspmodelfor_classname "trigger_once"
-				edt_getbspmodelfor_origin "-576 -7360 320"
+				edt_mins "-50 -80 -110"
+				edt_maxs "50 60 100"
 				spawnflags "1"
 				OnTrigger "beat_cop1_maker,Enable,,0.1,-1"} }
 
@@ -354,11 +354,13 @@ d1_canals_01
 
 //remake: don't let this trigger kill half the npc's
 		delete {classname "trigger_once" origin "608 -5058 552"}
+		//HL2U
+		delete {classname "trigger_once" origin "608 -5058 532"}
 		create {classname "trigger_once" origin "608 -5058 552"
 			values {
 				//model "*78"
-				edt_getbspmodelfor_classname "trigger_once"
-				edt_getbspmodelfor_origin "608 -5058 552"
+				edt_mins "-20 -10 -60"
+				edt_maxs "20 10 30"
 				spawnflags "1"
 				"OnTrigger" "tunnel_barrels_template,ForceSpawn,,0,-1"
 				"OnTrigger" "assault3cop_2_maker,Enable,,0,-1"
