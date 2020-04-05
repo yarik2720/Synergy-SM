@@ -3,6 +3,7 @@ d1_canals_01a
 	entity {
 //--Setup--
 		delete {classname "logic_auto" origin "576.631 2850.74 -68"}
+		edit {classname "func_areaportal" values {targetname "disabledPortals" StartOpen "1"} }
 
 //--Starting Items--
 		create {classname "info_player_equip"
