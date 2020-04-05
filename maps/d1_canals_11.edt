@@ -500,6 +500,8 @@ d1_canals_11
 				brightness "1"
 				distance "384"
 				style "12"} }
+		
+		create {classname "weapon_deagle" origin "785 -7012 -886" values {angles "0 90 90"} }
 
 //Trav|Edt - Functionality check
 		create {classname "logic_relay" values {targetname "trav_functionality_d1_canals_11"} }
