@@ -147,7 +147,10 @@ d1_town_01a
 //Trav|Edt add antirush at endlevel
 		create {classname "trigger_coop"
 			origin "-360 784 -3422"
-			values {model "*38"
+			values {
+				//model "*38"
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "-880 912 -3250"
 				spawnflags "1"
 				//StartDisabled "1"
 				targetname "syn_antirush_trav_town01a_end_coop"
@@ -161,7 +164,10 @@ d1_town_01a
 
 		create {classname "trigger_push"
 			origin "-534 712 -3365"
-			values {model "*33"
+			values {
+				//model "*33"
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "210 -144 -3219"
 				spawnflags "1"
 				targetname "syn_antirush_trav_town01a_end_push"
 				pushdir "0 0 0"
@@ -199,7 +205,9 @@ d1_town_01a
 
 			"values"
 			{
-				"model"			"*13"
+				//"model"			"*13"
+				"edt_getbspmodelfor_classname" "trigger_hurt"
+				"edt_getbspmodelfor_origin" "-124.5 317.48 -3526.14"
 				"targetname"		"edt_surfpush"
 				"origin"		"20 499 -3290"
 				"spawnflags"		"1"
@@ -215,7 +223,9 @@ d1_town_01a
 
 			"values"
 			{
-				"model"			"*13"
+				//"model"			"*13"
+				"edt_getbspmodelfor_classname" "trigger_hurt"
+				"edt_getbspmodelfor_origin" "-124.5 317.48 -3526.14"
 				"origin"		"-101 1086 -3230"
 				"spawnflags"		"1"
 				"StartDisabled"		"0"
