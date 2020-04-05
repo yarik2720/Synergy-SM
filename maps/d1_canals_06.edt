@@ -28,9 +28,9 @@ d1_canals_06
 	//			spawnflags "1"//65
 	//			speed "750"
 	//			pushdir "0 -160 0"} }
-
-		create {classname "func_vehicleclip" origin "-64 -16 0"
-			values {model "*59"} }
+//Not needed because of syn_transition wall
+		//create {classname "func_vehicleclip" origin "-64 -16 0"
+		//	values {model "*59"} }
 //Trav|ND
 		// fix the constantly breaking platform
 		delete {targetname "tower1_break_relay"}
@@ -171,7 +171,10 @@ d1_canals_06
 				filterclass "prop_vehicle_airboat"} }
 				
 		create {classname "trigger_multiple" origin "12290 9150 -248.02"
-			values {model "*91"
+			values {
+				//model "*91"
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "4455 5932 44"
 				spawnflags "72"
 				targetname "modi_spawn_antiblock"
 				filtername "modi_airboat_filer"
@@ -180,7 +183,10 @@ d1_canals_06
 
 		create {classname "trigger_hurt"
 			origin "12290 9150 -218.02"
-			values {model "*150"
+			values {
+				//model "*150"
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "-5568 -1808 364"
 				angles "0 0 90"
 				spawnflags "1"
 				StartDisabled "0"
@@ -193,7 +199,10 @@ d1_canals_06
 //--Checkpoints--
 		create {classname "trigger_once"
 			origin "0 5760 160"
-			values {model "*170"
+			values {
+				//model "*170"
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "0 5760 160"
 				spawnflags "32"
 				OnTrigger "syn_spawn_vehicle_2,Enable,,0,-1"
 				OnTrigger "syn_moreplayerssec,CheckSkill,,0,1"
@@ -203,14 +212,20 @@ d1_canals_06
 //wall skip
 		create {classname "func_brush"
 			origin "550 -288 288"
-			values {model "*146"
+			values {
+				//model "*146"
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "5632 3360 -96"
 				spawnflags "2"
 				rendermode "10"} }
 				
 //close dat wall
 		create {classname "trigger_push"
 			origin "-544.37 6000 200"
-			values {model "*143"
+			values {
+				//model "*143"
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "1692 1472 -304"
 				spawnflags "1"
 				pushdir "0 0 0"
 				speed "450"} }
@@ -219,29 +234,44 @@ d1_canals_06
 //N
 		create {classname "func_clip_vphysics"
 			origin "0 5696 160"
-			values {model "*170"
+			values {
+				//model "*170"
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "0 5760 160"
 				filtername "syn_filter_barrels"} }
 //W
 		create {classname "func_clip_vphysics"
 			origin "-832 5056 160"
-			values {model "*170"
+			values {
+				//model "*170"
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "0 5760 160"
 				angles "0 90 0"
 				filtername "syn_filter_barrels"} }
 //E
 		create {classname "func_clip_vphysics"
 			origin "640 5056 160"
-			values {model "*170"
+			values {
+				//model "*170"
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "0 5760 160"
 				angles "0 90 0"
 				filtername "syn_filter_barrels"} }
 //S
 		create {classname "func_clip_vphysics"
 			origin "0 4544 -48"
-			values {model "*170"
+			values {
+				//model "*170"
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "0 5760 160"
 				filtername "syn_filter_barrels"} }
 //T
 		create {classname "func_clip_vphysics"
 			origin "128 5056 64"
-			values {model "*145"
+			values {
+				//model "*145"
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "5120 5984 -416"
 				angles "0 90 0"
 				filtername "syn_filter_barrels"} }
 
@@ -255,7 +285,10 @@ d1_canals_06
 
 		create {classname "trigger_once"
 			origin "-256 5149 -352"
-			values {model "*53"
+			values {
+				//model "*53"
+				edt_getbspmodelfor_classname "trigger_look"
+				edt_getbspmodelfor_origin "6144 7708 -256"
 				spawnflags "8"
 				filtername "syn_filter_barrel_physics"
 				OnStartTouch "!activator,AddOutput,targetname bluebarrelandfriends,0,-1"} }
@@ -293,7 +326,10 @@ d1_canals_06
 
 		create {classname "trigger_once"
 			origin "-7680 10751.9 -85.43"
-			values {model"*65"
+			values {
+				//model"*65"
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "-6368 10559.9 -128"
 				spawnflags "1"
 				targetname "syn_vint"
 				OnTrigger "syn_vint_ss_trav,BeginSequence,-1,0,-1"} }
@@ -334,7 +370,10 @@ d1_canals_06
 //Trav|Edt - Auti-rush
 		create {classname "trigger_coop"
 			origin "-1280 -3584 -400"
-			values {model "*107"
+			values {
+				//model "*107"
+				edt_getbspmodelfor_classname "trigger_hurt"
+				edt_getbspmodelfor_origin "-512 9728 -304"
 				spawnflags "1"
 				//StartDisabled "1"
 				targetname "syn_antirush_coop"
