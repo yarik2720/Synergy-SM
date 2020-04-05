@@ -365,6 +365,9 @@ d2_coast_09
 				edt_getbspmodelfor_origin "-6400 5664 608"
 				spawnflags "1"
 				OnStartTouch "!activator,SetFogController,trav_fog_outside,0,-1"
+//Balimbanana add spawnflag assignment to fog controller for new spawning players
+				OnTrigger "trav_fog_outside,AddOutput,spawnflags 1,0,1"
+				OnTrigger "fog,AddOutput,spawnflags 0,0,1"
 				OnTrigger "syn_spawn_manager,SetCheckpoint,syn_spawn_player_2,0,1"
 				OnTrigger "syn_moreplayerssec,CheckSkill,,0,1"
 				OnTrigger "syn_spawn_vehicle_2,Enable,,0,1"} }
