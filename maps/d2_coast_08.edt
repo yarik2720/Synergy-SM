@@ -101,7 +101,10 @@ d2_coast_08
 
 //syn_spawn_player_3
 		create {classname "trigger_multiple" origin "3328 -1024 1840"
-			values {model "*90"
+			values {
+				//model "*90"
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "3328 -1024 1840"
 				spawnflags "1"
 				targetname "syn_checkpoint_3"
 				//StartDisabled "1"
@@ -109,7 +112,9 @@ d2_coast_08
 
 //syn_spawn_player_4
 		create {classname "trigger_multiple" origin "3260 -2656 1524"
-			values {model "*121"
+			values {
+				//model "*121"
+				edt_getbspmodelfor_targetname "crossbow_fodder_trigger"
 				spawnflags "1"
 				targetname "syn_checkpoint_4"
 				//StartDisabled "1"
@@ -123,7 +128,10 @@ d2_coast_08
 
 //syn_spawn_player_5
 		create {classname "trigger_multiple" origin "3328 -4144 1872"
-			values {model "*91"
+			values {
+				//model "*91"
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "3328 -3760 1840"
 				spawnflags "1"
 				targetname "syn_checkpoint_5"
 				//StartDisabled "1"
@@ -132,7 +140,10 @@ d2_coast_08
 //syn_spawn_player_6 && fix occluder I/O
 		create {classname "trigger_multiple"
 			origin "3328 -5552 1504"
-			values {model "*125"
+			values {
+				//model "*125"
+				edt_getbspmodelfor_classname "trigger_multiple"
+				edt_getbspmodelfor_origin "3328 -5552 1504"
 				spawnflags "1"
 				targetname "syn_checkpoint_6"
 				OnStartTouch "bridge_occluder_02,Deactivate,,0,-1"
@@ -141,7 +152,10 @@ d2_coast_08
 
 		create {classname "trigger_once"
 			origin "3024 -7324 1848"
-			values {model "*89"
+			values {
+				//model "*89"
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "3024 -7324 1848"
 				spawnflags "1"
 				OnTrigger "syn_spawn_manager,SetCheckpoint,syn_spawn_player_7,0,1"
 				OnTrigger "syn_mplrs_stragglers,Enable,,0,-1"
@@ -156,7 +170,9 @@ d2_coast_08
 		delete {targetname "music_trigger"}
 
 		create {classname "trigger_multiple" origin "3309 -45 1680"//trigger_once
-			values {model "*123"
+			values {
+				//model "*123"
+				edt_getbspmodelfor_targetname "music_trigger"
 				spawnflags "1"
 				targetname "music_trigger"
 				OnTrigger "music,PlaySound,,15,1"//d25
@@ -192,7 +208,10 @@ d2_coast_08
 
 		create {classname "trigger_multiple"
 			origin "2946 -7188 1982"
-			values {model "*127"
+			values {
+				//model "*127"
+				edt_getbspmodelfor_classname "trigger_multiple"
+				edt_getbspmodelfor_origin "2946 -7188 1982"
 				spawnflags "1"
 				OnStartTouch "!activator,SetFogController,trav_fog_end,0,-1"
 				OnEndTouch "!activator,SetFogController,fog,0,-1"} }
@@ -233,7 +252,10 @@ d2_coast_08
 				OnTrigger "syn_rockfall_killer,Disable,,1,-1"} }
 
 		create {classname "trigger_hurt" origin "3168 -5592 1604"
-			values {model "*121" angles "0 90 0"
+			values {
+				//model "*121"
+				edt_getbspmodelfor_targetname "crossbow_fodder_trigger"
+				angles "0 90 0"
 				spawnflags "3"
 				StartDisabled "1"
 				targetname "syn_rockfall_killer"
@@ -274,7 +296,10 @@ d2_coast_08
 //Trav|Edt - block LOS for turret through window
 		create {classname "func_brush"
 			origin "2821.5 -6976 1978"
-			values {model "*67"
+			values {
+				//model "*67"
+				edt_getbspmodelfor_classname "func_illusionary"
+				edt_getbspmodelfor_origin "2815.5 -6976 1978"
 				targetname "syn_vint_trav_turret_LOS_window"
 				spawnflags "2"} }
 
@@ -311,7 +336,9 @@ d2_coast_08
 
 //Trav|Edt - teleporter for stragglers
 		create { classname "trigger_teleport" origin "3456 -64 2096"
-			values {model "*132"
+			values {
+				//model "*132"
+				edt_getbspmodelfor_targetname "jeep_fall_trigger"
 				spawnflags "1"
 				StartDisabled "1"
 				targetname "syn_mplrs_stragglers"
@@ -388,7 +415,9 @@ d2_coast_08
 //Trav|Edt add anti-rush push
 		create {classname "trigger_coop"
 			origin "3417.53 1679.99 1624"
-			values {model "*126"
+			values {
+				//model "*126"
+				edt_getbspmodelfor_targetname "window_bullseye_killtrigger"
 				spawnflags "1"
 				StartDisabled "1"
 				targetname "syn_antirush_coop"
@@ -426,9 +455,11 @@ d2_coast_08
 		// prevent access to previous level only until we press the button
 		delete { classname "trigger_changelevel" }
 
-		create { classname "trigger_changelevel"
+		create { classname "trigger_changelevel" origin "3120 1695 1595"
 			values {
-				"model" "*64"
+				//"model" "*64"
+				"edt_mins" "-45 -95 -60"
+				"edt_maxs" "45 100 70"
 				"spawnflags" "0"
 				"landmark" "landmark_d2_coast_07-08"
 				"map" "d2_coast_07"
@@ -443,7 +474,8 @@ d2_coast_08
 			values {
 				spawnflags "1"
 				StartDisabled "1"
-				model "*29"
+				//model "*29"
+				edt_getbspmodelfor_targetname "gunship_trigger_5"
 				targetname "trigger_goback"
 
 				OnTrigger "ReturnBridgeMap,Enable,,8,-1"
