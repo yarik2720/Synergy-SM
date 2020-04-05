@@ -53,7 +53,7 @@ d2_coast_09
 				ammo_buckshot		"12"
 				ammo_ar2			"30"
 				ammo_rpg_round		"1"
-				ammo_crossbow		"800"
+				ammo_xbowbolt		"5"
 			} }
 
 //--Spawns--
