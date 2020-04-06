@@ -3,6 +3,13 @@ d1_canals_03
 	entity {
 //--Setup--
 		delete {classname "logic_auto" origin "743.03 3386.48 -839"}
+		delete {targetname "global_newgame_entmaker"}
+		delete {targetname "global_newgame_template"}
+		delete {targetname "global_newgame_spawner_suit"}
+		delete {targetname "global_newgame_spawner_crowbar"}
+		delete {targetname "global_newgame_spawner_pistol"}
+		delete {targetname "global_newgame_spawner_mrounds2"}
+		delete {targetname "global_newgame_spawner_mrounds1"}
 
 //Trav|Edt - prevent auto-reclose doors
 		//edit {targetname "fence_door_1" values {spawnflags "256" wait "-1"} }
