@@ -349,8 +349,8 @@ d1_canals_01
 				//model "*78"
 				edt_getbspmodelfor_classname "trigger_once"
 				edt_getbspmodelfor_origin "608 -5058 552"
+			}
 		}
-	}
 
 //remake: don't let this trigger kill half the npc's
 		delete {classname "trigger_once" origin "608 -5058 552"}
@@ -416,8 +416,8 @@ d1_canals_01
 			origin "2603.48 14864 392"
 			values {
 				//model "*91"
-				edt_getbspmodelfor_classname "trigger_hurt"
-				edt_getbspmodelfor_origin "2603.48 14864 392"
+				edt_mins "-35 -80 -150"
+				edt_maxs "35 80 150"
 				spawnflags "12"
 				parentname "looping_traincar2"
 				filtername "trav_train_filter"} }
