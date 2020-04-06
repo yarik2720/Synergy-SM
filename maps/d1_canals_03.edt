@@ -52,8 +52,7 @@ d1_canals_03
 			origin "-2424.5 -867 -1569"//-2424.5 -867 -1494.5
 			values {
 				//model "*250"
-				edt_getbspmodelfor_classname "trigger_multiple"
-				edt_getbspmodelfor_origin "-2424.5 -867 -1494.5"
+				edt_getbspmodelfor_targetname "underground_water_mhroom01"
 				spawnflags "1"
 				wait ".01"
 				parentname "underground_water_mhroom01"
@@ -77,17 +76,24 @@ d1_canals_03
 			} }
 
 //--Spawns--
+		delete {classname "info_player_start"}
 		create {classname "info_spawn_manager"
 			values {targetname "syn_spawn_manager"} }
 
 		create {classname "info_player_coop" origin "722.79 3362.85 -847"
 			values {angles "0 225 0" targetname "syn_spawn_player_1"} }
+		create {classname "info_player_coop" origin "1702 2674 -811"
+			values {angles "0 230 0" targetname "syn_spawnpointu_1" startdisabled "1"} }
 
 		create {classname "info_player_coop" origin "-1384 -60 -1024"
 			values {angles "0 0 0" targetname "syn_spawn_player_2" StartDisabled "1"} }
+		create {classname "info_player_coop" origin "-370 -790 -987"
+			values {angles "0 0 0" targetname "syn_spawnpointu_2" startdisabled "1"} }
 
 		create {classname "info_player_coop" origin "-2008 -992 -1136"
 			values {angles "0 240 0" targetname "syn_spawn_player_3" StartDisabled "1"} }
+		create {classname "info_player_coop" origin "-1060 -1800 -1100"
+			values {angles "0 240 0" targetname "syn_spawnpointu_3" startdisabled "1"} }
 
 		create {classname "info_global_settings"
 			values {IsVehicleMap "0" targetname "syn_global_settings"} }
@@ -97,21 +103,39 @@ d1_canals_03
 			origin "-1091.14 -64 -984"
 			values {
 				//model "*160"
-				edt_getbspmodelfor_classname "trigger_once"
-				edt_getbspmodelfor_origin "-1267.14 -64 -976"
+				edt_mins "-20 -40 -50"
+				edt_maxs "20 40 50"
 				spawnflags "1"
 				OnTrigger "syn_spawn_manager,SetCheckpoint,syn_spawn_player_2,0,-1"} }
+		create {classname "trigger_once"
+			origin "-125 -795 -984"
+			values {
+				targetname "hl2utrig"
+				edt_mins "-20 -40 -50"
+				edt_maxs "20 40 50"
+				spawnflags "1"
+				OnTrigger "syn_spawn_manager,SetCheckpoint,syn_spawnpointu_2,0,-1"} }
 //grate drop
 		create {classname "trigger_once"
 			origin "-2175.5 -857.5 -1122"
 			values {
 				//model "*217"
-				edt_getbspmodelfor_classname "trigger_once"
-				edt_getbspmodelfor_origin "-2175.5 -857.5 -1122"
+				edt_mins "-50 -50 -10"
+				edt_maxs "50 50 10"
 				spawnflags "1"
 				OnTrigger "syn_new_weapon_smg1,EquipAllPlayers,,0,-1"
 				OnTrigger "syn_spawn_manager,SetCheckpoint,syn_spawn_player_3,1,-1"
 				OnTrigger "syn_global_settings,AddOutput,IsVehicleMap 1,0,-1"} }//Need more people to test
+		create {classname "trigger_once"
+			origin "-1235 -1585 -1120"
+			values {
+				targetname "hl2utrig"
+				edt_mins "-50 -50 -10"
+				edt_maxs "50 50 10"
+				spawnflags "1"
+				OnTrigger "syn_new_weapon_smg1,EquipAllPlayers,,0,-1"
+				OnTrigger "syn_spawn_manager,SetCheckpoint,syn_spawnpointu_3,1,-1"
+				OnTrigger "syn_global_settings,AddOutput,IsVehicleMap 1,0,-1"} }
 
 //New Weapon(s)
 		create {classname "info_player_equip"
@@ -124,8 +148,8 @@ d1_canals_03
 		create {classname "trigger_multiple" origin "-1624.5 -507.5 -976"
 			values {
 				//model "*191"
-				edt_getbspmodelfor_classname "trigger_once"
-				edt_getbspmodelfor_origin "-1624.5 -507.5 -976"
+				edt_mins "-100 -40 -250"
+				edt_maxs "100 40 150"
 				spawnflags "1"
 				filtername "syn_new_weapon_filter"
 				OnStartTouch "syn_new_weapon_smg1,Enable,,0,1"
@@ -219,34 +243,47 @@ d1_canals_03
 			origin "-752 -104 -944"
 			values {
 				//model "*124"
-				edt_getbspmodelfor_classname "trigger_once"
-				edt_getbspmodelfor_origin "-880 -288 -880"
+				edt_mins "-50 -20 -20"
+				edt_maxs "50 20 20"
 				spawnflags "1"
 				pushdir "0 90 0"
 				speed "125"} }
 
 //Trav|Edt - enable vent motion on breakable breakage
-		delete {classname "func_breakable" origin "-1536 703.5 -808"}
-		delete {classname "prop_physics" origin "-1536 703 -820"}
+		create {classname "logic_auto"
+			values
+			{
+				spawnflags "1"
+				OnMapSpawn "syn_hl2urem,Trigger,,2,1"
+				OnMapSpawn "syn_hl2uact,kill,,2,1"
+				OnMapSpawn "trav_breakable_1,AddOutput,OnBreak trav_vent_1:EnableMotion::0:-1,0,-1"
+				OnMapSpawn "trav_breakable_2,AddOutput,OnBreak trav_vent_2:EnableMotion::0:-1,0,-1"
+			}
+		}
+//Balimbanana - just do all this in an edit and addoutput		
+		edit {classname "func_breakable" origin "-1536 703.5 -808" values {spawnflags "0" targetname "trav_breakable_1" material "4"} }
+		edit {classname "prop_physics" origin "-1536 703 -820" values {targetname "trav_vent_1" spawnflags "72"} }
+		//delete {classname "func_breakable" origin "-1536 703.5 -808"}
+		//delete {classname "prop_physics" origin "-1536 703 -820"}
 
-		create {classname "func_breakable"
-			origin "-1536 703.5 -808"
-			values {
-				//model "*184"
-				edt_getbspmodelfor_classname "func_breakable"
-				edt_getbspmodelfor_origin "-1536 703.5 -808"
-				spawnflags "0"
-				targetname "trav_breakable_1"
-				material "4"
-				health "1"
-				OnBreak "trav_vent_1,EnableMotion,,0,-1"} }
+		//create {classname "func_breakable"
+		//	origin "-1536 703.5 -808"
+		//	values {
+		//		//model "*184"
+		//		edt_getbspmodelfor_classname "func_breakable"
+		//		edt_getbspmodelfor_origin "-1536 703.5 -808"
+		//		spawnflags "0"
+		//		targetname "trav_breakable_1"
+		//		material "4"
+		//		health "1"
+		//		OnBreak "trav_vent_1,EnableMotion,,0,-1"} }
 
-		create {classname "prop_physics"
-			origin "-1536 703 -820"
-			values {spawnflags "72"
-				angles "0 90 0"
-				targetname "trav_vent_1"
-				model "models/props_junk/vent001.mdl"} }
+		//create {classname "prop_physics"
+		//	origin "-1536 703 -820"
+		//	values {spawnflags "72"
+		//		angles "0 90 0"
+		//		targetname "trav_vent_1"
+		//		model "models/props_junk/vent001.mdl"} }
 
 //Trav|Edt - Add extra grenades in secret zombie_torso spot
 		create {classname "weapon_frag"
@@ -288,27 +325,30 @@ d1_canals_03
 				targetname "syn_vint"} }
 
 //Trav|Edt - enable vent motion on breakable breakage
-		delete {classname "func_breakable" origin "-1952.5 -904 -851"}
-		delete {classname "prop_physics" origin "-1953 -904 -858"}
+//Balimbanana - same as above, edit and addoutput
+		edit {classname "func_breakable" origin "-1952.5 -904 -851" values {spawnflags "0" material "4" targetname "trav_breakable_2"} }
+		edit {classname "prop_physics" origin "-1953 -904 -858" values {targetname "trav_vent_2" spawnflags "72"} }
+		//delete {classname "func_breakable" origin "-1952.5 -904 -851"}
+		//delete {classname "prop_physics" origin "-1953 -904 -858"}
 
-		create {classname "func_breakable"
-			origin "-1952.5 -904 -851"
-			values {
-				//model "*210"
-				edt_getbspmodelfor_classname "func_breakable"
-				edt_getbspmodelfor_origin "-1952.5 -904 -851"
-				spawnflags "0"
-				targetname "trav_breakable_2"
-				material "4"
-				health "1"
-				OnBreak "trav_vent_2,EnableMotion,,0,-1"} }
+		//create {classname "func_breakable"
+		//	origin "-1952.5 -904 -851"
+		//	values {
+		//		//model "*210"
+		//		edt_getbspmodelfor_classname "func_breakable"
+		//		edt_getbspmodelfor_origin "-1952.5 -904 -851"
+		//		spawnflags "0"
+		//		targetname "trav_breakable_2"
+		//		material "4"
+		//		health "1"
+		//		OnBreak "trav_vent_2,EnableMotion,,0,-1"} }
 
-		create {classname "prop_physics"
-			origin "-1953 -904 -858"
-			values {spawnflags "72"
-				angles "0 0 0"
-				targetname "trav_vent_2"
-				model "models/props_junk/vent001.mdl"} }
+		//create {classname "prop_physics"
+		//	origin "-1953 -904 -858"
+		//	values {spawnflags "72"
+		//		angles "0 0 0"
+		//		targetname "trav_vent_2"
+		//		model "models/props_junk/vent001.mdl"} }
 
 //Trav|Edt - dont physboom barrels
 		delete {targetname "barrel_exp_1"}
@@ -318,10 +358,17 @@ d1_canals_03
 		create {classname "trigger_multiple" origin "-2157.81 -855.5 -1022"
 			values {
 				//model "*213"
-				edt_getbspmodelfor_classname "trigger_once"
-				edt_getbspmodelfor_origin "-2157.81 -855.5 -1022"
+				edt_mins "-80 -80 -10"
+				edt_maxs "80 80 10"
 				spawnflags "1"
 				OnStartTouch "!activator,IgnoreFallDamageWithoutReset,,0,-1"} }//Disables falling damage for 10 seconds
+		//HL2U
+		create {classname "trigger_multiple" origin "-1215.81 -1583.5 -1022"
+			values {
+				edt_mins "-80 -80 -10"
+				edt_maxs "80 80 10"
+				spawnflags "1"
+				OnStartTouch "!activator,IgnoreFallDamageWithoutReset,,0,-1"} }
 
 //lazy way to make all barrels freeze :D [no longer needed with no falldamage here]
 	//	create {classname "trigger_once"
@@ -403,8 +450,8 @@ d1_canals_03
 			origin "-1574 672 -832"
 			values {
 				//model "*187"
-				edt_getbspmodelfor_classname "trigger_once"
-				edt_getbspmodelfor_origin "-1594 584 -804"
+				edt_mins "-20 -20 -20"
+				edt_maxs "20 20 20"
 				spawnflags "1"
 				OnTrigger "syn_vint_ss_trav,BeginSequence,-1,0,-1" } }
 
@@ -412,8 +459,8 @@ d1_canals_03
 			origin "-1798 592.01 -756"
 			values {
 				//model "*185"
-				edt_getbspmodelfor_classname "trigger_once"
-				edt_getbspmodelfor_origin "-1710 584 -768"
+				edt_mins "-20 -20 -20"
+				edt_maxs "20 20 20"
 				spawnflags "1"
 				OnTrigger "syn_vint_trav,Kill,,0,-1"} }
 
@@ -436,14 +483,33 @@ d1_canals_03
 
 //Trav|Edt - Auti-rush
 		create {classname "trigger_coop"
-			origin "-3370 382 -970.5"//-2954 366 -1000.5
+			origin "-3290 5 -1010"//-2954 366 -1000.5
 			values {
 				//model "*251"
-				edt_getbspmodelfor_classname "trigger_multiple"
-				edt_getbspmodelfor_origin "-2410 -848 -1499.5"
+				edt_mins "-100 -100 -100"
+				edt_maxs "400 250 100"
 				spawnflags "1"
 				//StartDisabled "1"
 				targetname "syn_antirush_coop"
+				CountType "1"
+				UseHUD "1"
+				PlayerValue "50"
+				wait "1.5"
+				OnTrigger "syn_antirush_text,Display,,1,-1"
+				OnPlayersIn "syn_antirush_wall,Kill,,0,1"
+				OnPlayersIn "syn_antirush_light,Kill,,0,1"
+				OnPlayersIn "syn_antirush_push,Disable,,0,1"
+				OnPlayersIn "!self,Disable,,1,1"} }
+		//HL2U
+		create {classname "trigger_coop"
+			origin "-2520 -805 -1015"
+			values {
+				//model "*251"
+				edt_mins "-100 -100 -100"
+				edt_maxs "400 250 100"
+				spawnflags "1"
+				//StartDisabled "1"
+				targetname "syn_antirush_coophl2u"
 				CountType "1"
 				UseHUD "1"
 				PlayerValue "50"
@@ -457,6 +523,43 @@ d1_canals_03
 		create {classname "prop_dynamic" origin "-3520 -80 -1072"
 			values {model "models/synergy/tools/syn_transition.mdl"
 				targetname "syn_antirush_wall"
+				angles "0 0 0"
+				solid "6"
+				DisableShadows "1"} }
+		create {classname "trigger_once" origin "57 2120 -700"
+			values
+			{
+				spawnflags "2"
+				edt_mins "-50 -50 -50"
+				edt_maxs "50 50 50"
+				//Trig to set up HL2U off Matt NPC position
+				OnTrigger "syn_hl2uact,Trigger,,0,1"
+			}
+		}
+		create {classname "logic_relay"
+			values
+			{
+				targetname "syn_hl2uact"
+				OnTrigger "syn_spawn_manager,SetCheckPoint,syn_spawnpointu_1,0,1"
+				OnTrigger "syn_antirush_wall,kill,,0,-1"
+				OnTrigger "syn_antirush_coop,kill,,0,-1"
+				OnTrigger "syn_hl2urem,kill,,0,-1"
+			}
+		}
+		create {classname "logic_relay"
+			values
+			{
+				targetname "syn_hl2urem"
+				OnTrigger "syn_spawnpointu_1,kill,,0,-1"
+				OnTrigger "syn_antirush_coophl2u,kill,,0,-1"
+				OnTrigger "syn_antirush_coophl2u,kill,,0,-1"
+				OnTrigger "syn_hl2uact,kill,,0,-1"
+				OnTrigger "hl2utrig,kill,,0,-1"
+			}
+		}
+		create {classname "prop_dynamic" origin "-2570 -810 -1235"
+			values {model "models/synergy/tools/syn_transition.mdl"
+				targetname "syn_antirush_wallhl2u"
 				angles "0 0 0"
 				solid "6"
 				DisableShadows "1"} }
