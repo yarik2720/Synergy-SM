@@ -103,7 +103,7 @@ d1_canals_03
 
 		create {classname "info_player_coop" origin "-1384 -60 -1024"
 			values {angles "0 0 0" targetname "syn_spawn_player_2" StartDisabled "1"} }
-		create {classname "info_player_coop" origin "-370 -790 -1024"
+		create {classname "info_player_coop" origin "-370 -790 -1020"
 			values {angles "0 0 0" targetname "syn_spawnpointu_2" startdisabled "1"} }
 
 		create {classname "info_player_coop" origin "-2008 -992 -1136"
@@ -292,8 +292,8 @@ d1_canals_03
 				OnMapSpawn "syn_hl2uact,kill,,2,1"
 				OnMapSpawn "trav_breakable_1,AddOutput,OnBreak trav_vent_1:EnableMotion::0:-1,0,-1"
 				OnMapSpawn "trav_breakable_2,AddOutput,OnBreak trav_vent_2:EnableMotion::0:-1,0,-1"
-				OnMapSpawn "template_mattpipe,AddOutput,OnEntitySpawned pipeadd:Trigger::0:1,0,-1"
-				OnMapSpawn "template_mattpipe,AddOutput,OnEntitySpawned pipeadd:Trigger::0.5:1,0,-1"
+				OnMapSpawn "lcs_matt_survived,AddOutput,OnTrigger1 pipeadd:Trigger::0:-1,0,-1"
+				OnMapSpawn "lcs_matt_survived,AddOutput,OnTrigger1 pipeadd:Trigger::0.5:-1,0,-1"
 				OnMapSpawn "fence_door_1,AddOutput,OnOpen start_hall_manhack_maker:Spawn::0:1,0,-1"
 			}
 		}
