@@ -182,6 +182,7 @@ d1_canals_03
 
 //Trav|Edt - prevent matt (manhack guy) from being removed abruptly
 		delete {classname "trigger_once" origin "378 2620 -770"}
+		delete {classname "trigger_once" origin "1320 1892 -770"}
 
 //Balimbanana - do by edit for HL2U
 		edit {targetname "matt_pipetemplate" values {classname "weapon_pipe"} }
@@ -257,6 +258,7 @@ d1_canals_03
 
 //Trav|Edt - remove cleanup trigger
 		delete {classname "trigger_once" origin "-1586.86 800 -864"}
+		delete {classname "trigger_once" origin "96.38 -1427.29 -1240"}
 
 //Trav|Edt - Anti pipeskip
 		create {classname "trigger_push"
@@ -280,6 +282,7 @@ d1_canals_03
 				OnMapSpawn "trav_breakable_2,AddOutput,OnBreak trav_vent_2:EnableMotion::0:-1,0,-1"
 				OnMapSpawn "template_mattpipe,AddOutput,OnEntitySpawned pipeadd:Trigger::0:1,0,-1"
 				OnMapSpawn "template_mattpipe,AddOutput,OnEntitySpawned pipeadd:Trigger::0.5:1,0,-1"
+				OnMapSpawn "fence_door_1,AddOutput,OnOpen start_hall_manhack_maker:Spawn::0:1,0,-1"
 			}
 		}
 		create {classname "logic_relay"
@@ -384,6 +387,7 @@ d1_canals_03
 //Trav|Edt - dont physboom barrels
 		delete {targetname "barrel_exp_1"}
 		delete {classname "trigger_once" origin "-2175.5 -857.5 -1122"}//trigger for barrel_exp_1
+		delete {classname "trigger_once" origin "-1233.5 -1585.5 -1122"}
 
 //ignore fall damage here so behind players won't get hurt
 		create {classname "trigger_multiple" origin "-2157.81 -855.5 -1022"
