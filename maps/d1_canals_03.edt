@@ -183,14 +183,17 @@ d1_canals_03
 //Trav|Edt - prevent matt (manhack guy) from being removed abruptly
 		delete {classname "trigger_once" origin "378 2620 -770"}
 
-//Test new weapon_pipe
-		delete {targetname "matt_pipetemplate"}
+//Balimbanana - do by edit for HL2U
+		edit {targetname "matt_pipetemplate" values {classname "weapon_pipe"} }
 
-		create {classname "weapon_pipe" origin "-825 2821 -827"
-			values {targetname "matt_pipetemplate"
-				angles "-90 0 0"
-				OnPlayerPickup "syn_new_weapon_pipe,Enable,,0,-1"
-				OnPlayerPickup "syn_new_weapon_pipe,EquipAllPlayers,,0.15,-1"} }
+//Test new weapon_pipe
+		//delete {targetname "matt_pipetemplate"}
+
+		//create {classname "weapon_pipe" origin "-825 2821 -827"
+		//	values {targetname "matt_pipetemplate"
+		//		angles "-90 0 0"
+		//		OnPlayerPickup "syn_new_weapon_pipe,Enable,,0,-1"
+		//		OnPlayerPickup "syn_new_weapon_pipe,EquipAllPlayers,,0.15,-1"} }
 
 		create {classname "info_player_equip"
 			values {targetname "syn_new_weapon_pipe"
@@ -275,6 +278,17 @@ d1_canals_03
 				OnMapSpawn "syn_hl2uact,kill,,2,1"
 				OnMapSpawn "trav_breakable_1,AddOutput,OnBreak trav_vent_1:EnableMotion::0:-1,0,-1"
 				OnMapSpawn "trav_breakable_2,AddOutput,OnBreak trav_vent_2:EnableMotion::0:-1,0,-1"
+				OnMapSpawn "template_mattpipe,AddOutput,OnEntitySpawned pipeadd:Trigger::0:1,0,-1"
+				OnMapSpawn "template_mattpipe,AddOutput,OnEntitySpawned pipeadd:Trigger::0.5:1,0,-1"
+			}
+		}
+		create {classname "logic_relay"
+			values
+			{
+				targetname "pipeadd"
+				OnTrigger "matt_pipetemplate,AddOutput,OnPlayerPickup pipeadd:kill::0:1,0,-1"
+				OnTrigger "matt_pipetemplate,AddOutput,OnPlayerPickup syn_new_weapon_pipe:Enable::0:1,0,-1"
+				OnTrigger "matt_pipetemplate,AddOutput,OnPlayerPickup syn_new_weapon_pipe:EquipAllPlayers::0.1:1,0,-1"
 			}
 		}
 //Balimbanana - just do all this in an edit and addoutput		
