@@ -10,6 +10,7 @@ d1_canals_03
 		delete {targetname "global_newgame_spawner_pistol"}
 		delete {targetname "global_newgame_spawner_mrounds2"}
 		delete {targetname "global_newgame_spawner_mrounds1"}
+		edit {classname "func_areaportal" values {targetname "disabledPortals" StartOpen "1"} }
 
 //Trav|Edt - prevent auto-reclose doors
 		//edit {targetname "fence_door_1" values {spawnflags "256" wait "-1"} }
