@@ -166,6 +166,17 @@ d1_canals_03
 		create {classname "trigger_multiple" origin "-1624.5 -507.5 -976"
 			values {
 				//model "*191"
+				targetname "hl2deftrig"
+				edt_mins "-100 -40 -250"
+				edt_maxs "100 40 150"
+				spawnflags "1"
+				filtername "syn_new_weapon_filter"
+				OnStartTouch "syn_new_weapon_smg1,Enable,,0,1"
+				OnStartTouch "syn_new_weapon_smg1,EquipPlayer,,0,-1"
+				OnStartTouch "!activator,AddOutput,targetname syn_d1_canals_03_received_new_weapon,0.1,-1"} }
+		create {classname "trigger_multiple" origin "-682.5 -1235.5 -976"
+			values {
+				targetname "hl2utrig"
 				edt_mins "-100 -40 -250"
 				edt_maxs "100 40 150"
 				spawnflags "1"
