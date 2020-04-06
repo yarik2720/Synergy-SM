@@ -68,6 +68,18 @@ d1_canals_03
 			origin "-2424.5 -867 -1569"//-2424.5 -867 -1494.5
 			values {
 				//model "*250"
+				targetname "hl2deftrig"
+				edt_getbspmodelfor_targetname "underground_water_mhroom01"
+				spawnflags "1"
+				wait ".01"
+				parentname "underground_water_mhroom01"
+				OnStartTouch "!activator,SetFogController,trav_fog_water,0,-1"
+				OnEndTouch "!activator,SetFogController,trav_fog_sky,0,-1"} }
+		create {classname "trigger_multiple"
+			origin "-1482.5 -1595 -1494.5"
+			values {
+				//model "*250"
+				targetname "hl2utrig"
 				edt_getbspmodelfor_targetname "underground_water_mhroom01"
 				spawnflags "1"
 				wait ".01"
@@ -562,7 +574,7 @@ d1_canals_03
 				PlayerValue "50"
 				wait "1.5"
 				OnTrigger "syn_antirush_text,Display,,1,-1"
-				OnPlayersIn "syn_antirush_wall,Kill,,0,1"
+				OnPlayersIn "syn_antirush_wallhl2u,Kill,,0,1"
 				OnPlayersIn "syn_antirush_light,Kill,,0,1"
 				OnPlayersIn "syn_antirush_push,Disable,,0,1"
 				OnPlayersIn "!self,Disable,,1,1"} }
