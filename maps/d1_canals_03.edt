@@ -592,6 +592,7 @@ d1_canals_03
 				OnTrigger "syn_antirush_coop,kill,,0,-1"
 				OnTrigger "syn_hl2urem,kill,,0,-1"
 				OnTrigger "hl2deftrig,kill,,0,-1"
+				OnTrigger "syn_vint,kill,,0,-1"
 			}
 		}
 		create {classname "logic_relay"
