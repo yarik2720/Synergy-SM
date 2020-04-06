@@ -118,6 +118,7 @@ d1_canals_03
 			origin "-1091.14 -64 -984"
 			values {
 				//model "*160"
+				targetname "hl2deftrig"
 				edt_mins "-20 -40 -50"
 				edt_maxs "20 40 50"
 				spawnflags "1"
@@ -135,6 +136,7 @@ d1_canals_03
 			origin "-2175.5 -857.5 -1122"
 			values {
 				//model "*217"
+				targetname "hl2deftrig"
 				edt_mins "-50 -50 -10"
 				edt_maxs "50 50 10"
 				spawnflags "1"
