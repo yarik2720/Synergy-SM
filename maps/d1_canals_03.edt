@@ -97,17 +97,17 @@ d1_canals_03
 
 		create {classname "info_player_coop" origin "722.79 3362.85 -847"
 			values {angles "0 225 0" targetname "syn_spawn_player_1"} }
-		create {classname "info_player_coop" origin "1702 2674 -811"
+		create {classname "info_player_coop" origin "1702 2674 -847"
 			values {angles "0 230 0" targetname "syn_spawnpointu_1" startdisabled "1"} }
 
 		create {classname "info_player_coop" origin "-1384 -60 -1024"
 			values {angles "0 0 0" targetname "syn_spawn_player_2" StartDisabled "1"} }
-		create {classname "info_player_coop" origin "-370 -790 -987"
+		create {classname "info_player_coop" origin "-370 -790 -1024"
 			values {angles "0 0 0" targetname "syn_spawnpointu_2" startdisabled "1"} }
 
 		create {classname "info_player_coop" origin "-2008 -992 -1136"
 			values {angles "0 240 0" targetname "syn_spawn_player_3" StartDisabled "1"} }
-		create {classname "info_player_coop" origin "-1060 -1800 -1100"
+		create {classname "info_player_coop" origin "-1060 -1800 -1130"
 			values {angles "0 240 0" targetname "syn_spawnpointu_3" startdisabled "1"} }
 
 		create {classname "info_global_settings"
