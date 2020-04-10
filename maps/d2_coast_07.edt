@@ -775,7 +775,7 @@ d2_coast_07
 			}
 		}
 
-		create { classname "trigger_changelevel"
+		create { classname "trigger_changelevel" origin "3330 5030 1590"
 			values {
 				//"model" "*139"
 				"edt_mins" "-60 -80 -55"
