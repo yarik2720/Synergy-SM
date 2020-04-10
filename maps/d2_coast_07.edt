@@ -820,7 +820,7 @@ d2_coast_07
 				OnTrigger "syn_static_spawning,Enable,,0,-1"//Enable Static Spawing
 				} }
 
-		create { classname "trigger_changelevel"
+		create { classname "trigger_changelevel" origin "9220 -9570 2150"
 			values {
 				//"model" "*164"
 				"edt_mins" "-250 -30 -50"
