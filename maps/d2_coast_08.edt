@@ -181,7 +181,8 @@ d2_coast_08
 //Trav|Edt - Disable Enemy turrets when tipped (avoid player greif)
 		create {classname "logic_auto"
 			values {spawnflags "1"
-				OnMapSpawn "npc_turret_floor,AddOutput,OnTipped !self:SelfDestruct::0:-1,0,-1"} }//DepleteAmmo
+				OnMapSpawn "npc_turret_floor,AddOutput,OnTipped !self:SelfDestruct::0:-1,0,-1"//DepleteAmmo
+				OnMapSpawn "trigger_changelevel,Disable,,0,-1"} }
 
 //Trav|Edt close coast08 trainsision door
 		create {classname "logic_auto"
