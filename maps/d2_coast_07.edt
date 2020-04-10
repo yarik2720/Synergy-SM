@@ -194,6 +194,7 @@ d2_coast_07
 				OnMapSpawn "syn_gunship,SetTrack,path_b_7,1,-1"
 				OnMapSpawn "syn_gunship,flytospecifictrackviapath,path_b_7,1.1,-1"
 				OnMapSpawn "syn_gunship,AddOutput,spawnflags 4164,1,-1"
+				OnMapSpawn "synreturnchangelevel,AddOutput,OnChangeLevel syn_shiz:Trigger::0:-1,0,-1"
 				} }
 
 //--Checkpoints--
@@ -280,9 +281,7 @@ d2_coast_07
 //end_door open forward only
 		create {classname "logic_auto"
 			values {spawnflags "1"
-				OnMapSpawn "bridge_door_2,AddOutput,opendir 1,0,-1"
-				OnMapSpawn "trigger_changelevel,Disable,,0,-1"
-				OnMapSpawn "mapchangelevels,Enable,,0.5,-1"} }
+				OnMapSpawn "bridge_door_2,AddOutput,opendir 1,0,-1"} }
 
 //If a NewGame starts on coast_08, Fix the return trip to this level
 		create {classname "logic_auto"
@@ -765,27 +764,29 @@ d2_coast_07
 		//}
 
 		// when we return to this level, we need to move our vehicles to the close spot
-		delete { classname "trigger_changelevel" }
+		//Balimbanana - Redone in edit
+		//delete { classname "trigger_changelevel" }
+		//create { classname "trigger_changelevel"
+		//	values {
+		//		//"model" "*86"
+		//		"edt_getbspmodelfor_targetname" "window_1_breakable"
+		//		"spawnflags" "6"
+		//		"landmark" "landmark_d2_coast_05-07"
+		//		"map" "d2_coast_05"
+		//	}
+		//}
+		edit {classname "trigger_changelevel" values {edt_map "d2_coast_05" edt_landmark "landmark_d2_coast_05-07" spawnflags "6"} }
+		edit {classname "trigger_changelevel" values {edt_map "d2_coast_08" edt_landmark "landmark_d2_coast_07-08" targetname "synreturnchangelevel"} }
 
-		create { classname "trigger_changelevel"
-			values {
-				//"model" "*86"
-				"edt_getbspmodelfor_targetname" "window_1_breakable"
-				"spawnflags" "6"
-				"landmark" "landmark_d2_coast_05-07"
-				"map" "d2_coast_05"
-			}
-		}
-
-		create { classname "trigger_changelevel" origin "3330 5030 1590"
-			values {
-				//"model" "*139"
-				targetname "mapchangelevels"
-				"edt_mins" "-60 -80 -55"
-				"edt_maxs" "55 60 50"
-				"spawnflags" "0"
-				"landmark" "landmark_d2_coast_07-08"
-				"map" "d2_coast_08"
+		//create { classname "trigger_changelevel" origin "3330 5030 1590"
+		//	values {
+		//		//"model" "*139"
+		//		targetname "mapchangelevels"
+		//		"edt_mins" "-60 -80 -55"
+		//		"edt_maxs" "55 60 50"
+		//		"spawnflags" "0"
+		//		"landmark" "landmark_d2_coast_07-08"
+		//		"map" "d2_coast_08"
 
 //Trav|Edt - disable normal jeep spawn (return)
 //Trav|Edt - fix jeep spawn origin (Thx THC) ORIGINAL ORIGIN ANGLES: 2131 4849 1599 0 90 0
@@ -794,12 +795,12 @@ d2_coast_07
 			//	OnChangeLevel "trav_2seater_temp_return,ForceSpawn,,0,-1"
 //Trav|Edt - close door and lock it/ fix checkpoints
 //Enable new checkpoint after
-				OnChangeLevel "syn_shiz,Trigger,,0,-1"
+		//		OnChangeLevel "syn_shiz,Trigger,,0,-1"
 				//OnChangelevel "syn_antirush_push,Enable,,0,-1"
 				//OnChangelevel "MPVS_SPAWN,Kill,,0,-1"
 				//OnChangelevel "PS_Manager,SetCheckpoint,MPVS_SPAWN2,0,-1"
-			}
-		}
+		//	}
+		//}
 
 		create {classname "logic_relay"
 			values {targetname "_syn_antirush_doorunlocker"
@@ -823,17 +824,17 @@ d2_coast_07
 				OnTrigger "syn_static_spawning,Enable,,0,-1"//Enable Static Spawing
 				} }
 
-		create { classname "trigger_changelevel" origin "9220 -9570 2150"
-			values {
-				//"model" "*164"
-				targetname "mapchangelevels"
-				"edt_mins" "-250 -30 -50"
-				"edt_maxs" "250 30 150"
-				"spawnflags" "0"
-				"landmark" "landmark_d2_coast_07-09"
-				"map" "d2_coast_09"
-			}
-		}
+		//create { classname "trigger_changelevel" origin "9220 -9570 2150"
+		//	values {
+		//		//"model" "*164"
+		//		targetname "mapchangelevels"
+		//		"edt_mins" "-250 -30 -50"
+		//		"edt_maxs" "250 30 150"
+		//		"spawnflags" "0"
+		//		"landmark" "landmark_d2_coast_07-09"
+		//		"map" "d2_coast_09"
+		//	}
+		//}
 
 
 
