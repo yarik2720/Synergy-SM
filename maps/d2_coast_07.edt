@@ -280,7 +280,9 @@ d2_coast_07
 //end_door open forward only
 		create {classname "logic_auto"
 			values {spawnflags "1"
-				OnMapSpawn "bridge_door_2,AddOutput,opendir 1,0,-1"} }
+				OnMapSpawn "bridge_door_2,AddOutput,opendir 1,0,-1"
+				OnMapSpawn "trigger_changelevel,Disable,,0,-1"
+				OnMapSpawn "mapchangelevels,Enable,,0.5,-1"} }
 
 //If a NewGame starts on coast_08, Fix the return trip to this level
 		create {classname "logic_auto"
@@ -778,6 +780,7 @@ d2_coast_07
 		create { classname "trigger_changelevel" origin "3330 5030 1590"
 			values {
 				//"model" "*139"
+				targetname "mapchangelevels"
 				"edt_mins" "-60 -80 -55"
 				"edt_maxs" "55 60 50"
 				"spawnflags" "0"
@@ -823,6 +826,7 @@ d2_coast_07
 		create { classname "trigger_changelevel" origin "9220 -9570 2150"
 			values {
 				//"model" "*164"
+				targetname "mapchangelevels"
 				"edt_mins" "-250 -30 -50"
 				"edt_maxs" "250 30 150"
 				"spawnflags" "0"
