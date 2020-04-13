@@ -593,6 +593,15 @@ d1_canals_03
 				edt_maxs "50 50 50"
 				//Trig to set up HL2U off Matt NPC position
 				OnTrigger "syn_hl2uact,Trigger,,0,1"
+				OnTrigger "syn_hl2utemp,ForceSpawn,,0,1"
+			}
+		}
+		create {classname "point_template"
+			values
+			{
+				targetname "syn_hl2utemp"
+				Template01 "syn_antirush_coophl2u"
+				Template02 "syn_antirush_wallhl2u"
 			}
 		}
 		create {classname "logic_relay"
