@@ -9,7 +9,7 @@
 
 	> The folder `thisedit` can be named anything, it is just a container folder.
 
-- After placing edt files you need to restart your server if it was already running.
+- After placing edt files you need to restart your server if it was already running and set `content_mount_synergy_mod_path_priority 2` for the EDTs to apply.
 
 ## Changes
 > All files were imported from Synergy version 56.16 and here is changes:
