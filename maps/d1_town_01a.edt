@@ -4,6 +4,9 @@ d1_town_01a
 	{
 //--Setup--
 		delete {classname "logic_auto" origin "223 288 -3300"}
+		delete {targetname "player_spawn_items"}
+		delete {targetname "player_spawn_template"}
+		delete {classname "info_player_start"}
 		edit {classname "func_areaportal" values {targetname "disabledPortal" StartOpen "1"} }
 
 //--Starting Items--
@@ -31,6 +34,8 @@ d1_town_01a
 
 		create {classname "info_player_coop" origin "160 504 -3284"
 			values {angles "0 270 0" targetname "syn_spawn_player_1"} }
+		create {classname "info_player_coop" origin "185 340 -870"
+			values {angles "0 270 0" targetname "syn_spawn_player_1u" startdisabled "1"} }
 
 		create {classname "info_global_settings"
 			values {IsVehicleMap "0" targetname "syn_global_settings"} }
@@ -57,12 +62,12 @@ d1_town_01a
 		"create"
 		{
 			"classname"	"logic_auto"
-			"origin"	"196 540 -3274"
 
 			"values"
 			{
-				"spawnflags"	"1"
-				"OnMapSpawn"	"start_door,Lock,,.2,0" //delay so it locks after it is closed
+				spawnflags "1"
+				OnMapSpawn "start_door,Lock,,0.2,0" //delay so it locks after it is closed
+				OnMapSpawn "syn_hl2defsetup,Trigger,,1,1"
 			}
 		}
 
@@ -149,8 +154,8 @@ d1_town_01a
 			origin "-360 784 -3422"
 			values {
 				//model "*38"
-				edt_getbspmodelfor_classname "trigger_once"
-				edt_getbspmodelfor_origin "-880 912 -3250"
+				edt_mins "-200 -100 -40"
+				edt_maxs "190 100 40"
 				spawnflags "1"
 				//StartDisabled "1"
 				targetname "syn_antirush_trav_town01a_end_coop"
@@ -161,15 +166,41 @@ d1_town_01a
 				OnTrigger "syn_antirush_text,Display,,1,-1"
 				OnPlayersIn "syn_antirush_trav_town01a_end_push,Disable,,0,1"
 				OnPlayersIn "!self,Disable,,1,-1"} }
+		create {classname "trigger_coop"
+			origin "-495 765 -990"
+			values {
+				//model "*38"
+				edt_mins "-200 -100 -40"
+				edt_maxs "190 100 40"
+				spawnflags "1"
+				//StartDisabled "1"
+				targetname "syn_antirush_hl2u"
+				CountType "1"
+				UseHUD "1"
+				PlayerValue "50"
+				wait "1.5"
+				OnTrigger "syn_antirush_text,Display,,1,-1"
+				OnPlayersIn "syn_antirush_trav_town01a_end_pushu,Disable,,0,1"
+				OnPlayersIn "!self,Disable,,1,-1"} }
 
 		create {classname "trigger_push"
-			origin "-534 712 -3365"
+			origin "-610 710 -3385"
 			values {
 				//model "*33"
-				edt_getbspmodelfor_classname "trigger_once"
-				edt_getbspmodelfor_origin "210 -144 -3219"
+				edt_mins "-20 -60 -50"
+				edt_maxs "20 60 90"
 				spawnflags "1"
 				targetname "syn_antirush_trav_town01a_end_push"
+				pushdir "0 0 0"
+				speed "450"} }
+		create {classname "trigger_push"
+			origin "602 725 -965"
+			values {
+				//model "*33"
+				edt_mins "-20 -60 -50"
+				edt_maxs "20 60 90"
+				spawnflags "1"
+				targetname "syn_antirush_trav_town01a_end_pushu"
 				pushdir "0 0 0"
 				speed "450"} }
 
@@ -202,14 +233,31 @@ d1_town_01a
 		"create"
 		{
 			"classname"	"trigger_push"
+			"origin" "20 499 -3290"
 
 			"values"
 			{
 				//"model"			"*13"
-				"edt_getbspmodelfor_classname" "trigger_hurt"
-				"edt_getbspmodelfor_origin" "-124.5 317.48 -3526.14"
+				edt_mins "-55 -90 -50"
+				edt_maxs "55 90 50"
 				"targetname"		"edt_surfpush"
-				"origin"		"20 499 -3290"
+				"spawnflags"		"1"
+				"StartDisabled"		"0"
+				"pushdir"		"0 270 0"
+				"speed"			"200"
+			}
+		}
+		"create"
+		{
+			"classname"	"trigger_push"
+			"origin" "8 500 -865"
+
+			"values"
+			{
+				//"model"			"*13"
+				edt_mins "-55 -90 -50"
+				edt_maxs "55 90 50"
+				"targetname"		"syn_hl2upush"
 				"spawnflags"		"1"
 				"StartDisabled"		"0"
 				"pushdir"		"0 270 0"
@@ -220,17 +268,34 @@ d1_town_01a
 		"create"
 		{
 			"classname"	"trigger_once"
+			"origin" "-101 1086 -3230"
 
 			"values"
 			{
 				//"model"			"*13"
-				"edt_getbspmodelfor_classname" "trigger_hurt"
-				"edt_getbspmodelfor_origin" "-124.5 317.48 -3526.14"
-				"origin"		"-101 1086 -3230"
+				edt_mins "-55 -90 -50"
+				edt_maxs "55 90 50"
 				"spawnflags"		"1"
 				"StartDisabled"		"0"
 
 				"OnTrigger"		"edt_surfpush,kill,,0,0"
+			}
+		}
+		"create"
+		{
+			"classname"	"trigger_once"
+			"origin" "-90 1150 -825"
+
+			"values"
+			{
+				//"model"			"*13"
+				edt_mins "-55 -90 -50"
+				edt_maxs "55 90 50"
+				"spawnflags"		"1"
+				"StartDisabled"		"0"
+
+				targetname "syn_hl2u"
+				"OnTrigger"		"syn_hl2upush,kill,,0,0"
 			}
 		}
 
@@ -245,10 +310,41 @@ d1_town_01a
 
 		"edit"
 		{
-			"classname"	"aiscripted_schedule"
-			"targetname"	"alley_wall_crab_aiss_1"
+			"classname" "aiscripted_schedule"
+			"targetname" "alley_wall_crab_aiss_1"
 			"values" { "goalent" "alley_wall_crab_path_1" }
-		} 						
+		}
+		
+		create {classname "logic_relay"
+			values
+			{
+				targetname "syn_hl2defsetup"
+				OnTrigger "syn_spawn_player_1u,kill,,0,1"
+				OnTrigger "syn_vinthl2u,kill,,0,1"
+				OnTrigger "syn_hl2u,kill,,0,1"
+				OnTrigger "syn_hl2upush,kill,,0,1"
+				OnTrigger "syn_antirush_hl2u,kill,,0,1"
+			}
+		}
+		create {classname "trigger_once" origin "65 -495 -822"
+			values
+			{
+				edt_mins "-20 -20 -80"
+				edt_maxs "20 20 40"
+				spawnflags "2"
+				targetname "syn_hl2usetup"
+				OnTrigger "syn_hl2defsetup,kill,,0,1"
+				OnTrigger "syn_spawn_player_1,kill,,0,1"
+				OnTrigger "syn_spawn_manager,SetCheckPoint,syn_spawn_player_1u,0,1"
+				OnTrigger "syn_vint,kill,,0,1"
+				OnTrigger "syn_vint_trav_temp_zombies1,kill,,0,1"
+				OnTrigger "syn_vint_trav_zombies1,kill,,0,1"
+				OnTrigger "syn_vint_trav_zombies2,kill,,0,1"
+				OnTrigger "syn_vint_trav_temp_zombies2,kill,0,1"
+				OnTrigger "syn_antirush_trav_town01a_end_push,kill,,0,1"
+				OnTrigger "syn_antirush_trav_town01a_end_coop,kill,,0,1"
+			}
+		}
 
 //Trav|Edt - Functionality check
 		create {classname "logic_relay" values {targetname "trav_functionality_d1_town_01a"} }
