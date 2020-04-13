@@ -3,6 +3,14 @@ d1_canals_10
 	entity {
 //--Setup--
 		delete {classname "logic_auto" origin "11787.1 -12422 -528"}
+		delete {targetname "global_newgame_spawner_suit"}
+		delete {targetname "global_newgame_spawner_crowbar"}
+		delete {targetname "global_newgame_spawner_pistol"}
+		delete {targetname "global_newgame_spawner_smg"}
+		delete {targetname "global_newgame_spawner_airboat"}
+		delete {targetname "global_newgame_spawner_357"}
+		delete {targetname "global_newgame_template"}
+		delete {targetname "global_newgame_entmaker"}
 		edit {classname "func_areaportal" values {targetname "disabledPortal" StartOpen "1"} }
 
 //Prevent Backtracking
@@ -201,8 +209,8 @@ d1_canals_10
 			origin "11328 2512 -312.74"
 			values {
 				//model "*66"
-				edt_getbspmodelfor_classname "trigger_once"
-				edt_getbspmodelfor_origin "11328 2512 -312.74"
+				edt_mins "-380 -550 -100"
+				edt_maxs "50 600 100"
 				spawnflags "1"
 				OnTrigger "syn_spawn_manager,SetCheckpoint,syn_spawn_player_2,0,-1"
 				OnTrigger "syn_spawn_vehicle_2,Enable,,0,-1"} }
@@ -211,8 +219,8 @@ d1_canals_10
 			origin "4832 9224 -8"
 			values {
 				//model "*32"
-				edt_getbspmodelfor_classname "trigger_once"
-				edt_getbspmodelfor_origin "2432 8856 -392"
+				edt_mins "-50 -670 -100"
+				edt_maxs "50 700 150"
 				spawnflags "1"
 				OnTrigger "syn_spawn_manager,SetCheckpoint,syn_spawn_player_3,0,-1"
 				OnTrigger "syn_spawn_vehicle_3,Enable,,0,-1"} }
@@ -356,21 +364,31 @@ d1_canals_10
 				solid "6"
 				disableshadows "1"} }
 
-		create {classname "func_vehicleclip"
-			origin "3024 9944 -32"
-			values {
-				//model "*66"
-				edt_getbspmodelfor_classname "trigger_once"
-				edt_getbspmodelfor_origin "11328 2512 -312.74"
-				targetname "syn_vint"} }
+		//create {classname "func_vehicleclip"
+		//	origin "3024 9944 -32"
+		//	values {
+		//		//model "*66"
+		//		edt_getbspmodelfor_classname "trigger_once"
+		//		edt_getbspmodelfor_origin "11328 2512 -312.74"
+		//		targetname "syn_vint"} }
+		create {classname "prop_dynamic" origin "3024 9494 -32"
+			values
+			{
+				model "models/synergy/tools/syn_transition.mdl"
+				solid "6"
+				DisableShadows "1"
+				targetname "syn_vint"
+				startdisabled "1"
+			}
+		}
 
-		create {classname "func_vehicleclip"
-			origin "2936 9752 -8"
-			values {
-				//model "*31"
-				edt_getbspmodelfor_classname "trigger_once"
-				edt_getbspmodelfor_origin "1320 8680 -392"
-				targetname "syn_vint"} }
+		//create {classname "func_vehicleclip"
+		//	origin "2936 9752 -8"
+		//	values {
+		//		//model "*31"
+		//		edt_getbspmodelfor_classname "trigger_once"
+		//		edt_getbspmodelfor_origin "1320 8680 -392"
+		//		targetname "syn_vint"} }
 
 		create {classname "func_vehicleclip"
 			origin "3272 8576 8"
