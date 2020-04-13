@@ -3,6 +3,17 @@ d1_eli_01
 	entity {
 //--Setup--
 		delete {classname "logic_auto" origin "179.7 4434.42 -1379"}
+		delete {targetname "global_newgame_spawner_suit"}
+		delete {targetname "global_newgame_spawner_crowbar"}
+		delete {targetname "global_newgame_spawner_pistol"}
+		delete {targetname "global_newgame_spawner_smg"}
+		delete {targetname "global_newgame_spawner_airboat"}
+		delete {targetname "global_newgame_spawner_357"}
+		delete {targetname "global_newgame_template"}
+		delete {targetname "global_newgame_entmaker"}
+		delete {targetname "global_newgame_spawner_ammo"}
+		delete {targetname "global_newgame_template_ammo"}
+		delete {targetname "global_newgame_template_local_items"}
 		edit {classname "func_areaportal" values {targetname "disabledPortal" StartOpen "1"} }
 		edit {targetname "occluder_scrap_1" values {targetname "syn_occluder_scrap_1"} }
 
@@ -79,8 +90,8 @@ d1_eli_01
 		create {classname "trigger_once" origin "-384 4168 -1368"
 			values {
 				//model "*131"
-				edt_getbspmodelfor_classname "trigger_once"
-				edt_getbspmodelfor_origin "-384 4168 -1368"
+				edt_mins "-600 -400 -100"
+				edt_maxs "600 400 100"
 				spawnflags "1"
 				OnTrigger "syn_spawn_manager,SetCheckPoint,syn_spawn_player_1,0,-1"
 				OnTrigger "syn_global_settings,AddOutput,IsVehicleMap 0,0,-1"} }
@@ -111,7 +122,7 @@ d1_eli_01
 //Trav|Edt - block phys props going into vator
 		create {classname "func_clip_vphysics"
 			origin "448 1761 -1232"
-			values {edt_getbspmodelfor_classname "trigger_multiple" edt_getbspmodelfor_origin "448 1749 -1232"} }//model "*6"
+			values {edt_getbspmodelfor_targetname "brush_ele_door_PClip"} }//model "*6"
 
 //don't let actors die
 		create {classname "logic_auto"
@@ -124,12 +135,12 @@ d1_eli_01
 
 //Wait for players in airlock
 		delete {targetname "trigger_startScene"}
-		create {classname "trigger_coop" origin "0 2488 -1192"
+		create {classname "trigger_coop" origin "-60 2710 -1210"
 			values
 			{
 				//model "*131"
-				edt_getbspmodelfor_classname "trigger_once"
-				edt_getbspmodelfor_origin "-384 4168 -1368"
+				edt_mins "-100 -100 -100"
+				edt_maxs "100 110 50"
 				spawnflags "1"
 				CountType "1"
 				UseHUD "1"
