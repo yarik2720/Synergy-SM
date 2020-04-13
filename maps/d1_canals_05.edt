@@ -29,8 +29,8 @@ d1_canals_05
 		create {classname "trigger_once" origin "6838.83 1405.96 -408"//6608 -428 -404//6550.03 1362.73 -435
 			values {
 				//model "*89"//*87//*83
-				edt_getbspmodelfor_classname "trigger_once"
-				edt_getbspmodelfor_origin "6678.83 1405.96 -408"
+				edt_mins "-20 -150 -100"
+				edt_maxs "20 170 150"
 				spawnflags "64"
 				StartDisabled "1"
 				targetname "tigger_closegate"
@@ -288,7 +288,7 @@ d1_canals_05
 				OnMapSpawn "cannister_shanty_8,AddOutput,DamageRadius 64,0,-1"} }
 
 //Trav|Edt - add vclip b4 gate opens
-		create {classname "func_vehicleclip" origin "6736 1424 -408" values {edt_getbspmodelfor_classname "trigger_once" edt_getbspmodelfor_origin "6678.83 1405.96 -408" targetname "trav_boat_gatevclip"} }//model "*89"
+		create {classname "func_vehicleclip" origin "6736 1424 -408" values {edt_getbspmodelfor_targetname "trigger_arlenespawn_and_autosave" angles "0 90 0" targetname "trav_boat_gatevclip"} }//model "*89"
 
 		create {classname "logic_relay"
 			values {spawnflags "1"
