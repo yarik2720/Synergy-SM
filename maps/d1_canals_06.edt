@@ -400,6 +400,22 @@ d1_canals_06
 				angles "0 180 0"
 				solid "6"
 				DisableShadows "1"} }
+		
+		create {classname "prop_dynamic" origin "-1663.99 -2943.99 -192"
+			values {model "models/synergy/tools/syn_transition.mdl"
+				targetname "syn_antirush_wall"
+				angles "0 180 0"
+				solid "6"
+				DisableShadows "1"
+				startdisabled "1"} }
+
+		create {classname "prop_dynamic" origin "-1663.99 -3711.99 -192"
+			values {model "models/synergy/tools/syn_transition.mdl"
+				targetname "syn_antirush_wall"
+				angles "0 180 0"
+				solid "6"
+				DisableShadows "1"
+				startdisabled "1"} }
 
 		//create {classname "light_dynamic" origin "-4080 -2304 -432"
 		//	values {_light "170 255 170"
