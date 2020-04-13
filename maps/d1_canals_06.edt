@@ -202,7 +202,7 @@ d1_canals_06
 			values {
 				//model "*170"
 				edt_getbspmodelfor_classname "trigger_once"
-				edt_getbspmodelfor_origin "0 5760 160"
+				edt_getbspmodelfor_origin "0 6272 160"
 				spawnflags "32"
 				OnTrigger "syn_spawn_vehicle_2,Enable,,0,-1"
 				OnTrigger "syn_moreplayerssec,CheckSkill,,0,1"
@@ -237,7 +237,7 @@ d1_canals_06
 			values {
 				//model "*170"
 				edt_getbspmodelfor_classname "trigger_once"
-				edt_getbspmodelfor_origin "0 5760 160"
+				edt_getbspmodelfor_origin "0 6272 160"
 				filtername "syn_filter_barrels"} }
 //W
 		create {classname "func_clip_vphysics"
@@ -245,7 +245,7 @@ d1_canals_06
 			values {
 				//model "*170"
 				edt_getbspmodelfor_classname "trigger_once"
-				edt_getbspmodelfor_origin "0 5760 160"
+				edt_getbspmodelfor_origin "0 6272 160"
 				angles "0 90 0"
 				filtername "syn_filter_barrels"} }
 //E
@@ -254,7 +254,7 @@ d1_canals_06
 			values {
 				//model "*170"
 				edt_getbspmodelfor_classname "trigger_once"
-				edt_getbspmodelfor_origin "0 5760 160"
+				edt_getbspmodelfor_origin "0 6272 160"
 				angles "0 90 0"
 				filtername "syn_filter_barrels"} }
 //S
@@ -263,7 +263,7 @@ d1_canals_06
 			values {
 				//model "*170"
 				edt_getbspmodelfor_classname "trigger_once"
-				edt_getbspmodelfor_origin "0 5760 160"
+				edt_getbspmodelfor_origin "0 6272 160"
 				filtername "syn_filter_barrels"} }
 //T
 		create {classname "func_clip_vphysics"
@@ -328,8 +328,8 @@ d1_canals_06
 			origin "-7680 10751.9 -85.43"
 			values {
 				//model"*65"
-				edt_getbspmodelfor_classname "trigger_once"
-				edt_getbspmodelfor_origin "-6368 10559.9 -128"
+				edt_mins "-20 -500 -150"
+				edt_maxs "20 520 130"
 				spawnflags "1"
 				targetname "syn_vint"
 				OnTrigger "syn_vint_ss_trav,BeginSequence,-1,0,-1"} }
