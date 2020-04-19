@@ -775,7 +775,8 @@ d2_coast_07
 		//		"map" "d2_coast_05"
 		//	}
 		//}
-		edit {classname "trigger_changelevel" values {edt_map "d2_coast_05" edt_landmark "landmark_d2_coast_05-07" spawnflags "6"} }
+		//Balimbanana - Only apply next changelevel. BUG: this edit can only appear once in an EDT, additional instances are ignored.
+		//edit {classname "trigger_changelevel" values {edt_map "d2_coast_05" edt_landmark "landmark_d2_coast_05-07" spawnflags "6"} }
 		edit {classname "trigger_changelevel" values {edt_map "d2_coast_08" edt_landmark "landmark_d2_coast_07-08" targetname "synreturnchangelevel"} }
 
 		//create { classname "trigger_changelevel" origin "3330 5030 1590"
