@@ -452,26 +452,25 @@ d2_coast_08
 
 //End of Trav|Edt
 
-//Balimbanana - Re-do trigger_changelevel without remake
-		edit {classname "trigger_changelevel" values {edt_map "d2_coast_07" edt_landmark "landmark_d2_coast_07-08" startdisabled "1" targetname "ReturnBridgeMap"} }
+//Balimbanana - BUG: default EDT system cannot add or replace keys, only edt_addspawnflags // Re-do trigger_changelevel without remake
+		//edit {classname "trigger_changelevel" values {edt_map "d2_coast_07" edt_landmark "landmark_d2_coast_07-08" startdisabled "1" targetname "ReturnBridgeMap"} }
 
 		// prevent access to previous level only until we press the button
-		//delete { classname "trigger_changelevel" }
+		delete { classname "trigger_changelevel" }
 
-		//create { classname "trigger_changelevel" origin "3120 1695 1595"
-		//	values {
-		//		//"model" "*64"
-		//		"edt_mins" "-45 -95 -60"
-		//		"edt_maxs" "45 100 70"
-		//		"spawnflags" "0"
-		//		"landmark" "landmark_d2_coast_07-08"
-		//		"map" "d2_coast_07"
+		create { classname "trigger_changelevel" origin "3120 1664 1584"
+			values {
+				//"model" "*64"
+				"edt_getbspmodelfor_targetname" "return_trip_autosave"
+				"spawnflags" "0"
+				"landmark" "landmark_d2_coast_07-08"
+				"map" "d2_coast_07"
 
-		//		"StartDisabled" "1"
-		//		"targetname" "ReturnBridgeMap"
-		//		OnChangeLevel "syn_telegunship,Teleport,,0,-1"
-		//	}
-		//}
+				"StartDisabled" "1"
+				"targetname" "ReturnBridgeMap"
+				OnChangeLevel "syn_telegunship,Teleport,,0,-1"
+			}
+		}
 
 		create { classname "trigger_once" origin "3328 -1920 1808"
 			values {
