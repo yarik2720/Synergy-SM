@@ -3,6 +3,7 @@ d1_canals_01a
 	entity {
 //--Setup--
 		delete {classname "logic_auto" origin "576.631 2850.74 -68"}
+		edit {classname "func_areaportal" values {targetname "disabledPortals" StartOpen "1"} }
 
 //--Starting Items--
 		create {classname "info_player_equip"
@@ -35,13 +36,19 @@ d1_canals_01a
 //--Checkpoints--
 		create {classname "trigger_once"
 			origin "-1608 6066 34"
-			values {model "*124"
+			values {
+				//model "*124"
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "-1608 6066 34"
 				spawnflags "1"
 				OnTrigger "syn_spawn_manager,SetCheckpoint,syn_spawn_player_2,0,-1"} }
 
 		create {classname "trigger_once"
 			origin "-2808 7328 4"
-			values {model "*77"
+			values {
+				//model "*77"
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "-2808 7328 4"
 				spawnflags "1"
 				OnTrigger "syn_spawn_manager,SetCheckpoint,syn_spawn_player_3,0,-1"} }
 
@@ -50,19 +57,28 @@ d1_canals_01a
 //Trav|Edt - Anti-Skip clips
 		create {classname "func_brush"
 			origin "420 6268 120"
-			values {model "*131"
+			values {
+				//model "*131"
+				edt_getbspmodelfor_classname "func_brush"
+				edt_getbspmodelfor_origin "364 5796 -8"
 				spawnflags "2"
 				targetname "trav_clips"} }
 
 		create {classname "func_brush"
 			origin "924 6372 120"
-			values {model "*131"
+			values {
+				//model "*131"
+				edt_getbspmodelfor_classname "func_brush"
+				edt_getbspmodelfor_origin "364 5796 -8"
 				spawnflags "2"
 				targetname "trav_clips"} }
 
 		create {classname "func_brush"
 			origin "1444 6236 136"
-			values {model "*131"
+			values {
+				//model "*131"
+				edt_getbspmodelfor_classname "func_brush"
+				edt_getbspmodelfor_origin "364 5796 -8"
 				spawnflags "2"
 				targetname "trav_clips"} }
 
@@ -113,7 +129,10 @@ d1_canals_01a
 
 		create {classname "trigger_once"
 			origin "2282.66 6204 68.36"
-			values {model "*1"
+			values {
+				//model "*1"
+				edt_getbspmodelfor_classname "trigger_multiple"
+				edt_getbspmodelfor_origin "2282.66 6204 68.36"
 				spawnflags "1"
 				OnTrigger "syn_vint_trav_teleport_waste,ForceSpawn,,45,-1"
 				OnTrigger "syn_vint_trav_physexplosion,Explode,,46,-1"
@@ -149,13 +168,19 @@ d1_canals_01a
 //--
 		create {classname "func_brush"
 			origin "364 5796 -8"
-			values {model "*131"
+			values {
+				//model "*131"
+				edt_getbspmodelfor_classname "func_brush"
+				edt_getbspmodelfor_origin "364 5796 -8"
 				targetname "trav_clips"
 				Solidity "2"} }
 
 		create {classname "func_brush"
 			origin "394 6304 30"
-			values {model "*126"
+			values {
+				//model "*126"
+				edt_getbspmodelfor_classname "func_brush"
+				edt_getbspmodelfor_origin "394 6304 30"
 				targetname "trav_clips"} }
 
 //Trav|Edt - Add a wave of cops
@@ -204,7 +229,10 @@ d1_canals_01a
 
 		create {classname "trigger_once"
 			origin "-1600 4616 -96"
-			values {model "*6"
+			values {
+				//model "*6"
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "-1600 4616 -96"
 				spawnflags "1"
 				OnTrigger "lcs_sewercops_converse,Start,,0,-1"
 				OnTrigger "sewercop_microphone,Enable,,0,-1" } }
@@ -227,7 +255,10 @@ d1_canals_01a
 //Trav|Edt - Anti-bridgehop
 		create {classname "trigger_push"
 			origin "-4760 9109 148"
-			values {model "*15"
+			values {
+				//model "*15"
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "-3112 5413 -20"
 				spawnflags "1"
 				targetname "syn_vint_trav_bridgehop_push"//syn_antirush_
 				pushdir "0 270 0"
@@ -235,8 +266,11 @@ d1_canals_01a
 
 //Trav|Edt - Auti-rush
 		create {classname "trigger_coop"
-			origin "-5844.42 9213.5 132.07"
-			values {model "*83"
+			origin "-5470 9210 80"
+			values {
+				//model "*83"
+				edt_mins "-120 -70 -100"
+				edt_maxs "400 80 100"
 				spawnflags "1"
 				//StartDisabled "1"
 				targetname "syn_antirush_coop"

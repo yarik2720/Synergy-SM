@@ -106,7 +106,10 @@ d3_c17_07
 //prevent players rushing before alyx sequence
 		create {classname "trigger_push"
 			origin "4575 735 192"
-			values {model "*52"
+			values {
+				//model "*52"
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "4680 1064 340"
 				spawnflags "1"
 				targetname "syn_antirush_push"
 				pushdir "0 90 0"
@@ -177,7 +180,10 @@ d3_c17_07
 //Trav|Edt - add playerclip abovegate
 		create {classname "func_brush"
 			origin "7264 1520 248"
-			values {model "*35"
+			values {
+				//model "*35"
+				edt_getbspmodelfor_classname "func_brush"
+				edt_getbspmodelfor_origin "7312 1536 64"
 				spawnflags "2"} }
 
 //Trav|Edt - Finale defense
@@ -203,7 +209,10 @@ d3_c17_07
 //Trav|Edt - moveplayers to main area, and close/lock door and teleport alyx, also set net checkpoint, and save
 		create {classname "trigger_once"
 			origin "5544 1408 64"
-			values {model "*11"
+			values {
+				//model "*11"
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "5544 1408 64"
 				spawnflags "1"
 				OnTrigger "syn_spawn_manager,MovePlayers,,0.1,-1"
 				OnTrigger "trav_teleport_alyx1,Teleport,,0,-1"
@@ -264,7 +273,10 @@ d3_c17_07
 // prevent skipping	
 		create {classname "trigger_push"
 			origin "7235 1530 310"
-			values {model "*7"
+			values {
+				//model "*7"
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "6120 1536 100"
 				angles "-45 0 0"
 				spawnflags "1"
 				speed "350"
@@ -272,7 +284,10 @@ d3_c17_07
 				
 		create {classname "trigger_push"
 			origin "7100 1530 400"
-			values {model "*7"
+			values {
+				//model "*7"
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "6120 1536 100"
 				angles "90 0 0"
 				spawnflags "1"
 				speed "3950"
@@ -280,7 +295,10 @@ d3_c17_07
 				
 		create {classname "trigger_push"
 			origin "6655 1040 400"
-			values {model "*7"
+			values {
+				//model "*7"
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "6120 1536 100"
 				angles "90 0 0"
 				spawnflags "1"
 				speed "3950"
@@ -329,7 +347,10 @@ d3_c17_07
 //Trav|Edt - autirush
 		create {classname "trigger_coop"
 			origin "9096 2592 -88"
-			values {model "*20"
+			values {
+				//model "*20"
+				edt_getbspmodelfor_classname "trigger_multiple"
+				edt_getbspmodelfor_origin "7616 1536 104"
 				spawnflags "1"
 				//StartDisabled "1"
 				targetname "syn_antirush_coop"

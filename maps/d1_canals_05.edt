@@ -27,7 +27,10 @@ d1_canals_05
 //Enable AirBoats + checkpoint + Prevent Gate Closing
 		delete {targetname "tigger_closegate"}
 		create {classname "trigger_once" origin "6838.83 1405.96 -408"//6608 -428 -404//6550.03 1362.73 -435
-			values {model "*89"//*87//*83
+			values {
+				//model "*89"//*87//*83
+				edt_mins "-20 -150 -100"
+				edt_maxs "20 170 150"
 				spawnflags "64"
 				StartDisabled "1"
 				targetname "tigger_closegate"
@@ -122,7 +125,10 @@ d1_canals_05
 //--Checkpoints--
 		create {classname "trigger_once"
 			origin "4228 1746 -390.5"
-			values {model "*33"
+			values {
+				//model "*33"
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "4228 1746 -390.5"
 				spawnflags "1"
 				OnTrigger "syn_spawn_manager,SetCheckpoint,syn_spawn_player_2,0,-1"
 				OnTrigger "trav_teleport_failsafe,Enable,,4,-1"} }
@@ -136,7 +142,10 @@ d1_canals_05
 				filterclass "prop_vehicle_airboat"} }
 				
 		create {classname "trigger_multiple" origin "7352 1402 -478.02"
-			values {model "*48"
+			values {
+				//model "*48"
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "3532 5484 -264"
 				angles "90 0 0"
 				spawnflags "72"
 				targetname "modi_spawn_antiblock"
@@ -146,7 +155,10 @@ d1_canals_05
 
 		create {classname "trigger_hurt"
 			origin "7312 1402 -440"
-			values {model "*48"
+			values {
+				//model "*48"
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "3532 5484 -264"
 				angles "90 0 0"
 				spawnflags "1"
 				StartDisabled "0"
@@ -157,7 +169,10 @@ d1_canals_05
 
 		create {classname "trigger_hurt"
 			origin "7422 1402 -440"
-			values {model "*48"
+			values {
+				//model "*48"
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "3532 5484 -264"
 				angles "90 0 0"
 				spawnflags "1"
 				StartDisabled "0"
@@ -213,8 +228,13 @@ d1_canals_05
 		delete {targetname "trigger_rockfall_start"}
 
 		create {classname "trigger_coop"
-			origin "3904 2560 -416"
-			values {model "*67"
+			origin "5005 1395 -385"
+			values {
+				//model "*67"
+				//several trigger_hurts at the same origin
+				//this trigger should reach much further anyways
+				edt_mins "-250 -1300 -100"
+				edt_maxs "1800 210 100"
 				spawnflags "1"
 				CountType "1"
 				UseHUD "0"
@@ -254,7 +274,10 @@ d1_canals_05
 		delete {classname "trigger_once" origin "5060 1188 -389"}
 		create {classname "trigger_once"
 			origin "5060 1188 -389"
-			values {model "*37"
+			values {
+				//model "*37"
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "5060 1188 -389"
 				spawnflags "1"
 				OnTrigger "cannister_shanty_ambient2,FireCanister,,0,-1"} }
 
@@ -265,7 +288,7 @@ d1_canals_05
 				OnMapSpawn "cannister_shanty_8,AddOutput,DamageRadius 64,0,-1"} }
 
 //Trav|Edt - add vclip b4 gate opens
-		create {classname "func_vehicleclip" origin "6736 1424 -408" values {model "*89" targetname "trav_boat_gatevclip"} }
+		create {classname "func_vehicleclip" origin "6736 1424 -408" values {edt_getbspmodelfor_targetname "trigger_arlenespawn_and_autosave" angles "0 90 0" targetname "trav_boat_gatevclip"} }//model "*89"
 
 		create {classname "logic_relay"
 			values {spawnflags "1"
@@ -308,12 +331,18 @@ d1_canals_05
 //Trav|Edt - prevent players from blocking gate from opening by standing on it
 		create {classname "func_brush"
 			origin "-218.2 -1181.5 -192"
-			values {model "*29"
+			values {
+				//model "*29"
+				edt_getbspmodelfor_classname "func_brush"
+				edt_getbspmodelfor_origin "4157.8 2282.5 -384"
 				spawnflags "2"} }
 
 		create {classname "func_brush"
 			origin "-218.2 -1381.5 -192"
-			values {model "*29"
+			values {
+				//model "*29"
+				edt_getbspmodelfor_classname "func_brush"
+				edt_getbspmodelfor_origin "4157.8 2282.5 -384"
 				spawnflags "2"} }
 
 //Trav|Edt - Auti-rush

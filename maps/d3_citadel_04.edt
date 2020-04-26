@@ -13,8 +13,11 @@ d3_citadel_04
 			OnMapSpawn "relay_ballspawner1_on,Trigger,,0,-1"} }
 		edit {classname "func_areaportal" values {targetname "syn_disabledPortal" StartOpen "1"} }
 //Prevent Backtracking
-		create {classname "trigger_push" origin "-50 0 0"
-			values {model "*81"
+		create {classname "trigger_push" origin "830 -320 2430"
+			values {
+				//model "*81"
+				edt_mins "-20 -65 -70"
+				edt_maxs "20 65 70"
 				spawnflags "1"
 				speed "750"
 				pushdir "0 180 0"} }
@@ -59,7 +62,10 @@ d3_citadel_04
 
 		create {classname "trigger_once"
 			origin "272 832 3680"
-			values {model "*46"
+			values {
+				//model "*46"
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "272 832 3680"
 				spawnflags "1"
 				OnTrigger "relay_wake_soldiers3,Trigger,,0,-1"
 				OnTrigger "citadel_script_sold_hall1_1,ForceSpawn,,0,-1"
@@ -74,7 +80,10 @@ d3_citadel_04
 
 		create {classname "trigger_once"
 			origin "272 832 4192"
-			values {model "*61"
+			values {
+				//model "*61"
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "272 832 4192"
 				spawnflags "1"
 				OnTrigger "citadel_train_lift01_1,Toggle,,0,-1"
 				OnTrigger "citadel_npc_sold_elev_high,Kill,,0,-1"
@@ -84,7 +93,10 @@ d3_citadel_04
 
 		create {classname "trigger_once"
 			origin "272 832 5520"
-			values {model "*48"
+			values {
+				//model "*48"
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "272 832 5520"
 				spawnflags "1"
 				OnTrigger "citadel_script_sold_2cats_1,StartSchedule,,0,-1"
 				OnTrigger "citadel_npc_sold_hall*,Kill,,0,-1"
@@ -94,7 +106,10 @@ d3_citadel_04
 
 		create {classname "trigger_once"
 			origin "272 832 5984"
-			values {model "*62"
+			values {
+				//model "*62"
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "272 832 5984"
 				spawnflags "1"
 				OnTrigger "citadel_train_lift01_1,Toggle,,0,-1"
 				OnTrigger "citadel_spawner_codahall_sold0_1,ForceSpawn,,4,-1"
@@ -102,7 +117,10 @@ d3_citadel_04
 
 		create {classname "trigger_once"
 			origin "272 832 6464"
-			values {model "*56"
+			values {
+				//model "*56"
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "272 832 6464"
 				spawnflags "1"
 				OnTrigger "citadel_npc_sold_bay*,Kill,,0,-1"} }
 
@@ -131,7 +149,9 @@ d3_citadel_04
 			"origin" "256 832 2367"
 			"values"
 			{
-				"model" "*52"
+				//"model" "*52"
+				"edt_getbspmodelfor_classname" "trigger_once"
+				"edt_getbspmodelfor_origin" "256 832 2367"
 				"targetname" "citadel_trigger_elevatorride_up"
 				"spawnflags" "1"
 				"StartDisabled" "1"

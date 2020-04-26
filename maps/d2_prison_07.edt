@@ -11,6 +11,7 @@ d2_prison_07
 		create {classname "trigger_push" origin "4270 -4345 -640"
 			values {
 				//model "*94"
+				targetname "syn_antirush_push"
 				edt_mins "-40 -80 -50"
 				edt_maxs "20 90 80"
 				spawnflags "1"//65
@@ -629,6 +630,7 @@ d2_prison_07
 				wait "1.5"
 				OnTrigger "syn_antirush_text,Display,,0,-1"
 				OnPlayersIn "syn_antirush_wall,Kill,,0,1"
+				OnPlayersIn "syn_antirush_push,Kill,,0,1"
 				//OnPlayersIn "syn_antirush_light,TurnOff,,0,1"
 				OnPlayersIn "!self,Disable,,1,1"} }
 

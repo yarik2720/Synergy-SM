@@ -3,7 +3,10 @@ d1_town_01
 	entity
 	{
 //--Setup--
+		delete {targetname "info_player_start"}
 		delete {classname "logic_auto" origin "4488 -2784 -3731"}
+		delete {targetname "player_spawn_items"}
+		delete {targetname "player_spawn_template"}
 		edit {classname "func_areaportal" values {targetname "disabledPortal" StartOpen "1"} }
 
 //Prevent Backtracking
@@ -11,7 +14,14 @@ d1_town_01
 			values {model "models/synergy/tools/syn_transition.mdl"
 				angles "0 90 90"
 				solid "6"
-				DisableShadows "1"} }
+				DisableShadows "1"
+				targetname "syn_hl2def"} }
+		create {classname "prop_dynamic" origin "3580 -2980 -1700"
+			values {model "models/synergy/tools/syn_transition.mdl"
+				angles "0 90 90"
+				solid "6"
+				DisableShadows "1"
+				targetname "syn_hl2u"} }
 			
 	//	create {classname "light_dynamic" origin "4256.01 -2912 -3712"
 	//		values {_light "170 255 170"
@@ -50,18 +60,28 @@ d1_town_01
 
 		create {classname "info_player_coop" origin "4250 -2792 -3767"
 			values {angles "0 0 0" targetname "syn_spawn_player_1"} }
+		create {classname "info_player_coop" origin "3635 -2905 -1450"
+			values {angles "0 0 0" targetname "syn_spawn_player_1u" StartDisabled "1"} }
 
 		create {classname "info_player_coop" origin "2584 -1736 -3840"
 			values {angles "0 75 0" targetname "syn_spawn_player_2" StartDisabled "1"} }
+		create {classname "info_player_coop" origin "1985 -1790 -1470"
+			values {angles "0 75 0" targetname "syn_spawn_player_2u" StartDisabled "1"} }
 
 		create {classname "info_player_coop" origin "2464 -984 -3776"
 			values {angles "0 255 0" targetname "syn_spawn_player_3" StartDisabled "1"} }
+		create {classname "info_player_coop" origin "1835 -1050 -1445"
+			values {angles "0 255 0" targetname "syn_spawn_player_3u" StartDisabled "1"} }
 
 		create {classname "info_player_coop" origin "2480 -1680 -3776"
 			values {angles "0 180 0" targetname "syn_spawn_player_4" StartDisabled "1"} }
+		create {classname "info_player_coop" origin "1860 -1740 -1445"
+			values {angles "0 180 0" targetname "syn_spawn_player_4u" StartDisabled "1"} }
 
 		create {classname "info_player_coop" origin "2016 -1456 -3788"
 			values {angles "0 90 0" targetname "syn_spawn_player_5" StartDisabled "1"} }
+		create {classname "info_player_coop" origin "1395 -1520 -1475"
+			values {angles "0 90 0" targetname "syn_spawn_player_5u" StartDisabled "1"} }
 
 		create {classname "info_global_settings"
 			values {IsVehicleMap "0" targetname "syn_global_settings"} }
@@ -104,14 +124,24 @@ d1_town_01
 
 //Trav|Edt - delay music (players not loaded won't hear it)
 		delete {classname "trigger_once" origin "4512 -2676 -3728.77"}
+		//HL2U
+		delete {classname "trigger_once" origin "3895 -2738 -1396.77"}
 
+		edit {targetname "start_music" values {targetname "start_musicdelay"} }
 		create {classname "trigger_once" origin "4512 -2676 -3728.77"
 			values {
 				//model "*106"
-				edt_getbspmodelfor_classname "trigger_once"
-				edt_getbspmodelfor_origin "4512 -2676 -3728.77"
+				edt_mins "-50 -30 -50"
+				edt_maxs "55 30 80"
 				spawnflags "1"
-				OnTrigger "start_music,PlaySound,,20,-1"} }//30/45 (ppl loading faster and faster these days :P)
+				OnTrigger "start_musicdelay,PlaySound,,20,-1"} }//30/45 (ppl loading faster and faster these days :P)
+		create {classname "trigger_once" origin "3895 -2738 -1396.77"
+			values {
+				//model "*106"
+				edt_mins "-50 -30 -50"
+				edt_maxs "55 30 80"
+				spawnflags "1"
+				OnTrigger "start_musicdelay,PlaySound,,20,-1"} }
 
 
 //Trav|Edt - edit all propeller blades do people would be less likely to be spawn-decapatated when players are under them, break then when useless
@@ -133,14 +163,27 @@ d1_town_01
 			origin "2457.5 -1170.5 -3719.66"
 			values {
 				//model "*69"
-				edt_getbspmodelfor_classname "trigger_once"
-				edt_getbspmodelfor_origin "2457.5 -1170.5 -3719.66"
+				edt_mins "-15 -60 -50"
+				edt_maxs "15 60 50"
 				spawnflags "1"
 				targetname "syn_vint"
 				OnTrigger "propeller_01_lever_01,Lock,,0.01,-1"
 				OnTrigger "propeller_01,DisableMotion,,5,-1"
 				OnTrigger "propeller_01_lever_01,PressOut,,0,-1"
 				OnTrigger "syn_spawn_manager,SetCheckpoint,syn_spawn_player_3,0,-1"} }
+		//HL2U
+		create {classname "trigger_once"
+			origin "1840 -1232 -1387"
+			values {
+				//model "*69"
+				edt_mins "-15 -60 -50"
+				edt_maxs "15 60 50"
+				spawnflags "1"
+				targetname "syn_vinthl2u"
+				OnTrigger "propeller_01_lever_01,Lock,,0.01,-1"
+				OnTrigger "propeller_01,DisableMotion,,5,-1"
+				OnTrigger "propeller_01_lever_01,PressOut,,0,-1"
+				OnTrigger "syn_spawn_manager,SetCheckpoint,syn_spawn_player_3u,0,-1"} }
 //startbladeonsound
 		edit {targetname "propeller_01_spinning_wav" values {spawnflags "0"} }
 
@@ -148,14 +191,26 @@ d1_town_01
 			origin "1917 -1787.5 -3712"
 			values {
 				//model "*70"
-				edt_getbspmodelfor_classname "trigger_once"
-				edt_getbspmodelfor_origin "1917 -1787.5 -3712"
+				edt_mins "-5 -65 -65"
+				edt_maxs "5 55 60"
 				spawnflags "1"
 				targetname "syn_vint"
 				OnTrigger "propeller_03_lever_01,Lock,,0.01,-1"
 				OnTrigger "propeller_03,DisableMotion,,5,-1"
 				OnTrigger "propeller_03_lever_01,PressOut,,0,-1"
 				OnTrigger "syn_spawn_manager,SetCheckpoint,syn_spawn_player_4,0,-1"} }
+		create {classname "trigger_once"
+			origin "1300 -1849.5 -1380"
+			values {
+				//model "*70"
+				edt_mins "-5 -65 -65"
+				edt_maxs "5 55 60"
+				spawnflags "1"
+				targetname "syn_vinthl2u"
+				OnTrigger "propeller_03_lever_01,Lock,,0.01,-1"
+				OnTrigger "propeller_03,DisableMotion,,5,-1"
+				OnTrigger "propeller_03_lever_01,PressOut,,0,-1"
+				OnTrigger "syn_spawn_manager,SetCheckpoint,syn_spawn_player_4u,0,-1"} }
 
 //Trav|Edt - remove stupid logic I/O  loop
 		delete {targetname "electric_fence_rl_1"}
@@ -168,10 +223,29 @@ d1_town_01
 			origin "680 -572 -3602.72"
 			values {
 				//model "*54"
-				edt_getbspmodelfor_classname "trigger_once"
-				edt_getbspmodelfor_origin "1000 -1460 -3676"
+				edt_mins "-160 -135 -100"
+				edt_maxs "160 135 100"
 				spawnflags "1"
 				targetname "syn_vint"
+				OnStartTouch "hallfire_1_trap_1_ignition_button_1,Lock,,0,-1"
+				OnEndTouchAll "hallfire_1_trap_1_ignition_button_1,UnLock,,0,-1"
+				OnStartTouch "hallfire_1_trap_1_flamejet_wheel_1,Lock,,0,-1"
+				OnEndTouchAll "hallfire_1_trap_1_flamejet_wheel_1,UnLock,,0,-1"
+				//OnStartTouch "syn_hallfire_1_trap_1_firesensor_1,Disable,,0,-1"
+				//OnEndTouchAll "syn_hallfire_1_trap_1_firesensor_1,Enable,,0.01,-1"
+				OnStartTouch "hallfire_1_trap_1_fire_microphone,Disable,,0,-1"
+				OnEndTouchAll "hallfire_1_trap_1_fire_microphone,Enable,,0.01,-1"//triggers sparks even when disabled [but no biggie]
+				//OnStartTouch "hallfire_1_trap_1_fire_microphone,AddOutput,targetname syn_hallfire_1_trap_1_fire_microphone,0.01,-1"//Prevent being Enabled by wheel
+				//OnEndTouchAll "syn_hallfire_1_trap_1_fire_microphone,AddOutput,targetname hallfire_1_trap_1_fire_microphone,0,-1"
+				} }
+		create {classname "trigger_multiple"
+			origin "55 -570 -1325"
+			values {
+				//model "*54"
+				edt_mins "-160 -135 -100"
+				edt_maxs "160 135 100"
+				spawnflags "1"
+				targetname "syn_vinthl2u"
 				OnStartTouch "hallfire_1_trap_1_ignition_button_1,Lock,,0,-1"
 				OnEndTouchAll "hallfire_1_trap_1_ignition_button_1,UnLock,,0,-1"
 				OnStartTouch "hallfire_1_trap_1_flamejet_wheel_1,Lock,,0,-1"
@@ -186,7 +260,9 @@ d1_town_01
 //TODO: What was this for?
 		create {classname "logic_auto"
 			values {spawnflags "1"
-				OnMapSpawn "hallfire_1_trap_1_flamejet_wheel_1,OnClose,,0,-1"} }
+				//OnMapSpawn "hallfire_1_trap_1_flamejet_wheel_1,OnClose,,0,-1"
+				OnMapSpawn "syn_hl2usetup,kill,,1,1"
+				OnMapSpawn "syn_hl2defsetup,Trigger,,1,1"} }
 
 		//do not let the doors close on players
 		delete {targetname "trigger_close_gates"}
@@ -255,8 +331,8 @@ d1_town_01
 			origin "2718.5 -1324 -3758.07"
 			values {
 				//model "*49"
-				edt_getbspmodelfor_classname "trigger_once"
-				edt_getbspmodelfor_origin "2718.5 -1324 -3758.07"
+				edt_mins "-100 -10 -80"
+				edt_maxs "100 10 80"
 				spawnflags "1"
 				//OnTrigger "intro_zombie_1_spawner_1,Enable,,0,-1"
 				//OnTrigger "intro_zombie_2_spawner_1,Enable,,0,-1"
@@ -282,8 +358,8 @@ d1_town_01
 			origin "1146.47 -607.50 -3543.82"
 			values {
 				//model "*34"
-				edt_getbspmodelfor_classname "trigger_once"
-				edt_getbspmodelfor_origin "1514 -1242 -3707.73"
+				edt_mins "-40 -100 -130"
+				edt_maxs "40 95 120"
 				angles "0 35 0"
 				spawnflags "1"
 				speed "350"
@@ -321,8 +397,8 @@ d1_town_01
 		create {classname "trigger_multiple" origin "1160 41.5 -3542"
 			values {
 				//model "*118"
-				edt_getbspmodelfor_classname "trigger_multiple"
-				edt_getbspmodelfor_origin "1160 41.5 -3542"
+				edt_mins "-50 -100 -40"
+				edt_maxs "50 100 40"
 				spawnflags "1"
 				parentname "crushtrap_01_weight_car"
 				StartDisabled "1"
@@ -333,8 +409,8 @@ d1_town_01
 		create {classname "trigger_multiple" origin "760 248.5 -3542"
 			values {
 				//model "*118"
-				edt_getbspmodelfor_classname "trigger_multiple"
-				edt_getbspmodelfor_origin "1160 41.5 -3542"
+				edt_mins "-50 -100 -40"
+				edt_maxs "50 100 40"
 				angles "0 45 0"
 				spawnflags "1"
 				parentname "crushtrap_02_weight_car"
@@ -350,11 +426,11 @@ d1_town_01
 
 //Trav|Edt add antirush at endlevel
 		create {classname "trigger_coop"
-			origin "174.5 592.5 -3252"
+			origin "240 705 -3265"
 			values {
 				//model "*46"
-				edt_getbspmodelfor_classname "trigger_once"
-				edt_getbspmodelfor_origin "525.5 -138.5 -3316"
+				edt_mins "-100 -150 -60"
+				edt_maxs "130 120 50"
 				spawnflags "1"
 				//StartDisabled "1"
 				targetname "syn_antirush_trav_town01_end_coop"
@@ -421,6 +497,7 @@ d1_town_01
 				"StartDisabled"		"0"
 
 				"OnTrigger"		"syn_spawn_manager,SetCheckpoint,syn_spawn_player_5,0,0"
+				"OnTrigger"		"syn_spawn_manager,SetCheckpoint,syn_spawn_player_5u,0,0"
 //Trav|Edt - disable player teleport, nvm re-enable it
 				"OnTrigger"		"syn_spawn_manager,MovePlayers,,.2,0"
 				OnTrigger "syn_global_settings,AddOutput,IsVehicleMap 0,0,-1"
@@ -442,10 +519,69 @@ d1_town_01
 
 		"edit"
 		{
-			"classname"	"aiscripted_schedule"
-			"targetname"	"corridor_zombie_2_aiss_1"
-			"values" { "goalent" "corridor_zombie_2_aiss_1" }
-		} 						
+			"classname" "aiscripted_schedule"
+			"targetname" "corridor_zombie_2_aiss_1"
+			"values" {"goalent" "corridor_zombie_2_aiss_1" }
+		}
+		
+		create {classname "logic_relay"
+			values
+			{
+				targetname "syn_hl2defsetup"
+				OnTrigger "syn_spawn_player_1u,kill,,0,1"
+				OnTrigger "syn_spawn_player_2u,kill,,0,1"
+				OnTrigger "syn_spawn_player_3u,kill,,0,1"
+				OnTrigger "syn_spawn_player_4u,kill,,0,1"
+				OnTrigger "syn_spawn_player_5u,kill,,0,1"
+				OnTrigger "syn_vinthl2u,kill,,0,1"
+				OnTrigger "syn_hl2u,kill,,0,1"
+			}
+		}
+		create {classname "trigger_once" origin "181 -1286 -1187"
+			values
+			{
+				edt_mins "-20 -20 -80"
+				edt_maxs "20 20 40"
+				spawnflags "2"
+				targetname "syn_hl2usetup"
+				OnTrigger "syn_hl2defsetup,kill,,0,1"
+				OnTrigger "syn_spawn_player_1,kill,,0,1"
+				OnTrigger "syn_spawn_player_2,kill,,0,1"
+				OnTrigger "syn_spawn_player_3,kill,,0,1"
+				OnTrigger "syn_spawn_player_4,kill,,0,1"
+				OnTrigger "syn_spawn_player_5,kill,,0,1"
+				OnTrigger "syn_antirush_trav_town01_end_coop,kill,,0,1"
+				OnTrigger "syn_spawn_manager,SetCheckPoint,syn_spawn_player_1u,0,1"
+				OnTrigger "syn_vint,kill,,0,1"
+				OnTrigger "hl2utempl,ForceSpawn,,0,1"
+			}
+		}
+		create {classname "point_template"
+			values
+			{
+				targetname "hl2utempl"
+				Template01 "syn_antirush_hl2u"
+				Template02 "syn_vinthl2u"
+			}
+		}
+		
+		create {classname "trigger_coop"
+			origin "-357 655 -945"
+			values {
+				//model "*46"
+				edt_mins "-100 -150 -60"
+				edt_maxs "130 120 50"
+				spawnflags "1"
+				//StartDisabled "1"
+				targetname "syn_antirush_hl2u"
+				CountType "1"
+				UseHUD "1"
+				PlayerValue "50"
+				wait "1.5"
+				OnTrigger "syn_antirush_text,Display,,1,-1"
+				OnPlayersIn "start_door,UnLock,,0,1"
+				OnPlayersIn "!self,kill,,1,-1"} }
+		
 
 //Trav|Edt - Functionality check
 		create {classname "logic_relay" values {targetname "trav_functionality_d1_town_01"} }

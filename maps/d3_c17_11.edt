@@ -62,13 +62,19 @@ d3_c17_11
 //Trav|Edt - add antiskipper
 		create {classname "func_brush"
 			origin "1052 5908 1040"
-			values {model "*44"
+			values {
+				//model "*44"
+				edt_getbspmodelfor_classname "func_brush"
+				edt_getbspmodelfor_origin "1548 3204 1024"
 				spawnflags "1"
 				targetname "trav_antiskip_brush_dropshipdoor"} }
 
 		create {classname "func_brush"
 			origin "1012 5908 1040"
-			values {model "*44"
+			values {
+				//model "*44"
+				edt_getbspmodelfor_classname "func_brush"
+				edt_getbspmodelfor_origin "1548 3204 1024"
 				spawnflags "1"
 				targetname "trav_antiskip_brush_dropshipdoor"} }
 
@@ -77,6 +83,9 @@ d3_c17_11
 			values {spawnflags "1"
 				OnMapSpawn "skybridge_group_a_soldiers_maker,MaxLiveChildren,5,10,-1"
 				OnMapSpawn "skybridge_group_a_soldiers_maker,AddMaxChildren,5,10,-1"} }
+				
+//todo: remove after code optimisations made -- modi: fix weird teleportations caused by lag compensation on func_breakable (while player shoots on them)
+		edit {classname "func_breakable" values {"spawnflags" "3073‬"}}
 
 //Trav|Edt - Prevent door(s) from autoclosing
 		//edit {classname "prop_door_rotating"
@@ -85,7 +94,10 @@ d3_c17_11
 //Trav|Edt - autirush
 		create {classname "trigger_coop"
 			origin "1352 3216 1024"
-			values {model "*42"
+			values {
+				//model "*42"
+				edt_getbspmodelfor_classname "trigger_multiple"
+				edt_getbspmodelfor_origin "-2048 9152 608"
 				angles "0 0 90"
 				spawnflags "1"
 				//StartDisabled "1"

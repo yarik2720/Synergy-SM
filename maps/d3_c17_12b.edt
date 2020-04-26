@@ -74,7 +74,10 @@ d3_c17_12b
 //TODO: move this a bit bro
 		create {classname "trigger_coop"
 			origin "-4534 552 126"
-			values {model "*20"
+			values {
+				//model "*20"
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "-5125 -26 -290"
 				spawnflags "1"
 				//StartDisabled "1"
 				targetname "syn_antirush_coop"
@@ -141,7 +144,9 @@ d3_c17_12b
 			"classname" "trigger_once"
 			"values"
 			{
-				"model" "*19"
+				//"model" "*19"
+				"edt_getbspmodelfor_classname" "trigger_once"
+				"edt_getbspmodelfor_origin" "-7888 -912 -136"
 				"origin" "-7888 -912 -136"
 				"spawnflags" "1"
 				"StartDisabled" "0"

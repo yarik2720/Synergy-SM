@@ -63,7 +63,9 @@ d1_canals_01
 
 		//Trav|Edt - "_create" invalid?
 		create {classname "trigger_once" origin "684 2908 -36"
-			values {model "*117"
+			values {
+				//model "*117"
+				edt_getbspmodelfor_targetname "boxcar_door_close"
 				spawnflags "1"
 				targetname "boxcar_door_close"
 			//	"OnTrigger" "boxcar_closedoor,BeginSequence,,0,-1"
@@ -95,7 +97,10 @@ d1_canals_01
 
 		create {classname "trigger_once"
 			origin "-152 -6848 640"
-			values {model "*98"
+			values {
+				//model "*98"
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "-152 -6848 640"
 				spawnflags "1"
 				OnTrigger "trav_equip_pistol,Enable,,0,1"
 				OnTrigger "trav_equip_pistol,EquipAllPlayers,,1,1"
@@ -125,7 +130,10 @@ d1_canals_01
 			} }
 
 		create {classname "trigger_multiple" origin "-320 -7360 -72"
-			values {model "*118"
+			values {
+				//model "*118"
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "-312 -7360 -72"
 				spawnflags "1"
 				filtername "syn_new_weapon_filter"
 				OnTrigger "syn_vint_ld1,CheckSkill,,0,-1"
@@ -142,7 +150,10 @@ d1_canals_01
 //--Checkpoints--
 		create {classname "trigger_once"
 			origin "636 -6520 600"
-			values {model "*113"
+			values {
+				//model "*113"
+				edt_getbspmodelfor_classname "trigger_multiple"
+				edt_getbspmodelfor_origin "596 -6520 600"
 				spawnflags "1"
 				targetname "syn_mplrs"
 				OnTrigger "syn_spawn_manager,MovePlayers,,0.1,-1"
@@ -151,7 +162,10 @@ d1_canals_01
 //separate for mp_teleport_disable
 		create {classname "trigger_once"
 			origin "636 -6520 600"
-			values {model "*113"
+			values {
+				//model "*113"
+				edt_getbspmodelfor_classname "trigger_multiple"
+				edt_getbspmodelfor_origin "596 -6520 600"
 				spawnflags "1"
 				OnTrigger "syn_new_weapon_stunstick,EquipAllPlayers,,0,-1"
 				OnTrigger "syn_spawn_manager,SetCheckpoint,syn_spawn_player_2,0,-1"
@@ -168,7 +182,10 @@ d1_canals_01
 
 		create {classname "trigger_once"
 			origin "640 672 112"
-			values {model "*25"
+			values {
+				//model "*25"
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "640 672 112"
 				spawnflags "1"
 				OnTrigger "syn_spawn_manager,SetCheckpoint,syn_spawn_player_3,0,-1"} }
 
@@ -208,7 +225,10 @@ d1_canals_01
 
 //upstair default cop enabler
 		create {classname "trigger_once" origin "-576 -7360 320"
-			values {model "*106"
+			values {
+				//model "*106"
+				edt_mins "-50 -80 -110"
+				edt_maxs "50 60 100"
 				spawnflags "1"
 				OnTrigger "beat_cop1_maker,Enable,,0.1,-1"} }
 
@@ -234,7 +254,10 @@ d1_canals_01
 
 //disable cop spawner when able to be seen, failsafe
 		create {classname "trigger_once" origin "-224 -6848 864"
-			values {model "*28"
+			values {
+				//model "*28"
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "-448 -6848 640"
 				spawnflags "1"
 				OnTrigger "syn_vint_diff_1,Kill,,0,-1"} }
 //endlevelish
@@ -326,13 +349,18 @@ d1_canals_01
 				//model "*78"
 				edt_getbspmodelfor_classname "trigger_once"
 				edt_getbspmodelfor_origin "608 -5058 552"
+			}
 		}
-	}
 
 //remake: don't let this trigger kill half the npc's
 		delete {classname "trigger_once" origin "608 -5058 552"}
+		//HL2U
+		delete {classname "trigger_once" origin "608 -5058 532"}
 		create {classname "trigger_once" origin "608 -5058 552"
-			values {model "*78"
+			values {
+				//model "*78"
+				edt_mins "-20 -10 -60"
+				edt_maxs "20 10 30"
 				spawnflags "1"
 				"OnTrigger" "tunnel_barrels_template,ForceSpawn,,0,-1"
 				"OnTrigger" "assault3cop_2_maker,Enable,,0,-1"
@@ -368,7 +396,10 @@ d1_canals_01
 
 		create {classname "trigger_once"
 			origin "256 -4064 448"
-			values {model "*33"
+			values {
+				//model "*33"
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "256 -4064 448"
 				spawnflags "1"
 				OnTrigger "syn_vint_extracops_temp,Enable,,6,-1"
 //Trav|Edt - if barrelpush_cop2 dies b4 he pushes barrel, enable motion on his barrel
@@ -383,7 +414,10 @@ d1_canals_01
 //Trav|Edt - Stop crap from stopping train (CItem still blocks [does not effected by triggers)
 		create {classname "trigger_remove"
 			origin "2603.48 14864 392"
-			values {model "*91"
+			values {
+				//model "*91"
+				edt_mins "-35 -80 -150"
+				edt_maxs "35 80 150"
 				spawnflags "12"
 				parentname "looping_traincar2"
 				filtername "trav_train_filter"} }
@@ -451,7 +485,10 @@ d1_canals_01
 
 		create {classname "trigger_once"
 			origin "-184 -2288 600"
-			values {model "*86"
+			values {
+				//model "*86"
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "-104 -2032 504"
 				spawnflags "1"
 				OnTrigger "syn_vint_extracops_temp2,Spawn,,0,-1"
 				OnTrigger "trav_aiscript_sched_ambush,StartSchedule,,0.1,-1"
@@ -513,14 +550,20 @@ d1_canals_01
 //Trav|Edt - Stop train sound at boxcar (only needed when train is enabled, disabled cuz of lag spike (due to ragdoll/npc caught in train?)
 		create {classname "trigger_once"
 			origin "846 2638 87.65"
-			values {model "*115"
+			values {
+				//model "*115"
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "858 2638 58"
 				spawnflags "1"
 				OnTrigger "train_crossing_bell,StopSound,,1,-1" } }
 
 //Trav|Edt - Auti-rush
 		create {classname "trigger_coop"
 			origin "640 976 -80"
-			values {model "*25"
+			values {
+				//model "*25"
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "640 672 112"
 				spawnflags "1"
 				//StartDisabled "1"
 				targetname "syn_antirush_coop"
@@ -534,7 +577,10 @@ d1_canals_01
 
 		create {classname "trigger_push"
 			origin "816 2634 208.01"//608 2610 72.01
-			values {model "*100"
+			values {
+				//model "*100"
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "736 2158 -55.99"
 				spawnflags "1"
 				targetname "syn_antirush_push"
 				pushdir "0 270 0"
@@ -562,7 +608,10 @@ d1_canals_01
 
 		create {classname "trigger_coop"
 			origin "696 4424 -72"
-			values {model "*25"
+			values {
+				//model "*25"
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "640 672 112"
 				spawnflags "1"
 				//StartDisabled "1"
 				targetname "trav_closeboxcardoor_coop"

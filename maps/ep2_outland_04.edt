@@ -118,7 +118,7 @@ ep2_outland_04
 				model "*52"
 				StartDisabled "0"
 				spawnflags "1"
-				OnTrigger "syn_spawn_player_2,Enable,,0,-1"
+				OnTrigger "syn_spawn_manager,SetCheckPoint,syn_spawn_player_2,0,-1"
 			}
 		}
 				
@@ -166,8 +166,8 @@ ep2_outland_04
 				model "*24"
 				StartDisabled "0"
 				spawnflags "1"
-				OnTrigger "syn_spawn_player_3,Enable,,0,-1"
-				OnTrigger "syn_spawn_manager,TeleportPlayers,modi_teleport_meet_guardian,0,-1"
+				OnTrigger "syn_spawn_manager,SetCheckPoint,syn_spawn_player_3,0,-1"
+				OnTrigger "syn_spawn_manager,TeleportPlayers,modi_teleport_meet_guardian,0,1"
 			}
 		}
 
@@ -203,7 +203,7 @@ ep2_outland_04
 			values {model "*25"//*55
 				spawnflags "1"
 				OnTrigger "syn_spawn_manager,MovePlayers,,0,-1"
-				OnTrigger "syn_spawn_player_4,Enable,,3,-1"
+				OnTrigger "syn_spawn_manager,SetCheckPoint,syn_spawn_player_4,3,-1"
 //fix elevator_fall_trigger from killing players caught by barnacle
 				OnTrigger "elevator_fall_trigger,Kill,,3,-1"
 				OnTrigger "syn_elevator_fall,Disable,,3,-1"} }

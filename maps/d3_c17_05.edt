@@ -93,7 +93,10 @@ d3_c17_05
 
 //Trav|Edt - use funky method for gate-to-stay-open
 		create {classname "trigger_once" origin "1749.5 -4074.5 251.55"
-			values {model "*35"
+			values {
+				//model "*35"
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "1749.5 -4074.5 251.55"
 				spawnflags "64"
 				filtername "syn_filter_func_door"
 				OnTrigger "!activator,AddOutput,targetname syn_gate_button,0,-1"} }
@@ -103,7 +106,10 @@ d3_c17_05
 				filterclass "func_door"} }
 
 		create {classname "trigger_once" origin "1749.5 -4074.5 251.55"
-			values {model "*35"
+			values {
+				//model "*35"
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "1749.5 -4074.5 251.55"
 				spawnflags "1"
 				OnTrigger "syn_gate_button,AddOutput,OnOpen !self:Lock::0:-1,0,-1"} }
 
@@ -239,7 +245,10 @@ d3_c17_05
 //Trav|Edt - autirush
 		create {classname "trigger_coop"
 			origin "2530 -3622.12 -68"
-			values {model "*28"
+			values {
+				//model "*28"
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "2759.5 -3758.12 196"
 				spawnflags "1"
 				//StartDisabled "1"
 				targetname "syn_antirush_coop"

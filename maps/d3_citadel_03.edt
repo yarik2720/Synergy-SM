@@ -41,17 +41,26 @@ d3_citadel_03
 //Trav|Edt - keep DEGG in stripper area
 		create {classname "func_clip_vphysics"
 			origin "7680 -1084 2208"
-			values {model "*8"
+			values {
+				//model "*8"
+				edt_getbspmodelfor_classname "trigger_hurt"
+				edt_getbspmodelfor_origin "7680 -1084 2208"
 				filtername "syn_filter_DEGG"} }
 
 		create {classname "func_clip_vphysics"
 			origin "7684 -1584 2208"
-			values {model "*2"
+			values {
+				//model "*2"
+				edt_getbspmodelfor_classname "func_brush"
+				edt_getbspmodelfor_origin "7680 -1559.5 2208"
 				filtername "syn_filter_DEGG"} }
 
 		create {classname "func_clip_vphysics"
 			origin "7723 -1337 2392.86"
-			values {model "*91"
+			values {
+				//model "*91"
+				edt_getbspmodelfor_classname "trigger_vphysics_motion"
+				edt_getbspmodelfor_origin "7725 -1312 2216.72"
 				filtername "syn_filter_DEGG"} }
 
 		create {classname "filter_activator_class"
@@ -69,7 +78,10 @@ create { classname "info_player_coop" origin "7728 -1344 2672" values {angles "0
 
 		create {classname "trigger_remove"
 			origin "7725 -1337 2216.86"
-			values {model "*78"
+			values {
+				//model "*78"
+				edt_getbspmodelfor_classname "trigger_weapon_strip"
+				edt_getbspmodelfor_origin "7725 -1337 2216.86"
 				spawnflags "8"
 				targetname "trav_remover"
 				filtername "trav_filter_physgun"} }
@@ -92,7 +104,9 @@ create { classname "info_player_coop" origin "7728 -1344 2672" values {angles "0
 			"origin" "7725 -1321 2208.72"
 			"values"
 			{
-				"model" "*86"
+				//"model" "*86"
+				"edt_getbspmodelfor_classname" "trigger_weapon_dissolve"
+				"edt_getbspmodelfor_origin" "7725 -1321 2208.72"
 				"emittername" "weapon_dissolve_conduit"
 				"targetname" "weapon_dissolve"
 				"spawnflags" "64"
