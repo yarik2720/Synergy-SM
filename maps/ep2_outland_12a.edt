@@ -67,14 +67,14 @@ ep2_outland_12a
 
 //modi - add gman, Half Life Alyx reference
 		create {classname "npc_gman"
-			origin	"2573 -2489.32 -1160"
+			origin	"2573 -2518 -1176"
 			values {spawnflags "16532"
 				angles "0 180 0"
 				targetname "syn_vint_modi_gman_1"
 				sleepstate "3"} }
 
 		create {classname "scripted_sequence"
-			origin "2573 -2489.32 -1160"
+			origin "2573 -2518 -1176"
 			values {spawnflags "96"
 				targetname "syn_vint_modi_ss_gman_1_1"
 				m_iszEntity "syn_vint_modi_gman_1"
@@ -82,9 +82,9 @@ ep2_outland_12a
 				m_iszNextScript "syn_vint_modi_ss_gman_2_2"} }
 
 		create {classname "scripted_sequence"
-			origin "3044 -2489.32 -1160"
+			origin "2911 -2340 -1176"
 			values {spawnflags "96"
-				angles "0 90 0"
+				angles "0 0 0"
 				targetname "syn_vint_modi_ss_gman_2_2"
 				m_fMoveTo "1"
 				OnEndSequence "syn_vint_modi_gman_1,Kill,,0,-1"
@@ -93,8 +93,8 @@ ep2_outland_12a
 
 		create {classname "logic_relay"
 			values {spawnflags "1"
-				targetname "trigger.advisor.effect"
-				OnTrigger "syn_vint_modi_gman_1,Wake,,0,-1"
+				targetname "relay.advisor.scene"
+				OnTrigger "syn_vint_modi_gman_1,Wake,,0.5,-1"
 				OnTrigger "syn_vint_modi_ss_gman_1_1,BeginSequence,,8,-1"} }
 
 //Trav|Edt - moveplayers into elevator
