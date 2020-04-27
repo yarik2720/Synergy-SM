@@ -542,7 +542,7 @@ d1_canals_03
 
 //Trav|Edt - Auti-rush
 		create {classname "trigger_coop"
-			origin "-3290 5 -1010"//-2954 366 -1000.5
+			origin "-3390 0 -1010"//-2954 366 -1000.5
 			values {
 				//model "*251"
 				edt_mins "-100 -100 -100"
