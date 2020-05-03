@@ -197,10 +197,50 @@ ep1_c17_05
 				
 //changelevel after 800 seconds if there is no progression				
 //todo: remove changinglevel after another fix appears
+		// create {classname "logic_auto"
+			// values {spawnflags "1"
+				// OnMapSpawn "theEndCmd,Command,changelevel ep1 ep1_c17_06,800,-1"} }
+		// create { classname "point_servercommand" values { targetname "theEndCmd" } }
+//modi: made citizens proceed automatically - BUG on Synergy 56.16: citizens stops following any player when someone connects. Remove if you need vanilla "Follow Citizen"
+		create {classname "scripted_sequence"
+			origin "9400 9720 -734"
+			values {spawnflags "100"
+				angles "0 0 0"
+				targetname "modi_citizens_proceed_1"
+				m_iszEntity "citizen_refugees_1"
+				m_fMoveTo "2"} }
+		create {classname "scripted_sequence"
+			origin "9436 9720 -734"
+			values {spawnflags "100"
+				angles "0 0 0"
+				targetname "modi_citizens_proceed_2"
+				m_iszEntity "citizen_refugees_2"
+				m_fMoveTo "2"} }
+		create {classname "scripted_sequence"
+			origin "9350 9720 -734"
+			values {spawnflags "100"
+				angles "0 0 0"
+				targetname "modi_citizens_proceed_3"
+				m_iszEntity "citizen_refugees_3"
+				m_fMoveTo "2"} }
+		create {classname "scripted_sequence"
+			origin "9500 9720 -734"
+			values {spawnflags "100"
+				angles "0 0 0"
+				targetname "modi_citizens_proceed_4"
+				m_iszEntity "citizen_refugees_4"
+				m_fMoveTo "2"} }
+				
 		create {classname "logic_auto"
 			values {spawnflags "1"
-				OnMapSpawn "theEndCmd,Command,changelevel ep1 ep1_c17_06,800,-1"} }
-		create { classname "point_servercommand" values { targetname "theEndCmd" } }
+				OnMapSpawn "lcs_al_c17_05_barneyoverhere,AddOutput,OnCompletion modi_citizens_proceed_1:BeginSequence::2:-1,0,-1"
+				OnMapSpawn "lcs_al_c17_05_barneyoverhere,AddOutput,OnCompletion modi_citizens_proceed_2:BeginSequence::2:-1,0,-1"
+				OnMapSpawn "lcs_al_c17_05_barneyoverhere,AddOutput,OnCompletion modi_citizens_proceed_3:BeginSequence::2:-1,0,-1"
+				OnMapSpawn "lcs_al_c17_05_barneyoverhere,AddOutput,OnCompletion modi_citizens_proceed_4:BeginSequence::2:-1,0,-1"
+				OnMapSpawn "trigger_pickup_citizens,AddOutput,OnTrigger modi_citizens_proceed_1:BeginSequence::2:-1,0,-1"
+				OnMapSpawn "trigger_pickup_citizens,AddOutput,OnTrigger modi_citizens_proceed_2:BeginSequence::2:-1,0,-1"
+				OnMapSpawn "trigger_pickup_citizens,AddOutput,OnTrigger modi_citizens_proceed_3:BeginSequence::2:-1,0,-1"
+				OnMapSpawn "trigger_pickup_citizens,AddOutput,OnTrigger modi_citizens_proceed_4:BeginSequence::2:-1,0,-1"} }
 
 //Trav|Edt - remove trigger_serverragdoll
 		delete {classname "trigger_serverragdoll"}
