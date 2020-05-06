@@ -210,7 +210,9 @@ ep2_outland_10a
 		delete { classname "trigger_multiple" origin "4928 11184 303.69" }
 		create { classname "trigger_once" origin "4928 11184 303.69"
 			values {
-				"model" "*25"
+				//"model" "*25"
+				edt_getbspmodelfor_classname "trigger_multiple"
+				edt_getbspmodelfor_origin "4928 11184 303.69"
 				"wait" "0"
 				"targetname" "base_playertrigger_1"
 				"StartDisabled" "1"
@@ -227,6 +229,29 @@ ep2_outland_10a
 				"OnTrigger" "changelevel_to_11_trigger,Enable,,2,-1"
 			}
 		}
+
+//tp Alyx if there is enough players at the end
+		create {classname "trigger_coop"
+			origin "4928 11184 303.69"
+			values {
+				edt_getbspmodelfor_classname "trigger_multiple"
+				edt_getbspmodelfor_origin "4928 11184 303.69"
+				spawnflags "1"
+				//StartDisabled "1"
+				targetname "syn_antirush_coop"
+				CountType "1"
+				UseHUD "1"
+				PlayerValue "50"
+				wait "1.5"
+				OnPlayersIn "syn_teleport_alyx_end,Teleport,,0,1"
+				OnPlayersIn "alyx_follow,Deactivate,,0,-1"
+				OnPlayersIn "!self,Disable,,1,1"} }
+
+		create {classname "point_teleport"
+			origin "4894 11260 210"
+			values {targetname "syn_teleport_alyx_end"
+				angles "0 90 0"
+				target "alyx"} }
 
 		delete { targetname "base_transition_counter" }
 		create { classname "math_counter" origin "5024 11240 216"
