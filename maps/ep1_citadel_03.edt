@@ -133,8 +133,6 @@ ep1_citadel_03
 				OnMapSpawn "lcs_alyx_powerdown,AddOutput,OnStart trav_trigger_moveplayers_vator_end:Enable::0:-1,0,-1"
 				OnMapSpawn "syn_trigtimerball,AddOutput,OnStartTouch timer_ball_tube1nodisable:Enable::0:-1,0,-1"
 				OnMapSpawn "trigger_socket_5,AddOutput,OnTrigger trigger_alyx_reunion:Enable::0:-1,0,-1"
-				OnMapSpawn "trigger_socket_5,AddOutput,OnTrigger lcs_alyx_corecomplete:Start::0:1,0,-1"
-				OnMapSpawn "lcs_mossman_scene,AddOutput,OnStart lcs_alyx_corecomplete:Cancel::0:1,0,-1"
 				OnMapSpawn "lcs_mossman_scene,AddOutput,OnStart alyx:SetDamageFilter:nodmg:0:1,0,-1"} }
 		
 		create {classname "filter_activator_class" values {targetname "nodmg" filterclass "null" Negated "0"} }
@@ -178,6 +176,8 @@ ep1_citadel_03
 				"targetname" "trigger_CP01"
 
 				"OnTrigger" "syn_spawn_manager,SetCheckpoint,syn_spawn_player_2,0,-1"
+				"OnTrigger" "syn_spawn_player_1,disable,,0,-1"
+				"OnTrigger" "syn_spawn_player_1,kill,,0.1,-1"
 				"OnTrigger" "syn_spawn_manager,MovePlayers,,0.1,-1"
 			}
 		}
@@ -195,6 +195,8 @@ ep1_citadel_03
 				"OnStartTouch" "Core_lift_doors,Close,,0,-1"
 
 				"OnStartTouch" "syn_spawn_manager,SetCheckpoint,syn_spawn_player_3,0,-1"
+				OnTrigger "syn_spawn_player_2,disable,,0,-1"
+				OnTrigger "syn_spawn_player_2,kill,,0.1,-1"
 				"OnStartTouch" "syn_spawn_manager,MovePlayers,,0.1,-1"
 			}
 		}
