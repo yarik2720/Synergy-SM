@@ -111,28 +111,6 @@ ep1_citadel_02b
 				OnPass "autosave_trigger,enable,,5,-1"
 			}
 		}
-		
-//tp Alyx if there is enough players at the end
-		create {classname "trigger_coop"
-			origin "5545.25 4642.47 -6606"
-			values {
-				edt_getbspmodelfor_classname "trigger_multiple"
-				edt_getbspmodelfor_origin "5545.25 4642.47 -6606"
-				spawnflags "1"
-				//StartDisabled "1"
-				targetname "syn_antirush_coop"
-				CountType "1"
-				UseHUD "1"
-				PlayerValue "50"
-				wait "1.5"
-				OnPlayersIn "syn_teleport_alyx_end,Teleport,,0,1"
-				OnPlayersIn "!self,Disable,,1,1"} }
-
-		create {classname "point_teleport"
-			origin "5582 4757 -6691"
-			values {targetname "syn_teleport_alyx_end"
-				angles "0 180 0"
-				target "alyx"} }
 				
 //balimbanana fix
 		delete {targetname "entry_transition_door"}
@@ -219,6 +197,29 @@ ep1_citadel_02b
 				"OnTrigger" "alyx_clip_1,Enable,,0,-1"
 			}
 		}
+
+//tp Alyx if there is enough players at the end
+		create {classname "trigger_coop"
+			origin "5545.25 4642.47 -6606"
+			values {
+				edt_getbspmodelfor_classname "trigger_multiple"
+				edt_getbspmodelfor_origin "5545.25 4642.47 -6606"
+				spawnflags "1"
+				//StartDisabled "1"
+				targetname "syn_antirush_coop"
+				CountType "1"
+				UseHUD "1"
+				PlayerValue "50"
+				wait "1.5"
+				OnPlayersIn "syn_teleport_alyx_end,Teleport,,0,1"
+				OnPlayersIn "alyx_follow_player,Deactivate,,0,-1"
+				OnPlayersIn "!self,Disable,,1,1"} }
+
+		create {classname "point_teleport"
+			origin "5582 4757 -6691"
+			values {targetname "syn_teleport_alyx_end"
+				angles "0 180 0"
+				target "alyx"} }
 
 //		// whats with this door
 //		delete { targetname "entry_transition_door" }
