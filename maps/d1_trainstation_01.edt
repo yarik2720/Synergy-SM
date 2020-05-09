@@ -21,8 +21,10 @@ d1_trainstation_01
 				OnMapSpawn "syn_intro_viewcontrol,Enable,,0,-1"
 				// env_zoom - all players
 				OnMapSpawn "env_zoom,AddOutput,AllPlayers 1,0,-1"
-				// Set checkpoint after gman sequence
+				// Set checkpoint after gman sequence and disable old one
 				OnMapSpawn "logic_start_train,AddOutput,OnTrigger syn_spawn_manager:SetCheckpoint:syn_spawn_player_2:0:-1,0,-1"
+				OnMapSpawn "logic_start_train,AddOutput,OnTrigger syn_spawn_player_1:disable::0:-1,0,-1"
+				OnMapSpawn "logic_start_train,AddOutput,OnTrigger syn_spawn_player_1:kill::0.1:-1,0,-1"
 				// Enable DD settings
 				OnMapSpawn "logic_start_train,AddOutput,OnTrigger syn_vint_ld_1:CheckSkill::0:-1,0,-1"
 				// Move everyone to the train (failsafe)
