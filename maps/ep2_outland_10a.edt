@@ -137,7 +137,8 @@ ep2_outland_10a
 			values {spawnflags "1"
 				OnMapSpawn "alyx_approachdog,AddOutput,OnEndSequence syn_spawn_vehicle_2:Enable::20:-1,0,-1"
 				OnMapSpawn "alyx_approachdog,AddOutput,OnEndSequence syn_moreplayerssec:CheckSkill::20:-1,0,-1"
-				OnMapSpawn "ss_dog_gate,AddOutput,OnScriptEvent01 synvehiclemap:Trigger::0:-1,0,-1"} }
+				OnMapSpawn "ss_dog_gate,AddOutput,OnScriptEvent01 synvehiclemap:Trigger::0:-1,0,-1"
+				OnMapSpawn "base_transition_dog_seq,AddOutput,OnEndSequence syn_antirush_coop:Enable::0.1:-1,0,-1"} }
 		create {classname "logic_relay" values {targetname "synvehiclemap" OnTrigger "syn_global_settings,AddOutput,IsVehicleMap 1,0,-1"} }
 // teleport Alyx and car
 		create {classname "point_teleport"
@@ -237,7 +238,7 @@ ep2_outland_10a
 				edt_getbspmodelfor_classname "trigger_multiple"
 				edt_getbspmodelfor_origin "4928 11184 303.69"
 				spawnflags "1"
-				//StartDisabled "1"
+				StartDisabled "1"
 				targetname "syn_antirush_coop"
 				CountType "1"
 				UseHUD "1"
