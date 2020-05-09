@@ -129,7 +129,7 @@ ep1_c17_02a
 		create {classname "info_spawn_manager"
 			values {targetname "syn_spawn_manager"} }
 //Intro
-		create {classname "info_player_coop" origin "5494.15 6463.63 -2547.97"
+		create {classname "info_player_coop" origin "5450 6463.63 -2547.97"
 			values {angles "0 180 0" targetname "syn_spawn_player_1"} }
 //Gunship area
 		create {classname "info_player_coop" origin "2245 7565 -2420"
