@@ -219,8 +219,32 @@ ep2_outland_12
 
 				"OnTrigger" "syn_spawn_manager,SetCheckPoint,PS_InBaseAgain,0,-1"
 				"OnTrigger" "syn_spawn_manager,MovePlayers,,0.1,-1"
+				"OnTrigger" "syn_antirush_coop,Enable,,0.1,-1"
 			}
 		}
+
+		//enable trigger coop to teleport Alyx inside transition
+		create {classname "trigger_coop"
+			origin "176 -8640 -206.09"
+			values {
+				edt_getbspmodelfor_classname "trigger_multiple"
+				edt_getbspmodelfor_origin "176 -8640 -206.09"
+				spawnflags "1"
+				StartDisabled "1"
+				targetname "syn_antirush_coop"
+				CountType "1"
+				UseHUD "1"
+				PlayerValue "50"
+				wait "1.5"
+				OnPlayersIn "syn_teleport_alyx_end,Teleport,,0,1"
+				OnPlayersIn "alyx_follow,Deactivate,,0,-1"
+				OnPlayersIn "!self,Disable,,1,1"} }
+
+		create {classname "point_teleport"
+			origin "136 -8800 -320.444"
+			values {targetname "syn_teleport_alyx_end"
+				angles "0 90 0"
+				target "alyx"} }
 
 		// fix transition to final level
 		create { classname "info_teleport_destination" origin "188 -8611 -319" values { angles "0 -90 0" targetname "PS_EndMap" StartDisabled "1" } }
