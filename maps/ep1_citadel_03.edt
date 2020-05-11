@@ -85,6 +85,18 @@ ep1_citadel_03
 	//	edit {classname "func_brush" origin "3045.5 12535.8 4214" values {spawnflags "2"} }
 	//	edit {classname "func_brush" origin "2600.5 12716.2 4214" values {spawnflags "2"} }
 
+
+//failsafe Alyx spawn
+		create {classname "logic_auto"
+			values
+			{
+				spawnflags "1"
+				OnMapSpawn "alyx,AddOutput,OnUser1 global_newgame_template_base_items:kill::0:-1,0,-1"
+				OnMapSpawn "alyx,FireUser1,,0.5,1"
+				OnMapSpawn "global_newgame_template_base_items,ForceSpawn,,1,1"
+			}
+		}
+
 		// this prevents a player trap from occuring after the core arms are lowered
 		create { classname "trigger_once" origin "3080 12666.6 5613.5"
 			values { "model" "*206" "spawnflags" "1" "StartDisabled" "0"
