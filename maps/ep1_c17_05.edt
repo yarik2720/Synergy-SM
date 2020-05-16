@@ -112,6 +112,17 @@ ep1_c17_05
 
 		create { classname "info_intermission" origin "10455 12032 -482" values { angles "9 -125 0" } }
 
+//failsafe Alyx spawn
+		create {classname "logic_auto"
+			values
+			{
+				spawnflags "1"
+				OnMapSpawn "alyx,AddOutput,OnUser1 global_newgame_entmaker:kill::0:-1,0,-1"
+				OnMapSpawn "alyx,FireUser1,,0.5,1"
+				OnMapSpawn "global_newgame_entmaker,ForceSpawn,,1,1"
+			}
+		}
+
 //Trav|Edt - add hudhints for squad commands + crowbar [prolly no workie]
 		create {classname "logic_relay"
 			values {spawnflags "1"
