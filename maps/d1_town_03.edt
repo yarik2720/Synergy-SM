@@ -25,6 +25,7 @@ d1_town_03
 				//model "*37"
 				edt_mins "-60 -20 -80"
 				edt_maxs "60 30 350"
+				targetname "push_preventor"
 				spawnflags "1"
 				speed "750"
 				pushdir "0 270 0"} }
@@ -205,6 +206,7 @@ d1_town_03
 				OnPlayersIn "syn_antirush_trav_town03_end_push,Kill,,0,1"
 				OnPlayersIn "syn_antirush_wall,Kill,,0,1"
 				OnPlayersIn "syn_antirush_light,Kill,,0,1"
+				OnPlayersIn "push_preventor,Kill,,0,1"
 				OnPlayersIn "!self,Disable,,1,-1"} }
 
 		create {classname "prop_dynamic" origin "-3848 0 -3648"
