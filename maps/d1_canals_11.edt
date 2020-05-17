@@ -455,7 +455,29 @@ d1_canals_11
 				targetname "syn_vint"} }
 
 //Trav|Edt - move cop trigger (sooner)-NP- BbrushReq [gate early]
-		edit {classname "trigger_once" origin "1792 -7680 -768" values {origin "5083 -6801 -928" edt_getbspmodelfor_classname "trigger_hurt" edt_getbspmodelfor_origin "-9934 -2570 -991"} }//4736 -5760 -736 model "*134"
+		delete {classname "trigger_once" origin "1792 -7680 -768"}
+		create {
+			classname "trigger_once"
+			origin "5083 -6801 -928"
+			values {
+				//model "*134"
+				edt_getbspmodelfor_classname "trigger_hurt" 
+				edt_getbspmodelfor_origin "-9934 -2570 -991"
+				"spawnflags" "1"
+				"StartDisabled" "0"
+				"OnStartTouch" "metrocop_assault1_relay,Trigger,,0,-1"
+				"OnTrigger" "gate2,EnableMotion,,0.5,-1"
+				"OnStartTouch" "metrocop_assault2_relay,Trigger,,7.5,-1"
+				"OnTrigger" "gate1,EnableMotion,,0,-1"
+				"OnTrigger" "canals_sound_mcambush1_1,PlaySound,,0,-1"
+				"OnStartTouch" "canals_sound_mcambush_doorstop1,PlaySound,,1.5,-1"
+				"OnStartTouch" "canals_sound_mcambush_doorstop2,PlaySound,,1,-1"
+				"OnStartTouch" "canals_sound_mcambush_doormove1,PlaySound,,0,-1"
+				"OnStartTouch" "canals_sound_mcambush_doormove2,PlaySound,,0.5,-1"
+				"OnStartTouch" "canals_door_ambush2,Unlock,,6.8,-1"
+				"OnStartTouch" "canals_door_ambush2,Open,,7,-1"				
+			}
+		}
 //keep gate2 trigger ORI
 		edit {targetname "gate2" values {targetname "trav_gate2"} }
 		create {classname "trigger_once"
