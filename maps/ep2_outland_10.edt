@@ -180,14 +180,14 @@ ep2_outland_10
 //Trav|Edt - Disable Enemy turrets when tipped (avoid player greif)
 		create {classname "logic_auto"
 			values {spawnflags "1"
-				OnMapSpawn "alyx_garage_start_counter,AddOutput,OnHitMax syn_movealyx:MoveToPosition::0:1,0,-1"
 				OnMapSpawn "garage_turret_template,AddOutput,OnEntitySpawned syn_turret_manage:Trigger::0:-1,0,-1"} }//DepleteAmmo
 
 		create {classname "logic_relay"
 			values {targetname "syn_turret_manage"
-				OnTrigger "npc_turret_floor,AddOutput,OnTipped !self:SelfDestruct::0:-1,1,-1"} }
+				OnTrigger "npc_turret_floor,AddOutput,OnTipped !self:SelfDestruct::0:-1,1,-1"
+				OnTrigger "npc_turret_floor,AddOutput,OnTipped syn_movealyx:MoveToPosition::0:1,0,-1"} }
 		
-		create {classname "scripted_sequence" origin "584 -2120 161"
+		create {classname "scripted_sequence" origin "590 -2120 161"
 			values
 			{
 				targetname "syn_movealyx"
@@ -236,7 +236,8 @@ ep2_outland_10
 			values {model "*182"
 				spawnflags "1"
 				OnTrigger "syn_teleport_alyx,Teleport,,0,-1"
-				OnTrigger "syn_spawn_manager,MovePlayers,,0.1,-1"} }
+				OnTrigger "syn_spawn_manager,MovePlayers,,0.1,-1"
+				OnTrigger "alyx_follow,Deactivate,,0,-1"} }
 
 		create {classname "point_teleport"
 			origin "1016 -2384 152"
