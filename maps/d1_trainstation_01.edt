@@ -292,22 +292,25 @@ d1_trainstation_01
 				spawnflags "1"
 				edt_getbspmodelfor_classname "trigger_once"
 				edt_getbspmodelfor_origin "-4614.97 -678.03 16"
-				OnTrigger "actbusy_customs_queue,MoveQueueUp,,2,-1"
+				OnTrigger "actbusy_customs_queue,MoveQueueUp,,4,-1"
+				OnTrigger "actbusy_customs_queue,MoveQueueUp,,8,-1"
 				OnTrigger "razortrain_cop_template,ForceSpawn,,0,-1"
 				} }
 
-		create {classname "trigger_once"
-			origin "-4614.97 -806.03 16"
-			values {
-				spawnflags "1"
-				edt_getbspmodelfor_classname "trigger_once"
-				edt_getbspmodelfor_origin "-4614.97 -806.03 16"
-				OnTrigger "actbusy_customs_queue,MoveQueueUp,,3,-1"
-				} }
+		// create {classname "trigger_once"
+			// origin "-4614.97 -806.03 16"
+			// values {
+				// spawnflags "1"
+				// edt_getbspmodelfor_classname "trigger_once"
+				// edt_getbspmodelfor_origin "-4614.97 -806.03 16"
+				// OnTrigger "actbusy_customs_queue,MoveQueueUp,,3,-1"
+				// } }
 
 		delete {classname "trigger_once" origin "-5022.15 -787.48 0"}
 		delete {classname "trigger_once" origin "-4614.97 -678.03 16"}
 		delete {classname "trigger_once" origin "-4614.97 -806.03 16"}
+		
+
 
 		// fixup blockers at cagearea
 		delete {targetname "cage_playerclip"}
