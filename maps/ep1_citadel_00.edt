@@ -213,6 +213,24 @@ ep1_citadel_00
 				OnTrigger "syn_van_teleport,Enable,,2,1"
 				//OnTrigger "van,Lock,,2,1" //no workie? [code fix]
 				} }
+//modi: fix vanride can be ended before Alyx exits van
+		delete {targetname "counter_vanride_end01_resume"}
+		create {classname "logic_auto"
+			values {spawnflags "1"
+				OnMapSpawn "ss_alyx_ExitVan,AddOutput,OnEndSequence modi_counter_vanride_end01_resume:Add:1:0:1,0,-1"} }
+				
+		create {
+			classname "math_counter"
+			values {
+				"origin" "4704 4160 -6192"
+				"max" "1"
+				"min" "0"
+				"startvalue" "0"
+				"targetname" "modi_counter_vanride_end01_resume"
+				"OnHitMax" "lcs_al_vanride_end01,Resume,,0,-1"
+				"OnHitMax" "relay_Vanledge01,Trigger,,0,-1"
+			}
+		}
 
 //fixup van reentering
 		create {classname "logic_auto"
