@@ -101,7 +101,7 @@ ep1_citadel_01
 			values {solid "6" startdisabled "1" DisableShadows "1"} }
 		edit {classname "trigger_changelevel" values {edt_map "ep1_citadel_00" edt_landmark "landmark_00to01" spawnflags "6" startdisabled "1"} }
 
-//modi serios of teleport for alyx fixing
+//modi series of teleport for alyx fixing
 		create { classname "trigger_once" origin "-5200 6416 2720"
 			values {
 				"model" "*79"
@@ -140,9 +140,24 @@ ep1_citadel_01
 				"model" "*225"
 				"spawnflags" "1"
 				"OnTrigger" "syn_spawn_manager,MovePlayers,syn_spawn_player_2_1,0,-1"
+				"OnTrigger" "modi_antideath_clip,Disable,,2,-1"
 				"OnTrigger" "follow_alyx,Activate,,0.1,-1"
 			}
 		}
+		//antideath clip
+		create {
+			classname "func_brush"
+			origin "-4860 5080 2660"
+			values {
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "-5200 6416 2720"
+				angles "0 90 0"
+				spawnflags "0"
+				spawnflags "1"
+				rendermode "10"
+				excludednpc "npc_alyx"
+				targetname "modi_antideath_clip"} }
+		
 		create {classname "point_teleport"
 			origin "-5223 1460 2620"
 			values {
