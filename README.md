@@ -9,13 +9,14 @@
 
 	> The folder `thisedit` can be named anything, it is just a container folder.
 
-- After placing edt files you need to restart your server if it was already running and set `content_mount_synergy_mod_path_priority 2` for the EDTs to apply.
+- After placing edt files you need to restart your server if it was already running and set `content_mount_synergy_mod_path_priority 0` for the EDTs to apply.
 
 ## Changes
 > All files were imported from Synergy version 56.16 and here is changes:
 
 - Changes over all maps (or almost all):
 	+ Notifications of mission failure (will be removed when next version releases)
+	+ Half Life 2 Update support
 	+ Added Elite Jeep spawn on some hl2 and ep2 maps (also fix for Jeep Elite included in `scripts` folder)
 	+ Increased vehicle spawns for more players
 	+ Damage players on vehicle spawn places who blocks spawning
@@ -33,7 +34,8 @@
 + ##### Half Life 2
 	+ d1_trainstation_01
 		+ fixed players teleportation into the train after Gman scene
-		+ Changed Barney room teleport trigger to disable after TeleportPlayersNotTouching so it isn't a jarring teleport.
+		+ Changed Barney room teleport trigger to disable after TeleportPlayersNotTouching so it isn't a jarring teleport
+		+ fixed citizens queue stops due to rushing
 	+ d1_trainstation_03
 		+ enabled never used track "Miscount Detected"
 		+ changed player percentage on trigger_coop
@@ -148,7 +150,8 @@
 		+ fix spectators GUI breaking when spectating on falling player in the teleport chamber
 + ##### Half Life 2 Episode One
 	+ ep1_citadel_00
-		+ fix Alyx stucking and falling down through ground
+		+ fixed Alyx stucking and falling down through ground
+		+ fixed vanride can be ended before Alyx exits van
 		+ antirush blocks
 	+ ep1_citadel_01
 		+ don't stop Alyx scenarios on players fall, close door on rollermine area
@@ -195,7 +198,7 @@
 		+ give rpg for all players once one take it
 	+ ep1_c17_05
 		+ added checkpoint
-		+ changelevel after 800 seconds if there is no progression (fix still needed, citizens stops to follow player. maybe we need automated citizens running hitted by !player)
+		+ made citizens proceed automatically (supports vintage mode) - BUG on Synergy 56.16: citizens stops following any player when someone connects
 		+ faster combine spawns
 	+ ep1_c17_06
 		+ made killing Strider a bit harder
@@ -211,6 +214,7 @@
 		+ more fun - more antlion guards
 	+ ep2_outland_03
 		+ Vort enables generator quicker
+		+ edited entry gates mass
 	+ ep2_outland_04
 		+ prevent elevator blocking with props
 		+ fix vort position on elevator
@@ -230,8 +234,13 @@
 		+ removed door that can make transition to another map (looks bad, maybe I'll remade it later)
 	+ ep2_outland_10
 		+ teleport jalopy, players and Alyx on trap, also locks jalopy before trap is not opened
+		+ failsafe Alyx moving after turret disabled to start next sequence
 		+ more antirush events to prevent breaking game
 	+ ep2_outland_10a
 		+ moved car spawning points, remove additional
+		+ added trigger_coop at the end to teleport Alyx
+	+ ep2_outland_12
+		+ added trigger_coop at the end to teleport Alyx
 	+ ep2_outland_12a
 		+ fixed players teleportations to elevators
+		+ added GMan as Half Life Alyx reference
