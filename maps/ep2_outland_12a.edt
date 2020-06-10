@@ -65,17 +65,6 @@ ep2_outland_12a
 
 //--Extra--
 
-//failsafe Alyx spawn
-		create {classname "logic_auto"
-			values
-			{
-				spawnflags "1"
-				OnMapSpawn "alyx,AddOutput,OnUser1 startitems_template:kill::0:-1,0,-1"
-				OnMapSpawn "alyx,FireUser1,,0.5,1"
-				OnMapSpawn "startitems_template,ForceSpawn,,1,1"
-			}
-		}
-
 //modi - add gman, Half Life Alyx reference
 		create {classname "npc_gman"
 			origin	"2573 -2518 -1176"
