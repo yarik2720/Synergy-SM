@@ -83,6 +83,27 @@ d3_c17_06b
 			values {ItemClass "item_dynamic_resupply"
 				ItemCount "5"} }
 
+//modi: remade trigger_look to trigger_coop
+		delete {classname "trigger_look" origin "3456 1338 88"}
+		create {
+			classname "trigger_coop"
+			origin "3456 1338 88"
+			values {
+				edt_getbspmodelfor_classname "trigger_look"
+				edt_getbspmodelfor_origin "3456 1338 88"
+				spawnflags "1"
+				targetname "syn_plank_looktarget"
+				CountType "1"
+				UseHUD "1"
+				PlayerValue "50"
+				wait "1.5"
+				OnPlayersIn "plank_1_rl_1,Trigger,,0,-1"
+				OnPlayersIn "bld_a_frontdoor_1,Unlock,,20,-1"
+				OnPlayersIn "bld_a_frontdoor_1,Open,,20.5,-1"
+				OnPlayersIn "!self,Disable,,1,1"
+			} 
+		}
+
 //Trav|Edt - open door if timeout fails (common stuck area with multiple peeps)
 		create {classname "trigger_once"
 			origin "3447 1277 17"
