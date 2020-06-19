@@ -219,6 +219,13 @@ d1_town_05
 				schedule "6"
 				goalent "!player"} }
 
+//modi: fix music overlapping
+		create {
+			classname "logic_auto"
+			values {
+				OnMapSpawn "warehouse_deadcombine_counter,AddOutput,OnHitMax start_music:FadeOut:7:2:-1,0,-1"
+			}
+		}
 //prevent rushing into warehouse
 		create {classname "trigger_push" origin "-2016 8880 950"
 			values {
