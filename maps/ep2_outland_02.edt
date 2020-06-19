@@ -348,8 +348,8 @@ ep2_outland_02
 			values
 			{
 				targetname "syn_vint_moreplayers_guards"
-				LowerPlayer "2"
-				UpperPlayer "4"
+				LowerPlayer "8"
+				UpperPlayer "16"
 				OnLow "syn_antlionguard,Unburrow,,0,-1"
 				OnMed "syn_antlionguard,Unburrow,,0,-1"
 				OnMed "syn_antlionguard2,Unburrow,,1,-1"
