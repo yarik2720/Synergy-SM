@@ -347,7 +347,7 @@ ep2_outland_02
 		create {classname "logic_difficulty"
 			values
 			{
-				targetname "syn_moreplayers_guards"
+				targetname "syn_vint_moreplayers_guards"
 				LowerPlayer "2"
 				UpperPlayer "4"
 				OnLow "syn_antlionguard,Unburrow,,0,-1"
@@ -360,7 +360,7 @@ ep2_outland_02
 		}
 		create {classname "logic_relay"
 			values {targetname "logicRelay_finalWave"
-				OnTrigger "syn_moreplayers_guards,CheckSkill,,70,-1"} }
+				OnTrigger "syn_vint_moreplayers_guards,CheckSkill,,70,-1"} }
 
 //Trav|Edt RETURN, antirush
 		create {classname "trigger_once" origin "-4021 -9549 304"
