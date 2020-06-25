@@ -51,17 +51,6 @@ ep1_citadel_02b
 		delete {classname "trigger_multiple" origin "5545.25 4642.47 -6606"}
 		edit {targetname "airlock_exit_counter_1" values {max "1"} }//2
 
-//Trav|Edt - teleport players behind alyx scene
-		create {classname "logic_auto"
-			values {spawnflags "1"
-				OnMapSpawn ",,,0,-1"} }
-
-		create {classname "point_teleport"
-			origin ""
-			values {targetname "syn_teleport_alyx"
-				angles "0 180 0"
-				target "alyx"} }
-
 //Trav|Edt - allow everyone to see alyxface
 		edit {targetname "blackout_viewcontroller" values {spawnflags "156"} }
 

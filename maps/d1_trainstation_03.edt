@@ -80,7 +80,7 @@ d1_trainstation_03
 				OnPlayersIn "syn_wait01_trig2,Trigger,,0.5,1"
 				OnPlayersIn "!self,TeleportPlayersNotTouching,,0,1"
 				OnPlayersIn "!self,,,0,1"
-				OnPlayersIn "!self,Disable,,0,1"TeleportPlayersNotTouching
+				OnPlayersIn "!self,Disable,,0,1"
 			}
 		}
 
