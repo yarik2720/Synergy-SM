@@ -187,7 +187,7 @@ ep2_outland_10
 				OnTrigger "npc_turret_floor,AddOutput,OnTipped !self:SelfDestruct::0:-1,1,-1"
 				OnTrigger "npc_turret_floor,AddOutput,OnTipped syn_movealyx:MoveToPosition::0:1,0,-1"} }
 		
-		create {classname "scripted_sequence" origin "590 -2120 161"
+		create {classname "scripted_sequence" origin "720 -2150 161"
 			values
 			{
 				targetname "syn_movealyx"
@@ -199,7 +199,7 @@ ep2_outland_10
 				OnBeginSequence "!self,kill,,0.2,1"
 			}
 		}
-		create {classname "trigger_once" origin "584 -2120 161"
+		create {classname "trigger_once" origin "720 -2150 161"
 			values
 			{
 				edt_mins "-20 -20 -20"
