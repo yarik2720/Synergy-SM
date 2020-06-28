@@ -68,11 +68,14 @@ d1_canals_07
 		create {classname "info_player_coop" origin "7740.00 7800.85 -400.67"
 			values {angles "0 40 0" targetname "syn_spawn_player_1"} }
 
-		create {classname "info_player_coop" origin "10776 1512 -256"
+		create {classname "info_player_coop" origin "10776 1512 -250"
 			values {angles "0 0 0" targetname "syn_spawn_player_2" StartDisabled "1"} }
 
-		create {classname "info_player_coop" origin "7395.16 1834 -256"
+		create {classname "info_player_coop" origin "7395.16 1834 -370"
 			values {angles "0 0 0" targetname "syn_spawn_player_3" StartDisabled "1"} }
+
+		create {classname "info_player_coop" origin "-526 -6331 -920"
+			values {angles "0 -90 0" targetname "syn_spawn_player_4" StartDisabled "1"} }
 
 		create {classname "info_global_settings"
 			values {IsVehicleMap "1" targetname "syn_global_settings"} }
@@ -174,6 +177,17 @@ d1_canals_07
 
 		create {classname "info_teleport_destination" origin "7740.00 7800.85 -400.67" values {targetname "syn_spawn_teleport" angles "0 40 0"} }
 
+		create {classname "info_vehicle_spawn" origin "-765 -6344 -900"
+			values {targetname	"syn_spawn_vehicle_3"
+				angles "0 180 0"
+				StartEnabled "0"
+				RespawnVehicle "1"
+				Ownership "1"
+				VehicleType "2"
+				VehicleSize "164"
+				model "models/airboat.mdl"
+				VehicleScript "scripts/vehicles/airboat.txt"} }
+
 //--Checkpoints--
 		create {classname "trigger_once"
 			origin "10752 928 -368"
@@ -193,6 +207,20 @@ d1_canals_07
 				spawnflags "1"
 				OnTrigger "syn_spawn_manager,SetCheckpoint,syn_spawn_player_3,0,-1"
 				OnTrigger "syn_spawn_manager,MovePlayers,,0,-1"} }
+		
+		create 
+		{
+			classname "trigger_once" 
+			origin "-3968 -8256 -832"
+			values
+			{
+				spawnflags "1"
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "-3968 -8256 -832"
+				OnTrigger "syn_spawn_vehicle_3,Enable,,0,1"
+				OnTrigger "syn_spawn_manager,SetCheckpoint,syn_spawn_player_4,0,-1"
+			}
+		}
 
 //--Exploits--
 //Failsafe -- prevent I-beam exploit
