@@ -200,7 +200,7 @@ ep1_citadel_02b
 				UseHUD "1"
 				PlayerValue "50"
 				wait "1.5"
-				OnPlayersIn "syn_teleport_alyx_end,Teleport,,0,1"
+				OnPlayersIn "syn_teleport_alyx_end,Teleport,,0.1,1"
 				OnPlayersIn "alyx_follow_player,Deactivate,,0,-1"
 				OnPlayersIn "!self,Disable,,1,1"} }
 

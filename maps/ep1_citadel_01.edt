@@ -36,7 +36,7 @@ ep1_citadel_01
 		create {classname "info_player_coop" origin "-6306.06 6654.31 2648.03"
 			values {angles "0 270 0" targetname "syn_spawn_player_1"} }
 //Stalkers Area
-		create {classname "info_player_coop" origin "-4800 7750 2550"
+		create {classname "info_player_coop" origin "-4830 7780 2550"
 			values {angles "0 270 0" targetname "syn_spawn_player_1_1" StartDisabled "1"} }
 //Advisor Area
 		create {classname "info_player_coop" origin "-5016 1656 2464"
@@ -63,8 +63,8 @@ ep1_citadel_01
 				//StartDisabled "1"
 				OnTrigger "syn_spawn_manager,MovePlayers,,0.1,-1"
 				OnTrigger "syn_spawn_manager,SetCheckPoint,syn_spawn_player_2,0,-1"
-				OnTrigger "follow_alyx,Activate,,0,-1"
-				OnTrigger "syn_teleport_alyx_cit01,Teleport,,0,-1"} }
+				OnTrigger "follow_alyx,Deactivate,,0,-1"
+				OnTrigger "syn_teleport_alyx_cit01,Teleport,,0.1,-1"} }
 
 		// create {classname "logic_auto"
 			// values {spawnflags "1"
@@ -103,14 +103,6 @@ ep1_citadel_01
 
 //modi series of teleport for alyx fixing
 		create { classname "trigger_once" origin "-5200 6416 2720"
-			values {
-				"model" "*79"
-				"spawnflags" "1"
-				"OnTrigger" "syn_spawn_manager,MovePlayers,,0.1,-1"
-				"OnTrigger" "follow_alyx,Activate,,0,-1"
-			}
-		}
-		create { classname "trigger_once" origin "-4960 6724 2580"
 			values {
 				"model" "*79"
 				"spawnflags" "1"
@@ -159,21 +151,15 @@ ep1_citadel_01
 				targetname "modi_antideath_clip"} }
 		
 		create {classname "point_teleport"
-			origin "-5223 1460 2620"
+			origin "-5126 1460 2620"
 			values {
 				targetname "syn_teleport_alyx_cit01"
 				angles "0 180 0"
 				target "alyx"
 			} 
 		}
-		create { classname "trigger_once" origin "-5184 2880 2640"
-			values {
-				"model" "*202"
-				"spawnflags" "1"
-				"OnTrigger" "follow_alyx,Activate,,0,-1"
-			}
-		}
-		//modi: don't stop alyx scenarios on player fall
+
+//modi: don't stop Alyx scenarios on player fall
 		delete {classname "trigger_once" origin "-3584 6384 2384"}
 		delete {classname "trigger_once" origin "-4640 5018 2480"}
 
