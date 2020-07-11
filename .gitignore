@@ -7,6 +7,7 @@
 *.inf
 *.inc
 *.html
+*.lnk
 *.log
 *.rad
 *.tga
@@ -34,10 +35,9 @@ save/
 save1/
 save2/
 SDK/
+screenshots/
 scripts/
 sound/
 workshop/
 user_custom
 user_custom/
-
-*.lnk
