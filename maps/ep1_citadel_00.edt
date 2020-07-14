@@ -254,6 +254,35 @@ ep1_citadel_00
 			"OnTrigger" "shadowcontrol,SetAngles,80 10 0,0,-1"
 				} }
 
+//modi: don't kill falling Van (bug Synergy 56.16: players can be teleported into van if player joins server) looks weird, but better, than player inside vehicle being killed
+		delete {targetname "SS_Van_Crash"}
+		create 
+		{
+			classname "scripted_sequence"
+			origin "-6678 7200 192"
+			values
+			{
+				"m_iszPostIdle" "GhostAnim_vanCrash_PI"
+				"m_iszPlay" "ghostAnim_vanCrash"
+				"spawnflags" "992"
+				"m_iszEntity" "shotput"
+				"m_fMoveTo" "0"
+				"m_flRepeat" "0"
+				"m_flRadius" "0"
+				"targetname" "SS_Van_Crash"
+				"maxdxlevel" "0"
+				"mindxlevel" "0"
+				"angles" "0 270 0"
+				"OnBeginSequence" "mic_vansounds,Disable,,4.5,-1"
+				//"OnBeginSequence" "Van,Kill,,4.6,-1"
+				"OnBeginSequence" "maker_Vanspawn,ForceSpawn,,4.7,-1"
+				"OnBeginSequence" "ar2exp_Vanspawn,Explode,,4.5,-1"
+				"OnBeginSequence" "sound_vancrash,PlaySound,,4.5,-1"
+				"OnBeginSequence" "relay_pillar_fall_01,Trigger,,2,-1"
+				"OnBeginSequence" "pclip_van_end,Kill,,4.6,-1"
+			}
+		}
+
 //Trav|Edt - kill players who re-enter van (cant teleport) [no longer needed with code fix]
 //		create {classname "trigger_hurt" origin "-6781.92 7170 196"
 //			values {model "*80"
