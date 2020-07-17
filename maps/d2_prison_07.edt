@@ -299,6 +299,7 @@ d2_prison_07
 				OnTrigger "syn_new_weapons,EquipAllPlayers,,0,-1"
 				OnTrigger "syn_new_weapons,Enable,,0,-1"
 				OnTrigger "syn_spawn_manager,SetCheckpoint,syn_spawn_player_3,0,-1"
+				OnTrigger "syn_vint_spawnkill_preventer,Enable,,0,-1"
 				OnTrigger "trav_turrets_teleport,Enable,,0,-1"
 				OnTrigger "trav_turrets_teleport,Disable,,2,-1"
 				OnTrigger "trav_turret_wall*,Enable,,0,-1"} }
@@ -596,6 +597,35 @@ d2_prison_07
 		create {classname "info_node" origin "3688 -4272 -412"}
 		create {classname "info_node" origin "3688 -4328 -412"}
 		create {classname "info_node" origin "3688 -4392 -412"}
+		
+//modi: prevent spawnkill
+		create {
+			classname "trigger_push"
+			origin "4448 -3790 -350"
+			values {
+				edt_getbspmodelfor_classname "trigger_multiple"
+				edt_getbspmodelfor_origin "4448 -3760 -488.5"
+				targetname "syn_vint_spawnkill_preventer"
+				spawnflags "1"
+				StartDisabled "1"
+				pushdir "0 270 0"
+				speed "450"
+			}
+		}
+
+		create {
+			classname "trigger_push"
+			origin "3872 -3790 -350"
+			values {
+				edt_getbspmodelfor_classname "trigger_multiple"
+				edt_getbspmodelfor_origin "3872 -3760 -488.5"
+				targetname "syn_vint_spawnkill_preventer"
+				spawnflags "1"
+				StartDisabled "1"
+				pushdir "0 270 0"
+				speed "450"
+			}
+		}
 
 //Trav|Edt make sure alyx trainsisons
 		create {classname "point_teleport"
