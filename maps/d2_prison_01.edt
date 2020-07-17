@@ -54,11 +54,15 @@ d2_prison_01
 
 
 //--Spawns--
+		delete {classname "info_player_start"}
 		create {classname "info_spawn_manager"
 			values {targetname "syn_spawn_manager"} }
 
 		create {classname "info_player_coop" origin "4159.33 -5041.15 1036"
 			values {angles "0 90 0" targetname "syn_spawn_player_1"} }
+		
+		create {classname "info_player_coop" origin "1225 -1490 1620"
+			values {angles "0 180 0" targetname "syn_spawn_player_end"} }
 
 		create {classname "info_global_settings"
 			values {IsVehicleMap "0" targetname "syn_global_settings"} }
@@ -139,7 +143,28 @@ d2_prison_01
 //				fxtime "0.25"} }
 
 //end collaspe
-		delete {classname "trigger_once" origin "1064 -1536 1664"}
+//Balimbanana - Do not delete trigger for mp_antirush_disable 1
+		//delete {classname "trigger_once" origin "1064 -1536 1664"}
+		edit {classname "trigger_once" origin "1064 -1536 1664" values {targetname "syn_defaulttrig"} }
+		create {classname "logic_relay"
+			values
+			{
+				targetname "syn_antirush_enabled"
+				OnTrigger "syn_defaulttrig,kill,,0,-1"
+				OnTrigger "syn_defaultend,kill,,0,-1"
+			}
+		}
+		
+		create {classname "logic_auto"
+			values
+			{
+				spawnflags "1"
+				OnMapSpawn "syn_antirush_enabled,Trigger,,0.1,-1"
+				OnMapSpawn "syn_defaulttrig,AddOutput,OnTrigger syn_defaultend:TeleportPlayersNotTouching::1.5:-1,0,-1"
+				OnMapSpawn "syn_defaulttrig,AddOutput,OnTrigger syn_defaultend:kill::1.6:-1,0,-1"
+				OnMapSpawn "syn_defaulttrig,AddOutput,OnTrigger syn_spawn_manager:SetCheckPoint:syn_spawn_player_end:0:1,0,-1"
+			}
+		}
 
 		create {classname "trigger_coop"
 			origin "920 -1452 1664"
@@ -152,13 +177,24 @@ d2_prison_01
 				CountType "1"
 				UseHUD "1"
 				PlayerValue "50"
-				target "syn_antirush2_target"
+				target "syn_teleporttarget_2"
 				wait "1.5"
 				OnPlayersIn "!self,TeleportPlayersNotTouching,,0,1"
 				OnPlayersIn "relay_start_rockfall,Trigger,,0,1"
+				OnPlayersIn "syn_spawn_manager,SetCheckPoint,syn_spawn_player_end,0,1"
 				OnPlayersIn "!self,Disable,,1,1"} }
+		create {classname "trigger_coop"
+			origin "920 -1452 1664"
+			values {
+				edt_mins "-400 -150 -100"
+				edt_maxs "410 240 100"
+				spawnflags "1"
+				targetname "syn_defaultend"
+				target "syn_teleporttarget_2"
+			}
+		}
 
-		create {classname "info_target" origin "1024 -1496 1608" values {targetname "syn_antirush2_target" angles "0 180 0"} }
+		create {classname "info_target" origin "1024 -1496 1608" values {targetname "syn_teleporttarget_2" angles "0 180 0"} }
 
 		create {classname "prop_dynamic" origin "592 -1602 1601"
 			values {model "models/synergy/tools/syn_transition.mdl"
