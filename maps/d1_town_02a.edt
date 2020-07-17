@@ -80,9 +80,6 @@ d1_town_02a
 				OnSpawn "graveyard_fz_5_maker,AddOutput,MaxNPCCount 5,5,1"
 				OnSpawn "graveyard_crab_maker,AddOutput,MaxNPCCount 10,5,1"//modi - adding more headcrabs
 				OnSpawn "graveyard_crab_maker,AddOutput,MaxLiveChildren 4,5,1"
-				OnSpawn "graveyard_pzombie_maker,AddOutput,MaxNPCCount 3,5,1"//modi - adding more poison zombies
-				OnSpawn "graveyard_pzombie_maker,AddOutput,MaxLiveChildren 4,5,1"
-				OnSpawn "graveyard_pzombie_maker,AddOutput,spawnflags 176,5,1"
 				} }
 
 		//edit {targetname "graveyard_crypt_zombie_maker" values {spawnflags "176" MaxLiveChildren "4" StartDisabled "0"} }//vint
