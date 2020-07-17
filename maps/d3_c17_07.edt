@@ -304,6 +304,33 @@ d3_c17_07
 				speed "3950"
 				pushdir "90 180 0"} }
 
+//modi: prevent spawnkill
+		create {
+			classname "trigger_push"
+			origin "5779 495 335"
+			values {
+				edt_getbspmodelfor_classname "trigger_multiple"
+				edt_getbspmodelfor_origin "5779 495 75.5"
+				targetname "syn_vint_spawnkill_preventer"
+				spawnflags "1"
+				pushdir "0 60 0"
+				speed "450"
+			}
+		}
+
+		create {
+			classname "trigger_push"
+			origin "5602 2704 335"
+			values {
+				edt_getbspmodelfor_classname "trigger_multiple"
+				edt_getbspmodelfor_origin "5602 2704 75.5"
+				targetname "syn_vint_spawnkill_preventer"
+				spawnflags "1"
+				pushdir "0 -65 0"
+				speed "450"
+			}
+		}
+
 //Trav|Edt - make balcony cop keep comming //nvm(too lazy to remove !self kill RAWR)
 		delete {targetname "balcony_cop1_maker"}
 
