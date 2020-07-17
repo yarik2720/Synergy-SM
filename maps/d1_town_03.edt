@@ -209,10 +209,10 @@ d1_town_03
 				OnPlayersIn "push_preventor,Kill,,0,1"
 				OnPlayersIn "!self,Disable,,1,-1"} }
 
-		create {classname "prop_dynamic" origin "-3848 0 -3648"
+		create {classname "prop_dynamic" origin "-3803 -110 -3330" //-3848 0 -3648
 			values {model "models/synergy/tools/syn_transition.mdl"
 				targetname "syn_antirush_wall"
-				angles "0 270 0"
+				angles "0 180 0"
 				//solid "6"
 				DisableShadows "1"} }
 
@@ -224,14 +224,13 @@ d1_town_03
 				style "12"} }
 
 		create {classname "trigger_push"
-			origin "-3736 24 -3348"
+			origin "-3819 -174 -3299"
 			values {
-				//model "*22"
 				edt_getbspmodelfor_classname "trigger_once"
-				edt_getbspmodelfor_origin "-1664 -1760 -3620"
+				edt_getbspmodelfor_origin "-3144 -1064 -3532"
 				spawnflags "1"
 				targetname "syn_antirush_trav_town03_end_push"
-				pushdir "0 270 0"
+				pushdir "0 180 0"
 				speed "450"} }
 
 		create {classname "game_text"
