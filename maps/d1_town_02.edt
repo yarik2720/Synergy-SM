@@ -422,6 +422,26 @@ d1_town_02
 				targetname "syn_vint_trigger_jump"
 				pushdir "0 0 0"
 				speed "850"} }
+				
+		create {classname "trigger_push"
+			origin "-3637 -549 -2900"
+			values {angles "90 0 0"
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "-2344 759.07 -3204"
+				spawnflags "1"
+				targetname "syn_vint_trigger_jump"
+				pushdir "0 90 0"
+				speed "850"} }
+				
+		create {classname "trigger_push"
+			origin "-3867 -549 -2900"
+			values {angles "90 0 0"
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "-2344 759.07 -3204"
+				spawnflags "1"
+				targetname "syn_vint_trigger_jump"
+				pushdir "0 90 0"
+				speed "850"} }
 
 //Trav|Edt - Teleport players to elevator
 		delete {targetname "freight_lift_button_2"}
