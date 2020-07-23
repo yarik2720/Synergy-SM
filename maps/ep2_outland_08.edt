@@ -121,6 +121,33 @@ ep2_outland_08
 				OnTrigger "syn_spawn_vehicle_1,Enable,,0,-1"
 			}
 		}
+				
+//Game Over text
+		delete {targetname "alyx_check_fail"}
+		create {classname "logic_auto"
+			values {
+				spawnflags "1"
+				OnMapSpawn "alyx_check_fail_relay,AddOutput,OnTrigger syn_gameover_message:Display::0:-1,1,-1"
+			}
+		}
+		create {
+			classname "game_text"
+			values {
+				"y" "-1"
+				"x" "-1"
+				"targetname" "syn_gameover_message"
+				"spawnflags" "1"
+				"message" "EP2_GameOver_AlyxLeft"
+				"holdtime" "5"
+				"fxtime" "0.25"
+				"fadeout" "0.5"
+				"fadein" "1.5"
+				"effect" "0"
+				"color2" "240 110 0"
+				"color" "100 100 100"
+				"channel" "1"
+			}
+		}
 
 //--Extra--
 
