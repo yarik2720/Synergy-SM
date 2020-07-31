@@ -62,7 +62,7 @@ d2_prison_01
 			values {angles "0 90 0" targetname "syn_spawn_player_1"} }
 		
 		create {classname "info_player_coop" origin "1225 -1490 1620"
-			values {angles "0 180 0" targetname "syn_spawn_player_end"} }
+			values {angles "0 180 0" targetname "syn_spawn_player_end" StartDisabled "1"} }
 
 		create {classname "info_global_settings"
 			values {IsVehicleMap "0" targetname "syn_global_settings"} }
