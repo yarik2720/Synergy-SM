@@ -168,6 +168,52 @@ ep2_outland_01
 		
 //--Extra--
 
+//modi: getting alyx faster into communication center
+		create {
+			classname "trigger_coop" 
+			origin "-3776 1796 236"
+			values {
+				spawnflags "1"
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "-3776 1796 236"
+				targetname "syn_coop_alyx_teleport"
+				CountType "1"
+				UseHUD "1"
+				PlayerValue "50"
+				wait "1.5"
+				OnPlayersIn "syn_alyx_teleport,Teleport,,0,1"
+				OnPlayersIn "!self,Disable,,1,1"
+			}
+		}
+
+		create {
+			classname "trigger_once" 
+			origin "-3776 1796 236"
+			values {
+				spawnflags "2"
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "-3776 1796 236"
+				OnTrigger "syn_coop_alyx_teleport,Disable,,0,1"
+			}
+		}
+		create {
+			classname "point_teleport"
+			values {
+				origin "-3585 1621 176"
+				angles "0 130 0"
+				targetname "syn_alyx_teleport"
+				target "alyx"
+			} 
+		}
+
+//modi: prevent fast wire plugin
+		edit {
+			targetname "lcs_alyx_monitorsout"
+			values {
+				OnTrigger6 "relay_wire_setup,Trigger,,3,-1"
+			}
+		}
+
 //Doors: Prevent Closing
 		edit {classname "prop_door_rotating" origin "-3667 1529 200" values {spawnflags "0"} }
 
