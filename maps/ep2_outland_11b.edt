@@ -234,6 +234,10 @@ ep2_outland_11b
 				"OnTrigger" "magnusson_ragdoll_door_brush,Enable,,0,-1"
 				"OnTrigger" "magnusson_ragdoll_door,Close,,0,-1"
 				"OnTrigger" "magnusson_ragdoll_door_playerout_trigger,Kill,,0,-1"
+				
+				//modi: failsafe if something went wrong (no new magnussons, strider stuck while moving or smth)
+				"OnTrigger" "magnusson_training_lcs4,Start,,60,-1"
+				"OnTrigger" "magnusson_courtyard_exitdoor,Open,,120,-1"
 			}
 		}
 
