@@ -352,6 +352,10 @@ d2_coast_04
 		create {classname "logic_auto"
 			values {spawnflags "1"
 				OnMapSpawn "prop_ragdoll,DisableMotion,,10,-1"} }
+				
+		//swap places a bit so nomotion ragdoll not closes way
+		edit {classname "prop_ragdoll" origin "2216 3680 1093" values {origin "2524 3233 1093"} }
+		edit {classname "prop_physics" origin "2336 3456 1093" values {origin "2216 3680 1093"} }
 
 		//edit {classname "prop_ragdoll" origin "2661.9 3360.3 1150.1" values {classname "prop_physics"} }
 		//delete {classname "prop_ragdoll" origin "2661.9 3360.3 1150.1"}
