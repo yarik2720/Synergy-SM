@@ -283,6 +283,11 @@ d2_coast_07
 			values {spawnflags "1"
 				OnMapSpawn "bridge_door_2,AddOutput,opendir 1,0,-1"} }
 
+//disable antiskip if field is turned off (failsafe)
+		create {classname "logic_auto"
+			values {spawnflags "1"
+				OnMapSpawn "gunship_trigger_10,AddOutput,OnTrigger syn_antiskip_hurt:Disable::0:-1,0,-1"} }
+
 //If a NewGame starts on coast_08, Fix the return trip to this level
 		create {classname "logic_auto"
 			values {spawnflags "1"
@@ -820,6 +825,10 @@ d2_coast_07
 				OnTrigger "bridge_door_2,Close,,1,-1"
 				OnTrigger "bridge_door_2,Lock,,2,-1"
 				OnTrigger "field_trigger,Disable,,0,-1"//stop annoying sound >.>
+				OnTrigger "forcefield3_sound_far,StopSound,,0,-1" //disable field sound
+				OnTrigger "forcefield3_sound_far,Kill,,0.1,-1"
+				OnTrigger "field_wall_poles,Skin,1,0,1" //disable field beams
+				OnTrigger "gate_sprite,color,0 255 0,0,1" //show that field really opened
 				OnTrigger "syn_global_settings,AddOutput,IsVehicleMap 0,0,-1"//Disable Static Spawning
 				OnTrigger "syn_static_spawning,Enable,,0,-1"//Enable Static Spawing
 				} }
