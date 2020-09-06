@@ -171,7 +171,7 @@ d1_town_02
 		create {classname "info_player_coop" origin "-3920 -580 -3341"
 			values {angles "0 90 0" targetname "syn_spawn_player_3" StartDisabled "1"} }
 //after tram lever
-		create {classname "info_player_coop" origin "-4980 -760 -3200"
+		create {classname "info_player_coop" origin "-4750 760 -3200"
 			values {angles "0 90 0" targetname "syn_spawn_player_4" StartDisabled "1"} }
 
 		create {classname "info_global_settings"
@@ -824,7 +824,7 @@ d1_town_02
 		create 
 		{
 			classname "info_teleport_destination"
-			origin "-4980 760 -3200"
+			origin "-4750 760 -3200"
 			values 
 			{
 				targetname "syn_modi_teleport_aftertram"
