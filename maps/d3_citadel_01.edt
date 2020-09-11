@@ -78,6 +78,15 @@ d3_citadel_01
 		// do not delete the diggers
 		"delete" { "classname" "trigger_multiple" "origin" "8992 3468 -1396" }
 
+		// don't allow players enter upperpod
+		edit {
+			classname "prop_vehicle_prisoner_pod"
+			targetname "upperpod*_vehicle"
+			values {
+				"VehicleLocked" "1"
+			}
+		}
+
 		// fix gay fade
 //Trav|Edt - lol, remove compleately was "edit"
 		delete {classname "env_fade"}
