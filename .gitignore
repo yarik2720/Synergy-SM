@@ -4,6 +4,7 @@
 *.cache
 *.doc
 *.dt
+*.gz
 *.inf
 *.inc
 *.html
