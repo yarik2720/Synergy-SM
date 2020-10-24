@@ -101,7 +101,6 @@ ep1_citadel_03
 //balimbanana fix
 		edit {classname "env_sprite" values {GlowProxySize "200"} }
 		edit {classname "env_lightglow" values {GlowProxySize "48"} }
-		delete {classname "logic_achievement"}
 		edit {classname "trigger_multiple" origin "1619 11688 4272" values {targetname "syn_soundonce"} }
 		create {classname "logic_auto" origin "3080 12666.6 5613.5"
 			values {spawnflags "1"
