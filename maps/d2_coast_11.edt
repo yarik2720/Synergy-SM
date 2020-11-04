@@ -431,6 +431,7 @@ d2_coast_11
 		}
 
 		edit { classname "npc_antlion_maker" values { "spawntarget" "!rndplayer" } }
+		edit { targetname "antlion_expanse_spawner_1" values { "spawntarget" "!rndplayer" } }
 
 //Trav|Edt - Functionality check
 		create {classname "logic_relay" values {targetname "trav_functionality_d2_coast_11"} }
