@@ -122,7 +122,7 @@ d2_coast_11
 				disposition "4"} }
 
 //Trav|Edt - increase antlioncount (for difficulty) TEST
-		edit {targetname "antlion_expanse_spawner_1" values {MaxLiveChildren "8"} }//5
+		//edit {targetname "antlion_expanse_spawner_1" values {MaxLiveChildren "8"} }//5
 
 //Trav|Edt - make wooden bridge unbreakable
 		edit {classname "func_physbox" origin "4691.2 1355.48 613"
@@ -431,7 +431,7 @@ d2_coast_11
 		}
 
 		edit { classname "npc_antlion_maker" values { "spawntarget" "!rndplayer" } }
-		edit { targetname "antlion_expanse_spawner_1" values { "spawntarget" "!rndplayer" } }
+		edit { targetname "antlion_expanse_spawner_1" values { spawntarget "!rndplayer" MaxLiveChildren "8" } }
 
 //Trav|Edt - Functionality check
 		create {classname "logic_relay" values {targetname "trav_functionality_d2_coast_11"} }
