@@ -420,14 +420,14 @@ d1_canals_03
 				edt_mins "-80 -80 -10"
 				edt_maxs "80 80 10"
 				spawnflags "1"
-				OnStartTouch "!activator,IgnoreFallDamageWithoutReset,,0,-1"} }//Disables falling damage for 10 seconds
+				OnStartTouch "!activator,IgnoreFallDamageWithoutReset,5.0,0,-1"} }//Disables falling damage for 5 seconds
 		//HL2U
 		create {classname "trigger_multiple" origin "-1215.81 -1583.5 -1022"
 			values {
 				edt_mins "-80 -80 -10"
 				edt_maxs "80 80 10"
 				spawnflags "1"
-				OnStartTouch "!activator,IgnoreFallDamageWithoutReset,,0,-1"} }
+				OnStartTouch "!activator,IgnoreFallDamageWithoutReset,5.0,0,-1"} }
 
 //lazy way to make all barrels freeze :D [no longer needed with no falldamage here]
 	//	create {classname "trigger_once"
