@@ -147,7 +147,7 @@ d1_eli_01
 				PlayerValue "50"
 				target "spottarget_M"
 				OnPlayersIn "logic_startScene,Trigger,,0,1"
-				OnPlayersIn "!self,TeleportPlayersNotTouching,,0,1"-72 2728 -1276 0 180 0
+				OnPlayersIn "!self,TeleportPlayersNotTouching,,0,1"
 				OnPlayersIn "!self,Disable,,1,1"
 			}
 		}
