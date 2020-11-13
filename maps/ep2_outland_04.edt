@@ -58,7 +58,7 @@ ep2_outland_04
 			values {angles "0 90 0" targetname "syn_spawn_player_3" StartDisabled "1"} }
 
 //bye guardian
-		create {classname "info_player_coop" origin "5319 -4283 -2236"
+		create {classname "info_player_coop" origin "5319 -4283 -2290"
 			values {angles "0 90 0" targetname "syn_spawn_player_4" StartDisabled "1"} }
 
 //Shaft Lift
