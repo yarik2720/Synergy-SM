@@ -108,9 +108,28 @@ ep1_citadel_00
 				OnTrigger "syn_hudtimer,Start,45,0,1"
 				OnTrigger "viewcontrol_black,Enable,,0.1,1"//point_viewcontrol_01
 				//OnEndTouch "!activator,SetHealth,47,5,-1"
+				OnTrigger "syntpvehicletospark,Teleport,,1,1"
 				OnTrigger "vehicle_blackout,EnterVehicleImmediate,,1,-1"//force all players into vehicle to avoid mysterious stuff
 			}
 		}
+		create {classname "point_teleport" origin "-9021.53 5754.55 -142.898"
+			values
+			{
+				targetname "syntpvehicle"
+				target "blackout"
+				angles "0 0 0"
+			}
+		}
+		create {classname "point_teleport" origin "7013 -6080 1220"
+			values
+			{
+				targetname "syntpvehicletospark"
+				target "blackout"
+				angles "0 0 0"
+			}
+		}
+		//fix render bug
+		edit {targetname "sprite_end_final_explosion_1" values {origin "11146 -5312 -9317.9"} }
 		create {classname "trigger_teleport" origin "2084 -7644 -1998"
 			values
 			{
@@ -217,6 +236,7 @@ ep1_citadel_00
 		delete {targetname "counter_vanride_end01_resume"}
 		create {classname "logic_auto"
 			values {spawnflags "1"
+				OnMapSpawn "relay_citadel_exterior,AddOutput,OnTrigger syntpvehicle:Teleport::3:-1,0,-1"
 				OnMapSpawn "ss_alyx_ExitVan,AddOutput,OnEndSequence modi_counter_vanride_end01_resume:Add:1:0:1,0,-1"} }
 				
 		create {
