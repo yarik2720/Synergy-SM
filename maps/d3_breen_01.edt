@@ -112,11 +112,12 @@ d3_breen_01
 				//model "*100"
 				edt_getbspmodelfor_classname "trigger_weapon_strip"
 				edt_getbspmodelfor_origin "-2459 -1408 -40"
+				KillWeapons "1"
 				spawnflags "1"} }
 
 //Trav|Edt - make sure slow loaders dont keep gg
 		create {classname "trigger_weapon_strip" origin "-2008 656 648"
-			values {edt_getbspmodelfor_classname "trigger_teleport" edt_getbspmodelfor_origin "-2008 656 648" spawnflags "1"} }//model "*91"
+			values {edt_getbspmodelfor_classname "trigger_teleport" edt_getbspmodelfor_origin "-2008 656 648" spawnflags "1" KillWeapons "1"} }//model "*91"
 
 //delete this, testing only
 		//edit {targetname "trigger_sceneStart" values {spawnflags "0"} }
@@ -450,6 +451,12 @@ d3_breen_01
 				"OnTrigger" "syn_get_physcannon,EquipAllPlayers,,0.1,-1"
 			}
 		}
+		
+//Balim - fix logic_measure_movement issues by making targets send to clients
+		edit {targetname "target_measure_player" values {spawnflags "1"} }
+		edit {targetname "target_follow_camera" values {spawnflags "1"} }
+		edit {targetname "target_measure_player_2" values {spawnflags "1"} }
+		edit {targetname "target_follow_camera_2" values {spawnflags "1"} }
 
 //Trav|Edt - Functionality check
 		create {classname "logic_relay" values {targetname "trav_functionality_d3_breen_01"} }
