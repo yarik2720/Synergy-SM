@@ -353,27 +353,15 @@ d2_coast_04
 			values {spawnflags "1"
 				OnMapSpawn "prop_ragdoll,DisableMotion,,10,-1"} }
 				
-		//swap places a bit so nomotion ragdoll not closes way
-		edit {classname "prop_ragdoll" origin "2216 3680 1093" values {origin "2524 3233 1093"} }
-		edit {classname "prop_physics" origin "2336 3456 1093" values {origin "2216 3680 1093"} }
-
-		//edit {classname "prop_ragdoll" origin "2661.9 3360.3 1150.1" values {classname "prop_physics"} }
-		//delete {classname "prop_ragdoll" origin "2661.9 3360.3 1150.1"}
-		//delete {classname "prop_ragdoll" origin "2793 3331 1093"}
-		//delete {classname "prop_ragdoll" origin "2593 3461 1161"}
-		//delete {classname "prop_ragdoll" origin "2596 3530 1241"}
-		//delete {classname "prop_ragdoll" origin "2584 3639 1091"}
-		//delete {classname "prop_ragdoll" origin "2741 3868 1083"}
-		//delete {classname "prop_ragdoll" origin "2679 4002 1072"}
-
-		//create {classname "prop_physics" origin "2661 3360 1150"
-		//	values {angles "-51.3889 115.695 -177.607"
-		//		model "models/props_vehicles/car001b_phy.mdl"
-		//		skin "3"
-		//		fademindist "4000"
-		//		fademaxdist "4500"} }
-
-
+		//replace prop_ragdoll with physics cars to prevent network lag
+		edit {classname "prop_ragdoll" origin "2216 3680 1093" values {classname "prop_physics" model "models/props_vehicles/car005a_physics.mdl"} }
+		edit {classname "prop_ragdoll" origin "2792 3328 1093" values {classname "prop_physics" model "models/props_vehicles/car002a_physics.mdl"} }
+		edit {classname "prop_ragdoll" origin "2592 3536 1245" values {classname "prop_physics" model "models/props_vehicles/car002b_physics.mdl"} }
+		edit {classname "prop_ragdoll" origin "2582.85 3640.5 1093" values {classname "prop_physics" model "models/props_vehicles/car003a_physics.mdl"} }
+		edit {classname "prop_ragdoll" origin "2593.27 3459.56 1158.2" values {classname "prop_physics" model "models/props_vehicles/car003b_physics.mdl"} }
+		edit {classname "prop_ragdoll" origin "2651.99 3367.15 1134.72" values {classname "prop_physics" model "models/props_vehicles/car004a_physics.mdl"} }
+		edit {classname "prop_ragdoll" origin "2672 4000 1077" values {classname "prop_physics" model "models/props_vehicles/car004b_physics.mdl"} }
+		edit {classname "prop_ragdoll" origin "2740 3870.13 1080" values {classname "prop_physics" model "models/props_vehicles/car005a_physics.mdl"} }
 
 //Trav|Edt - Doors: Open Only
 	//	edit {classname "prop_door_rotating" values {returndelay "-1"} }
