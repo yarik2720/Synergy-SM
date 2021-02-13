@@ -202,7 +202,7 @@ d3_c17_10a
 
 //modi tp barney
 		create {classname "point_teleport"
-			origin "-2890 6445 526"
+			origin "-2632 6476 526"
 			values {targetname "syn_teleport_barney01"
 				angles "0 180 0"
 				target "barney"} }
