@@ -24,6 +24,8 @@ d2_prison_08
 				speed "750"
 				pushdir "0 0 0"} }
 
+		edit {classname "trigger_changelevel" values {edt_map "d2_prison_07" edt_landmark "landmark_d2_prison_07-08" spawnflags "6" startdisabled "1"} }
+
 //--Starting Items--
 		create {classname "info_player_equip"
 			values {
