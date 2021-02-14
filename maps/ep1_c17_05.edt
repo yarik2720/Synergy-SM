@@ -206,41 +206,47 @@ ep1_c17_05
 			origin "9400 9720 -734"
 			values {spawnflags "100"
 				angles "0 0 0"
-				targetname "syn_vint_modi_citizens_proceed_1"
+				targetname "modi_citizens_proceed_1"
 				m_iszEntity "citizen_refugees_1"
 				m_fMoveTo "2"} }
 		create {classname "scripted_sequence"
 			origin "9436 9720 -734"
 			values {spawnflags "100"
 				angles "0 0 0"
-				targetname "syn_vint_modi_citizens_proceed_2"
+				targetname "modi_citizens_proceed_2"
 				m_iszEntity "citizen_refugees_2"
 				m_fMoveTo "2"} }
 		create {classname "scripted_sequence"
 			origin "9350 9720 -734"
 			values {spawnflags "100"
 				angles "0 0 0"
-				targetname "syn_vint_modi_citizens_proceed_3"
+				targetname "modi_citizens_proceed_3"
 				m_iszEntity "citizen_refugees_3"
 				m_fMoveTo "2"} }
 		create {classname "scripted_sequence"
 			origin "9500 9720 -734"
 			values {spawnflags "100"
 				angles "0 0 0"
-				targetname "syn_vint_modi_citizens_proceed_4"
+				targetname "modi_citizens_proceed_4"
 				m_iszEntity "citizen_refugees_4"
 				m_fMoveTo "2"} }
+		
+		//don't follow players
+		edit {targetname "citizen_refugees_1" values {spawnflags "5768708"}}
+		edit {targetname "citizen_refugees_2" values {spawnflags "9569796"}}
+		edit {targetname "citizen_refugees_3" values {spawnflags "5244420"}}
+		edit {targetname "citizen_refugees_4" values {spawnflags "5244420"}}
 				
 		create {classname "logic_auto"
 			values {spawnflags "1"
-				OnMapSpawn "lcs_al_c17_05_barneyoverhere,AddOutput,OnCompletion syn_vint_modi_citizens_proceed_1:BeginSequence::2:-1,0,-1"
-				OnMapSpawn "lcs_al_c17_05_barneyoverhere,AddOutput,OnCompletion syn_vint_modi_citizens_proceed_2:BeginSequence::2:-1,0,-1"
-				OnMapSpawn "lcs_al_c17_05_barneyoverhere,AddOutput,OnCompletion syn_vint_modi_citizens_proceed_3:BeginSequence::2:-1,0,-1"
-				OnMapSpawn "lcs_al_c17_05_barneyoverhere,AddOutput,OnCompletion syn_vint_modi_citizens_proceed_4:BeginSequence::2:-1,0,-1"
-				OnMapSpawn "trigger_pickup_citizens,AddOutput,OnTrigger syn_vint_modi_citizens_proceed_1:BeginSequence::2:-1,0,-1"
-				OnMapSpawn "trigger_pickup_citizens,AddOutput,OnTrigger syn_vint_modi_citizens_proceed_2:BeginSequence::2:-1,0,-1"
-				OnMapSpawn "trigger_pickup_citizens,AddOutput,OnTrigger syn_vint_modi_citizens_proceed_3:BeginSequence::2:-1,0,-1"
-				OnMapSpawn "trigger_pickup_citizens,AddOutput,OnTrigger syn_vint_modi_citizens_proceed_4:BeginSequence::2:-1,0,-1"} }
+				OnMapSpawn "lcs_al_c17_05_barneyoverhere,AddOutput,OnCompletion modi_citizens_proceed_1:BeginSequence::2:-1,0,-1"
+				OnMapSpawn "lcs_al_c17_05_barneyoverhere,AddOutput,OnCompletion modi_citizens_proceed_2:BeginSequence::2:-1,0,-1"
+				OnMapSpawn "lcs_al_c17_05_barneyoverhere,AddOutput,OnCompletion modi_citizens_proceed_3:BeginSequence::2:-1,0,-1"
+				OnMapSpawn "lcs_al_c17_05_barneyoverhere,AddOutput,OnCompletion modi_citizens_proceed_4:BeginSequence::2:-1,0,-1"
+				OnMapSpawn "trigger_pickup_citizens,AddOutput,OnTrigger modi_citizens_proceed_1:BeginSequence::2:-1,0,-1"
+				OnMapSpawn "trigger_pickup_citizens,AddOutput,OnTrigger modi_citizens_proceed_2:BeginSequence::2:-1,0,-1"
+				OnMapSpawn "trigger_pickup_citizens,AddOutput,OnTrigger modi_citizens_proceed_3:BeginSequence::2:-1,0,-1"
+				OnMapSpawn "trigger_pickup_citizens,AddOutput,OnTrigger modi_citizens_proceed_4:BeginSequence::2:-1,0,-1"} }
 
 //Trav|Edt - remove trigger_serverragdoll
 		delete {classname "trigger_serverragdoll"}
