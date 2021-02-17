@@ -156,11 +156,12 @@ ep1_citadel_02b
 			{
 				spawnflags "1"
 				OnMapSpawn "train_initial_start_counter,AddOutput,OnHitMax trigger_checkpoint_ent:Enable::0:1,0,-1"
+				OnMapSpawn "alyx_elevator_ss_1,AddOutput,OnEndSequence trigger_tpalyx:Enable::0:1,0,-1"
 			}
 		}
 
 		create {classname "point_teleport"
-			origin "3272 4745 2600"
+			origin "3272 4745 2510"
 			values {targetname "syn_teleport_alyx2"
 				angles "0 180 0"
 				target "alyx"} }
@@ -181,6 +182,8 @@ ep1_citadel_02b
 			values {
 				"model" "*72"
 				"spawnflags" "1"
+				"StartDisabled" "1"
+				"targetname" "trigger_tpalyx"
 				"OnTrigger" "syn_teleport_alyx2,Teleport,,0,-1"
 				"OnTrigger" "alyx_follow_player,Deactivate,,0,-1"
 				"OnTrigger" "alyx_clip_1,Enable,,0,-1"
