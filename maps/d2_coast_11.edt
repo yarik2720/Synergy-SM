@@ -241,7 +241,35 @@ d2_coast_11
 				OnTrigger "syn_restorevint,kill,,0,-1"
 			}
 		}
-		
+
+// modi: add failsafe if someone kills vort
+		create {classname "logic_auto"
+			values {
+				spawnflags "1"
+				OnMapSpawn "vortigaunt_bugbait,AddOutput,OnDeath syn_gameover_message:Display::0:-1,1,-1"
+				OnMapSpawn "vortigaunt_bugbait,AddOutput,OnDeath reload:Reload::0:-1,1,-1"
+			}
+		}
+
+		create {
+			classname "game_text"
+			values {
+				"y" "-1"
+				"x" "-1"
+				"targetname" "syn_gameover_message"
+				"spawnflags" "1"
+				"message" "HL2_GameOver_Stuck"
+				"holdtime" "5"
+				"fxtime" "0.25"
+				"fadeout" "0.5"
+				"fadein" "1.5"
+				"effect" "0"
+				"color2" "240 110 0"
+				"color" "100 100 100"
+				"channel" "1"
+			}
+		}
+
 //block
 		create {classname "trigger_push"
 			origin "4480 6816 456"
