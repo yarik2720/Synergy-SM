@@ -196,9 +196,9 @@ d3_c17_10a
 				edt_getbspmodelfor_classname "trigger_once"
 				edt_getbspmodelfor_origin "-460 6272 256"
 				spawnflags "1"
-				OnTrigger "field1_breakable_plug_bit,SetDamageFilter,,45,-1"
+				OnTrigger "field1_breakable_plug_bit,SetDamageFilter,,15,-1"
 				//OnTrigger "field1_breakable_plug_bit,EnableDamageForces,,10,-1"
-				OnTrigger "field1_plug,EnablePhyscannonPickup,,60,-1"} }//MUST DAMAGE
+				OnTrigger "field1_plug,EnablePhyscannonPickup,,30,-1"} }//MUST DAMAGE
 
 //modi tp barney
 		create {classname "point_teleport"
