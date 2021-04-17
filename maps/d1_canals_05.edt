@@ -288,7 +288,14 @@ d1_canals_05
 				OnMapSpawn "cannister_shanty_8,AddOutput,DamageRadius 64,0,-1"} }
 
 //Trav|Edt - add vclip b4 gate opens
-		create {classname "func_vehicleclip" origin "6736 1424 -408" values {edt_getbspmodelfor_targetname "trigger_arlenespawn_and_autosave" angles "0 90 0" targetname "trav_boat_gatevclip"} }//model "*89"
+		create {
+			classname "func_vehicleclip"
+			origin "6591 1424 -408" 
+			values {
+				edt_getbspmodelfor_targetname "trigger_arelenechat" 
+				targetname "trav_boat_gatevclip"
+			}
+		}
 
 		create {classname "logic_relay"
 			values {spawnflags "1"
