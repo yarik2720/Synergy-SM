@@ -195,11 +195,7 @@ ep1_c17_05
 			}
 		}
 				
-//changelevel after 800 seconds if there is no progression				
-//todo: remove changinglevel after another fix appears
-		// create {classname "logic_auto"
-			// values {spawnflags "1"
-				// OnMapSpawn "theEndCmd,Command,changelevel ep1 ep1_c17_06,800,-1"} }
+
 		// create { classname "point_servercommand" values { targetname "theEndCmd" } }
 //modi: made citizens proceed automatically - BUG on Synergy 56.16: citizens stops following any player when someone connects. Remove if you need vanilla "Follow Citizen"
 		create {classname "scripted_sequence"
@@ -246,7 +242,19 @@ ep1_c17_05
 				OnMapSpawn "trigger_pickup_citizens,AddOutput,OnTrigger modi_citizens_proceed_1:BeginSequence::2:-1,0,-1"
 				OnMapSpawn "trigger_pickup_citizens,AddOutput,OnTrigger modi_citizens_proceed_2:BeginSequence::2:-1,0,-1"
 				OnMapSpawn "trigger_pickup_citizens,AddOutput,OnTrigger modi_citizens_proceed_3:BeginSequence::2:-1,0,-1"
-				OnMapSpawn "trigger_pickup_citizens,AddOutput,OnTrigger modi_citizens_proceed_4:BeginSequence::2:-1,0,-1"} }
+				OnMapSpawn "trigger_pickup_citizens,AddOutput,OnTrigger modi_citizens_proceed_4:BeginSequence::2:-1,0,-1"
+				OnMapSpawn "lcs_al_c17_05_barneyoverhere,AddOutput,OnCompletion modi_citizens_complete:Trigger::500:-1,0,-1"
+				OnMapSpawn "compare_parkinglot_trips_TO,AddOutput,OnEqualTo modi_citizens_complete:Disable::0:-1,0,-1"} }
+		
+		//forcing map end after 500 seconds
+		create {
+			classname "logic_relay"
+			values {
+				startdisabled "0"
+				targetname "modi_citizens_complete"
+				OnTrigger "relay_first_area_complete,Trigger,,0,1"
+			}
+		}
 
 //Trav|Edt - remove trigger_serverragdoll
 		delete {classname "trigger_serverragdoll"}
