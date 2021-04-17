@@ -384,6 +384,8 @@ ep1_c17_02a
 				UseHUD "1"
 				PlayerValue "50"
 				OnPlayersIn "syn_antirush_push,Disable,,0,1"
+				OnPlayersIn "syn_teleport_alyx_end,Teleport,,0.1,1"
+				OnPlayersIn "follow_alyx,Deactivate,,0,-1"
 				OnPlayersIn "!self,Disable,,1,1"} }
 
 		create {classname "trigger_push"
@@ -393,6 +395,12 @@ ep1_c17_02a
 				targetname "syn_antirush_push"
 				pushdir "0 90 0"
 				speed "450"} }
+
+		create {classname "point_teleport"
+			origin "-2677 7950 -2800"
+			values {targetname "syn_teleport_alyx_end"
+				angles "0 90 0"
+				target "alyx"} }
 
 //End of Trav|Edt
 
