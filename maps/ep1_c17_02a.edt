@@ -397,7 +397,7 @@ ep1_c17_02a
 				speed "450"} }
 
 		create {classname "point_teleport"
-			origin "-2677 7950 -2800"
+			origin "-2744 8090 -2800"
 			values {targetname "syn_teleport_alyx_end"
 				angles "0 90 0"
 				target "alyx"} }
