@@ -4,7 +4,7 @@ d1_trainstation_06
 	{
 		// create a co-op spawn
 
-		"create" { "classname" "info_player_coop" "origin" "-10003 -3924 326" "values" { "angles" "0 45 0" } }
+		"create" { "classname" "info_player_coop" "origin" "-9952 -3576 326" "values" { "angles" "0 45 0" } }
 
 		// create spawn equipment
 		"create"
