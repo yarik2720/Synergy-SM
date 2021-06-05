@@ -156,7 +156,12 @@ ep1_c17_02a
 				speed "550"
 			} 
 		}
-
+//disabling movement of gunship ragdoll
+		create {classname "logic_auto"
+			values {spawnflags "1"
+				OnMapSpawn "relay_gunship_killed,AddOutput,OnTrigger gunship_showdown_ragdoll:DisableMotion::0:-1,0,-1"
+			}
+		}
 //modi - Alyx: "I found a shotgun". Remaking this part to prevent game stuck
 		delete {targetname "slam_slam_01_13"}
 		delete {targetname "trigger_teleport"}
