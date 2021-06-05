@@ -161,6 +161,9 @@ d1_canals_11
 				OnHigh "syn_spawn_vehicle_2_high,Enable,,0,-1"
 			}
 		}
+		
+//delete acid hurt trig at intro
+		delete {classname "trigger_hurt" origin "10038.1 9312 -991"}
 
 		create {classname "info_vehicle_spawn" origin "6363 4874 -959"//5552 4992.01 -960
 			values {targetname	"syn_spawn_vehicle_2"
