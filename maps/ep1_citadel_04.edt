@@ -46,6 +46,44 @@ ep1_citadel_04
 
 //--Extra--
 
+//teleport Alyx to airlock on many players
+		create {classname "logic_difficulty"
+			values
+			{
+				targetname "syn_vint_moreplayers_coop"
+				LowerPlayer "8"
+				UpperPlayer "16"
+				OnNotLow "syn_alyx_teleporter_coop,Enable,,0,-1"
+			}
+		}
+
+		create {
+			classname "trigger_coop"
+			origin "3816 11772 3688"
+			values {
+				edt_mins "-700 -150 -100"
+				edt_maxs "350 100 1300"
+				spawnflags "1"
+				StartDisabled "1"
+				targetname "syn_alyx_teleporter_coop"
+				CountType "1"
+				UseHUD "1"
+				PlayerValue "50"
+				OnPlayersIn "!self,Disable,,1,1"
+				OnPlayersIn "syn_teleport_alyx_airlock,Teleport,,0,-1"
+			} 
+		}
+
+		create {
+			classname "point_teleport"
+			origin "3424 12400 3648"
+			values {
+				targetname "syn_teleport_alyx_airlock"
+				angles "0 50 0"
+				target "alyx"
+				} 
+			}
+
 //Trav|Edt - fix the insane network lag on train
 		create {classname "logic_auto"
 			values {spawnflags "1"
@@ -109,6 +147,12 @@ ep1_citadel_04
 				"OnTrigger" "CP02,MovePlayers,,0.1,-1"
 			}
 		}
+// and teleport Alyx (failsafe for not running out of train)
+		create {classname "point_teleport"
+			origin "3926 10775 3508"
+			values {targetname "syn_teleport_alyx_in_train"
+				angles "0 180 0"
+				target "alyx"} }
 
 		// do not disable teleporter
 		delete { targetname "door_stalkertrain_1" }
@@ -145,6 +189,8 @@ ep1_citadel_04
 				"OnFullyClosed" "timer_alarm,Disable,,0.6,-1"
 				"OnFullyClosed" "relay_alarm1,Disable,,0.6,-1"
 				"OnFullyClosed" "csoldiers_finalassault_*,Kill,,2,-1"
+				
+				"OnFullyClosed" "syn_teleport_alyx_in_train,Teleport,,0,-1"
 			}
 		}
 
