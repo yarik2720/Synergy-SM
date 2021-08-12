@@ -4,6 +4,7 @@ ep2_outland_02
 	{
 		//sk_antlionguard_health 7100 //500
 		mp_player_death_items 0
+		sv_test_scripted_sequences "1"
 	}
 	entity
 	{
@@ -46,7 +47,9 @@ ep2_outland_02
 				OnMapSpawn "relay_gman_scene_end,AddOutput,OnTrigger zoomtodefault:Zoom::0:-1,0,-1"
 				OnMapSpawn "pathTrack_elevator_alyx_stop,AddOutput,OnPass vort_healsAlyx:CancelSequence::1:1,0,-1"
 				OnMapSpawn "pathTrack_elevator_alyx_stop,AddOutput,OnPass vort_healsAlyx:kill::1.1:1,0,-1"
-				OnMapSpawn "lcs_gman_scene,AddOutput,OnTrigger14 syn_g1:Teleport::3.3:-1,0,-1"} }
+				//OnMapSpawn "lcs_gman_scene,AddOutput,OnTrigger14 syn_g1:Teleport::3.3:-1,0,-1"
+			}
+		}
 
 // env_zooms - all players
 		create {classname "logic_auto"
@@ -539,7 +542,7 @@ ep2_outland_02
 
 		// -----------------
 		//create { classname "info_player_coop" origin "-3089 -9460 -3110" values { angles "0 -90 0" targetname "PS_TransEle" StartDisabled "1" } }
-		create {classname "point_teleport" origin "-856 -12781 -1096" values {targetname "syn_g1" target "gman" angles "0 180 0"} }
+		//create {classname "point_teleport" origin "-856 -12781 -1096" values {targetname "syn_g1" target "gman" angles "0 180 0"} }
 
 		create { classname "info_teleport_destination" origin "-3120 -9309 -899" values { angles "0 -50 0" targetname "syn_spawn_player_3_TP" } }
 
