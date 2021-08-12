@@ -2,7 +2,8 @@ ep1_citadel_04
 {
 	console
 	{
-	physcannon_mega_enabled 0
+		physcannon_mega_enabled "0"
+		sv_test_scripted_sequences "1"
 	}
 	entity
 	{

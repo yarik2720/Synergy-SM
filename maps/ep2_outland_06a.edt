@@ -1,5 +1,9 @@
 ep2_outland_06a
 {
+	console
+	{
+		sv_test_scripted_sequences "1"
+	}
 	entity
 	{
 //--Setup--
