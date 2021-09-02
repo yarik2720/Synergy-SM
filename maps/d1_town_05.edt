@@ -271,16 +271,16 @@ d1_town_05
 				targetname "syn_vint"} }
 
 //fence
-//		create {classname "npc_turret_floor"
-//			origin "-1024 8576 896"
-//			values {angles "0 240 0"
-//				targetname "syn_vint"} }
+		create {classname "npc_turret_floor"
+			origin "-1024 8576 896"
+			values {angles "0 240 0"
+				targetname "syn_vint"} }
 
 //hidden
-//		create {classname "npc_turret_floor"
-//			origin "-664 8280 898"
-//			values {angles "0 180 0"
-//				targetname "syn_vint"} }
+		create {classname "npc_turret_floor"
+			origin "-664 8280 898"
+			values {angles "0 180 0"
+				targetname "syn_vint"} }
 
 // prevent escaping out of the map
 		create {classname "trigger_push"
