@@ -108,6 +108,25 @@ d1_town_04
 //Trav|Edt - TEST using prop_phys_multplayer (works but may want to add additional ents to list (override props etc)
 		//edit {classname "prop_physics" values {classname "prop_physics_multiplayer"} }
 
+//remade autosave to prevent crash, possibly caused by saving during someone is falling down. due to a lot players have much skills to complete map we need only one autosave here
+		delete {classname "trigger_autosave"}
+
+		create {
+			classname "logic_autosave"
+            values {
+				targetname "cust_save"
+            }
+		}
+
+//autosave before minecar
+		create {
+			classname "logic_auto"
+            values {
+				spawnflags "1"
+                OnMapSpawn "caver_lift_lowerlever_lever,AddOutput,OnOpen cust_save:save::1:-1,0,-1"
+            }
+		}
+
 //Trav|Edt - add gman
 		create {classname "npc_gman"
 			origin	"1920 320 -5077"
