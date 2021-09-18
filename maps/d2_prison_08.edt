@@ -80,13 +80,20 @@ d2_prison_08
 
 		// create intermission
 	//	"create" { "classname" "info_intermission" "origin" "" "values" { "angles" "" } }
-			
+//add autosave on ambush (trying to save Alyx spawn on reload)
+		create {classname "logic_auto"
+			values {
+				spawnflags "1"
+				OnMapSpawn "ambush_trigger,AddOutput,OnTrigger autosave:Save::0:1,1,-1"
+			}
+		}
 //Game Over text
 		delete {targetname "text_alyx_died"}
 		create {classname "logic_auto"
 			values {
 				spawnflags "1"
 				OnMapSpawn "alyx,AddOutput,OnDeath syn_gameover_message:Display::0:-1,1,-1"
+				OnMapSpawn "alyx,AddOutput,OnDeath loadsaved_alyx_died:Reload::0:-1,1,-1"
 			}
 		}
 		create {
@@ -105,6 +112,18 @@ d2_prison_08
 				"color2" "240 110 0"
 				"color" "100 100 100"
 				"channel" "1"
+			}
+		}
+//and recreate game reload
+		delete {targetname "loadsaved_alyx_died"}
+		create {classname "player_loadsaved"
+			values {
+				targetname "loadsaved_alyx_died"
+				"loadtime" "6"
+				"rendercolor" "0 0 0"
+				"renderamt" "255"
+				"holdtime" "6.1"
+				"duration" "2"
 			}
 		}
 
