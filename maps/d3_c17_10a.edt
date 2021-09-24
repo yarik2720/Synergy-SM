@@ -176,30 +176,6 @@ d3_c17_10a
 				//OnMapSpawn "tank_mortar,SetDamage,100,8,-1"
 				} }
 
-//Trav|Edt - prevent rushingpast guardrush
-		create {classname "filter_activator_name"
-			values {targetname "trav_null_filter"
-				filtername "null"} }
-
-		edit {targetname "field1_plug" values {spawnflags "823296"} }
-
-		create {classname "logic_auto"
-			values {spawnflags "1"
-				OnMapSpawn "field1_breakable_plug_bit,SetDamageFilter,trav_null_filter,8,-1"} }
-				//OnMapSpawn "field1_breakable_plug_bit,DisableDamageForces,,5,-1"
-				//OnMapSpawn "field1_plug,DisablePhyscannonPickup,,5,-1"
-
-		create {classname "trigger_once"
-			origin "-460 6272 256"
-			values {
-				//model "*22"
-				edt_getbspmodelfor_classname "trigger_once"
-				edt_getbspmodelfor_origin "-460 6272 256"
-				spawnflags "1"
-				OnTrigger "field1_breakable_plug_bit,SetDamageFilter,,15,-1"
-				//OnTrigger "field1_breakable_plug_bit,EnableDamageForces,,10,-1"
-				OnTrigger "field1_plug,EnablePhyscannonPickup,,30,-1"} }//MUST DAMAGE
-
 //modi tp barney
 		create {classname "point_teleport"
 			origin "-2632 6476 526"
@@ -267,8 +243,12 @@ d3_c17_10a
 		//		targetname "lobby_frontdoors_relay"
 		//		OnTrigger "trav_combine_door_vol,Enable,0.1,0,-1"} }
 
+//don't allow npc to hit trigger to open front doors
+		edit {classname "trigger_once" origin "-460 6272 256" values {spawnflags "1"} }
 		edit {targetname "lobby_frontdoors_counter" values {max "4"} }
 
+		//replace prop_ragdoll with physics cars to prevent network lag
+		edit {targetname "initialmortar_car" values {classname "prop_physics" model "models/props_vehicles/car002b_physics.mdl"} }
 //Trav|Edt - autirush
 		create {classname "trigger_coop"
 			origin "376 4880 356"
