@@ -157,6 +157,9 @@ ep2_outland_03
 		
 		edit {targetname "cave_entry_gate" values {overridescript "mass,5000"} }
 		edit {targetname "cave_gate" values {overridescript "mass,5000"} }
+		
+		// Add barrel in front of gate in case it gets stuck players can push it with this
+		create {classname "prop_physics" origin "4032 -8790 -550" values {model "models/props_c17/oildrum001.mdl"} }
 
 		// do not let players get stuck down below
 		// activate a checkpoint here
