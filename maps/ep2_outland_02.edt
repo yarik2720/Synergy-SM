@@ -353,13 +353,14 @@ ep2_outland_02
 				targetname "syn_vint_moreplayers_guards"
 				LowerPlayer "8"
 				UpperPlayer "16"
-				OnLow "combine_mine,Kill,,0,-1" //remove hoppers to prevent crashes
 				OnLow "syn_antlionguard,Unburrow,,0,-1"
 				OnMed "syn_antlionguard,Unburrow,,0,-1"
 				OnMed "syn_antlionguard2,Unburrow,,1,-1"
+				OnMed "combine_mine,Kill,,0,-1" //remove hoppers to prevent crashes
 				OnHigh "syn_antlionguard,Unburrow,,0,-1"
 				OnHigh "syn_antlionguard2,Unburrow,,1,-1"
 				OnHigh "syn_antlionguard3,Unburrow,,2,-1"
+				OnHigh "combine_mine,Kill,,0,-1" //remove hoppers to prevent crashes
 			}
 		}
 		create {classname "logic_relay"
