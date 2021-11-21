@@ -356,16 +356,28 @@ ep2_outland_02
 				OnLow "syn_antlionguard,Unburrow,,0,-1"
 				OnMed "syn_antlionguard,Unburrow,,0,-1"
 				OnMed "syn_antlionguard2,Unburrow,,1,-1"
-				OnMed "combine_mine,Kill,,0,-1" //remove hoppers to prevent crashes
 				OnHigh "syn_antlionguard,Unburrow,,0,-1"
 				OnHigh "syn_antlionguard2,Unburrow,,1,-1"
 				OnHigh "syn_antlionguard3,Unburrow,,2,-1"
-				OnHigh "combine_mine,Kill,,0,-1" //remove hoppers to prevent crashes
 			}
 		}
 		create {classname "logic_relay"
 			values {targetname "logicRelay_finalWave"
 				OnTrigger "syn_vint_moreplayers_guards,CheckSkill,,70,-1"} }
+
+ //remove hoppers to prevent crashes
+		create {classname "logic_difficulty"
+			values
+			{
+				targetname "syn_vint_moreplayers_hoppers"
+				LowerPlayer "8"
+				UpperPlayer "16"
+				OnNotLow "combine_mine,Kill,,0,-1"
+			}
+		}
+		create {classname "logic_auto"
+			values {spawnflags "1"
+				OnMapSpawn "syn_vint_moreplayers_hoppers,CheckSkill,,25,-1"} }
 
 //Trav|Edt RETURN, antirush
 		create {classname "trigger_once" origin "-4021 -9549 304"
