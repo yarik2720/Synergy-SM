@@ -239,6 +239,12 @@ ep2_outland_08
 			}
 		}
 
+//make final rebel invencible
+		edit {targetname "npc_citizen_opengate" values {damagefilter "syn_dfilter_null"} }
+		create {classname "filter_activator_name"
+			values {targetname "syn_dfilter_null"
+				filtername "null"} }
+		
 		create {classname "trigger_once" origin "-1920 784 127.41"
 			values {model "*111"
 				spawnflags "1"
