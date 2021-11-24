@@ -246,8 +246,16 @@ d2_coast_11
 		create {classname "logic_auto"
 			values {
 				spawnflags "1"
-				OnMapSpawn "vortigaunt_bugbait,AddOutput,OnDeath syn_gameover_message:Display::0:-1,1,-1"
-				OnMapSpawn "vortigaunt_bugbait,AddOutput,OnDeath reload:Reload::0:-1,1,-1"
+				OnMapSpawn "citizen_ambush_vortspawner,addoutput,OnEntitySpawned syn_vortdeathendgame:Trigger::0:-1,0.2,-1"
+			}
+		}
+
+		create {classname "logic_relay"
+			values {
+				spawnflags "1"
+				targetname "syn_vortdeathendgame"
+				OnTrigger "vortigaunt_bugbait,AddOutput,OnDeath syn_gameover_message:Display::0:-1,1,-1"
+				OnTrigger "vortigaunt_bugbait,AddOutput,OnDeath reload:Reload::0:-1,1,-1"
 			}
 		}
 
