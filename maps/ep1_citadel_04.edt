@@ -52,8 +52,9 @@ ep1_citadel_04
 			values
 			{
 				targetname "syn_vint_moreplayers_coop"
-				LowerPlayer "8"
-				UpperPlayer "16"
+				spawnflags "1"
+				LowerPlayer "7"
+				UpperPlayer "8"
 				OnNotLow "syn_alyx_teleporter_coop,Enable,,0,-1"
 			}
 		}
@@ -72,7 +73,20 @@ ep1_citadel_04
 				PlayerValue "50"
 				OnPlayersIn "!self,Disable,,1,1"
 				OnPlayersIn "syn_teleport_alyx_airlock,Teleport,,0,-1"
-			} 
+			}
+		}
+
+		create {
+			classname "trigger_once"
+			origin "3389 12153 3688"
+			values {
+				edt_mins "-80 -50 -200"
+				edt_maxs "80 50 200"
+				spawnflags "1"
+				StartDisabled "0"
+				targetname "syn_alyx_teleporter_trigger"
+				OnTrigger "syn_vint_moreplayers_coop,CheckSkill,,0,-1"
+			}
 		}
 
 		create {
@@ -82,8 +96,8 @@ ep1_citadel_04
 				targetname "syn_teleport_alyx_airlock"
 				angles "0 50 0"
 				target "alyx"
-				} 
 			}
+		}
 
 //Trav|Edt - fix the insane network lag on train
 		create {classname "logic_auto"
@@ -91,6 +105,22 @@ ep1_citadel_04
 				OnMapSpawn "stalkerpod_*_model,DisableMotion,,10,-1"} }
 
 		create { classname "info_intermission" origin "4104.250000 11797.750000 3708.718750" values { angles "18 -135 0" } }
+
+//recreate counter_reinforcementsdead to destroy rollermines earlier
+		delete {targetname "counter_reinforcementsdead"}
+		create {
+			classname "math_counter"
+			"origin" "3075.4 11384.1 3609"
+			values {
+				"max" "6"
+				"targetname" "counter_reinforcementsdead"
+				"OnHitMax" "al_citadel_04_rollerattack_04,Start,,0,1"
+				"OnHitMax" "alyx,StartScripting,,0,1"
+				"OnHitMax" "npc_rollermine,InteractivePowerDown,,4,1" //was 18
+				"OnHitMax" "autosave,Save,,0,1"
+				"OnHitMax" "rollermine,InteractivePowerDown,,1,1" //was 15
+			}
+		}
 
 //Trav|Edt - teleport all players into train
 		create {classname "trigger_once"
