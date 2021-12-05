@@ -207,12 +207,32 @@ ep2_outland_09
 
 //Trav|Edt - prevent players from running past cannonness and enable votecar
 		create {classname "trigger_push"
-			origin "-2088 -7633.41 160"
+			origin "-2058 -7633.41 160"
 			values {model "*98"
 				spawnflags "1"
 				targetname "syn_antirush_push"
 				pushdir "0 270 0"
 				speed "750"} }
+
+		create {classname "trigger_push"
+			origin "-1560 -7913 280"
+			values {model "*118"
+				spawnflags "1"
+				targetname "syn_antirush_push"
+				pushdir "0 0 0"
+				speed "750"} }
+
+//and trigger hurt for overjumped players
+		create { classname "trigger_hurt" origin "-1095.83 -6113.99 192"
+			values {
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "-1095.83 -6113.99 192"
+				"spawnflags" "1"
+				"targetname" "syn_antirush_push"
+				"damage" "10000"
+				"damagetype" "0"
+			}
+		}
 
 		create {classname "trigger_once"
 			origin "-2088 -7633.41 160"
