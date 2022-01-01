@@ -74,35 +74,62 @@ ep2_outland_09
 				VehicleScript "scripts/vehicles/jeep_test.txt"
 				OnSpawnVehicle "syn_moreplayers,CheckSkill,,1,-1"} }
 		
-		create {classname "info_vehicle_spawn" origin "-2136 -8800 128"
+		create {classname "info_vehicle_spawn" origin "-2336 -8800 128"
 			values {targetname "syn_spawn_vehicle_1_med"
 				angles "0 0 0"
 				StartEnabled "0"
 				RespawnVehicle "1"
+				StartGunEnabled "1"
 				VehicleType "4"
 				VehicleSize "192"
-				model "models/vehicles/buggy_p2.mdl"
-				VehicleScript "scripts/vehicles/jeep_test.txt"} }
+				model "models/vehicles/8seattruck.mdl"
+				vehiclescript "scripts/vehicles/truck.txt"} }
+		
+		create {classname "info_vehicle_spawn" origin "-2336 -8800 128"
+			values {targetname "syn_spawn_vehicle_1_high"
+				angles "0 0 0"
+				StartEnabled "0"
+				StartGunEnabled "0"
+				RespawnVehicle "1"
+				VehicleType "2"
+				VehicleSize "164"
+				model "models/airboat.mdl"
+				VehicleScript "scripts/vehicles/airboat.txt"} }
+		
+		create {classname "info_vehicle_spawn" origin "-2136 -8800 128"
+			values {targetname "syn_spawn_vehicle_1_high"
+				angles "0 0 0"
+				StartEnabled "0"
+				StartGunEnabled "0"
+				RespawnVehicle "1"
+				VehicleType "2"
+				VehicleSize "164"
+				model "models/airboat.mdl"
+				VehicleScript "scripts/vehicles/airboat.txt"} }
 		
 		create {classname "info_vehicle_spawn" origin "-1936 -8800 128"
 			values {targetname "syn_spawn_vehicle_1_high"
 				angles "0 0 0"
 				StartEnabled "0"
+				StartGunEnabled "0"
 				RespawnVehicle "1"
-				VehicleType "4"
-				VehicleSize "192"
-				model "models/vehicles/buggy_p2.mdl"
-				VehicleScript "scripts/vehicles/jeep_test.txt"} }
+				VehicleType "2"
+				VehicleSize "164"
+				model "models/airboat.mdl"
+				VehicleScript "scripts/vehicles/airboat.txt"} }
 		
 		create {classname "logic_difficulty"
 			values
 			{
 				targetname "syn_moreplayers"
 				LowerPlayer "10"
-				UpperPlayer "20"
+				UpperPlayer "16"
+				OnLow "syn_spawn_vehicle_1,Enable,,0,-1"
 				OnMed "syn_spawn_vehicle_1_med,Enable,,0,-1"
-				OnHigh "syn_spawn_vehicle_1_med,Enable,,0,-1"
 				OnHigh "syn_spawn_vehicle_1_high,Enable,,0,-1"
+				OnNotLow "syn_spawn_vehicle_1,Disable,,0,-1"
+				OnNotMed "syn_spawn_vehicle_1_med,Disable,,0,-1"
+				OnNotHigh "syn_spawn_vehicle_1_high,Disable,,0,-1"
 			}
 		}
 
@@ -422,7 +449,7 @@ ep2_outland_09
 			//	"OnAllTrue" "door.garage.main,Close,,0,-1"
 
 				"OnAllTrue" "theBlueVan,Unlock,,0.05,-1"
-				"OnAllTrue" "syn_spawn_vehicle_1,Enable,,0.05,-1"
+				"OnAllTrue" "syn_moreplayers,CheckSkill,,0.05,-1"
 				OnAllTrue "syn_spawn_manager,SetCheckpoint,syn_spawn_player_7,0,-1"
 			}
 		}

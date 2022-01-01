@@ -62,44 +62,65 @@ ep2_outland_10a
 		create {classname "info_vehicle_spawn" origin "4352 -5760 -1536"
 			values {targetname "syn_spawn_vehicle_1"
 				angles "0 90 0"
-				StartEnabled "0"
+				StartEnabled "1"
 				RespawnVehicle "1"
 				VehicleType "4"
 				VehicleSize "192"
 				model "models/vehicles/buggy_p2.mdl"
 				VehicleScript "scripts/vehicles/jeep_test.txt"
-				OnSpawnVehicle "syn_moreplayers,CheckSkill,,1,-1"} }
+				OnSpawnVehicle "syn_moreplayers,CheckSkill,,5,-1"} }
 		
 		create {classname "info_vehicle_spawn" origin "4552 -5760 -1536"
 			values {targetname "syn_spawn_vehicle_1_med"
 				angles "0 90 0"
 				StartEnabled "0"
 				RespawnVehicle "1"
+				StartGunEnabled "1"
 				VehicleType "4"
 				VehicleSize "192"
-				model "models/vehicles/buggy_p2.mdl"
-				VehicleScript "scripts/vehicles/jeep_test.txt"} }
+				model "models/vehicles/8seattruck.mdl"
+				vehiclescript "scripts/vehicles/truck.txt"
+				OnSpawnVehicle "syn_moreplayers,CheckSkill,,5,-1"} }
+		
+		create {classname "info_vehicle_spawn" origin "4552 -5760 -1536"
+			values {targetname "syn_spawn_vehicle_1_high"
+				angles "0 90 0"
+				StartEnabled "0"
+				StartGunEnabled "0"
+				RespawnVehicle "1"
+				VehicleType "2"
+				VehicleSize "164"
+				model "models/airboat.mdl"
+				VehicleScript "scripts/vehicles/airboat.txt"
+				OnSpawnVehicle "syn_moreplayers,CheckSkill,,5,-1"} }
 		
 		create {classname "logic_difficulty"
 			values
 			{
 				targetname "syn_moreplayers"
 				LowerPlayer "10"
-				UpperPlayer "20"
+				UpperPlayer "16"
+				OnLow "syn_spawn_vehicle_1,Enable,,0,-1"
 				OnMed "syn_spawn_vehicle_1_med,Enable,,0,-1"
-				OnHigh "syn_spawn_vehicle_1_med,Enable,,0,-1"
+				OnHigh "syn_spawn_vehicle_1_high,Enable,,0,-1"
+				OnNotLow "syn_spawn_vehicle_1,Disable,,0,-1"
+				OnNotMed "syn_spawn_vehicle_1_med,Disable,,0,-1"
+				OnNotHigh "syn_spawn_vehicle_1_high,Disable,,0,-1"
 			}
 		}
 		
 		create {classname "logic_difficulty"
 			values
 			{
-				targetname "syn_moreplayerssec"
+				targetname "syn_moreplayerssecond"
 				LowerPlayer "10"
-				UpperPlayer "20"
+				UpperPlayer "16"
+				OnLow "syn_spawn_vehicle_2,Enable,,0,-1"
 				OnMed "syn_spawn_vehicle_2_med,Enable,,0,-1"
-				OnHigh "syn_spawn_vehicle_2_med,Enable,,0,-1"
 				OnHigh "syn_spawn_vehicle_2_high,Enable,,0,-1"
+				OnNotLow "syn_spawn_vehicle_2,Disable,,0,-1"
+				OnNotMed "syn_spawn_vehicle_2_med,Disable,,0,-1"
+				OnNotHigh "syn_spawn_vehicle_2_high,Disable,,0,-1"
 			}
 		}
 //Dog
@@ -113,30 +134,53 @@ ep2_outland_10a
 				model "models/vehicles/buggy_p2.mdl"
 				VehicleScript "scripts/vehicles/jeep_test.txt"} }
 		
-		create {classname "info_vehicle_spawn" origin "2624.13 -2786.72 -1800"
+		create {classname "info_vehicle_spawn" origin "2824.13 -2786.72 -1800"
 			values {targetname "syn_spawn_vehicle_2_med"
 				angles "0 345 0"
 				StartEnabled "0"
 				RespawnVehicle "1"
 				VehicleType "4"
 				VehicleSize "192"
-				model "models/vehicles/buggy_p2.mdl"
-				VehicleScript "scripts/vehicles/jeep_test.txt"} }
+				model "models/vehicles/7seatvan.mdl"
+				vehiclescript "scripts/vehicles/van.txt"
+				skin "3"} }
+		
+		create {classname "info_vehicle_spawn" origin "2824.13 -2786.72 -1800"
+			values {targetname "syn_spawn_vehicle_2_high"
+				angles "0 0 0"
+				StartEnabled "0"
+				StartGunEnabled "0"
+				RespawnVehicle "1"
+				VehicleType "2"
+				VehicleSize "164"
+				model "models/airboat.mdl"
+				VehicleScript "scripts/vehicles/airboat.txt"} }
+		
+		create {classname "info_vehicle_spawn" origin "2624.13 -2786.72 -1800"
+			values {targetname "syn_spawn_vehicle_2_high"
+				angles "0 0 0"
+				StartEnabled "0"
+				StartGunEnabled "0"
+				RespawnVehicle "1"
+				VehicleType "2"
+				VehicleSize "164"
+				model "models/airboat.mdl"
+				VehicleScript "scripts/vehicles/airboat.txt"} }
 		
 		create {classname "info_vehicle_spawn" origin "2884 -3000 -1800"
 			values {targetname "syn_spawn_vehicle_2_high"
 				angles "0 0 0"
 				StartEnabled "0"
+				StartGunEnabled "0"
 				RespawnVehicle "1"
-				VehicleType "4"
-				VehicleSize "192"
-				model "models/vehicles/buggy_p2.mdl"
-				VehicleScript "scripts/vehicles/jeep_test.txt"} }
+				VehicleType "2"
+				VehicleSize "164"
+				model "models/airboat.mdl"
+				VehicleScript "scripts/vehicles/airboat.txt"} }
 
 		create {classname "logic_auto"
 			values {spawnflags "1"
-				OnMapSpawn "alyx_approachdog,AddOutput,OnEndSequence syn_spawn_vehicle_2:Enable::20:-1,0,-1"
-				OnMapSpawn "alyx_approachdog,AddOutput,OnEndSequence syn_moreplayerssec:CheckSkill::20:-1,0,-1"
+				OnMapSpawn "alyx_approachdog,AddOutput,OnEndSequence syn_moreplayerssecond:CheckSkill::20:-1,0,-1"
 				OnMapSpawn "ss_dog_gate,AddOutput,OnScriptEvent01 synvehiclemap:Trigger::0:-1,0,-1"
 				OnMapSpawn "base_transition_dog_seq,AddOutput,OnEndSequence syn_antirush_coop:Enable::0.1:-1,0,-1"} }
 		create {classname "logic_relay" values {targetname "synvehiclemap" OnTrigger "syn_global_settings,AddOutput,IsVehicleMap 1,0,-1"} }

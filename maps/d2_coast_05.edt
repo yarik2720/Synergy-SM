@@ -61,7 +61,7 @@ d2_coast_05
 		create {classname "info_player_coop" origin "9194.50 -11947.53 1792.03"
 			values {angles "0 180 0" targetname "syn_spawn_player_1"} }
 //First House
-		create {classname "info_player_coop" origin "-4928 -11816 696"
+		create {classname "info_player_coop" origin "-4808 -11950 696"
 			values {angles "0 255 0" targetname "syn_spawn_player_2" StartDisabled "1"} }
 //Crossbow Truck
 		create {classname "info_player_coop" origin "-4040 -5024 1088"
@@ -83,9 +83,10 @@ d2_coast_05
 				VehicleSize "192"
 				model "models\vehicles\buggy_p2.mdl"//models/buggy.mdl
 				VehicleScript "scripts/vehicles/jeep_test.txt"
+				OnSpawnVehicle "syn_moreplayers,CheckSkill,,0.1,1"
 				OnSpawnVehicle "syn_moreplayers,CheckSkill,,5,-1"} }
 		
-		create {classname "info_vehicle_spawn" origin "7800 -12160 1792"
+		create {classname "info_vehicle_spawn" origin "7600 -12160 1792"
 			values {targetname "syn_spawn_vehicle_1_med"
 				angles "0 90 0"
 				StartEnabled "0"
@@ -93,8 +94,33 @@ d2_coast_05
 				RespawnVehicle "1"
 				VehicleType "4"
 				VehicleSize "192"
-				model "models\vehicles\buggy_p2.mdl"
-				VehicleScript "scripts/vehicles/jeep_test.txt"} }
+				model "models/vehicles/8seattruck.mdl"
+				vehiclescript "scripts/vehicles/truck.txt"
+				OnSpawnVehicle "syn_moreplayers,CheckSkill,,5,-1"} }
+		
+		create {classname "info_vehicle_spawn" origin "7600 -12160 1792"
+			values {targetname "syn_spawn_vehicle_1_high"
+				angles "0 90 0"
+				StartEnabled "0"
+				StartGunEnabled "1"
+				RespawnVehicle "1"
+				VehicleType "2"
+				VehicleSize "164"
+				model "models/airboat.mdl"
+				VehicleScript "scripts/vehicles/airboat.txt"
+				OnSpawnVehicle "syn_moreplayers,CheckSkill,,5,-1"} }
+		
+		create {classname "info_vehicle_spawn" origin "7800 -12160 1792"
+			values {targetname "syn_spawn_vehicle_1_high"
+				angles "0 90 0"
+				StartEnabled "0"
+				StartGunEnabled "1"
+				RespawnVehicle "1"
+				VehicleType "2"
+				VehicleSize "164"
+				model "models/airboat.mdl"
+				VehicleScript "scripts/vehicles/airboat.txt"
+				OnSpawnVehicle "syn_moreplayers,CheckSkill,,5,-1"} }
 		
 		create {classname "info_vehicle_spawn" origin "8000 -12160 1792"
 			values {targetname "syn_spawn_vehicle_1_high"
@@ -102,20 +128,39 @@ d2_coast_05
 				StartEnabled "0"
 				StartGunEnabled "1"
 				RespawnVehicle "1"
-				VehicleType "4"
-				VehicleSize "192"
-				model "models\vehicles\buggy_p2.mdl"
-				VehicleScript "scripts/vehicles/jeep_test.txt"} }
-		
+				VehicleType "2"
+				VehicleSize "164"
+				model "models/airboat.mdl"
+				VehicleScript "scripts/vehicles/airboat.txt"
+				OnSpawnVehicle "syn_moreplayers,CheckSkill,,5,-1"} }
+
 		create {classname "logic_difficulty"
 			values
 			{
 				targetname "syn_moreplayers"
 				LowerPlayer "10"
-				UpperPlayer "20"
+				UpperPlayer "16"
+				OnLow "syn_spawn_vehicle_1,Enable,,0,-1"
 				OnMed "syn_spawn_vehicle_1_med,Enable,,0,-1"
-				OnHigh "syn_spawn_vehicle_1_med,Enable,,0,-1"
 				OnHigh "syn_spawn_vehicle_1_high,Enable,,0,-1"
+				OnNotLow "syn_spawn_vehicle_1,Disable,,0,-1"
+				OnNotMed "syn_spawn_vehicle_1_med,Disable,,0,-1"
+				OnNotHigh "syn_spawn_vehicle_1_high,Disable,,0,-1"
+			}
+		}
+		
+		create {classname "logic_difficulty"
+			values
+			{
+				targetname "syn_moreplayerssecond"
+				LowerPlayer "10"
+				UpperPlayer "16"
+				OnLow "syn_spawn_vehicle_2,Enable,,0,-1"
+				OnMed "syn_spawn_vehicle_2_med,Enable,,0,-1"
+				OnHigh "syn_spawn_vehicle_2_high,Enable,,0,-1"
+				OnNotLow "syn_spawn_vehicle_2,Disable,,0,-1"
+				OnNotMed "syn_spawn_vehicle_2_med,Disable,,0,-1"
+				OnNotHigh "syn_spawn_vehicle_2_high,Disable,,0,-1"
 			}
 		}
 		
@@ -124,9 +169,13 @@ d2_coast_05
 			{
 				targetname "syn_moreplayersthird"
 				LowerPlayer "10"
-				UpperPlayer "20"
+				UpperPlayer "16"
+				OnLow "syn_spawn_vehicle_3,Enable,,0,-1"
 				OnMed "syn_spawn_vehicle_3_med,Enable,,0,-1"
-				OnHigh "syn_spawn_vehicle_3_med,Enable,,0,-1"
+				OnHigh "syn_spawn_vehicle_3_high,Enable,,0,-1"
+				OnNotLow "syn_spawn_vehicle_3,Disable,,0,-1"
+				OnNotMed "syn_spawn_vehicle_3_med,Disable,,0,-1"
+				OnNotHigh "syn_spawn_vehicle_3_high,Disable,,0,-1"
 			}
 		}
 		
@@ -135,9 +184,13 @@ d2_coast_05
 			{
 				targetname "syn_moreplayersfourth"
 				LowerPlayer "10"
-				UpperPlayer "20"
+				UpperPlayer "16"
+				OnLow "syn_spawn_vehicle_4,Enable,,0,-1"
 				OnMed "syn_spawn_vehicle_4_med,Enable,,0,-1"
-				OnHigh "syn_spawn_vehicle_4_med,Enable,,0,-1"
+				OnHigh "syn_spawn_vehicle_4_high,Enable,,0,-1"
+				OnNotLow "syn_spawn_vehicle_4,Disable,,0,-1"
+				OnNotMed "syn_spawn_vehicle_4_med,Disable,,0,-1"
+				OnNotHigh "syn_spawn_vehicle_4_high,Disable,,0,-1"
 			}
 		}
 //First House
@@ -151,6 +204,29 @@ d2_coast_05
 				VehicleSize "192"
 				model "models\vehicles\buggy_p2.mdl"//models/buggy.mdl
 				VehicleScript "scripts/vehicles/jeep_test.txt"} }
+
+		create {classname "info_vehicle_spawn" origin "-4928 -12224 736"//-6703.96 -12144 711.99
+			values {targetname "syn_spawn_vehicle_2_med"
+				angles "0 90 0"
+				StartEnabled "0"
+				StartGunEnabled "1"
+				RespawnVehicle "1"
+				VehicleType "4"
+				VehicleSize "192"
+				model "models/vehicles/8seattruck.mdl"
+				vehiclescript "scripts/vehicles/truck.txt"} }
+
+		create {classname "info_vehicle_spawn" origin "-4928 -12224 736"//-6703.96 -12144 711.99
+			values {targetname "syn_spawn_vehicle_2_high"
+				angles "0 90 0"
+				StartEnabled "0"
+				StartGunEnabled "1"
+				RespawnVehicle "1"
+				VehicleType "2"
+				VehicleSize "164"
+				model "models/airboat.mdl"
+				VehicleScript "scripts/vehicles/airboat.txt"} }
+
 //Crossbow Truck
 		create {classname "info_vehicle_spawn" origin "-4544 -4672 1104"//-5165.88 -4768.01 1088
 			values {targetname "syn_spawn_vehicle_3"
@@ -163,7 +239,7 @@ d2_coast_05
 				model "models\vehicles\buggy_p2.mdl"//models/buggy.mdl
 				VehicleScript "scripts/vehicles/jeep_test.txt"} }
 		
-		create {classname "info_vehicle_spawn" origin "-4720 -4710 1104"
+		create {classname "info_vehicle_spawn" origin "-4544 -4672 1104"
 			values {targetname "syn_spawn_vehicle_3_med"
 				angles "0 15 0"
 				StartEnabled "0"
@@ -171,8 +247,19 @@ d2_coast_05
 				RespawnVehicle "1"
 				VehicleType "4"
 				VehicleSize "192"
-				model "models\vehicles\buggy_p2.mdl"
-				VehicleScript "scripts/vehicles/jeep_test.txt"} }
+				model "models/vehicles/8seattruck.mdl"
+				vehiclescript "scripts/vehicles/truck.txt"} }
+		
+		create {classname "info_vehicle_spawn" origin "-4544 -4672 1104"
+			values {targetname "syn_spawn_vehicle_3_high"
+				angles "0 15 0"
+				StartEnabled "0"
+				StartGunEnabled "1"
+				RespawnVehicle "1"
+				VehicleType "2"
+				VehicleSize "164"
+				model "models/airboat.mdl"
+				VehicleScript "scripts/vehicles/airboat.txt"} }
 //Gas Station Workhouse
 		create {classname "info_vehicle_spawn" origin "-5208 -76 1112"
 			values {targetname "syn_spawn_vehicle_4"
@@ -185,7 +272,7 @@ d2_coast_05
 				model "models\vehicles\buggy_p2.mdl"//models/buggy.mdl
 				VehicleScript "scripts/vehicles/jeep_test.txt"} }
 		
-		create {classname "info_vehicle_spawn" origin "-5392 -20 1112"
+		create {classname "info_vehicle_spawn" origin "-5208 -76 1112"
 			values {targetname "syn_spawn_vehicle_4_med"
 				angles "0 255 0"
 				StartEnabled "0"
@@ -193,8 +280,19 @@ d2_coast_05
 				RespawnVehicle "1"
 				VehicleType "4"
 				VehicleSize "192"
-				model "models\vehicles\buggy_p2.mdl"
-				VehicleScript "scripts/vehicles/jeep_test.txt"} }
+				model "models/vehicles/8seattruck.mdl"
+				vehiclescript "scripts/vehicles/truck.txt"} }
+		
+		create {classname "info_vehicle_spawn" origin "-5208 -76 1112"
+			values {targetname "syn_spawn_vehicle_4_high"
+				angles "0 255 0"
+				StartEnabled "0"
+				StartGunEnabled "1"
+				RespawnVehicle "1"
+				VehicleType "2"
+				VehicleSize "164"
+				model "models/airboat.mdl"
+				VehicleScript "scripts/vehicles/airboat.txt"} }
 
 //--Checkpoints--
 		create {classname "trigger_once"
@@ -205,7 +303,7 @@ d2_coast_05
 				edt_getbspmodelfor_origin "-4611.95 -11929.1 708"
 				spawnflags "1"
 				OnTrigger "syn_spawn_manager,SetCheckpoint,syn_spawn_player_2,0,-1"
-				OnTrigger "syn_spawn_vehicle_2,Enable,,0,-1"
+				OnTrigger "syn_moreplayerssecond,CheckSkill,,0,-1"
 				OnTrigger "syn_checkpoint_3,Enable,,1,-1"} }
 //xbow
 		create {classname "trigger_once"
@@ -218,7 +316,6 @@ d2_coast_05
 				targetname "syn_checkpoint_3"
 				StartDisabled "1"
 				OnTrigger "syn_spawn_manager,SetCheckpoint,syn_spawn_player_3,0,-1"
-				OnTrigger "syn_spawn_vehicle_3,Enable,,0,-1"
 				OnTrigger "syn_moreplayersthird,CheckSkill,,0,-1"
 				OnTrigger "syn_checkpoint_3,Enable,,1,-1"
 				OnTrigger "syn_autosave,Save,,1,-1"//only save
@@ -228,7 +325,6 @@ d2_coast_05
 			values {targetname "logic_gate_shutdown"
 				OnTrigger "syn_checkpoint_*,Disable,,0,-1"
 				OnTrigger "syn_spawn_manager,SetCheckpoint,syn_spawn_player_4,0,-1"
-				OnTrigger "syn_spawn_vehicle_4,Enable,,0,-1"
 				OnTrigger "syn_moreplayersfourth,CheckSkill,,0,-1"} }
 
 //--Extra--
