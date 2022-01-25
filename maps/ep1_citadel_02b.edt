@@ -159,6 +159,7 @@ ep1_citadel_02b
 			{
 				spawnflags "1"
 				OnMapSpawn "train_initial_start_counter,AddOutput,OnHitMax trigger_checkpoint_ent:Enable::0:1,0,-1"
+				OnMapSpawn "lift_constraint,AddOutput,OnBreak syn_spawn_manager:SetCheckPoint:syn_spawn_player_3:0:1,0,-1"
 				OnMapSpawn "alyx_elevator_ss_1,AddOutput,OnEndSequence trigger_tpalyx:Enable::0:1,0,-1"
 				OnMapSpawn "alyx_elevator_ss_1,AddOutput,OnEndSequence syn_spawn_manager:SetCheckPoint:syn_spawn_player_2:0:1,0,-1"
 			}
@@ -177,7 +178,7 @@ ep1_citadel_02b
 				"StartDisabled" "1"
 				"spawnflags" "1"
 
-				"OnTrigger" "syn_spawn_manager,SetCheckpoint,syn_spawn_player_3,0,-1"
+//				"OnTrigger" "syn_spawn_manager,SetCheckpoint,syn_spawn_player_3,0,-1"
 				"OnTrigger" "syn_spawn_manager,MovePlayers,,0.05,-1"
 //				"OnTrigger" "trigger_explode_elevator_test,Enable,,0,-1"
 			}
