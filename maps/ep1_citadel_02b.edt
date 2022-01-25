@@ -28,9 +28,12 @@ ep1_citadel_02b
 //Intro
 		create {classname "info_player_coop" origin "1023.59 4639.06 2496.03"
 			values {angles "0 270 0" targetname "syn_spawn_player_1"} }
-//Elevator
+//On Elevator
+		create {classname "info_player_coop" origin "3200 4645 2550"
+			values {angles "0 0 0" targetname "syn_spawn_player_2" StartDisabled "1" parentname "citadel_train_lift01_1"} }
+//After Elevator
 		create {classname "info_player_coop" origin "3585.37 4645.98 -6680"
-			values {angles "0 0 0" targetname "syn_spawn_player_2" StartDisabled "1"} }
+			values {angles "0 0 0" targetname "syn_spawn_player_3" StartDisabled "1"} }
 
 		create {classname "info_global_settings"
 			values {targetname "syn_global_settings" IsVehicleMap "0"} }
@@ -157,6 +160,7 @@ ep1_citadel_02b
 				spawnflags "1"
 				OnMapSpawn "train_initial_start_counter,AddOutput,OnHitMax trigger_checkpoint_ent:Enable::0:1,0,-1"
 				OnMapSpawn "alyx_elevator_ss_1,AddOutput,OnEndSequence trigger_tpalyx:Enable::0:1,0,-1"
+				OnMapSpawn "alyx_elevator_ss_1,AddOutput,OnEndSequence syn_spawn_manager:SetCheckPoint:syn_spawn_player_2:0:1,0,-1"
 			}
 		}
 
@@ -173,7 +177,7 @@ ep1_citadel_02b
 				"StartDisabled" "1"
 				"spawnflags" "1"
 
-				"OnTrigger" "syn_spawn_manager,SetCheckpoint,syn_spawn_player_2,0,-1"
+				"OnTrigger" "syn_spawn_manager,SetCheckpoint,syn_spawn_player_3,0,-1"
 				"OnTrigger" "syn_spawn_manager,MovePlayers,,0.05,-1"
 //				"OnTrigger" "trigger_explode_elevator_test,Enable,,0,-1"
 			}
