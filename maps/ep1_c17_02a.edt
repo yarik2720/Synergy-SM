@@ -227,6 +227,17 @@ ep1_c17_02a
 				OnTrigger "syn_movealyx,CancelSequence,,0,-1"
 				OnTrigger "syn_movealyx,kill,,0.1,-1"
 				OnTrigger "trigger_shotgun,Enable,,0.5,-1"
+				OnTrigger "skip_shotgun_pickup,Trigger,,10,-1"
+				OnTrigger "alyx,AddOutput,OnWeaponPickup skip_shotgun_pickup:Disable::0:1,0,-1"
+			}
+		}
+
+		create {classname "logic_relay" origin "998 8598 -2558"
+			values
+			{
+				StartDisabled "0"
+				targetname "skip_shotgun_pickup"
+				OnTrigger "lcs_hos_enterance,Start,,1,-1"
 			}
 		}
 
