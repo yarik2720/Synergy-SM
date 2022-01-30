@@ -20,6 +20,8 @@ ep1_citadel_04
 				"Template01" "alyx"} }
 		edit {classname "func_areaportal" values {targetname "syn_DisabledPortal" StartOpen "1"} }
 		edit {classname "func_areaportalwindow" values {targetname "syn_DisabledPortalWindow" FadeStartDist "1000" FadeDist "1500"} }
+		// Prevent Alyx give way to players
+		edit {targetname "alyx" values {spawnflags "16388"} }
 
 //--Starting Items--
 		create {classname "info_player_equip"
@@ -221,6 +223,7 @@ ep1_citadel_04
 				"OnFullyClosed" "relay_alarm1,Disable,,0.6,-1"
 				"OnFullyClosed" "csoldiers_finalassault_*,Kill,,2,-1"
 				
+				"OnFullyClosed" "ai_goal_follow,Deactivate,,0,-1"
 				"OnFullyClosed" "syn_teleport_alyx_in_train,Teleport,,0,-1"
 			}
 		}
