@@ -101,6 +101,34 @@ ep1_c17_01
 			values {spawnflags "1"
 				OnMapSpawn "elevator_garage,Kill,,1,-1"} }
 
+//add failsafe to stop antlions spawn and start final scene "thats over"
+		create {
+			classname "trigger_once"
+			origin "-2926 456 58"
+			values {
+				edt_getbspmodelfor_targetname "trigger_car_detect"
+				targetname "test_trigger"
+				StartDisabled "0"
+				filtername "filter_alyx"
+				spawnflags "2"
+				OnTrigger "spawner_ants_chaseAlyx,Disable,,0,-1"
+			}
+		}
+		
+		create {
+			classname "trigger_once"
+			origin "-3400 552 58"
+			values {
+				edt_getbspmodelfor_targetname "trigger_car_detect"
+				targetname "test_trigger"
+				StartDisabled "0"
+				filtername "filter_alyx"
+				spawnflags "2"
+				OnTrigger "sc_alyx_startGarrisonScene,Enable,,0,1"
+				OnTrigger "npc_antlion,SetHealth,0,0,-1"
+			}
+		}
+
 //Trav|Edt - Prevent door(s) from autoclosing
 		edit {targetname "building_door" values {spawnflags "18432" returndelay "-1"} }
 		edit {classname "prop_door_rotating"
