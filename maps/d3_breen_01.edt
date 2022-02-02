@@ -452,6 +452,31 @@ d3_breen_01
 			}
 		}
 		
+//modi: fix exploit of blocking "digger" on the teleport part
+		create {
+			classname "trigger_multiple"
+			origin "-560 -624 -640"
+			values {
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "-560 -624 992"
+				wait "1"
+				spawnflags "1032"
+				StartDisabled "1"
+				targetname "train_digger2_damage"
+				parentname "train_digger2"
+				OnStartTouch "!activator,Break,,0,-1"
+				OnStartTouch "!activator,Kill,,0,-1"
+			}
+		}
+
+		create {
+			classname "logic_auto"
+			values {
+				spawnflags "1"
+				OnMapSpawn "citadel_scene_br_start,AddOutput,OnCompletion train_digger2_damage:Enable::0:-1,0,-1"
+			}
+		}
+		
 //Balim - fix logic_measure_movement issues by making targets send to clients
 		edit {targetname "target_measure_player" values {spawnflags "1"} }
 		edit {targetname "target_follow_camera" values {spawnflags "1"} }
