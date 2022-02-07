@@ -124,13 +124,33 @@ ep1_citadel_01
 				"OnTrigger" "follow_alyx,Activate,,0,-1"
 			}
 		}
+//teleport players into stalkers room and start rollertraining if alyx was blocked by players 
 		create { classname "trigger_once" origin "-4792 7696 2648"
 			values {
 				"model" "*16"
 				"spawnflags" "1"
 				"OnTrigger" "syn_spawn_manager,MovePlayers,,0.1,-1"
 				"OnTrigger" "syn_spawn_manager,SetCheckPoint,syn_spawn_player_1_1,0,-1"
-				"OnTrigger" "follow_alyx,Activate,,0,-1"
+				"OnTrigger" "relay_rollertraining_start,Trigger,,5,-1"
+			}
+		}
+		create {
+			classname "logic_relay" 
+			origin "-4792 7696 2648"
+			values {
+				targetname "relay_rollertraining_start"
+				StartDisabled "0"
+				"OnTrigger" "trigger_start_rollertraining,Enable,,0,-1"
+				"OnTrigger" "trigger_start_rollertraining,Trigger,,0.1,-1"
+			}
+		}
+		create
+		{
+			classname "logic_auto"
+			origin "0 0 0"
+			values
+			{
+				"OnMapSpawn" "trigger_start_rollertraining,addoutput,OnTrigger relay_rollertraining_start:Disable::0:-1,0,-1"
 			}
 		}
 		create { classname "trigger_once" origin "-4354.4 5226 2372"
@@ -185,10 +205,25 @@ ep1_citadel_01
 			"values"
 			{
 				"OnMapSpawn" "lcs_al_citadel_01_rollertraining_01,addoutput,OnStart counter_rollerdoor_close:Enable::0:-1,0,-1"
+				"OnMapSpawn" "lcs_al_citadel_01_rollertraining_01,addoutput,OnCompletion coop_counter_rollerdoor_close:Add:1:0:-1,0,-1"
 			}
 		}
 
 		delete { targetname "counter_rollerdoor_close" }
+		create {
+			classname "math_counter"
+			origin "-4792 7696 2648"
+			values {
+				max "2"
+				min "0"
+				startvalue "0"
+				targetname "coop_counter_rollerdoor_close"
+				OnHitMax "door_rollertraining,SetAnimation,idle_close,5,-1"
+				OnHitMax "door_rollertraining,SetAnimation,close,0,-1"
+				OnHitMax "trigger_player_closedoor,Kill,,0,-1"
+				OnHitMax "clip_rollerdoor,Enable,,0,-1"
+				OnHitMax "clip_rollerdoor,Kill,,5,-1"
+				} }
 		create {classname "trigger_coop"
 			origin "-4792 7696 2648"
 			values {model "*16"
@@ -197,11 +232,7 @@ ep1_citadel_01
 				targetname "counter_rollerdoor_close"
 				CountType "1"
 				PlayerValue "100"
-				OnPlayersIn "door_rollertraining,SetAnimation,idle_close,5,-1"
-				OnPlayersIn "door_rollertraining,SetAnimation,close,0,-1"
-				OnPlayersIn "trigger_player_closedoor,Kill,,0,-1"
-				OnPlayersIn "clip_rollerdoor,Enable,,0,-1"
-				OnPlayersIn "clip_rollerdoor,Kill,,5,-1"
+				OnPlayersIn "coop_counter_rollerdoor_close,Add,1,0,-1"
 				} }
 
 		// activate a checkpoint during weapon strip
