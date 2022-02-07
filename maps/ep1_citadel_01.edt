@@ -78,7 +78,17 @@ ep1_citadel_01
 				OnTrigger "syn_spawn_manager,MovePlayers,,0.1,-1"
 				OnTrigger "syn_spawn_manager,SetCheckPoint,syn_spawn_player_2,0,-1"
 				OnTrigger "follow_alyx,Deactivate,,0,-1"
-				OnTrigger "syn_teleport_alyx_cit01,Teleport,,0.1,-1"} }
+				OnTrigger "alyx,StopScripting,,0,-1"
+				OnTrigger "syn_teleport_alyx_cit01,Teleport,,0.5,-1"} }
+		
+		create {classname "point_teleport"
+			origin "-5048 1496 2602"
+			values {
+				targetname "syn_teleport_alyx_cit01"
+				angles "0 0 0"
+				target "alyx"
+			} 
+		}
 
 		// create {classname "logic_auto"
 			// values {spawnflags "1"
@@ -183,15 +193,6 @@ ep1_citadel_01
 				rendermode "10"
 				excludednpc "npc_alyx"
 				targetname "modi_antideath_clip"} }
-		
-		create {classname "point_teleport"
-			origin "-5126 1460 2620"
-			values {
-				targetname "syn_teleport_alyx_cit01"
-				angles "0 180 0"
-				target "alyx"
-			} 
-		}
 
 //modi: don't stop Alyx scenarios on player fall
 		delete {classname "trigger_once" origin "-3584 6384 2384"}
