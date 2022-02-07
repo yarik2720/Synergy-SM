@@ -234,6 +234,7 @@ ep1_citadel_01
 				CountType "1"
 				PlayerValue "100"
 				OnPlayersIn "coop_counter_rollerdoor_close,Add,1,0,-1"
+				OnPlayersIn "!self,Disable,,1,1"
 				} }
 
 		// activate a checkpoint during weapon strip
