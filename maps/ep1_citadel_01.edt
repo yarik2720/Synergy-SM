@@ -289,6 +289,7 @@ ep1_citadel_01
 		}
 
 		// do not allow the field to go back up after player and rollermine triggers
+		//anti-grief: enable more rollermine charges
 		delete { targetname "clip_combineshieldwall6" }
 
 		delete { targetname "lcs_al_citadel_01_rollertraining_02" }
@@ -304,8 +305,41 @@ ep1_citadel_01
 				"OnCompletion" "relay_al_scripting_stop2,Trigger,,0.2,-1"
 			//	"OnTrigger2" "relay_combineshieldwall3_on,Trigger,,0,-1"
 				"OnStart" "alyx,StartScripting,,0,-1"
+				
+				"OnCompletion" "trigger_more_roller_charge,Enable,,10,-1"
 			}
 		}
+		delete {targetname "math_bringroller"}
+		create {
+			classname "math_counter"
+			origin "-4884.74 7709.65 2529"
+			values {
+				"targetname" "math_bringroller"
+				"max" "2"
+				"min" "0"
+				"startvalue" "0"
+				"OnHitMax" "lcs_al_citadel_01_rollertraining_02,Start,,0,-1"
+				//"OnHitMax" "trigger_roller_holdmine,Disable,,0,-1"
+				//"OnHitMax" "trigger_player_holdmine,Disable,,0,-1"
+				"OnHitMax" "math_bringroller,SetValueNoFire,0,0,-1"
+				"OnHitMax" "clip_combineshieldwall6,Enable,,0,-1"
+				"OnHitMax" "nag_bringrollermine,Kill,,0.1,-1"
+				"OnHitMax" "trigger_nagbringroller,Kill,,0,-1"
+				"OnHitMax" "trigger_alyxrunback,Enable,,0,-1"
+				"OnHitMax" "alyx,AddContext,al_hint_citRollerMineTraining:0,0,-1"
+			}
+		}
+		create { classname "trigger_multiple" origin "-4716 7688 2648"
+			values {
+				"model" "*155"
+				"targetname" "trigger_more_roller_charge"
+				"spawnflags" "1"
+				"StartDisabled" "1"
+
+				"OnTrigger" "relay_al_scripting_stop2,Trigger,1,0,-1"
+			}
+		}
+
 
 
 //Trav|Edt - Functionality check
