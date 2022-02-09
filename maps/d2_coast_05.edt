@@ -119,7 +119,7 @@ d2_coast_05
 				VehicleType "4"
 				VehicleSize "192"
 				model "models/vehicles/8seattruck.mdl"
-				vehiclescript "scripts/vehicles/truck.txt""} }
+				vehiclescript "scripts/vehicles/truck.txt"} }
 		
 		create {classname "info_vehicle_spawn" origin "8000 -12160 1792"
 			values {targetname "syn_spawn_vehicle_1_high"
