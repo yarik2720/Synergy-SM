@@ -137,10 +137,10 @@ d2_coast_03
 				StartEnabled "0"
 				StartGunEnabled "1"
 				RespawnVehicle "1"
-				VehicleType "2"
-				VehicleSize "164"
-				model "models/airboat.mdl"
-				VehicleScript "scripts/vehicles/airboat.txt"} }
+				VehicleType "4"
+				VehicleSize "192"
+				model "models/vehicles/8seattruck.mdl"
+				vehiclescript "scripts/vehicles/truck.txt"} }
 		
 		create {classname "logic_difficulty"
 			values
@@ -355,10 +355,10 @@ d2_coast_03
 				StartEnabled "0"
 				StartGunEnabled "1"
 				RespawnVehicle "1"
-				VehicleType "2"
-				VehicleSize "164"
-				model "models/airboat.mdl"
-				VehicleScript "scripts/vehicles/airboat.txt"} }
+				VehicleType "4"
+				VehicleSize "192"
+				model "models/vehicles/8seattruck.mdl"
+				vehiclescript "scripts/vehicles/truck.txt"} }
 //Boathouse Speical
 		create {classname "prop_vehicle_mp"
 			origin "-200 8832 112"

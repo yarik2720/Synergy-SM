@@ -128,8 +128,7 @@ d2_coast_07
 				VehicleType "2"
 				VehicleSize "164"
 				model "models/airboat.mdl"
-				VehicleScript "scripts/vehicles/airboat.txt"
-				OnSpawnVehicle "syn_moreplayers,CheckSkill,,5,-1"} }
+				VehicleScript "scripts/vehicles/airboat.txt"} }
 		
 		create {classname "logic_difficulty"
 			values
@@ -262,10 +261,10 @@ d2_coast_07
 				StartEnabled "0"
 				StartGunEnabled "1"
 				RespawnVehicle "1"
-				VehicleType "2"
-				VehicleSize "164"
-				model "models/airboat.mdl"
-				VehicleScript "scripts/vehicles/airboat.txt"} }
+				VehicleType "4"
+				VehicleSize "192"
+				model "models/vehicles/8seattruck.mdl"
+				vehiclescript "scripts/vehicles/truck.txt"} }
 
 //Toggle Static Spawning on return
 		create {classname "trigger_once" origin "3476.13 6971.17 2164.43"

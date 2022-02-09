@@ -116,11 +116,10 @@ d2_coast_05
 				StartEnabled "0"
 				StartGunEnabled "1"
 				RespawnVehicle "1"
-				VehicleType "2"
-				VehicleSize "164"
-				model "models/airboat.mdl"
-				VehicleScript "scripts/vehicles/airboat.txt"
-				OnSpawnVehicle "syn_moreplayers,CheckSkill,,5,-1"} }
+				VehicleType "4"
+				VehicleSize "192"
+				model "models/vehicles/8seattruck.mdl"
+				vehiclescript "scripts/vehicles/truck.txt""} }
 		
 		create {classname "info_vehicle_spawn" origin "8000 -12160 1792"
 			values {targetname "syn_spawn_vehicle_1_high"
@@ -131,8 +130,7 @@ d2_coast_05
 				VehicleType "2"
 				VehicleSize "164"
 				model "models/airboat.mdl"
-				VehicleScript "scripts/vehicles/airboat.txt"
-				OnSpawnVehicle "syn_moreplayers,CheckSkill,,5,-1"} }
+				VehicleScript "scripts/vehicles/airboat.txt"} }
 
 		create {classname "logic_difficulty"
 			values
