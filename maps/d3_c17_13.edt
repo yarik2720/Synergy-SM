@@ -69,12 +69,15 @@ d3_c17_13
 	//	delete {targetname "strider2_physobjects1"}
 	//	delete {targetname "strider2_physobjects2"}
 	//	delete {targetname "strider2_physobjects3"}
-	//	edit {targetname "strider2_physobjects1" {classname "prop_physics" model "models/props_vehicles/car002a_physics.mdl"} }
-	//	edit {targetname "strider2_physobjects2" {classname "prop_physics" model "models/props_vehicles/car002a_physics.mdl"} }
-	//	edit {targetname "strider2_physobjects3" {model "models/props_vehicles/car002b_physics.mdl"} }
+	  	edit {targetname "strider2_physobjects1" values {classname "prop_physics" model "models/props_vehicles/car002a_physics.mdl"} }
+	  	edit {targetname "strider2_physobjects2" values {classname "prop_physics" model "models/props_vehicles/car002a_physics.mdl"} }
+	  	edit {targetname "strider2_physobjects3" values {classname "prop_physics" model "models/props_vehicles/car002b_physics.mdl"} }
 
 		// create intermission
 		"create" { "classname" "info_intermission" "origin" "5030.713379 1261.108276 187.134674" "values" { "angles" "0 -40 0" } }
+
+//fix car stucks on the ground
+		edit {targetname "physprop_car" values {"origin" "6708 1532 30" "angles" "0 155 0"} }
 
 //Trav|Edt - allow striders to stomp on players
 		edit {targetname "strider1" values {spawnflags "68868"} }
