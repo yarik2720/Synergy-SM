@@ -362,6 +362,8 @@ ep2_outland_10
 				"OnTrigger" "jeep,Lock,,0,-1"
 				"OnTrigger" "syn_spawn_manager,SetCheckPoint,syn_spawn_player_2,0,-1"
 				"OnTrigger" "syn_spawn_manager,TeleportPlayers,syn_spawn_player_2TP,1,-1"
+				OnTrigger "prop_vehicle_*,Lock,,0.1,-1"
+				OnTrigger "prop_vehicle_*,TurnOff,,0.5,-1"
 			}
 		}
 
