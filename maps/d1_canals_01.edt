@@ -592,6 +592,19 @@ d1_canals_01
 		create {classname "infodecal"
 			origin "960 -504 168"
 			values {texture "vgui/gfx/synergy" } }
+			
+//block skip
+		create {classname "trigger_hurt"
+			origin "256 -628 608"
+			values {
+				//model "*25"
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "640 672 112"
+				targetname "push_test"
+				spawnflags "1"
+				damagetype "0"
+				damage "1500"} }
+
 
 //Trav|Edt - Stop train sound at boxcar (only needed when train is enabled, disabled cuz of lag spike (due to ragdoll/npc caught in train?)
 		create {classname "trigger_once"
