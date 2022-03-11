@@ -438,6 +438,52 @@ d1_canals_01
 				Negated "1"
 				filterclass "item_item_crate"} }
 
+		//another way to remove stuff
+		create {
+			classname "trigger_multiple"
+			origin "2603.48 14864 392"
+			values {
+				edt_getbspmodelfor_classname "trigger_hurt"
+				edt_getbspmodelfor_origin "2603.48 14864 392"
+				//wait "1"
+				spawnflags "1032"
+				StartDisabled "0"
+				parentname "looping_traincar2"
+				OnStartTouch "!activator,Break,,0,-1"
+				OnStartTouch "!activator,Kill,,0,-1"
+			}
+		}
+		//from first train too
+		create {
+			classname "trigger_multiple"
+			origin "3171.48 15056 344"
+			values {
+				edt_getbspmodelfor_classname "trigger_hurt"
+				edt_getbspmodelfor_origin "3171.48 15056 344"
+				//wait "1"
+				spawnflags "1032"
+				StartDisabled "0"
+				parentname "looping_traincar1"
+				OnStartTouch "!activator,Break,,0,-1"
+				OnStartTouch "!activator,Kill,,0,-1"
+			}
+		}
+		//failsafe for first train as it have low ladder that can stuck train by props
+		create {
+			classname "trigger_multiple"
+			origin "2770 15056 344"
+			values {
+				edt_getbspmodelfor_classname "trigger_hurt"
+				edt_getbspmodelfor_origin "3171.48 15056 344"
+				//wait "1"
+				spawnflags "1032"
+				StartDisabled "0"
+				parentname "looping_traincar1"
+				OnStartTouch "!activator,Break,,0,-1"
+				OnStartTouch "!activator,Kill,,0,-1"
+			}
+		}
+
 //Trav|Edt - fix train lags
 		edit {targetname "track_4" values {origin "248 -12864 341"} }
 
