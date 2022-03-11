@@ -41,6 +41,7 @@ d1_trainstation_01
 				// storage room
 				OnMapSpawn "trigger_storage_close_door_1,AddOutput,target syn_barneyroom_wait_target2,0,-1"
 				OnMapSpawn "trigger_storage_close_door_1,AddOutput,OnPlayersIn !self:TeleportPlayersNotTouching::0:1,0,-1"
+				OnMapSpawn "trigger_storage_close_door_1,AddOutput,OnPlayersIn syn_spawn_manager:SetCheckpoint:syn_spawn_player_4:0:-1,0,-1"
 				OnMapSpawn "trigger_storage_close_door_1,AddOutput,OnPlayersIn !self:Disable::0.1:1,0,-1"
 				OnMapSpawn "storage_room_door,AddOutput,OnFullyClosed syn_end_ladder:Enable::0:1,0,-1"
 				// ?
@@ -73,6 +74,14 @@ d1_trainstation_01
 		// Outside train
 		create {classname "info_player_coop" origin "-5385 -1968 16"
 			values {angles "0 0 0" targetname "syn_spawn_player_2" StartDisabled "1"} }
+
+		// Barney room
+		create {classname "info_player_coop" origin "-3446.15 -179.48 0"
+			values {angles "0 0 0" targetname "syn_spawn_player_3" StartDisabled "1"} }
+
+		// Crates room
+		create {classname "info_player_coop" origin "-3531 41 0"
+			values {angles "0 0 0" targetname "syn_spawn_player_4" StartDisabled "1"} }
 
 		// Intro wait camera
 		create {classname "point_viewcontrol" origin "-5280 -1504 592"
@@ -452,6 +461,7 @@ d1_trainstation_01
 				PlayerValue "50"
 				OnTrigger "!self,TeleportPlayersNotTouching,,15,1"
 				OnTrigger "barney_room_blocker,Enable,,15,1"
+				OnTrigger "syn_spawn_manager,SetCheckpoint,syn_spawn_player_3,,1,1"
 				OnTrigger "syn_barney_door_2,UnLock,,15,1"
 				OnTrigger "syn_barney_door_2,Close,,15.1,1"
 				OnTrigger "syn_barney_door_2,Lock,,16,1"
