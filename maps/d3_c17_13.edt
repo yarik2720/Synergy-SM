@@ -131,7 +131,7 @@ d3_c17_13
 			values {
 				//model "*35"
 				edt_mins "-150 -55 -60"
-				edt_maxs "200 180 60"
+				edt_maxs "150 150 60"
 				target "syn_cooptarg_02"
 				spawnflags "1"
 				counttype "1"
