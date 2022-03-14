@@ -385,6 +385,7 @@ ep2_outland_10
 				"OnTrigger" "syn_teleport_jeep,Teleport,,0.5,-1"
 				"OnTrigger" "jeep,Unlock,,3,-1"
 				"OnTrigger" "jeep,EnablePhysGun,,3,-1"
+				OnTrigger "jeep,TurnOn,,3,-1"
 
 				"OnTrigger" "syn_spawn_manager,SetCheckPoint,syn_spawn_player_3,0,-1"
 				"OnTrigger" "syn_spawn_manager,MovePlayers,,0.1,-1"
