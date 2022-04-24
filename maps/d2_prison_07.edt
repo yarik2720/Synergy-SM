@@ -483,7 +483,7 @@ d2_prison_07
 		create {classname "logic_relay"
 			values {spawnflags "2"
 				targetname "logic_room5_spawn_combine_upper"
-				OnTrigger "counter_room5_total_living_enemies,Add,2,0,-1"
+				//OnTrigger "counter_room5_total_living_enemies,Add,2,0,-1"
 				OnTrigger "logic_spawn_single_combine_upper,PickRandom,,0,-1"} }
 
 		create {classname "logic_case"
@@ -493,14 +493,17 @@ d2_prison_07
 				Case03 "3"
 				OnCase01 "maker_combine_room5_upper_1,AddMaxChildren,2,0,-1"
 				OnCase01 "maker_combine_room5_upper_1,Enable,,0.1,-1"
+				OnCase01 "counter_room5_total_living_enemies,Add,2,0,-1"
 				OnCase02 "maker_combine_room5_upper_2,AddMaxChildren,2,0,-1"
 				OnCase02 "maker_combine_room5_upper_2,Enable,,0.1,-1"
+				OnCase02 "counter_room5_total_living_enemies,Add,2,0,-1"
 //add counter for extra combine and add mai combine
 				//OnCase02 "trav_maker_combine_room5_upper_2,AddMaxChildren,1,0,-1"
 				//OnCase02 "counter_room5_total_living_enemies,Add,1,0,-1"
 				//OnCase02 "trav_maker_combine_room5_upper_2,Enable,,0.1,-1"
-				OnCase03 "maker_combine_room5_upper_3,AddMaxChildren,2,0,-1"
-				OnCase03 "maker_combine_room5_upper_3,Enable,,0.1,-1"} }
+				OnCase03 "maker_combine_room5_upper_3,AddMaxChildren,1,0,-1"
+				OnCase03 "maker_combine_room5_upper_3,Enable,,0.1,-1"
+				OnCase03 "counter_room5_total_living_enemies,Add,1,0,-1"} }
 
 		//create {classname "logic_relay"
 		//	values {spawnflags "2"
@@ -598,6 +601,15 @@ d2_prison_07
 		create {classname "info_node" origin "3688 -4328 -412"}
 		create {classname "info_node" origin "3688 -4392 -412"}
 		
+//fixing upper_3 combines stuck
+	edit {
+		classname "assault_rallypoint"
+		origin "4768 -4960 -400"
+		values {
+			assaultpoint "assault_room5_lower_3"
+		}
+	}
+
 //modi: prevent spawnkill
 		create {
 			classname "trigger_push"
