@@ -227,7 +227,9 @@ ep1_citadel_03
 				"OnTrigger" "lcs_alyx_corecomplete,Resume,,0,-1"
 				"OnTrigger" "relay_core_sealed,Trigger,,0,-1"
 				"OnTrigger" "door_core_breaker_room_04,SetAnimation,idle_closed,0,-1"
-
+				// Remove sprite that was left in
+				"OnTrigger" "sprite_laser_03b,HideSprite,,0.1,-1"
+				"OnTrigger" "sprite_laser_03b,kill,,0.2,-1"
 				"OnTrigger" "syn_spawn_manager,SetCheckpoint,syn_spawn_player_4,0,-1"
 				"OnTrigger" "syn_spawn_manager,MovePlayers,,0.1,-1"
 			}
