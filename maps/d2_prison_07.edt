@@ -309,6 +309,34 @@ d2_prison_07
 			values {targetname "trav_turrets_filter"
 				filtername "turret_buddy" } }
 
+//play soundtrack when wave starts logic_room5_begin_assault
+		"create"
+		{
+			"classname" "logic_auto"
+			"origin" "4148 -4032 -476"
+			"values"
+			{
+				"spawnflags" "1"
+				OnMapSpawn "logic_room5_begin_assault,AddOutput,OnTrigger modi_song_second_wave:PlaySound::4:-1,5,-1"
+			}
+		}
+		
+		create 
+		{
+			classname "ambient_generic"
+			values 
+			{
+				origin "4148 -4032 -476"
+				pitchstart "100"
+				pitch "100"
+				health "10"
+				message "song16"
+				targetname "modi_song_second_wave"
+				spawnflags "49"
+				radius "1250"
+			}
+		}
+
 		create {classname "trigger_teleport"
 			origin "2180.5 -3160 -723.5"
 			values {
