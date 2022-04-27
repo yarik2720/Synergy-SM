@@ -92,7 +92,7 @@ d3_breen_01
 		delete {classname "trigger_multiple" origin "256 0 -1920"}
 
 //todo: remove after code optimisations made -- modi: fix weird teleportations caused by lag compensation on func_breakable (while player shoots on them)
-		edit {targetname "citadel_breakable_alyxglass" values {"spawnflags" "3073‬"}}
+		edit {targetname "citadel_breakable_alyxglass" values {"spawnflags" "3073"}}
 
 //Trav|Edt - lower ragdoll count
 		edit {classname "game_ragdoll_manager" values {MaxRagdollCount "2"} }//4

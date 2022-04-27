@@ -85,7 +85,7 @@ d3_c17_11
 				OnMapSpawn "skybridge_group_a_soldiers_maker,AddMaxChildren,5,10,-1"} }
 				
 //todo: remove after code optimisations made -- modi: fix weird teleportations caused by lag compensation on func_breakable (while player shoots on them)
-		edit {classname "func_breakable" values {"spawnflags" "3073‬"}}
+		edit {classname "func_breakable" values {"spawnflags" "3073"}}
 
 //Trav|Edt - Prevent door(s) from autoclosing
 		//edit {classname "prop_door_rotating"

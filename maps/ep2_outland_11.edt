@@ -89,7 +89,7 @@ ep2_outland_11
 				targetname "gnome"} }
 
 //todo: remove after code optimisations made -- modi: fix weird teleportations caused by lag compensation on func_breakable (while player shoots on them)
-		edit {classname "func_breakable" origin "2035 -9673 -1347" values {"spawnflags" "3073‬"}}
+		edit {classname "func_breakable" origin "2035 -9673 -1347" values {"spawnflags" "3073"}}
 
 //Trav|Edt - prevent afk or bully players from blocking progress by staying in tram
 		create {classname "trigger_once"
