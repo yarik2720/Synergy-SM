@@ -11,7 +11,7 @@ d2_prison_08
 				OnMapSpawn "teleport_lift_platform_1,SetAnimation,close,0,-1"
 				OnMapSpawn "alyx_goal_follow_1,Activate,,1,-1"
 				OnMapSpawn "prop_camerasx,SetAnimation,idlealert,0,-1"
-				OnNewGame "spawn_alyx,Spawn,,0.75,1"} }
+				OnNewGame "spawn_alyx,Enable,,0.75,1"} }
 		edit {classname "func_areaportal" values {targetname "disabledPortal" StartOpen "1"} }
 
 //Prevent Backtracking
@@ -92,8 +92,8 @@ d2_prison_08
 		create {classname "logic_auto"
 			values {
 				spawnflags "1"
-				OnMapSpawn "alyx,AddOutput,OnDeath syn_gameover_message:Display::0:-1,1,-1"
-				OnMapSpawn "alyx,AddOutput,OnDeath loadsaved_alyx_died:Reload::0:-1,1,-1"
+				OnMapSpawn "alyx,AddOutput,OnDeath syn_gameover_message:Display::0:-1,5,-1"
+				OnMapSpawn "alyx,AddOutput,OnDeath loadsaved_alyx_died:Reload::0:-1,5,-1"
 			}
 		}
 		create {
@@ -463,7 +463,25 @@ d2_prison_08
 				targetname "trigger_teleport_player_enter_1"
 				OnTrigger "trav_trigger_teleport_player_enter_1,Enable,,10,-1"
 				OnTrigger "trav_hud_timer,Start,10,0,-1"
-				OnTrigger "trav_hunter_template,ForceSpawn,,1,-1"} }
+				OnTrigger "trav_hunter_template,ForceSpawn,,1,-1"
+				OnTrigger "song25_Teleporter,PlaySound,,2,-1"} }
+
+//play music
+		create 
+		{
+			classname "ambient_generic"
+			values 
+			{
+				origin "-4078 -4488 442"
+				pitchstart "100"
+				pitch "100"
+				health "10"
+				message "song25" // HL2_song25_teleporter - Miscount Detected
+				targetname "song25_Teleporter"
+				spawnflags "49"
+				radius "1250"
+			}
+		}
 
 //Trav|Edt - add hunters at end for noreason			// no EP2 content in HL2!
 //		create {classname "npc_hunter"

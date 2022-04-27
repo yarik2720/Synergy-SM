@@ -88,7 +88,7 @@ d2_prison_06
 		create {classname "logic_auto"
 			values {
 				spawnflags "1"
-				OnMapSpawn "alyx,AddOutput,OnDeath syn_gameover_message:Display::0:-1,1,-1"
+				OnMapSpawn "alyx,AddOutput,OnDeath syn_gameover_message:Display::0:-1,5,-1"
 			}
 		}
 		create {
