@@ -461,7 +461,7 @@ d1_trainstation_01
 				PlayerValue "50"
 				OnTrigger "!self,TeleportPlayersNotTouching,,15,1"
 				OnTrigger "barney_room_blocker,Enable,,15,1"
-				OnTrigger "syn_spawn_manager,SetCheckpoint,syn_spawn_player_3,,1,1"
+				OnTrigger "syn_spawn_manager,SetCheckpoint,syn_spawn_player_3,1,1"
 				OnTrigger "syn_barney_door_2,UnLock,,15,1"
 				OnTrigger "syn_barney_door_2,Close,,15.1,1"
 				OnTrigger "syn_barney_door_2,Lock,,16,1"
