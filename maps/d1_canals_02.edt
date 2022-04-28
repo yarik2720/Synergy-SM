@@ -90,12 +90,12 @@ d1_canals_02
 		create {classname "npc_metropolice" origin "3236.32 -719.37 -383.97" values {additionalequipment "weapon_pistol" angles "0 -150 0" targetname "syn_vint"} }
 
 //Trav|Edt - Setup Bridge
-		delete {classname "phys_hinge" origin "3057 -2600 -676"}
-		edit {targetname "teeter_totter_plank" values {classname "func_brush"} }//3008 -2586 -676
-		create {classname "logic_auto"
-			values {spawnflags "1"
-				OnMapSpawn "teeter_totter_plank,AddOutput,angles 0 0 20,0,-1"
-				OnMapSpawn "teeter_totter_plank,AddOutput,origin 3008 -2586 -670,0,-1"} } 
+	//	delete {classname "phys_hinge" origin "3057 -2600 -676"}
+	//	edit {targetname "teeter_totter_plank" values {classname "func_brush"} }//3008 -2586 -676
+	//	create {classname "logic_auto"
+	//		values {spawnflags "1"
+	//			OnNewGame "teeter_totter_plank,AddOutput,angles 0 0 20,0,-1"
+	//			OnNewGame "teeter_totter_plank,AddOutput,origin 3008 -2586 -670,0,-1"} } 
 
 //Trav|Edt - add intro crate
 		create {classname "item_item_crate"
