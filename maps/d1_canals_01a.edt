@@ -182,6 +182,10 @@ d1_canals_01a
 				edt_getbspmodelfor_classname "func_brush"
 				edt_getbspmodelfor_origin "394 6304 30"
 				targetname "trav_clips"} }
+//modi: copy from d2_coast_04 Trav|Edt - save major network usage by removeing prop_ragdoll cars
+		create {classname "logic_auto"
+			values {spawnflags "1"
+				OnMapSpawn "prop_ragdoll,DisableMotion,,10,-1"} }
 
 //Trav|Edt - Add a wave of cops
 		create {classname "logic_difficulty"
