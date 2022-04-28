@@ -45,6 +45,9 @@ d1_trainstation_03
  
 		create {classname "info_player_coop" origin "-4964 -4252 1"
 			values {angles "0 135 0" targetname "syn_spawn_player_1"} }
+ 
+		create {classname "info_player_coop" origin "-4946 -4566 540"
+			values {angles "0 -90 0" targetname "syn_spawn_player_2" StartDisabled "1"} }
 
 		// -- Wait01 --
 		//delete {targetname "knockout_fade"}
@@ -89,10 +92,10 @@ d1_trainstation_03
 		// -- Wait02 --
 		edit {targetname "trigger_PreRaid_Peeker_retreat" values {StartDisabled "1"} }
 
-		create {classname "trigger_coop" origin "-4078 -4488 442"
+		create {classname "trigger_coop" origin "-3884 -4615 444"
 			values
 			{
-				edt_getbspmodelfor_targetname "trigger_breakin_knockout1"
+				edt_getbspmodelfor_targetname "trigger_rush_start"
 				spawnflags "1"
 				targetname "syn_wait02_coop"
 				target "syn_wait02_coop_target"
@@ -100,7 +103,7 @@ d1_trainstation_03
 				CountType "1"
 				PlayerValue "50"
 				OnPlayersIn "syn_wait02_blocker,Kill,,0,1"
-				OnPlayersIn "!self,TeleportPlayersNotTouching,,0,1"
+				OnPlayersIn "!self,TeleportPlayersNotTouching,,0.5,1"
 				OnPlayersIn "trigger_PreRaid_Peeker_retreat,Trigger,1,0,1"// TODO remove flag
 				OnPlayersIn "trigger_rush_start,Trigger,,1,1"
 				OnPlayersIn "song25_Teleporter,PlaySound,,2,-1"
@@ -124,7 +127,7 @@ d1_trainstation_03
 			}
 		}
 
-		create {classname "info_target" origin "-4024 -4608 385" values {targetname "syn_wait02_coop_target" angles "0 180 0"} }
+		create {classname "info_target" origin "-3976 -4500 408" values {targetname "syn_wait02_coop_target" angles "0 80 0"} }
 
 		//Trav|Edt - move players near end (hotfix until more thorough one is done later)
 		//create {classname "trigger_once"
@@ -140,13 +143,17 @@ d1_trainstation_03
 	//	"delete" { "classname" "npc_metropolice" "origin" "-3568.00 -4752.00 393.00" }
 
 		// close doorman when everyone is in
+			
 		edit {classname "trigger_once" origin "-4948 -4740 576" values {targetname "syn_end_trig" StartDisabled "1"} }
+		
+		//failsafe if someone suicides after door close		
 		create {classname "trigger_coop" origin "-5052 -5129 570"
 			values {//model "*117"
 				edt_getbspmodelfor_targetname "trigger_breakin_knockout1"
 				spawnflags "1"
 				CountType "1"
 				PlayerValue "100"
+				OnPlayersIn "syn_spawn_manager,SetCheckpoint,syn_spawn_player_2,0,1"
 				OnPlayersIn "syn_end_trig,Trigger,,0,1"
 				OnPlayersIn "!self,Disable,,0,1"} }
 
