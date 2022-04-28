@@ -127,10 +127,10 @@ d2_coast_05
 				StartEnabled "0"
 				StartGunEnabled "1"
 				RespawnVehicle "1"
-				VehicleType "2"
-				VehicleSize "164"
-				model "models/airboat.mdl"
-				VehicleScript "scripts/vehicles/airboat.txt"} }
+				VehicleType "4"
+				VehicleSize "192"
+				model "models/vehicles/buggy_p2.mdl"//models/vehicles/buggy_p2.mdl
+				VehicleScript "scripts/vehicles/jeep_test.txt""} }
 
 		create {classname "logic_difficulty"
 			values

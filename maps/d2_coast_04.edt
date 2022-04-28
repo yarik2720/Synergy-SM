@@ -120,10 +120,10 @@ d2_coast_04
 				StartEnabled "0"
 				StartGunEnabled "1"
 				RespawnVehicle "1"
-				VehicleType "2"
-				VehicleSize "164"
-				model "models/airboat.mdl"
-				VehicleScript "scripts/vehicles/airboat.txt"} }
+				VehicleType "4"
+				VehicleSize "192"
+				model "models/vehicles/buggy_p2.mdl"//models/vehicles/buggy_p2.mdl
+				VehicleScript "scripts/vehicles/jeep_test.txt"} }
 		
 		create {classname "info_vehicle_spawn" origin "-9600 -632 112"
 			values {targetname "syn_spawn_vehicle_1_high"
