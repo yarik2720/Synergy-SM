@@ -137,6 +137,14 @@ d2_prison_02
 		create {classname "logic_auto"
 			values {spawnflags "1"
 				OnMapSpawn "door_2*,AddOutPut,OnFullyOpen trav_pzombie1_sched:StartSchedule::0:-1,4,-1"} }
+//make sound overwatch_freeman_spotted play once
+		edit {
+			targetname "double_doors"
+			origin "-1905 2666.18 566"
+			values {
+				OnOpen "overwatch_freeman_spotted,PlaySound,,3,1"
+			} 
+		}
 
 //Trav|Edt - Add stuff
 		create {classname "npc_poisonzombie"
