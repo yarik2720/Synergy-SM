@@ -108,17 +108,29 @@ d2_coast_03
 				vehiclescript "scripts/vehicles/truck.txt"
 				OnSpawnVehicle "syn_moreplayers,CheckSkill,,5,-1"} }
 		
+		create {classname "info_vehicle_spawn" origin "-7340 -12445 1050"
+			values {targetname "syn_spawn_vehicle_1_med"
+				angles "0 -90 0"
+				StartEnabled "0"
+				StartGunEnabled "1"
+				RespawnVehicle "1"
+				VehicleType "4"
+				VehicleSize "192"
+				model "models\vehicles\buggy_p2.mdl"
+				VehicleScript "scripts/vehicles/jeep_test.txt"} }
+		
 		create {classname "info_vehicle_spawn" origin "-7104 -12480 1050"
 			values {targetname "syn_spawn_vehicle_1_high"
 				angles "0 -90 0"
 				StartEnabled "0"
 				StartGunEnabled "1"
 				RespawnVehicle "1"
-				VehicleType "2"
-				VehicleSize "164"
-				model "models/airboat.mdl"
-				VehicleScript "scripts/vehicles/airboat.txt"
-				OnSpawnVehicle "syn_moreplayers,CheckSkill,,5,-1"} }
+				VehicleType "4"
+				VehicleSize "192"
+				model "models\vehicles\buggy_p2.mdl"
+				VehicleScript "scripts/vehicles/jeep_test.txt"
+				OnSpawnVehicle "syn_moreplayers,CheckSkill,,5,-1"
+				OnSpawnVehicle "modi_high_vehicles_counter,Add,1,,-1"} }
 		
 		create {classname "info_vehicle_spawn" origin "-7340 -12445 1050"
 			values {targetname "syn_spawn_vehicle_1_high"
@@ -128,7 +140,7 @@ d2_coast_03
 				RespawnVehicle "1"
 				VehicleType "4"
 				VehicleSize "192"
-				model "models\vehicles\buggy_p2.mdl"//models/buggy.mdl
+				model "models\vehicles\buggy_p2.mdl"
 				VehicleScript "scripts/vehicles/jeep_test.txt"} }
 		
 		create {classname "info_vehicle_spawn" origin "-7104 -12480 1050"
@@ -156,6 +168,14 @@ d2_coast_03
 				OnNotHigh "syn_spawn_vehicle_1_high,Disable,,0,-1"
 			}
 		}
+		
+		create {classname "math_counter"
+			values {targetname "modi_high_vehicles_counter"
+				startvalue "0"
+				min "0"
+				max "4"
+				OnHitMax "syn_spawn_vehicle_1_high,Disable,,0,-1"
+				OnHitMax "syn_moreplayers,Disable,,0,-1"} }
 		
 		create {classname "logic_difficulty"
 			values
@@ -245,10 +265,19 @@ d2_coast_03
 				StartEnabled "0"
 				StartGunEnabled "1"
 				RespawnVehicle "1"
-				VehicleType "2"
-				VehicleSize "164"
-				model "models/airboat.mdl"
-				VehicleScript "scripts/vehicles/airboat.txt"} }
+				VehicleType "4"
+				VehicleSize "192"
+				model "models/vehicles/buggy_p2.mdl"
+				VehicleScript "scripts/vehicles/jeep_test.txt"
+				OnSpawnVehicle "modi_high_vehicles_counter2,Add,1,,-1"} }
+		
+		create {classname "math_counter"
+			values {targetname "modi_high_vehicles_counter2"
+				startvalue "0"
+				min "0"
+				max "4"
+				OnHitMax "syn_spawn_vehicle_2_high,Disable,,0,-1"
+				OnHitMax "syn_moreplayerssecond,Disable,,0,-1"} }
 //Binocular House
 		create {classname "info_vehicle_spawn" origin "-4831.99 4000.01 304"//-5248.01 4751.99 48
 			values {targetname	"syn_spawn_vehicle_3"
@@ -258,7 +287,7 @@ d2_coast_03
 				RespawnVehicle "1"
 				VehicleType "4"
 				VehicleSize "192"
-				model "models/vehicles/buggy_p2.mdl"//models/vehicles/buggy_p2.mdl
+				model "models/vehicles/buggy_p2.mdl"
 				VehicleScript "scripts/vehicles/jeep_test.txt"} }
 
 		create {classname "info_vehicle_spawn" origin "-4831.99 4000.01 304"
@@ -278,10 +307,19 @@ d2_coast_03
 				StartEnabled "0"
 				StartGunEnabled "1"
 				RespawnVehicle "1"
-				VehicleType "2"
-				VehicleSize "164"
-				model "models/airboat.mdl"
-				VehicleScript "scripts/vehicles/airboat.txt"} }
+				VehicleType "4"
+				VehicleSize "192"
+				model "models/vehicles/buggy_p2.mdl"
+				VehicleScript "scripts/vehicles/jeep_test.txt
+				OnSpawnVehicle "modi_high_vehicles_counter3,Add,1,,-1"} }
+		
+		create {classname "math_counter"
+			values {targetname "modi_high_vehicles_counter3"
+				startvalue "0"
+				min "0"
+				max "4"
+				OnHitMax "syn_spawn_vehicle_3_high,Disable,,0,-1"
+				OnHitMax "syn_moreplayersthird,Disable,,0,-1"} }
 //Boathouse
 		create {classname "info_vehicle_spawn" origin "504.01 8407.99 87.99"
 			values {targetname	"syn_spawn_vehicle_4"
@@ -291,7 +329,7 @@ d2_coast_03
 				RespawnVehicle "1"
 				VehicleType "4"
 				VehicleSize "192"
-				model "models/vehicles/buggy_p2.mdl"//models/vehicles/buggy_p2.mdl
+				model "models/vehicles/buggy_p2.mdl"
 				VehicleScript "scripts/vehicles/jeep_test.txt"} }
 
 		create {classname "info_vehicle_spawn" origin "504.01 8407.99 87.99"
@@ -311,10 +349,19 @@ d2_coast_03
 				StartEnabled "0"
 				StartGunEnabled "1"
 				RespawnVehicle "1"
-				VehicleType "2"
-				VehicleSize "164"
-				model "models/airboat.mdl"
-				VehicleScript "scripts/vehicles/airboat.txt"} }
+				VehicleType "4"
+				VehicleSize "192"
+				model "models/vehicles/buggy_p2.mdl"
+				VehicleScript "scripts/vehicles/jeep_test.txt
+				OnSpawnVehicle "modi_high_vehicles_counter4,Add,1,,-1"} }
+		
+		create {classname "math_counter"
+			values {targetname "modi_high_vehicles_counter4"
+				startvalue "0"
+				min "0"
+				max "4"
+				OnHitMax "syn_spawn_vehicle_4_high,Disable,,0,-1"
+				OnHitMax "syn_moreplayersfourth,Disable,,0,-1"} }
 //Odessa
 		create {classname "info_vehicle_spawn" origin "8048 3840 336"
 			values {targetname	"syn_spawn_vehicle_5"
@@ -344,10 +391,11 @@ d2_coast_03
 				StartEnabled "0"
 				RespawnVehicle "1"
 				StartGunEnabled "1"
-				VehicleType "2"
+				VehicleType "4"
 				VehicleSize "192"
-				model "models/airboat.mdl"
-				VehicleScript "scripts/vehicles/airboat.txt"} }
+				model "models/vehicles/buggy_p2.mdl"
+				VehicleScript "scripts/vehicles/jeep_test.txt"
+				OnSpawnVehicle "modi_high_vehicles_counter5,Add,1,,-1"} }
 		
 		create {classname "info_vehicle_spawn" origin "8165 3562 336"
 			values {targetname	"syn_spawn_vehicle_5_high"
@@ -359,6 +407,14 @@ d2_coast_03
 				VehicleSize "192"
 				model "models/vehicles/8seattruck.mdl"
 				vehiclescript "scripts/vehicles/truck.txt"} }
+		
+		create {classname "math_counter"
+			values {targetname "modi_high_vehicles_counter5"
+				startvalue "0"
+				min "0"
+				max "4"
+				OnHitMax "syn_spawn_vehicle_5_high,Disable,,0,-1"
+				OnHitMax "syn_moreplayersfifth,Disable,,0,-1"} }
 //Boathouse Speical
 		create {classname "prop_vehicle_mp"
 			origin "-200 8832 112"

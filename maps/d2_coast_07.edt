@@ -113,11 +113,12 @@ d2_coast_07
 				StartEnabled "0"
 				StartGunEnabled "1"
 				RespawnVehicle "1"
-				VehicleType "2"
-				VehicleSize "164"
-				model "models/airboat.mdl"
-				VehicleScript "scripts/vehicles/airboat.txt"
-				OnSpawnVehicle "syn_moreplayers,CheckSkill,,5,-1"} }
+				VehicleType "4"
+				VehicleSize "192"
+				model "models/vehicles/buggy_p2.mdl"
+				VehicleScript "scripts/vehicles/jeep_test.txt"
+				OnSpawnVehicle "syn_moreplayers,CheckSkill,,5,-1"
+				OnSpawnVehicle "modi_high_vehicles_counter,Add,1,,-1"} }
 		
 		create {classname "info_vehicle_spawn" origin "-7846 5792 1732"
 			values {targetname "syn_spawn_vehicle_1_high"
@@ -144,6 +145,14 @@ d2_coast_07
 				OnNotHigh "syn_spawn_vehicle_1_high,Disable,,0,-1"
 			}
 		}
+		
+		create {classname "math_counter"
+			values {targetname "modi_high_vehicles_counter"
+				startvalue "0"
+				min "0"
+				max "4"
+				OnHitMax "syn_spawn_vehicle_1_high,Disable,,0,-1"
+				OnHitMax "syn_moreplayers,Disable,,0,-1"} }
 		
 		create {classname "logic_difficulty"
 			values
@@ -204,10 +213,19 @@ d2_coast_07
 				StartEnabled "0"
 				StartGunEnabled "1"
 				RespawnVehicle "1"
-				VehicleType "2"
-				VehicleSize "164"
-				model "models/airboat.mdl"
-				VehicleScript "scripts/vehicles/airboat.txt"} }
+				VehicleType "4"
+				VehicleSize "192"
+				model "models/vehicles/buggy_p2.mdl"
+				VehicleScript "scripts/vehicles/jeep_test.txt"
+				OnSpawnVehicle "modi_high_vehicles_counter2,Add,1,,-1"} }
+		
+		create {classname "math_counter"
+			values {targetname "modi_high_vehicles_counter2"
+				startvalue "0"
+				min "0"
+				max "4"
+				OnHitMax "syn_spawn_vehicle_2_high,Disable,,0,-1"
+				OnHitMax "syn_moreplayerssecond,Disable,,0,-1"} }
 //Bridge (after coast_08 is completed)
 		create {classname "info_vehicle_spawn" origin "3487.99 6896 2064"
 			values {targetname "syn_spawn_vehicle_3"
@@ -239,10 +257,11 @@ d2_coast_07
 				StartEnabled "0"
 				StartGunEnabled "1"
 				RespawnVehicle "1"
-				VehicleType "2"
-				VehicleSize "164"
-				model "models/airboat.mdl"
-				VehicleScript "scripts/vehicles/airboat.txt"} }
+				VehicleType "4"
+				VehicleSize "192"
+				model "models/vehicles/buggy_p2.mdl"
+				VehicleScript "scripts/vehicles/jeep_test.txt"
+				OnSpawnVehicle "modi_high_vehicles_counter3,Add,1,,-1"} }
 		
 		create {classname "info_vehicle_spawn" origin "3825 7325 2064"
 			values {targetname "syn_spawn_vehicle_3_high"
@@ -250,10 +269,10 @@ d2_coast_07
 				StartEnabled "0"
 				StartGunEnabled "1"
 				RespawnVehicle "1"
-				VehicleType "2"
-				VehicleSize "164"
-				model "models/airboat.mdl"
-				VehicleScript "scripts/vehicles/airboat.txt"} }
+				VehicleType "4"
+				VehicleSize "192"
+				model "models/vehicles/buggy_p2.mdl"
+				VehicleScript "scripts/vehicles/jeep_test.txt"} }
 		
 		create {classname "info_vehicle_spawn" origin "3625 7325 2064"
 			values {targetname "syn_spawn_vehicle_3_high"
@@ -265,6 +284,14 @@ d2_coast_07
 				VehicleSize "192"
 				model "models/vehicles/8seattruck.mdl"
 				vehiclescript "scripts/vehicles/truck.txt"} }
+		
+		create {classname "math_counter"
+			values {targetname "modi_high_vehicles_counter3"
+				startvalue "0"
+				min "0"
+				max "4"
+				OnHitMax "syn_spawn_vehicle_3_high,Disable,,0,-1"
+				OnHitMax "syn_moreplayersthird,Disable,,0,-1"} }
 
 //Toggle Static Spawning on return
 		create {classname "trigger_once" origin "3476.13 6971.17 2164.43"
