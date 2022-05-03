@@ -78,6 +78,20 @@ d1_eli_02
 //delete prop_ragdoll, causes high network usage, maybe causes clients crash
 		delete {classname "prop_ragdoll"}
 
+//disable pushes from player for furniture
+		edit {
+			targetname "rock_ball"
+			values {
+				spawnflags "16400"
+			}
+		}
+
+		edit {
+			targetname "scrapyard_Dumpster"
+			values {
+				spawnflags "16404"
+			}
+		}
 
 //Trav|Edt - phys block airlock
 		create {classname "func_clip_vphysics"
