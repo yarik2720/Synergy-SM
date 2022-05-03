@@ -75,6 +75,9 @@ d1_eli_02
 			//	"OnNewGame" "global_newgame_template_base_items,ForceSpawn,,0,1"
 			}
 		}
+//delete prop_ragdoll, causes high network usage, maybe causes clients crash
+		delete {classname "prop_ragdoll"}
+
 
 //Trav|Edt - phys block airlock
 		create {classname "func_clip_vphysics"
