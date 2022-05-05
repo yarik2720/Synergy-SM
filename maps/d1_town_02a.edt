@@ -189,6 +189,21 @@ d1_town_02a
 				ItemCount "5"
 				targetname "syn_vint"} }
 
+//make Monk avoid players on his way at the end
+		edit {
+			targetname "monk_assault_4_ap1"
+			values {
+				strict "1"
+				urgent "1"
+			}
+		}
+		edit {
+			targetname "monk_assault_4_rp1"
+			values {
+				urgent "1"
+			}
+		}
+
 //Trav|Edt add antirush at endlevel
 		create {classname "trigger_coop"
 			origin "-6584 -578 -3216.14"
