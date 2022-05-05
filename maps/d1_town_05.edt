@@ -186,6 +186,7 @@ d1_town_05
 				spawnflags "2564"
 				squadname "squad_trav_combine1"
 				additionalequipment "weapon_ar2"
+				NumGrenades "5"
 				OnDeath "warehouse_deadcombine_counter,Add,1,0,-1"} }
 
 		create {classname "logic_difficulty"
@@ -196,19 +197,35 @@ d1_town_05
 				//OnEasy "warehouse_deadcombine_counter,AddOutput,max 12,0,-1"//done with edit below
 				OnNormal "warehouse_deadcombine_counter,AddOutput,max 15,0,-1"//-1 for checker
 				OnHard "warehouse_deadcombine_counter,AddOutput,max 20,0,-1"} }
+//make combine spawn visible, fix odd spawnflags
+		edit {
+			targetname "end_soldier_5_maker"
+			values {
+				spawnflags "16"
+			}
+		}
 
+		edit {
+			targetname "end_soldier_4_maker"
+			values {
+				spawnflags "16"
+			}
+		}
 //Trav|Edt - Mod counter to adhere for extra enemies
 		edit {targetname"warehouse_deadcombine_counter"
 			values {max "11"} }//23//24//11? should work
 
 		create {classname "npc_template_maker"
 			origin "-2170 8896 904"
-			values {spawnflags "128"
+			values {spawnflags "16"
 				//angles " 0 45 0"
 				targetname "syn_vint_trav_tmaker_combine1"
+				startdisabled "1"
 				MaxNPCCount "8"//20 LD Saled
 				MaxLiveChildren "7"//10
 				SpawnFrequency "0.2"
+				CriterionVisibility "2"
+				CriterionDistance "2"
 				TemplateName "syn_vint_trav_combine1"
 				OnSpawnNPC "trav_aiscript_sched_combine1,StartSchedule,,0.5,0"} }
 
@@ -238,6 +255,8 @@ d1_town_05
 				pushdir "0 270 0"
 				targetname "syn_warehouse_rush"} }
 
+//failsafe when players forced combines spawn
+		
 //Prevent backtracking
 		create {classname "trigger_push" origin "-4573.31 8082.94 1013.62"
 			values {
