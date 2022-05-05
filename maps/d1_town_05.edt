@@ -197,7 +197,7 @@ d1_town_05
 				//OnEasy "warehouse_deadcombine_counter,AddOutput,max 12,0,-1"//done with edit below
 				OnNormal "warehouse_deadcombine_counter,AddOutput,max 15,0,-1"//-1 for checker
 				OnHard "warehouse_deadcombine_counter,AddOutput,max 20,0,-1"} }
-//make combine spawn visible, fix odd spawnflags
+//make combines spawn while visible, fix odd spawnflags
 		edit {
 			targetname "end_soldier_5_maker"
 			values {
@@ -255,8 +255,6 @@ d1_town_05
 				pushdir "0 270 0"
 				targetname "syn_warehouse_rush"} }
 
-//failsafe when players forced combines spawn
-		
 //Prevent backtracking
 		create {classname "trigger_push" origin "-4573.31 8082.94 1013.62"
 			values {
