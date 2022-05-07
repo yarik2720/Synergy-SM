@@ -75,7 +75,6 @@ d1_town_05
 				edt_getbspmodelfor_classname "trigger_once"
 				edt_getbspmodelfor_origin "-3090 7380 960"
 				spawnflags "1"
-				OnTrigger "syn_vint_trav_tmaker_combine1,Enable,,2,-1"
 				OnTrigger "syn_spawn_manager,SetCheckpoint,syn_spawn_player_2,,0-1"
 				//OnTrigger "syn_spawn_manager,MovePlayers,,0,-1"
 				OnTrigger "syn_vint_syn_warehouse_backtrack,Enable,,2,-1"
@@ -237,12 +236,15 @@ d1_town_05
 				goalent "!player"} }
 
 //modi: fix music overlapping
+//spawn additional waves of combines only when it needs to be
 		create {
 			classname "logic_auto"
 			values {
 				OnMapSpawn "warehouse_deadcombine_counter,AddOutput,OnHitMax start_music:FadeOut:7:2:-1,0,-1"
+				OnMapSpawn "end_reinforcements_trigger,AddOutput,OnTrigger syn_vint_trav_tmaker_combine1:Enable::0:-1,0,-1"
 			}
 		}
+
 //prevent rushing into warehouse
 		create {classname "trigger_push" origin "-2016 8880 950"
 			values {
@@ -255,6 +257,8 @@ d1_town_05
 				pushdir "0 270 0"
 				targetname "syn_warehouse_rush"} }
 
+//failsafe when players forced combines spawn
+		
 //Prevent backtracking
 		create {classname "trigger_push" origin "-4573.31 8082.94 1013.62"
 			values {
