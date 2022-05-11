@@ -102,6 +102,12 @@ d1_eli_02
 				edt_getbspmodelfor_origin "-600 876 -2624"
 				filtername "syn_clipfilter"
 				targetname "trav_airlock_phys"} }
+		
+		create {classname "func_clip_vphysics"
+			origin "-438 826 -2754"
+			values {
+				edt_getbspmodelfor_targetname "trigger_scrapyard_start_alyx"
+				targetname "syn_blockdisplacement"} }
 
 		create {classname "filter_multi"
 			values {targetname "syn_clipfilter"
