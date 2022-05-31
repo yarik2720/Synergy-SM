@@ -179,6 +179,9 @@
 		+ replaced ragdoll cars with physics one
 	+ d3_citadel_01
 		+ prevented players enter upperpod
+	+ d3_citadel_02
+		+ fixed not entering pod on map start
+		+ fixed ejecting out of the pod at the end
 	+ d3_citadel_04
 		+ added trigger hurt for skipping map
 	+ d3_breen_01

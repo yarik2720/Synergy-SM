@@ -48,7 +48,7 @@ d3_citadel_02
 				
 			//	"OnStartTouch" "citadel_fade_in,Fade,,0,-1"
 			//	"OnStartTouch"	"pod_player,Unlock,,0.2,-1"
-				"OnStartTouch" "pod_player,EnterVehicleImmediate,,0.3,1"
+				"OnStartTouch" "pod_player,EnterVehicleImmediate,,0.3,-1"
 			//	"OnStartTouch" "pod_player,Lock,,0.4,-1"
 			}
 		}
@@ -101,14 +101,13 @@ d3_citadel_02
 				"edt_getbspmodelfor_origin" "3842.79 13352 4324"
 				"targetname" "track_dump"
 				"spawnflags" "1"
-				"StartDisabled" "1"
-				"delay" "2"
-				"OnTrigger" "pod_player,Open,,0,1"		// only once
-				"OnTrigger" "pod_player,Unlock,,0,1"	// only once
-				"OnTrigger" "pod_player,ExitVehicle,,1,-1"
+				"StartDisabled" "0"
+				"OnTrigger" "pod_player,Open,,2,1"
+				"OnTrigger" "pod_player,Unlock,,2,1"
+				"OnTrigger" "pod_player,ExitVehicle,,3,-1"
 
 				"OnTrigger" "syn_spawn_manager,SetCheckPoint,PS_End,0,-1"
-				"OnTrigger" "syn_spawn_manager,TeleportPlayers,PS_End_TP,1.2,-1"
+				"OnTrigger" "syn_spawn_manager,TeleportPlayers,PS_End_TP,3.2,-1"
 			}
 		}
 
