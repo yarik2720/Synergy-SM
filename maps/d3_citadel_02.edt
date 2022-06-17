@@ -88,24 +88,31 @@ d3_citadel_02
 
 		// when we hit the trigger to eject us out of the pod
 		// activate checkpoint and prepare to change level
+		"create"
+		{
+			"classname" "logic_auto"
+			"values"
+			{
+				"spawnflags" "1"
+				"OnMapSpawn" "pod_player52,AddOutput,OnPass track_dump:Trigger::0:-1,0,-1"
+			}
+		}
 		"delete" { "targetname" "track_dump" }
 		"create"
 		{
-			"classname" "trigger_once"
+			"classname" "logic_relay"
 			"origin" "3842.79 13352 4324"
-
 			"values"
 			{
 				//"model" "*78"
-				"edt_getbspmodelfor_classname" "trigger_once"
-				"edt_getbspmodelfor_origin" "3842.79 13352 4324"
+				//"edt_getbspmodelfor_classname" "trigger_once"
+				//"edt_getbspmodelfor_origin" "3842.79 13352 4324"
 				"targetname" "track_dump"
 				"spawnflags" "1"
 				"StartDisabled" "0"
-				"OnTrigger" "pod_player,Open,,2,1"
 				"OnTrigger" "pod_player,Unlock,,2,1"
+				"OnTrigger" "pod_player,Open,,2.1,1"
 				"OnTrigger" "pod_player,ExitVehicle,,3,-1"
-
 				"OnTrigger" "syn_spawn_manager,SetCheckPoint,PS_End,0,-1"
 				"OnTrigger" "syn_spawn_manager,TeleportPlayers,PS_End_TP,3.2,-1"
 			}
