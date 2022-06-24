@@ -163,7 +163,9 @@ d2_prison_07
 			values{maxpieces "8"} }//3
 
 //Trav|Edt - dont spawn manlyhackies while vis
-		edit {targetname "maker_croom2_manhack_1" values {spawnflags "208"} }
+		//edit {targetname "maker_croom2_manhack_1" values {spawnflags "208"} }
+//Balim - Moving this to the back and keeping original flags because this will never spawn with no vis
+		edit {targetname "maker_croom2_manhack_1" values {origin "-736 -4635 30"} }
 
 //Trav|Edt - extend clip in first defense
 		create {classname "func_brush"
