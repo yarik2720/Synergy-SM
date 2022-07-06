@@ -148,6 +148,13 @@ ep2_outland_06
 				speed "400"
 				pushdir "0 -90 0"} }
 				
+		create {classname "trigger_push" origin "170 1410 1000"
+			values {model "*150"
+				angles "0 90 0"
+				spawnflags "1"
+				speed "400"
+				pushdir "0 -90 0"} }
+				
 		edit {"targetname" "trigger_killPlayer02" values 
 			{
 				damagecap "2000"
