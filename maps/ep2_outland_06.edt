@@ -152,8 +152,32 @@ ep2_outland_06
 			values {model "*150"
 				angles "0 90 0"
 				spawnflags "1"
-				speed "400"
+				speed "999"
 				pushdir "0 -90 0"} }
+				
+		create {
+			classname "prop_dynamic" 
+			origin "40 1454 910"
+			values {
+				model "models/synergy/tools/syn_transition.mdl"
+				angles "0 90 90"
+				solid "6"
+				StartDisabled "1"
+				DisableShadows "1"
+			} 
+		}
+				
+		create {
+			classname "prop_dynamic" 
+			origin "40 1844 910"
+			values {
+				model "models/synergy/tools/syn_transition.mdl"
+				angles "0 90 90"
+				solid "6"
+				StartDisabled "1"
+				DisableShadows "1"
+			} 
+		}
 				
 		edit {"targetname" "trigger_killPlayer02" values 
 			{
