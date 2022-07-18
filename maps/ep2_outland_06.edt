@@ -135,29 +135,9 @@ ep2_outland_06
 				pushdir "0 90 0"} }
 
 //prevent skipping by rocketjump
-		create {classname "trigger_push" origin "400 950 912"
-			values {model "*150"
-				spawnflags "1"
-				speed "9999"
-				pushdir "-45 180 0"} }
-				
-		create {classname "trigger_push" origin "170 1410 670"
-			values {model "*150"
-				angles "0 90 0"
-				spawnflags "1"
-				speed "400"
-				pushdir "0 -90 0"} }
-				
-		create {classname "trigger_push" origin "170 1410 1000"
-			values {model "*150"
-				angles "0 90 0"
-				spawnflags "1"
-				speed "999"
-				pushdir "0 -90 0"} }
-				
 		create {
 			classname "prop_dynamic" 
-			origin "40 1454 910"
+			origin "60 1254 910"
 			values {
 				model "models/synergy/tools/syn_transition.mdl"
 				angles "0 90 90"
@@ -166,7 +146,7 @@ ep2_outland_06
 				DisableShadows "1"
 			} 
 		}
-				
+
 		create {
 			classname "prop_dynamic" 
 			origin "40 1844 910"
@@ -178,7 +158,19 @@ ep2_outland_06
 				DisableShadows "1"
 			} 
 		}
-				
+
+		create {
+			classname "prop_dynamic" 
+			origin "200 1220 910"
+			values {
+				model "models/synergy/tools/syn_transition.mdl"
+				angles "0 0 90"
+				solid "6"
+				StartDisabled "1"
+				DisableShadows "1"
+			} 
+		}
+	
 		edit {"targetname" "trigger_killPlayer02" values 
 			{
 				damagecap "2000"
