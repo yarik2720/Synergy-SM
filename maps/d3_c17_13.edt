@@ -140,7 +140,7 @@ d3_c17_13
 				OnTrigger "!self,kill,,1.1,1"} }
 		create {classname "info_target" origin "6251 -1461 30" values {targetname "syn_cooptarg_02" angles "0 315 0"} }
 
-//Nocona Fixes - Killing strider prevents progression - https://gitlab.com/SynergyMod/Synergy/issues/6
+//Nocona Fixes - Killing strider prevents progression - gitlab.com/SynergyMod/Synergy/issues/6
 		
 		"create"
 		{
@@ -148,25 +148,32 @@ d3_c17_13
 			"origin" "0 0 0"
 			"values"
 			{
-				"OnMapSpawn" "strider1_start_maker,addoutput,OnSpawnNPC nocona_strider1_config:Trigger::0:-1,0,-1"
+				"OnMapSpawn" "strider1_start_maker,addoutput,OnSpawnNPC nocona_strider1_config:Trigger::1:-1,0,-1"
 				"OnMapSpawn" "bigdestroy2_relay,addoutput,OnTrigger strider1:SetDamageFilter::0:-1,0,-1"
 				"OnMapSpawn" "bigdestroy2_relay,addoutput,OnTrigger nocona_failsafe_bigdestroy2_timer:Kill::0:-1,0,-1"
 				"OnMapSpawn" "bigdestroy2_relay,addoutput,OnTrigger !self:Kill::0:-1"
 			}
 		}
-		"create" //strider configure
+		//strider configure
+		"create"
 		{
 			"classname" "logic_relay"
 			"origin" "0 0 0"
 			"values"
 			{
 				"targetname" "nocona_strider1_config"
-				"OnTrigger" "strider1,SetDamageFilter,filter_strider1,1,-1"
+				"OnTrigger" "strider1,SetDamageFilter,syn_dfilter_null,1,-1"
 				"OnTrigger" "strider1,addoutput,OnDeath bigdestroy2_relay:Trigger::0:-1,1,-1"
 				"OnTrigger" "strider1_bigdestroy2_trigger,addoutput,OnTrigger nocona_failsafe_bigdestroy2_timer:Enable::0:-1,0,1"
 			}
 		}
-		"create" //timer
+
+		create {classname "filter_activator_name"
+			values {targetname "syn_dfilter_null"
+				filtername "null"} }
+
+		//timer
+		"create"
 		{
 			"classname" "logic_timer"
 			"origin" "176 976 -16"
