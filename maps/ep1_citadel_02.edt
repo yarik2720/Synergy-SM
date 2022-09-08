@@ -65,6 +65,25 @@ ep1_citadel_02
 				target "alyx"
 			} 
 		}
+//fix energy balls spawning out of edict limits
+		edit {
+			classname "trigger_multiple"
+			origin "-7168 1024 912"
+			values {
+				targetname "valve_trigger_ballspawner"
+			}
+		}
+		
+		create
+		{
+			classname "logic_auto"
+			origin "0 0 0"
+			values
+			{
+				"OnMapSpawn" "counter_balltrap_bridge_01,addoutput,OnHitMax relay_bridge_room_disable:Trigger::0:-1,0,-1"
+				"OnMapSpawn" "relay_bridge_room_disable,addoutput,OnTrigger valve_trigger_ballspawner:Disable::0:-1,0,-1"
+			}
+		}
 
 	//	// fix trigger_fall
 	//	"delete" { "classname" "trigger_hurt" "origin" "-4864 896 400" }
