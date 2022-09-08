@@ -342,7 +342,14 @@ ep1_citadel_01
 			}
 		}
 
-
+//fix trigger position to prevent rollermine creating out of edicts limit
+		edit {
+			classname "trigger_multiple"
+			origin "-5312 8480 1696"
+			values {
+				origin "-5312 8480 1376"
+			}
+		}
 
 //Trav|Edt - Functionality check
 		create {classname "logic_relay" values {targetname "trav_functionality_ep1_citadel_01"} }
