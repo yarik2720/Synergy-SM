@@ -131,6 +131,7 @@ ep1_c17_06
 				"OnDeath" "relay_deliver_strider,Trigger,,6,-1" //0
 				"OnDeath" "trigger_container_6,Disable,,0,-1"
 				"OnDeath" "trigger_Striderstands,Enable,,0,-1"
+				"OnDeath" "modi_container_failsave_exploder,Trigger,,0,-1"
 			}
 		}
 
@@ -147,6 +148,31 @@ ep1_c17_06
 				OnTrigger "autosave,SaveDangerous,20,0,-1"
 			} 
 		}
+
+//another failsafe to explode container if strider was killed too early
+		create {
+			classname "logic_relay" origin "12293.4 9728 -736"
+			values {
+				spawnflags "1"
+				targetname "modi_container_failsafe_exploder"
+				OnTrigger "sound_container_0,PlaySound,,0,-1"
+				OnTrigger "shake_container_0,StartShake,,0,-1"
+				OnTrigger "exp_container_0,Explode,,0,-1"
+				OnTrigger "ar2exp_container_0,Explode,,0,-1"
+				OnTrigger "Door_container_0,Toggle,,0,-1"
+				OnTrigger "breakable_fence,Break,,0,-1"
+				OnTrigger "schedule_strider_straight_4,StartSchedule,,10,-1"
+			} 
+		}
+
+		create {
+			classname "logic_auto"
+			values {
+				spawnflags "1"
+				OnMapSpawn "bullseye_container_0,AddOutput,OnDeath modi_container_failsafe_exploder:Disable::0:-1,0,-1"
+			}
+		}
+		
 
 //Trav|Edt - no rpgs
 	//	create {classname "trigger_multiple"
