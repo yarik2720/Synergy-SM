@@ -133,6 +133,21 @@ ep1_c17_06
 				"OnDeath" "trigger_Striderstands,Enable,,0,-1"
 			}
 		}
+
+		delete {classname "trigger_once" origin "11047.5 8174.98 -670.23"}
+		create {
+			classname "trigger_once" origin "11047.5 8174.98 -670.23"
+			values {
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "11047.5 8174.98 -670.23"
+				spawnflags "1"
+				targetname "modi_strider_deliver_disabler"
+				OnTrigger "relay_deliver_strider,Kill,,10,-1" //0 - to make sure that strider was killed before trigger hit as we added delay before
+				OnTrigger "relay_striderBattleOver,Enable,,0,-1"
+				OnTrigger "autosave,SaveDangerous,20,0,-1"
+			} 
+		}
+
 //Trav|Edt - no rpgs
 	//	create {classname "trigger_multiple"
 	//		origin "11239 8102 -413"
