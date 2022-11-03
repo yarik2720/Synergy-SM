@@ -10,7 +10,7 @@ d2_coast_11
 	entity
 	{
 		// ----- spawn location -----
-		create { classname "info_player_coop" origin "4159 -11320 1602" values { angles "0 140 0" } }
+		create { classname "info_player_coop" origin "3475 -10911 1575" values { angles "0 140 0" } }
 		create { classname "info_spawn_manager" values { targetname "PS_Manager" } }
 
 		// ----- spawn equipment -----
