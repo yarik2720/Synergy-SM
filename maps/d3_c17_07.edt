@@ -6,14 +6,9 @@ d3_c17_07
 		edit {classname "func_areaportal" values {targetname "syn_disabledPortal" StartOpen "1"} }
 
 //Prevent Backtracking
-//no fit at cltrig
 		create {classname "syn_transition_wall" origin "4096 1064 217" values {angles "0 90 0" targetname "syn_antirush_wall"} }
 
-		//create {classname "trigger_push" origin "64 0 0"
-		//	values {model "*50"
-		//		spawnflags "1"
-		//		speed "750"
-		//		pushdir "0 0 0"} }
+		edit {classname "trigger_changelevel" values {edt_map "d3_c17_06b" edt_landmark "d3_c17_07-06b" spawnflags "6" startdisabled "1"} }
 
 //--Starting Items--
 		create {classname "info_player_equip"
