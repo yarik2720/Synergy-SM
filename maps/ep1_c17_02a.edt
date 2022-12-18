@@ -39,7 +39,7 @@ ep1_c17_02a
 				speed "750"
 				pushdir "0 180 0"} }
 //and disable backtracking trigger
-		delete {classname "trigger_changelevel" values {edt_map "ep1_c17_02b" edt_landmark "landmark_ep1_c17_02a"} }
+		edit {classname "trigger_changelevel" values {edt_map "ep1_c17_02b" edt_landmark "landmark_ep1_c17_02a" spawnflags "6" startdisabled "1"} }
 
 //--Starting Items--
 		create {classname "info_player_equip"
