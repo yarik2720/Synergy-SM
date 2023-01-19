@@ -179,16 +179,32 @@ d2_coast_11
 	//			distance "1024"
 	//			style "12"} }
 
-		create {classname "trigger_push"
-			origin "4270 6530 746.43"
+		create {
+			classname "trigger_push"
+			origin "4270 6530 1600"
 			values {
-				//model "*16"
-				edt_getbspmodelfor_targetname "autosave_beforeguard"
-				angles "0 5 0"
+				edt_getbspmodelfor_classname "trigger_multiple"
+				edt_getbspmodelfor_origin "5158.06 3952 598.47"
+				angles "0 352 0"
 				spawnflags "1"
 				targetname "syn_antirush_push"
 				pushdir "0 270 0"
-				speed "450"} }
+				speed "450"
+			}
+		}
+		create {
+			classname "trigger_push"
+			origin "4270 6530 700"
+			values {
+				edt_getbspmodelfor_classname "trigger_multiple"
+				edt_getbspmodelfor_origin "5158.06 3952 598.47"
+				angles "0 352 0"
+				spawnflags "1"
+				targetname "syn_antirush_push"
+				pushdir "0 270 0"
+				speed "450"
+			}
+		}
 
 		create {classname "game_text"
 			values {spawnflags "0"
