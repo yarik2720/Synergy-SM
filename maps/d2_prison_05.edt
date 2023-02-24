@@ -62,7 +62,7 @@ d2_prison_05
 		create {classname "info_player_coop" origin "-2054.05 580.05 733.39"
 			values {angles "0 0 0" targetname "syn_spawn_player_2" StartDisabled "1"} }
 			
-		create {classname "info_player_coop" origin "-4632.32 -768.45 704"
+		create {classname "info_player_coop" origin "-4632.32 -768.45 680"
 			values {angles "0 0 0" targetname "syn_spawn_player_3" StartDisabled "1"} }
 
 		create {classname "info_global_settings"
@@ -169,6 +169,7 @@ d2_prison_05
 				edt_getbspmodelfor_origin "-2204 512 704.22"
 				spawnflags "1"
 				OnTrigger "syn_spawn_manager,SetCheckpoint,syn_spawn_player_2,0,-1"
+				OnTrigger "syn_spawn_player_1,Disable,,0,-1"
 				OnTrigger "syn_spawn_manager,MovePlayers,,0,-1"} }
 
 		create {classname "syn_transition_wall" origin "-3104 440 536" values {angles "0 90 0" targetname "trav_guardnotdead_push"} }
@@ -246,55 +247,39 @@ d2_prison_05
 				rendermode "10"
 				targetname "trav_endclip_brush"} }
 
-//Trav|Edt - autirush
-		create {classname "trigger_coop"
-			origin "-4476.04 -997.64 704"
+//Trav|Edt - antirush
+		create {
+			classname "logic_relay"
 			values {
-				//model "*75"
-				edt_getbspmodelfor_classname "trigger_look"
-				edt_getbspmodelfor_origin "-1644.04 -973.64 576"
+				targetname "end_waitingroom"
+				OnTrigger "syn_spawn_player_1,Disable,,0,-1"
+				OnTrigger "syn_spawn_player_2,Disable,,0,-1"
+				OnTrigger "syn_spawn_manager,SetCheckpoint,syn_spawn_player_3,0,-1"
+				OnTrigger "syn_spawn_manager,TeleportPlayers,syn_spawn_teleport_3,0.1,-1"
+				OnTrigger "syn_spawn_manager,RespawnPlayers,,0.2,-1"
+				OnTrigger "syn_antirush_wall,Kill,,0.1,1"
+			}
+		}
+		
+		create {classname "info_teleport_destination" origin "-4632.32 -768.45 680" values {targetname "syn_spawn_teleport_3" angles "0 90 0"} }
+
+		create {
+			classname "logic_auto"
+			values {
 				spawnflags "1"
-				StartDisabled "1"//enabled by combine_crusherwall2_ss
-				targetname "syn_antirush_coop"
-				CountType "1"
-				UseHUD "1"
-				PlayerValue "50"
-				wait "1.5"
-				OnTrigger "syn_antirush_text,Display,,0,-1"
-				//OnPlayersIn "syn_antirush_push,Disable,,0,1"
-				OnPlayersIn "syn_antirush_wall,Kill,,0,1"
-				OnPlayersIn "!self,Disable,,1,1"} }
+				OnMapSpawn "combine_crusherwall2_ss,AddOutput,OnEndSequence end_waitingroom:Trigger::0:-1,0,-1"
+			}
+		}
 
-		create {classname "logic_auto"
-			values {spawnflags "1"
-				OnMapSpawn "combine_crusherwall2_ss,AddOutput,OnEndSequence syn_antirush_coop:Enable::0:-1,0,-1"
-				OnMapSpawn "combine_crusherwall2_ss,AddOutput,OnEndSequence syn_spawn_manager:SetCheckpoint:syn_spawn_player_3:0:-1,0,-1"
-				OnMapSpawn "combine_crusherwall2_ss,AddOutput,OnEndSequence syn_spawn_manager:MovePlayers::0:-1,0,-1"} }
-
-		create {classname "syn_transition_wall" origin "-4368 -1336 632" values {angles "0 180 0" targetname "syn_antirush_wall" solid "6"} }
-
-		//create {classname "trigger_push"
-		//	origin "-4296 -1096 712"//z816
-		//	values {model "*80"
-		//		spawnflags "1"
-		//		targetname "syn_antirush_push"
-		//		pushdir "0 180 0"
-		//		speed "450"} }
-
-		create {classname "game_text"
-			values {spawnflags "0"
-				targetname "syn_antirush_text"
-				message "Need More Players to Continue. . ."
-				channel "0"
-				effect "2"
-				x "-1"
-				y "0.85"
-				color "100 100 100"
-				color2 "240 110 0"
-				fadein "0.03"
-				fadeout "1.25"
-				holdtime "2"
-				fxtime "0.25"} }
+		create {
+			classname "syn_transition_wall" 
+			origin "-4368 -1336 632" 
+			values {
+				angles "0 180 0" 
+				targetname "syn_antirush_wall" 
+				solid "6"
+			}
+		}
 
 //End of Trav|Edt
 
