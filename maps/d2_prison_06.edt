@@ -62,8 +62,8 @@ d2_prison_06
 		create {classname "info_player_coop" origin "2034.58 1763.71 -447.97"
 			values {angles "0 -90 0" targetname "syn_spawn_player_1"} }
 
-		create {classname "info_player_coop" origin "1333.47 643.60 -190"
-			values {angles "0 180 0" targetname "syn_spawn_player_2" StartDisabled "1"} } //after elevator
+		create {classname "info_player_coop" origin "1544 680.93 -675"
+			values {angles "0 180 0" targetname "syn_spawn_player_2" StartDisabled "1" parentname "introom_elevator_1"} } //in elevator
 
 		create {classname "info_player_coop" origin "1180 -1344 -128"
 			values {angles "0 270 0" targetname "syn_spawn_player_3" StartDisabled "1"} } //on vents
