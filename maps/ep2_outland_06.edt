@@ -170,7 +170,31 @@ ep2_outland_06
 				DisableShadows "1"
 			} 
 		}
-	
+
+		create {
+			classname "prop_dynamic" 
+			origin "-50 1134 983"
+			values {
+				model "models/synergy/tools/syn_transition.mdl"
+				angles "90 90 90"
+				solid "6"
+				StartDisabled "1"
+				DisableShadows "1"
+			} 
+		}
+
+		create {
+			classname "prop_dynamic" 
+			origin "-340 1134 983"
+			values {
+				model "models/synergy/tools/syn_transition.mdl"
+				angles "90 90 90"
+				solid "6"
+				StartDisabled "1"
+				DisableShadows "1"
+			} 
+		}
+
 		edit {"targetname" "trigger_killPlayer02" values 
 			{
 				damagecap "2000"
