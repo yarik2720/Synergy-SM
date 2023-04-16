@@ -214,6 +214,14 @@ ep2_outland_01
 			}
 		}
 
+//modi: prevent early use of choreo vehicle and soft-locking players (original ep2 bug)
+		edit {
+			targetname "coreo_vehicle_01"
+			values {
+				VehicleLocked "1"
+			}
+		}
+
 //Doors: Prevent Closing
 		edit {classname "prop_door_rotating" origin "-3667 1529 200" values {spawnflags "0"} }
 
