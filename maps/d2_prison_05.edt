@@ -170,7 +170,10 @@ d2_prison_05
 				spawnflags "1"
 				OnTrigger "syn_spawn_manager,SetCheckpoint,syn_spawn_player_2,0,-1"
 				OnTrigger "syn_spawn_player_1,Disable,,0,-1"
-				OnTrigger "syn_spawn_manager,MovePlayers,,0,-1"} }
+				OnTrigger "syn_spawn_manager,MovePlayers,,0,-1"
+				OnTrigger "syn_vint_crushables_killer,CheckSkill,,1,-1"
+			}
+		}
 
 		create {classname "syn_transition_wall" origin "-3104 440 536" values {angles "0 90 0" targetname "trav_guardnotdead_push"} }
 
@@ -197,13 +200,28 @@ d2_prison_05
 				spawnflags "1"
 				OnTrigger "syn_spawn_manager,MovePlayers,,0,-1"} }
 
-//Trav|Edt - add static crate for ledge
-	//	create {classname "prop_physics_override"
-	//		origin "-4530 -612 542"
-	//		values {spawnflags "8"
-	//			targetname "Crushables"
-	//			model "models/props_junk/wood_crate001a.mdl"
-	//			health "0"} }
+//Trav|Edt - add static crate for ledge for a lot of players
+		create {
+			classname "prop_physics_override"
+			origin "-4530 -612 542"
+			values {
+				spawnflags "8"
+				targetname "syn_vint_crushables"
+				model "models/props_junk/wood_crate001a.mdl"
+				health "0"
+			}
+		}
+
+		create {
+			classname "logic_difficulty"
+			values
+			{
+				targetname "syn_vint_crushables_killer"
+				LowerPlayer "6"
+				UpperPlayer "10"
+				OnLow "syn_vint_crushables,Kill,,0.1,1"
+			}
+		}
 
 //Trav|Edt - increase combine wall speed
 		delete {classname "trigger_once" origin "-4048 -528 560"}
