@@ -201,6 +201,22 @@ d2_prison_06
 			values {targetname "syn_spawn_player_4_teleport"
 				angles "0 270 0"} }
 
+//modi: move door to prevent its block by props
+		edit {
+			classname "prop_dynamic"
+			origin "466.848 -927.897 60"
+			values {
+				origin "479.848 -927.897 60"
+				angles "0 180 0"
+			}
+		}
+
+		edit {
+			targetname "door_room1_gate"
+			values {
+				origin "485 -916 46" //"468 -916 46"
+			}
+		}
 
 //Trav|Edt - impulse to block peeps from putting props in vent to block players
 		create {classname "func_clip_vphysics"
