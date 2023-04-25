@@ -69,14 +69,15 @@ ep2_outland_01
 				StartDisabled "1"
 				weapon_crowbar		"1"
 				} }
-//give gravitygun
+//give gravitygun and enable trigger for next checkpoint
 		create {classname "trigger_once" origin "1011.53 -343.59 21.27"
 			values {model "*70"
 				spawnflags "1"
 				targetname "trigger_Get_physgun"
 				StartDisabled "1"
 				OnTrigger "syn_new_weapon,Enable,,0,-1"
-				OnTrigger "syn_new_weapon,EquipAllPlayers,,0.05,-1"} }
+				OnTrigger "syn_new_weapon,EquipAllPlayers,,0.05,-1"
+				OnTrigger "modi_checkpoint_after_train,Enable,,0,-1"} }
 
 //--Spawns--
 		create {classname "info_spawn_manager"
@@ -107,9 +108,11 @@ ep2_outland_01
 				spawnflags "1"
 				OnTrigger "syn_spawn_manager,SetCheckPoint,syn_spawn_player_2,0,-1"
 				OnTrigger "syn_spawn_manager,MovePlayers,,0.1,-1"} }
-//Post Train Doors (pre portal storm)
+//Post Train Doors (pre portal storm), start disabled to prevent teleport by lagged player
 		create {classname "trigger_once" origin "82.36 -1210.4 39.38"
 			values {model "*71"
+				StartDisabled "1"
+				targetname "modi_checkpoint_after_train"
 				spawnflags "1"
 				"OnTrigger" "syn_spawn_manager,SetCheckPoint,syn_spawn_player_3,0,-1"
 				"OnTrigger" "syn_spawn_manager,MovePlayers,,0.1,-1"} }
