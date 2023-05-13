@@ -293,7 +293,17 @@ d2_coast_11
 				"channel" "1"
 			}
 		}
+//modi: remove harpoon due soft-lock by killing npc_antlionguard
+		delete {
+			classname "prop_physics"
+			origin "6544.48 -621.324 128"
+		}
 
+		delete {
+			classname "prop_physics"
+			origin "6550 -631 137"
+		}
+		
 //block
 		create {classname "trigger_push"
 			origin "4480 6816 456"

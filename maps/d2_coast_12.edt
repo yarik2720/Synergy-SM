@@ -239,7 +239,16 @@ d2_coast_12
 	//	edit {targetname "tunnel_zombie"
 	//		values {MaxLiveChildren "-1"
 	//			MaxNPCCount "2"} }//1 -- 3
+//modi: remove harpoon
+		delete {
+			classname "prop_physics"
+			origin "8824 7904 1008.63"
+		}
 
+		delete {
+			classname "prop_physics"
+			origin "8848 7888 1008.63"
+		}
 //Trav|Edt - autirush
 		create {classname "trigger_coop"
 			origin "9174 8302 2118"
