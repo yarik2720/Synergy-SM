@@ -285,6 +285,65 @@ ep2_outland_08
 			}
 		}
 
+//break props from exploding tower
+		create {
+			classname "logic_auto"
+			values {
+				spawnflags "1"
+				OnMapSpawn "relay_exploding_tower,AddOutput,OnTrigger syn_explode_tower_props:Trigger::0:-1,1,-1"
+			}
+		}
+
+		create {
+			classname "logic_relay"
+			values {
+				targetname "syn_explode_tower_props"
+				OnTrigger "engine,Break,,1.2,-1"
+				OnTrigger "prop_siren,Break,,1.6,-1"
+				OnTrigger "tower_*,Break,,1.9,-1"
+			}
+		}
+		
+		edit {
+			targetname "tower_ladder_1"
+			values {
+				material "2" //2 - metal, was 0 - glass
+			}
+		}
+		
+		edit {
+			targetname "tower_strut_1"
+			values {
+				material "1" //1 - wood, was 0 - glass
+			}
+		}
+		edit {targetname "tower_strut_2" values {material "1"}}
+		edit {targetname "tower_strut_3" values {material "1"}}
+		edit {targetname "tower_strut_4" values {material "1"}}
+
+		edit {
+			targetname "tower_wall_support_1"
+			values {
+				material "2"
+			}
+		}
+		edit {
+			targetname "tower_wall_support_2"
+			values {
+				material "2"
+			}
+		}
+
+		edit {
+			targetname "tower_roof_support_1"
+			values {
+				material "2"
+			}
+		}
+		edit {targetname "tower_roof_support_3" values {material "2"}}
+		edit {targetname "tower_roof_support_4" values {material "2"}}
+		edit {targetname "tower_roof_support_5" values {material "2"}}
+		
 		// move all players inside the transition here when a player gets in
 		create { classname "info_teleport_destination" origin "-2952 1898 73" values { angles "0 160 0" targetname "PS_End_TP" } }
 		delete { classname "prop_door_rotating" origin "-3251 2026 126.281"}
