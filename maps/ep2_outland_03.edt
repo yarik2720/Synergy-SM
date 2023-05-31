@@ -228,6 +228,81 @@ ep2_outland_03
 			}
 		}
 
+//modi: platform_2 is designed for one person, boost ot when there is high amount players on server and start platform by trigger_coop
+		create {
+			classname "logic_difficulty"
+			values {
+				targetname "platform_2_counterweight_1_override"
+				LowerPlayer "3"
+				UpperPlayer "5"
+				OnLow "platform_2_thruster_1,Activate,,0,-1"
+				OnNotLow "platform_2_thruster_1,Scale,2,0,-1"
+			}
+		}
+		
+		create {
+			classname "trigger_coop"
+			origin "1040.5 -5138.5 -896"
+			values {
+				"edt_getbspmodelfor_origin" "1040.5 -5138.5 -896"
+				"edt_getbspmodelfor_classname" "trigger_once"
+				"wait" "1"
+				"targetname" "holdout_platform_2_playerriding_trigger_1"
+				"StartDisabled" "1"
+				"spawnflags" "1"
+				"parentname" "platform_2"
+				CountType "1"
+				PlayerValue "30"
+				UseHud "1"
+				OnPlayersIn "platform_2_counterweight_1_override,CheckSkill,,1,-1"
+				OnPlayersIn "!self,Disable,,1,-1"
+			}
+		}
+		
+		//recrate button and call trigger_coop OnOpen
+		delete {targetname "platform_2_lever_1"}
+		create {
+			classname "func_door_rotating"
+			origin "1232 -5445 -1868"
+			values {
+				edt_getbspmodelfor_targetname "platform_2_lever_1" //"model" "*288"
+				wait "-1"
+				unlocked_sound "0"
+				unlocked_sentence "0"
+				targetname "platform_2_lever_1"
+				speed "30"
+				spawnflags "106"
+				rendermode "0"
+				renderfx "0"
+				rendercolor "255 255 255"
+				renderamt "255"
+				locked_sound "0"
+				locked_sentence "0"
+				lip "0"
+				health "0"
+				dmg "0"
+				distance "17"
+				angles "0 0 0"
+				hammerid "1457382"
+				//OnOpen "platform_2_thruster_1,Activate,,0,-1"
+				OnOpen "holdout_platform_2_playerriding_trigger_1,Enable,,0,-1"
+				OnClose "platform_2_thruster_1,Deactivate,,0,-1"
+				OnClose "holdout_platform_2_playerriding_trigger_1,Disable,,0,-1"
+				OnOpen "platform_2_movesound_1,PlaySound,,0,-1"
+				OnClose "platform_2_freefall_sound_1,PlaySound,,0,-1"
+				OnClose "platform_2_movesound_1,StopSound,,0,-1"
+				OnOpen "platform_2_freefall_sound_1,StopSound,,0,-1"
+				OnOpen "gear_lever_model,SetAnimation,Up_downlight_turnoff_Uplight_turnon,0,-1"
+				OnOpen "gear_lever_model,SetDefaultAnimation,idleUp_Uplight_turnedon,0.1,-1"
+				OnClose "gear_lever_model,SetDefaultAnimation,idleDown_downlight_turnedon,0.1,-1"
+				OnClose "gear_lever_model,SetAnimation,Down_Uplight_turnoff_downlight_turnon,0,-1"
+				OnOpen "gear_engaged_sound_proxy,Start,,0,-1"
+				OnClose "gear_engaged_sound_proxy,Stop,,0,-1"
+				OnOpen "gear_motor_sound_proxy,Start,,0,-1"
+				OnClose "gear_motor_sound_proxy,Stop,,0,-1"
+			}
+		}
+
 		// activate another checkpoint here
 		// after the mine cart flies down the shaft
 		create { classname "info_player_coop" origin "2592.65 -7190.22 -1745.47" values { angles "0 135 0" StartDisabled "1" targetname "PS_AfterCartFall" } }
