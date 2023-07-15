@@ -402,7 +402,8 @@ d3_breen_01
 			}
 		}
 
-		create { classname "point_servercommand" values { targetname "PSCTest" } }
+		delete {classname "point_clientcommand"}
+		create {classname "point_servercommand" values {targetname "PSCTest"} }
 
 		create {classname "logic_auto"
 			values
@@ -414,8 +415,13 @@ d3_breen_01
 				OnMapSpawn "env_zoom,AddOutput,allplayers 1,-1,0,-1"
 				OnMapSpawn "teleport_player_gman_1,AddOutput,origin -800 -66 1282:Enable::0:-1,0,-1"// push this back a bit (-728)
 				
+				// Comment out these to see the credits all the way through
 				OnMapSpawn "logic_ending_credits,AddOutput,OnTrigger PSCTest:Command:changelevel ep1 ep1_citadel_00:30:-1,0,-1"
 				OnMapSpawn "logic_ending_credits,AddOutput,OnTrigger gameControl:EndGame::31:-1,0,-1"
+				
+				OnMapSpawn "SS_lamarr,AddOutput,OnBeginSequence PSCTest:Command:changelevel ep1 ep1_citadel_00:6:-1,0,-1"
+				OnMapSpawn "SS_lamarr,AddOutput,OnBeginSequence gameControl:EndGame::6.5:-1,0,-1"
+				
 				//OnMapSpawn "logic_ending_credits,AddOutput,OnTrigger trav_gtext_ep1:Display::0:-1,0,-1"
 			}
 		}
@@ -424,6 +430,8 @@ d3_breen_01
 		create {classname "point_viewcontrol" origin "-728 -66 1346"//-728 -66 1282 (1354)
 			values {spawnflags "172" angles "0 12 0"
 				targetname "syn_gman_viewcontrol"} }
+		// Additional view controls should also have all players, such as the Lamarr ending sequence if not changing to Ep1 immediately
+		edit {classname "point_viewcontrol" values {edt_addspawnflags "128"} }
 
 		//"All Players" flag
 		edit {targetname "blackout_viewcontroller" values {spawnflags "188"} }
