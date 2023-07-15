@@ -191,13 +191,18 @@ ep2_outland_12a
 		delete { targetname "menu" }
 		create { classname "game_end" origin "0 0 0" values { targetname "end_the_game" } }
 
-		create { classname "logic_auto"
-			values {
+		create {classname "logic_auto"
+			values
+			{
+				// Comment out this to see the credits all the way through
 				"OnMapSpawn" "lcs_hangar,AddOutput,OnCompletion end_the_game:EndGame:15:-1,0,-1"
+				
+				"OnMapSpawn" "credits,AddOutput,OnCreditsDone end_the_game:EndGame::2:-1,0,-1"
 			}
 		}
 
-		delete { classname "env_credits" origin "230.271 -1967.64 -975.07" }
+		// Deleted credits?
+		//delete { classname "env_credits" origin "230.271 -1967.64 -975.07" }
 //Trav|Edt - Functionality check
 		create {classname "logic_relay" values {targetname "trav_functionality_ep2_outland_12a"} }
 	}

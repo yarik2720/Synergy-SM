@@ -165,11 +165,13 @@ ep1_c17_06
 			} 
 		}
 
-		create {
-			classname "logic_auto"
-			values {
+		create {classname "logic_auto"
+			values
+			{
 				spawnflags "1"
 				OnMapSpawn "bullseye_container_0,AddOutput,OnDeath modi_container_failsafe_exploder:Disable::0:-1,0,-1"
+				OnMapSpawn "credits,AddOutput,OnCreditsDone theEndCmd:Command:changelevel ep2 ep2_outland_01:2:-1,0,-1"
+				OnMapSpawn "credits,AddOutput,OnCreditsDone theEnd:EndGame::3.5:1,0,-1"
 			}
 		}
 		
@@ -233,11 +235,13 @@ ep1_c17_06
 				"OnPass" "sound_outro_finale_02,PlaySound,,7,-1"
 				"OnPass" "fog,SetColorSecondary,255 255 255,4,-1"
 
+				// Comment out these to see the credits all the way through
 				"OnPass" "theEndCmd,Command,changelevel ep2 ep2_outland_01,7.8,-1"
 				"OnPass" "theEnd,EndGame,,8,1"
 			}
 		}
 
+		delete { classname "point_clientcommand" }
 		create { classname "point_servercommand" values { targetname "theEndCmd" } }
 		create { classname "game_end" values { targetname "theEnd" } }
 //Trav|Edt - Functionality check
