@@ -107,14 +107,15 @@
 		+ replaced ragdolls cars with physics models
 	+ d2_coast_07
 		+ extended trigger hurt against field overjump
+  		+ re-enabled manhack spawner in first room
 	+ d2_coast_09
 		+ moved syn_autosave from multiple trigger to trigger once (more players = more cars stopping)
 	+ d2_coast_10
-		+ antirush push triggers
 		+ antirush trigger_hurt now disables after secret door opens
 		+ fixed server crash by replacing already used TemplateName for Combine Soldiers
 	+ d2_coast_11
 		+ fixed health for Antlion Guard on vintage mode
+  		+ removed harpoon due soft-lock by killing npc_antlionguard
 		+ added antiskip clips
 		+ added failsafe to game reload if someone kills vort
 		+ added button to open gates if bugbait is broken (happens if server didn't restarted after Episodes)
@@ -127,10 +128,14 @@
 	+ d2_prison_05
 		+ added checkpoint before Antlion Guard
 		+ add checkpoint after combine crusherwall ends moving (helpful if level restart disabled when all players are dead)
+  		+ fixed spawning outside the crusherwall if mp_reset is disabled
+    		+ add static crate for ledge for a lot of players
 	+ d2_prison_06
 		+ reenabled commented out working solution to fix Alyx stuck
+ 		+ fix spawning outside the elevator
 		+ added checkpoints and teleports on Eli scene and after it
 		+ made more vanilla doors behavior
+		+ prevent gate block
 		+ teleport players on elevator, prevent them to be teleported on checkpoint too early
 	+ d2_prison_07
 		+ revert to vanilla backtracking d2_prison_07
@@ -189,6 +194,7 @@
 		+ fixed exploit of blocking "digger" on the teleport part
 		+ proper teleport destinations
 		+ fix spectators GUI breaking when spectating on falling player in the teleport chamber
+ 		+ For people that may want to see the credits all the way through, there is a comment in each of these: "// Comment out these to see the credits all the way through"
 + ##### Half Life 2 Episode One
 	+ ep1_citadel_00
 		+ render bug fixes
@@ -203,8 +209,10 @@
 		+ teleport players into stalkers room and start rollertraining if alyx was blocked by players
 		+ enabled more rollermine charges if another charged mine was thrown out
 		+ recreated particle system to fix vortex rendering
+  		+ fixed trigger position to prevent rollermine creating out of edicts limit
 	+ ep1_citadel_02
 		+ add Alyx and players teleport before dropship scene
+  		+ fixed energy balls spawning out of edict limits
 	+ ep1_citadel_02a
 		+ deleted entry_transition_door, some players can stay before it and can't proceed
 		+ teleport Alyx on elevator platform
@@ -247,7 +255,8 @@
 		+ added teleport
 		+ prevent players being stucked in npc (fixed)
 	+ ep1_c17_02a
-		+ teleport players to the gunship battle
+		+ disable backtracking trigger, some players could touch it on spawn
+  		+ teleport players to the gunship battle
 		+ gave rpg for all players once one take it
 		+ disabled movement of gunship ragdoll after falldown
 		+ reduce door delay
@@ -262,8 +271,10 @@
 		+ added checkpoint
 		+ prevent escaping
 		+ fixed strider wan't respawning on early death
+ 		+ For people that may want to see the credits all the way through, there is a comment in each of these: "// Comment out these to see the credits all the way through"
 + ##### Half Life 2 Episode Two
 	+ ep2_outland_01
+		+ prevent early use of choreo vehicle and soft-locking players (original ep2 bug)
 		+ getting alyx faster into communication center by trigger_coop
 		+ prevented fast wire plugin
 		+ antiskip triggers
@@ -276,6 +287,7 @@
 	+ ep2_outland_03
 		+ Vort enables generator quicker
 		+ edited entry gates mass
+  		+ fixed platform rising with high amount of players
 	+ ep2_outland_04
 		+ prevent elevator blocking with props
 		+ fix vort position on elevator
@@ -296,6 +308,7 @@
 	+ ep2_outland_08
 		+ removed door that can make transition to another map (looks bad, maybe I'll remade it later)
 		+ made final rebel invencible
+		+ break props from exploding tower to prevent killing with them friendly npc's
 	+ ep2_outland_10
 		+ teleport jalopy, players and Alyx on trap, also locks jalopy before trap is not opened
 		+ added shield disabling failsafe
@@ -310,3 +323,4 @@
 	+ ep2_outland_12a
 		+ fixed players teleportations to elevators
 		+ added GMan as Half-Life: Alyx reference
+ 		+ For people that may want to see the credits all the way through, there is a comment in each of these: "// Comment out these to see the credits all the way through"
