@@ -186,11 +186,34 @@ ep1_c17_01
 //Trav|Edt - dont let sniper_wall_1 disappear
 		edit {targetname "sniper_wall_1" values {targetname "syn_sniper_wall_1" StartDisabled "0"} }
 
-		
 //make fire deal more damage
 		edit {targetname "hellskitchen_hurtbrush_1" values {"damage" "10000" "damagecap" "10000"} }
 
 //End of Trav|Edt
+
+//modi: clip physics on combine patrol wall
+		create {
+			classname "func_clip_vphysics"
+			origin "-2926 277 240"
+			values {
+				angles "0 -5 0"
+				edt_getbspmodelfor_targetname "brush_sniperblockclip"
+				targetname "modi_vphysics_blocker"
+			}
+		}
+		create {
+			classname "func_clip_vphysics"
+			origin "-2926 608 240"
+			values {
+				angles "0 -5 0"
+				edt_getbspmodelfor_targetname "brush_sniperblockclip"
+				targetname "modi_vphysics_blocker"
+			}
+		}
+		create {classname "logic_auto"
+			values {spawnflags "1"
+				OnMapSpawn "relay_openGate,AddOutput,OnTrigger modi_vphysics_blocker:Disable::0.1:1,0,-1"} }
+
 
 		create { classname "logic_relay" origin "0 0 10"
 			values {
