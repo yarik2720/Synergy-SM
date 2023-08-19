@@ -246,6 +246,7 @@
 		+ added player teleports in some places, Alyx waits for afk's
 		+ made fire deal more damage (antirush)
 		+ add failsafe to stop antlions spawn and start final scene "thats over"
+		+ fixed car lost on combines gate
 	+ ep1_c17_02
 		+ teleport Alyx in guards room as failsafe while she can be blocked by another players
 		+ recreate antlion_guard, stop spawning antlions and proceed next scene
