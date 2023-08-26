@@ -312,7 +312,8 @@ d2_coast_10
 		create {classname "logic_relay"
 			values {spawnflags "1"
 				targetname "logic_start_leader_exit"
-				OnTrigger "lighthouse_secret_door,Open,,120,-1"} }
+				OnTrigger "lighthouse_secret_door,Open,,120,-1"
+				OnTrigger "afterlighthouse,Enable,,120,-1"} }
 
 //Trav|Edt - raise dropship4_dropzone to avoid getting stuck (needs testing)
 		//edit {targetname "dropship4_dropzone" values {origin "6552 2075 1032"} }
@@ -438,8 +439,8 @@ d2_coast_10
 		// it enables the push brush
 		"delete" { "classname" "trigger_multiple" "origin" "8224 1688 1024" }
 
-		// forget about this
-	//	"delete" { "classname" "trigger_once" "origin" "8088 1920 896" }
+		// Prevent players from activating this trigger too early by making it disabled until the door opens.
+		edit {classname "trigger_once" origin "8088 1920 896" values {targetname "afterlighthouse" startdisabled "1"} }
 
 		// once one of the vehicles is in garage, activate checkpoint and disable all vehicles
 		create { classname "info_player_coop" origin "4774 -471 916" values { angles "0 0 0" StartDisabled "1" targetname "PS_InsideGarage" } }
@@ -448,6 +449,7 @@ d2_coast_10
 				"OnMapSpawn" "garage_exit_trigger,AddOutput,OnTrigger syn_spawn_manager:SetCheckpoint:PS_InsideGarage:0:-1,0,-1"
 				"OnMapSpawn" "garage_exit_trigger,AddOutput,OnTrigger MPVS_SPAWN:Kill::0.1:-1,0,-1"
 				//"OnMapSpawn" "garage_exit_trigger,AddOutput,OnTrigger syn_spawn_manager:MovePlayers::0.2:-1,0,-1"
+				"OnMapSpawn" "lighthouse_secret_door,AddOutput,OnOpen afterlighthouse:Enable::0:-1,0,-1"
 			}
 		}
 		//create { classname "logic_relay"
