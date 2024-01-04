@@ -222,6 +222,7 @@ ep2_outland_01
 			targetname "coreo_vehicle_01"
 			values {
 				VehicleLocked "1"
+				PlayerOff "!self,Lock,,0.01,1"
 			}
 		}
 
