@@ -119,25 +119,21 @@ ep2_outland_06
 		create {classname "filter_activator_class" values {targetname "syn_null" negated "0" filterclass "null"} }
 
 //Trav|Edt - prevent skip of entire level to physjump over building
-		create {classname "func_brush"
-			origin "-880 1524.14 1208"
-			values {model "*325"
-			spawnflags "2"
-			rendermode "10"
-			targetname "trav_antiskip"
-			excludednpc "npc_crow"
-			invert_exclusion "1"} }
-//skip level on building roofs
-		create {classname "trigger_push" origin "196 888 1030.15"
-			values {model "*79" angles "0 90 0"
+		create {
+			classname "trigger_push"
+			origin "60 1264 1050"
+			values {
+				edt_getbspmodelfor_targetname "trigger_goopit3_hurt"
+				angles "0 90 0"
+				targetname "modi_antiskip"
 				spawnflags "1"
-				speed "450"
-				pushdir "0 90 0"} }
-
-//prevent skipping by rocketjump
+				speed "2000"
+				pushdir "90 0 0"
+			}
+		}
 		create {
 			classname "prop_dynamic" 
-			origin "60 1254 910"
+			origin "60 1220 910"
 			values {
 				model "models/synergy/tools/syn_transition.mdl"
 				angles "0 90 90"
@@ -165,30 +161,6 @@ ep2_outland_06
 			values {
 				model "models/synergy/tools/syn_transition.mdl"
 				angles "0 0 90"
-				solid "6"
-				StartDisabled "1"
-				DisableShadows "1"
-			} 
-		}
-
-		create {
-			classname "prop_dynamic" 
-			origin "-50 1134 983"
-			values {
-				model "models/synergy/tools/syn_transition.mdl"
-				angles "90 90 90"
-				solid "6"
-				StartDisabled "1"
-				DisableShadows "1"
-			} 
-		}
-
-		create {
-			classname "prop_dynamic" 
-			origin "-340 1134 983"
-			values {
-				model "models/synergy/tools/syn_transition.mdl"
-				angles "90 90 90"
 				solid "6"
 				StartDisabled "1"
 				DisableShadows "1"
