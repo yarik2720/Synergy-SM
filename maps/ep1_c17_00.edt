@@ -45,6 +45,24 @@ ep1_c17_00
 				OnMapSpawn "rubble_tunnel_door_1_lock,AddOutput,OnBreak syn_new_weapon_trigger:Enable::0.1:-1,0,-1"
 				OnMapSpawn "rubble_tunnel_door_1_lock,AddOutput,OnBreak syn_new_weapons:Enable::0:-1,0,-1"} }
 
+//disable stalker sequence from previous map
+		edit {
+			classname "trigger_multiple"
+			origin "5040 -6048 88"
+			values {
+				targetname "modi_stalkerpod_phys"
+				StartDisabled "1"
+			}
+		}
+
+		create {
+			classname "logic_auto"
+			values {
+				spawnflags "1"
+				OnMapSpawn "stalkerPod_Physanim,DisablePhyscannonPickup,,0,-1"
+			}
+		}
+
 //--Spawns--
 		create {classname "info_spawn_manager"
 			values {targetname "syn_spawn_manager"} }
