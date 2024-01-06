@@ -118,6 +118,15 @@ ep2_outland_06
 		edit {targetname "alyx_sniper" values {damagefilter "syn_null"} }
 		create {classname "filter_activator_class" values {targetname "syn_null" negated "0" filterclass "null"} }
 
+//prop_ragdoll disable movement to save network usage
+		create {
+			classname "logic_auto"
+			values {
+				spawnflags "1"
+				OnMapSpawn "prop_ragdoll,DisableMotion,,10,-1"
+			}
+		}
+
 //Trav|Edt - prevent skip of entire level to physjump over building
 		create {
 			classname "trigger_push"
