@@ -63,7 +63,6 @@ ep1_c17_01
 				rendermode "10"} }
 				
 //modi - fix crank locking
-//synvint - modi: idk why it uses on d1_canals_05
 		create {classname "logic_relay"
 			values {spawnflags "1"
 			targetname "_syn_vint"
@@ -152,6 +151,9 @@ ep1_c17_01
 		create {classname "logic_auto"
 			values {spawnflags "1"
 				OnMapSpawn "breakable_collapse,AddOutput,OnBreak propphys_collapse_gib:DisableMotion::5:-1,0,-1"} }
+
+//don't allow ceiling breaking by shooting on it
+		edit {targetname "breakable_collapse" values {spawnflags "3073"} }
 
 //Trav|Edt - make rapple combine use normal tacticts ???
 		//edit {targetname "csoldier_rappelintro_*" values {tacticalvariant "0"} }
