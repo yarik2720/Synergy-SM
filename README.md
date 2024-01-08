@@ -112,6 +112,7 @@
 		+ moved syn_autosave from multiple trigger to trigger once (more players = more cars stopping)
 	+ d2_coast_10
 		+ antirush trigger_hurt now disables after secret door opens
+		+ fixed soft-lock by preventing trigger on the other side of the lighthouse door to be enabled until after the secret door opens
 		+ fixed server crash by replacing already used TemplateName for Combine Soldiers
 	+ d2_coast_11
 		+ fixed health for Antlion Guard on vintage mode
@@ -232,6 +233,7 @@
 		+ added failsafe for Alyx not running out of train
 	+ ep1_c17_00
 		+ antirush block
+		+ disable stalker sequence from previous map (origin Valve EP1 bug)
 		+ teleport players to prevent stucking in Alyx
 		+ add checkpoint and tp Alyx to zombine joke scene
 		+ open gate automatically
@@ -244,7 +246,8 @@
 	+ ep1_c17_01
 		+ fixed crank locking
 		+ added player teleports in some places, Alyx waits for afk's
-		+ made fire deal more damage (antirush)
+		+ made fire deal more damage and block skipping fire puzzle (antirush)
+		+ don't allow ceiling breaking by shooting on it
 		+ add failsafe to stop antlions spawn and start final scene "thats over"
 		+ fixed car lost on combines gate
 	+ ep1_c17_02
@@ -275,7 +278,7 @@
  		+ For people that may want to see the credits all the way through, there is a comment in each of these: "// Comment out these to see the credits all the way through"
 + ##### Half Life 2 Episode Two
 	+ ep2_outland_01
-		+ prevent early use of choreo vehicle and soft-locking players (original ep2 bug)
+		+ prevent early use of choreo vehicle and soft-locking players (original ep2 bug) and lock after players eject
 		+ getting alyx faster into communication center by trigger_coop
 		+ prevented fast wire plugin
 		+ antiskip triggers
@@ -298,6 +301,7 @@
 		+ spawn guards when player hits battle area
 	+ ep2_outland_06
 		+ antiskip triggers
+		+ prop_ragdoll disable movement to save network usage
 		+ Alyx sniper invulnerable
 		+ reenabled players teleport after forklift
 	+ on maps ep2_outland_06a - ep2_outland_10a made Alyx and jalopy teleporting at the end so they will be on next map after changelevel
