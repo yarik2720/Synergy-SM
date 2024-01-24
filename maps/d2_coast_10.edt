@@ -408,6 +408,21 @@ d2_coast_10
 				spawnflags "1"
 				targetname "syn_antirusher_hurt"
 				damage "10000"} }
+		
+		create {
+			classname "trigger_push"
+			origin "6000 2108 625"
+			values {
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "2848 -5120 1504"
+				targetname "syn_antirusher_hurt"
+				angles "0 -10 0"
+				spawnflags "1"
+				speed "1000"
+				pushdir "0 -10 0"
+				StartDisabled "0"
+			}
+		}
 
 
 //End of Trav|Edt
