@@ -101,7 +101,7 @@ ep2_outland_08
 			values {targetname "syn_spawn_vehicle_1_high"
 				angles "0 0 0"
 				StartEnabled "0"
-				StartGunEnabled "1"
+				StartGunEnabled "0"
 				RespawnVehicle "1"
 				VehicleType "4"
 				VehicleSize "192"
