@@ -398,6 +398,10 @@ d1_canals_13
 				landmark "canals_trans_13_eli"
 				} }
 
+// Balim - Prevent the crow removal trigger from removing any other intersecting NPCs if someone pulls the lever before helicopters are dead
+		create {classname "filter_activator_class" values {targetname "filtercrows" filterclass "npc_crow" negated "0"} }
+		edit {targetname "trigger_killcrows" values {filtername "filtercrows"} }
+
 //Trav|Edt - Functionality check
 		create {classname "logic_relay" values {targetname "trav_functionality_d1_canals_13"} }
 	}
