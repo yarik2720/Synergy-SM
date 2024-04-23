@@ -443,6 +443,32 @@ d1_town_02
 				pushdir "0 90 0"
 				speed "850"} }
 
+//fix skipping elevator
+		create {
+			classname "trigger_push"
+			origin "-1920 -144 -2910"
+			values {
+				edt_getbspmodelfor_targetname "leave_roof_trigger"
+				spawnflags "1"
+				pushdir "0 90 0"
+				speed "850"
+				targetname "syn_vint_stopplayerjump_1"
+			}
+		}
+
+		create {
+			classname "trigger_push"
+			origin "-2798 128 -2844"
+			values {
+				edt_getbspmodelfor_targetname "leave_roof_trigger"
+				angles "0 90 0"
+				spawnflags "1"
+				pushdir "0 40 0"
+				speed "850"
+				targetname "syn_vint_stopplayerjump_1"
+			}
+		}
+
 //Trav|Edt - Teleport players to elevator
 		delete {targetname "freight_lift_button_2"}
 
@@ -658,6 +684,19 @@ d1_town_02
 				spawnflags "1"
 				speed "400"
 				targetname "syn_vint"} }
+
+//churchyard extend
+		create {
+			classname "func_brush"
+			origin "-4584 1114 -2900"
+			values {
+				edt_getbspmodelfor_classname "func_brush"
+				edt_getbspmodelfor_origin "-4545 965 -2960"
+				spawnflags "2"
+				angles "0 -15 0"
+				targetname "syn_vint"
+			}
+		}
 
 //Delay tram 2x (but do not if in vintage_mode
 //synvint
