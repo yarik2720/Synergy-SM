@@ -151,8 +151,9 @@ d3_c17_11
 			classname "trigger_push" 
 			origin "1344 4644 1120"
 			values {
-				edt_getbspmodelfor_targetname "trigger_staticcombineshieldwall1"
-				angles "0 90 0"
+				edt_getbspmodelfor_origin "1344 4632 1016"
+				edt_getbspmodelfor_classname "trigger_once"
+				parentname "skybridge_gate"
 				spawnflags "1"
 				speed "999"
 				pushdir "0 90 0"
