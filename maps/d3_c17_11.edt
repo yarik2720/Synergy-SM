@@ -67,7 +67,9 @@ d3_c17_11
 				edt_getbspmodelfor_classname "func_brush"
 				edt_getbspmodelfor_origin "1548 3204 1024"
 				spawnflags "1"
-				targetname "trav_antiskip_brush_dropshipdoor"} }
+				targetname "trav_antiskip_brush_dropshipdoor"
+			}
+		}
 
 		create {classname "func_brush"
 			origin "1012 5908 1040"
@@ -76,7 +78,9 @@ d3_c17_11
 				edt_getbspmodelfor_classname "func_brush"
 				edt_getbspmodelfor_origin "1548 3204 1024"
 				spawnflags "1"
-				targetname "trav_antiskip_brush_dropshipdoor"} }
+				targetname "trav_antiskip_brush_dropshipdoor"
+			}
+		}
 
 		create {
 			classname "trigger_push" 
@@ -87,7 +91,22 @@ d3_c17_11
 				angles "0 30 0"
 				spawnflags "1"
 				speed "999"
-				pushdir "0 0 0"} }
+				pushdir "0 0 0"
+			}
+		}
+
+		create {
+			classname "trigger_push" 
+			origin "718 6462 1100"
+			values {
+				edt_getbspmodelfor_targetname "trigger_staticcombineshieldwall1"
+				targetname "modi_antiskip_push_dropshipdoor"
+				angles "0 45 0"
+				spawnflags "1"
+				speed "999"
+				pushdir "0 40 0"
+			}
+		}
 
 		create {
 			classname "logic_auto"
