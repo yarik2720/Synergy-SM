@@ -41,6 +41,9 @@ ep2_outland_06
 //Post Intro (drop)
 		create {classname "info_player_coop" origin "88 376 776"
 			values {angles "0 0 0" targetname "syn_spawn_player_2" StartDisabled "1"} }
+//Warehouse
+		create {classname "info_player_coop" origin "200 2200 -85"
+			values {angles "0 0 0" targetname "syn_spawn_player_2_1" StartDisabled "1"} }
 //Post Fort Lift
 		create {classname "info_player_coop" origin "904 3304 0"
 			values {angles "0 330 0" targetname "syn_spawn_player_3" StartDisabled "1"} }
@@ -294,12 +297,26 @@ ep2_outland_06
 				OnTrigger "syn_spawn_manager,MovePlayers,,0.5,-1"
 				OnTrigger "trigger_killPlayer00,Kill,,5,-1"} }
 
-//Trav|Edt - teleportp players down into wearhouse
-		create {classname "trigger_once"
+//Trav|Edt - teleport players down into warehouse
+		create {
+			classname "trigger_once"
 			origin "408 2415.98 -90"
-			values {model "*163"
+			values {
+				model "*163"
 				spawnflags "1"
-				OnTrigger "syn_spawn_manager,MovePlayers,,0,-1"} }
+				OnTrigger "syn_spawn_manager,SetCheckpoint,syn_spawn_player_2_1,0,-1"
+				OnTrigger "syn_spawn_manager,TeleportPlayers,syn_spawn_player_warehouse_teleport,0.01,-1"
+			}
+		}
+		
+		create {
+			classname "info_teleport_destination"
+			origin "408 2415.98 -90"
+			values {
+				targetname "syn_spawn_player_warehouse_teleport"
+				angles "0 90 0"
+			}
+		}
 
 //Trav|Edt - moveplayers in warehouse-vents + checkpoint
 		create {classname "trigger_once"
@@ -308,7 +325,7 @@ ep2_outland_06
 				spawnflags "1"
 				OnTrigger "syn_spawn_manager,SetCheckpoint,syn_spawn_player_3,0,-1"
 				//OnTrigger "syn_global_settings,AddOutput,IsVehicleMap 1,0,-1"
-				OnTrigger "syn_spawn_manager,MovePlayers,,0,-1"
+				OnTrigger "syn_spawn_manager,MovePlayers,,0.01,-1"
 				} }
 
 //Trav|Edt - prevent cleanup in first goopit
