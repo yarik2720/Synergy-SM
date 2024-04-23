@@ -429,6 +429,7 @@ d2_coast_08
 				//OnPlayersIn "ReturnBridgeMap_Pusher,Disable,,0,1"
 				OnPlayersIn "syn_wall_return,Kill,,0,1"
 				OnPlayersIn "syn_wall_return_light,Kill,,0,1"
+				OnPlayersIn "modi_antiskip_ending,Kill,,0,1"
 				OnPlayersIn "!self,Disable,,2,1"} }
 
 		create {classname "game_text"
@@ -497,6 +498,55 @@ d2_coast_08
 		}
 
 		edit { classname "npc_antlion_maker" values { "spawntarget" "!rndplayer" } }
+
+//prevent overjump playerclip at the end of map
+		create {
+			classname "trigger_push" 
+			origin "2637 1437 1500"
+			values {
+				edt_getbspmodelfor_origin "3328 272 1504"
+				edt_getbspmodelfor_classname "trigger_multiple"
+				targetname "modi_antiskip_ending"
+				spawnflags "1"
+				speed "999"
+				pushdir "0 -90 0"
+			} 
+		}
+		create {
+			classname "trigger_push" 
+			origin "1741 1437 1500"
+			values {
+				edt_getbspmodelfor_origin "3328 272 1504"
+				edt_getbspmodelfor_classname "trigger_multiple"
+				targetname "modi_antiskip_ending"
+				spawnflags "1"
+				speed "999"
+				pushdir "0 -90 0"
+			} 
+		}
+		create {
+			classname "trigger_push" 
+			origin "845 1437 1500"
+			values {
+				edt_getbspmodelfor_origin "3328 272 1504"
+				edt_getbspmodelfor_classname "trigger_multiple"
+				targetname "modi_antiskip_ending"
+				spawnflags "1"
+				speed "999"
+				pushdir "0 -90 0"
+			} 
+		}
+		create {
+			classname "trigger_push" 
+			origin "3016 1648 1592"
+			values {
+				edt_getbspmodelfor_targetname "gunship_trigger_10"
+				targetname "modi_antiskip_ending"
+				spawnflags "1"
+				speed "999"
+				pushdir "0 180 0"
+			} 
+		}
 
 //Trav|Edt - Functionality check
 		create {classname "logic_relay" values {targetname "trav_functionality_d2_coast_08"} }
