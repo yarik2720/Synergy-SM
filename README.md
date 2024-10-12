@@ -74,6 +74,7 @@
 		+ extended trigger_coop size while waiting other players
 	+ d1_canals_13
 		+ fixed helicopter health in vintage mode
+		+ Prevent other NPCs from being able to be removed by crow removal trigger
 	+ d1_eli_01
 		+ fixed npc's damage filter
 	+ d1_eli_02
@@ -108,6 +109,8 @@
 	+ d2_coast_07
 		+ extended trigger hurt against field overjump
   		+ re-enabled manhack spawner in first room
+	+ d2_coast_08
+		+ fixed skip of trigger coop
 	+ d2_coast_09
 		+ moved syn_autosave from multiple trigger to trigger once (more players = more cars stopping)
 	+ d2_coast_10
@@ -176,6 +179,9 @@
 		+ replaced ragdoll car with physics one
 	+ d3_c17_10b
 		+ antirush push in trap with Barney
+	+ d3_c17_11
+		+ fixed combine skip door
+		+ fixed skybridge skip block origin
 	+ d3_c17_13
 		+ remove meeting citizen storytelling, it stucks in duck position
 		+ antirush push positions added
@@ -302,6 +308,7 @@
 	+ ep2_outland_06
 		+ antiskip triggers
 		+ prop_ragdoll disable movement to save network usage
+		+ fixed warehouse teleport
 		+ Alyx sniper invulnerable
 		+ reenabled players teleport after forklift
 	+ on maps ep2_outland_06a - ep2_outland_10a made Alyx and jalopy teleporting at the end so they will be on next map after changelevel
