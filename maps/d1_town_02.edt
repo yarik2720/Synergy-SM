@@ -470,30 +470,34 @@ d1_town_02
 		}
 
 //Trav|Edt - Teleport players to elevator
-		delete {targetname "freight_lift_button_2"}
+// Balim - Now doing this all by added outputs because this button is in different locations depending on the game/version
+		//delete {targetname "freight_lift_button_2"}
 
-		create {classname "func_button"
-			origin "-2882 862 -3086"
-			values {
-				//model "*38"
-				edt_getbspmodelfor_targetname "freight_lift_button_2"
-				spawnflags "1025"
-				targetname "freight_lift_button_2"
-				wait "1"
-				speed "5"
-				OnPressed "freight_lift_button_2,Lock,,0,-1"
-				OnPressed "freight_lift_down_relay,Trigger,,0,-1"
-				OnPressed "elevator_nodelink,TurnOff,,10,-1"
-
-				OnPressed "syn_spawn_manager,TeleportPlayers,trav_teleport_elevator,0.5,1"
-				OnPressed "syn_new_weapon,Enable,,2,-1"
-				OnPressed "syn_new_weapon,EquipAllPlayers,,3,-1"
-				OnPressed "autosave_shotgun,Save,,5,1"
-				OnPressed "syn_vint_trav_maker_zombies_elevator,Enable,,28,-1"
-				OnPressed "syn_vint_trav_trigger_hurt,Disable,,5,-1"
-				OnPressed "syn_spawn_manager,SetCheckpoint,syn_spawn_player_2,0,1"//old cp = inside? leftover? yea prolly. no worries
-				OnPressed "syn_vint_trav_maker_zombies_wait,AddMaxChildren,10,0,-1"//Add more zombies at end rush from roof(1st end)
-				OnPressed "syn_vint_trav_maker_zombies_wait,Enable,,0.1,-1"} }
+		//create {classname "func_button"
+		//	origin "-2882 862 -3086"
+		//	values {model "*38"
+		//		spawnflags "1025"
+		//		targetname "freight_lift_button_2"
+		//		wait "1"
+		//		speed "5"
+		//		OnPressed "freight_lift_button_2,Lock,,0,-1"
+		//		OnPressed "freight_lift_down_relay,Trigger,,0,-1"
+		//		OnPressed "elevator_nodelink,TurnOff,,10,-1"
+		create {classname "logic_auto"
+			values
+			{
+				spawnflags "1"
+				OnMapSpawn "freight_lift_button_2,AddOutput,OnPressed syn_spawn_manager:TeleportPlayers:trav_teleport_elevator:0.5:1,0,-1"
+				OnMapSpawn "freight_lift_button_2,AddOutput,OnPressed syn_new_weapon:Enable::2:-1,0,-1"
+				OnMapSpawn "freight_lift_button_2,AddOutput,OnPressed syn_new_weapon:EquipAllPlayers::3:-1,0,-1"
+				OnMapSpawn "freight_lift_button_2,AddOutput,OnPressed autosave_shotgun:Save::5:1,0,-1"
+				OnMapSpawn "freight_lift_button_2,AddOutput,OnPressed syn_vint_trav_maker_zombies_elevator:Enable::28:-1,0,-1"
+				OnMapSpawn "freight_lift_button_2,AddOutput,OnPressed syn_vint_trav_trigger_hurt:Disable::5:-1,0,-1"
+				OnMapSpawn "freight_lift_button_2,AddOutput,OnPressed syn_spawn_manager:SetCheckpoint:syn_spawn_player_2:0:1,0,-1"
+				OnMapSpawn "freight_lift_button_2,AddOutput,OnPressed syn_vint_trav_maker_zombies_wait:AddMaxChildren:10:0:-1,0,-1"
+				OnMapSpawn "freight_lift_button_2,AddOutput,OnPressed syn_vint_trav_maker_zombies_wait:Enable::0.1:-1,0,-1"
+			}
+		}
 
 		create {classname "info_teleport_destination"
 			origin "-2944 896 -3092"
@@ -890,6 +894,8 @@ d1_town_02
 			values {spawnflags "1"
 				OnMapSpawn "trav_churchtram_lever,AddOutput,OnFullyOpen syn_churchyard_playerclip_trigger:Enable::6:-1,0,1"
 				OnMapSpawn "trav_churchtram_lever,AddOutput,OnFullyOpen cavezombies_away_timer:Enable::0:-1,0,1"
+				OnMapSpawn "churchtram_lever_button,AddOutput,OnIn trav_churchtram_lever:Open::0:-1,0,-1"
+				OnMapSpawn "churchtram_lever_button,AddOutput,OnOut trav_churchtram_lever:Close::0:-1,0,-1"
 				OnMapSpawn "monk_rock_scene_b3,AddOutput,OnCompletion syn_break1:Enable::1:-1,0,-1"} }
 		
 		create {classname "trigger_coop" origin "-4445 -830 -3105"
