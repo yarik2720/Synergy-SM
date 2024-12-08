@@ -2,6 +2,7 @@ d3_c17_10b
 {
 	entity 
 	{
+
 //--Setup--
 		delete {targetname "player_spawn_items"}
 		edit {classname "func_areaportal" values {targetname "syn_disabledPortal" StartOpen "1"} }
@@ -14,6 +15,17 @@ d3_c17_10b
 		//		spawnflags "1"
 		//		speed "750"
 		//		pushdir "0 0 0"} }
+
+// Spawn barney if missing. Assumes player_spawn_items was deleted.
+		create
+		{
+			classname "logic_ensure_transitioned"
+			values
+			{
+				FindEntity "barney"
+				OnNotFound "player_spawn_items_maker,ForceSpawn,,0,-1"
+			}
+		}
 
 //--Starting Items--
 		create {classname "info_player_equip"
@@ -61,22 +73,6 @@ d3_c17_10b
 
 //--Extra--
 
-		// logic check for barney
-		create { "classname" "logic_relay"
-			values { "spawnflags" "3"
-				"targetname" "mapedit_spawn_new_barney_relay"
-				"OnTrigger" "player_spawn_items_maker,ForceSpawn,,0,-1"
-			}
-		}
-
-		create { "classname" "logic_auto"
-			values { "spawnflags" "0"
-				"OnMapSpawn" "barney,addoutput,OnUser1 mapedit_spawn_new_barney_relay:Disable::0:-1,5,-1"
-				"OnMapSpawn" "barney,FireUser1,,6,-1"
-				"OnMapSpawn" "mapedit_spawn_new_barney_relay,Trigger,,7,-1"
-			}
-		}
-
 		// ------------- standard -------------
 
 		// create intermission
@@ -110,31 +106,31 @@ d3_c17_10b
 				target "trav_turret"} }
 
 //Trav|Edt - add more combine
-		edit {targetname "assault_1_soldier_1_maker_1" values {spawnflags "144"} }
-		edit {targetname "assault_1_soldier_2_maker_1" values {spawnflags "144"} }
-		edit {targetname "assault_1_soldier_3_maker_1" values {spawnflags "144"} }
-		edit {targetname "assault_1_soldier_4_maker_1" values {spawnflags "144"} }
-		edit {targetname "assault_1_soldier_5_maker_1" values {spawnflags "144"} }
-		edit {targetname "assault_1_soldier_6_maker_1" values {spawnflags "144"} }
-		edit {targetname "assault_1_soldier_7_maker_1" values {spawnflags "144"} }
-
-		create {classname "logic_relay"
-			values {spawnflags "1"
-				targetname "n_room_sounds_relay"
-				OnTrigger "assault_1_soldier_*,SetMaxLiveChildren,3,0,-1"
-				OnTrigger "assault_1_soldier_*,SetSpawnFrequency,3,0,-1"
-				OnTrigger "assault_1_soldier_*,AddMaxChildren,4,0,-1"
-				OnTrigger "assault_1_soldier_*,Enable,,1,-1"} }
+//		edit {targetname "assault_1_soldier_1_maker_1" values {spawnflags "144"} }
+//		edit {targetname "assault_1_soldier_2_maker_1" values {spawnflags "144"} }
+//		edit {targetname "assault_1_soldier_3_maker_1" values {spawnflags "144"} }
+//		edit {targetname "assault_1_soldier_4_maker_1" values {spawnflags "144"} }
+//		edit {targetname "assault_1_soldier_5_maker_1" values {spawnflags "144"} }
+//		edit {targetname "assault_1_soldier_6_maker_1" values {spawnflags "144"} }
+//		edit {targetname "assault_1_soldier_7_maker_1" values {spawnflags "144"} }
+//
+//		create {classname "logic_relay"
+//			values {spawnflags "1"
+//				targetname "n_room_sounds_relay"
+//				OnTrigger "assault_1_soldier_*,SetMaxLiveChildren,3,0,-1"
+//				OnTrigger "assault_1_soldier_*,SetSpawnFrequency,3,0,-1"
+//				OnTrigger "assault_1_soldier_*,AddMaxChildren,4,0,-1"
+//				OnTrigger "assault_1_soldier_*,Enable,,1,-1"} }
 
 //Trav|Edt - add more combine after final shield is disabled
-		create {classname "logic_relay"
-			values {spawnflags "1"
-				targetname "switches_success_relay"
-				OnTrigger "trav_endsquad_assault,Activate,,0,-1"
-				OnTrigger "endsquad_soldier_makers,SetMaxLiveChildren,3,0,-1"
-				OnTrigger "endsquad_soldier_makers,SetSpawnFrequency,3,0,-1"
-				OnTrigger "endsquad_soldier_makers,AddMaxChildren,5,0,-1"
-				OnTrigger "endsquad_soldier_makers,Enable,,1,-1"} }
+//		create {classname "logic_relay"
+//			values {spawnflags "1"
+//				targetname "switches_success_relay"
+//				OnTrigger "trav_endsquad_assault,Activate,,0,-1"
+//				OnTrigger "endsquad_soldier_makers,SetMaxLiveChildren,3,0,-1"
+//				OnTrigger "endsquad_soldier_makers,SetSpawnFrequency,3,0,-1"
+//				OnTrigger "endsquad_soldier_makers,AddMaxChildren,5,0,-1"
+//				OnTrigger "endsquad_soldier_makers,Enable,,1,-1"} }
 
 		delete {targetname "endsquad_assault"}
 
@@ -323,5 +319,33 @@ d3_c17_10b
 
 //Trav|Edt - Functionality check
 		create {classname "logic_relay" values {targetname "trav_functionality_d3_c17_10b"} }
-	}
+
+        // Seth: Prevent Barney from standing at door while turrets active
+        create  {
+            classname   "ai_relationship"
+            origin      "2600 -1700 320"
+            values      {
+                targetname      "turret_rel"
+                subject         "barney"
+                target          "npc_turret_ceiling"
+                disposition     "4" // Neutral
+                rank            "30"
+                StartActive     "1"
+            }
+        }
+
+        // Seth: Prevent turrets from shooting Barney
+        create  {
+            classname   "ai_relationship"
+            origin      "2600 -1700 320"
+            values      {
+                targetname      "turret_rel"
+                subject         "npc_turret_ceiling"
+                target          "npc_barney"
+                disposition     "4"  // Neutral
+                rank            "30"
+                StartActive     "1"
+            }
+        }
+    }
 }

@@ -10,7 +10,7 @@ d1_town_03
 			values {model "models/synergy/tools/syn_transition.mdl"
 				targetname "syn_wall_removeme_t03"
 				angles "0 270 0"
-				//solid "6"
+				solid "6"
 				DisableShadows "1"} }
 
 		create {classname "light_dynamic" origin "-3648 -288 -3504"

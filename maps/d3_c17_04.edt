@@ -128,7 +128,7 @@ d3_c17_04
 				angles " 0 270 0"
 				targetname "trav_maker_cops2"
 				StartDisabled "0"
-				MaxNPCCount "18"//24
+				MaxNPCCount "4"//24
 				SpawnFrequency "0.4"
 				MaxLiveChildren "12"
 				TemplateName "end_cop_reinforcement"} }

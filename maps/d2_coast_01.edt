@@ -61,7 +61,7 @@ d2_coast_01
 				StartGunEnabled "1"
 				VehicleType "4"//1&4 disalllows multiple players
 				VehicleSize "192"
-				model "models\vehicles\buggy_p2.mdl"//models/buggy.mdl
+				model "models/vehicles/buggy_p2.mdl"//models/buggy.mdl
 				VehicleScript "scripts/vehicles/jeep_test.txt"} }
 //pre dysVS edt: ref
 				//VehicleType "4"
@@ -71,7 +71,9 @@ d2_coast_01
 //--Checkpoints--
 		create {classname "trigger_once"
 			origin "-12638.7 248.6 1639.59"
-			values {model "*22"
+			values {
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "-5086.69 -455.6 1036"
 				spawnflags "32"
 				targetname "syn_checkpoint_3"
 				StartDisabled "1"
@@ -256,7 +258,7 @@ d2_coast_01
 
 			"values"
 			{
-				"model" "*11"//*12
+				edt_getbspmodelfor_targetname "turbo_hudhint_trigger"
 				"wait" "1"
 				"spawnflags" "32"
 				"StartDisabled" "0"
@@ -287,7 +289,8 @@ d2_coast_01
 //Trav|Edt - anti-rush
 		create {classname "trigger_coop"
 			origin "-12825.8 3782.29 1689"
-			values {model "*9"
+			values {
+				edt_getbspmodelfor_targetname "trigger_didntgetinjeep"
 				spawnflags "1"
 				targetname "syn_antirush_coop"
 				CountType "1"

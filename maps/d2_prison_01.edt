@@ -142,7 +142,8 @@ d2_prison_01
 			origin "920 -1452 1664"
 			values {model "*60"
 				spawnflags "1"
-				targetname "syn_antirush_trigger2"
+				// Was named syn_antirush_trigger2 but allowing antirush to delete this breaks transition
+				targetname "syn_end_trigger_coop" // syn_antirush_trigger2
 				CountType "1"
 				UseHUD "1"
 				PlayerValue "50"

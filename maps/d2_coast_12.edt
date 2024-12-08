@@ -84,122 +84,123 @@ d2_coast_12
 //--Extra--
 
 //Trav|Edt -  add more combine
-		create {classname "npc_combine_s"
-			origin "2304 -4544 632"
-			values {spawnflags "2564"
-				targetname "syn_vint_trav_combine1"
-				model "models/combine_soldier_prisonguard.mdl"
-				squadname "bunker_1_squad"
-				additionalequipment "weapon_ar2"} }
-
-		create {classname "npc_template_maker"
-			origin "2304 -4544 632"
-			values {spawnflags "128"
-				targetname "syn_vint_trav_tmaker_combine1"
-				StartDisabled "1"
-				MaxNPCCount "8"
-				SpawnFrequency "1"
-				MaxLiveChildren "-1"
-				TemplateName "syn_vint_trav_combine1"} }
-
-		create {classname "logic_relay"
-			values{targetname "patrol_1_assault1_relay"
-				OnTrigger "syn_vint_trav_tmaker_combine1,Enable,,8,-1"} }
-
-//--
-
-		create {classname "npc_combine_s"
-			origin "1984 2368 688"
-			values {spawnflags "2564"
-				targetname "syn_vint_trav_tmaker_combine1"
-				model "models/combine_soldier_prisonguard.mdl"
-				squadname "bigbunker_squad"
-				additionalequipment "weapon_shotgun"} }
-
-		create {classname "npc_template_maker"
-			origin "1984 2368 688"
-			values {//spawnflags "128"
-				targetname "syn_vint_trav_tmaker_combine2"
-				StartDisabled "1"
-				MaxNPCCount "8"
-				SpawnFrequency "1"
-				MaxLiveChildren "-1"
-				TemplateName "syn_vint_trav_tmaker_combine1"} }
-
-		create {classname "trigger_once"
-			origin "2144 -304 728.5"//1904 272 728.5
-			values {model "*24"//*22
-				spawnflags "1"
-				OnTrigger "syn_vint_trav_tmaker_combine2,Enable,,0,-1"
-				OnTrigger "syn_spawn_manager,SetCheckpoint,syn_spawn_player_2,0,-1"
-				OnTrigger "syn_spawn_manager,MovePlayers,,0,-1"} }
-
-//--
-		create {classname "npc_combine_s"
-			origin "6280 6808 880"
-			values {spawnflags "2564"
-				targetname "syn_vint_trav_combine3"
-				model "models/combine_soldier_prisonguard.mdl"
-				squadname "assault_squad"
-				additionalequipment "weapon_ar2"} }
-
-		create {classname "logic_difficulty"
-			values {spawnflags "3"
-				targetname "syn_vint_ld"
-				OnNormal "syn_vint_trav_tmaker_combine3,SetMaxChildren,12,0,-1"
-				OnHard "syn_vint_trav_tmaker_combine3,SetMaxChildren,16,0,-1"} }
-
-		create {classname "npc_template_maker"
-			origin "6280 6808 880"
-			values {spawnflags "128"
-				angles " 0 180 0"
-				targetname "syn_vint_trav_tmaker_combine3"
-				StartDisabled "1"
-				MaxNPCCount "8"//24
-				SpawnFrequency "1"
-				MaxLiveChildren "6"
-				TemplateName "syn_vint_trav_combine3"} }
-
-		delete {classname "trigger_once" origin "5152 4112 720"}
-
-		create {classname "trigger_once"
-			origin "5152 4112 720"
-			values {model "*33"
-				spawnflags "1"
-				OnTrigger "antspawn_nodes_10,EnableHint,,0,-1"
-				OnTrigger "ragdoll_manager,SetMaxRagdollCount,2,0,-1"
-				OnTrigger "syn_vint_trav_tmaker_combine3,Enable,,0,-1"
-				//OnTrigger "syn_vint_trav_combine3_timer,Enable,,0,-1"
-				OnTrigger "assault_template_spawner,ForceSpawn,,0,-1"
-				OnTrigger "assault_template_spawner,ForceSpawn,,2,-1"
-				OnTrigger "assault_template_spawner,ForceSpawn,,4,-1"
-				OnTrigger "trav_bigassault_counter,Enable,,5,-1"} }
-//!!
-//Trav|Edt ^ test big assault (needs refining)
-		create {classname "logic_auto"
-			values {spawnflags "1"
-				//OnMapSpawn "assault_soldier_*,AddOutput,OnDeath trav_bigassault_counter:Subtract:1:0:-1,0,-1"
-				//OnMapSpawn "assault_template_spawner,AddOutput,OnEntitySpawned trav_bigassault_counter:Add:4:0:-1,0,-1"
-				OnMapSpawn "assault_template_spawner,AddOutput,OnEntitySpawned trav_bigassault_setuper:Trigger::0:-1,0,-1"} }
-//additional waves
-		create {classname"math_counter"
-			values {targetname "trav_bigassault_counter_total"
-				max "4"
-				OnHitMax "trav_bigassault_counter,Disable,,0,-1"} }
-//when to spawn next wave
-		create {classname"math_counter"
-			values {targetname "trav_bigassault_counter"
-				min "6"
-				startvalue "12"
-				StartDisabled "1"
-				OnHitMin "assault_template_spawner,ForceSpawn,,0,-1"
-				OnHitMin "trav_bigassault_counter_total,Add,1,,-1"} }
-//on squad spawn
-		create {classname "logic_relay"
-			values {targetname "trav_bigassault_setuper"
-				OnTrigger "trav_bigassault_counter,Add,4,0,-1"
-				OnTrigger "assault_soldier_*,AddOutput,OnDeath trav_bigassault_counter:Subtract:1:0:-1,0.1,-1"
-				OnTrigger "assault_soldier_*,AddOutput,targetname syn_assault_soldier,0.2,-1"} }
+// Half-Life 2 20th Anniversary Update - Disabling this for now. Insane number of soldiers for low player count, needs balancing.
+//		create {classname "npc_combine_s"
+//			origin "2304 -4544 632"
+//			values {spawnflags "2564"
+//				targetname "syn_vint_trav_combine1"
+//				model "models/combine_soldier_prisonguard.mdl"
+//				squadname "bunker_1_squad"
+//				additionalequipment "weapon_ar2"} }
+//
+//		create {classname "npc_template_maker"
+//			origin "2304 -4544 632"
+//			values {spawnflags "128"
+//				targetname "syn_vint_trav_tmaker_combine1"
+//				StartDisabled "1"
+//				MaxNPCCount "3"
+//				SpawnFrequency "1"
+//				MaxLiveChildren "-1"
+//				TemplateName "syn_vint_trav_combine1"} }
+//
+//		create {classname "logic_relay"
+//			values{targetname "patrol_1_assault1_relay"
+//				OnTrigger "syn_vint_trav_tmaker_combine1,Enable,,8,-1"} }
+//
+////--
+//
+//		create {classname "npc_combine_s"
+//			origin "1984 2368 688"
+//			values {spawnflags "2564"
+//				targetname "syn_vint_trav_tmaker_combine1"
+//				model "models/combine_soldier_prisonguard.mdl"
+//				squadname "bigbunker_squad"
+//				additionalequipment "weapon_shotgun"} }
+//
+//		create {classname "npc_template_maker"
+//			origin "1984 2368 688"
+//			values {//spawnflags "128"
+//				targetname "syn_vint_trav_tmaker_combine2"
+//				StartDisabled "1"
+//				MaxNPCCount "3"
+//				SpawnFrequency "1"
+//				MaxLiveChildren "-1"
+//				TemplateName "syn_vint_trav_tmaker_combine1"} }
+//
+//		create {classname "trigger_once"
+//			origin "2144 -304 728.5"//1904 272 728.5
+//			values {model "*24"//*22
+//				spawnflags "1"
+//				OnTrigger "syn_vint_trav_tmaker_combine2,Enable,,0,-1"
+//				OnTrigger "syn_spawn_manager,SetCheckpoint,syn_spawn_player_2,0,-1"
+//				OnTrigger "syn_spawn_manager,MovePlayers,,0,-1"} }
+//
+////--
+//		create {classname "npc_combine_s"
+//			origin "6280 6808 880"
+//			values {spawnflags "2564"
+//				targetname "syn_vint_trav_combine3"
+//				model "models/combine_soldier_prisonguard.mdl"
+//				squadname "assault_squad"
+//				additionalequipment "weapon_ar2"} }
+//
+//		create {classname "logic_difficulty"
+//			values {spawnflags "3"
+//				targetname "syn_vint_ld"
+//				OnNormal "syn_vint_trav_tmaker_combine3,SetMaxChildren,12,0,-1"
+//				OnHard "syn_vint_trav_tmaker_combine3,SetMaxChildren,16,0,-1"} }
+//
+//		create {classname "npc_template_maker"
+//			origin "6280 6808 880"
+//			values {spawnflags "128"
+//				angles " 0 180 0"
+//				targetname "syn_vint_trav_tmaker_combine3"
+//				StartDisabled "1"
+//				MaxNPCCount "3"//24
+//				SpawnFrequency "1"
+//				MaxLiveChildren "6"
+//				TemplateName "syn_vint_trav_combine3"} }
+//
+//		delete {classname "trigger_once" origin "5152 4112 720"}
+//
+//		create {classname "trigger_once"
+//			origin "5152 4112 720"
+//			values {model "*33"
+//				spawnflags "1"
+//				OnTrigger "antspawn_nodes_10,EnableHint,,0,-1"
+//				OnTrigger "ragdoll_manager,SetMaxRagdollCount,2,0,-1"
+//				OnTrigger "syn_vint_trav_tmaker_combine3,Enable,,0,-1"
+//				//OnTrigger "syn_vint_trav_combine3_timer,Enable,,0,-1"
+//				OnTrigger "assault_template_spawner,ForceSpawn,,0,-1"
+//				OnTrigger "assault_template_spawner,ForceSpawn,,2,-1"
+//				OnTrigger "assault_template_spawner,ForceSpawn,,4,-1"
+//				OnTrigger "trav_bigassault_counter,Enable,,5,-1"} }
+////!!
+////Trav|Edt ^ test big assault (needs refining)
+//		create {classname "logic_auto"
+//			values {spawnflags "1"
+//				//OnMapSpawn "assault_soldier_*,AddOutput,OnDeath trav_bigassault_counter:Subtract:1:0:-1,0,-1"
+//				//OnMapSpawn "assault_template_spawner,AddOutput,OnEntitySpawned trav_bigassault_counter:Add:4:0:-1,0,-1"
+//				OnMapSpawn "assault_template_spawner,AddOutput,OnEntitySpawned trav_bigassault_setuper:Trigger::0:-1,0,-1"} }
+////additional waves
+//		create {classname"math_counter"
+//			values {targetname "trav_bigassault_counter_total"
+//				max "4"
+//				OnHitMax "trav_bigassault_counter,Disable,,0,-1"} }
+////when to spawn next wave
+//		create {classname"math_counter"
+//			values {targetname "trav_bigassault_counter"
+//				min "6"
+//				startvalue "12"
+//				StartDisabled "1"
+//				OnHitMin "assault_template_spawner,ForceSpawn,,0,-1"
+//				OnHitMin "trav_bigassault_counter_total,Add,1,,-1"} }
+////on squad spawn
+//		create {classname "logic_relay"
+//			values {targetname "trav_bigassault_setuper"
+//				OnTrigger "trav_bigassault_counter,Add,4,0,-1"
+//				OnTrigger "assault_soldier_*,AddOutput,OnDeath trav_bigassault_counter:Subtract:1:0:-1,0.1,-1"
+//				OnTrigger "assault_soldier_*,AddOutput,targetname syn_assault_soldier,0.2,-1"} }
 
 		edit {targetname "field_assault" values {actor "syn_assault_soldier"} }
 

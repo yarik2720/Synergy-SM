@@ -1,9 +1,5 @@
 ep2_outland_02
 {
-	console
-	{
-	sk_antlionguard_health "1280" //500
-	}
 	entity
 	{
 //--Setup--
@@ -266,34 +262,34 @@ ep2_outland_02
 		//		goalent "!player"} }
 
 //Trav|Edt - TEST add antlion guard for funkyness
-		create {classname "npc_antlionguard" origin "-1696 -8320 -712"
-			values {spawnflags "131588"
-				angles "0 225 0"
-				targetname "syn_antlionguard"
-				startburrowed "1"} }
-
+//		create {classname "npc_antlionguard" origin "-1696 -8320 -712"
+//			values {spawnflags "131588"
+//				angles "0 225 0"
+//				targetname "syn_antlionguard"
+//				startburrowed "1"} }
+//
 //only attack players
-		create {classname "ai_relationship"
-			values {subject "syn_antlionguard"
-				target "npc_vortigaunt"
-				disposition "4"
-				StartActive "1"} }
-
-		create {classname "ai_relationship"
-			values {subject "syn_antlionguard"
-				target "npc_citizen"
-				disposition "4"
-				StartActive "1"} }
-
-		create {classname "ai_relationship"
-			values {subject "syn_antlionguard"
-				target "npc_alyx"
-				disposition "4"
-				StartActive "1"} }
-
-		create {classname "logic_relay"
-			values {targetname "logicRelay_finalWave"
-				OnTrigger "syn_antlionguard,Unburrow,,70,-1"} }
+//		create {classname "ai_relationship"
+//			values {subject "syn_antlionguard"
+//				target "npc_vortigaunt"
+//				disposition "4"
+//				StartActive "1"} }
+//
+//		create {classname "ai_relationship"
+//			values {subject "syn_antlionguard"
+//				target "npc_citizen"
+//				disposition "4"
+//				StartActive "1"} }
+//
+//		create {classname "ai_relationship"
+//			values {subject "syn_antlionguard"
+//				target "npc_alyx"
+//				disposition "4"
+//				StartActive "1"} }
+//
+//		create {classname "logic_relay"
+//			values {targetname "logicRelay_finalWave"
+//				OnTrigger "syn_antlionguard,Unburrow,,70,-1"} }
 
 //Trav|Edt RETURN, antirush
 		create {classname "trigger_once" origin "-4021 -9549 304"
@@ -322,19 +318,22 @@ ep2_outland_02
 		delete {classname "prop_physics" origin "-4049 -9558 178"}
 
 		create {classname "prop_physics_override" origin "-4049 -9554 250"
-			values {spawnflags "8"
+			values {targetname "syn_end_boards"
+				spawnflags "8"
 				angles "0 90 90"
 				model "models/props_debris/wood_board05a.mdl"
 				health "99999"} }
 
 		create {classname "prop_physics_override" origin "-4048 -9554 219"
-			values {spawnflags "8"
+			values {targetname "syn_end_boards"
+				spawnflags "8"
 				angles "0.646857 86.9149 -104.986"
 				model "models/props_debris/wood_board05a.mdl"
 				health "99999"} }
 
 		create {classname "prop_physics_override" origin "-4049 -9558 178"
-			values {spawnflags "8"
+			values {targetname "syn_end_boards"
+				spawnflags "8"
 				angles "0 86.5 90"
 				model "models/props_debris/wood_board05a.mdl"
 				health "99999"} }
@@ -489,6 +488,15 @@ ep2_outland_02
 			//	"OnTrigger" "syn_spawn_manager,MovePlayers,,0.1,-1"
 
 				"OnTrigger" "PlayerCatcher,Enable,,0,-1"
+			}
+		}
+
+		// Force teleport restoring players inside elevator
+		create { classname "player_restore_point" origin "-3127 -9499 -3085"
+			values
+			{
+				parent "elevator"
+				PreviousLevel "ep2_outland_04"
 			}
 		}
 

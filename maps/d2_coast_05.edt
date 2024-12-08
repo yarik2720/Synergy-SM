@@ -84,7 +84,7 @@ d2_coast_05
 				RespawnVehicle "1"
 				VehicleType "4"//1&4 disalllows multiple players
 				VehicleSize "192"
-				model "models\vehicles\buggy_p2.mdl"//models/buggy.mdl
+				model "models/vehicles/buggy_p2.mdl"//models/buggy.mdl
 				VehicleScript "scripts/vehicles/jeep_test.txt"} }
 //First House
 		create {classname "info_vehicle_spawn" origin "-4928 -12224 736"//-6703.96 -12144 711.99
@@ -95,7 +95,7 @@ d2_coast_05
 				RespawnVehicle "1"
 				VehicleType "4"//1&4 disalllows multiple players
 				VehicleSize "192"
-				model "models\vehicles\buggy_p2.mdl"//models/buggy.mdl
+				model "models/vehicles/buggy_p2.mdl"//models/buggy.mdl
 				VehicleScript "scripts/vehicles/jeep_test.txt"} }
 //Crossbow Truck
 		create {classname "info_vehicle_spawn" origin "-4544 -4672 1104"//-5165.88 -4768.01 1088
@@ -106,7 +106,7 @@ d2_coast_05
 				RespawnVehicle "1"
 				VehicleType "4"//1&4 disalllows multiple players
 				VehicleSize "192"
-				model "models\vehicles\buggy_p2.mdl"//models/buggy.mdl
+				model "models/vehicles/buggy_p2.mdl"//models/buggy.mdl
 				VehicleScript "scripts/vehicles/jeep_test.txt"} }
 //Gas Station Workhouse
 		create {classname "info_vehicle_spawn" origin "-5304.01 -40.04 1112"
@@ -117,7 +117,7 @@ d2_coast_05
 				RespawnVehicle "1"
 				VehicleType "4"//1&4 disalllows multiple players
 				VehicleSize "192"
-				model "models\vehicles\buggy_p2.mdl"//models/buggy.mdl
+				model "models/vehicles/buggy_p2.mdl"//models/buggy.mdl
 				VehicleScript "scripts/vehicles/jeep_test.txt"} }
 
 //--Checkpoints--

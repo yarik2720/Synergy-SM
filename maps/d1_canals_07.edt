@@ -65,49 +65,31 @@ d1_canals_07
 		create {classname "info_spawn_manager"
 			values {targetname "syn_spawn_manager"} }
 
-		create {classname "info_player_coop" origin "7740.00 7800.85 -400.67"
-			values {angles "0 40 0" targetname "syn_spawn_player_1"} }
-
-		create {classname "info_player_coop" origin "10776 1512 -256"
-			values {angles "0 0 0" targetname "syn_spawn_player_2" StartDisabled "1"} }
-
 		create {classname "info_global_settings"
 			values {IsVehicleMap "1" targetname "syn_global_settings"} }
 
-		create {classname "info_vehicle_spawn" origin "7888 8043.28 -479.33"
-			values {targetname	"syn_spawn_vehicle_1"
+		create {classname "info_player_coop" origin "7888 8043.28 -479.33"
+			values {targetname	"syn_vehiclespawn_1"
 				angles "0 270 0"
-				StartEnabled "1"
-				RespawnVehicle "1"
-				Ownership "1"
-				VehicleType "2"
-				VehicleSize "164"
+				StartDisabled "0"
+				SpawnMode "2"
 				model "models/airboat.mdl"
-				VehicleScript "scripts/vehicles/airboat.txt"} }
+				VehicleEntity "prop_vehicle_airboat"} }
 
-		create {classname "info_vehicle_spawn" origin "11456 1202 -445"
-			values {targetname	"syn_spawn_vehicle_2"
+		create {classname "info_player_coop" origin "11456 1202 -445"
+			values {targetname	"syn_vehiclespawn_2"
 				angles "0 90 0"
-				StartEnabled "0"//Enabled in 'Exploits - Failsafe'
-				RespawnVehicle "1"
-				Ownership "1"
-				VehicleType "2"
-				VehicleSize "164"
+				StartDisabled "1"
+				SpawnMode "2"
 				model "models/airboat.mdl"
-				VehicleScript "scripts/vehicles/airboat.txt"} }
-
-		create {classname "logic_auto"
-			values {spawnflags "1"
-				OnMapTransition "syn_spawn_manager,TeleportPlayers,syn_spawn_teleport,0.1,-1"} }
-
-		create {classname "info_teleport_destination" origin "7740.00 7800.85 -400.67" values {targetname "syn_spawn_teleport" angles "0 40 0"} }
+				VehicleEntity "prop_vehicle_airboat"} }
 
 //--Checkpoints--
 		create {classname "trigger_once"
 			origin "10752 928 -368"
 			values {model "*88"
 				spawnflags "1"
-				OnTrigger "syn_spawn_manager,SetCheckpoint,syn_spawn_player_2,0,-1"} }
+				OnTrigger "syn_vehiclespawn_2,EnableOnly,,0,-1"} }
 
 //--Exploits--
 //Failsafe -- prevent I-beam exploit

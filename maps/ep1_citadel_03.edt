@@ -188,6 +188,11 @@ ep1_citadel_03
 			}
 		}
 
+		// Stop the annoying sound_radiation_warning sound from being triggered every time a player enters the trigger
+		create {classname "logic_auto"
+			values {spawnflags "1"
+				OnMapSpawn "sound_radiation_warning,AddOutput,OnPlaySound sound_radiation_warning:Kill::0.1:-1,0,-1"} }
+
 		// activate checkpoint after the exit elevator starts to move
 	//	delete { classname "trigger_multiple" origin "1152 13654 5312" }
 	//	create { classname "trigger_multiple" origin "1152 13654 5312"

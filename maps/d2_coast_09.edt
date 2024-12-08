@@ -83,7 +83,7 @@ d2_coast_09
 				RespawnVehicle "1"
 				VehicleType "4"//1&4 disalllows multiple players
 				VehicleSize "192"
-				model "models\vehicles\buggy_p2.mdl"//models/buggy.mdl
+				model "models/vehicles/buggy_p2.mdl"//models/buggy.mdl
 				VehicleScript "scripts/vehicles/jeep_test.txt"} }
 
 		create {classname "info_vehicle_spawn" origin "-6768 4192 479.99"
@@ -94,7 +94,7 @@ d2_coast_09
 				RespawnVehicle "1"
 				VehicleType "4"//1&4 disalllows multiple players
 				VehicleSize "192"
-				model "models\vehicles\buggy_p2.mdl"//models/buggy.mdl
+				model "models/vehicles/buggy_p2.mdl"//models/buggy.mdl
 				VehicleScript "scripts/vehicles/jeep_test.txt"} }
 
 		create {classname "info_vehicle_spawn" origin "112.01 -7256 -744.01"
@@ -105,7 +105,7 @@ d2_coast_09
 				RespawnVehicle "1"
 				VehicleType "4"//1&4 disalllows multiple players
 				VehicleSize "192"
-				model "models\vehicles\buggy_p2.mdl"//models/buggy.mdl
+				model "models/vehicles/buggy_p2.mdl"//models/buggy.mdl
 				VehicleScript "scripts/vehicles/jeep_test.txt"} }
 
 		create {classname "info_vehicle_spawn" origin "10024 9928 -176"
@@ -115,7 +115,7 @@ d2_coast_09
 				RespawnVehicle "1"
 				VehicleType "4"//1&4 disalllows multiple players
 				VehicleSize "192"
-				model "models\vehicles\buggy_p2.mdl"//models/buggy.mdl
+				model "models/vehicles/buggy_p2.mdl"//models/buggy.mdl
 				VehicleScript "scripts/vehicles/jeep_test.txt"} }
 
 //--Checkpoints--

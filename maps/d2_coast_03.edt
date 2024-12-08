@@ -65,8 +65,12 @@ d2_coast_03
 		create {classname "info_spawn_manager"
 			values {targetname "syn_spawn_manager"} }
 //Intro: Tunnel
-		create {classname "info_player_coop" origin "-6752 -14100 1025"
-			values {angles "0 100 0" targetname "syn_spawn_player_1"} }
+		create {classname "info_player_coop" origin "-6920 -13348 1033"
+			values {targetname "syn_spawn_player_1"
+				model "models/buggy.mdl"
+				VehicleEntity "prop_vehicle_jeep"
+				SpawnMode "1"
+				EnableGun "1"} }
 //First House
 		create {classname "info_player_coop" origin "-3840 -6016 560"
 			values {angles "0 270 0" targetname "syn_spawn_player_2" StartDisabled "1"} }
@@ -91,7 +95,7 @@ d2_coast_03
 				RespawnVehicle "1"
 				VehicleType "4"
 				VehicleSize "192"
-				model "models\vehicles\buggy_p2.mdl"//models/buggy.mdl
+				model "models/vehicles/buggy_p2.mdl"//models/buggy.mdl
 				VehicleScript "scripts/vehicles/jeep_test.txt"} }
 //First House
 		create {classname "info_vehicle_spawn" origin "-3776 -6400 576"//-4576.01 -4944 240
@@ -311,7 +315,9 @@ d2_coast_03
 //Trav|Edt - add moveplayers to base and teleport scar
 		create {classname "trigger_once"//trigger_coop (disable this teleport point for now)
 			origin "8852 4376 276.08"
-			values {model "*98"
+			values {
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "8852 4376 276.08"
 				spawnflags "1"
 				targetname "syn_mplrs"
 				CountType "1"
@@ -483,7 +489,8 @@ d2_coast_03
 		delete {targetname "rpg_weapon"}
 
 		create {classname "trigger_multiple" origin "8516 4268 300"
-			values {model "*140"
+			values {
+				edt_getbspmodelfor_targetname "trigger_odessa"
 				spawnflags "1"
 				wait "0.5"
 				targetname "syn_giverpg_trig"
@@ -555,7 +562,7 @@ d2_coast_03
 		delete { targetname "telescope_button" }
 		create { classname "func_button" origin "-3694.5 3735 544"
 			values {
-				"model" "*109"//*114 - Pre 2010 Update
+				"edt_getbspmodelfor_targetname" "telescope_button"
 				"targetname" "telescope_button"
 				"spawnflags" "1056" // 1024 (use) + 32 (toggle)
 				"wait" "-1"

@@ -106,42 +106,42 @@ d1_town_04
 		//edit {classname "prop_physics" values {classname "prop_physics_multiplayer"} }
 
 //Trav|Edt - add gman
-		create {classname "npc_gman"
-			origin	"1920 320 -5077"
-			values {spawnflags "17028"
-				angles "0 270 0"
-				targetname "syn_vint_trav_gman" } }
-
-		create {classname "scripted_sequence"
-			origin	"1920 320 -5120"
-			values {spawnflags	"96"
-				targetname "syn_vint_trav_ss_gman1"
-				m_iszEntity	"syn_vint_trav_gman"
-				m_iszPlay	"tiefidget"
-				m_iszNextScript	"syn_vint_trav_ss_gman2"} }
-
-		create {classname "scripted_sequence"
-			origin	"2176 320 -5076"
-			values {spawnflags	"96"
-				//angles "0 0 0"
-				targetname	"syn_vint_trav_ss_gman2"
-				m_fMoveTo	"1"
-				OnEndSequence "syn_vint_trav_gman,Kill,,0,-1"
-				OnEndSequence "syn_vint_trav_gman_pusher,Disable,,0,-1"} }
-
-		create {classname "trigger_once"
-			origin "1920 -260 -5035.5"
-			values {model "*32"
-				spawnflags "1"
-				OnTrigger "syn_vint_trav_ss_gman1,BeginSequence,-1,0,-1"} }
-
-		create {classname "trigger_push"
-			origin "1920 508 -5035.5"
-			values {model "*32"
-				spawnflags "1"
-				targetname "syn_vint_trav_gman_pusher"
-				pushdir "0 270 0"
-				speed "275"} }
+//		create {classname "npc_gman"
+//			origin	"1920 320 -5077"
+//			values {spawnflags "17028"
+//				angles "0 270 0"
+//				targetname "syn_vint_trav_gman" } }
+//
+//		create {classname "scripted_sequence"
+//			origin	"1920 320 -5120"
+//			values {spawnflags	"96"
+//				targetname "syn_vint_trav_ss_gman1"
+//				m_iszEntity	"syn_vint_trav_gman"
+//				m_iszPlay	"tiefidget"
+//				m_iszNextScript	"syn_vint_trav_ss_gman2"} }
+//
+//		create {classname "scripted_sequence"
+//			origin	"2176 320 -5076"
+//			values {spawnflags	"96"
+//				//angles "0 0 0"
+//				targetname	"syn_vint_trav_ss_gman2"
+//				m_fMoveTo	"1"
+//				OnEndSequence "syn_vint_trav_gman,Kill,,0,-1"
+//				OnEndSequence "syn_vint_trav_gman_pusher,Disable,,0,-1"} }
+//
+//		create {classname "trigger_once"
+//			origin "1920 -260 -5035.5"
+//			values {model "*32"
+//				spawnflags "1"
+//				OnTrigger "syn_vint_trav_ss_gman1,BeginSequence,-1,0,-1"} }
+//
+//		create {classname "trigger_push"
+//			origin "1920 508 -5035.5"
+//			values {model "*32"
+//				spawnflags "1"
+//				targetname "syn_vint_trav_gman_pusher"
+//				pushdir "0 270 0"
+//				speed "275"} }
 
 //random pzombie (vint)
 		create {classname "npc_poisonzombie" origin "1328 1072 -5872"

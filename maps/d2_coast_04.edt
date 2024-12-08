@@ -16,14 +16,16 @@ console
 //outoflevel fail
 		delete {classname "trigger_once" origin "10496 -6144 -20"}
 //Prevent Backtracking
-		create {classname "trigger_push" origin "0 80 0"
-			values {model "*74"//*75 - Pre 2010 Update
+		create {classname "trigger_push" origin "-9923 -2065 200"
+			values {
+				edt_mins "-800 -100 -300"
+				edt_maxs "800 100 300"
 				spawnflags "65"
 				speed "750"
 				pushdir "0 90 0"} }
 
-		create {classname "func_vehicleclip" origin "0 80 0"
-			values {model "*74"} }//*75 - Pre 2010 Update
+		create {classname "prop_dynamic" origin "-9765 -2155 0" values {angles "0 70 0" startdisabled "1" solid "6" DisableShadows "1" model "models/synergy/tools/syn_transition.mdl"} }
+		create {classname "prop_dynamic" origin "-10487 -1893 0" values {angles "0 70 0" startdisabled "1" solid "6" DisableShadows "1" model "models/synergy/tools/syn_transition.mdl"} }
 
 //--Starting Items--
 		create {classname "info_player_equip"
@@ -93,7 +95,7 @@ console
 				RespawnVehicle "1"
 				VehicleType "4"//1&4 disalllows multiple players
 				VehicleSize "192"
-				model "models\vehicles\buggy_p2.mdl"//models/buggy.mdl
+				model "models/vehicles/buggy_p2.mdl"//models/buggy.mdl
 				VehicleScript "scripts/vehicles/jeep_test.txt"} }
 //Prejump
 		create {classname "info_vehicle_spawn" origin "-2080 -2240 1056"
@@ -104,7 +106,7 @@ console
 				RespawnVehicle "1"
 				VehicleType "4"//1&4 disalllows multiple players
 				VehicleSize "192"
-				model "models\vehicles\buggy_p2.mdl"//models/buggy.mdl
+				model "models/vehicles/buggy_p2.mdl"//models/buggy.mdl
 				VehicleScript "scripts/vehicles/jeep_test.txt"} }
 //Post-jump
 		create {classname "info_vehicle_spawn" origin "-1887.99 3016 1000"
@@ -115,18 +117,21 @@ console
 				RespawnVehicle "1"
 				VehicleType "4"//1&4 disalllows multiple players
 				VehicleSize "192"
-				model "models\vehicles\buggy_p2.mdl"//models/buggy.mdl
+				model "models/vehicles/buggy_p2.mdl"//models/buggy.mdl
 				VehicleScript "scripts/vehicles/jeep_test.txt"} }
 
 //--Checkpoints--
 		create {classname "trigger_once"
 			origin "4352 -1728 720"
-			values {model "*97"
+			values {
+				edt_getbspmodelfor_targetname "crane_soldier_kill"
 				spawnflags "1"
 				OnTrigger "syn_spawn_manager,SetCheckpoint,syn_spawn_player_2,0,-1"} }
 //1b
 		create {classname "trigger_once" origin "2600 -1816 323.54"
-			values {model "*84"
+			values {
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "2464 -2080 320"
 				spawnflags "1"
 				OnTrigger "syn_spawn_manager,SetCheckpoint,syn_spawn_player_1b,0,-1"} }
 
@@ -136,12 +141,14 @@ console
 //--Extra--
 
 //Trav|Edt - fix walkway to heaven; fix free falls
-		create {classname "trigger_waterydeath" origin "1056 5760 -512" values {model "*54" spawnflags "3"} }
-		create {classname "trigger_hurt" origin "3091.2 2607.99 736" values {model "*25" spawnflags "1" angles "0 90 0" damage "1000" nodmgforce "1"} }
+		create {classname "trigger_waterydeath" origin "1056 5760 -512" values {edt_getbspmodelfor_classname "trigger_waterydeath" edt_getbspmodelfor_origin "10496 -6144 0" spawnflags "3"} }
+		create {classname "trigger_hurt" origin "3091.2 2607.99 736" values {edt_getbspmodelfor_classname "trigger_multiple" edt_getbspmodelfor_origin "2416 5420.8 1184" spawnflags "1" angles "0 90 0" damage "1000" nodmgforce "1"} }
 
 //Trav|Edt - kill players who fall at bridge (avoids frustration of re-crane & will spawn at bridge)
 		create {classname "trigger_multiple" origin "-1873.95 1088 592"
-			values {model "*102"
+			values {
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "-1201.95 2848 1088"
 				spawnflags "1"
 				OnStartTouch "!activator,SetHealth,0,1,-1"} }
 
@@ -149,26 +156,30 @@ console
 		edit {targetname "autosave" values {targetname "syn_autosave"} }
 
 		create {classname "trigger_once" origin "4723.5 -2688 394.5"
-			values {model "*59"
+			values {
+				//model "*59"
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "4723.5 -2688 394.5"
 				spawnflags "8"
 				filtername "catwalk_filter"
 				OnTrigger "syn_autosave,Save,,1,-1"} }
 
 //TODO: add non phys model for prop_physics equivalent??
 //Trav|Edt - save major network usage by removeing prop_ragdoll cars
-		create {classname "filter_activator_class"
-			values {targetname "syn_filter_prop_ragdoll"
-				filterclass "prop_ragdoll"} }
-
-		create {classname "trigger_once" origin "2464 3744 1120"
-			values {model "*90"
-				spawnflags "8"
-				filtername "syn_filter_prop_ragdoll"
-				OnStartTouch "!activator,Kill,,0,-1"} }
-
-		create {classname "logic_auto"
-			values {spawnflags "1"
-				OnMapSpawn "prop_ragdoll,DisableMotion,,10,-1"} }
+// 2023: Undone since netcode optimizations make this less of an issue.
+//		create {classname "filter_activator_class"
+//			values {targetname "syn_filter_prop_ragdoll"
+//				filterclass "prop_ragdoll"} }
+//
+//		create {classname "trigger_once" origin "2464 3744 1120"
+//			values {model "*90"
+//				spawnflags "8"
+//				filtername "syn_filter_prop_ragdoll"
+//				OnStartTouch "!activator,Kill,,0,-1"} }
+//
+//		create {classname "logic_auto"
+//			values {spawnflags "1"
+//				OnMapSpawn "prop_ragdoll,DisableMotion,,10,-1"} }
 
 		//edit {classname "prop_ragdoll" origin "2661.9 3360.3 1150.1" values {classname "prop_physics"} }
 		//delete {classname "prop_ragdoll" origin "2661.9 3360.3 1150.1"}
@@ -226,8 +237,9 @@ console
 
 //Trav|Edt - prevent players from running up hill to skip level.
 		create {classname "trigger_push"
-			origin "1696 1376 736"
-			values {model "*75"
+			origin "1696 1476 736"
+			values {
+				edt_getbspmodelfor_targetname "warehouse_open"
 				spawnflags "1"
 				targetname "syn_vint_trav_hill_push"
 				pushdir "10 270 0"
@@ -254,7 +266,9 @@ console
 
 //Trav|Edt - Require a vehicle to enable spawn
 		create {classname "trigger_once" origin "5900 -3528 448"
-			values {model "*68"
+			values {
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "5900 -3528 448"
 				spawnflags "32"//vehicle only
 				OnTrigger "syn_spawn_vehicle_2,Enable,,1,-1"} }
 
@@ -289,7 +303,9 @@ console
 //Trav|Edt - anti-rush
 		create {classname "trigger_coop"
 			origin "-3808 13440 2304"//-1761.95 10976 1952
-			values {model "*54"//*102
+			values {
+				edt_getbspmodelfor_classname "trigger_waterydeath"
+				edt_getbspmodelfor_origin "10496 -6144 0"
 				spawnflags "1"
 				targetname "syn_antirush_coop"
 				CountType "1"
@@ -371,7 +387,8 @@ console
 
 			"values"
 			{
-				"model" "*47"
+				"edt_getbspmodelfor_classname" "trigger_multiple"
+				"edt_getbspmodelfor_origin" "-1792 1472 1088"
 				"spawnflags" "1"
 				"wait" "1"
 				"StartDisabled" "0"

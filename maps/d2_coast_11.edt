@@ -2,7 +2,7 @@ d2_coast_11
 {
 	console
 	{
-		sk_antlionguard_health 2560 //5120 //d-500
+		sk_antlionguard_health 1000 //d-500
 		sk_antlionguard_dmg_charge 60 //20
 		sk_antlionguard_dmg_shove 25 //10
 		//sk_antlion_health 50//30
@@ -10,7 +10,7 @@ d2_coast_11
 	entity
 	{
 		// ----- spawn location -----
-		create { classname "info_player_coop" origin "4159 -11320 1602" values { angles "0 140 0" } }
+		create { classname "info_player_coop" origin "4178 -11324 1608" values { angles "0 150 0" } }
 		create { classname "info_spawn_manager" values { targetname "PS_Manager" } }
 
 		// ----- spawn equipment -----

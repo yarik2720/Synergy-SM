@@ -364,6 +364,7 @@ ep1_citadel_00
 				OnMapSpawn "ss_DogIntro,AddOutput,OnScriptEvent01 syn_spawn_manager:SetCheckpoint:syn_spawn_player_2:0:-1,0,-1"
 				OnMapSpawn "ss_DogIntro,AddOutput,OnScriptEvent01 syn_equip_start:Enable::0:-1,0,-1"
 				OnMapSpawn "ss_DogIntro,AddOutput,OnScriptEvent01 syn_equip_start:EquipAllPlayers::0:-1,0,-1"
+				OnMapSpawn "ss_DogIntro,AddOutput,OnScriptEvent01 trav_intro_trigger:Kill::0:-1,0,-1"
 				OnMapSpawn "ss_DogIntro,AddOutput,OnScriptEvent01 syn_spawn_manager:TeleportPlayers:syn_spawn_player_2TP:0.1:-1,0,-1"
 					OnMapSpawn "ss_DogIntro,AddOutput,OnScriptEvent01 ghostanim_DogIntro:Kill::0:-1,0,-1"
 				OnMapSpawn "ss_DogIntro,AddOutput,targetname ss_DogIntro,1,-1"

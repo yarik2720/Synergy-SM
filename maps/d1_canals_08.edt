@@ -99,17 +99,16 @@ d1_canals_08
 				filtername "syn_d1_canals_08_IHasGunz"} }
 
 //--Spawns--
-//maybe unness
-		create {classname "logic_auto"
-			values {spawnflags "1"
-				OnMapTransition "syn_spawn_manager,TeleportPlayers,syn_spawn_teleport,0.1,-1"} }
-
-		create {classname "info_teleport_destination" origin "7234.77 -11016.11 -470.21" values {targetname "syn_spawn_teleport" angles "0 0 0"} }
 		create {classname "info_spawn_manager"
 			values {targetname "syn_spawn_manager"} }
 //Intro
-		create {classname "info_player_coop" origin "7504 -11398 -448"//7234.77 -11016.11 -470.21
-			values {angles "0 0 0" targetname "syn_spawn_player_1"} }
+		create {classname "info_player_coop" origin "7592.31 -11315.3 -447.02"
+			values {targetname	"syn_vehiclespawn_1"
+				angles "0 270 0"
+				StartDisabled "0"
+				SpawnMode "2"
+				model "models/airboat.mdl"
+				VehicleEntity "prop_vehicle_airboat"} }
 //Locked Door
 		create {classname "info_player_coop" origin "-832 -64 -576"
 			values {angles "0 330 0" targetname "syn_spawn_player_2" StartDisabled "1"} }
@@ -123,17 +122,6 @@ d1_canals_08
 		create {classname "info_global_settings"
 			values {IsVehicleMap "1" targetname "syn_global_settings"} }
 
-		create {classname "info_vehicle_spawn" origin "7592.31 -11315.3 -447.02"
-			values {targetname	"syn_spawn_vehicle_1"
-				angles "0 270 0"
-				StartEnabled "1"
-				RespawnVehicle "1"
-				Ownership "1"
-				VehicleType "2"
-				VehicleSize "164"
-				model "models/airboat.mdl"
-				VehicleScript "scripts/vehicles/airboat.txt"} }
-
 		create {classname "info_vehicle_spawn" origin "256 -256 -608"
 			values {targetname	"syn_spawn_vehicle_2"
 				angles "0 180 0"
@@ -144,12 +132,6 @@ d1_canals_08
 				VehicleSize "164"
 				model "models/airboat.mdl"
 				VehicleScript "scripts/vehicles/airboat.txt"} }
-
-		create {classname "logic_auto"
-			values {spawnflags "1"
-				OnMapTransition "syn_spawn_manager,TeleportPlayers,syn_spawn_teleport,0,-1"} }
-
-		create {classname "info_teleport_destination" origin "7234.77 -11016.11 -470.21" values {targetname "syn_spawn_teleport" angles "0 0 0"} }
 
 //--Checkpoints--
 		create {classname "logic_auto"

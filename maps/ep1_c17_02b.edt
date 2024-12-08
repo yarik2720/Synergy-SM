@@ -90,6 +90,10 @@ ep1_c17_02b
 
 		create { classname "info_intermission" origin "-1063 2977 99" values { target "backstreet_soldier_3_grenadetarget_1" } }
 
+		// Make these door explosions hurt
+		edit {targetname "det_det_expl_frontdoor" values { iMagnitude "80" spawnflags "0" } }
+		edit {targetname "door1_det_det_expl_frontdoor" values { iMagnitude "100" spawnflags "0" } }
+
 //Trav|Edt add alot more combine on eastfront door
 		edit {targetname "eastfront_soldiers_respawn_counter" values {max "12"} }
 

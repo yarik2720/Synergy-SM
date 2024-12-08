@@ -62,6 +62,10 @@ d3_c17_07
 		create {classname "info_global_settings"
 			values {IsVehicleMap "0" targetname "syn_global_settings"} }
 
+		// Don't block players after one player jumps down into the turrent room.
+		// Not sure why this was added in hl2 20a update. Not surprised I missed this in my solo testing.
+		delete {targetname "turretroom_playerclipbrush"}
+
 //--Extra--
 
 		// create intermission
@@ -230,9 +234,9 @@ d3_c17_07
 				angles " 0 270 0"
 				targetname "balcony_cop1_maker"
 				StartDisabled "1"
-				MaxNPCCount "24"
+				MaxNPCCount "6"
 				SpawnFrequency "4"
-				MaxLiveChildren "3"
+				MaxLiveChildren "2"
 				Radius "0"
 				TemplateName "balcony_cop1"
 				OnSpawnNPC "balcony_doors,Open,,0,-1"

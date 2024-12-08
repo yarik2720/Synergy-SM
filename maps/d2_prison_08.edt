@@ -155,12 +155,12 @@ d2_prison_08
 		//		target "turret_buddy"} }
 
 //Trav|Edt - Add a 4th turret in the empty locker
-		create { classname "npc_turret_floor"
-			 origin	"-272 810 997"
-			 values {spawnflags "640"//640 citizen turret
-				angles "0 180 0"
-				targetname "turret_buddy"
-				OnPhysGunPickup "!activator,Enable,-1,0,-1" } }
+//		create { classname "npc_turret_floor"
+//			 origin	"-272 810 997"
+//			 values {spawnflags "640"//640 citizen turret
+//				angles "0 180 0"
+//				targetname "turret_buddy"
+//				OnPhysGunPickup "!activator,Enable,-1,0,-1" } }
 
 		create {classname "trigger_once"
 			origin "96 240 996"
@@ -234,88 +234,89 @@ d2_prison_08
 				filtername "alyx"} }
 
 //Trav|Edt - finale defense
-		edit {targetname "maker_combine_lower_1" values {MaxLiveChildren "3"} }
-		edit {targetname "maker_combine_lower_2" values {MaxLiveChildren "3"} }
-		edit {targetname "maker_combine_lower_3" values {MaxLiveChildren "3"} }
-		edit {targetname "maker_combine_lower_4" values {MaxLiveChildren "3"} }
-		edit {targetname "maker_combine_lower_6" values {MaxLiveChildren "3"} }
-		edit {targetname "maker_combine_lower_7" values {MaxLiveChildren "3"} }
-		edit {targetname "maker_combine_upper_1" values {MaxLiveChildren "2"} }
-		edit {targetname "maker_combine_upper_2" values {MaxLiveChildren "2"} }
-		delete {targetname "logic_spawn_single_combine_upperandlower"}
-		delete {targetname "logic_spawn_single_combine_lower"}
-		delete {targetname "logic_spawn_single_combine_lower_and_behind"}
-
-		create {classname "logic_case"
-			values {targetname "logic_spawn_single_combine_upperandlower"
-				Case01 "1"
-				Case02 "2"
-				Case03 "3"
-				Case04 "4"
-				Case05 "5"
-				Case06 "6"
-				Case07 "7"
-				Case08 "8"
-				Case09 "9"
-				OnCase01 "maker_combine_lower_1,AddMaxChildren,3,0,-1"
-				OnCase01 "maker_combine_lower_1,Enable,,0.1,-1"
-				OnCase02 "maker_combine_lower_2,AddMaxChildren,3,0,-1"
-				OnCase02 "maker_combine_lower_2,Enable,,0.1,-1"
-				OnCase03 "maker_combine_lower_3,AddMaxChildren,3,0,-1"
-				OnCase03 "maker_combine_lower_3,Enable,,0.1,-1"
-				OnCase04 "maker_combine_lower_4,AddMaxChildren,3,0,-1"
-				OnCase04 "maker_combine_lower_4,Enable,,0.1,-1"
-				OnCase06 "maker_combine_upper_1,AddMaxChildren,2,0,-1"
-				OnCase06 "maker_combine_upper_1,Enable,,0.1,-1"
-				OnCase07 "maker_combine_upper_2,AddMaxChildren,2,0,-1"
-				OnCase07 "maker_combine_upper_2,Enable,,0.1,-1"
-				OnCase08 "maker_combine_lower_6,AddMaxChildren,3,0,-1"
-				OnCase08 "maker_combine_lower_6,Enable,,0.1,-1"
-				OnCase09 "maker_combine_lower_7,AddMaxChildren,3,0,-1"
-				OnCase09 "maker_combine_lower_7,Enable,,0.1,-1"} }
-
-		create {classname "logic_case"
-			values {targetname "logic_spawn_single_combine_lower"
-				Case01 "1"
-				Case02 "2"
-				Case03 "3"
-				Case04 "4"
-				Case05 "5"
-				Case06 "6"
-				OnCase01 "maker_combine_lower_1,AddMaxChildren,3,0,-1"
-				OnCase01 "maker_combine_lower_1,Enable,,0.1,-1"
-				OnCase02 "maker_combine_lower_2,AddMaxChildren,3,0,-1"
-				OnCase02 "maker_combine_lower_2,Enable,,0.1,-1"
-				OnCase03 "maker_combine_lower_3,AddMaxChildren,3,0,-1"
-				OnCase03 "maker_combine_lower_3,Enable,,0.1,-1"
-				OnCase04 "maker_combine_lower_4,AddMaxChildren,3,0,-1"
-				OnCase04 "maker_combine_lower_4,Enable,,0.1,-1"
-				OnCase05 "maker_combine_lower_6,AddMaxChildren,3,0,-1"
-				OnCase05 "maker_combine_lower_6,Enable,,0.1,-1"
-				OnCase06 "maker_combine_lower_7,AddMaxChildren,3,0,-1"
-				OnCase06 "maker_combine_lower_7,Enable,,0.1,-1"} }
-
-		create {classname "logic_case"
-			values {targetname "logic_spawn_single_combine_lower_and_behind"
-				Case01 "1"
-				Case02 "2"
-				Case03 "3"
-				Case04 "4"
-				Case05 "5"
-				Case06 "6"
-				Case07 "7"
-				OnCase01 "maker_combine_lower_1,AddMaxChildren,3,0,-1"
-				OnCase01 "maker_combine_lower_1,Enable,,0.1,-1"
-				OnCase02 "maker_combine_lower_2,AddMaxChildren,3,0,-1"
-				OnCase02 "maker_combine_lower_2,Enable,,0.1,-1"
-				OnCase03 "maker_combine_lower_3,AddMaxChildren,3,0,-1"
-				OnCase03 "maker_combine_lower_3,Enable,,0.1,-1"
-				OnCase04 "maker_combine_lower_4,AddMaxChildren,3,0,-1"
-				OnCase04 "maker_combine_lower_4,Enable,,0.1,-1"
-				OnCase05 "maker_combine_lower_6,AddMaxChildren,3,0,-1"
-				OnCase05 "maker_combine_lower_6,Enable,,0.1,-1"
-				OnCase06 "maker_combine_lower_7,AddMaxChildren,2,0,-1"
-				OnCase06 "maker_combine_lower_7,Enable,,0.1,-1"} }
+// Half-Life 2 20th Anniversary Update -- too damn many, rebalance based on skill level
+//		edit {targetname "maker_combine_lower_1" values {MaxLiveChildren "3"} }
+//		edit {targetname "maker_combine_lower_2" values {MaxLiveChildren "3"} }
+//		edit {targetname "maker_combine_lower_3" values {MaxLiveChildren "3"} }
+//		edit {targetname "maker_combine_lower_4" values {MaxLiveChildren "3"} }
+//		edit {targetname "maker_combine_lower_6" values {MaxLiveChildren "3"} }
+//		edit {targetname "maker_combine_lower_7" values {MaxLiveChildren "3"} }
+//		edit {targetname "maker_combine_upper_1" values {MaxLiveChildren "2"} }
+//		edit {targetname "maker_combine_upper_2" values {MaxLiveChildren "2"} }
+//		delete {targetname "logic_spawn_single_combine_upperandlower"}
+//		delete {targetname "logic_spawn_single_combine_lower"}
+//		delete {targetname "logic_spawn_single_combine_lower_and_behind"}
+//
+//		create {classname "logic_case"
+//			values {targetname "logic_spawn_single_combine_upperandlower"
+//				Case01 "1"
+//				Case02 "2"
+//				Case03 "3"
+//				Case04 "4"
+//				Case05 "5"
+//				Case06 "6"
+//				Case07 "7"
+//				Case08 "8"
+//				Case09 "9"
+//				OnCase01 "maker_combine_lower_1,AddMaxChildren,3,0,-1"
+//				OnCase01 "maker_combine_lower_1,Enable,,0.1,-1"
+//				OnCase02 "maker_combine_lower_2,AddMaxChildren,3,0,-1"
+//				OnCase02 "maker_combine_lower_2,Enable,,0.1,-1"
+//				OnCase03 "maker_combine_lower_3,AddMaxChildren,3,0,-1"
+//				OnCase03 "maker_combine_lower_3,Enable,,0.1,-1"
+//				OnCase04 "maker_combine_lower_4,AddMaxChildren,3,0,-1"
+//				OnCase04 "maker_combine_lower_4,Enable,,0.1,-1"
+//				OnCase06 "maker_combine_upper_1,AddMaxChildren,2,0,-1"
+//				OnCase06 "maker_combine_upper_1,Enable,,0.1,-1"
+//				OnCase07 "maker_combine_upper_2,AddMaxChildren,2,0,-1"
+//				OnCase07 "maker_combine_upper_2,Enable,,0.1,-1"
+//				OnCase08 "maker_combine_lower_6,AddMaxChildren,3,0,-1"
+//				OnCase08 "maker_combine_lower_6,Enable,,0.1,-1"
+//				OnCase09 "maker_combine_lower_7,AddMaxChildren,3,0,-1"
+//				OnCase09 "maker_combine_lower_7,Enable,,0.1,-1"} }
+//
+//		create {classname "logic_case"
+//			values {targetname "logic_spawn_single_combine_lower"
+//				Case01 "1"
+//				Case02 "2"
+//				Case03 "3"
+//				Case04 "4"
+//				Case05 "5"
+//				Case06 "6"
+//				OnCase01 "maker_combine_lower_1,AddMaxChildren,3,0,-1"
+//				OnCase01 "maker_combine_lower_1,Enable,,0.1,-1"
+//				OnCase02 "maker_combine_lower_2,AddMaxChildren,3,0,-1"
+//				OnCase02 "maker_combine_lower_2,Enable,,0.1,-1"
+//				OnCase03 "maker_combine_lower_3,AddMaxChildren,3,0,-1"
+//				OnCase03 "maker_combine_lower_3,Enable,,0.1,-1"
+//				OnCase04 "maker_combine_lower_4,AddMaxChildren,3,0,-1"
+//				OnCase04 "maker_combine_lower_4,Enable,,0.1,-1"
+//				OnCase05 "maker_combine_lower_6,AddMaxChildren,3,0,-1"
+//				OnCase05 "maker_combine_lower_6,Enable,,0.1,-1"
+//				OnCase06 "maker_combine_lower_7,AddMaxChildren,3,0,-1"
+//				OnCase06 "maker_combine_lower_7,Enable,,0.1,-1"} }
+//
+//		create {classname "logic_case"
+//			values {targetname "logic_spawn_single_combine_lower_and_behind"
+//				Case01 "1"
+//				Case02 "2"
+//				Case03 "3"
+//				Case04 "4"
+//				Case05 "5"
+//				Case06 "6"
+//				Case07 "7"
+//				OnCase01 "maker_combine_lower_1,AddMaxChildren,3,0,-1"
+//				OnCase01 "maker_combine_lower_1,Enable,,0.1,-1"
+//				OnCase02 "maker_combine_lower_2,AddMaxChildren,3,0,-1"
+//				OnCase02 "maker_combine_lower_2,Enable,,0.1,-1"
+//				OnCase03 "maker_combine_lower_3,AddMaxChildren,3,0,-1"
+//				OnCase03 "maker_combine_lower_3,Enable,,0.1,-1"
+//				OnCase04 "maker_combine_lower_4,AddMaxChildren,3,0,-1"
+//				OnCase04 "maker_combine_lower_4,Enable,,0.1,-1"
+//				OnCase05 "maker_combine_lower_6,AddMaxChildren,3,0,-1"
+//				OnCase05 "maker_combine_lower_6,Enable,,0.1,-1"
+//				OnCase06 "maker_combine_lower_7,AddMaxChildren,2,0,-1"
+//				OnCase06 "maker_combine_lower_7,Enable,,0.1,-1"} }
 
 //Trav|Edt - increase max npcdropweapon cap
 		edit {classname "game_weapon_manager"

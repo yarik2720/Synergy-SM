@@ -3,8 +3,8 @@ ep1_c17_06
 	console
 	{
 	sk_strider_num_missiles1 12
-	sk_strider_num_missiles1 16
-	sk_strider_num_missiles1 20
+	sk_strider_num_missiles2 16
+	sk_strider_num_missiles3 20
 	}
 	entity
 	{

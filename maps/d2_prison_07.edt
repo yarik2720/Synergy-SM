@@ -170,87 +170,87 @@ d2_prison_07
 			origin "-536 -3088 -120"
 			values {angles " 0 270 0"} }
 
-		edit {targetname "math_croom2_combine_counter" values{max "24"} }
-		//edit {targetname "maker_croom2_*" values {MaxLiveChildren "-1"} }
-		edit {targetname "maker_croom2_1" values {MaxLiveChildren "-1"} }
-		edit {targetname "maker_croom2_2" values {MaxLiveChildren "-1"} }
-		edit {targetname "maker_croom2_3" values {MaxLiveChildren "-1"} }
-		edit {targetname "maker_croom2_4" values {MaxLiveChildren "-1"} }
-		edit {targetname "maker_croom2_balcony" values {MaxLiveChildren "-1"} }
-		edit {targetname "maker_croom2_manhack_1" values {MaxLiveChildren "-1"} }
-		edit {targetname "maker_croom2_manhack_2" values {MaxLiveChildren "-1"} }
-		delete {targetname "logic_croom2_assault_wave_1"}
-		delete {targetname "logic_croom2_assault_wave_2"}
-		delete {targetname "logic_croom2_assault_wave_3"}
-		delete {targetname "logic_croom2_assault_wave_4"}
-		delete {targetname "logic_croom2_assault_wave_5"}
-
-		create {classname "logic_relay"
-			values {targetname "logic_croom2_assault_wave_1"
-				OnTrigger "math_croom2_combine_counter,SetValue,12,0,-1"
-				OnTrigger "maker_croom2_1,AddMaxChildren,6,0,-1"
-				OnTrigger "maker_croom2_3,AddMaxChildren,6,0,-1"
-				OnTrigger "maker_croom2_1,Enable,,0.1,-1"
-				OnTrigger "trav_gtext_wavecount,Display,,0,-1"
-				OnTrigger "maker_croom2_3,Enable,,0.1,-1"} }
-
-		create {classname "logic_relay"
-			values {targetname "logic_croom2_assault_wave_2"
-				OnTrigger "math_croom2_combine_counter,SetValue,6,0,-1"
-				OnTrigger "maker_croom2_1,AddMaxChildren,6,0,-1"
-				OnTrigger "maker_croom2_2,AddMaxChildren,6,0,-1"
-				OnTrigger "maker_croom2_3,AddMaxChildren,6,0,-1"
-				OnTrigger "maker_croom2_1,Enable,,0.1,-1"
-				OnTrigger "maker_croom2_2,Enable,,0.1,-1"
-				OnTrigger "trav_gtext_wavecount,Display,,0,-1"
-				OnTrigger "maker_croom2_3,Enable,,0.1,-1"} }
-
-		create {classname "logic_relay"
-			values {targetname "logic_croom2_assault_wave_3"
-				OnTrigger "maker_croom2_1,AddMaxChildren,6,0,-1"
-				OnTrigger "maker_croom2_2,AddMaxChildren,6,0,-1"
-				OnTrigger "maker_croom2_3,AddMaxChildren,6,0,-1"
-				OnTrigger "maker_croom2_4,AddMaxChildren,6,0,-1"
-				OnTrigger "maker_croom2_1,Enable,,0.1,-1"
-				OnTrigger "maker_croom2_2,Enable,,0.1,-1"
-				OnTrigger "maker_croom2_3,Enable,,0.1,-1"
-				OnTrigger "trav_gtext_wavecount,Display,,0,-1"
-				OnTrigger "maker_croom2_4,Enable,,0.1,-1"} }
-
-		create {classname "logic_relay"
-			values {targetname "logic_croom2_assault_wave_4"
-				OnTrigger "maker_croom2_1,AddMaxChildren,6,0,-1"
-				OnTrigger "maker_croom2_2,AddMaxChildren,6,0,-1"
-				OnTrigger "maker_croom2_3,AddMaxChildren,6,0,-1"
-				OnTrigger "maker_croom2_4,AddMaxChildren,6,0,-1"
-				//OnTrigger "maker_croom2_balcony,AddMaxChildren,4,0,-1"
-				OnTrigger "maker_croom2_manhack_1,AddMaxChildren,4,0,-1"
-				OnTrigger "maker_croom2_1,Enable,,0.1,-1"
-				OnTrigger "maker_croom2_2,Enable,,0.1,-1"
-				OnTrigger "maker_croom2_3,Enable,,0.1,-1"
-				OnTrigger "maker_croom2_4,Enable,,0.1,-1"
-				//OnTrigger "maker_croom2_balcony,Enable,,0.1,-1"
-				OnTrigger "trav_gtext_wavecount,Display,,0,-1"
-				OnTrigger "maker_croom2_manhack_1,Enable,,0.1,-1"} }
-
-		create {classname "logic_relay"
-			values {targetname "logic_croom2_assault_wave_5"
-				OnTrigger "maker_croom2_1,AddMaxChildren,6,0,-1"
-				OnTrigger "maker_croom2_2,AddMaxChildren,6,0,-1"
-				OnTrigger "maker_croom2_3,AddMaxChildren,6,0,-1"
-				OnTrigger "maker_croom2_4,AddMaxChildren,6,0,-1"
-				//OnTrigger "maker_croom2_balcony,AddMaxChildren,4,0,-1"
-				OnTrigger "maker_croom2_manhack_1,AddMaxChildren,4,0,-1"
-				OnTrigger "maker_croom2_manhack_2,AddMaxChildren,4,0,-1"
-				OnTrigger "maker_croom2_1,Enable,,0.1,-1"
-				OnTrigger "maker_croom2_2,Enable,,0.1,-1"
-				OnTrigger "maker_croom2_3,Enable,,0.1,-1"
-				OnTrigger "maker_croom2_4,Enable,,0.1,-1"
-				//OnTrigger "maker_croom2_balcony,Enable,,0.1,-1"
-				OnTrigger "maker_croom2_manhack_1,Enable,,0.1,-1"
-				OnTrigger "maker_croom2_manhack_2,Enable,,0.1,-1"
-				OnTrigger "trav_gtext_wavecount,Display,,0,-1"
-				OnTrigger "trigger_ensure_no_combine_left,Enable,,2,-1"} }
+//		edit {targetname "math_croom2_combine_counter" values{max "24"} }
+//		//edit {targetname "maker_croom2_*" values {MaxLiveChildren "-1"} }
+//		edit {targetname "maker_croom2_1" values {MaxLiveChildren "-1"} }
+//		edit {targetname "maker_croom2_2" values {MaxLiveChildren "-1"} }
+//		edit {targetname "maker_croom2_3" values {MaxLiveChildren "-1"} }
+//		edit {targetname "maker_croom2_4" values {MaxLiveChildren "-1"} }
+//		edit {targetname "maker_croom2_balcony" values {MaxLiveChildren "-1"} }
+//		edit {targetname "maker_croom2_manhack_1" values {MaxLiveChildren "-1"} }
+//		edit {targetname "maker_croom2_manhack_2" values {MaxLiveChildren "-1"} }
+//		delete {targetname "logic_croom2_assault_wave_1"}
+//		delete {targetname "logic_croom2_assault_wave_2"}
+//		delete {targetname "logic_croom2_assault_wave_3"}
+//		delete {targetname "logic_croom2_assault_wave_4"}
+//		delete {targetname "logic_croom2_assault_wave_5"}
+//
+//		create {classname "logic_relay"
+//			values {targetname "logic_croom2_assault_wave_1"
+//				OnTrigger "math_croom2_combine_counter,SetValue,12,0,-1"
+//				OnTrigger "maker_croom2_1,AddMaxChildren,6,0,-1"
+//				OnTrigger "maker_croom2_3,AddMaxChildren,6,0,-1"
+//				OnTrigger "maker_croom2_1,Enable,,0.1,-1"
+//				OnTrigger "trav_gtext_wavecount,Display,,0,-1"
+//				OnTrigger "maker_croom2_3,Enable,,0.1,-1"} }
+//
+//		create {classname "logic_relay"
+//			values {targetname "logic_croom2_assault_wave_2"
+//				OnTrigger "math_croom2_combine_counter,SetValue,6,0,-1"
+//				OnTrigger "maker_croom2_1,AddMaxChildren,6,0,-1"
+//				OnTrigger "maker_croom2_2,AddMaxChildren,6,0,-1"
+//				OnTrigger "maker_croom2_3,AddMaxChildren,6,0,-1"
+//				OnTrigger "maker_croom2_1,Enable,,0.1,-1"
+//				OnTrigger "maker_croom2_2,Enable,,0.1,-1"
+//				OnTrigger "trav_gtext_wavecount,Display,,0,-1"
+//				OnTrigger "maker_croom2_3,Enable,,0.1,-1"} }
+//
+//		create {classname "logic_relay"
+//			values {targetname "logic_croom2_assault_wave_3"
+//				OnTrigger "maker_croom2_1,AddMaxChildren,6,0,-1"
+//				OnTrigger "maker_croom2_2,AddMaxChildren,6,0,-1"
+//				OnTrigger "maker_croom2_3,AddMaxChildren,6,0,-1"
+//				OnTrigger "maker_croom2_4,AddMaxChildren,6,0,-1"
+//				OnTrigger "maker_croom2_1,Enable,,0.1,-1"
+//				OnTrigger "maker_croom2_2,Enable,,0.1,-1"
+//				OnTrigger "maker_croom2_3,Enable,,0.1,-1"
+//				OnTrigger "trav_gtext_wavecount,Display,,0,-1"
+//				OnTrigger "maker_croom2_4,Enable,,0.1,-1"} }
+//
+//		create {classname "logic_relay"
+//			values {targetname "logic_croom2_assault_wave_4"
+//				OnTrigger "maker_croom2_1,AddMaxChildren,6,0,-1"
+//				OnTrigger "maker_croom2_2,AddMaxChildren,6,0,-1"
+//				OnTrigger "maker_croom2_3,AddMaxChildren,6,0,-1"
+//				OnTrigger "maker_croom2_4,AddMaxChildren,6,0,-1"
+//				//OnTrigger "maker_croom2_balcony,AddMaxChildren,4,0,-1"
+//				OnTrigger "maker_croom2_manhack_1,AddMaxChildren,4,0,-1"
+//				OnTrigger "maker_croom2_1,Enable,,0.1,-1"
+//				OnTrigger "maker_croom2_2,Enable,,0.1,-1"
+//				OnTrigger "maker_croom2_3,Enable,,0.1,-1"
+//				OnTrigger "maker_croom2_4,Enable,,0.1,-1"
+//				//OnTrigger "maker_croom2_balcony,Enable,,0.1,-1"
+//				OnTrigger "trav_gtext_wavecount,Display,,0,-1"
+//				OnTrigger "maker_croom2_manhack_1,Enable,,0.1,-1"} }
+//
+//		create {classname "logic_relay"
+//			values {targetname "logic_croom2_assault_wave_5"
+//				OnTrigger "maker_croom2_1,AddMaxChildren,6,0,-1"
+//				OnTrigger "maker_croom2_2,AddMaxChildren,6,0,-1"
+//				OnTrigger "maker_croom2_3,AddMaxChildren,6,0,-1"
+//				OnTrigger "maker_croom2_4,AddMaxChildren,6,0,-1"
+//				//OnTrigger "maker_croom2_balcony,AddMaxChildren,4,0,-1"
+//				OnTrigger "maker_croom2_manhack_1,AddMaxChildren,4,0,-1"
+//				OnTrigger "maker_croom2_manhack_2,AddMaxChildren,4,0,-1"
+//				OnTrigger "maker_croom2_1,Enable,,0.1,-1"
+//				OnTrigger "maker_croom2_2,Enable,,0.1,-1"
+//				OnTrigger "maker_croom2_3,Enable,,0.1,-1"
+//				OnTrigger "maker_croom2_4,Enable,,0.1,-1"
+//				//OnTrigger "maker_croom2_balcony,Enable,,0.1,-1"
+//				OnTrigger "maker_croom2_manhack_1,Enable,,0.1,-1"
+//				OnTrigger "maker_croom2_manhack_2,Enable,,0.1,-1"
+//				OnTrigger "trav_gtext_wavecount,Display,,0,-1"
+//				OnTrigger "trigger_ensure_no_combine_left,Enable,,2,-1"} }
 
 //Trav|Edt - Wave count (testing purposes)
 		//create {classname "game_text"

@@ -1,0 +1,126 @@
+"rock24.RichardMainCells01"
+{
+	"channel"		"CHAN_AUTO"
+	"volume"		"VOL_NORM"
+	"pitch"		"PITCH_NORM"
+
+	"soundlevel"	"SNDLVL_NORM"
+
+	"wave"		 "*@custom\richard_06a.wav" 
+}
+
+"rock24.RichardMainCells02"
+{
+	"channel"		"CHAN_AUTO"
+	"volume"		"VOL_NORM"
+	"pitch"		"PITCH_NORM"
+
+	"soundlevel"	"SNDLVL_NORM"
+
+	"wave"		 "*@custom\richard_07a.wav" 
+}
+
+"rock24.RichardMainCells03"
+{
+	"channel"		"CHAN_AUTO"
+	"volume"		"VOL_NORM"
+	"pitch"		"PITCH_NORM"
+
+	"soundlevel"	"SNDLVL_NORM"
+
+	"wave"		 "*@custom\richard_07b.wav" 
+}
+
+"rock24.RichardMainCells01a"
+{
+	"channel"		"CHAN_AUTO"
+	"volume"		"VOL_NORM"
+	"pitch"		"PITCH_NORM"
+
+	"soundlevel"	"SNDLVL_NORM"
+
+	"wave"		 "*@custom\richard_06b.wav" 
+}
+
+"rock24.RichardMainCells04"
+{
+	"channel"		"CHAN_AUTO"
+	"volume"		"VOL_NORM"
+	"pitch"		"PITCH_NORM"
+
+	"soundlevel"	"SNDLVL_NORM"
+
+	"wave"		 "*@custom\richard_08a.wav" 
+}
+
+"rock24.RichardMainCells05"
+{
+	"channel"		"CHAN_AUTO"
+	"volume"		"VOL_NORM"
+	"pitch"		"PITCH_NORM"
+
+	"soundlevel"	"SNDLVL_NORM"
+
+	"wave"		 "*@custom\richard_08b.wav" 
+}
+
+"rock24.RichardMainCells04b"
+{
+	"channel"		"CHAN_AUTO"
+	"volume"		"VOL_NORM"
+	"pitch"		"PITCH_NORM"
+
+	"soundlevel"	"SNDLVL_NORM"
+
+	"wave"		 "*@custom\Rock24_richard_additional_01.wav" 
+}
+
+"rock24.RichardMainCells06"
+{
+	"channel"		"CHAN_AUTO"
+	"volume"		"VOL_NORM"
+	"pitch"		"PITCH_NORM"
+
+	"soundlevel"	"SNDLVL_NORM"
+
+	"wave"		 "*@custom\Rock24_additional2a_Richard.wav" 
+}
+
+"rock24.RichardMainCells07"
+{
+	"channel"		"CHAN_AUTO"
+	"volume"		"VOL_NORM"
+	"pitch"		"PITCH_NORM"
+
+	"soundlevel"	"SNDLVL_NORM"
+
+	"wave"		 "*@custom\Rock24_additional2b_Richard.wav" 
+}
+
+"rock24.GordonAttentionA"
+{
+	"channel"		"CHAN_AUTO"
+	"volume"		"VOL_NORM"
+	"pitch"		"PITCH_NORM"
+
+	"soundlevel"	"SNDLVL_NORM"
+
+	"wave"		 "*@custom\richardgordon.wav" 
+}
+
+"rock24.GordonAttentionB"
+{
+	"channel"		"CHAN_AUTO"
+	"volume"		"VOL_NORM"
+	"pitch"		"PITCH_NORM"
+
+	"soundlevel"	"SNDLVL_NORM"
+
+	"wave"		 "*@custom\richardgordon.wav" 
+}
+
+
+
+
+
+

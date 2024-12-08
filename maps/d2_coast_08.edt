@@ -8,7 +8,7 @@ d2_coast_08
 	}
 	entity {
 //--Setup--
-		//delete {classname "logic_auto" origin "-6389 6152 1649"}//Pre-2010: -6388.92 4616.12 1648.88
+		//delete {classname "logic_auto" origin "-6389 9736 1649"}//Pre-2010: -6388.92 4616.12 1648.88
 		delete {targetname "jeep_fall_trigger"}
 		edit {classname "func_areaportal" values {targetname "disabledPortal" StartOpen "1"} }
 		edit {classname "func_areaportalwindow" values {targetname "DisabledPortalWindow"} }// FadeStartDist "1000" FadeDist "1500"
@@ -16,7 +16,7 @@ d2_coast_08
 		delete {targetname "bridge_field_01"} // HOTFIX: Delete this entity, EDT will handle entity globalstates, crashes otherwise - TRAVIS
 
 //Prevent Backtracking
-		create {classname "prop_dynamic" origin "3184 1968 1536"
+		create {classname "prop_dynamic" origin "3184 5552 1536"
 			values {model "models/synergy/tools/syn_transition.mdl"
 				targetname "syn_wall_return"
 				angles "0 0 0"
@@ -25,7 +25,7 @@ d2_coast_08
 				OnKilled "syn_wall_return_light,Kill,,0,-1"//next CB :)
 				} }
 
-		create {classname "light_dynamic" origin "3184 1696 1600"
+		create {classname "light_dynamic" origin "3184 5280 1600"
 			values {_light "170 255 170"
 				targetname "syn_wall_return_light"
 				brightness "0.5"
@@ -33,7 +33,7 @@ d2_coast_08
 				//style "12"
 				} }
 
-	//	create {classname "trigger_push" origin "56 0 0"
+	//	create {classname "trigger_push" origin "56 3584 0"
 	//		values {model "*64"
 	//			spawnflags "1"
 	//			targetname "ReturnBridgeMap_Pusher"
@@ -70,25 +70,25 @@ d2_coast_08
 		create {classname "info_spawn_manager"
 			values {targetname "syn_spawn_manager"} }
 
-		create {classname "info_player_coop" origin "3327 1684 1536"
+		create {classname "info_player_coop" origin "3327 5268 1536"
 			values {angles "0 270 0" targetname "syn_spawn_player_1"} }
 
-		create {classname "info_player_coop" origin "2976 352 1792"
+		create {classname "info_player_coop" origin "2976 3936 1792"
 			values {angles "0 270 0" targetname "syn_spawn_player_2" StartDisabled "1"} }
 
-		create {classname "info_player_coop" origin "3584 -1240 1792"
+		create {classname "info_player_coop" origin "3584 2344 1792"
 			values {angles "0 240 0" targetname "syn_spawn_player_3" StartDisabled "1"} }
 
-		create {classname "info_player_coop" origin "3088 -2576 1480"
+		create {classname "info_player_coop" origin "3088 1008 1480"
 			values {angles "0 330 0" targetname "syn_spawn_player_4" StartDisabled "1"} }
 
-		create {classname "info_player_coop" origin "3168 -4048 1792"
+		create {classname "info_player_coop" origin "3168 -464 1792"
 			values {angles "0 270 0" targetname "syn_spawn_player_5" StartDisabled "1"} }
 //may need to move to hint players in correct direction
-		create {classname "info_player_coop" origin "3672 -5616 1792"
+		create {classname "info_player_coop" origin "3672 -2032 1792"
 			values {angles "0 90 0" targetname "syn_spawn_player_6" StartDisabled "1"} }
 
-		create {classname "info_player_coop" origin "2848 -7400 1920"
+		create {classname "info_player_coop" origin "2848 -3816 1920"
 			values {angles "0 330 0" targetname "syn_spawn_player_7" StartDisabled "1"} }
 
 		create {classname "info_global_settings"
@@ -100,16 +100,19 @@ d2_coast_08
 //syn_spawn_player_2 enabled in 'delay music'
 
 //syn_spawn_player_3
-		create {classname "trigger_multiple" origin "3328 -1024 1840"
-			values {model "*90"
+		create {classname "trigger_multiple" origin "3328 2560 1840"
+			values {
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "3328 2560 1840"
 				spawnflags "1"
 				targetname "syn_checkpoint_3"
 				//StartDisabled "1"
 				OnTrigger "syn_spawn_manager,SetCheckpoint,syn_spawn_player_3,0,1"} }
 
 //syn_spawn_player_4
-		create {classname "trigger_multiple" origin "3260 -2656 1524"
-			values {model "*121"
+		create {classname "trigger_multiple" origin "3260 928 1524"
+			values {
+				edt_getbspmodelfor_targetname "crossbow_fodder_trigger"
 				spawnflags "1"
 				targetname "syn_checkpoint_4"
 				//StartDisabled "1"
@@ -122,8 +125,10 @@ d2_coast_08
 		//		//OnMapSpawn "headcrab_2_template,AddOutput,OnEntitySpawned syn_spawn_manager:SetCheckpoint:syn_spawn_player_5:5:1,0,-1"} }
 
 //syn_spawn_player_5
-		create {classname "trigger_multiple" origin "3328 -4144 1872"
-			values {model "*91"
+		create {classname "trigger_multiple" origin "3328 -560 1872"
+			values {
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "3328 -176 1840"
 				spawnflags "1"
 				targetname "syn_checkpoint_5"
 				//StartDisabled "1"
@@ -131,8 +136,10 @@ d2_coast_08
 
 //syn_spawn_player_6 && fix occluder I/O
 		create {classname "trigger_multiple"
-			origin "3328 -5552 1504"
-			values {model "*125"
+			origin "3328 -1968 1504"
+			values {
+				edt_getbspmodelfor_classname "trigger_multiple"
+				edt_getbspmodelfor_origin "3328 -1968 1504"
 				spawnflags "1"
 				targetname "syn_checkpoint_6"
 				OnStartTouch "bridge_occluder_02,Deactivate,,0,-1"
@@ -140,8 +147,10 @@ d2_coast_08
 				OnTrigger "syn_spawn_manager,SetCheckpoint,syn_spawn_player_6,0,1"} }
 
 		create {classname "trigger_once"
-			origin "3024 -7324 1848"
-			values {model "*89"
+			origin "3024 -3740 1848"
+			values {
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "3024 -3740 1848"
 				spawnflags "1"
 				OnTrigger "syn_spawn_manager,SetCheckpoint,syn_spawn_player_7,0,1"
 				OnTrigger "syn_mplrs_stragglers,Enable,,0,-1"
@@ -155,8 +164,9 @@ d2_coast_08
 //Trav|Edt - Delay Music a bit
 		delete {targetname "music_trigger"}
 
-		create {classname "trigger_multiple" origin "3309 -45 1680"//trigger_once
-			values {model "*123"
+		create {classname "trigger_multiple" origin "3309 3539 1680"//trigger_once
+			values {
+				edt_getbspmodelfor_targetname "music_trigger"
 				spawnflags "1"
 				targetname "music_trigger"
 				OnTrigger "music,PlaySound,,15,1"//d25
@@ -186,13 +196,15 @@ d2_coast_08
 				fogcolor "176 192 202"
 				fogcolor2 "0 0 0"} }
 
-		delete {classname "trigger_multiple" origin "2946 -7188 1982"}//wtf 176 192 202
-		edit {classname "trigger_multiple" origin "3328 960 1600" values {classname "trigger_once"} }
-		delete {classname "trigger_multiple" origin "3328 1152 1600"}
+		delete {classname "trigger_multiple" origin "2946 -3604 1982"}//wtf 176 192 202
+		edit {classname "trigger_multiple" origin "3328 4544 1600" values {classname "trigger_once"} }
+		delete {classname "trigger_multiple" origin "3328 4736 1600"}
 
 		create {classname "trigger_multiple"
-			origin "2946 -7188 1982"
-			values {model "*127"
+			origin "2946 -3604 1982"
+			values {
+				edt_getbspmodelfor_classname "trigger_multiple"
+				edt_getbspmodelfor_origin "2946 -3604 1982"
 				spawnflags "1"
 				OnStartTouch "!activator,SetFogController,trav_fog_end,0,-1"
 				OnEndTouch "!activator,SetFogController,fog,0,-1"} }
@@ -219,7 +231,7 @@ d2_coast_08
 		//		OnMapSpawn "gunship_trigger_4,AddOutput,OnTrigger PS_Manager:SetCheckPoint:trav_checkpoint_halfway:0:1,8,-1"} }
 
 		//create {classname "info_player_coop"
-		//	origin "3088 -2592 1480"
+		//	origin "3088 992 1480"
 		//	values {targetname "trav_checkpoint_halfway"
 		//		angles "0 330 0"
 		//		StartDisabled "1"} }
@@ -232,8 +244,10 @@ d2_coast_08
 				OnTrigger "syn_rockfall_killer,Enable,,0.75,-1"
 				OnTrigger "syn_rockfall_killer,Disable,,1,-1"} }
 
-		create {classname "trigger_hurt" origin "3168 -5592 1604"
-			values {model "*121" angles "0 90 0"
+		create {classname "trigger_hurt" origin "3168 -2008 1604"
+			values {
+				edt_getbspmodelfor_targetname "crossbow_fodder_trigger"
+				angles "0 90 0"
 				spawnflags "3"
 				StartDisabled "1"
 				targetname "syn_rockfall_killer"
@@ -243,17 +257,17 @@ d2_coast_08
 
 //Trav|Edt add more combine
 		create {classname "npc_turret_floor"
-			origin "2992 -7008 1920"//2888 -7040 1920
+			origin "2992 -3424 1920"//2888 -7040 1920
 			values {angles "0 270 0"
 				targetname "syn_vint"} }//0 285 0
 
 		create {classname "npc_turret_floor"
-			origin "3342 -7216 1680"
+			origin "3342 -3632 1680"
 			values {angles "0 90 0"
 				targetname "syn_vint"} }
 
 		create {classname "npc_turret_ceiling"
-			origin "2840 -6936 2040"//2864 -6992 2040 //3008 -6960 2040
+			origin "2840 -3352 2040"//2864 -6992 2040 //3008 -6960 2040
 			values {spawnflags "160"
 				targetname "syn_vint_trav_ceilingturret"
 				disableshadows "1"
@@ -273,34 +287,36 @@ d2_coast_08
 
 //Trav|Edt - block LOS for turret through window
 		create {classname "func_brush"
-			origin "2821.5 -6976 1978"
-			values {model "*67"
+			origin "2821.5 -3392 1978"
+			values {
+				edt_getbspmodelfor_classname "func_illusionary"
+				edt_getbspmodelfor_origin "2815.5 -3392 1978"
 				targetname "syn_vint_trav_turret_LOS_window"
 				spawnflags "2"} }
 
 		create {classname "npc_combine_s"
-			origin "3508 -6972 1712"
+			origin "3508 -3388 1712"
 			values {spawnflags "16908"
 				angles "0 180 0"
 				additionalequipment "weapon_ar2"
 				targetname "syn_vint"} }
 
 		create {classname "npc_combine_s"
-			origin "3032 -7008 1700"
+			origin "3032 -3424 1700"
 			values {spawnflags "16908"
 			//squadname "combine_squad_01"
 				additionalequipment "weapon_ar2"
 				targetname "syn_vint"} }
 
 		create {classname "npc_combine_s"
-			origin "2920 -7496 1800"
+			origin "2920 -3912 1800"
 			values {targetname "syn_vint_trav_combine2"
 				spawnflags "2564"
 				squadname "combine_squad_01"
 				additionalequipment "weapon_shotgun" } }
 
 		create {classname "npc_template_maker"
-			origin "2920 -7496 1800"
+			origin "2920 -3912 1800"
 			values {//spawnflags "128"
 				//angles " 0 0 0"
 				targetname "syn_vint_trav_tmaker_combine2"
@@ -310,14 +326,15 @@ d2_coast_08
 				TemplateName "syn_vint_trav_combine2"} }
 
 //Trav|Edt - teleporter for stragglers
-		create { classname "trigger_teleport" origin "3456 -64 2096"
-			values {model "*132"
+		create { classname "trigger_teleport" origin "3456 3520 2096"
+			values {
+				edt_getbspmodelfor_targetname "jeep_fall_trigger"
 				spawnflags "1"
 				StartDisabled "1"
 				targetname "syn_mplrs_stragglers"
 				target "syn_mplrs_stragglers_destination"} }
 
-		create {classname "info_teleport_destination" origin "2848 -6944 1792"
+		create {classname "info_teleport_destination" origin "2848 -3360 1792"
 			values {targetname "syn_mplrs_stragglers_destination" angles "0 285 0"} }
 
 //Trav|Edt - teleport players/set checkpoint
@@ -345,30 +362,30 @@ d2_coast_08
 					OnTrigger "syn_checkpoint_6,Addoutput,OnTrigger syn_spawn_manager:SetCheckpoint:syn_spawn_player_6:0:1,0,1"} }
 
 		//create {classname "point_teleport"
-		//	origin "3024 -6944 1944"
+		//	origin "3024 -3360 1944"
 		//	values {targetname "trav_teleport_button_2"
 		//		angles "0 0 0"
 		//		target "!player"} }
 
 		//create {classname "info_player_coop"
-		//	origin "2896 -6952 1967"//z1928
+		//	origin "2896 -3368 1967"//z1928
 		//	values {targetname "trav_checkpoint_button"
 		//		angles "0 300 0"
 		//		StartDisabled "1"} }
 
 		create {classname "info_teleport_destination"
-			origin "3024 -6944 1944"//z1924
+			origin "3024 -3360 1944"//z1924
 			values {targetname "trav_teleport_button"} }
 
 //Trav|Edt add crate full of slams
 		create {classname "item_item_crate"
-			origin "3033 -7105 1940"
+			origin "3033 -3521 1940"
 			values{ItemClass "weapon_slam"
 				ItemCount "6"
 				targetname "syn_vint"} }
 
 //Trav|Edt - TEST transition the gunship if not killed
-	//	create {classname "trigger_transition" origin "3200 -2560 2624"
+	//	create {classname "trigger_transition" origin "3200 1024 2624"
 	//		values {model "*132" targetname "landmark_d2_coast_07-08"} }
 
 //travTEST make gunship transition when not dead (in code)
@@ -376,7 +393,7 @@ d2_coast_08
 			values {spawnflags "1"
 				OnMapSpawn "gunship,AddOutput,ForceTransition 1,0,-1"} }
 
-		create {classname "point_teleport" origin "1982 -1155 2448"
+		create {classname "point_teleport" origin "1982 2429 2448"
 			values
 			{
 				targetname "syn_telegunship"
@@ -387,8 +404,9 @@ d2_coast_08
 
 //Trav|Edt add anti-rush push
 		create {classname "trigger_coop"
-			origin "3417.53 1679.99 1624"
-			values {model "*126"
+			origin "3417.53 5263 1624"
+			values {
+				edt_getbspmodelfor_targetname "window_bullseye_killtrigger"
 				spawnflags "1"
 				StartDisabled "1"
 				targetname "syn_antirush_coop"
@@ -428,7 +446,7 @@ d2_coast_08
 
 		create { classname "trigger_changelevel"
 			values {
-				"model" "*64"
+				"model" "*55"
 				"spawnflags" "0"
 				"landmark" "landmark_d2_coast_07-08"
 				"map" "d2_coast_07"
@@ -439,11 +457,11 @@ d2_coast_08
 			}
 		}
 
-		create { classname "trigger_once" origin "3328 -1920 1808"
+		create { classname "trigger_once" origin "3328 1664 1808"
 			values {
 				spawnflags "1"
 				StartDisabled "1"
-				model "*29"
+				edt_getbspmodelfor_targetname "gunship_trigger_5"
 				targetname "trigger_goback"
 
 				OnTrigger "ReturnBridgeMap,Enable,,8,-1"
@@ -451,7 +469,7 @@ d2_coast_08
 			}
 		}
 
-		create { classname "logic_relay" origin "2986.2 -6929 1950.02"
+		create { classname "logic_relay" origin "2986.2 -3345 1950.02"
 			values {
 				"spawnflags" "1"
 				"targetname" "button_press"

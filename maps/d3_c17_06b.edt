@@ -86,7 +86,9 @@ d3_c17_06b
 //Trav|Edt - open door if timeout fails (common stuck area with multiple peeps)
 		create {classname "trigger_once"
 			origin "3447 1277 17"
-			values {model "*97"
+			values {
+				edt_getbspmodelfor_classname "trigger_multiple"
+				edt_getbspmodelfor_origin "3447 1277 17"
 				spawnflags "1"
 				OnTrigger "bld_a_frontdoor_1,UnLock,,30,-1"//def 45 delay
 				OnTrigger "bld_a_frontdoor_1,Open,,30.1,-1"} }
@@ -96,7 +98,10 @@ d3_c17_06b
 
 		delete {classname "func_button" origin "4344 1624.5 408"}
 		create {classname "func_button" origin "4349 1585.6 408"
-			values {model "*138" angles "0 -45 0"
+			values {
+				edt_getbspmodelfor_classname "func_button"
+				edt_getbspmodelfor_origin "4344 1624.5 408"
+				angles "0 -45 0"
 				spawnflags "1025"
 				targetname "syn_buttonfor_wench_2_lever_1"
 				OnPressed "wench_2_lever_1,Toggle,,0,1"} }
@@ -110,7 +115,9 @@ d3_c17_06b
 //Trav|Edt - push players tryin to jump over fence
 		create {classname "trigger_push"
 			origin "3852 1480 166.5"
-			values {model "*61"
+			values {
+				edt_getbspmodelfor_classname "trigger_multiple"
+				edt_getbspmodelfor_origin "3580 1392 281.5"
 				targetname "trav_wallpush"
 				spawnflags "1"
 				speed "750"
@@ -118,7 +125,9 @@ d3_c17_06b
 
 		create {classname "trigger_push"
 			origin "3800 1555 138"//3800 1556 194
-			values {model "*46"
+			values {
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "3041 1192 78"
 				targetname "trav_wallpush"
 				spawnflags "1"
 				speed "750"
@@ -126,14 +135,18 @@ d3_c17_06b
 
 		create {classname "trigger_once"
 			origin "3580 1392 281.5"
-			values {model "*61"
+			values {
+				edt_getbspmodelfor_classname "trigger_multiple"
+				edt_getbspmodelfor_origin "3580 1392 281.5"
 				spawnflags "1"
 				OnTrigger "trav_wallpush,Kill,,0,-1"} }
 
 //Trav|Edt - autirush
 		create {classname "trigger_coop"
-			origin "5240 1488 186.5"
-			values {model "*3"
+			origin "5440 1495 240"
+			values {
+				edt_getbspmodelfor_classname "trigger_multiple"
+				edt_getbspmodelfor_origin "3264 216 66.5"
 				spawnflags "1"
 				targetname "syn_antirush_coop"
 				CountType "1"

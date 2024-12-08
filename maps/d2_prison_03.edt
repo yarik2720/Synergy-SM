@@ -2,7 +2,7 @@ d2_prison_03
 {
 	console
 	{
-		sk_antlionguard_health 2560
+		sk_antlionguard_health 750
 		sk_antlionguard_dmg_charge 30 //20
 		sk_antlionguard_dmg_shove 15 //10
 		sk_antlion_health 75 //30

@@ -406,8 +406,9 @@ d1_canals_03
 
 //Trav|Edt - Auti-rush
 		create {classname "trigger_coop"
-			origin "-3370 382 -970.5"//-2954 366 -1000.5
-			values {model "*251"
+			origin "-3320 160 -1008"
+			values {
+				edt_getbspmodelfor_targetname "trigger_matt_nags"
 				spawnflags "1"
 				//StartDisabled "1"
 				targetname "syn_antirush_coop"

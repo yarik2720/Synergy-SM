@@ -27,6 +27,10 @@ d1_canals_11
 		//create {classname "func_vehicleclip" origin "0 -64 0"
 		//	values {model "*45"} }
 
+		create {classname "edt_disable_vehicle_collisions" origin "9728 7936 -768"
+			values {StartDisabled "0"
+				size "2048 6144 1024"} }
+
 //Doors: Open Only
 		//edit {targetname "canals_door_ambush2" values {returndelay "-1"} }
 
@@ -76,37 +80,25 @@ d1_canals_11
 		create {classname "info_spawn_manager"
 			values {targetname "syn_spawn_manager"} }
 
-		create {classname "info_player_coop" origin "10104.35 9038.49 -944.99"
-			values {angles "0 -90 0" targetname "syn_spawn_player_1"} }
-
-		create {classname "info_player_coop" origin "6904 4656 -896"
-			values {angles "0 150 0" targetname "syn_spawn_player_2" StartDisabled "1"} }
+		create {classname "info_player_coop" origin "9941.34 8931.36 -945.70"
+			values {targetname	"syn_vehiclespawn_1"
+				angles "0 165 0"
+				StartDisabled "0"
+				SpawnMode "2"
+				model "models/airboat.mdl"
+				VehicleEntity "prop_vehicle_airboat"} }
 
 		create {classname "info_global_settings"
 			values {IsVehicleMap "1" targetname "syn_global_settings"} }
 
-		create {classname "info_vehicle_spawn" origin "9941.34 8931.36 -945.70"
-			values {targetname	"syn_spawn_vehicle_1"
-				angles "0 165 0"
-				StartEnabled "0"//Enabled in Extas
-				RespawnVehicle "1"
-				Ownership "1"
-				VehicleType "2"
-				VehicleSize "164"
+		create {classname "info_player_coop" origin "6363 4874 -959"
+			values {targetname	"syn_vehiclespawn_2"
+				angles "0 90 0"
+				StartDisabled "1"
+				SpawnMode "2"
+				VehicleGun "1"
 				model "models/airboat.mdl"
-				VehicleScript "scripts/vehicles/airboat.txt"} }
-
-		create {classname "info_vehicle_spawn" origin "6363 4874 -959"//5552 4992.01 -960
-			values {targetname	"syn_spawn_vehicle_2"
-				angles "0 90 0"//105y
-				StartEnabled "0"
-				StartGunEnabled "1"
-				RespawnVehicle "1"
-				Ownership "1"
-				VehicleType "2"
-				VehicleSize "164"
-				model "models/airboat.mdl"
-				VehicleScript "scripts/vehicles/airboat.txt"} }
+				VehicleEntity "prop_vehicle_airboat"} }
 
 //fake vehicle
 		create {classname "logic_auto"
@@ -121,7 +113,9 @@ d1_canals_11
 		create {classname "logic_relay"
 			values {spawnflags "1"
 				targetname "relay_guncave_startgunmount"
-				OnTrigger "syn_fakeboat,AddOutput,body 1,0,-1"} }
+				OnTrigger "syn_fakeboat,AddOutput,body 1,0,-1"
+				OnTrigger "syn_vehiclespawn_2,EnableOnly,,0,-1"
+				OnTrigger "prop_vehicle_airboat,EnableGun,1,1,-1"} }
 
 		create {classname "logic_relay"
 			values {spawnflags "1"
@@ -135,12 +129,6 @@ d1_canals_11
 				StartDisabled "1"
 				angles "0 90 0"
 				solid "6"} }
-
-		create {classname "logic_auto"
-			values {spawnflags "1"
-				OnMapTransition "syn_spawn_manager,TeleportPlayers,syn_spawn_teleport,0.1,-1"} }
-
-		create {classname "info_teleport_destination" origin "10104.35 9038.49 -944.99" values {targetname "syn_spawn_teleport" angles "0 -90 0"} }
 
 //--Checkpoints--
 		//create {classname "trigger_once"
@@ -173,7 +161,7 @@ d1_canals_11
 				//targetname "syn_antirush_coop"
 				CountType "1"
 				UseHUD "1"
-				PlayerValue "50"//66//75
+				PlayerValue "25"//50//66//75
 				wait "1.5"
 				OnTrigger "syn_antirush_text,Display,,1,-1"
 				OnPlayersIn "!self,Disable,,1,1"

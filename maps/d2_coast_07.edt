@@ -117,7 +117,10 @@ d2_coast_07
 
 //Toggle Static Spawning on return
 		create {classname "trigger_once" origin "3476.13 6971.17 2164.43"
-			values {model "*186" angles "0 90 0"
+			values {
+				edt_getbspmodelfor_classname "trigger_multiple"
+				edt_getbspmodelfor_origin "3348.83 7689.13 2164.43"
+				angles "0 90 0"
 				spawnflags "1"
 				StartDisabled "1"
 				targetname "syn_static_spawning"
@@ -137,7 +140,9 @@ d2_coast_07
 //--Checkpoints--
 		create {classname "trigger_once"
 			origin "-1244.9 9160 1712"
-			values {model "*137"
+			values {
+				edt_getbspmodelfor_classname "trigger_multiple"
+				edt_getbspmodelfor_origin "-1372.9 9160 1712"
 				spawnflags "1"
 				OnTrigger "syn_spawn_manager,SetCheckpoint,syn_spawn_player_2,0,-1"
 				OnTrigger "syn_spawn_vehicle_2,Enable,,0,-1"
@@ -145,7 +150,8 @@ d2_coast_07
 
 		create {classname "trigger_once"
 			origin "1824 5312 1632"
-			values {model "*154"
+			values {
+				edt_getbspmodelfor_targetname "assault_trigger"
 				spawnflags "1"
 				targetname "syn_checkpoint_3"
 				StartDisabled "1"
@@ -154,7 +160,8 @@ d2_coast_07
 
 		create {classname "trigger_once"
 			origin "3424 5312 1600"
-			values {model "*154"
+			values {
+				edt_getbspmodelfor_targetname "assault_trigger"
 				spawnflags "1"
 				targetname "syn_checkpoint_3_2"
 				StartDisabled "1"
@@ -278,14 +285,18 @@ d2_coast_07
 		delete {classname "trigger_multiple" origin "8753.96 -8167.08 2144"}
 		create {classname "trigger_multiple"
 			origin "8753.96 -8167.08 2144"
-			values {model "*181"
+			values {
+				edt_getbspmodelfor_classname "trigger_multiple"
+				edt_getbspmodelfor_origin "8753.96 -8167.08 2144"
 				spawnflags "1"
 				OnTrigger "!activator,SetFogController,fog,0,-1"} }
 
 		delete {classname "trigger_multiple" origin "8799.21 -8212.33 2144"}
 		create {classname "trigger_multiple"
 			origin "8799.21 -8212.33 2144"
-			values {model "*165"
+			values {
+				edt_getbspmodelfor_classname "trigger_multiple"
+				edt_getbspmodelfor_origin "8799.21 -8212.33 2144"
 				spawnflags "1"
 				OnTrigger "!activator,SetFogController,trav_fog_tunnel,0,-1"} }
 
@@ -354,7 +365,8 @@ d2_coast_07
 
 		create {classname "trigger_once"
 			origin "3328 4864 2176"//3328 3328 2176
-			values {model "*136"
+			values {
+				edt_getbspmodelfor_targetname "gunship_trigger_12"
 				spawnflags "1"
 				OnTrigger "syn_vint_trav_tmaker_combine1,Spawn,,0,-1"
 				OnTrigger "trav_maker_zombie1,Spawn,,0,-1"
@@ -380,7 +392,8 @@ d2_coast_07
 //Trav|Edt add testing anti-rush mapedt stuff to coast08
 		create {classname "trigger_coop"
 			origin "3392 5120 1664"
-			values {model "*136"
+			values {
+				edt_getbspmodelfor_targetname "gunship_trigger_12"
 				spawnflags "1"
 				//StartDisabled "1"
 				targetname "syn_antirush_coop"
@@ -403,7 +416,9 @@ d2_coast_07
 
 		create {classname "trigger_push"
 			origin "3736 4568 1632"
-			values {model "*133"
+			values {
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "-2304 8992 1760"
 				spawnflags "1"
 				targetname "syn_antirush_push"
 				pushdir "0 200 0"
@@ -440,7 +455,8 @@ d2_coast_07
 //				globalname "bridge_field_02"} }
 
 		create {classname "trigger_hurt" origin "3328 4968 2176"
-			values {model "*136"
+			values {
+				edt_getbspmodelfor_targetname "gunship_trigger_12"
 				spawnflags "1"
 				targetname "trav_antiskip_hurt"
 				damage "1000"
@@ -450,59 +466,51 @@ d2_coast_07
 //Trav|Edt - Stop crap from stopping train and allow to hurt players
 		create {classname "trigger_hurt"
 			origin "2846.11 11152 2248"
-			values {model "*192"
+			values {
+				edt_getbspmodelfor_targetname "stop_rollermines"
 				spawnflags "11"
-				parentname "razortrain"} }
+				parentname "razortrain"
+				damage "10000"
+				damagetype "1"} }
 
+//		create {classname "trigger_multiple"
+//			origin "2851.11 11152 2248"
+//			values {model "*192" // Using different model from original, just want the front
+//				spawnflags "64"
+//				parentname "razortrain"
+//				filtername "jeep_filter"
+//				OnStartTouch "train_explosion_01,Explode,,0,-1"
+//				OnStartTouch "train_explosion_02,Explode,,0.4,-1"
+//				OnStartTouch "train_explosion_01,Explode,,1,-1"} }
+
+		// TODO: push instead? May still risk getting stuck
 		create {classname "trigger_remove"
 			origin "2846.11 11152 2248"
-			values {model "*192"
-				spawnflags "12"
+			values {
+				edt_getbspmodelfor_targetname "stop_rollermines"
+				spawnflags "64"
 				parentname "razortrain"
 				filtername "trav_train_filter"} }
 
 		create {classname "filter_multi"
 			values {targetname "trav_train_filter"
-				//Negated "1"
+				FilterType "1"
 				Filter01 "trav_train_filter1"
-				Filter02 "trav_train_filter2"
-				Filter03 "trav_train_filter3"} }
+				Filter02 "trav_train_filter2"} }
 
 		create {classname "filter_activator_class"
 			values {targetname "trav_train_filter1"
-				Negated "1"
-				filterclass "prop_physics"} }
+				filterclass "prop_physics*"} }
 
 		create {classname "filter_activator_class"
 			values {targetname "trav_train_filter2"
-				Negated "1"
-				filterclass "item_item_crate"} }
-
-		create {classname "filter_activator_class"
-			values {targetname "trav_train_filter3"
-				Negated "1"
-				filterclass "prop_vehicle_*"} }
-
-		//delete {targetname "filter_rollermine"}
-
-		//create {classname "filter_multi"
-		//	values {targetname "filter_rollermine"
-		//		//Negated "1"
-		//		Filter01 "trav_train_filter_push1"
-		//		Filter02 "trav_train_filter_push2"} }
-
-		//create {classname "filter_activator_class"
-		//	values {targetname "trav_train_filter_push1"
-		//		filterclass "npc_rollermine"} }
-
-		//create {classname "filter_activator_class"
-		//	values {targetname "trav_train_filter_push2"
-		//		filterclass "item_*"} }
+				filterclass "item_*"} }
 
 //Trav|Edt - item_heathkit etc seem to ignore all filters >.< ... so jsut remove train peice by peice at end
 		create {classname "trigger_remove"
 			origin "121.11 10723 2200"
-			values {model "*192"
+			values {
+				edt_getbspmodelfor_targetname "stop_rollermines"
 				spawnflags "64"
 				filtername "trav_train_filter_kill"} }
 
@@ -525,14 +533,16 @@ d2_coast_07
 
 //hacky method to make func_lod nonsolid
 		create {classname "trigger_once" origin "3348.83 7689.13 2164.43"
-			values {model "*186"
+			values {
+				edt_getbspmodelfor_classname "trigger_multiple"
+				edt_getbspmodelfor_origin "3348.83 7689.13 2164.43"
 				spawnflags "64"
 				filtername "trav_filter_func_lod"
 				OnTrigger "!activator,AddOutput,solid 1,0,-1"} }
 
 		create {classname "func_vehicleclip"
 			origin "3348.83 7741.13 2152.43"
-			values {model "*186"} }
+			values {edt_getbspmodelfor_classname "trigger_multiple" edt_getbspmodelfor_origin "3348.83 7689.13 2164.43"} }
 
 		create {classname "filter_activator_class"
 			values {targetname "trav_filter_func_lod"
@@ -552,7 +562,8 @@ d2_coast_07
 //Trav|Edt - autirush to 09
 		create {classname "trigger_coop"
 			origin "9120 -8480 2176"//8672 -8224 2176
-			values {model "*166"
+			values {
+				edt_getbspmodelfor_targetname "autosave_trigger"
 				spawnflags "1"
 				//StartDisabled "1"
 				targetname "syn_transition_trigger_2"
@@ -631,7 +642,7 @@ d2_coast_07
 
 		create { classname "trigger_changelevel"
 			values {
-				"model" "*86"
+				"edt_getbspmodelfor_targetname" "window_1_breakable"
 				"spawnflags" "0"
 				"landmark" "landmark_d2_coast_05-07"
 				"map" "d2_coast_05"
@@ -640,7 +651,7 @@ d2_coast_07
 
 		create { classname "trigger_changelevel"
 			values {
-				"model" "*139"
+				"model" "*131"
 				"spawnflags" "0"
 				"landmark" "landmark_d2_coast_07-08"
 				"map" "d2_coast_08"
@@ -682,7 +693,7 @@ d2_coast_07
 
 		create { classname "trigger_changelevel"
 			values {
-				"model" "*164"
+				"model" "*143"
 				"spawnflags" "0"
 				"landmark" "landmark_d2_coast_07-09"
 				"map" "d2_coast_09"

@@ -41,12 +41,6 @@ d3_breen_01
 		create {classname "info_global_settings"
 			values {IsVehicleMap "1" targetname "syn_global_settings"} }
 
-		create {classname "logic_auto"
-			values {spawnflags "1"
-				OnMapTransition "syn_spawn_manager,TeleportPlayers,syn_spawn_teleport,0,-1"} }
-
-		create {classname "info_teleport_destination" origin "-2436.75 -1405.8 -1463" values {targetname "syn_spawn_teleport" angles "0 150 0"} }
-
 		edit {targetname "trans_cit05_breen01" values {origin "-2432 -1392 -512"} }
 
 //--Extra--
