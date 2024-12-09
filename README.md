@@ -1,9 +1,9 @@
 # Map fixes of Half Life 2 and Episodes for Synergy Mod
 ## Installation 
-### Synergy 56.16:
+### Synergy old version 56.16:
 - Simply place folders with files in `synergy` directory, for example: `Steam\steamapps\common\Synergy\synergy\`
 
-### Synergy 20.xx (development and twitch branch):
+### Synergy public branch 24.11 and newer:
 - Place folders with files in custom directory, for example:
 `Synergy\synergy\custom\thisedit\`
 
