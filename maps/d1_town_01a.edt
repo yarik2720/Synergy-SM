@@ -4,9 +4,6 @@ d1_town_01a
 	{
 //--Setup--
 		delete {classname "logic_auto" origin "223 288 -3300"}
-		delete {targetname "player_spawn_items"}
-		delete {targetname "player_spawn_template"}
-		delete {classname "info_player_start"}
 		edit {classname "func_areaportal" values {targetname "disabledPortal" StartOpen "1"} }
 
 //--Starting Items--
@@ -154,7 +151,7 @@ d1_town_01a
 			origin "-360 784 -3422"
 			values {
 				//model "*38"
-				edt_mins "-200 -100 -40"
+				edt_mins "-200 -104 -40"
 				edt_maxs "190 100 40"
 				spawnflags "1"
 				//StartDisabled "1"
