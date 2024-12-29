@@ -3,7 +3,6 @@ d2_coast_10
 	console
 	{
 		sk_gunship_health_increments 12 //4
-		sk_dropship_container_health 999999
 	}
 	entity
 	{
@@ -11,6 +10,7 @@ d2_coast_10
 		delete {classname "logic_auto" origin "2068.06 -5365.76 1408.88"}
 		delete {classname "player_loadsaved"}
 		delete {targetname "fall_trigger"}
+		delete {targetname "fade_fall"}
 		edit {classname "func_areaportal" values {targetname "disabledPortal" StartOpen "1"} }
 		edit {classname "func_areaportalwindow" values {targetname "DisabledPortalWindow" FadeStartDist "1000" FadeDist "1500"} }
 
@@ -75,7 +75,7 @@ d2_coast_10
 			create {classname "info_global_settings"
 			values {IsVehicleMap "1" targetname "syn_global_settings"} }
 
-		create {classname "info_vehicle_spawn" origin "-3184.01 -4880 1540"
+		create {classname "info_vehicle_spawn" origin "-3184.01 -4880 1440"
 			values {targetname "syn_spawn_vehicle_1"
 				angles "0 210 0"
 				StartEnabled "1"
@@ -83,7 +83,7 @@ d2_coast_10
 				RespawnVehicle "1"
 				VehicleType "4"//1&4 disalllows multiple players
 				VehicleSize "192"
-				model "models\vehicles\buggy_p2.mdl"//models/buggy.mdl
+				model "models/vehicles/buggy_p2.mdl"//models/buggy.mdl
 				VehicleScript "scripts/vehicles/jeep_test.txt"} }
 
 //--Extra--
@@ -146,11 +146,10 @@ d2_coast_10
 		create {classname "trigger_once"
 			origin "-2722 -3624 1560"
 			values {
-				//model "*121"
 				edt_getbspmodelfor_targetname "trigger_lighthouse_check"
 				spawnflags "2"
 				filtername "trav_filter_gunship"
-				OnTrigger "trav_trigger_lighthousedoor,Enable,-1,1,-1" } }
+				OnTrigger "trav_trigger_lighthousedoor,Enable,-1,10,-1" } }
 
 		create {classname "filter_activator_class"
 			values {targetname "trav_filter_gunship"
@@ -159,7 +158,6 @@ d2_coast_10
 		create {classname "trigger_once"
 			origin "8224 1944 1024"//8224 1802 1024
 			values {
-				//model "*126"
 				edt_getbspmodelfor_classname "trigger_multiple"
 				edt_getbspmodelfor_origin "8224 1832 1024"
 				spawnflags "1"
@@ -179,7 +177,6 @@ d2_coast_10
 		create {classname "func_brush"
 			origin "8264 2016 976"
 			values {
-				//model "*126"
 				edt_getbspmodelfor_classname "trigger_multiple"
 				edt_getbspmodelfor_origin "8224 1832 1024"
 				spawnflags "0"
@@ -191,7 +188,6 @@ d2_coast_10
 		create {classname "func_brush"
 			origin "8088 2248 912"
 			values {
-				//model "*89"
 				edt_getbspmodelfor_classname "trigger_multiple"
 				edt_getbspmodelfor_origin "7200 1568 1152"
 				spawnflags "0"
@@ -203,7 +199,6 @@ d2_coast_10
 		create {classname "func_brush"
 			origin "7944 2112 912"
 			values {
-				//model "*89"
 				edt_getbspmodelfor_classname "trigger_multiple"
 				edt_getbspmodelfor_origin "7200 1568 1152"
 				spawnflags "0"
@@ -236,7 +231,6 @@ d2_coast_10
 		create {classname "trigger_once"
 			origin "4773 -228 976"
 			values {
-				//model "*115"
 				edt_getbspmodelfor_classname "trigger_once"
 				edt_getbspmodelfor_origin "4773 -228 976"
 				spawnflags "8"
@@ -247,7 +241,7 @@ d2_coast_10
 				OnTrigger "syn_spawn_manager,TeleportPlayers,syn_teleport_stragglers_destination,2,-1"
 				OnTrigger "syn_teleport_stragglers,Enable,,0,-1"
 				OnTrigger "syn_teleport_stragglers,Disable,,2,-1"
-				//OnTrigger "syn_global_settings,AddOutput,IsVehicleMap 0,0,-1"//Disable Static Spawning thus enabling dynamic spawning near players
+				OnTrigger "syn_global_settings,AddOutput,IsVehicleMap 0,0,-1"//Disable Static Spawning thus enabling dynamic spawning near players
 				OnTrigger "garage_door,Close,,3.25,-1"
 				OnTrigger "prop_vehicle_*,Lock,,2.1,-1"
 				OnTrigger "prop_vehicle_*,TurnOff,,2.5,-1"} }
@@ -256,7 +250,6 @@ d2_coast_10
 //Trav|Edt - teleporter for stragglers
 		create { classname "trigger_teleport" origin "148.21 -6856 1439"
 			values {
-				//model "*83"
 				edt_getbspmodelfor_targetname "fall_trigger"
 				angles "0 90 0"
 				spawnflags "1"
@@ -306,7 +299,9 @@ d2_coast_10
 //Trav|Edt - add a vehicleclip wall outside garage side entrance (for player teleport checkpoint)nvm bsp single ent not possible, need trigger model)
 		create {classname "func_vehicleclip"
 			origin "4960 -416 1000"
-			values {edt_getbspmodelfor_classname "trigger_once" edt_getbspmodelfor_origin "7744 1728 800"} }//model "*85"
+			values {
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "7744 1728 800"} }
 
 //Trav|Edt - Add failsafe for door opener
 		create {classname "logic_relay"
@@ -364,7 +359,6 @@ d2_coast_10
 //2011 - make this delete the combine inside (works fine on localhost 0.o mostly)
 		create {classname "trigger_remove" origin "6496 2456 1184"
 			values {
-				//model "*124"
 				edt_getbspmodelfor_classname "trigger_once"
 				edt_getbspmodelfor_origin "2848 -5120 1504"
 				angles "0 -10 0"
@@ -386,7 +380,6 @@ d2_coast_10
 		create {classname "trigger_hurt"
 			origin "4880 2872 520.01"
 			values {
-				//model "*124"
 				edt_getbspmodelfor_classname "trigger_once"
 				edt_getbspmodelfor_origin "2848 -5120 1504"
 				spawnflags "1"
