@@ -63,16 +63,15 @@ d1_trainstation_01
 		create 
 		{
 			classname "info_teleport_destination"
-			origin "-5520 -1858 55"
+			origin "-9419 -2483 22"
 			values {
 				targetname "modi_teleport_into_train"
-				angles "0 -18 0"
-				parentname "intro_train_2"
+				angles "0 15 0"
 			} 
 		}
 
 		// Outside train
-		create {classname "info_player_coop" origin "-5385 -1968 16"
+		create {classname "info_player_coop" origin "-5392 -1968 16"
 			values {angles "0 0 0" targetname "syn_spawn_player_2" StartDisabled "1"} }
 
 		// Barney room
@@ -84,8 +83,8 @@ d1_trainstation_01
 			values {angles "0 0 0" targetname "syn_spawn_player_4" StartDisabled "1"} }
 
 		// Intro wait camera
-		create {classname "point_viewcontrol" origin "-5280 -1504 592"
-			values {spawnflags "140" angles "30 320 0"
+		create {classname "point_viewcontrol" origin "-6193 -2490 100"
+			values {spawnflags "140" angles "8 164 0"
 				targetname "syn_intro_viewcontrol"} }
 		
 		create {classname "env_zoom" values {targetname "zoomtodefault" Rate "1.0" fov "90" allplayers "1"} }
