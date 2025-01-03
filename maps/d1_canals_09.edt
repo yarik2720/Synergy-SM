@@ -71,7 +71,9 @@ d1_canals_09
 //--Checkpoints--
 		create {classname "trigger_once"
 			origin "9728 -2024 -128"
-			values {model "*19"
+			values {
+				edt_getbspmodelfor_classname "trigger_multiple"
+				edt_getbspmodelfor_origin "9728 -2568 192"
 				spawnflags "1"
 				OnTrigger "syn_vehiclespawn_2,EnableOnly,,0,-1"} }
 
@@ -117,8 +119,10 @@ d1_canals_09
 
 //Trav|Edt - Auti-rush
 		create {classname "trigger_coop"
-			origin "-1728 -6752 -400"
-			values {model "*16"
+			origin "-1580 -7852 -400" //-1728 -6752 -400
+			values {
+				edt_mins "-200 -550 -50"
+				edt_maxs "200 550 250"
 				spawnflags "1"
 				//StartDisabled "1"
 				targetname "syn_antirush_coop"

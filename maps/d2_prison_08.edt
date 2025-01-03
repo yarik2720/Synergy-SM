@@ -15,8 +15,10 @@ d2_prison_08
 		edit {classname "func_areaportal" values {targetname "disabledPortal" StartOpen "1"} }
 
 //Prevent Backtracking
-		create {classname "trigger_push" origin "64 0 0"
-			values {model "*90"
+		create {classname "trigger_push" origin "-2780 3025 1000"
+			values {
+				edt_mins "-20 -100 -80"
+				edt_maxs "20 100 80"
 				spawnflags "1"
 				speed "750"
 				pushdir "0 0 0"} }
@@ -104,7 +106,9 @@ d2_prison_08
 
 		create {classname "trigger_once"
 			origin "-2416 3040 1015.5"
-			values {model "*92"
+			values {
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "-2416 3040 1015.5"
 				spawnflags "1"
 				OnTrigger "alyx,StopScripting,,0,-1"
 				OnTrigger "unholster,Start,,0,-1"} }
@@ -136,7 +140,8 @@ d2_prison_08
 
 		create {classname "trigger_teleport"
 			origin "-1120 1232 1028"
-			values {model "*30"
+			values {
+				edt_getbspmodelfor_targetname "trigger_tp_scene_start"
 				spawnflags "8"
 				targetname "trav_turrets_teleport"
 				StartDisabled "1"
@@ -164,7 +169,8 @@ d2_prison_08
 
 		create {classname "trigger_once"
 			origin "96 240 996"
-			values {model "*30"
+			values {
+				edt_getbspmodelfor_targetname "trigger_tp_scene_start"
 				spawnflags "1"
 				OnTrigger "edt_spawns,SetCheckpoint,syn_spawn_player_3,0,-1"} }
 
@@ -196,7 +202,8 @@ d2_prison_08
 //Trav|Edt - Close mossman's door when all players are in
 		create {classname "trigger_coop"
 			origin "-464 480 992"
-			values{model "*31"
+			values{
+				edt_getbspmodelfor_targetname "trigger_close_console_door_1"
 				spawnflags "1"
 				targetname "trav_coop_moss"
 				CountType "1"
@@ -208,7 +215,8 @@ d2_prison_08
 //Trav|Edt - Close teleporter room door when all players are in
 		create {classname "trigger_coop"
 			origin "96 240 996"
-			values{model "*30"
+			values{
+				edt_getbspmodelfor_targetname "trigger_tp_scene_start"
 				spawnflags "1"
 				targetname "trav_coop_teleporterroom"
 				StartDisabled "1"
@@ -223,7 +231,8 @@ d2_prison_08
 		//alyx in teleporter room before coop trig enable
 		create {classname "trigger_once"
 			origin "96 240 996"
-			values {model "*30"
+			values {
+				edt_getbspmodelfor_targetname "trigger_tp_scene_start"
 				spawnflags "2"
 				filtername "trav_filter_alyx"
 				OnTrigger "trav_coop_teleporterroom,Enable,,0,-1"} }
@@ -358,7 +367,8 @@ d2_prison_08
 
 		create {classname "trigger_once"
 			origin "128 -10 1093.84"
-			values {model "*35"
+			values {
+				edt_getbspmodelfor_targetname "trigger_teleport_player_enter_1"
 				spawnflags "1"
 				StartDisabled "1"
 				targetname "trigger_teleport_player_enter_1"
@@ -419,7 +429,7 @@ d2_prison_08
 			"origin" "-752 949.8 1024"
 			"values"
 			{
-				"model" "*29"
+				"edt_getbspmodelfor_targetname" "trigger_teleport01"
 				"targetname" "trigger_teleport01"
 				"spawnflags" "1"
 				"StartDisabled" "1"
@@ -457,7 +467,7 @@ d2_prison_08
 			"origin" "-464 480 992"
 			"values"
 			{
-				"model" "*31"
+				"edt_getbspmodelfor_targetname" "trigger_close_console_door_1"
 				"targetname" "trigger_close_console_door_1"
 				"spawnflags" "1"
 				"StartDisabled" "1"
@@ -478,7 +488,7 @@ d2_prison_08
 			"origin" "96 240 996"
 			"values"
 			{
-				"model" "*30"
+				"edt_getbspmodelfor_targetname" "trigger_tp_scene_start"
 				"targetname" "trigger_tp_scene_start"
 				"spawnflags" "1"
 				"StartDisabled" "0"

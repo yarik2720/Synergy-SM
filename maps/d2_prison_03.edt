@@ -94,7 +94,9 @@ d2_prison_03
 
 		create {classname "trigger_once"
 			origin "-3120 1632 62"
-			values {model "*30"
+			values {
+				edt_getbspmodelfor_classname "trigger_multiple"
+				edt_getbspmodelfor_origin "-3120 1632 62"
 				spawnflags "1"
 				OnTrigger "trav_guard_spawner,ForceSpawn,,0,-1"
 				OnTrigger "syn_spawn_manager,MovePlayers,,0,-1"} }
@@ -142,7 +144,9 @@ d2_prison_03
 
 		create {classname "trigger_once"
 			origin "-3384 3504 64"
-			values {model "*52"//*53
+			values {
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "-3384 3520 64"
 				spawnflags "1"
 				OnTrigger "trav_tmaker_combine1,Enable,,0,-1"} }
 
@@ -203,7 +207,9 @@ d2_prison_03
 
 		create {classname "trigger_once"
 			origin "-3728 4912 196"
-			values {model "*37"//*38
+			values {
+				edt_getbspmodelfor_classname "trigger_multiple"
+				edt_getbspmodelfor_origin "-3728 4912 196"
 				spawnflags "1"
 				OnTrigger "monitor_1,Enable,,0.25,-1"} }
 
@@ -212,7 +218,9 @@ d2_prison_03
 
 		create {classname "trigger_multiple"
 			origin "-3414 5824 72"
-			values {model "*86"
+			values {
+				edt_getbspmodelfor_classname "trigger_multiple"
+				edt_getbspmodelfor_origin "-3414 5824 72"
 				spawnflags "1"
 				OnEndTouchAll "fan_motor,TurnOff,,0.5,-1"
 				OnEndTouchAll "fan_wind,Disable,,0,-1"
@@ -222,7 +230,9 @@ d2_prison_03
 //Trav|Edt - stop fan movement when broken and clear
 		create {classname "trigger_once"
 			origin "-3469 5822 26.5"
-			values {model "*84"
+			values {
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "-3615 5827 21.5"
 				spawnflags "1"
 				targetname "trav_fan_disablemotion"
 				StartDisabled "1"
@@ -235,14 +245,18 @@ d2_prison_03
 
 		create {classname "trigger_once"
 			origin "-3469 5822 26.5"
-			values {model "*84"
+			values {
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "-3615 5827 21.5"
 				spawnflags "1"
 				OnTrigger "trav_tmaker_combine3,Enable,,0,-1"} }
 
 //Trav|Edt - autirush
-		create {classname "trigger_coop"
-			origin "-3572.5 6048 66"
-			values {model "*3"
+		create {classname "trigger_coop" origin "-3572.5 6048 66"
+			values
+			{
+				edt_mins "-200 -90 -50"
+				edt_maxs "200 90 50"
 				spawnflags "1"
 				targetname "syn_antirush_coop"
 				CountType "1"
@@ -252,7 +266,9 @@ d2_prison_03
 				OnTrigger "syn_antirush_text,Display,,0,-1"
 				OnPlayersIn "syn_antirush_blocker,Kill,,0,1"
 				//OnPlayersIn "syn_antirush_light,TurnOff,,0,1"
-				OnPlayersIn "!self,Disable,,1,1"} }
+				OnPlayersIn "!self,Disable,,1,1"
+			}
+		}
 
 		create {classname "prop_dynamic" origin "-3440 6336 -8"
 			values {model "models/synergy/tools/syn_transition.mdl"

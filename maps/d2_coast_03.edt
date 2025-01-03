@@ -151,7 +151,9 @@ d2_coast_03
 //--Checkpoints--
 		create {classname "trigger_once"
 			origin "-4608 -5832 484"
-			values {model "*77"
+			values {
+				edt_getbspmodelfor_classname "trigger_multiple"
+				edt_getbspmodelfor_origin "-4608 -5832 484"
 				spawnflags "1"
 				OnTrigger "syn_spawn_manager,SetCheckpoint,syn_spawn_player_2,0,-1"
 				OnTrigger "syn_spawn_vehicle_2,Enable,,0,-1"
@@ -159,7 +161,9 @@ d2_coast_03
 
 		create {classname "trigger_once"
 			origin "-4540.2 2560 602.67"
-			values {model "*83"
+			values {
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "-4540.2 2560 602.67"
 				spawnflags "1"
 				StartDisabled "1"
 				targetname "syn_checkpoint_3"
@@ -189,7 +193,9 @@ d2_coast_03
 
 		create {classname "trigger_once"
 			origin "-553.09 9611.8 738.67"
-			values {model "*83"
+			values {
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "-4540.2 2560 602.67"
 				spawnflags "1"
 				angles "0 90 "
 				StartDisabled "1"
@@ -302,12 +308,17 @@ d2_coast_03
 //TODO why did i disable this
 		create {classname "trigger_once"
 			origin "7108 604 320"
-			values {model "*86"
-			spawnflags "1"
-			//OnTrigger "thumper_soldier_*,Kill,,0,-1"
-			OnTrigger "autosave,Save,,0.1,-1"
-			OnTrigger "gunship_vs_player_neutral,RevertRelationship,,0,1"} }
-			//OnTrigger "thumper_3_dust,Kill,,0,-1"
+			values {
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "7108 604 320"
+				spawnflags "1"
+				//OnTrigger "thumper_soldier_*,Kill,,0,-1"
+				OnTrigger "autosave,Save,,0.1,-1"
+				OnTrigger "gunship_vs_player_neutral,RevertRelationship,,0,1"
+				//OnTrigger "thumper_3_dust,Kill,,0,-1"
+				OnTrigger "syn_gman_template,Kill,,0,-1"
+			}
+		}
 
 //Trav|Edt - disable occluder
 		edit {targetname "nlo_occluder" values {StartActive "0" targetname "syn_nlo_occluder"} }
@@ -391,8 +402,10 @@ d2_coast_03
 
 //Antirush
 		create {classname "trigger_coop"
-			origin "8560.77 17132.2 453.34"
-			values {model "*126"
+			origin "6110 12575 200"
+			values {
+				edt_mins "-1400 -800 -200"
+				edt_maxs "1050 820 400"
 				spawnflags "1"
 				targetname "syn_antirush_coop"
 				CountType "1"

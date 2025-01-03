@@ -82,7 +82,9 @@ d3_c17_06a
 
 		create {classname "trigger_once"
 			origin "3035.5 -1623.5 -224.5"
-			values {model "*24"
+			values {
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "3035.5 -1623.5 -224.5"
 				spawnflags "1"
 				OnTrigger "citizen_follow,Activate,,0,-1"
 				OnTrigger "manhack_2_maker_1,Spawn,,0,-1"} }
@@ -119,7 +121,9 @@ d3_c17_06a
 
 		create {classname "trigger_once"
 			origin "2950 1664 -284.83"
-			values {model "*43"
+			values {
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "2972 2076 -244"
 				spawnflags "1"
 				//OnTrigger "trav_maker_combine1,Enable,,12,-1"
 				OnTrigger "trav_teleport_tturret,Teleport,,0,-1"
@@ -171,9 +175,11 @@ d3_c17_06a
 //Trav|Edt - prevent trav_turret from going into zombiepit
 		create {classname "func_clip_vphysics"
 			origin "3104 3284 -298"
-			values {model "*77"
-			targetname "trav_vphysclip_vent"
-			filtername "trav_turret_clip"} }
+			values {
+				edt_getbspmodelfor_classname "trigger_multiple"
+				edt_getbspmodelfor_origin "3104 3348 -298"
+				targetname "trav_vphysclip_vent"
+				filtername "trav_turret_clip"} }
 
 		create {classname "filter_activator_class"
 			values {targetname "trav_turret_clip"
@@ -203,7 +209,9 @@ d3_c17_06a
 //Trav|Edt - antirush
 		create {classname "trigger_coop"
 			origin "2174.11 2860 -128"
-			values {model "*43"
+			values {
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "2972 2076 -244"
 				spawnflags "1"
 				//StartDisabled "1"
 				targetname "syn_antirush_coop"

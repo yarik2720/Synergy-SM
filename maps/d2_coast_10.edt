@@ -10,6 +10,7 @@ d2_coast_10
 		delete {classname "logic_auto" origin "2068.06 -5365.76 1408.88"}
 		delete {classname "player_loadsaved"}
 		delete {targetname "fall_trigger"}
+		delete {targetname "fade_fall"}
 		edit {classname "func_areaportal" values {targetname "disabledPortal" StartOpen "1"} }
 		edit {classname "func_areaportalwindow" values {targetname "DisabledPortalWindow" FadeStartDist "1000" FadeDist "1500"} }
 

@@ -104,7 +104,9 @@ d3_c17_13
 
 		create {classname "trigger_once"
 			origin "8386 1024 -114"
-			values {model "*103"//model i wanted is not showing?? maybe same as one i wanted D:
+			values {
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "8386 1024 -250"
 				spawnflags "1"
 				OnTrigger "syn_spawn_manager,MovePlayers,,0,-1"} }
 

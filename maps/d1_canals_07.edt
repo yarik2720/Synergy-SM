@@ -87,7 +87,9 @@ d1_canals_07
 //--Checkpoints--
 		create {classname "trigger_once"
 			origin "10752 928 -368"
-			values {model "*88"
+			values {
+				edt_mins "-130 -550 -150"
+				edt_maxs "50 550 120"
 				spawnflags "1"
 				OnTrigger "syn_vehiclespawn_2,EnableOnly,,0,-1"} }
 
@@ -101,9 +103,9 @@ d1_canals_07
 				OnTrigger "syn_spawn_vehicle_2,Enable,,0,1"
 				} }
 //Clip -- over gate
-		create {classname "func_vehicleclip" origin "7776 433 -62" values {model "*65"} }
-		create {classname "func_vehicleclip" origin "7776 1071 98" values {model "*65"} }
-		create {classname "func_vehicleclip" origin "7776 1647 -62" values {model "*65"} }
+		create {classname "func_vehicleclip" origin "7776 433 -62" values {edt_getbspmodelfor_classname "trigger_once" edt_getbspmodelfor_origin "7136 943 -318"} }
+		create {classname "func_vehicleclip" origin "7776 1071 98" values {edt_getbspmodelfor_classname "trigger_once" edt_getbspmodelfor_origin "7136 943 -318"} }
+		create {classname "func_vehicleclip" origin "7776 1647 -62" values {edt_getbspmodelfor_classname "trigger_once" edt_getbspmodelfor_origin "7136 943 -318"} }
 //Misc -- protect barrels
 		//create {classname "func_brush" origin "7265 1124 -61"
 		//	values {model "*65"//large
@@ -126,7 +128,10 @@ d1_canals_07
 		//		targetname "syn_barrel_block"} }
 
 		create {classname "trigger_once" origin "6710.49 1280 -304"
-			values {model "*88" angles "0 90 0"
+			values {
+				edt_mins "-130 -550 -150"
+				edt_maxs "50 550 120"
+				angles "0 90 0"
 				spawnflags "8"
 				StartDisabled "1"
 				targetname "syn_enable_ibeam"
@@ -135,7 +140,10 @@ d1_canals_07
 				OnStartTouch "!activator,Disablemotion,,0.5,-1"} }
 
 		create {classname "trigger_once" origin "6710.49 1280 -304"
-			values {model "*88" angles "0 90 0"
+			values {
+				edt_mins "-130 -550 -150"
+				edt_maxs "50 550 120"
+				angles "0 90 0"
 				spawnflags "8"
 				StartDisabled "1"
 				filtername "syn_filter_prop_physics"
@@ -158,7 +166,9 @@ d1_canals_07
 
 		create {classname "trigger_once"
 			origin "7402 1376 -200"
-			values {model "*156"
+			values {
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "7402 1376 -200"
 				spawnflags "1"
 				OnTrigger "syn_barrel_block,Disable,,0,-1"
 				OnTrigger "ibeam_board_*,setdamagefilter,none,0,-1"
@@ -258,7 +268,9 @@ d1_canals_07
 
 		create {classname "trigger_once"
 			origin "7992 1808 -192"
-			values {model "*120"
+			values {
+				edt_getbspmodelfor_classname "trigger_multiple"
+				edt_getbspmodelfor_origin "7992 1808 -192"
 				spawnflags "1"
 				targetname "syn_vint"
 				OnTrigger "syn_vint_trav_temp_cops_gateroom,Enable,,0,-1"} }
@@ -292,15 +304,19 @@ d1_canals_07
 
 		create {classname "trigger_once"
 			origin "7136 943 -318"
-			values {model "*65"
+			values {
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "7136 943 -318"
 				spawnflags "1"
 				targetname "syn_vint"
 				OnTrigger "syn_vint_trav_extrabridgecops_temp_,ForceSpawn,,0,-1"} }
 
 //Trav|Edt - anti-rush
-		create {classname "trigger_coop"
-			origin "-7864.93 -4192.01 -950"
-			values {model "*80" angles "0 90 -21"
+		create {classname "trigger_coop" origin "-8155 -4190 -885"
+			values
+			{
+				edt_mins "-1000 -600 -200"
+				edt_maxs "1000 600 200"
 				spawnflags "1"
 				targetname "syn_antirush_coop"
 				CountType "1"
@@ -310,7 +326,9 @@ d1_canals_07
 				OnTrigger "syn_antirush_text,Display,,1,-1"
 				OnPlayersIn "syn_antirush_prop,Kill,,0,1"
 				OnPlayersIn "syn_end_light,TurnOff,,0,1"
-				OnPlayersIn "!self,Disable,,1,1"} }
+				OnPlayersIn "!self,Disable,,1,1"
+			}
+		}
 
 		create {classname "prop_dynamic" origin "-7320 -4224 -1056"
 			values {model "models/synergy/tools/syn_transition.mdl"

@@ -36,8 +36,8 @@ d1_canals_13
 		//		speed "750"
 		//		pushdir "0 -90 0"} }
 //infront of synwall
-		create {classname "func_vehicleclip" origin "0 -64 0"
-			values {model "*71"} }
+		//create {classname "func_vehicleclip" origin "0 -64 0"
+		//	values {model "*71"} }
 
 //--Starting Items--
 		create {classname "info_player_equip"
@@ -75,8 +75,8 @@ d1_canals_13
 
 //--Exploits--
 //block airboating over dam
-		create {classname "func_vehicleclip" origin "-1024 -6144 17" values {model "*16"} }//57 WS!!
-		create {classname "func_vehicleclip" origin "512 -5824 -46.92" values {model "*16" targetname "trav_antiskip"} }
+		create {classname "func_vehicleclip" origin "-1024 -6144 17" values {edt_getbspmodelfor_classname "trigger_once" edt_getbspmodelfor_origin "-1024 -6656 -1262.92"} }
+		create {classname "func_vehicleclip" origin "512 -5824 -46.92" values {edt_getbspmodelfor_classname "trigger_once" edt_getbspmodelfor_origin "-1024 -6656 -1262.92" targetname "trav_antiskip"} }
 
 //--Extra--
 //TODO
@@ -159,7 +159,9 @@ d1_canals_13
 //on tower platform
 		create {classname "trigger_multiple"
 			origin "3136 2600 -128"
-			values {model "*35"
+			values {
+				edt_getbspmodelfor_classname "trigger_multiple"
+				edt_getbspmodelfor_origin "3768 -1632 224"
 				targetname "syn_gatetower_target"
 				spawnflags "1"
 				wait "6"
@@ -283,7 +285,9 @@ d1_canals_13
 	//	edit {targetname "canals_trigger_elitrans" values {origin "0 1200 -2400" spawnflags "0"} }
 
 		create {classname "trigger_changelevel" origin "-1024 -7360 -1262.92"//-1024 -6656 -1262.92
-			values {model "*16"
+			values {
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "-1024 -6656 -1262.92"
 				angles "0 90 0"
 				map "d1_eli_01"
 				landmark "canals_trans_13_eli"

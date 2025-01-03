@@ -157,7 +157,9 @@ d3_c17_04
 //Trav|Edt - autirush
 		create {classname "trigger_coop"
 			origin "28 -6042 183.5"
-			values {model "*46"
+			values {
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "-1467 -4081 376.5"
 				spawnflags "1"
 				//StartDisabled "1"
 				targetname "syn_antirush_coop"

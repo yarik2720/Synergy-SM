@@ -110,9 +110,13 @@ d1_trainstation_05
 
 		create {classname "trigger_once"
 			origin "-13386 -156 49"
-			values {model "*32"
+			values
+			{
+				edt_getbspmodelfor_targetname "Barney_lab_entry_closedoor_1"
 				spawnflags "1"
-				OnTrigger "syn_vint_trav_gman,Kill,,10,-1"} }
+				OnTrigger "syn_vint_trav_gman,Kill,,10,-1"
+			}
+		}
 
 //Trav|Edt - allow vending machine door to close(works fine unless behind player gets in right when barney spawns, just leaves door open)
 		//edit {targetname "soda_door_areaportal_1" values {StartOpen "0"} } //hmm, i didn't think u could edit defaultkey values :O
@@ -134,22 +138,30 @@ d1_trainstation_05
 //alyx
 		create {classname "trigger_multiple"
 			origin "-6485 -1084 33"
-			values {model "*40"
+			values
+			{
+				edt_getbspmodelfor_targetname "Alyx_lab_entry_closedoor_1"
 				spawnflags "2"
 				wait "6"
 				//OnTrigger "Barney_lab_entry_opendoor_1,Enable,,0,-1"
 				//OnTrigger "Barney_lab_entry_closedoor_1,Enable,,4,-1"
 				OnTrigger "!self,Disable,,5,-1"
-				OnTrigger "trav_coop_vendingdoor,Enable,,0,-1"} }
+				OnTrigger "trav_coop_vendingdoor,Enable,,0,-1"
+			}
+		}
 //barney
 		create {classname "trigger_once"
 			origin "-6485 -1076 33"
-			values {model "*32"
+			values
+			{
+				edt_getbspmodelfor_targetname "Barney_lab_entry_closedoor_1"
 				spawnflags "2"
 				StartDisabled "1"
 				targetname "Barney_lab_entry_closedoor_1"
 				filtername "trav_filter_barney"
-				OnTrigger "soda_machine_entry_door_1,Close,,1,-1"} }
+				OnTrigger "soda_machine_entry_door_1,Close,,1,-1"
+			}
+		}
 
 		create {classname "filter_activator_name"
 			values {targetname "trav_filter_barney"
@@ -158,7 +170,8 @@ d1_trainstation_05
 
 		create {classname "func_brush"//*32 barney close
 			origin "-6485 -1054.5 46"
-			values {model "*122"
+			values {
+				edt_getbspmodelfor_targetname "brush_soda_clip_player_2"
 				spawnflags "1"
 				StartDisabled "1"
 				targetname "trav_brush_soda_clip_player_2"} }
@@ -168,12 +181,16 @@ d1_trainstation_05
 //check on voting system
 		create {classname "trigger_once"
 			origin "-6364.96 -1158 53"
-			values {model "*55"
+			values
+			{
+				edt_getbspmodelfor_targetname "player_in_teleport"
 				spawnflags "1"
 				targetname "mini_teleport_port_L_1"//syn_vint_//uses IO to enable
 				StartDisabled "1"
 				//target "trav_teleport_waste"
-				OnTrigger "syn_vint_trav_teleport_waste,Teleport,,0,-1"} }
+				OnTrigger "syn_vint_trav_teleport_waste,Teleport,,0,-1"
+			}
+		}
 
 		create {classname "point_teleport"
 			origin "-10240 2768 10820"
@@ -194,11 +211,15 @@ d1_trainstation_05
 
 		create {classname "trigger_once"
 			origin "-7232 4970 10632"
-			values {model "*101"
+			values
+			{
+				edt_getbspmodelfor_targetname "2_waste1_teleport_trigger_1"
 				spawnflags "1"
 				StartDisabled "1"
 				targetname "syn_vint_trav_teleport_waste2_trig"
-				OnStartTouch "syn_vint_trav_teleport_waste2,Teleport,,3,-1"} }
+				OnStartTouch "syn_vint_trav_teleport_waste2,Teleport,,3,-1"
+			}
+		}
 
 		create {classname "prop_physics" origin "-9696 2704 10795"
 			values {spawnflags "8"
@@ -227,7 +248,9 @@ d1_trainstation_05
 //Trav|Edt - allow lab_door to close if all players get in
 		create {classname "trigger_coop"
 			origin "-7220 -1312 56"
-			values {model "*15"
+			values
+			{
+				edt_getbspmodelfor_targetname "start_first_teleport_01"
 				spawnflags "1"
 				StartDisabled "1"
 				targetname "trav_coop_labdoor"
@@ -259,7 +282,9 @@ d1_trainstation_05
 
 		create {classname "trigger_teleport"
 			origin "328 6856 148"
-			values {model "*101"
+			values
+			{
+				edt_getbspmodelfor_targetname "2_waste1_teleport_trigger_1"
 				spawnflags "1"
 				targetname "trav_teleport_lab"
 				StartDisabled "1"
@@ -272,7 +297,9 @@ d1_trainstation_05
 
 		create {classname "trigger_coop"
 			origin "-7186.95 -1166 24"
-			values {model "*55"
+			values
+			{
+				edt_getbspmodelfor_targetname "player_in_teleport"
 				spawnflags "1"
 				StartDisabled "1"
 				targetname "player_in_teleport"
@@ -288,7 +315,9 @@ d1_trainstation_05
 				//OnPlayersIn "player_in_teleport2,Enable,,0,1"
 				//OnPlayersIn "syn_spawn_manager,MovePlayers,,0,-1"
 				OnPlayersIn "!self,Disable,,1,1"
-				OnPlayersIn "syn_suit_only,EquipAllPlayers,,1,-1"} }
+				OnPlayersIn "syn_suit_only,EquipAllPlayers,,1,-1"
+			}
+		}
 
 		create {classname "point_teleport"//just use trigger when ur not lazy gaw
 			origin "-7184 -1176 8"
@@ -339,7 +368,7 @@ d1_trainstation_05
 
 			"values"
 			{
-				"model" "*15"
+				"edt_getbspmodelfor_targetname" "start_first_teleport_01"
 				"targetname" "start_first_teleport_01"
 				"spawnflags" "1"
 				"StartDisabled" "1"

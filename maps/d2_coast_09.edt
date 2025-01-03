@@ -123,7 +123,9 @@ d2_coast_09
 
 		create {classname "trigger_once"
 			origin "1076 -6716 -592"
-			values {model "*225"
+			values {
+				edt_getbspmodelfor_classname "trigger_multiple"
+				edt_getbspmodelfor_origin "1076 -6716 -592"
 				spawnflags "1"
 				targetname "syn_checkpoint_3"
 				OnTrigger "syn_spawn_manager,SetCheckpoint,syn_spawn_player_3,0,1"
@@ -134,13 +136,17 @@ d2_coast_09
 
 		create {classname "trigger_once"
 			origin "740 -6748 -420"
-			values {model "*148"
+			values {
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "740 -6748 -420"
 				spawnflags "1"
 				OnTrigger "syn_spawn_vehicle_3,Enable,,0,1"} }
 
 		create {classname "trigger_once"
 			origin "10171 10272 -94"
-			values {model "*156"
+			values {
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "10171 10272 -94"
 				spawnflags "1"
 				targetname "syn_checkpoint_4"
 				OnTrigger "syn_spawn_manager,SetCheckpoint,syn_spawn_player_4,1,-1"
@@ -188,19 +194,22 @@ d2_coast_09
 //syn_spawn_player_2
 		create {classname "trigger_multiple"
 			origin "-6720 4552 512"
-			values {model "*123"
+			values {
+				edt_getbspmodelfor_targetname "npc_zombie_slump_1_standtrigger"
 				spawnflags "1"
 				OnStartTouch "!activator,SetFogController,trav_fog_outside,0,-1"} }
 //syn_spawn_player_3
 		create {classname "trigger_multiple"
 			origin "512 -7000 -736"
-			values {model "*123"
+			values {
+				edt_getbspmodelfor_targetname "npc_zombie_slump_1_standtrigger"
 				spawnflags "1"
 				OnStartTouch "!activator,SetFogController,trav_fog_outside,0,-1"} }
 //syn_spawn_player_4
 		create {classname "trigger_multiple"
 			origin "11136 8816 -188"
-			values {model "*123"
+			values {
+				edt_getbspmodelfor_targetname "npc_zombie_slump_1_standtrigger"
 				spawnflags "1"
 				OnStartTouch "!activator,SetFogController,trav_fog_outside,0,-1"} }
 
@@ -257,13 +266,17 @@ d2_coast_09
 //inner
 		create {classname "trigger_multiple"
 			origin "-6400 6048 608"
-			values {model "*230"
+			values {
+				edt_getbspmodelfor_classname "trigger_multiple"
+				edt_getbspmodelfor_origin "-6400 6048 608"
 				spawnflags "1"
 				OnStartTouch "!activator,SetFogController,fog,0,-1"} }
 //outer
 		create {classname "trigger_multiple"
 			origin "-6400 5664 608"
-			values {model "*229"
+			values {
+				edt_getbspmodelfor_classname "trigger_multiple"
+				edt_getbspmodelfor_origin "-6400 5664 608"
 				spawnflags "1"
 				OnStartTouch "!activator,SetFogController,trav_fog_outside,0,-1"
 				OnTrigger "syn_spawn_manager,SetCheckpoint,syn_spawn_player_2,0,1"
@@ -275,7 +288,9 @@ d2_coast_09
 
 		create {classname "trigger_multiple"
 			origin "1076 -6716 -592"
-			values {model "*225"
+			values {
+				edt_getbspmodelfor_classname "trigger_multiple"
+				edt_getbspmodelfor_origin "1076 -6716 -592"
 				spawnflags "1"
 				OnStartTouch "house_occluder,Deactivate,,0,-1"
 				OnEndTouchAll "house_occluder,Activate,,0,-1"} }
@@ -412,7 +427,9 @@ d2_coast_09
 
 		create {classname "trigger_once"
 			origin "10171 10272 -94"
-			values {model "*156"//*158
+			values {
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "10171 10272 -94"
 				spawnflags "1"
 		//		//OnTrigger "trav_pmessage_batteries,Enable,,300,-1"
 				OnTrigger "spawn_dropship,Trigger,,1,-1"
@@ -421,7 +438,7 @@ d2_coast_09
 //Trav|Edt - add vehicle clip at gate
 		create {classname "func_vehicleclip"
 		origin "9967.06 7312 96"
-		values {targetname "trav_gate_vehicleclip" model "*156"} }
+		values {targetname "trav_gate_vehicleclip" edt_getbspmodelfor_classname "trigger_once" edt_getbspmodelfor_origin "10171 10272 -94"} }
 
 		create {classname "math_counter"
 			values {targetname "battery_counter"
@@ -431,7 +448,9 @@ d2_coast_09
 //Trav|Edt - autirush
 		create {classname "trigger_coop"
 			origin "14720 -6400.01 224"//13440 383.99 -480
-			values {model "*227"//*64
+			values {
+				edt_getbspmodelfor_classname "trigger_multiple"
+				edt_getbspmodelfor_origin "5504 5912 -1483"
 				spawnflags "1"
 				//StartDisabled "1"
 				targetname "syn_antirush_trigger"
@@ -477,7 +496,9 @@ d2_coast_09
 
 		create {classname "trigger_push"
 			origin "9029 3552 98"
-			values {model "*156"
+			values {
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "10171 10272 -94"
 				spawnflags "1"
 				targetname "syn_antirush_blocker_needvehicle"
 				pushdir "0 90 0"

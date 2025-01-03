@@ -157,7 +157,6 @@ console
 
 		create {classname "trigger_once" origin "4723.5 -2688 394.5"
 			values {
-				//model "*59"
 				edt_getbspmodelfor_classname "trigger_once"
 				edt_getbspmodelfor_origin "4723.5 -2688 394.5"
 				spawnflags "8"

@@ -20,8 +20,11 @@ d1_town_03
 				distance "256"
 				style "12"} }
 
-		create {classname "trigger_push" origin "0 -64 0"
-			values {model "*37"
+		create {classname "trigger_push" origin "-3648 -352 -3508"
+			values {
+				edt_mins "-60 -20 -80"
+				edt_maxs "60 30 350"
+				targetname "push_preventor"
 				spawnflags "1"
 				speed "750"
 				pushdir "0 270 0"} }
@@ -84,7 +87,9 @@ d1_town_03
 //Trav|Edt - prevent players from sprint-jump-croutching to skip tram.
 		create {classname "func_brush"
 			origin "-2381.5 -1231 -3328"
-			values {model "*79"
+			values {
+				edt_getbspmodelfor_classname "func_brush"
+				edt_getbspmodelfor_origin "-3357.5 -1295 -3543.85"
 				spawnflags "2"
 				targetname "trav_crouchjump_clip"
 				disablereceiveshadows "1"
@@ -92,7 +97,9 @@ d1_town_03
 				
 		create {classname "func_brush"
 			origin "-2330.5 -1327 -3379.07"
-			values {model "*79"
+			values {
+				edt_getbspmodelfor_classname "func_brush"
+				edt_getbspmodelfor_origin "-3357.5 -1295 -3543.85"
 				spawnflags "2"
 				targetname "trav_crouchjump_clip"
 				disablereceiveshadows "1"
@@ -102,7 +109,8 @@ d1_town_03
 
 		create {classname "func_rot_button"
 			origin "-2096 -1548 -3504"
-			values {model "*43"
+			values {
+				edt_getbspmodelfor_targetname "street_lever"
 				spawnflags "3137"
 				targetname "street_lever"
 				distance "15"
@@ -179,7 +187,9 @@ d1_town_03
 //Trav|Edt add antirush at endlevel
 		create {classname "trigger_coop"
 			origin "-4704 -144 -3072"//-4552 -168 -3136
-			values {model "*29"
+			values {
+				edt_getbspmodelfor_classname "trigger_multiple"
+				edt_getbspmodelfor_origin "-1664 -1168 -3456"
 				spawnflags "1"
 				//StartDisabled "1"
 				targetname "syn_antirush_trav_town03_end_coop"
@@ -193,10 +203,10 @@ d1_town_03
 				OnPlayersIn "syn_antirush_light,Kill,,0,1"
 				OnPlayersIn "!self,Disable,,1,-1"} }
 
-		create {classname "prop_dynamic" origin "-3848 0 -3648"
+		create {classname "prop_dynamic" origin "-3803 -110 -3330" //-3848 0 -3648
 			values {model "models/synergy/tools/syn_transition.mdl"
 				targetname "syn_antirush_wall"
-				angles "0 270 0"
+				angles "0 180 0"
 				//solid "6"
 				DisableShadows "1"} }
 
@@ -208,11 +218,13 @@ d1_town_03
 				style "12"} }
 
 		create {classname "trigger_push"
-			origin "-3736 24 -3348"
-			values {model "*22"
+			origin "-3819 -174 -3299"
+			values {
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "-3144 -1064 -3532"
 				spawnflags "1"
 				targetname "syn_antirush_trav_town03_end_push"
-				pushdir "0 270 0"
+				pushdir "0 180 0"
 				speed "450"} }
 
 		create {classname "game_text"

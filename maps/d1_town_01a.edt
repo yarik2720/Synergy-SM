@@ -146,8 +146,10 @@ d1_town_01a
 
 //Trav|Edt add antirush at endlevel
 		create {classname "trigger_coop"
-			origin "-360 784 -3422"
-			values {model "*38"
+			origin "-536 832 -3400"
+			values {
+				edt_mins "-152 -175 -40"
+				edt_maxs "152 175 40"
 				spawnflags "1"
 				//StartDisabled "1"
 				targetname "syn_antirush_trav_town01a_end_coop"
@@ -160,8 +162,10 @@ d1_town_01a
 				OnPlayersIn "!self,Disable,,1,-1"} }
 
 		create {classname "trigger_push"
-			origin "-534 712 -3365"
-			values {model "*33"
+			origin "-610 710 -3385"
+			values {
+				edt_mins "-20 -60 -50"
+				edt_maxs "20 60 90"
 				spawnflags "1"
 				targetname "syn_antirush_trav_town01a_end_push"
 				pushdir "0 0 0"
@@ -199,7 +203,8 @@ d1_town_01a
 
 			"values"
 			{
-				"model"			"*13"
+				edt_mins "-55 -90 -50"
+				edt_maxs "55 90 50"
 				"targetname"		"edt_surfpush"
 				"origin"		"20 499 -3290"
 				"spawnflags"		"1"
@@ -215,8 +220,8 @@ d1_town_01a
 
 			"values"
 			{
-				"model"			"*13"
-				"origin"		"-101 1086 -3230"
+				edt_mins "-55 -90 -50"
+				edt_maxs "55 90 50"
 				"spawnflags"		"1"
 				"StartDisabled"		"0"
 

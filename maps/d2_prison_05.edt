@@ -116,7 +116,9 @@ d2_prison_05
 
 		create {classname "trigger_once"
 			origin "-256 1758.25 464"
-			values {model "*38"
+			values {
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "-256 1758.25 464"
 				spawnflags "1"
 				OnTrigger "trav_tmaker_combine1,Enable,,0,-1"} }
 
@@ -125,7 +127,9 @@ d2_prison_05
 
 		create {classname "trigger_once"
 			origin "1304 1156 448"
-			values {model "*37"
+			values {
+				edt_getbspmodelfor_classname "trigger_multiple"
+				edt_getbspmodelfor_origin "1304 1156 448"
 				spawnflags "1"
 				OnTrigger "monitor_1,Enable,,0,-1"
 				OnTrigger "monitor_1,SetCamera,laundry_camera,0,-1"} }
@@ -167,7 +171,9 @@ d2_prison_05
 
 		create {classname "trigger_once"
 			origin "-4048 -528 560"
-			values {model "*85"
+			values {
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "-4048 -528 560"
 				spawnflags "1"
 				OnTrigger "syn_spawn_manager,MovePlayers,,0,-1"} }
 
@@ -184,7 +190,9 @@ d2_prison_05
 
 		create {classname "trigger_once"
 			origin "-4048 -528 560"
-			values {model "*80"
+			values {
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "-3536 -544 560"
 				spawnflags "1"
 				//OnTrigger "point_of_no_return,Enable,,0,-1"
 				OnTrigger "combine_crusherwall1_ss,BeginSequence,,0,-1"
@@ -200,7 +208,8 @@ d2_prison_05
 //still can go through prop, but no biggie, for now.
 		create {classname "func_brush"
 			origin "-4376 -280 1145.79"
-			values {model "*104"
+			values {
+				edt_getbspmodelfor_targetname "hurt_trigger_crusher_2"
 				spawnflags "2"
 				StartDisabled "1"
 				rendermode "10"
@@ -208,7 +217,8 @@ d2_prison_05
 
 		create {classname "func_brush"
 			origin "-4224 -360 1145.79"
-			values {model "*104"
+			values {
+				edt_getbspmodelfor_targetname "hurt_trigger_crusher_2"
 				spawnflags "2"
 				StartDisabled "1"
 				rendermode "10"

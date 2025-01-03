@@ -87,7 +87,9 @@ d3_c17_10b
 
 		create {classname "trigger_once"
 			origin "2716 860 566"
-			values {model "*47"
+			values {
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "2716 860 566"
 				spawnflags "1"
 				OnTrigger "syn_spawn_manager,MovePlayers,,0,-1"
 				OnTrigger "trav_teleport_barney_trap,Teleport,,0,-1"
@@ -145,7 +147,9 @@ d3_c17_10b
 //Trav|Edt - disable extra combine at end from spawning randomly infront of everyone
 		create {classname "trigger_once"
 			origin "2556 872 376"
-			values {model "*167"
+			values {
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "2556 872 376"
 				spawnflags "1"
 				OnTrigger "endsquad_soldier_makers,Kill,,0,-1"//Disable
 				OnTrigger "soldiersquad_soldier_makers,Kill,,0,-1"} }
@@ -166,7 +170,8 @@ d3_c17_10b
 			"origin" "3192 -376 320"
 			"values"
 			{
-				"model" "*33"
+				"edt_getbspmodelfor_classname" "trigger_once"
+				"edt_getbspmodelfor_origin" "3192 -376 320"
 				"spawnflags" "1"
 				"StartDisabled" "0"
 				"OnTrigger" "mortar_fire_expl,Explode,,11,-1"

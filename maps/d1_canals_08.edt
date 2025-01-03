@@ -87,7 +87,9 @@ d1_canals_08
 
 		create {classname "trigger_multiple"
 			origin "-768 -736 -512"
-			values {model "*56"
+			values {
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "-768 -736 -512"
 				spawnflags "1"
 				filtername "syn_neweapon_got"
 				OnStartTouch "syn_neweapon,EquipPlayer,,0,-1"
@@ -145,13 +147,17 @@ d1_canals_08
 
 //check2
 		create {classname "trigger_once" origin "-2288 -2864 -312"
-			values {model "*72"
+			values {
+				edt_getbspmodelfor_classname "trigger_multiple"
+				edt_getbspmodelfor_origin "-2288 -2864 -312"
 				spawnflags "1"
 				OnTrigger "syn_spawn_manager,SetCheckpoint,syn_spawn_player_3,0,-1"} }
 
 //ck3
 		create {classname "trigger_once" origin "-776 -1544 -288"
-			values {model "*70"
+			values {
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "-776 -1368 -288"
 				spawnflags "1"
 				OnTrigger "syn_spawn_manager,SetCheckpoint,syn_spawn_player_4,0,-1"} }
 
@@ -159,7 +165,9 @@ d1_canals_08
 //attempt to prevent skips
 		create {classname "trigger_push"
 			origin "-24 -2760 -112"
-			values {model "*105"
+			values {
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "-1456 -2456 -240"
 				spawnflags "1"
 				targetname "trav_exploit_push"
 				pushdir "0 180 0"
@@ -167,7 +175,9 @@ d1_canals_08
 
 		create {classname "trigger_push"
 			origin "-1104 -2232 -112"
-			values {model "*105"
+			values {
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "-1456 -2456 -240"
 				spawnflags "1"
 				targetname "trav_exploit_push"
 				//pushdir "0 0 0"
@@ -175,7 +185,9 @@ d1_canals_08
 
 		create {classname "trigger_push"
 			origin "16 -2936 -368"
-			values {model "*105"
+			values {
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "-1456 -2456 -240"
 				spawnflags "1"
 				targetname "trav_exploit_push_rail"
 				//pushdir "0 0 0"
@@ -183,7 +195,9 @@ d1_canals_08
 
 		create {classname "trigger_once"
 			origin "-149 -3520 -376"
-			values {model "*22"
+			values {
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "-701 -2552.06 -316"
 				spawnflags "1"
 				OnTrigger "trav_exploit_push_rail,Kill,,0,-1"} }
 
@@ -262,7 +276,9 @@ d1_canals_08
 
 		create {classname "trigger_once"
 			origin "-1456 -2456 -240"
-			values {model "*105"
+			values {
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "-1456 -2456 -240"
 				spawnflags "1"
 				OnTrigger "syn_vint_trav_temp_cops_charge,Enable,,0,-1"
 				OnTrigger "trav_aiscript_sched_charge,StartSchedule,,0.1,-1"} }
@@ -270,7 +286,9 @@ d1_canals_08
 //Trav|Edt - Auti-rush
 		create {classname "trigger_coop"
 			origin "-9024 8288 -544"
-			values {model "*81"
+			values {
+				edt_mins "-200 -500 -50"
+				edt_maxs "200 350 250"
 				spawnflags "1"
 				//StartDisabled "1"
 				targetname "syn_antirush_coop"

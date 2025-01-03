@@ -53,7 +53,7 @@ d1_canals_11
 				OnMapSpawn "hopper_physics_trigger,AddOutput,OnTrigger syn_enable_vehiclespawn:Add:1:0:1,0,-1"
 				OnMapSpawn "lock_lever_button,AddOutput,OnPressed syn_enable_vehiclespawn:Add:1:0:1,0,-1"} }
 
-		create {classname"math_counter"
+		create {classname "math_counter"
 			values {targetname "syn_enable_vehiclespawn"
 				max "2"
 				OnHitMax "syn_spawn_vehicle_1,Enable,,0,-1"} }
@@ -145,7 +145,9 @@ d1_canals_11
 				OnTrigger "syn_original_vintage_trigger,Enable,,0,-1"} }
 //original trigger for vintage mode
 		create {classname "trigger_once" origin "7477.99 4867.84 -924"
-			values {model "*109"
+			values {
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "7477.99 4867.84 -924"
 				targetname "syn_original_vintage_trigger"
 				spawnflags "41"
 				StartDisabled "1"
@@ -154,14 +156,16 @@ d1_canals_11
 		delete {classname "trigger_once" origin "7477.99 4867.84 -924"}
 //AR
 		create {classname "trigger_coop"
-			origin "7744 4896 -928" //7808 4864 -928
-			values {model "*127"//GBMdl
+			origin "7250 4860 -860"
+			values {
+				edt_mins "-550 -250 -150"
+				edt_maxs "550 250 150"
 				spawnflags "1"
 				//StartDisabled "1"
 				//targetname "syn_antirush_coop"
 				CountType "1"
 				UseHUD "1"
-				PlayerValue "25"//50//66//75
+				PlayerValue "37"
 				wait "1.5"
 				OnTrigger "syn_antirush_text,Display,,1,-1"
 				OnPlayersIn "!self,Disable,,1,1"
@@ -268,19 +272,23 @@ d1_canals_11
 				targetname "syn_vint"} }
 
 //Trav|Edt - move cop trigger (sooner)-NP- BbrushReq [gate early]
-		edit {classname "trigger_once" origin "1792 -7680 -768" values {origin "5083 -6801 -928" model "*134"} }//4736 -5760 -736
+		edit {classname "trigger_once" origin "1792 -7680 -768" values {origin "5083 -6801 -928"} }//4736 -5760 -736 //  model "*134"
 //keep gate2 trigger ORI
 		edit {targetname "gate2" values {targetname "trav_gate2"} }
 		create {classname "trigger_once"
 			origin "1792 -7680 -768"
-			values {model "*58"
+			values {
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "1792 -7680 -768"
 				spawnflags "1"
 				OnTrigger "trav_gate2,EnableMotion,,0.5,-1"} }
 
 //Trav|Edt - Auti-rush
 		create {classname "trigger_coop"
-			origin "-9934 -2570 -944"
-			values {model "*134"
+			origin "-11520 -1376 -872"
+			values {
+				edt_mins "-250 -550 -150"
+				edt_maxs "250 550 150"
 				spawnflags "1"
 				//StartDisabled "1"
 				targetname "syn_antirush_coop"

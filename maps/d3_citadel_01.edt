@@ -10,8 +10,10 @@ d3_citadel_01
 		edit {classname "func_areaportal" values {targetname "syn_disabledPortal" StartOpen "1"} }
 
 //Prevent Backtracking - just in case
-		create {classname "trigger_push" origin "0 0 0"
-			values {model "*17"
+		create {classname "trigger_push" origin "6400 2496 60"
+			values {
+				edt_mins "-100 -100 -10"
+				edt_maxs "100 100 10"
 				spawnflags "1"
 				speed "750"
 				pushdir "90 0 0"} }
@@ -56,7 +58,8 @@ d3_citadel_01
 
 			"values"
 			{
-				"model" "*33"
+				"edt_getbspmodelfor_classname" "trigger_once"
+				"edt_getbspmodelfor_origin" "10624 4592 -1664"
 				"spawnflags" "33"
 				"StartDisabled" "0"
 				"OnTrigger" "playerpod_resume_relay,Trigger,,0.1,-1"

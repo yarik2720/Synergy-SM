@@ -50,7 +50,8 @@ d1_canals_03
 
 		create {classname "trigger_multiple"
 			origin "-2424.5 -867 -1569"//-2424.5 -867 -1494.5
-			values {model "*250"
+			values {
+				edt_getbspmodelfor_targetname "underground_water_mhroom01"
 				spawnflags "1"
 				wait ".01"
 				parentname "underground_water_mhroom01"
@@ -92,13 +93,17 @@ d1_canals_03
 //--Checkpoints--
 		create {classname "trigger_once"
 			origin "-1091.14 -64 -984"
-			values {model "*160"
+			values {
+				edt_mins "-20 -40 -50"
+				edt_maxs "20 40 50"
 				spawnflags "1"
 				OnTrigger "syn_spawn_manager,SetCheckpoint,syn_spawn_player_2,0,-1"} }
 //grate drop
 		create {classname "trigger_once"
 			origin "-2175.5 -857.5 -1122"
-			values {model "*217"
+			values {
+				edt_mins "-50 -50 -10"
+				edt_maxs "50 50 10"
 				spawnflags "1"
 				OnTrigger "syn_new_weapon_smg1,EquipAllPlayers,,0,-1"
 				OnTrigger "syn_spawn_manager,SetCheckpoint,syn_spawn_player_3,1,-1"
@@ -113,7 +118,9 @@ d1_canals_03
 			} }
 
 		create {classname "trigger_multiple" origin "-1624.5 -507.5 -976"
-			values {model "*191"
+			values {
+				edt_mins "-100 -40 -250"
+				edt_maxs "100 40 150"
 				spawnflags "1"
 				filtername "syn_new_weapon_filter"
 				OnStartTouch "syn_new_weapon_smg1,Enable,,0,1"
@@ -205,7 +212,9 @@ d1_canals_03
 //Trav|Edt - Anti pipeskip
 		create {classname "trigger_push"
 			origin "-752 -104 -944"
-			values {model "*124"
+			values {
+				edt_mins "-50 -20 -20"
+				edt_maxs "50 20 20"
 				spawnflags "1"
 				pushdir "0 90 0"
 				speed "125"} }
@@ -216,7 +225,9 @@ d1_canals_03
 
 		create {classname "func_breakable"
 			origin "-1536 703.5 -808"
-			values {model "*184"
+			values {
+				edt_getbspmodelfor_classname "func_breakable"
+				edt_getbspmodelfor_origin "-1536 703.5 -808"
 				spawnflags "0"
 				targetname "trav_breakable_1"
 				material "4"
@@ -275,7 +286,9 @@ d1_canals_03
 
 		create {classname "func_breakable"
 			origin "-1952.5 -904 -851"
-			values {model "*210"
+			values {
+				edt_getbspmodelfor_classname "func_breakable"
+				edt_getbspmodelfor_origin "-1952.5 -904 -851"
 				spawnflags "0"
 				targetname "trav_breakable_2"
 				material "4"
@@ -295,7 +308,9 @@ d1_canals_03
 
 //ignore fall damage here so behind players won't get hurt
 		create {classname "trigger_multiple" origin "-2157.81 -855.5 -1022"
-			values {model "*213"
+			values {
+				edt_mins "-80 -80 -10"
+				edt_maxs "80 80 10"
 				spawnflags "1"
 				OnStartTouch "!activator,IgnoreFallDamageWithoutReset,,0,-1"} }//Disables falling damage for 10 seconds
 
@@ -377,13 +392,17 @@ d1_canals_03
 
 		create {classname "trigger_once"
 			origin "-1574 672 -832"
-			values {model "*187"
+			values {
+				edt_mins "-20 -20 -20"
+				edt_maxs "20 20 20"
 				spawnflags "1"
 				OnTrigger "syn_vint_ss_trav,BeginSequence,-1,0,-1" } }
 
 		create {classname "trigger_once"
 			origin "-1798 592.01 -756"
-			values {model "*185"
+			values {
+				edt_mins "-20 -20 -20"
+				edt_maxs "20 20 20"
 				spawnflags "1"
 				OnTrigger "syn_vint_trav,Kill,,0,-1"} }
 

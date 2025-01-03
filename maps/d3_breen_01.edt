@@ -55,18 +55,23 @@ d3_breen_01
 
 //Trav|Edt make sure players get into pod on level trainsistion
 		create {classname "trigger_multiple" origin "-2448 -1408 -1456"
-			values {model "*98"
+			values {
+				edt_mins "-100 -100 -100"
+				edt_maxs "100 100 100"
 				spawnflags "1"
 				OnStartTouch "pod,EnterVehicleImmediate,,0,-1"
 				OnStartTouch "weaponstrip_end_game,Strip,,0,-1"} }
 //over spawn
 		create {classname "trigger_weapon_strip" origin "-2448 -1408 -1192"
-			values {model "*100"
+			values {
+				edt_getbspmodelfor_classname "trigger_weapon_strip"
+				edt_getbspmodelfor_origin "-2459 -1408 -40"
+				KillWeapons "1"
 				spawnflags "1"} }
 
 //Trav|Edt - make sure slow loaders dont keep gg
 		create {classname "trigger_weapon_strip" origin "-2008 656 648"
-			values {model "*91" spawnflags "1"} }
+			values {edt_getbspmodelfor_classname "trigger_teleport" edt_getbspmodelfor_origin "-2008 656 648" spawnflags "1" KillWeapons "1"} }
 
 //delete this, testing only
 		//edit {targetname "trigger_sceneStart" values {spawnflags "0"} }
@@ -77,14 +82,19 @@ d3_breen_01
 
 		create {classname "trigger_once"
 			origin "-640 -464 1424"//-640 -368 1424 not in same spot origin //-640 -472 1424 nvm use reg
-			values {model "*45"
+			values {
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "-640 -464 1424"
 				spawnflags "1"
 				OnTrigger "syn_spawn_manager,MovePlayers,,0,-1"} }
 
 //Trav|Edt - block jump
 		create {classname "func_brush"
 			origin "-370.35 -554.35 -180"
-			values {model "*125" angles "0 45 0"
+			values {
+				edt_getbspmodelfor_classname "func_brush"
+				edt_getbspmodelfor_origin "-1056 382.5 1392"
+				angles "0 45 0"
 				targetname "syn_block_jump"
 				spawnflags "2"} }
 
@@ -173,7 +183,8 @@ d3_breen_01
 
 		create { classname "trigger_multiple" origin "-2436 -1405 -1463"
 			values {
-				"model" "*100"
+				"edt_getbspmodelfor_classname" "trigger_weapon_strip"
+				"edt_getbspmodelfor_origin" "-2459 -1408 -40"
 				"spawnflags" "1"
 				"wait" "1"
 				"OnTrigger" "pod,EnterVehicleImmediate,,2.5,1"
@@ -184,7 +195,8 @@ d3_breen_01
 
 		create { classname "trigger_teleport" origin "-2436 -1405 -1463"
 			values {
-				"model" "*100"
+				"edt_getbspmodelfor_classname" "trigger_weapon_strip"
+				"edt_getbspmodelfor_origin" "-2459 -1408 -40"
 				"spawnflags" "1"
 				"wait" "1"
 				"target" "InBlackExit"
@@ -234,7 +246,8 @@ d3_breen_01
 			"origin" "-1968 -4 616.75"
 			"values"
 			{
-				"model" "*106"
+				"edt_getbspmodelfor_classname" "trigger_once"
+				"edt_getbspmodelfor_origin" "-1968 -4 616.75"
 				"spawnflags" "1"
 				"StartDisabled" "1"
 				"targetname" "trigger_player_Breenelevator"
@@ -266,7 +279,8 @@ d3_breen_01
 			"origin" "-1056 504 1536"
 			"values"
 			{
-				"model" "*123"
+				"edt_getbspmodelfor_classname" "trigger_once"
+				"edt_getbspmodelfor_origin" "-1056 504 1536"
 				"targetname" "Trigger_lift_control"
 				"spawnflags" "1"
 				"StartDisabled" "1"

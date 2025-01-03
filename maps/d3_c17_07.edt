@@ -141,7 +141,9 @@ d3_c17_07
 //Trav|Edt - add playerclip abovegate
 		create {classname "func_brush"
 			origin "7264 1520 248"
-			values {model "*35"
+			values {
+				edt_getbspmodelfor_classname "func_brush"
+				edt_getbspmodelfor_origin "7312 1536 64"
 				spawnflags "2"} }
 
 //Trav|Edt - Finale defense
@@ -167,7 +169,9 @@ d3_c17_07
 //Trav|Edt - moveplayers to main area, and close/lock door and teleport alyx, also set net checkpoint, and save
 		create {classname "trigger_once"
 			origin "5544 1408 64"
-			values {model "*11"
+			values {
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "5544 1408 64"
 				spawnflags "1"
 				OnTrigger "syn_spawn_manager,MovePlayers,,0.1,-1"
 				OnTrigger "trav_teleport_alyx1,Teleport,,0,-1"
@@ -268,7 +272,9 @@ d3_c17_07
 //Trav|Edt - autirush
 		create {classname "trigger_coop"
 			origin "9096 2592 -88"
-			values {model "*20"
+			values {
+				edt_getbspmodelfor_classname "trigger_multiple"
+				edt_getbspmodelfor_origin "7616 1536 104"
 				spawnflags "1"
 				//StartDisabled "1"
 				targetname "syn_antirush_coop"

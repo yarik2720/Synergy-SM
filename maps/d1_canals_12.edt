@@ -101,13 +101,17 @@ d1_canals_12
 
 //--Checkpoints--
 		create {classname "trigger_once" origin "-3552 4352 384"
-			values {model "*8"
+			values {
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "-3552 4352 384"
 				spawnflags "1"
 				OnTrigger "syn_spawn_manager,SetCheckpoint,syn_spawn_player_2,0,-1"
 				OnTrigger "syn_vehiclespawn_2,EnableOnly,,0,-1"} }
 
 		create {classname "trigger_once" origin "-960 -256 352"
-			values {model "*34"
+			values {
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "-960 -256 352"
 				spawnflags "1"
 				OnTrigger "syn_spawn_manager,SetCheckpoint,syn_spawn_player_3,0,-1"
 				OnTrigger "syn_vehiclespawn_3,EnableOnly,,0,-1"} }
@@ -115,7 +119,9 @@ d1_canals_12
 //--Exploits--
 //block pedestrians from climbing past jump
 		create {classname "trigger_push" origin "1232 -4288 544"
-			values {model "*34"
+			values {
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "-960 -256 352"
 				angles "0 90 0"
 				spawnflags "1"
 				targetname "syn_endjump_pusher"
@@ -123,7 +129,9 @@ d1_canals_12
 				pushdir "0 90 0"} }
 
 		create {classname "trigger_once" origin "1232 -4432 544"
-			values {model "*34"
+			values {
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "-960 -256 352"
 				angles "0 90 0"
 				spawnflags "32"
 				OnTrigger "syn_endjump_pusher,Disable,,0,-1"} }
@@ -132,18 +140,24 @@ d1_canals_12
 //Trav|Edt - prevent players from skiping barrelroll part
 		create {classname "func_vehicleclip"
 			origin "-3768 3168 608"
-			values {model "*95"
+			values {
+				edt_getbspmodelfor_classname "trigger_multiple"
+				edt_getbspmodelfor_origin "304 -3456 352"
 				targetname "syn_vint"} }
 
 		create {classname "func_vehicleclip"
 			origin "-4664 3168 608"
-			values {model "*95"
+			values {
+				edt_getbspmodelfor_classname "trigger_multiple"
+				edt_getbspmodelfor_origin "304 -3456 352"
 				targetname "syn_vint"} }
 
 //Trav|Edt - fix waterline at end
 		create {classname "func_brush"
 			origin "2400 -7808 71"
-			values {model "*10"
+			values {
+				edt_getbspmodelfor_classname "trigger_hurt"
+				edt_getbspmodelfor_origin "-1536 9312 481"
 				rendermode "10"
 				spawnflags "2"
 				targetname "syn_vint"} }
@@ -163,8 +177,10 @@ d1_canals_12
 
 //Trav|Edt - Auti-rush
 		create {classname "trigger_coop"
-			origin "4164 -5188 177"
-			values {model "*24" angles "0 270 0"
+			origin "2438 -7560 160"
+			values {
+				edt_mins "-200 -500 -50"
+				edt_maxs "200 500 250"
 				spawnflags "1"
 				//StartDisabled "1"
 				targetname "syn_antirush_coop"

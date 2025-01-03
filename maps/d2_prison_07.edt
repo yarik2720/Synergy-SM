@@ -93,7 +93,9 @@ d2_prison_07
 //Trav|Edt - Close gate if all in (and move checkpoint)
 		create {classname "trigger_coop"
 			origin "-44.5 -3672 -91.5"
-			values {model "*23"
+			values
+			{
+				edt_getbspmodelfor_targetname "trigger_ensure_no_combine_left"
 				spawnflags "1"
 				CountType "1"
 				UseHUD "0"
@@ -107,7 +109,8 @@ d2_prison_07
 //failsafe for slow loders
 		create {classname "trigger_teleport"
 			origin "739.5 -2072 -90"
-			values {model "*23"
+			values {
+				edt_getbspmodelfor_targetname "trigger_ensure_no_combine_left"
 				spawnflags "1"
 				targetname "syn_intro_teleport"
 				StartDisabled "1"
@@ -118,7 +121,9 @@ d2_prison_07
 //turretblocker at gate
 		create {classname "func_clip_vphysics"
 			origin "-440 -2796 -172"
-			values {model "*74"
+			values {
+				edt_getbspmodelfor_classname "trigger_multiple"
+				edt_getbspmodelfor_origin "-440 -2796 -172"
 				targetname "syn_intro_turret_blocker"
 				filtername "trav_filter_turret_wall"} }
 
@@ -127,7 +132,8 @@ d2_prison_07
 
 		create {classname "trigger_once"
 			origin "-421.5 -3216 -118"
-			values {model "*76"
+			values {
+				edt_getbspmodelfor_targetname "trigger_croom2_alyxarrival"
 				spawnflags "1"
 				StartDisabled "1"
 				targetname "trigger_croom2_alyxarrival"
@@ -154,12 +160,14 @@ d2_prison_07
 //Trav|Edt - extend clip in first defense
 		create {classname "func_brush"
 			origin "-423.9 -3681 17.21"
-			values {model "*17"
+			values {
+				edt_getbspmodelfor_targetname "func_croom2_field_clip"
 				targetname "func_croom2_field_clip"} }
 
 		create {classname "func_brush"
 			origin "-423.9 -3681 185.21"
-			values {model "*17"
+			values {
+				edt_getbspmodelfor_targetname "func_croom2_field_clip"
 				targetname "func_croom2_field_clip"} }
 
 //Trav|Edt - remove annoying sound trigger
@@ -272,7 +280,9 @@ d2_prison_07
 
 		create {classname "trigger_once"
 			origin "4148 -4032 -476"
-			values {model "*70"
+			values {
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "3692 -3632 -492"
 				spawnflags "1"
 				OnTrigger "syn_spawn_manager,MovePlayers,,0,-1"
 					OnTrigger "syn_new_weapons,EquipAllPlayers,,0,-1"
@@ -289,7 +299,8 @@ d2_prison_07
 
 		create {classname "trigger_teleport"
 			origin "2180.5 -3160 -723.5"
-			values {model "*23"
+			values {
+				edt_getbspmodelfor_targetname "trigger_ensure_no_combine_left"
 				spawnflags "8"
 				targetname "trav_turrets_teleport"
 				StartDisabled "1"
@@ -299,7 +310,8 @@ d2_prison_07
 
 		create {classname "trigger_teleport"
 			origin "4747.5 -3136 -331.5"
-			values {model "*23"
+			values {
+				edt_getbspmodelfor_targetname "trigger_ensure_no_combine_left"
 				spawnflags "8"
 				targetname "trav_turrets_teleport"
 				StartDisabled "1"
@@ -316,63 +328,72 @@ d2_prison_07
 //1 right
 		create {classname "func_clip_vphysics"
 			origin "-2291.5 -4536 -83.5"
-			values {model "*23"
+			values {
+				edt_getbspmodelfor_targetname "trigger_ensure_no_combine_left"
 				targetname "trav_turret_wall1_right"
 				//StartDisabled "1"
 				filtername "trav_filter_turret_wall"} }
 //1 left
 		create {classname "func_clip_vphysics"
 			origin "1315.5 -4536 -83.5"
-			values {model "*23"
+			values {
+				edt_getbspmodelfor_targetname "trigger_ensure_no_combine_left"
 				targetname "trav_turret_wall1_left"
 				//StartDisabled "1"
 				filtername "trav_filter_turret_wall"} }
 //1 left2
 		create {classname "func_clip_vphysics"
 			origin "1315.5 -4536 340.5"
-			values {model "*23"
+			values {
+				edt_getbspmodelfor_targetname "trigger_ensure_no_combine_left"
 				targetname "trav_turret_wall_toggle"
 				StartDisabled "1"
 				filtername "trav_filter_turret_wall"} }
 //1 mainhigh
 		create {classname "func_clip_vphysics"
 			origin "-876.01 -4913.75 22"
-			values {model "*54"
+			values {
+				edt_getbspmodelfor_targetname "trigger_room5_ensure_no_combine_left"
 				targetname "trav_turret_wallp_main"//perma
 				//StartDisabled "1"
 				filtername "trav_filter_turret_wall"} }
 //2 main
 		create {classname "func_clip_vphysics"
 			origin "3980 -3069.75 -482"//4324 -5706 -410 for double
-			values {model "*54"
+			values {
+				edt_getbspmodelfor_targetname "trigger_room5_ensure_no_combine_left"
 				targetname "trav_turret_wall2_main"
 				StartDisabled "1"
 				filtername "trav_filter_turret_wall"} }
 //2 back
 		create {classname "func_clip_vphysics"
 			origin "4460 -5801.75 -482"//4324 -5706 -410wtf
-			values {model "*54"
+			values {
+				edt_getbspmodelfor_targetname "trigger_room5_ensure_no_combine_left"
 				targetname "trav_turret_wall2_back"
 				StartDisabled "1"//not alviablez in 2007 codebase, but in fgd?
 				filtername "trav_filter_turret_wall"} }
 //2 side
 		create {classname "func_clip_vphysics"
 			origin "5268 -4293.75 -354"//5284 -4002 -282wtf
-			values {model "*54"
+			values {
+				edt_getbspmodelfor_targetname "trigger_room5_ensure_no_combine_left"
 				targetname "trav_turret_wall2_side"
 				StartDisabled "1"
 				filtername "trav_filter_turret_wall"} }
 //2 side toggle
 		create {classname "func_clip_vphysics"
 			origin "2868 -4737.75 -482"
-			values {model "*54"
+			values {
+				edt_getbspmodelfor_targetname "trigger_room5_ensure_no_combine_left"
 				targetname "trav_turret_wall2_toggle"
 				StartDisabled "1"
 				filtername "trav_filter_turret_wall"} }
 
 		create {classname "trigger_once"
 			origin "2868 -4737.75 -482"
-			values {model "*54"
+			values {
+				edt_getbspmodelfor_targetname "trigger_room5_ensure_no_combine_left"
 				spawnflags "1"
 				OnTrigger "trav_turret_wall_toggle,Disable,,0,-1"} }
 
@@ -563,15 +584,19 @@ d2_prison_07
 
 		create {classname "trigger_once"
 			origin "4008 -4344 -632"
-			values {model "*107"
+			values {
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "4444 -4336 -632"
 				spawnflags "1"
 				OnTrigger "trav_teleport_alyx,Teleport,,0,-1"} }
 
 //Trav|Edt - autirush
 		create {classname "trigger_coop"
-			origin "4041 -4312 -676"
-			values {model "*95"
-				angles "0 90 0"
+			origin "4155 -4345 -655"
+			values
+			{
+				edt_mins "-750 -300 -100"
+				edt_maxs "500 100 80"
 				spawnflags "1"
 				targetname "syn_antirush_coop"
 				CountType "1"

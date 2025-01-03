@@ -104,7 +104,9 @@ d3_c17_10a
 
 //Trav|Edt - block window
 		create {classname "func_brush" origin "-2424 7488 580"
-			values {model "*53"//or *129 for LOS
+			values {
+				edt_getbspmodelfor_classname "func_brush"
+				edt_getbspmodelfor_origin "-2424 7488 580"
 				spawnflags "2"} }
 
 //Trav|Edt - increase magnitude of mortar
@@ -196,7 +198,9 @@ d3_c17_10a
 
 		create {classname "trigger_multiple"
 			origin "252 6344 316"
-			values {model "*33"
+			values {
+				edt_getbspmodelfor_classname "trigger_multiple"
+				edt_getbspmodelfor_origin "-2692 7528 572"
 				spawnflags "2"
 				targetname "trav_combine_capitol_allout"
 				//StartDisabled "1"
@@ -210,7 +214,9 @@ d3_c17_10a
 
 		create {classname "trigger_push"
 			origin "268 6272 316"
-			values {model "*33"
+			values {
+				edt_getbspmodelfor_classname "trigger_multiple"
+				edt_getbspmodelfor_origin "-2692 7528 572"
 				spawnflags "1"
 				targetname "trav_push_capitol"
 				pushdir "0 180 0"
@@ -234,7 +240,9 @@ d3_c17_10a
 //Trav|Edt - autirush
 		create {classname "trigger_coop"
 			origin "376 4880 356"
-			values {model "*24"
+			values {
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "-2488 6040 220"
 				spawnflags "1"
 				//StartDisabled "1"
 				targetname "syn_antirush_coop"

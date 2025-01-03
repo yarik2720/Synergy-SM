@@ -446,7 +446,7 @@ d2_coast_08
 
 		create { classname "trigger_changelevel"
 			values {
-				"model" "*55"
+				"edt_getbspmodelfor_targetname" "return_trip_autosave"
 				"spawnflags" "0"
 				"landmark" "landmark_d2_coast_07-08"
 				"map" "d2_coast_07"

@@ -69,8 +69,10 @@ d1_town_05
 
 //--Checkpoints--
 		create {classname "trigger_once"
-			origin "-3330 7488 960"//-3090 7380 960
-			values {model "*14"//*53 - trigger_autosave model
+			origin "-3218 7438 995"
+			values {
+				edt_mins "-30 -300 -100"
+				edt_maxs "30 200 200"
 				spawnflags "1"
 				OnTrigger "syn_vint_trav_tmaker_combine1,Enable,,2,-1"
 				OnTrigger "syn_spawn_manager,SetCheckpoint,syn_spawn_player_2,,0-1"
@@ -81,8 +83,10 @@ d1_town_05
 				OnTrigger "syn_new_weapon,EquipAllPlayers,,0.5,-1"
 				OnTrigger "syn_new_weapon,Enable,,0,-1"} }
 //dislodge for mp_teleport_disable
-		create {classname "trigger_once" origin "-3330 7488 960"
-			values {model "*14"
+		create {classname "trigger_once" origin "-3218 7438 995"
+			values {
+				edt_mins "-30 -300 -100"
+				edt_maxs "30 200 200"
 				spawnflags "1"
 				targetname "syn_mplrs"
 				OnTrigger "syn_spawn_manager,MovePlayers,,0,-1"} }
@@ -112,7 +116,9 @@ d1_town_05
 //Trav|Edt - delay music (players not loaded won't hear it)
 		delete {classname "trigger_once" origin "-11254 4352 952"}
 		create {classname "trigger_once" origin "-11254 4352 952"
-			values {model "*44"
+			values {
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "-11254 4352 952"
 				spawnflags "1"
 				OnTrigger "start_music,PlaySound,,30,-1" //0
 				OnTrigger "start_gulls_rel,RevertRelationship,,0,-1"} }
@@ -212,7 +218,9 @@ d1_town_05
 
 //prevent rushing into warehouse
 		create {classname "trigger_push" origin "-2016 8880 950"
-			values {model "*36"
+			values {
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "-2016 8784 950"
 				spawnflags "1"
 				speed "450"
 					StartDisabled "1"//disabled for now
@@ -221,7 +229,9 @@ d1_town_05
 
 //Prevent backtracking
 		create {classname "trigger_push" origin "-4573.31 8082.94 1013.62"
-			values {model "*19"
+			values {
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "-4960 8096 994.39"
 				angles "0 14 0"
 				spawnflags "1"
 				StartDisabled "1"
@@ -303,7 +313,9 @@ d1_town_05
 
 		create {classname "trigger_coop"
 			origin "-1696 10752 928.23"
-			values {model "*57"
+			values {
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "-256 7328 1120.23"
 				spawnflags "1"
 				//StartDisabled "1"
 				targetname "syn_vint_trav_enddoor_coop"
@@ -318,7 +330,9 @@ d1_town_05
 
 		create {classname "func_brush"
 			origin "-1108 10282 932"
-			values {model "*42"
+			values {
+				edt_getbspmodelfor_classname "trigger_multiple"
+				edt_getbspmodelfor_origin "-1380 9682 932"
 				spawnflags "2"
 				rendermode "10"
 				StartDisabled "1"

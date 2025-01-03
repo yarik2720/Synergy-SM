@@ -65,7 +65,9 @@ d1_town_04
 //--Checkpoints--
 		create {classname "trigger_once"
 			origin "1915 130 -5296"
-			values {model "*17"
+			values {
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "603 -1357.5 -4264"
 				spawnflags "1"
 				OnTrigger "syn_spawn_manager,SetCheckpoint,syn_spawn_player_2,0,-1"
 //Trav|Edt - Disable moving players
@@ -131,13 +133,17 @@ d1_town_04
 //
 //		create {classname "trigger_once"
 //			origin "1920 -260 -5035.5"
-//			values {model "*32"
+			values {
+				edt_getbspmodelfor_classname "trigger_multiple"
+				edt_getbspmodelfor_origin "-8 -1688 -5028.73"
 //				spawnflags "1"
 //				OnTrigger "syn_vint_trav_ss_gman1,BeginSequence,-1,0,-1"} }
 //
 //		create {classname "trigger_push"
 //			origin "1920 508 -5035.5"
-//			values {model "*32"
+			values {
+				edt_getbspmodelfor_classname "trigger_multiple"
+				edt_getbspmodelfor_origin "-8 -1688 -5028.73"
 //				spawnflags "1"
 //				targetname "syn_vint_trav_gman_pusher"
 //				pushdir "0 270 0"
@@ -150,7 +156,9 @@ d1_town_04
 
 //Trav|Edt - dont let players past trap b4 it's on
 		create {classname "trigger_push" origin "998 1152 -5783.15"
-			values {model "*11"
+			values {
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "858 1152 -5756.69"
 				spawnflags "1"
 				targetname "syn_vint_syn_caver_blocker"
 				speed "450"} }
@@ -164,7 +172,9 @@ d1_town_04
 //Trav|Edt add antirush at endlevel
 		create {classname "trigger_coop"
 			origin "-2528 1148 -4779.5"//-2280 1140 -4771.5
-			values {model "*32"
+			values {
+				edt_getbspmodelfor_classname "trigger_multiple"
+				edt_getbspmodelfor_origin "-8 -1688 -5028.73"
 				spawnflags "1"
 				//StartDisabled "1"
 				targetname "syn_antirush_trav_town04_end_coop"

@@ -82,14 +82,18 @@ d1_canals_10
 //--Checkpoints--
 		create {classname "trigger_once"
 			origin "11328 2512 -312.74"
-			values {model "*66"
+			values {
+				edt_mins "-380 -550 -100"
+				edt_maxs "50 600 100"
 				spawnflags "1"
 				OnTrigger "syn_spawn_manager,SetCheckpoint,syn_spawn_player_2,0,-1"
 				OnTrigger "syn_vehiclespawn_2,EnableOnly,,0,-1"} }
 
 		create {classname "trigger_once"
 			origin "4832 9224 -8"
-			values {model "*32"
+			values {
+				edt_mins "-50 -670 -100"
+				edt_maxs "50 700 150"
 				spawnflags "1"
 				OnTrigger "syn_spawn_manager,SetCheckpoint,syn_spawn_player_3,0,-1"
 				OnTrigger "syn_vehiclespawn_3,EnableOnly,,0,-1"} }
@@ -201,19 +205,29 @@ d1_canals_10
 				solid "6"
 				disableshadows "1"} }
 
-		create {classname "func_vehicleclip"
-			origin "3024 9944 -32"
-			values {model "*66"
-				targetname "syn_vint"} }
+		create {classname "prop_dynamic" origin "3024 9494 -32"
+			values
+			{
+				model "models/synergy/tools/syn_transition.mdl"
+				solid "6"
+				DisableShadows "1"
+				targetname "syn_vint"
+				startdisabled "1"
+			}
+		}
 
 		create {classname "func_vehicleclip"
 			origin "2936 9752 -8"
-			values {model "*31"
+			values {
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "1320 8680 -392"
 				targetname "syn_vint"} }
 
 		create {classname "func_vehicleclip"
 			origin "3272 8576 8"
-			values {model "*41"
+			values {
+				edt_getbspmodelfor_classname "trigger_multiple"
+				edt_getbspmodelfor_origin "8064 2368 -352"
 				targetname "syn_vint"} }
 
 // Enable gib collisions on smokestack
@@ -223,8 +237,10 @@ d1_canals_10
 
 //Trav|Edt - Auti-rush
 		create {classname "trigger_coop"
-			origin "-13705.9 832 -303"
-			values {model "*49"
+			origin "-13760 800 -303" //-13705.9 832 -303
+			values {
+				edt_mins "-200 -550 -50"
+				edt_maxs "200 550 250"
 				spawnflags "1"
 				//StartDisabled "1"
 				targetname "syn_antirush_coop"
