@@ -57,11 +57,15 @@ d3_c17_07
 		create {classname "info_global_settings"
 			values {IsVehicleMap "0" targetname "syn_global_settings"} }
 
+		// Don't block players after one player jumps down into the turrent room.
+		// Not sure why this was added in hl2 20a update. Not surprised I missed this in my solo testing.
+		delete {targetname "turretroom_playerclipbrush"}
+
 //--Extra--
 
 		// create intermission
 		"create" { "classname" "info_intermission" "origin" "7103.490723 1270.962769 204.487061" "values" { "angles" "16 150 0" } }
-			
+
 //Game Over text
 		delete {targetname "message_alyxdead"}
 		create {classname "logic_auto"
@@ -97,7 +101,7 @@ d3_c17_07
 		create {classname "logic_auto"
 			values {spawnflags "1"
 				OnMapSpawn "turretroom_doorbreak_conditions,AddOutPut,OnConditionsSatisfied !self:Kill::0:-1,0,-1"} }
-				
+
 //prevent players rushing before alyx sequence
 		create {classname "trigger_push"
 			origin "4575 735 192"
