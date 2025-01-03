@@ -19,7 +19,6 @@
 
 - Changes over all maps (or almost all):
 	+ Notifications of mission failure (will be removed when next version releases)
-	+ Half Life 2 Update support
 	+ Added Elite Jeep spawn on some hl2 and ep2 maps (also fix for Jeep Elite included in `scripts` folder)
 	+ Increased vehicle spawns for more players
 	+ Damage players on vehicle spawn places who blocks spawning
