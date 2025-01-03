@@ -2,9 +2,11 @@
 ## Installation 
 ### Synergy actual version:
 - Place folders with files in custom directory, for example:
-`Synergy\synergy\custom\Synergy-SM\`
+`Synergy\synergy\custom\synergy-sm\`
 
-	> The folder `Synergy-SM` can be named anything, it is just a container folder.
+	> The folder `synergy-sm` can be named anything, it is just a container folder.
+
+	> On linux operating system you should use lower-case naming
 
 - After placing edt files you need to restart your server if it was already running and set `content_mount_synergy_mod_path_priority 0` on your server config for the EDTs to apply.
 
