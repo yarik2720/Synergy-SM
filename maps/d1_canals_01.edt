@@ -10,7 +10,7 @@ d1_canals_01
 		delete {targetname "start_item"}
 		delete {targetname "start_item_template"}//un-ness
 		edit {classname "func_areaportal" values {targetname "syn_disabled_portal" StartOpen "1" } }
-				
+
 		// prevent backtracking
 		edit {classname "trigger_changelevel" values {edt_landmark "trainstation_06-canals_01" edt_map "d1_trainstation_06" edt_addspawnflags "2"} }
 		create {classname "prop_dynamic" origin "1496 -8288 224"// 1328 -8287.99 128
@@ -64,7 +64,6 @@ d1_canals_01
 		//Trav|Edt - "_create" invalid?
 		create {classname "trigger_once" origin "684 2908 -36"
 			values {
-				//model "*117"
 				edt_getbspmodelfor_targetname "boxcar_door_close"
 				spawnflags "1"
 				targetname "boxcar_door_close"
@@ -98,7 +97,6 @@ d1_canals_01
 		create {classname "trigger_once"
 			origin "-152 -6848 640"
 			values {
-				//model "*98"
 				edt_getbspmodelfor_classname "trigger_once"
 				edt_getbspmodelfor_origin "-152 -6848 640"
 				spawnflags "1"
@@ -131,7 +129,6 @@ d1_canals_01
 
 		create {classname "trigger_multiple" origin "-320 -7360 -72"
 			values {
-				//model "*118"
 				edt_getbspmodelfor_classname "trigger_once"
 				edt_getbspmodelfor_origin "-312 -7360 -72"
 				spawnflags "1"
@@ -151,7 +148,6 @@ d1_canals_01
 		create {classname "trigger_once"
 			origin "636 -6520 600"
 			values {
-				//model "*113"
 				edt_getbspmodelfor_classname "trigger_multiple"
 				edt_getbspmodelfor_origin "596 -6520 600"
 				spawnflags "1"
@@ -163,7 +159,6 @@ d1_canals_01
 		create {classname "trigger_once"
 			origin "636 -6520 600"
 			values {
-				//model "*113"
 				edt_getbspmodelfor_classname "trigger_multiple"
 				edt_getbspmodelfor_origin "596 -6520 600"
 				spawnflags "1"
@@ -183,7 +178,6 @@ d1_canals_01
 		create {classname "trigger_once"
 			origin "640 672 112"
 			values {
-				//model "*25"
 				edt_getbspmodelfor_classname "trigger_once"
 				edt_getbspmodelfor_origin "640 672 112"
 				spawnflags "1"
@@ -226,7 +220,6 @@ d1_canals_01
 //upstair default cop enabler
 		create {classname "trigger_once" origin "-576 -7360 320"
 			values {
-				//model "*106"
 				edt_mins "-50 -80 -110"
 				edt_maxs "50 60 100"
 				spawnflags "1"
@@ -255,7 +248,6 @@ d1_canals_01
 //disable cop spawner when able to be seen, failsafe
 		create {classname "trigger_once" origin "-224 -6848 864"
 			values {
-				//model "*28"
 				edt_getbspmodelfor_classname "trigger_once"
 				edt_getbspmodelfor_origin "-448 -6848 640"
 				spawnflags "1"
@@ -346,19 +338,15 @@ d1_canals_01
 		create {classname "func_clip_vphysics" origin "608 -5166 552"
 			values
 			{
-				//model "*78"
 				edt_getbspmodelfor_classname "trigger_once"
 				edt_getbspmodelfor_origin "608 -5058 552"
-			}
 		}
+	}
 
 //remake: don't let this trigger kill half the npc's
 		delete {classname "trigger_once" origin "608 -5058 552"}
-		//HL2U
-		delete {classname "trigger_once" origin "608 -5058 532"}
 		create {classname "trigger_once" origin "608 -5058 552"
 			values {
-				//model "*78"
 				edt_mins "-20 -10 -60"
 				edt_maxs "20 10 30"
 				spawnflags "1"
@@ -397,7 +385,6 @@ d1_canals_01
 		create {classname "trigger_once"
 			origin "256 -4064 448"
 			values {
-				//model "*33"
 				edt_getbspmodelfor_classname "trigger_once"
 				edt_getbspmodelfor_origin "256 -4064 448"
 				spawnflags "1"
@@ -415,7 +402,6 @@ d1_canals_01
 		create {classname "trigger_remove"
 			origin "2603.48 14864 392"
 			values {
-				//model "*91"
 				edt_mins "-35 -80 -150"
 				edt_maxs "35 80 150"
 				spawnflags "12"
@@ -532,7 +518,6 @@ d1_canals_01
 		create {classname "trigger_once"
 			origin "-184 -2288 600"
 			values {
-				//model "*86"
 				edt_getbspmodelfor_classname "trigger_once"
 				edt_getbspmodelfor_origin "-104 -2032 504"
 				spawnflags "1"
@@ -610,7 +595,6 @@ d1_canals_01
 		create {classname "trigger_once"
 			origin "846 2638 87.65"
 			values {
-				//model "*115"
 				edt_getbspmodelfor_classname "trigger_once"
 				edt_getbspmodelfor_origin "858 2638 58"
 				spawnflags "1"
@@ -620,7 +604,6 @@ d1_canals_01
 		create {classname "trigger_coop"
 			origin "640 976 -80"
 			values {
-				//model "*25"
 				edt_getbspmodelfor_classname "trigger_once"
 				edt_getbspmodelfor_origin "640 672 112"
 				spawnflags "1"
@@ -637,7 +620,6 @@ d1_canals_01
 		create {classname "trigger_push"
 			origin "816 2634 208.01"//608 2610 72.01
 			values {
-				//model "*100"
 				edt_getbspmodelfor_classname "trigger_once"
 				edt_getbspmodelfor_origin "736 2158 -55.99"
 				spawnflags "1"
@@ -668,7 +650,6 @@ d1_canals_01
 		create {classname "trigger_coop"
 			origin "696 4424 -72"
 			values {
-				//model "*25"
 				edt_getbspmodelfor_classname "trigger_once"
 				edt_getbspmodelfor_origin "640 672 112"
 				spawnflags "1"
