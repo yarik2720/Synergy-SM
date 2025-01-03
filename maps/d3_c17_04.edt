@@ -78,6 +78,8 @@ d3_c17_04
 			}
 		}
 
+		delete {classname "func_brush" targetname "nogoingback_clipbrush"}
+
 //Trav|Edt - Disable Enemy turrets when tipped (avoid player greif)
 		create {classname "logic_auto"
 			values {spawnflags "1"
@@ -159,8 +161,7 @@ d3_c17_04
 			origin "28 -6042 183.5"
 			values {
 				//model "*46"
-				edt_getbspmodelfor_classname "trigger_once"
-				edt_getbspmodelfor_origin "-1467 -4081 376.5"
+				edt_getbspmodelfor_targetname "hopper_vcd_trigger"
 				spawnflags "1"
 				//StartDisabled "1"
 				targetname "syn_antirush_coop"
