@@ -445,6 +445,7 @@ d2_coast_08
 		delete { classname "trigger_changelevel" }
 
 		create { classname "trigger_changelevel"
+			origin "3120 5248 1584"
 			values {
 				"edt_getbspmodelfor_targetname" "return_trip_autosave"
 				"spawnflags" "0"
