@@ -61,7 +61,6 @@ d3_c17_03
 		delete {classname "trigger_once" origin "-5128 -4164 64.5"}
 		create {classname "trigger_once" origin "-5128 -4164 64.5"
 			values {
-				//model "*17"
 				edt_getbspmodelfor_classname "trigger_once"
 				edt_getbspmodelfor_origin "-5128 -4164 64.5"
 				spawnflags "1"

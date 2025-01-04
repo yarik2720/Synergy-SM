@@ -10,7 +10,7 @@ d1_town_03
 			values {model "models/synergy/tools/syn_transition.mdl"
 				targetname "syn_wall_removeme_t03"
 				angles "0 270 0"
-				//solid "6"
+				solid "6"
 				DisableShadows "1"} }
 
 		create {classname "light_dynamic" origin "-3648 -288 -3504"
@@ -22,7 +22,6 @@ d1_town_03
 
 		create {classname "trigger_push" origin "-3648 -352 -3508"
 			values {
-				//model "*37"
 				edt_mins "-60 -20 -80"
 				edt_maxs "60 30 350"
 				targetname "push_preventor"
@@ -89,7 +88,6 @@ d1_town_03
 		create {classname "func_brush"
 			origin "-2381.5 -1231 -3328"
 			values {
-				//model "*79"
 				edt_getbspmodelfor_classname "func_brush"
 				edt_getbspmodelfor_origin "-3357.5 -1295 -3543.85"
 				spawnflags "2"
@@ -100,7 +98,6 @@ d1_town_03
 		create {classname "func_brush"
 			origin "-2330.5 -1327 -3379.07"
 			values {
-				//model "*79"
 				edt_getbspmodelfor_classname "func_brush"
 				edt_getbspmodelfor_origin "-3357.5 -1295 -3543.85"
 				spawnflags "2"
@@ -113,7 +110,6 @@ d1_town_03
 		create {classname "func_rot_button"
 			origin "-2096 -1548 -3504"
 			values {
-				//model "*43"
 				edt_getbspmodelfor_targetname "street_lever"
 				spawnflags "3137"
 				targetname "street_lever"
@@ -192,7 +188,6 @@ d1_town_03
 		create {classname "trigger_coop"
 			origin "-4704 -144 -3072"//-4552 -168 -3136
 			values {
-				//model "*29"
 				edt_getbspmodelfor_classname "trigger_multiple"
 				edt_getbspmodelfor_origin "-1664 -1168 -3456"
 				spawnflags "1"

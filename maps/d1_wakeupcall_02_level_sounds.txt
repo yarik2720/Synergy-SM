@@ -1,0 +1,121 @@
+"rock24.Richardholdingcells01"
+{
+	"channel"		"CHAN_AUTO"
+	"volume"		"VOL_NORM"
+	"pitch"		"PITCH_NORM"
+
+	"soundlevel"	"SNDLVL_NORM"
+
+	"wave"		 "*@custom\richard_02.wav" 
+}
+
+"rock24.Richardholdingcells02"
+{
+	"channel"		"CHAN_AUTO"
+	"volume"		"VOL_NORM"
+	"pitch"		"PITCH_NORM"
+
+	"soundlevel"	"SNDLVL_NORM"
+
+	"wave"		 "*@custom\richard_03.wav" 
+}
+
+"rock24.RichardHoldingCells03"
+{
+	"channel"		"CHAN_AUTO"
+	"volume"		"VOL_NORM"
+	"pitch"		"PITCH_NORM"
+
+	"soundlevel"	"SNDLVL_NORM"
+
+	"wave"		 "*@custom\richard_04.wav" 
+}
+
+"custom.file3" 
+{ 
+	"channel"		"CHAN_AUTO"
+	"volume"		"VOL_NORM"
+	"pitch"		"PITCH_NORM"
+
+	"soundlevel"	"SNDLVL_NORM"
+
+	"wave" "*@custom/richardhub_01.wav" 
+}
+
+"custom.file4" 
+{ 
+	"channel"		"CHAN_AUTO"
+	"volume"		"VOL_NORM"
+	"pitch"		"PITCH_NORM"
+
+	"soundlevel"	"SNDLVL_NORM"
+
+	"wave" "*@custom/richardhub_02.wav" 
+}
+
+"custom.file5" 
+{ 
+	"channel"		"CHAN_AUTO"
+	"volume"		"VOL_NORM"
+	"pitch"		"PITCH_NORM"
+
+	"soundlevel"	"SNDLVL_NORM"
+
+	"wave" "*@custom/richardhub_03.wav" 
+}
+
+"custom.file6" 
+{ 
+	"channel"		"CHAN_AUTO"
+	"volume"		"VOL_NORM"
+	"pitch"		"PITCH_NORM"
+
+	"soundlevel"	"SNDLVL_NORM"
+
+	"wave" "*@custom/richardhub_04.wav" 
+}
+
+"custom.file7" 
+{ 
+	"channel"		"CHAN_AUTO"
+	"volume"		"VOL_NORM"
+	"pitch"		"PITCH_NORM"
+
+	"soundlevel"	"SNDLVL_NORM"
+
+	"wave" "*@custom/richardhub_05.wav" 
+}
+
+"custom.file8" 
+{ 
+	"channel"		"CHAN_AUTO"
+	"volume"		"VOL_NORM"
+	"pitch"		"PITCH_NORM"
+
+	"soundlevel"	"SNDLVL_NORM"
+
+	"wave" "*@custom/richardhub_06.wav" 
+}
+
+"custom.file9" 
+{ 
+	"channel"		"CHAN_AUTO"
+	"volume"		"VOL_NORM"
+	"pitch"		"PITCH_NORM"
+
+	"soundlevel"	"SNDLVL_NORM"
+
+	"wave" "*@custom/richard_05a.wav" 
+}
+
+"custom.file10" 
+{ 
+	"channel"		"CHAN_AUTO"
+	"volume"		"VOL_NORM"
+	"pitch"		"PITCH_NORM"
+
+	"soundlevel"	"SNDLVL_NORM"
+
+	"wave" "*@custom/richard_05b.wav" 
+}
+

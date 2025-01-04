@@ -15,7 +15,6 @@ d3_citadel_04
 //Prevent Backtracking
 		create {classname "trigger_push" origin "830 -320 2430"
 			values {
-				//model "*81"
 				edt_mins "-20 -65 -70"
 				edt_maxs "20 65 70"
 				spawnflags "1"
@@ -63,7 +62,6 @@ d3_citadel_04
 		create {classname "trigger_once"
 			origin "272 832 3680"
 			values {
-				//model "*46"
 				edt_getbspmodelfor_classname "trigger_once"
 				edt_getbspmodelfor_origin "272 832 3680"
 				spawnflags "1"
@@ -81,7 +79,6 @@ d3_citadel_04
 		create {classname "trigger_once"
 			origin "272 832 4192"
 			values {
-				//model "*61"
 				edt_getbspmodelfor_classname "trigger_once"
 				edt_getbspmodelfor_origin "272 832 4192"
 				spawnflags "1"
@@ -94,7 +91,6 @@ d3_citadel_04
 		create {classname "trigger_once"
 			origin "272 832 5520"
 			values {
-				//model "*48"
 				edt_getbspmodelfor_classname "trigger_once"
 				edt_getbspmodelfor_origin "272 832 5520"
 				spawnflags "1"
@@ -107,7 +103,6 @@ d3_citadel_04
 		create {classname "trigger_once"
 			origin "272 832 5984"
 			values {
-				//model "*62"
 				edt_getbspmodelfor_classname "trigger_once"
 				edt_getbspmodelfor_origin "272 832 5984"
 				spawnflags "1"
@@ -118,7 +113,6 @@ d3_citadel_04
 		create {classname "trigger_once"
 			origin "272 832 6464"
 			values {
-				//model "*56"
 				edt_getbspmodelfor_classname "trigger_once"
 				edt_getbspmodelfor_origin "272 832 6464"
 				spawnflags "1"
@@ -149,7 +143,6 @@ d3_citadel_04
 			"origin" "256 832 2367"
 			"values"
 			{
-				//"model" "*52"
 				"edt_getbspmodelfor_classname" "trigger_once"
 				"edt_getbspmodelfor_origin" "256 832 2367"
 				"targetname" "citadel_trigger_elevatorride_up"

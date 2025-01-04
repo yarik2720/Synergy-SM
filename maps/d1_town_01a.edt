@@ -234,7 +234,6 @@ d1_town_01a
 
 			"values"
 			{
-				//"model"			"*13"
 				edt_mins "-55 -90 -50"
 				edt_maxs "55 90 50"
 				"targetname"		"edt_surfpush"
@@ -269,7 +268,6 @@ d1_town_01a
 
 			"values"
 			{
-				//"model"			"*13"
 				edt_mins "-55 -90 -50"
 				edt_maxs "55 90 50"
 				"spawnflags"		"1"

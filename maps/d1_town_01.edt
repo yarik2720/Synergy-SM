@@ -190,7 +190,6 @@ d1_town_01
 		create {classname "trigger_once"
 			origin "1917 -1787.5 -3712"
 			values {
-				//model "*70"
 				edt_mins "-5 -65 -65"
 				edt_maxs "5 55 60"
 				spawnflags "1"
@@ -222,7 +221,6 @@ d1_town_01
 		create {classname "trigger_multiple"
 			origin "680 -572 -3602.72"
 			values {
-				//model "*54"
 				edt_mins "-160 -135 -100"
 				edt_maxs "160 135 100"
 				spawnflags "1"
@@ -330,7 +328,6 @@ d1_town_01
 		create {classname "trigger_once"
 			origin "2718.5 -1324 -3758.07"
 			values {
-				//model "*49"
 				edt_mins "-100 -10 -80"
 				edt_maxs "100 10 80"
 				spawnflags "1"
@@ -396,7 +393,6 @@ d1_town_01
 //Trav|Edt - lock levers when players are on cars
 		create {classname "trigger_multiple" origin "1160 41.5 -3542"
 			values {
-				//model "*118"
 				edt_mins "-50 -100 -40"
 				edt_maxs "50 100 40"
 				spawnflags "1"
@@ -408,7 +404,6 @@ d1_town_01
 
 		create {classname "trigger_multiple" origin "760 248.5 -3542"
 			values {
-				//model "*118"
 				edt_mins "-50 -100 -40"
 				edt_maxs "50 100 40"
 				angles "0 45 0"
@@ -428,7 +423,6 @@ d1_town_01
 		create {classname "trigger_coop"
 			origin "240 705 -3265"
 			values {
-				//model "*46"
 				edt_mins "-100 -150 -60"
 				edt_maxs "130 120 50"
 				spawnflags "1"

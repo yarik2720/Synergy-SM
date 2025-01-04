@@ -43,7 +43,6 @@ d1_town_02a
 //--Checkpoints--
 		create {classname "trigger_once" origin "-7504 -304 -3344"
 			values {
-				//model "*27"
 				edt_getbspmodelfor_classname "trigger_once"
 				edt_getbspmodelfor_origin "-7504 -304 -3344"
 				spawnflags "1"
@@ -88,7 +87,6 @@ d1_town_02a
 		create {classname "trigger_once"
 			origin "-7560 400 -3336"
 			values {
-				//model "*29"
 				edt_getbspmodelfor_classname "trigger_once"
 				edt_getbspmodelfor_origin "-7576 784 -3320"
 				spawnflags "1"
@@ -130,7 +128,6 @@ d1_town_02a
 		create {classname "trigger_push"
 			origin "-7796 1376.01 -3256"
 			values {
-				//model "*48"
 				edt_getbspmodelfor_classname "trigger_once"
 				edt_getbspmodelfor_origin "-6268 2144 -3264"
 				spawnflags "1"
@@ -208,7 +205,6 @@ d1_town_02a
 		create {classname "trigger_coop"
 			origin "-6584 -578 -3216.14"
 			values {
-				//model "*47"
 				edt_getbspmodelfor_classname "trigger_multiple"
 				edt_getbspmodelfor_origin "-8128 688 -3359.87"
 				spawnflags "1"

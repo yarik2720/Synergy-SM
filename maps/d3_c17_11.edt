@@ -63,7 +63,6 @@ d3_c17_11
 		create {classname "func_brush"
 			origin "1052 5908 1040"
 			values {
-				//model "*44"
 				edt_getbspmodelfor_classname "func_brush"
 				edt_getbspmodelfor_origin "1548 3204 1024"
 				spawnflags "1"
@@ -177,7 +176,6 @@ d3_c17_11
 		create {classname "trigger_coop"
 			origin "1352 3216 1024"
 			values {
-				//model "*42"
 				edt_getbspmodelfor_classname "trigger_multiple"
 				edt_getbspmodelfor_origin "-2048 9152 608"
 				angles "0 0 90"

@@ -83,7 +83,6 @@ d3_c17_06a
 		create {classname "trigger_once"
 			origin "3035.5 -1623.5 -224.5"
 			values {
-				//model "*24"
 				edt_getbspmodelfor_classname "trigger_once"
 				edt_getbspmodelfor_origin "3035.5 -1623.5 -224.5"
 				spawnflags "1"
@@ -99,11 +98,11 @@ d3_c17_06a
 //Trav|Edt - increase combine rapple numbers
 		edit {targetname "end_rappel_cop_1_maker"
 			values {MaxLiveChildren "2"
-				MaxNPCCount "16"} }
+				MaxNPCCount "4"} }
 
 		edit {targetname "end_rappel_cop_2_maker"
 			values {MaxLiveChildren "2"
-				MaxNPCCount "16"} }
+				MaxNPCCount "4"} }
 
 //Trav|Edt - wave of combine at turret defense, trigger teleport turret if existent
 		create {classname "npc_maker"
@@ -113,9 +112,9 @@ d3_c17_06a
 				targetname "trav_maker_combine1"
 				StartDisabled "1"
 				NPCTargetname "trav_combine1"
-				MaxNPCCount "24"
+				MaxNPCCount "6"
 				SpawnFrequency "3"
-				MaxLiveChildren "8"
+				MaxLiveChildren "2"
 				NPCType "npc_combine_s"
 				additionalequipment "weapon_ar2"
 				NPCSquadname "rappelling_cop_squad"} }
@@ -123,7 +122,6 @@ d3_c17_06a
 		create {classname "trigger_once"
 			origin "2950 1664 -284.83"
 			values {
-				//model "*43"
 				edt_getbspmodelfor_classname "trigger_once"
 				edt_getbspmodelfor_origin "2972 2076 -244"
 				spawnflags "1"
@@ -164,7 +162,7 @@ d3_c17_06a
 				OnTrigger "barricade_explosion_rl_1,Trigger,,125,-1"//75
 				OnTrigger "trav_maker_combine1,Enable,,12,-1"
 				OnTrigger "end_rappel_cop_*_maker,SetSpawnFrequency,25,174,-1"//pram15
-				OnTrigger "end_rappel_cop_*_maker,AddMaxChildren,10,175,-1"//pram3
+				//OnTrigger "end_rappel_cop_*_maker,AddMaxChildren,10,175,-1"//pram3
 				OnTrigger "end_rappel_cop_*_maker,Enable,,176,-1"} }
 
 //Trav|Edt - only allow exitdoor_opened_vcd to play once
@@ -178,7 +176,6 @@ d3_c17_06a
 		create {classname "func_clip_vphysics"
 			origin "3104 3284 -298"
 			values {
-				//model "*77"
 				edt_getbspmodelfor_classname "trigger_multiple"
 				edt_getbspmodelfor_origin "3104 3348 -298"
 				targetname "trav_vphysclip_vent"
@@ -213,7 +210,6 @@ d3_c17_06a
 		create {classname "trigger_coop"
 			origin "2174.11 2860 -128"
 			values {
-				//model "*43"
 				edt_getbspmodelfor_classname "trigger_once"
 				edt_getbspmodelfor_origin "2972 2076 -244"
 				spawnflags "1"

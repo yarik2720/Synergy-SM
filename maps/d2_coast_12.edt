@@ -253,7 +253,6 @@ d2_coast_12
 		create {classname "trigger_coop"
 			origin "9174 8302 2118"
 			values {
-				//model "*73"
 				edt_getbspmodelfor_classname "trigger_once"
 				edt_getbspmodelfor_origin "9278 7778 2010"
 				angles "0 90 0"

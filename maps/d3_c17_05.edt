@@ -94,7 +94,6 @@ d3_c17_05
 //Trav|Edt - use funky method for gate-to-stay-open
 		create {classname "trigger_once" origin "1749.5 -4074.5 251.55"
 			values {
-				//model "*35"
 				edt_getbspmodelfor_classname "trigger_once"
 				edt_getbspmodelfor_origin "1749.5 -4074.5 251.55"
 				spawnflags "64"
@@ -107,7 +106,6 @@ d3_c17_05
 
 		create {classname "trigger_once" origin "1749.5 -4074.5 251.55"
 			values {
-				//model "*35"
 				edt_getbspmodelfor_classname "trigger_once"
 				edt_getbspmodelfor_origin "1749.5 -4074.5 251.55"
 				spawnflags "1"
@@ -246,7 +244,6 @@ d3_c17_05
 		create {classname "trigger_coop"
 			origin "2530 -3622.12 -68"
 			values {
-				//model "*28"
 				edt_getbspmodelfor_classname "trigger_once"
 				edt_getbspmodelfor_origin "2759.5 -3758.12 196"
 				spawnflags "1"

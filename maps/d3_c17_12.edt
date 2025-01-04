@@ -76,7 +76,6 @@ d3_c17_12
 		create {classname "trigger_coop"
 			origin "-2584.68 9027.5 -40"
 			values {
-				//model "*44"
 				edt_getbspmodelfor_classname "trigger_once"
 				edt_getbspmodelfor_origin "-1549.5 7297.5 192"
 				spawnflags "1"

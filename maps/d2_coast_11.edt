@@ -152,7 +152,6 @@ d2_coast_11
 		create {classname "trigger_coop"
 			origin "3808 6112.01 640"
 			values {
-				//model "*70"
 				edt_getbspmodelfor_classname "trigger_hurt"
 				edt_getbspmodelfor_origin "3808 -3296 -64"
 				spawnflags "1"
@@ -225,7 +224,6 @@ d2_coast_11
 		create {classname "trigger_once"
 			origin "4416.99 7214.78 351.21"
 			values {
-				//model "*54"
 				edt_getbspmodelfor_classname "trigger_once"
 				edt_getbspmodelfor_origin "4416.99 7214.78 351.21"
 				spawnflags "1"
@@ -308,7 +306,6 @@ d2_coast_11
 		create {classname "trigger_push"
 			origin "4480 6816 456"
 			values {
-				//model "*79"
 				edt_getbspmodelfor_classname "trigger_multiple"
 				edt_getbspmodelfor_origin "4848 3488 504"
 				spawnflags "1"
@@ -328,7 +325,6 @@ d2_coast_11
 		create {classname "func_brush"
 			origin "4056 6916 948.86"
 			values {
-				//model "*67"
 				edt_getbspmodelfor_targetname "gate_mover_blocker"
 				angles "0 90 0"
 				spawnflags "2"
@@ -338,7 +334,6 @@ d2_coast_11
 		create {classname "func_brush"
 			origin "4900 9944 596.86"
 			values {
-				//model "*67"
 				edt_getbspmodelfor_targetname "gate_mover_blocker"
 				spawnflags "2"
 				targetname "trav_antiskip_brush_guard"} }
@@ -346,7 +341,6 @@ d2_coast_11
 //wut happend to closedoor tirgger?
 		create {classname "trigger_once" origin "5429 9936 203.5"
 			values {
-				//model "*37"
 				edt_getbspmodelfor_classname "trigger_once"
 				edt_getbspmodelfor_origin "5371 9928 203.5"
 				spawnflags "2"
@@ -369,7 +363,6 @@ d2_coast_11
 
 		create {classname "trigger_once" origin "5241 9920 219.5"
 			values {
-				//model "*37"
 				edt_getbspmodelfor_classname "trigger_once"
 				edt_getbspmodelfor_origin "5371 9928 203.5"
 				spawnflags "2"
@@ -460,7 +453,6 @@ d2_coast_11
 
 		create { classname "trigger_once" origin "4398.67 7036 459.75"
 			values {
-				//"model" "*27"
 				"edt_getbspmodelfor_classname" "trigger_multiple"
 				"edt_getbspmodelfor_origin" "4398.67 7036 459.75"
 				"spawnflags" "1"
@@ -481,7 +473,6 @@ d2_coast_11
 		// make sure everyone gets bugbait
 		create { classname "trigger_once" origin "5036 9920 472"
 			values {
-				//model "*61"
 				edt_getbspmodelfor_classname "trigger_once"
 				edt_getbspmodelfor_origin "5036 9920 472"
 				spawnflags "1"

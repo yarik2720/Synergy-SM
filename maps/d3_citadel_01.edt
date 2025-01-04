@@ -12,7 +12,6 @@ d3_citadel_01
 //Prevent Backtracking - just in case
 		create {classname "trigger_push" origin "6400 2496 60"
 			values {
-				//model "*17"
 				edt_mins "-100 -100 -10"
 				edt_maxs "100 100 10"
 				spawnflags "1"
@@ -59,7 +58,6 @@ d3_citadel_01
 
 			"values"
 			{
-				//"model" "*33"
 				"edt_getbspmodelfor_classname" "trigger_once"
 				"edt_getbspmodelfor_origin" "10624 4592 -1664"
 				"spawnflags" "33"

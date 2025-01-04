@@ -83,103 +83,8 @@ d2_coast_09
 				RespawnVehicle "1"
 				VehicleType "4"//1&4 disalllows multiple players
 				VehicleSize "192"
-				model "models\vehicles\buggy_p2.mdl"//models/buggy.mdl
-				VehicleScript "scripts/vehicles/jeep_test.txt"
-				OnSpawnVehicle "syn_moreplayers,CheckSkill,,1,1"
-				OnSpawnVehicle "syn_moreplayers,CheckSkill,,5,-1"} }
-		
-		create {classname "info_vehicle_spawn" origin "-14095 12064 630"
-			values {targetname "syn_spawn_vehicle_1_med"
-				angles "0 180 0"
-				StartEnabled "0"
-				StartGunEnabled "0"
-				RespawnVehicle "1"
-				VehicleType "4"
-				VehicleSize "192"
-				model "models/vehicles/8seattruck.mdl"
-				vehiclescript "scripts/vehicles/truck.txt"
-				OnSpawnVehicle "syn_moreplayers,CheckSkill,,5,-1"} }
-		
-		create {classname "info_vehicle_spawn" origin "-14095 12064 630"
-			values {targetname "syn_spawn_vehicle_1_high"
-				angles "0 180 0"
-				StartEnabled "0"
-				StartGunEnabled "1"
-				RespawnVehicle "1"
-				VehicleType "4"
-				VehicleSize "192"
-				model "models\vehicles\buggy_p2.mdl"
-				VehicleScript "scripts/vehicles/jeep_test.txt"
-				OnSpawnVehicle "syn_moreplayers,CheckSkill,,5,-1"
-				OnSpawnVehicle "modi_high_vehicles_counter,Add,1,,-1"} }
-
-		create {classname "logic_difficulty"
-			values
-			{
-				targetname "syn_moreplayers"
-				LowerPlayer "10"
-				UpperPlayer "16"
-				OnLow "syn_spawn_vehicle_1,Enable,,0,-1"
-				OnMed "syn_spawn_vehicle_1_med,Enable,,0,-1"
-				OnHigh "syn_spawn_vehicle_1_high,Enable,,0,-1"
-				OnNotLow "syn_spawn_vehicle_1,Disable,,0,-1"
-				OnNotMed "syn_spawn_vehicle_1_med,Disable,,0,-1"
-				OnNotHigh "syn_spawn_vehicle_1_high,Disable,,0,-1"
-			}
-		}
-		
-		create {classname "math_counter"
-			values {targetname "modi_high_vehicles_counter"
-				startvalue "0"
-				min "0"
-				max "4"
-				OnHitMax "syn_spawn_vehicle_1_high,Disable,,0,-1"
-				OnHitMax "syn_moreplayers,Disable,,0,-1"} }
-		
-		create {classname "logic_difficulty"
-			values
-			{
-				targetname "syn_moreplayerssecond"
-				LowerPlayer "10"
-				UpperPlayer "16"
-				OnLow "syn_spawn_vehicle_2,Enable,,0,-1"
-				OnMed "syn_spawn_vehicle_2_med,Enable,,0,-1"
-				OnHigh "syn_spawn_vehicle_2_high,Enable,,0,-1"
-				OnNotLow "syn_spawn_vehicle_2,Disable,,0,-1"
-				OnNotMed "syn_spawn_vehicle_2_med,Disable,,0,-1"
-				OnNotHigh "syn_spawn_vehicle_2_high,Disable,,0,-1"
-			}
-		}
-		
-		create {classname "logic_difficulty"
-			values
-			{
-				targetname "syn_moreplayersthird"
-				LowerPlayer "10"
-				UpperPlayer "16"
-				OnLow "syn_spawn_vehicle_3,Enable,,0,-1"
-				OnMed "syn_spawn_vehicle_3_med,Enable,,0,-1"
-				OnHigh "syn_spawn_vehicle_3_high,Enable,,0,-1"
-				OnNotLow "syn_spawn_vehicle_3,Disable,,0,-1"
-				OnNotMed "syn_spawn_vehicle_3_med,Disable,,0,-1"
-				OnNotHigh "syn_spawn_vehicle_3_high,Disable,,0,-1"
-			}
-		}
-		
-		create {classname "logic_difficulty"
-			values
-			{
-				targetname "syn_moreplayersfourth"
-				LowerPlayer "10"
-				UpperPlayer "16"
-				OnLow "syn_spawn_vehicle_4,Enable,,0,-1"
-				OnMed "syn_spawn_vehicle_4_med,Enable,,0,-1"
-				OnHigh "syn_spawn_vehicle_4_high,Enable,,0,-1"
-				OnNotLow "syn_spawn_vehicle_4,Disable,,0,-1"
-				OnNotMed "syn_spawn_vehicle_4_med,Disable,,0,-1"
-				OnNotHigh "syn_spawn_vehicle_4_high,Disable,,0,-1"
-			}
-		}
+				model "models/vehicles/buggy_p2.mdl"//models/buggy.mdl
+				VehicleScript "scripts/vehicles/jeep_test.txt"} }
 
 		create {classname "info_vehicle_spawn" origin "-6768 4192 479.99"
 			values {targetname "syn_spawn_vehicle_2"
@@ -189,7 +94,7 @@ d2_coast_09
 				RespawnVehicle "1"
 				VehicleType "4"//1&4 disalllows multiple players
 				VehicleSize "192"
-				model "models\vehicles\buggy_p2.mdl"//models/buggy.mdl
+				model "models/vehicles/buggy_p2.mdl"//models/buggy.mdl
 				VehicleScript "scripts/vehicles/jeep_test.txt"} }
 		
 		create {classname "info_vehicle_spawn" origin "-6768 4192 479.99"
@@ -231,39 +136,8 @@ d2_coast_09
 				RespawnVehicle "1"
 				VehicleType "4"//1&4 disalllows multiple players
 				VehicleSize "192"
-				model "models/vehicles/buggy_elite.mdl"//models/vehicles/buggy_p2.mdl
-				VehicleScript "scripts/vehicles/jeep_elite.txt"} }
-
-		create {classname "info_vehicle_spawn" origin "112.01 -7256 -744.01"
-			values {targetname "syn_spawn_vehicle_3_med"
-				angles "0 45 0"
-				StartEnabled "0"
-				StartGunEnabled "0"
-				RespawnVehicle "1"
-				VehicleType "4"
-				VehicleSize "192"
-				model "models/vehicles/8seattruck.mdl"
-				vehiclescript "scripts/vehicles/truck.txt"} }
-
-		create {classname "info_vehicle_spawn" origin "112.01 -7256 -744.01"
-			values {targetname "syn_spawn_vehicle_3_high"
-				angles "0 45 0"
-				StartEnabled "0"
-				StartGunEnabled "1"
-				RespawnVehicle "1"
-				VehicleType "4"
-				VehicleSize "192"
-				model "models\vehicles\buggy_p2.mdl"
-				VehicleScript "scripts/vehicles/jeep_test.txt"
-				OnSpawnVehicle "modi_high_vehicles_counter3,Add,1,,-1"} }
-		
-		create {classname "math_counter"
-			values {targetname "modi_high_vehicles_counter3"
-				startvalue "0"
-				min "0"
-				max "4"
-				OnHitMax "syn_spawn_vehicle_3_high,Disable,,0,-1"
-				OnHitMax "syn_moreplayersthird,Disable,,0,-1"} }
+				model "models/vehicles/buggy_p2.mdl"//models/buggy.mdl
+				VehicleScript "scripts/vehicles/jeep_test.txt"} }
 
 		create {classname "info_vehicle_spawn" origin "10024 9928 -176"
 			values {targetname "syn_spawn_vehicle_4"
@@ -272,7 +146,7 @@ d2_coast_09
 				RespawnVehicle "1"
 				VehicleType "4"//1&4 disalllows multiple players
 				VehicleSize "192"
-				model "models\vehicles\buggy_p2.mdl"//models/buggy.mdl
+				model "models/vehicles/buggy_p2.mdl"//models/buggy.mdl
 				VehicleScript "scripts/vehicles/jeep_test.txt"} }
 		
 		create {classname "info_vehicle_spawn" origin "10024 9928 -176"
@@ -312,7 +186,6 @@ d2_coast_09
 		create {classname "trigger_once"
 			origin "1076 -6716 -592"
 			values {
-				//model "*225"
 				edt_getbspmodelfor_classname "trigger_multiple"
 				edt_getbspmodelfor_origin "1076 -6716 -592"
 				spawnflags "1"
@@ -326,7 +199,6 @@ d2_coast_09
 		create {classname "trigger_once"
 			origin "740 -6748 -420"
 			values {
-				//model "*148"
 				edt_getbspmodelfor_classname "trigger_once"
 				edt_getbspmodelfor_origin "740 -6748 -420"
 				spawnflags "1"
@@ -335,7 +207,6 @@ d2_coast_09
 		create {classname "trigger_once"
 			origin "10171 10272 -94"
 			values {
-				//model "*156"
 				edt_getbspmodelfor_classname "trigger_once"
 				edt_getbspmodelfor_origin "10171 10272 -94"
 				spawnflags "1"
@@ -386,7 +257,6 @@ d2_coast_09
 		create {classname "trigger_multiple"
 			origin "-6720 4552 512"
 			values {
-				//model "*123"
 				edt_getbspmodelfor_targetname "npc_zombie_slump_1_standtrigger"
 				spawnflags "1"
 				OnStartTouch "!activator,SetFogController,trav_fog_outside,0,-1"} }
@@ -394,7 +264,6 @@ d2_coast_09
 		create {classname "trigger_multiple"
 			origin "512 -7000 -736"
 			values {
-				//model "*123"
 				edt_getbspmodelfor_targetname "npc_zombie_slump_1_standtrigger"
 				spawnflags "1"
 				OnStartTouch "!activator,SetFogController,trav_fog_outside,0,-1"} }
@@ -402,7 +271,6 @@ d2_coast_09
 		create {classname "trigger_multiple"
 			origin "11136 8816 -188"
 			values {
-				//model "*123"
 				edt_getbspmodelfor_targetname "npc_zombie_slump_1_standtrigger"
 				spawnflags "1"
 				OnStartTouch "!activator,SetFogController,trav_fog_outside,0,-1"} }
@@ -461,7 +329,6 @@ d2_coast_09
 		create {classname "trigger_multiple"
 			origin "-6400 6048 608"
 			values {
-				//model "*230"
 				edt_getbspmodelfor_classname "trigger_multiple"
 				edt_getbspmodelfor_origin "-6400 6048 608"
 				spawnflags "1"
@@ -470,7 +337,6 @@ d2_coast_09
 		create {classname "trigger_multiple"
 			origin "-6400 5664 608"
 			values {
-				//model "*229"
 				edt_getbspmodelfor_classname "trigger_multiple"
 				edt_getbspmodelfor_origin "-6400 5664 608"
 				spawnflags "1"
@@ -496,7 +362,6 @@ d2_coast_09
 		create {classname "trigger_multiple"
 			origin "1076 -6716 -592"
 			values {
-				//model "*225"
 				edt_getbspmodelfor_classname "trigger_multiple"
 				edt_getbspmodelfor_origin "1076 -6716 -592"
 				spawnflags "1"
@@ -636,7 +501,6 @@ d2_coast_09
 		create {classname "trigger_once"
 			origin "10171 10272 -94"
 			values {
-				//model "*156"//*158
 				edt_getbspmodelfor_classname "trigger_once"
 				edt_getbspmodelfor_origin "10171 10272 -94"
 				spawnflags "1"
@@ -647,7 +511,7 @@ d2_coast_09
 //Trav|Edt - add vehicle clip at gate
 		create {classname "func_vehicleclip"
 		origin "9967.06 7312 96"
-		values {targetname "trav_gate_vehicleclip" edt_getbspmodelfor_classname "trigger_once" edt_getbspmodelfor_origin "10171 10272 -94"} }//model "*156"
+		values {targetname "trav_gate_vehicleclip" edt_getbspmodelfor_classname "trigger_once" edt_getbspmodelfor_origin "10171 10272 -94"} }
 
 		create {classname "math_counter"
 			values {targetname "battery_counter"
@@ -658,7 +522,6 @@ d2_coast_09
 		create {classname "trigger_coop"
 			origin "14720 -6400.01 224"//13440 383.99 -480
 			values {
-				//model "*227"//*64
 				edt_getbspmodelfor_classname "trigger_multiple"
 				edt_getbspmodelfor_origin "5504 5912 -1483"
 				spawnflags "1"
@@ -707,7 +570,6 @@ d2_coast_09
 		create {classname "trigger_push"
 			origin "9029 3552 98"
 			values {
-				//model "*156"
 				edt_getbspmodelfor_classname "trigger_once"
 				edt_getbspmodelfor_origin "10171 10272 -94"
 				spawnflags "1"

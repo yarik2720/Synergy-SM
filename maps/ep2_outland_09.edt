@@ -7,6 +7,53 @@ ep2_outland_09
 		edit {classname "func_areaportal" values {targetname "syn_DisabledPortal" StartOpen "1"} }
 		edit {classname "func_areaportalwindow" values {targetname "syn_DisabledPortalWindow" FadeStartDist "1000" FadeDist "1500"} }
 
+// Spawn alyx if missing.
+		delete {targetname "new_game_items"}
+	
+		create
+		{
+			classname "point_template"
+			values
+			{
+				spawnflags "2"
+				targetname "syn_spawn_alyx"
+				Template01 "alyx"
+			}
+		}
+
+		create
+		{
+			classname "logic_ensure_transitioned"
+			values
+			{
+				FindEntity "alyx"
+				OnNotFound "syn_spawn_alyx,ForceSpawn,,0,-1"
+			}
+		}
+
+		// npc_citizen_opengate was also in alyx's template so handle him as we did before
+		// to avoid two of them existing on transition.
+		create
+		{
+			classname "point_template"
+			values
+			{
+				spawnflags "2"
+				targetname "syn_spawn_npc_citizen_opengate"
+				Template01 "npc_citizen_opengate"
+			}
+		}
+
+		create
+		{
+			classname "logic_auto"
+			values
+			{
+				spawnflags "1"
+				OnNewGame "syn_spawn_npc_citizen_opengate,ForceSpawn,,0,-1"
+			}
+		}
+
 //--Starting Items--
 		create {classname "info_player_equip"
 			values {

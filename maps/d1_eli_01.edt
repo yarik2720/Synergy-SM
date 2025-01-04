@@ -46,9 +46,6 @@ d1_eli_01
 //--Spawns--
 		create {classname "info_spawn_manager"
 			values {targetname "syn_spawn_manager"} }
-//Dam
-		create {classname "info_player_coop" origin "5248 8064 -1372"
-			values {angles "0 270 0" targetname "syn_spawn_player_0"} }
 //Docks
 		create {classname "info_player_coop" origin "124 4279 -1350"
 			values {angles "0 180 0" targetname "syn_spawn_player_1" StartDisabled "1"} }
@@ -65,18 +62,11 @@ d1_eli_01
 		create {classname "info_vehicle_spawn" origin "5120 7936 -1480"//y7552
 			values {targetname "syn_spawn_vehicle_1"
 				angles "0 180 0"
-				StartEnabled "1"
-				RespawnVehicle "1"
-				VehicleType "2"
-				VehicleSize "164"
+				StartDisabled "0"
+				VehicleGun "1"
+				SpawnMode "2"
 				model "models/airboat.mdl"
-				VehicleScript "scripts/vehicles/airboat.txt"} }
-
-		create {classname "logic_auto"
-			values {spawnflags "1"
-				OnMapTransition "syn_spawn_manager,TeleportPlayers,syn_spawn_teleport,0.1,-1"} }
-
-		create {classname "info_teleport_destination" origin "5248 8064 -1372" values {targetname "syn_spawn_teleport" angles "0 270 0"} }
+				VehicleEntity "prop_vehicle_airboat"} }
 
 //--Extra--
 		// lcs resume - so Alyx won't get stuck
@@ -89,7 +79,6 @@ d1_eli_01
 //enable syn_spawn_player_1
 		create {classname "trigger_once" origin "-384 4168 -1368"
 			values {
-				//model "*131"
 				edt_mins "-600 -400 -100"
 				edt_maxs "600 400 100"
 				spawnflags "1"
@@ -101,7 +90,6 @@ d1_eli_01
 
 		create {classname "trigger_once" origin "-4500 -1024 -2400"
 			values {
-				//model "*22"
 				edt_getbspmodelfor_targetname "canals_trigger_elitrans"
 				spawnflags "1"
 				OnTrigger "syn_song_dam,PlaySound,,10,-1"} }
@@ -111,7 +99,6 @@ d1_eli_01
 		create {classname "func_clip_vphysics"
 			origin "272 2105.99 -1226"
 			values {
-				//model "*108"
 				edt_getbspmodelfor_targetname "elevator_trigger_go_up_1"
 				targetname "trav_inner_door_phys"} }
 
@@ -122,7 +109,7 @@ d1_eli_01
 //Trav|Edt - block phys props going into vator
 		create {classname "func_clip_vphysics"
 			origin "448 1761 -1232"
-			values {edt_getbspmodelfor_targetname "brush_ele_door_PClip"} }//model "*6"
+			values {edt_getbspmodelfor_targetname "brush_ele_door_PClip"} }
 
 //don't let actors die
 		create {classname "logic_auto"
@@ -138,7 +125,6 @@ d1_eli_01
 		create {classname "trigger_coop" origin "-60 2710 -1210"
 			values
 			{
-				//model "*131"
 				edt_mins "-100 -100 -100"
 				edt_maxs "100 110 50"
 				spawnflags "1"
@@ -180,7 +166,6 @@ d1_eli_01
 		create {classname "trigger_once"
 			origin "-70 2816 -1236"
 			values {
-				//model "*40"
 				edt_getbspmodelfor_classname "trigger_once"
 				edt_getbspmodelfor_origin "-70 2816 -1236"
 				spawnflags "1"
@@ -220,7 +205,6 @@ d1_eli_01
 		create {classname "trigger_once"
 			origin "720 2580 -2631.5"
 			values {
-				//model "*66"
 				edt_getbspmodelfor_targetname "trigger_lcs_labtalk02"
 				spawnflags "1"
 				OnTrigger "syn_vint_ss_trav_2,BeginSequence,-1,2,-1" } }
@@ -281,7 +265,6 @@ d1_eli_01
 		create {classname "trigger_coop"
 			origin "-327.99 2152 -2640"//415.99
 			values{
-				//model "*37"
 				edt_getbspmodelfor_targetname "trigger_alyxtour03b"
 				spawnflags "1"
 				targetname "syn_vint_trav_coop_eli"
@@ -326,7 +309,6 @@ d1_eli_01
 		delete {targetname "trigger_inner_door"}
 		create {classname "trigger_once" origin "414 1944 -1232"
 			values {
-				//model "*25"
 				edt_getbspmodelfor_targetname "trigger_inner_door"
 				spawnflags "1"
 				StartDisabled "1"
@@ -343,7 +325,6 @@ d1_eli_01
 		delete {targetname "elevator_trigger_go_up_1"}
 		create {classname "trigger_once" origin "456 1665.99 -1226"
 			values {
-				//model "*108"
 				edt_getbspmodelfor_targetname "elevator_trigger_go_up_1"
 				targetname "elevator_trigger_go_up_1"
 				spawnflags "1"
@@ -372,7 +353,6 @@ d1_eli_01
 		delete {targetname "trigger_alyxtour01"}
 		create {classname "trigger_once" origin "-164 2128 -2640"
 			values {
-				//model "*28"
 				edt_getbspmodelfor_targetname "trigger_alyxtour01"
 				targetname "trigger_alyxtour01"
 				spawnflags "1"

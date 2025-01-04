@@ -17,7 +17,6 @@ d2_prison_08
 //Prevent Backtracking
 		create {classname "trigger_push" origin "-2780 3025 1000"
 			values {
-				//model "*90"
 				edt_mins "-20 -100 -80"
 				edt_maxs "20 100 80"
 				spawnflags "1"
@@ -173,7 +172,6 @@ d2_prison_08
 		create {classname "trigger_once"
 			origin "-2416 3040 1015.5"
 			values {
-				//model "*92"
 				edt_getbspmodelfor_classname "trigger_once"
 				edt_getbspmodelfor_origin "-2416 3040 1015.5"
 				spawnflags "1"
@@ -208,7 +206,6 @@ d2_prison_08
 		create {classname "trigger_teleport"
 			origin "-1120 1232 1028"
 			values {
-				//model "*30"
 				edt_getbspmodelfor_targetname "trigger_tp_scene_start"
 				spawnflags "8"
 				targetname "trav_turrets_teleport"
@@ -228,17 +225,16 @@ d2_prison_08
 		//		target "turret_buddy"} }
 
 //Trav|Edt - Add a 4th turret in the empty locker
-		create { classname "npc_turret_floor"
-			 origin	"-272 810 997"
-			 values {spawnflags "640"//640 citizen turret
-				angles "0 180 0"
-				targetname "turret_buddy"
-				OnPhysGunPickup "!activator,Enable,-1,0,-1" } }
+//		create { classname "npc_turret_floor"
+//			 origin	"-272 810 997"
+//			 values {spawnflags "640"//640 citizen turret
+//				angles "0 180 0"
+//				targetname "turret_buddy"
+//				OnPhysGunPickup "!activator,Enable,-1,0,-1" } }
 
 		create {classname "trigger_once"
 			origin "96 240 996"
 			values {
-				//model "*30"
 				edt_getbspmodelfor_targetname "trigger_tp_scene_start"
 				spawnflags "1"
 				OnTrigger "syn_spawn_manager,SetCheckpoint,syn_spawn_player_3,0,-1"} }
@@ -289,7 +285,6 @@ d2_prison_08
 		create {classname "trigger_coop"
 			origin "-464 480 992"
 			values{
-				//model "*31"
 				edt_getbspmodelfor_targetname "trigger_close_console_door_1"
 				spawnflags "1"
 				targetname "trav_coop_moss"
@@ -303,7 +298,6 @@ d2_prison_08
 		create {classname "trigger_coop"
 			origin "96 240 996"
 			values{
-				//model "*30"
 				edt_getbspmodelfor_targetname "trigger_tp_scene_start"
 				spawnflags "1"
 				targetname "trav_coop_teleporterroom"
@@ -320,7 +314,6 @@ d2_prison_08
 		create {classname "trigger_once"
 			origin "96 240 996"
 			values {
-				//model "*30"
 				edt_getbspmodelfor_targetname "trigger_tp_scene_start"
 				spawnflags "2"
 				filtername "trav_filter_alyx"
@@ -332,88 +325,89 @@ d2_prison_08
 				filtername "alyx"} }
 
 //Trav|Edt - finale defense
-		edit {targetname "maker_combine_lower_1" values {MaxLiveChildren "3"} }
-		edit {targetname "maker_combine_lower_2" values {MaxLiveChildren "3"} }
-		edit {targetname "maker_combine_lower_3" values {MaxLiveChildren "3"} }
-		edit {targetname "maker_combine_lower_4" values {MaxLiveChildren "3"} }
-		edit {targetname "maker_combine_lower_6" values {MaxLiveChildren "3"} }
-		edit {targetname "maker_combine_lower_7" values {MaxLiveChildren "3"} }
-		edit {targetname "maker_combine_upper_1" values {MaxLiveChildren "2"} }
-		edit {targetname "maker_combine_upper_2" values {MaxLiveChildren "2"} }
-		delete {targetname "logic_spawn_single_combine_upperandlower"}
-		delete {targetname "logic_spawn_single_combine_lower"}
-		delete {targetname "logic_spawn_single_combine_lower_and_behind"}
-
-		create {classname "logic_case"
-			values {targetname "logic_spawn_single_combine_upperandlower"
-				Case01 "1"
-				Case02 "2"
-				Case03 "3"
-				Case04 "4"
-				Case05 "5"
-				Case06 "6"
-				Case07 "7"
-				Case08 "8"
-				Case09 "9"
-				OnCase01 "maker_combine_lower_1,AddMaxChildren,3,0,-1"
-				OnCase01 "maker_combine_lower_1,Enable,,0.1,-1"
-				OnCase02 "maker_combine_lower_2,AddMaxChildren,3,0,-1"
-				OnCase02 "maker_combine_lower_2,Enable,,0.1,-1"
-				OnCase03 "maker_combine_lower_3,AddMaxChildren,3,0,-1"
-				OnCase03 "maker_combine_lower_3,Enable,,0.1,-1"
-				OnCase04 "maker_combine_lower_4,AddMaxChildren,3,0,-1"
-				OnCase04 "maker_combine_lower_4,Enable,,0.1,-1"
-				OnCase06 "maker_combine_upper_1,AddMaxChildren,2,0,-1"
-				OnCase06 "maker_combine_upper_1,Enable,,0.1,-1"
-				OnCase07 "maker_combine_upper_2,AddMaxChildren,2,0,-1"
-				OnCase07 "maker_combine_upper_2,Enable,,0.1,-1"
-				OnCase08 "maker_combine_lower_6,AddMaxChildren,3,0,-1"
-				OnCase08 "maker_combine_lower_6,Enable,,0.1,-1"
-				OnCase09 "maker_combine_lower_7,AddMaxChildren,3,0,-1"
-				OnCase09 "maker_combine_lower_7,Enable,,0.1,-1"} }
-
-		create {classname "logic_case"
-			values {targetname "logic_spawn_single_combine_lower"
-				Case01 "1"
-				Case02 "2"
-				Case03 "3"
-				Case04 "4"
-				Case05 "5"
-				Case06 "6"
-				OnCase01 "maker_combine_lower_1,AddMaxChildren,3,0,-1"
-				OnCase01 "maker_combine_lower_1,Enable,,0.1,-1"
-				OnCase02 "maker_combine_lower_2,AddMaxChildren,3,0,-1"
-				OnCase02 "maker_combine_lower_2,Enable,,0.1,-1"
-				OnCase03 "maker_combine_lower_3,AddMaxChildren,3,0,-1"
-				OnCase03 "maker_combine_lower_3,Enable,,0.1,-1"
-				OnCase04 "maker_combine_lower_4,AddMaxChildren,3,0,-1"
-				OnCase04 "maker_combine_lower_4,Enable,,0.1,-1"
-				OnCase05 "maker_combine_lower_6,AddMaxChildren,3,0,-1"
-				OnCase05 "maker_combine_lower_6,Enable,,0.1,-1"
-				OnCase06 "maker_combine_lower_7,AddMaxChildren,3,0,-1"
-				OnCase06 "maker_combine_lower_7,Enable,,0.1,-1"} }
-
-		create {classname "logic_case"
-			values {targetname "logic_spawn_single_combine_lower_and_behind"
-				Case01 "1"
-				Case02 "2"
-				Case03 "3"
-				Case04 "4"
-				Case05 "5"
-				Case06 "6"
-				Case07 "7"
-				OnCase01 "maker_combine_lower_1,AddMaxChildren,3,0,-1"
-				OnCase01 "maker_combine_lower_1,Enable,,0.1,-1"
-				OnCase02 "maker_combine_lower_2,AddMaxChildren,3,0,-1"
-				OnCase02 "maker_combine_lower_2,Enable,,0.1,-1"
-				OnCase03 "maker_combine_lower_3,AddMaxChildren,3,0,-1"
-				OnCase03 "maker_combine_lower_3,Enable,,0.1,-1"
-				OnCase04 "maker_combine_lower_4,AddMaxChildren,3,0,-1"
-				OnCase04 "maker_combine_lower_4,Enable,,0.1,-1"
-				OnCase05 "maker_combine_lower_6,AddMaxChildren,3,0,-1"
-				OnCase05 "maker_combine_lower_6,Enable,,0.1,-1"
-				OnCase06 "maker_combine_lower_7,AddMaxChildren,2,0,-1"
-				OnCase06 "maker_combine_lower_7,Enable,,0.1,-1"} }
+// Half-Life 2 20th Anniversary Update -- too damn many, rebalance based on skill level
+//		edit {targetname "maker_combine_lower_1" values {MaxLiveChildren "3"} }
+//		edit {targetname "maker_combine_lower_2" values {MaxLiveChildren "3"} }
+//		edit {targetname "maker_combine_lower_3" values {MaxLiveChildren "3"} }
+//		edit {targetname "maker_combine_lower_4" values {MaxLiveChildren "3"} }
+//		edit {targetname "maker_combine_lower_6" values {MaxLiveChildren "3"} }
+//		edit {targetname "maker_combine_lower_7" values {MaxLiveChildren "3"} }
+//		edit {targetname "maker_combine_upper_1" values {MaxLiveChildren "2"} }
+//		edit {targetname "maker_combine_upper_2" values {MaxLiveChildren "2"} }
+//		delete {targetname "logic_spawn_single_combine_upperandlower"}
+//		delete {targetname "logic_spawn_single_combine_lower"}
+//		delete {targetname "logic_spawn_single_combine_lower_and_behind"}
+//
+//		create {classname "logic_case"
+//			values {targetname "logic_spawn_single_combine_upperandlower"
+//				Case01 "1"
+//				Case02 "2"
+//				Case03 "3"
+//				Case04 "4"
+//				Case05 "5"
+//				Case06 "6"
+//				Case07 "7"
+//				Case08 "8"
+//				Case09 "9"
+//				OnCase01 "maker_combine_lower_1,AddMaxChildren,3,0,-1"
+//				OnCase01 "maker_combine_lower_1,Enable,,0.1,-1"
+//				OnCase02 "maker_combine_lower_2,AddMaxChildren,3,0,-1"
+//				OnCase02 "maker_combine_lower_2,Enable,,0.1,-1"
+//				OnCase03 "maker_combine_lower_3,AddMaxChildren,3,0,-1"
+//				OnCase03 "maker_combine_lower_3,Enable,,0.1,-1"
+//				OnCase04 "maker_combine_lower_4,AddMaxChildren,3,0,-1"
+//				OnCase04 "maker_combine_lower_4,Enable,,0.1,-1"
+//				OnCase06 "maker_combine_upper_1,AddMaxChildren,2,0,-1"
+//				OnCase06 "maker_combine_upper_1,Enable,,0.1,-1"
+//				OnCase07 "maker_combine_upper_2,AddMaxChildren,2,0,-1"
+//				OnCase07 "maker_combine_upper_2,Enable,,0.1,-1"
+//				OnCase08 "maker_combine_lower_6,AddMaxChildren,3,0,-1"
+//				OnCase08 "maker_combine_lower_6,Enable,,0.1,-1"
+//				OnCase09 "maker_combine_lower_7,AddMaxChildren,3,0,-1"
+//				OnCase09 "maker_combine_lower_7,Enable,,0.1,-1"} }
+//
+//		create {classname "logic_case"
+//			values {targetname "logic_spawn_single_combine_lower"
+//				Case01 "1"
+//				Case02 "2"
+//				Case03 "3"
+//				Case04 "4"
+//				Case05 "5"
+//				Case06 "6"
+//				OnCase01 "maker_combine_lower_1,AddMaxChildren,3,0,-1"
+//				OnCase01 "maker_combine_lower_1,Enable,,0.1,-1"
+//				OnCase02 "maker_combine_lower_2,AddMaxChildren,3,0,-1"
+//				OnCase02 "maker_combine_lower_2,Enable,,0.1,-1"
+//				OnCase03 "maker_combine_lower_3,AddMaxChildren,3,0,-1"
+//				OnCase03 "maker_combine_lower_3,Enable,,0.1,-1"
+//				OnCase04 "maker_combine_lower_4,AddMaxChildren,3,0,-1"
+//				OnCase04 "maker_combine_lower_4,Enable,,0.1,-1"
+//				OnCase05 "maker_combine_lower_6,AddMaxChildren,3,0,-1"
+//				OnCase05 "maker_combine_lower_6,Enable,,0.1,-1"
+//				OnCase06 "maker_combine_lower_7,AddMaxChildren,3,0,-1"
+//				OnCase06 "maker_combine_lower_7,Enable,,0.1,-1"} }
+//
+//		create {classname "logic_case"
+//			values {targetname "logic_spawn_single_combine_lower_and_behind"
+//				Case01 "1"
+//				Case02 "2"
+//				Case03 "3"
+//				Case04 "4"
+//				Case05 "5"
+//				Case06 "6"
+//				Case07 "7"
+//				OnCase01 "maker_combine_lower_1,AddMaxChildren,3,0,-1"
+//				OnCase01 "maker_combine_lower_1,Enable,,0.1,-1"
+//				OnCase02 "maker_combine_lower_2,AddMaxChildren,3,0,-1"
+//				OnCase02 "maker_combine_lower_2,Enable,,0.1,-1"
+//				OnCase03 "maker_combine_lower_3,AddMaxChildren,3,0,-1"
+//				OnCase03 "maker_combine_lower_3,Enable,,0.1,-1"
+//				OnCase04 "maker_combine_lower_4,AddMaxChildren,3,0,-1"
+//				OnCase04 "maker_combine_lower_4,Enable,,0.1,-1"
+//				OnCase05 "maker_combine_lower_6,AddMaxChildren,3,0,-1"
+//				OnCase05 "maker_combine_lower_6,Enable,,0.1,-1"
+//				OnCase06 "maker_combine_lower_7,AddMaxChildren,2,0,-1"
+//				OnCase06 "maker_combine_lower_7,Enable,,0.1,-1"} }
 
 //Trav|Edt - increase max npcdropweapon cap
 		edit {classname "game_weapon_manager"
@@ -456,7 +450,6 @@ d2_prison_08
 		create {classname "trigger_once"
 			origin "128 -10 1093.84"
 			values {
-				//model "*35"
 				edt_getbspmodelfor_targetname "trigger_teleport_player_enter_1"
 				spawnflags "1"
 				StartDisabled "1"
@@ -536,7 +529,6 @@ d2_prison_08
 			"origin" "-752 949.8 1024"
 			"values"
 			{
-				//"model" "*29"
 				"edt_getbspmodelfor_targetname" "trigger_teleport01"
 				"targetname" "trigger_teleport01"
 				"spawnflags" "1"
@@ -575,7 +567,6 @@ d2_prison_08
 			"origin" "-464 480 992"
 			"values"
 			{
-				//"model" "*31"
 				"edt_getbspmodelfor_targetname" "trigger_close_console_door_1"
 				"targetname" "trigger_close_console_door_1"
 				"spawnflags" "1"
@@ -597,7 +588,6 @@ d2_prison_08
 			"origin" "96 240 996"
 			"values"
 			{
-				//"model" "*30"
 				"edt_getbspmodelfor_targetname" "trigger_tp_scene_start"
 				"targetname" "trigger_tp_scene_start"
 				"spawnflags" "1"

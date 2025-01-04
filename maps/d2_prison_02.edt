@@ -48,7 +48,6 @@ d2_prison_02
 		create {classname "trigger_multiple"
 			origin "-1080 3388 440"
 			values {
-				//model "*32"
 				edt_getbspmodelfor_classname "trigger_multiple"
 				edt_getbspmodelfor_origin "-1080 3388 440"
 				spawnflags "1"
@@ -204,7 +203,6 @@ d2_prison_02
 		create {classname "trigger_once"
 			origin "-1592 2576 430"
 			values {
-				//model "*13"
 				edt_getbspmodelfor_classname "trigger_look"
 				edt_getbspmodelfor_origin "-1388 2940 434"
 				spawnflags "1"
@@ -216,7 +214,6 @@ d2_prison_02
 		create {classname "trigger_coop"
 			origin "-2490.15 1175.31 700"
 			values {
-				//model "*6"
 				edt_getbspmodelfor_classname "trigger_multiple"
 				edt_getbspmodelfor_origin "-1898.15 2595.31 316"
 				spawnflags "1"

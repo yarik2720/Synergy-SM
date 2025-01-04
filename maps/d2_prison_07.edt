@@ -99,7 +99,6 @@ d2_prison_07
 			origin "-44.5 -3672 -91.5"
 			values
 			{
-				//model "*23"
 				edt_getbspmodelfor_targetname "trigger_ensure_no_combine_left"
 				spawnflags "1"
 				CountType "1"
@@ -115,7 +114,6 @@ d2_prison_07
 		create {classname "trigger_teleport"
 			origin "739.5 -2072 -90"
 			values {
-				//model "*23"
 				edt_getbspmodelfor_targetname "trigger_ensure_no_combine_left"
 				spawnflags "1"
 				targetname "syn_intro_teleport"
@@ -128,7 +126,6 @@ d2_prison_07
 		create {classname "func_clip_vphysics"
 			origin "-440 -2796 -172"
 			values {
-				//model "*74"
 				edt_getbspmodelfor_classname "trigger_multiple"
 				edt_getbspmodelfor_origin "-440 -2796 -172"
 				targetname "syn_intro_turret_blocker"
@@ -140,7 +137,6 @@ d2_prison_07
 		create {classname "trigger_once"
 			origin "-421.5 -3216 -118"
 			values {
-				//model "*76"
 				edt_getbspmodelfor_targetname "trigger_croom2_alyxarrival"
 				spawnflags "1"
 				StartDisabled "1"
@@ -171,14 +167,12 @@ d2_prison_07
 		create {classname "func_brush"
 			origin "-423.9 -3681 17.21"
 			values {
-				//model "*17"
 				edt_getbspmodelfor_targetname "func_croom2_field_clip"
 				targetname "func_croom2_field_clip"} }
 
 		create {classname "func_brush"
 			origin "-423.9 -3681 185.21"
 			values {
-				//model "*17"
 				edt_getbspmodelfor_targetname "func_croom2_field_clip"
 				targetname "func_croom2_field_clip"} }
 
@@ -190,87 +184,87 @@ d2_prison_07
 			origin "-536 -3088 -120"
 			values {angles " 0 270 0"} }
 
-		edit {targetname "math_croom2_combine_counter" values{max "24"} }
-		//edit {targetname "maker_croom2_*" values {MaxLiveChildren "-1"} }
-		edit {targetname "maker_croom2_1" values {MaxLiveChildren "-1"} }
-		edit {targetname "maker_croom2_2" values {MaxLiveChildren "-1"} }
-		edit {targetname "maker_croom2_3" values {MaxLiveChildren "-1"} }
-		edit {targetname "maker_croom2_4" values {MaxLiveChildren "-1"} }
-		edit {targetname "maker_croom2_balcony" values {MaxLiveChildren "-1"} }
-		edit {targetname "maker_croom2_manhack_1" values {MaxLiveChildren "-1"} }
-		edit {targetname "maker_croom2_manhack_2" values {MaxLiveChildren "-1"} }
-		delete {targetname "logic_croom2_assault_wave_1"}
-		delete {targetname "logic_croom2_assault_wave_2"}
-		delete {targetname "logic_croom2_assault_wave_3"}
-		delete {targetname "logic_croom2_assault_wave_4"}
-		delete {targetname "logic_croom2_assault_wave_5"}
-
-		create {classname "logic_relay"
-			values {targetname "logic_croom2_assault_wave_1"
-				OnTrigger "math_croom2_combine_counter,SetValue,12,0,-1"
-				OnTrigger "maker_croom2_1,AddMaxChildren,6,0,-1"
-				OnTrigger "maker_croom2_3,AddMaxChildren,6,0,-1"
-				OnTrigger "maker_croom2_1,Enable,,0.1,-1"
-				OnTrigger "trav_gtext_wavecount,Display,,0,-1"
-				OnTrigger "maker_croom2_3,Enable,,0.1,-1"} }
-
-		create {classname "logic_relay"
-			values {targetname "logic_croom2_assault_wave_2"
-				OnTrigger "math_croom2_combine_counter,SetValue,6,0,-1"
-				OnTrigger "maker_croom2_1,AddMaxChildren,6,0,-1"
-				OnTrigger "maker_croom2_2,AddMaxChildren,6,0,-1"
-				OnTrigger "maker_croom2_3,AddMaxChildren,6,0,-1"
-				OnTrigger "maker_croom2_1,Enable,,0.1,-1"
-				OnTrigger "maker_croom2_2,Enable,,0.1,-1"
-				OnTrigger "trav_gtext_wavecount,Display,,0,-1"
-				OnTrigger "maker_croom2_3,Enable,,0.1,-1"} }
-
-		create {classname "logic_relay"
-			values {targetname "logic_croom2_assault_wave_3"
-				OnTrigger "maker_croom2_1,AddMaxChildren,6,0,-1"
-				OnTrigger "maker_croom2_2,AddMaxChildren,6,0,-1"
-				OnTrigger "maker_croom2_3,AddMaxChildren,6,0,-1"
-				OnTrigger "maker_croom2_4,AddMaxChildren,6,0,-1"
-				OnTrigger "maker_croom2_1,Enable,,0.1,-1"
-				OnTrigger "maker_croom2_2,Enable,,0.1,-1"
-				OnTrigger "maker_croom2_3,Enable,,0.1,-1"
-				OnTrigger "trav_gtext_wavecount,Display,,0,-1"
-				OnTrigger "maker_croom2_4,Enable,,0.1,-1"} }
-
-		create {classname "logic_relay"
-			values {targetname "logic_croom2_assault_wave_4"
-				OnTrigger "maker_croom2_1,AddMaxChildren,6,0,-1"
-				OnTrigger "maker_croom2_2,AddMaxChildren,6,0,-1"
-				OnTrigger "maker_croom2_3,AddMaxChildren,6,0,-1"
-				OnTrigger "maker_croom2_4,AddMaxChildren,6,0,-1"
-				//OnTrigger "maker_croom2_balcony,AddMaxChildren,4,0,-1"
-				OnTrigger "maker_croom2_manhack_1,AddMaxChildren,4,0,-1"
-				OnTrigger "maker_croom2_1,Enable,,0.1,-1"
-				OnTrigger "maker_croom2_2,Enable,,0.1,-1"
-				OnTrigger "maker_croom2_3,Enable,,0.1,-1"
-				OnTrigger "maker_croom2_4,Enable,,0.1,-1"
-				//OnTrigger "maker_croom2_balcony,Enable,,0.1,-1"
-				OnTrigger "trav_gtext_wavecount,Display,,0,-1"
-				OnTrigger "maker_croom2_manhack_1,Enable,,0.1,-1"} }
-
-		create {classname "logic_relay"
-			values {targetname "logic_croom2_assault_wave_5"
-				OnTrigger "maker_croom2_1,AddMaxChildren,6,0,-1"
-				OnTrigger "maker_croom2_2,AddMaxChildren,6,0,-1"
-				OnTrigger "maker_croom2_3,AddMaxChildren,6,0,-1"
-				OnTrigger "maker_croom2_4,AddMaxChildren,6,0,-1"
-				//OnTrigger "maker_croom2_balcony,AddMaxChildren,4,0,-1"
-				OnTrigger "maker_croom2_manhack_1,AddMaxChildren,4,0,-1"
-				OnTrigger "maker_croom2_manhack_2,AddMaxChildren,4,0,-1"
-				OnTrigger "maker_croom2_1,Enable,,0.1,-1"
-				OnTrigger "maker_croom2_2,Enable,,0.1,-1"
-				OnTrigger "maker_croom2_3,Enable,,0.1,-1"
-				OnTrigger "maker_croom2_4,Enable,,0.1,-1"
-				//OnTrigger "maker_croom2_balcony,Enable,,0.1,-1"
-				OnTrigger "maker_croom2_manhack_1,Enable,,0.1,-1"
-				OnTrigger "maker_croom2_manhack_2,Enable,,0.1,-1"
-				OnTrigger "trav_gtext_wavecount,Display,,0,-1"
-				OnTrigger "trigger_ensure_no_combine_left,Enable,,2,-1"} }
+//		edit {targetname "math_croom2_combine_counter" values{max "24"} }
+//		//edit {targetname "maker_croom2_*" values {MaxLiveChildren "-1"} }
+//		edit {targetname "maker_croom2_1" values {MaxLiveChildren "-1"} }
+//		edit {targetname "maker_croom2_2" values {MaxLiveChildren "-1"} }
+//		edit {targetname "maker_croom2_3" values {MaxLiveChildren "-1"} }
+//		edit {targetname "maker_croom2_4" values {MaxLiveChildren "-1"} }
+//		edit {targetname "maker_croom2_balcony" values {MaxLiveChildren "-1"} }
+//		edit {targetname "maker_croom2_manhack_1" values {MaxLiveChildren "-1"} }
+//		edit {targetname "maker_croom2_manhack_2" values {MaxLiveChildren "-1"} }
+//		delete {targetname "logic_croom2_assault_wave_1"}
+//		delete {targetname "logic_croom2_assault_wave_2"}
+//		delete {targetname "logic_croom2_assault_wave_3"}
+//		delete {targetname "logic_croom2_assault_wave_4"}
+//		delete {targetname "logic_croom2_assault_wave_5"}
+//
+//		create {classname "logic_relay"
+//			values {targetname "logic_croom2_assault_wave_1"
+//				OnTrigger "math_croom2_combine_counter,SetValue,12,0,-1"
+//				OnTrigger "maker_croom2_1,AddMaxChildren,6,0,-1"
+//				OnTrigger "maker_croom2_3,AddMaxChildren,6,0,-1"
+//				OnTrigger "maker_croom2_1,Enable,,0.1,-1"
+//				OnTrigger "trav_gtext_wavecount,Display,,0,-1"
+//				OnTrigger "maker_croom2_3,Enable,,0.1,-1"} }
+//
+//		create {classname "logic_relay"
+//			values {targetname "logic_croom2_assault_wave_2"
+//				OnTrigger "math_croom2_combine_counter,SetValue,6,0,-1"
+//				OnTrigger "maker_croom2_1,AddMaxChildren,6,0,-1"
+//				OnTrigger "maker_croom2_2,AddMaxChildren,6,0,-1"
+//				OnTrigger "maker_croom2_3,AddMaxChildren,6,0,-1"
+//				OnTrigger "maker_croom2_1,Enable,,0.1,-1"
+//				OnTrigger "maker_croom2_2,Enable,,0.1,-1"
+//				OnTrigger "trav_gtext_wavecount,Display,,0,-1"
+//				OnTrigger "maker_croom2_3,Enable,,0.1,-1"} }
+//
+//		create {classname "logic_relay"
+//			values {targetname "logic_croom2_assault_wave_3"
+//				OnTrigger "maker_croom2_1,AddMaxChildren,6,0,-1"
+//				OnTrigger "maker_croom2_2,AddMaxChildren,6,0,-1"
+//				OnTrigger "maker_croom2_3,AddMaxChildren,6,0,-1"
+//				OnTrigger "maker_croom2_4,AddMaxChildren,6,0,-1"
+//				OnTrigger "maker_croom2_1,Enable,,0.1,-1"
+//				OnTrigger "maker_croom2_2,Enable,,0.1,-1"
+//				OnTrigger "maker_croom2_3,Enable,,0.1,-1"
+//				OnTrigger "trav_gtext_wavecount,Display,,0,-1"
+//				OnTrigger "maker_croom2_4,Enable,,0.1,-1"} }
+//
+//		create {classname "logic_relay"
+//			values {targetname "logic_croom2_assault_wave_4"
+//				OnTrigger "maker_croom2_1,AddMaxChildren,6,0,-1"
+//				OnTrigger "maker_croom2_2,AddMaxChildren,6,0,-1"
+//				OnTrigger "maker_croom2_3,AddMaxChildren,6,0,-1"
+//				OnTrigger "maker_croom2_4,AddMaxChildren,6,0,-1"
+//				//OnTrigger "maker_croom2_balcony,AddMaxChildren,4,0,-1"
+//				OnTrigger "maker_croom2_manhack_1,AddMaxChildren,4,0,-1"
+//				OnTrigger "maker_croom2_1,Enable,,0.1,-1"
+//				OnTrigger "maker_croom2_2,Enable,,0.1,-1"
+//				OnTrigger "maker_croom2_3,Enable,,0.1,-1"
+//				OnTrigger "maker_croom2_4,Enable,,0.1,-1"
+//				//OnTrigger "maker_croom2_balcony,Enable,,0.1,-1"
+//				OnTrigger "trav_gtext_wavecount,Display,,0,-1"
+//				OnTrigger "maker_croom2_manhack_1,Enable,,0.1,-1"} }
+//
+//		create {classname "logic_relay"
+//			values {targetname "logic_croom2_assault_wave_5"
+//				OnTrigger "maker_croom2_1,AddMaxChildren,6,0,-1"
+//				OnTrigger "maker_croom2_2,AddMaxChildren,6,0,-1"
+//				OnTrigger "maker_croom2_3,AddMaxChildren,6,0,-1"
+//				OnTrigger "maker_croom2_4,AddMaxChildren,6,0,-1"
+//				//OnTrigger "maker_croom2_balcony,AddMaxChildren,4,0,-1"
+//				OnTrigger "maker_croom2_manhack_1,AddMaxChildren,4,0,-1"
+//				OnTrigger "maker_croom2_manhack_2,AddMaxChildren,4,0,-1"
+//				OnTrigger "maker_croom2_1,Enable,,0.1,-1"
+//				OnTrigger "maker_croom2_2,Enable,,0.1,-1"
+//				OnTrigger "maker_croom2_3,Enable,,0.1,-1"
+//				OnTrigger "maker_croom2_4,Enable,,0.1,-1"
+//				//OnTrigger "maker_croom2_balcony,Enable,,0.1,-1"
+//				OnTrigger "maker_croom2_manhack_1,Enable,,0.1,-1"
+//				OnTrigger "maker_croom2_manhack_2,Enable,,0.1,-1"
+//				OnTrigger "trav_gtext_wavecount,Display,,0,-1"
+//				OnTrigger "trigger_ensure_no_combine_left,Enable,,2,-1"} }
 
 //Trav|Edt - Wave count (testing purposes)
 		//create {classname "game_text"
@@ -293,7 +287,6 @@ d2_prison_07
 		create {classname "trigger_once"
 			origin "4148 -4032 -476"
 			values {
-				//model "*70"
 				edt_getbspmodelfor_classname "trigger_once"
 				edt_getbspmodelfor_origin "3692 -3632 -492"
 				spawnflags "1"
@@ -342,7 +335,6 @@ d2_prison_07
 		create {classname "trigger_teleport"
 			origin "2180.5 -3160 -723.5"
 			values {
-				//model "*23"
 				edt_getbspmodelfor_targetname "trigger_ensure_no_combine_left"
 				spawnflags "8"
 				targetname "trav_turrets_teleport"
@@ -354,7 +346,6 @@ d2_prison_07
 		create {classname "trigger_teleport"
 			origin "4747.5 -3136 -331.5"
 			values {
-				//model "*23"
 				edt_getbspmodelfor_targetname "trigger_ensure_no_combine_left"
 				spawnflags "8"
 				targetname "trav_turrets_teleport"
@@ -373,7 +364,6 @@ d2_prison_07
 		create {classname "func_clip_vphysics"
 			origin "-2291.5 -4536 -83.5"
 			values {
-				//model "*23"
 				edt_getbspmodelfor_targetname "trigger_ensure_no_combine_left"
 				targetname "trav_turret_wall1_right"
 				//StartDisabled "1"
@@ -382,7 +372,6 @@ d2_prison_07
 		create {classname "func_clip_vphysics"
 			origin "1315.5 -4536 -83.5"
 			values {
-				//model "*23"
 				edt_getbspmodelfor_targetname "trigger_ensure_no_combine_left"
 				targetname "trav_turret_wall1_left"
 				//StartDisabled "1"
@@ -391,7 +380,6 @@ d2_prison_07
 		create {classname "func_clip_vphysics"
 			origin "1315.5 -4536 340.5"
 			values {
-				//model "*23"
 				edt_getbspmodelfor_targetname "trigger_ensure_no_combine_left"
 				targetname "trav_turret_wall_toggle"
 				StartDisabled "1"
@@ -400,7 +388,6 @@ d2_prison_07
 		create {classname "func_clip_vphysics"
 			origin "-876.01 -4913.75 22"
 			values {
-				//model "*54"
 				edt_getbspmodelfor_targetname "trigger_room5_ensure_no_combine_left"
 				targetname "trav_turret_wallp_main"//perma
 				//StartDisabled "1"
@@ -409,7 +396,6 @@ d2_prison_07
 		create {classname "func_clip_vphysics"
 			origin "3980 -3069.75 -482"//4324 -5706 -410 for double
 			values {
-				//model "*54"
 				edt_getbspmodelfor_targetname "trigger_room5_ensure_no_combine_left"
 				targetname "trav_turret_wall2_main"
 				StartDisabled "1"
@@ -418,7 +404,6 @@ d2_prison_07
 		create {classname "func_clip_vphysics"
 			origin "4460 -5801.75 -482"//4324 -5706 -410wtf
 			values {
-				//model "*54"
 				edt_getbspmodelfor_targetname "trigger_room5_ensure_no_combine_left"
 				targetname "trav_turret_wall2_back"
 				StartDisabled "1"//not alviablez in 2007 codebase, but in fgd?
@@ -427,7 +412,6 @@ d2_prison_07
 		create {classname "func_clip_vphysics"
 			origin "5268 -4293.75 -354"//5284 -4002 -282wtf
 			values {
-				//model "*54"
 				edt_getbspmodelfor_targetname "trigger_room5_ensure_no_combine_left"
 				targetname "trav_turret_wall2_side"
 				StartDisabled "1"
@@ -436,7 +420,6 @@ d2_prison_07
 		create {classname "func_clip_vphysics"
 			origin "2868 -4737.75 -482"
 			values {
-				//model "*54"
 				edt_getbspmodelfor_targetname "trigger_room5_ensure_no_combine_left"
 				targetname "trav_turret_wall2_toggle"
 				StartDisabled "1"
@@ -445,7 +428,6 @@ d2_prison_07
 		create {classname "trigger_once"
 			origin "2868 -4737.75 -482"
 			values {
-				//model "*54"
 				edt_getbspmodelfor_targetname "trigger_room5_ensure_no_combine_left"
 				spawnflags "1"
 				OnTrigger "trav_turret_wall_toggle,Disable,,0,-1"} }
@@ -679,7 +661,6 @@ d2_prison_07
 		create {classname "trigger_once"
 			origin "4008 -4344 -632"
 			values {
-				//model "*107"
 				edt_getbspmodelfor_classname "trigger_once"
 				edt_getbspmodelfor_origin "4444 -4336 -632"
 				spawnflags "1"
@@ -690,8 +671,6 @@ d2_prison_07
 			origin "4155 -4345 -655"
 			values
 			{
-				//angles "0 90 0"
-				//model "*95"
 				edt_mins "-750 -300 -100"
 				edt_maxs "500 100 80"
 				spawnflags "1"

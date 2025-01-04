@@ -143,7 +143,6 @@ d1_trainstation_06
 		create {classname "trigger_multiple"
 			origin "-8001 -734 -113.5"
 			values {
-				//model "*16"
 				edt_getbspmodelfor_classname "trigger_once"
 				edt_getbspmodelfor_origin "-8000 -3171 207.5"
 				spawnflags "1"
@@ -170,7 +169,6 @@ d1_trainstation_06
 		create {classname "trigger_once"
 			origin "-7784 -1520 -44"
 			values {
-				//model "*18"
 				edt_getbspmodelfor_classname "trigger_once"
 				edt_getbspmodelfor_origin "-7784 -1520 -44"
 				spawnflags "512"

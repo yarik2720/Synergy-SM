@@ -63,9 +63,6 @@ d1_canals_13
 		create {classname "info_spawn_manager"
 			values {targetname "syn_spawn_manager"} }
 
-		create {classname "info_player_coop" origin "-10968 3088 -348"//-10775.40 3839.94 -415.46
-			values {angles "0 345 0" targetname "syn_spawn_player_1"} }//y-90
-
 		create {classname "info_global_settings"
 			values {IsVehicleMap "1" targetname "syn_global_settings"} }
 
@@ -263,7 +260,6 @@ d1_canals_13
 		create {classname "trigger_multiple"
 			origin "3136 2600 -128"
 			values {
-				//model "*35"
 				edt_getbspmodelfor_classname "trigger_multiple"
 				edt_getbspmodelfor_origin "3768 -1632 224"
 				targetname "syn_gatetower_target"
@@ -390,7 +386,6 @@ d1_canals_13
 
 		create {classname "trigger_changelevel" origin "-1024 -7360 -1262.92"//-1024 -6656 -1262.92
 			values {
-				//model "*16"
 				edt_getbspmodelfor_classname "trigger_once"
 				edt_getbspmodelfor_origin "-1024 -6656 -1262.92"
 				angles "0 90 0"

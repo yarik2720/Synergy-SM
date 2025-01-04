@@ -126,7 +126,6 @@ d1_canals_05
 		create {classname "trigger_once"
 			origin "4228 1746 -390.5"
 			values {
-				//model "*33"
 				edt_getbspmodelfor_classname "trigger_once"
 				edt_getbspmodelfor_origin "4228 1746 -390.5"
 				spawnflags "1"
@@ -230,9 +229,6 @@ d1_canals_05
 		create {classname "trigger_coop"
 			origin "5005 1395 -385"
 			values {
-				//model "*67"
-				//several trigger_hurts at the same origin
-				//this trigger should reach much further anyways
 				edt_mins "-250 -1300 -100"
 				edt_maxs "1800 210 100"
 				spawnflags "1"
@@ -275,7 +271,6 @@ d1_canals_05
 		create {classname "trigger_once"
 			origin "5060 1188 -389"
 			values {
-				//model "*37"
 				edt_getbspmodelfor_classname "trigger_once"
 				edt_getbspmodelfor_origin "5060 1188 -389"
 				spawnflags "1"
@@ -339,7 +334,6 @@ d1_canals_05
 		create {classname "func_brush"
 			origin "-218.2 -1181.5 -192"
 			values {
-				//model "*29"
 				edt_getbspmodelfor_classname "func_brush"
 				edt_getbspmodelfor_origin "4157.8 2282.5 -384"
 				spawnflags "2"} }
@@ -347,7 +341,6 @@ d1_canals_05
 		create {classname "func_brush"
 			origin "-218.2 -1381.5 -192"
 			values {
-				//model "*29"
 				edt_getbspmodelfor_classname "func_brush"
 				edt_getbspmodelfor_origin "4157.8 2282.5 -384"
 				spawnflags "2"} }

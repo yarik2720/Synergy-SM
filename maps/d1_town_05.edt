@@ -71,9 +71,8 @@ d1_town_05
 
 //--Checkpoints--
 		create {classname "trigger_once"
-			origin "-3218 7438 995"//-3090 7380 960
+			origin "-3218 7438 995"
 			values {
-				//model "*14"//*53 - trigger_autosave model
 				edt_mins "-30 -300 -100"
 				edt_maxs "30 200 200"
 				spawnflags "1"
@@ -87,7 +86,6 @@ d1_town_05
 //dislodge for mp_teleport_disable
 		create {classname "trigger_once" origin "-3218 7438 995"
 			values {
-				//model "*14"
 				edt_mins "-30 -300 -100"
 				edt_maxs "30 200 200"
 				spawnflags "1"
@@ -120,7 +118,6 @@ d1_town_05
 		delete {classname "trigger_once" origin "-11254 4352 952"}
 		create {classname "trigger_once" origin "-11254 4352 952"
 			values {
-				//model "*44"
 				edt_getbspmodelfor_classname "trigger_once"
 				edt_getbspmodelfor_origin "-11254 4352 952"
 				spawnflags "1"
@@ -250,7 +247,6 @@ d1_town_05
 //prevent rushing into warehouse
 		create {classname "trigger_push" origin "-2016 8880 950"
 			values {
-				//model "*36"
 				edt_getbspmodelfor_classname "trigger_once"
 				edt_getbspmodelfor_origin "-2016 8784 950"
 				spawnflags "1"
@@ -264,7 +260,6 @@ d1_town_05
 //Prevent backtracking
 		create {classname "trigger_push" origin "-4573.31 8082.94 1013.62"
 			values {
-				//model "*19"
 				edt_getbspmodelfor_classname "trigger_once"
 				edt_getbspmodelfor_origin "-4960 8096 994.39"
 				angles "0 14 0"
@@ -391,7 +386,6 @@ d1_town_05
 		create {classname "trigger_coop"
 			origin "-1696 10752 928.23"
 			values {
-				//model "*57"
 				edt_getbspmodelfor_classname "trigger_once"
 				edt_getbspmodelfor_origin "-256 7328 1120.23"
 				spawnflags "1"
@@ -409,7 +403,6 @@ d1_town_05
 		create {classname "func_brush"
 			origin "-1108 10282 932"
 			values {
-				//model "*42"
 				edt_getbspmodelfor_classname "trigger_multiple"
 				edt_getbspmodelfor_origin "-1380 9682 932"
 				spawnflags "2"
