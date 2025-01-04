@@ -63,6 +63,9 @@ d1_canals_13
 		create {classname "info_spawn_manager"
 			values {targetname "syn_spawn_manager"} }
 
+		create {classname "info_player_coop" origin "-10968 3088 -348"
+			values {angles "0 345 0" targetname "syn_spawn_player_1"} }
+
 		create {classname "info_global_settings"
 			values {IsVehicleMap "1" targetname "syn_global_settings"} }
 
