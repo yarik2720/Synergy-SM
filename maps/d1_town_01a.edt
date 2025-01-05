@@ -148,11 +148,9 @@ d1_town_01a
 
 //Trav|Edt add antirush at endlevel
 		create {classname "trigger_coop"
-			origin "-360 784 -3422"
+			origin "-476 718 -3400"
 			values {
-				//model "*38"
-				edt_mins "-200 -104 -40"
-				edt_maxs "190 100 40"
+				edt_getbspmodelfor_targetname "car_explosion_hurt_1"
 				spawnflags "1"
 				//StartDisabled "1"
 				targetname "syn_antirush_trav_town01a_end_coop"
