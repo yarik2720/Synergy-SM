@@ -741,7 +741,15 @@ d1_town_02
 				OnTrigger "monk_rock_scene_c1,Start,,2,1"} }
 
 //Trav|Edt - add coop trigger for crate and only go down when most peopel are in tram
-		edit {targetname "churchtram_lever" values {targetname "trav_churchtram_lever"} }
+		edit {
+			targetname "churchtram_lever"
+			values 
+			{
+				targetname "trav_churchtram_lever"
+				spawnflags "2410" //add flag Use Opens +256, broke after hl2 20a update
+			}
+		}
+		delete {targetname "churchtram_lever_button"}
 
 		edit {classname "prop_dynamic"
 			origin "-4313.32 1201.11 -2980.27"
@@ -876,8 +884,6 @@ d1_town_02
 			values {spawnflags "1"
 				OnMapSpawn "trav_churchtram_lever,AddOutput,OnFullyOpen syn_churchyard_playerclip_trigger:Enable::6:-1,0,1"
 				OnMapSpawn "trav_churchtram_lever,AddOutput,OnFullyOpen cavezombies_away_timer:Enable::0:-1,0,1"
-				OnMapSpawn "churchtram_lever_button,AddOutput,OnIn trav_churchtram_lever:Open::0:-1,0,-1"
-				OnMapSpawn "churchtram_lever_button,AddOutput,OnOut trav_churchtram_lever:Close::0:-1,0,-1"
 				OnMapSpawn "monk_rock_scene_b3,AddOutput,OnCompletion syn_break1:Enable::1:-1,0,-1"} }
 		
 		create {classname "trigger_coop" origin "-4445 -830 -3105"
