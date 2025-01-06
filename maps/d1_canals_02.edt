@@ -11,7 +11,6 @@ d1_canals_02
 		// create a push so we cannot go back if a new game is started
 		create {classname "trigger_push" origin "2952 -2540 -600"
 			values {
-				//model "*49"
 				edt_getbspmodelfor_classname "trigger_once"
 				edt_getbspmodelfor_origin "2952 -2568 -704"
 				spawnflags "1"
@@ -28,7 +27,6 @@ d1_canals_02
 		create {classname "trigger_once"
 			origin "2952 -2568 -704"
 			values {
-				//model "*49"
 				edt_getbspmodelfor_classname "trigger_once"
 				edt_getbspmodelfor_origin "2952 -2568 -704"
 				spawnflags "8"
@@ -37,7 +35,6 @@ d1_canals_02
 		create {classname "func_clip_vphysics"
 			origin "2984 -2304 -408"
 			values {
-				//model "*49"
 				edt_getbspmodelfor_classname "trigger_once"
 				edt_getbspmodelfor_origin "2952 -2568 -704"
 				angles "0 0 90"
@@ -78,7 +75,6 @@ d1_canals_02
 		create {classname "trigger_once"
 			origin "-112 -1032 -792"
 			values {
-				//model "*34"
 				edt_getbspmodelfor_classname "trigger_multiple"
 				edt_getbspmodelfor_origin "-112 -920 -808"
 				spawnflags "1"
@@ -149,7 +145,6 @@ d1_canals_02
 
 		create {classname "trigger_once" origin "2540 -512 -588"
 			values {
-				//model "*35"
 				edt_getbspmodelfor_classname "trigger_once"
 				edt_getbspmodelfor_origin "2100 -496 -588"
 				spawnflags "1"
@@ -162,7 +157,6 @@ d1_canals_02
 		create {classname "trigger_push"
 			origin "128 -592 -615"
 			values {
-				//model "*37"
 				edt_getbspmodelfor_classname "trigger_once"
 				edt_getbspmodelfor_origin "1856 -496 -648"
 				spawnflags "1"
@@ -173,7 +167,6 @@ d1_canals_02
 		create {classname "trigger_hurt"
 			origin "330 241 -540"
 			values {
-				//model "*37"
 				edt_getbspmodelfor_classname "trigger_once"
 				edt_getbspmodelfor_origin "1856 -496 -648"
 				angles "90 90 0"
@@ -185,7 +178,6 @@ d1_canals_02
 		create {classname "trigger_hurt"
 			origin "330 0 -540"
 			values {
-				//model "*37"
 				edt_getbspmodelfor_classname "trigger_once"
 				edt_getbspmodelfor_origin "1856 -496 -648"
 				angles "90 90 0"
@@ -197,7 +189,6 @@ d1_canals_02
 		create {classname "trigger_hurt"
 			origin "220 -240 -540"
 			values {
-				//model "*37"
 				edt_getbspmodelfor_classname "trigger_once"
 				edt_getbspmodelfor_origin "1856 -496 -648"
 				angles "90 0 0"
@@ -209,7 +200,6 @@ d1_canals_02
 		create {classname "trigger_push"
 			origin "455 72 -740"
 			values {
-				//model "*45"
 				edt_mins "-360 -20 -20"
 				edt_maxs "80 30 200"
 				spawnflags "1"
@@ -220,7 +210,6 @@ d1_canals_02
 		create {classname "trigger_push"
 			origin "228 -202 -668"
 			values {
-				//model "*35"
 				edt_getbspmodelfor_classname "trigger_once"
 				edt_getbspmodelfor_origin "2100 -496 -588"
 				spawnflags "1"
@@ -231,7 +220,6 @@ d1_canals_02
 		create {classname "trigger_push"
 			origin "168 -292 -668"
 			values {
-				//model "*35"
 				edt_getbspmodelfor_classname "trigger_once"
 				edt_getbspmodelfor_origin "2100 -496 -588"
 				angles "0 -15 0"
@@ -276,7 +264,6 @@ d1_canals_02
 		create {classname "trigger_coop"
 			origin "-296 1768 -785.18"
 			values {
-				//model "*49"
 				edt_getbspmodelfor_classname "trigger_once"
 				edt_getbspmodelfor_origin "2952 -2568 -704"
 				spawnflags "1"

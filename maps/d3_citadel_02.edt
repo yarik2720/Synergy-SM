@@ -41,7 +41,6 @@ d3_citadel_02
 			{
 				"StartDisabled"	"0"
 				"spawnflags"	"512"
-				//"model"			"*78"
 				"edt_getbspmodelfor_classname" "trigger_once"
 				"edt_getbspmodelfor_origin" "3842.79 13352 4324"
 				"origin"		"-6410.47 6660.32 2646"
@@ -104,9 +103,8 @@ d3_citadel_02
 			"origin" "3842.79 13352 4324"
 			"values"
 			{
-				//"model" "*78"
-				//"edt_getbspmodelfor_classname" "trigger_once"
-				//"edt_getbspmodelfor_origin" "3842.79 13352 4324"
+				"edt_getbspmodelfor_classname" "trigger_once"
+				"edt_getbspmodelfor_origin" "3842.79 13352 4324"
 				"targetname" "track_dump"
 				"spawnflags" "1"
 				"StartDisabled" "0"

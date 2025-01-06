@@ -97,7 +97,6 @@ d1_eli_02
 		create {classname "func_clip_vphysics"
 			origin "-600 884 -2624"
 			values {
-				//model "*117"
 				edt_getbspmodelfor_classname "trigger_once"
 				edt_getbspmodelfor_origin "-600 876 -2624"
 				filtername "syn_clipfilter"
@@ -192,7 +191,6 @@ d1_eli_02
 		create {classname "trigger_once"
 			origin "-1593 -441 -2652"
 			values {
-				//model "*113"
 				edt_getbspmodelfor_classname "trigger_once"
 				edt_getbspmodelfor_origin "-1360 45.08 -2654"
 				spawnflags "1"
@@ -265,7 +263,6 @@ d1_eli_02
 		create {classname "trigger_coop"
 			origin "-2352 3064 -2850.88"
 			values {
-				//model "*47"
 				edt_getbspmodelfor_classname "trigger_once"
 				edt_getbspmodelfor_origin "-1376 224 -2560"
 				spawnflags "1"
@@ -293,7 +290,6 @@ d1_eli_02
 
 			"values"
 			{
-				//"model" "*50"
 				"edt_getbspmodelfor_targetname" "trigger_scrapyard_start"
 				"targetname" "trigger_scrapyard_start"
 				"spawnflags" "1"
@@ -331,7 +327,6 @@ d1_eli_02
 
 			"values"
 			{
-				//"model" "*52"
 				"edt_getbspmodelfor_targetname" "trigger_Get_physgun"
 				"targetname" "trigger_Get_physgun"
 				"spawnflags" "1"
@@ -377,7 +372,6 @@ d1_eli_02
 
 			"values"
 			{
-				//"model" "*19"
 				"edt_getbspmodelfor_classname" "trigger_once"
 				"edt_getbspmodelfor_origin" "-588 1056 -2624"
 				"targetname" "trigger_attack02"

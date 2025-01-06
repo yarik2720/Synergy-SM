@@ -252,7 +252,7 @@ d2_coast_05
 				RespawnVehicle "1"
 				VehicleType "4"//1&4 disalllows multiple players
 				VehicleSize "192"
-				model "models\vehicles\buggy_p2.mdl"//models/buggy.mdl
+				model "models/vehicles/buggy_p2.mdl"//models/buggy.mdl
 				VehicleScript "scripts/vehicles/jeep_test.txt"} }
 		
 		create {classname "info_vehicle_spawn" origin "-4544 -4672 1104"
@@ -294,7 +294,7 @@ d2_coast_05
 				RespawnVehicle "1"
 				VehicleType "4"//1&4 disalllows multiple players
 				VehicleSize "192"
-				model "models\vehicles\buggy_p2.mdl"//models/buggy.mdl
+				model "models/vehicles/buggy_p2.mdl"//models/buggy.mdl
 				VehicleScript "scripts/vehicles/jeep_test.txt"} }
 		
 		create {classname "info_vehicle_spawn" origin "-5208 -76 1112"
@@ -332,7 +332,6 @@ d2_coast_05
 		create {classname "trigger_once"
 			origin "-4611.95 -11929.1 708"
 			values {
-				//model "*100"
 				edt_getbspmodelfor_classname "trigger_once"
 				edt_getbspmodelfor_origin "-4611.95 -11929.1 708"
 				spawnflags "1"
@@ -343,7 +342,6 @@ d2_coast_05
 		create {classname "trigger_once"
 			origin "-3520 -4880 1542.86"
 			values {
-				//model "*88"
 				edt_getbspmodelfor_classname "trigger_multiple"
 				edt_getbspmodelfor_origin "-2016 -4960 1542.86"
 				spawnflags "1"
@@ -456,7 +454,6 @@ d2_coast_05
 		create {classname "trigger_multiple"
 			origin "-3785 -4148.5 1358.37"
 			values {
-				//model "*104"
 				edt_getbspmodelfor_classname "trigger_once"
 				edt_getbspmodelfor_origin "-5681 -11261.5 902.5"
 				spawnflags "1"
@@ -512,7 +509,6 @@ d2_coast_05
 		create {classname "trigger_once"
 			origin "-4803.99 -1346 1188"
 			values {
-				//model "*106"
 				edt_getbspmodelfor_classname "trigger_once"
 				edt_getbspmodelfor_origin "-4803.99 -1346 1188"
 				spawnflags "1"
@@ -574,7 +570,6 @@ d2_coast_05
 		create {classname "trigger_coop"
 			origin "9408 12224 2075.25"
 			values {
-				//model "*99"
 				edt_getbspmodelfor_classname "trigger_hurt"
 				edt_getbspmodelfor_origin "448 -3136 475.25"
 				spawnflags "1"

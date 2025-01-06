@@ -146,7 +146,7 @@ d2_prison_06
 		//edit {classname "prop_door_rotating" values {returndelay "-1"} }
 
 //Trav|Edt - block phys props going into vator
-		create {classname "func_clip_vphysics" origin "1440 664 -560" values {edt_getbspmodelfor_classname "trigger_multiple" edt_getbspmodelfor_origin "-116 1016 144"} }//model "*143"
+		create {classname "func_clip_vphysics" origin "1440 664 -560" values {edt_getbspmodelfor_classname "trigger_multiple" edt_getbspmodelfor_origin "-116 1016 144"} }
 		create {classname "func_clip_vphysics" origin "1440 688 -560" values {edt_getbspmodelfor_classname "trigger_multiple" edt_getbspmodelfor_origin "-116 1016 144"} }
 
 //Trav|Edt - Disable Enemy turrets when tipped (avoid player greif)
@@ -173,7 +173,6 @@ d2_prison_06
 		create {classname "trigger_coop"
 			origin "544 8 48"
 			values {
-				//model "*101"
 				edt_getbspmodelfor_targetname "int_door_close_inside_1"
 				spawnflags "1"
 				StartDisabled "1"
@@ -222,7 +221,6 @@ d2_prison_06
 		create {classname "func_clip_vphysics"
 			origin "910 -1144 20"
 			values {
-				//model "*70"
 				edt_getbspmodelfor_classname "trigger_once"
 				edt_getbspmodelfor_origin "1038 -1144 20"
 				targetname "trav_vphysclip_vent"
@@ -260,7 +258,6 @@ d2_prison_06
 		create {classname "trigger_once"
 			origin "1180 -1778 -116"
 			values {
-				//model "*119"
 				edt_getbspmodelfor_classname "trigger_once"
 				edt_getbspmodelfor_origin "1180 -1590 -116"
 				spawnflags "1"
@@ -284,7 +281,6 @@ d2_prison_06
 		create {classname "trigger_once"
 			origin "1180 -1338 -52"
 			values {
-				//model "*119"
 				edt_getbspmodelfor_classname "trigger_once"
 				edt_getbspmodelfor_origin "1180 -1590 -116"
 				spawnflags "1"
@@ -316,7 +312,6 @@ d2_prison_06
 		create {classname "trigger_coop"
 			origin "272 -2544 -176"
 			values {
-				//model "*96"
 				edt_getbspmodelfor_classname "trigger_once"
 				edt_getbspmodelfor_origin "960 416 -128"
 				spawnflags "1"
@@ -456,7 +451,6 @@ d2_prison_06
 
 			"values"
 			{
-				//"model" "*101"
 				"edt_getbspmodelfor_targetname" "int_door_close_inside_1"
 				"targetname" "int_door_close_inside_1"
 				"spawnflags" "1"

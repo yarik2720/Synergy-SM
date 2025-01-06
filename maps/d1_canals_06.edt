@@ -5,11 +5,6 @@ d1_canals_06
 		delete {targetname "global_newgame_spawner_airboat"}
 		delete {classname "logic_auto" origin "12371.9 9297.58 -203"}
 
-//remove sp airboat from prev level
-		create {classname "logic_auto"
-			values {spawnflags "1"
-				OnMapSpawn "global_newgame_spawner_airboat,Kill,,0,-1"} }
-
 //Prevent Backtracking
 		create {classname "prop_dynamic" origin "13664 9408 -256"
 			values {model "models/synergy/tools/syn_transition.mdl"
@@ -61,16 +56,10 @@ d1_canals_06
 		create {classname "info_spawn_manager"
 			values {targetname "syn_spawn_manager"} }
 
-		create {classname "info_player_coop" origin "12304 8886 -180"//12368 9294 -212
-			values {angles "0 211 0" targetname "syn_spawn_player_1"} }//y150
-
-		create {classname "info_player_coop" origin "-368 6544 -190"
-			values {angles "0 90 0" targetname "syn_spawn_player_2" StartDisabled "1"} }
-
 		create {classname "info_global_settings"
 			values {IsVehicleMap "1" targetname "syn_global_settings"} }
 
-		create {classname "info_vehicle_spawn" origin "12290 9150 -218.02"
+		create {classname "info_player_coop" origin "12290 9150 -218.02"
 			values {targetname	"syn_vehiclespawn_1"
 				angles "0 90 0"
 				StartEnabled "1"
@@ -125,14 +114,11 @@ d1_canals_06
 			}
 		}
 
-		create {classname "info_vehicle_spawn"
-			origin "-256 6640 -176"
-			values {targetname "syn_spawn_vehicle_2"
-				StartEnabled "0"
-				RespawnVehicle "1"
-				Ownership "1"
-				VehicleType "2"
-				VehicleSize "164"
+		create {classname "info_player_coop" origin "-256 6640 -176"
+			values {targetname	"syn_vehiclespawn_2"
+				angles "0 0 0"
+				StartDisabled "1"
+				SpawnMode "2"
 				model "models/airboat.mdl"
 				VehicleScript "scripts/vehicles/airboat.txt"} }
 		
@@ -200,7 +186,6 @@ d1_canals_06
 		create {classname "trigger_once"
 			origin "0 5760 160"
 			values {
-				//model "*170"
 				edt_getbspmodelfor_classname "trigger_once"
 				edt_getbspmodelfor_origin "0 6272 160"
 				spawnflags "32"
@@ -213,7 +198,6 @@ d1_canals_06
 		create {classname "func_brush"
 			origin "550 -288 288"
 			values {
-				//model "*146"
 				edt_getbspmodelfor_classname "trigger_once"
 				edt_getbspmodelfor_origin "5632 3360 -96"
 				spawnflags "2"
@@ -235,7 +219,6 @@ d1_canals_06
 		create {classname "func_clip_vphysics"
 			origin "0 5696 160"
 			values {
-				//model "*170"
 				edt_getbspmodelfor_classname "trigger_once"
 				edt_getbspmodelfor_origin "0 6272 160"
 				filtername "syn_filter_barrels"} }
@@ -243,7 +226,6 @@ d1_canals_06
 		create {classname "func_clip_vphysics"
 			origin "-832 5056 160"
 			values {
-				//model "*170"
 				edt_getbspmodelfor_classname "trigger_once"
 				edt_getbspmodelfor_origin "0 6272 160"
 				angles "0 90 0"
@@ -252,7 +234,6 @@ d1_canals_06
 		create {classname "func_clip_vphysics"
 			origin "640 5056 160"
 			values {
-				//model "*170"
 				edt_getbspmodelfor_classname "trigger_once"
 				edt_getbspmodelfor_origin "0 6272 160"
 				angles "0 90 0"
@@ -261,7 +242,6 @@ d1_canals_06
 		create {classname "func_clip_vphysics"
 			origin "0 4544 -48"
 			values {
-				//model "*170"
 				edt_getbspmodelfor_classname "trigger_once"
 				edt_getbspmodelfor_origin "0 6272 160"
 				filtername "syn_filter_barrels"} }
@@ -269,7 +249,6 @@ d1_canals_06
 		create {classname "func_clip_vphysics"
 			origin "128 5056 64"
 			values {
-				//model "*145"
 				edt_getbspmodelfor_classname "trigger_once"
 				edt_getbspmodelfor_origin "5120 5984 -416"
 				angles "0 90 0"
@@ -286,7 +265,6 @@ d1_canals_06
 		create {classname "trigger_once"
 			origin "-256 5149 -352"
 			values {
-				//model "*53"
 				edt_getbspmodelfor_classname "trigger_look"
 				edt_getbspmodelfor_origin "6144 7708 -256"
 				spawnflags "8"
@@ -327,7 +305,6 @@ d1_canals_06
 		create {classname "trigger_once"
 			origin "-7680 10751.9 -85.43"
 			values {
-				//model"*65"
 				edt_mins "-20 -500 -150"
 				edt_maxs "20 520 130"
 				spawnflags "1"
@@ -371,7 +348,6 @@ d1_canals_06
 		create {classname "trigger_coop"
 			origin "-1280 -3584 -400"
 			values {
-				//model "*107"
 				edt_getbspmodelfor_classname "trigger_hurt"
 				edt_getbspmodelfor_origin "-512 9728 -304"
 				spawnflags "1"

@@ -95,7 +95,6 @@ d2_prison_03
 		create {classname "trigger_once"
 			origin "-3120 1632 62"
 			values {
-				//model "*30"
 				edt_getbspmodelfor_classname "trigger_multiple"
 				edt_getbspmodelfor_origin "-3120 1632 62"
 				spawnflags "1"
@@ -146,7 +145,6 @@ d2_prison_03
 		create {classname "trigger_once"
 			origin "-3384 3504 64"
 			values {
-				//model "*52"
 				edt_getbspmodelfor_classname "trigger_once"
 				edt_getbspmodelfor_origin "-3384 3520 64"
 				spawnflags "1"
@@ -210,7 +208,6 @@ d2_prison_03
 		create {classname "trigger_once"
 			origin "-3728 4912 196"
 			values {
-				//model "*37"//*38
 				edt_getbspmodelfor_classname "trigger_multiple"
 				edt_getbspmodelfor_origin "-3728 4912 196"
 				spawnflags "1"
@@ -222,7 +219,6 @@ d2_prison_03
 		create {classname "trigger_multiple"
 			origin "-3414 5824 72"
 			values {
-				//model "*86"
 				edt_getbspmodelfor_classname "trigger_multiple"
 				edt_getbspmodelfor_origin "-3414 5824 72"
 				spawnflags "1"
@@ -235,7 +231,6 @@ d2_prison_03
 		create {classname "trigger_once"
 			origin "-3469 5822 26.5"
 			values {
-				//model "*84"
 				edt_getbspmodelfor_classname "trigger_once"
 				edt_getbspmodelfor_origin "-3615 5827 21.5"
 				spawnflags "1"
@@ -251,7 +246,6 @@ d2_prison_03
 		create {classname "trigger_once"
 			origin "-3469 5822 26.5"
 			values {
-				//model "*84"
 				edt_getbspmodelfor_classname "trigger_once"
 				edt_getbspmodelfor_origin "-3615 5827 21.5"
 				spawnflags "1"

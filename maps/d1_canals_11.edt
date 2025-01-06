@@ -27,6 +27,10 @@ d1_canals_11
 		//create {classname "func_vehicleclip" origin "0 -64 0"
 		//	values {model "*45"} }
 
+		create {classname "edt_disable_vehicle_collisions" origin "9728 7936 -768"
+			values {StartDisabled "0"
+				size "2048 6144 1024"} }
+
 //Doors: Open Only
 		//edit {targetname "canals_door_ambush2" values {returndelay "-1"} }
 
@@ -49,7 +53,7 @@ d1_canals_11
 				OnMapSpawn "hopper_physics_trigger,AddOutput,OnTrigger syn_enable_vehiclespawn:Add:1:0:1,0,-1"
 				OnMapSpawn "lock_lever_button,AddOutput,OnPressed syn_enable_vehiclespawn:Add:1:0:1,0,-1"} }
 
-		create {classname "math_counter"
+		create {classname"math_counter"
 			values {targetname "syn_enable_vehiclespawn"
 				max "2"
 				OnHitMax "syn_spawn_vehicle_1,Enable,,0,-1"
@@ -95,11 +99,13 @@ d1_canals_11
 		create {classname "info_spawn_manager"
 			values {targetname "syn_spawn_manager"} }
 
-		create {classname "info_player_coop" origin "10104.35 9038.49 -944.99"
-			values {angles "0 -90 0" targetname "syn_spawn_player_1"} }
-
-		create {classname "info_player_coop" origin "6904 4656 -896"
-			values {angles "0 150 0" targetname "syn_spawn_player_2" StartDisabled "1"} }
+		create {classname "info_player_coop" origin "9941.34 8931.36 -945.70"
+			values {targetname	"syn_vehiclespawn_1"
+				angles "0 165 0"
+				StartDisabled "0"
+				SpawnMode "2"
+				model "models/airboat.mdl"
+				VehicleEntity "prop_vehicle_airboat"} }
 
 		create {classname "info_global_settings"
 			values {IsVehicleMap "1" targetname "syn_global_settings"} }
@@ -214,7 +220,9 @@ d1_canals_11
 		create {classname "logic_relay"
 			values {spawnflags "1"
 				targetname "relay_guncave_startgunmount"
-				OnTrigger "syn_fakeboat,AddOutput,body 1,0,-1"} }
+				OnTrigger "syn_fakeboat,AddOutput,body 1,0,-1"
+				OnTrigger "syn_vehiclespawn_2,EnableOnly,,0,-1"
+				OnTrigger "prop_vehicle_airboat,EnableGun,1,1,-1"} }
 
 		create {classname "logic_relay"
 			values {spawnflags "1"
@@ -232,12 +240,6 @@ d1_canals_11
 				angles "0 90 0"
 				solid "6"} }
 
-		create {classname "logic_auto"
-			values {spawnflags "1"
-				OnMapTransition "syn_spawn_manager,TeleportPlayers,syn_spawn_teleport,0.1,-1"} }
-
-		create {classname "info_teleport_destination" origin "10104.35 9038.49 -944.99" values {targetname "syn_spawn_teleport" angles "0 -90 0"} }
-
 //--Checkpoints--
 		//create {classname "trigger_once"
 		//	origin "5088 4864 -904"
@@ -254,7 +256,6 @@ d1_canals_11
 //original trigger for vintage mode
 		create {classname "trigger_once" origin "7477.99 4867.84 -924"
 			values {
-				//model "*109"
 				edt_getbspmodelfor_classname "trigger_once"
 				edt_getbspmodelfor_origin "7477.99 4867.84 -924"
 				targetname "syn_original_vintage_trigger"
@@ -265,9 +266,8 @@ d1_canals_11
 		delete {classname "trigger_once" origin "7477.99 4867.84 -924"}
 //AR
 		create {classname "trigger_coop"
-			origin "7250 4860 -860" //"6935 4896 -892" //7808 4864 -928
+			origin "7250 4860 -860"
 			values {
-				//model "*52"//GBMdl
 				edt_mins "-550 -250 -150"
 				edt_maxs "550 250 150"
 				spawnflags "1"
@@ -275,7 +275,7 @@ d1_canals_11
 				//targetname "syn_antirush_coop"
 				CountType "1"
 				UseHUD "1"
-				PlayerValue "37"//66//75
+				PlayerValue "37"
 				wait "1.5"
 				OnTrigger "syn_antirush_text,Display,,1,-1"
 				OnPlayersIn "!self,Disable,,1,1"
@@ -458,35 +458,12 @@ d1_canals_11
 				targetname "syn_vint"} }
 
 //Trav|Edt - move cop trigger (sooner)-NP- BbrushReq [gate early]
-		delete {classname "trigger_once" origin "1792 -7680 -768"}
-		create {
-			classname "trigger_once"
-			origin "5083 -6801 -928"
-			values {
-				//model "*134"
-				edt_getbspmodelfor_classname "trigger_hurt" 
-				edt_getbspmodelfor_origin "-9934 -2570 -991"
-				"spawnflags" "1"
-				"StartDisabled" "0"
-				"OnStartTouch" "metrocop_assault1_relay,Trigger,,0,-1"
-				"OnTrigger" "gate2,EnableMotion,,0.5,-1"
-				"OnStartTouch" "metrocop_assault2_relay,Trigger,,7.5,-1"
-				"OnTrigger" "gate1,EnableMotion,,0,-1"
-				"OnTrigger" "canals_sound_mcambush1_1,PlaySound,,0,-1"
-				"OnStartTouch" "canals_sound_mcambush_doorstop1,PlaySound,,1.5,-1"
-				"OnStartTouch" "canals_sound_mcambush_doorstop2,PlaySound,,1,-1"
-				"OnStartTouch" "canals_sound_mcambush_doormove1,PlaySound,,0,-1"
-				"OnStartTouch" "canals_sound_mcambush_doormove2,PlaySound,,0.5,-1"
-				"OnStartTouch" "canals_door_ambush2,Unlock,,6.8,-1"
-				"OnStartTouch" "canals_door_ambush2,Open,,7,-1"				
-			}
-		}
+		edit {classname "trigger_once" origin "1792 -7680 -768" values {origin "5083 -6801 -928"} }//4736 -5760 -736 //  model "*134"
 //keep gate2 trigger ORI
 		edit {targetname "gate2" values {targetname "trav_gate2"} }
 		create {classname "trigger_once"
 			origin "1792 -7680 -768"
 			values {
-				//model "*58"
 				edt_getbspmodelfor_classname "trigger_once"
 				edt_getbspmodelfor_origin "1792 -7680 -768"
 				spawnflags "1"
@@ -496,7 +473,6 @@ d1_canals_11
 		create {classname "trigger_coop"
 			origin "-11520 -1376 -872"
 			values {
-				//model "*52"
 				edt_mins "-250 -550 -150"
 				edt_maxs "250 550 150"
 				spawnflags "1"

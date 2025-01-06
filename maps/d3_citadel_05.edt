@@ -248,7 +248,6 @@ d3_citadel_05
 
 		create { classname "trigger_once" origin "14335 -9855 10310"
 			values {
-				//"model" "*22"
 				"edt_mins" "-300 -300 -100"
 				"edt_maxs" "300 300 100"
 				"spawnflags" "1"

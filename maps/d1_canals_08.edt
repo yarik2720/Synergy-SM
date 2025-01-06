@@ -88,7 +88,6 @@ d1_canals_08
 		create {classname "trigger_multiple"
 			origin "-768 -736 -512"
 			values {
-				//model "*56"
 				edt_getbspmodelfor_classname "trigger_once"
 				edt_getbspmodelfor_origin "-768 -736 -512"
 				spawnflags "1"
@@ -100,21 +99,18 @@ d1_canals_08
 			values {targetname "syn_neweapon_got"
 				Negated "1"
 				filtername "syn_d1_canals_08_IHasGunz"} }
-		
-		edit {targetname "ai_warehouse_357cop" values {goalent "syn_d1_canals_08_IHasGunz"} }
 
 //--Spawns--
-//maybe unness
-		create {classname "logic_auto"
-			values {spawnflags "1"
-				OnMapTransition "syn_spawn_manager,TeleportPlayers,syn_spawn_teleport,0.1,-1"} }
-
-		create {classname "info_teleport_destination" origin "7234.77 -11016.11 -470.21" values {targetname "syn_spawn_teleport" angles "0 0 0"} }
 		create {classname "info_spawn_manager"
 			values {targetname "syn_spawn_manager"} }
 //Intro
-		create {classname "info_player_coop" origin "7504 -11398 -448"//7234.77 -11016.11 -470.21
-			values {angles "0 0 0" targetname "syn_spawn_player_1"} }
+		create {classname "info_player_coop" origin "7592.31 -11315.3 -447.02"
+			values {targetname	"syn_vehiclespawn_1"
+				angles "0 270 0"
+				StartDisabled "0"
+				SpawnMode "2"
+				model "models/airboat.mdl"
+				VehicleEntity "prop_vehicle_airboat"} }
 //Locked Door
 		create {classname "info_player_coop" origin "-832 -64 -576"
 			values {angles "0 330 0" targetname "syn_spawn_player_2" StartDisabled "1"} }
@@ -196,28 +192,6 @@ d1_canals_08
 				VehicleSize "164"
 				model "models/airboat.mdl"
 				VehicleScript "scripts/vehicles/airboat.txt"} }
-		
-		create {classname "info_vehicle_spawn" origin "75 -256 -608"
-			values {targetname	"syn_spawn_vehicle_2_med"
-				angles "0 180 0"
-				StartEnabled "0"
-				RespawnVehicle "1"
-				Ownership "1"
-				VehicleType "2"
-				VehicleSize "164"
-				model "models/airboat.mdl"
-				VehicleScript "scripts/vehicles/airboat.txt"} }
-		
-		create {classname "info_vehicle_spawn" origin "430 -256 -608"
-			values {targetname	"syn_spawn_vehicle_2_high"
-				angles "0 180 0"
-				StartEnabled "0"
-				RespawnVehicle "1"
-				Ownership "1"
-				VehicleType "2"
-				VehicleSize "164"
-				model "models/airboat.mdl"
-				VehicleScript "scripts/vehicles/airboat.txt"} }
 
 		create {classname "logic_auto"
 			values {spawnflags "1"
@@ -239,7 +213,6 @@ d1_canals_08
 //check2
 		create {classname "trigger_once" origin "-2288 -2864 -312"
 			values {
-				//model "*72"
 				edt_getbspmodelfor_classname "trigger_multiple"
 				edt_getbspmodelfor_origin "-2288 -2864 -312"
 				spawnflags "1"
@@ -248,7 +221,6 @@ d1_canals_08
 //ck3
 		create {classname "trigger_once" origin "-776 -1544 -288"
 			values {
-				//model "*70"
 				edt_getbspmodelfor_classname "trigger_once"
 				edt_getbspmodelfor_origin "-776 -1368 -288"
 				spawnflags "1"
@@ -259,7 +231,6 @@ d1_canals_08
 		create {classname "trigger_push"
 			origin "-24 -2760 -112"
 			values {
-				//model "*105"
 				edt_getbspmodelfor_classname "trigger_once"
 				edt_getbspmodelfor_origin "-1456 -2456 -240"
 				spawnflags "1"
@@ -270,7 +241,6 @@ d1_canals_08
 		create {classname "trigger_push"
 			origin "-1104 -2232 -112"
 			values {
-				//model "*105"
 				edt_getbspmodelfor_classname "trigger_once"
 				edt_getbspmodelfor_origin "-1456 -2456 -240"
 				spawnflags "1"
@@ -281,7 +251,6 @@ d1_canals_08
 		create {classname "trigger_push"
 			origin "16 -2936 -368"
 			values {
-				//model "*105"
 				edt_getbspmodelfor_classname "trigger_once"
 				edt_getbspmodelfor_origin "-1456 -2456 -240"
 				spawnflags "1"
@@ -292,7 +261,6 @@ d1_canals_08
 		create {classname "trigger_once"
 			origin "-149 -3520 -376"
 			values {
-				//model "*22"
 				edt_getbspmodelfor_classname "trigger_once"
 				edt_getbspmodelfor_origin "-701 -2552.06 -316"
 				spawnflags "1"
@@ -421,7 +389,6 @@ d1_canals_08
 		create {classname "trigger_once"
 			origin "-1456 -2456 -240"
 			values {
-				//model "*105"
 				edt_getbspmodelfor_classname "trigger_once"
 				edt_getbspmodelfor_origin "-1456 -2456 -240"
 				spawnflags "1"
@@ -432,7 +399,6 @@ d1_canals_08
 		create {classname "trigger_coop"
 			origin "-9024 8288 -544"
 			values {
-				//model "*81"
 				edt_mins "-200 -500 -50"
 				edt_maxs "200 350 250"
 				spawnflags "1"

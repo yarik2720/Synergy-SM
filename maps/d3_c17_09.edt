@@ -199,7 +199,6 @@ d3_c17_09
 		create {classname "trigger_coop"
 			origin "9052 7042.01 32"
 			values {
-				//model "*76"
 				edt_getbspmodelfor_classname "trigger_once"
 				edt_getbspmodelfor_origin "8730 7352 24"
 				angles "0 90 0"

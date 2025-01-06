@@ -17,6 +17,51 @@ ep2_outland_10
 		create {classname "func_vehicleclip" origin "0 96 0"
 			values {model "*251"} }
 
+// Spawn alyx if missing.
+		delete {targetname "spawnitems_template"}
+	
+		create
+		{
+			classname "point_template"
+			values
+			{
+				spawnflags "2"
+				targetname "syn_spawn_alyx"
+				Template01 "alyx"
+			}
+		}
+	
+		create
+		{
+			classname "point_template"
+			values
+			{
+				spawnflags "2"
+				targetname "syn_spawn_jeep"
+				Template01 "jeep"
+			}
+		}
+	
+		create
+		{
+			classname "logic_ensure_transitioned"
+			values
+			{
+				FindEntity "alyx"
+				OnNotFound "syn_spawn_alyx,ForceSpawn,,0,-1"
+			}
+		}
+	
+		create
+		{
+			classname "logic_ensure_transitioned"
+			values
+			{
+				FindEntity "jeep"
+				OnNotFound "syn_spawn_jeep,ForceSpawn,,0,-1"
+			}
+		}
+
 //--Starting Items--
 		create {classname "info_player_equip"
 			values {

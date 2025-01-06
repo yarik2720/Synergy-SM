@@ -93,7 +93,6 @@ d2_prison_04
 		create {classname "trigger_once"
 			origin "-672 2096 304"
 			values {
-				//model "*42"
 				edt_getbspmodelfor_classname "trigger_multiple"
 				edt_getbspmodelfor_origin "-672 2096 304"
 				spawnflags "1"
@@ -129,7 +128,6 @@ d2_prison_04
 		create {classname "trigger_coop"
 			origin "-1336 2880 418"
 			values {
-				//model "*44"
 				edt_getbspmodelfor_classname "trigger_once"
 				edt_getbspmodelfor_origin "-1216 1736 434"
 				spawnflags "1"

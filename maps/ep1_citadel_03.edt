@@ -101,10 +101,6 @@ ep1_citadel_03
 //balimbanana fix
 		edit {classname "env_sprite" values {GlowProxySize "200"} }
 		edit {classname "env_lightglow" values {GlowProxySize "48"} }
-		edit {classname "trigger_multiple" origin "1619 11688 4272" values {targetname "syn_soundonce"} }
-		create {classname "logic_auto" origin "3080 12666.6 5613.5"
-			values {spawnflags "1"
-				OnMapSpawn "syn_soundonce,AddOutput,OnStartTouch sound_radiation_warning:kill::1:1,0,-1"} }
 		edit {classname "trigger_changelevel" values {edt_map "ep1_citadel_02b" edt_landmark "landmark_02_03" spawnflags "6" startdisabled "1"} }
 
 //set checkpoint for last camera
@@ -234,6 +230,11 @@ ep1_citadel_03
 				"OnTrigger" "syn_spawn_manager,MovePlayers,,0.1,-1"
 			}
 		}
+
+		// Stop the annoying sound_radiation_warning sound from being triggered every time a player enters the trigger
+		create {classname "logic_auto"
+			values {spawnflags "1"
+				OnMapSpawn "sound_radiation_warning,AddOutput,OnPlaySound sound_radiation_warning:Kill::0.1:-1,0,-1"} }
 
 		// activate checkpoint after the exit elevator starts to move
 	//	delete { classname "trigger_multiple" origin "1152 13654 5312" }

@@ -112,10 +112,29 @@ d3_c17_10a
 			}
 		}
 
+// Start barney sequence as soon as player gets to top.
+// We'll softlock if barney follows player that never comes up.
+	delete {classname "trigger_once" origin "-2632 6476 576"}
+	create {classname "trigger_once" origin "-2632 6476 576"
+		values {model "*132"
+			spawnflags "1"
+			OnTrigger "barney_vista01_seq,BeginSequence,,0,-1"
+			} }
+
+	create {classname "trigger_once" origin "-2632 6476 576"
+		values {model "*132"
+			spawnflags "2"
+			filtername "filter_barney"
+			OnTrigger "barney_vista01_lcs,Start,,1,-1"
+			} }
+
+// Make these explosions hurt around combine camera
+	edit {targetname "firstmortar2_ar2expl"
+		values {spawnflags "0"} }
+
 //Trav|Edt - block window
 		create {classname "func_brush" origin "-2424 7488 580"
 			values {
-				//model "*53"//or *129 for LOS
 				edt_getbspmodelfor_classname "func_brush"
 				edt_getbspmodelfor_origin "-2424 7488 580"
 				spawnflags "2"} }
@@ -168,13 +187,13 @@ d3_c17_10a
 		delete {targetname "bldg2_door2_close_timer"}
 
 //Trav|Edt - add more combine that burst out of capital building.. looking thing.
-		create {classname "logic_auto"
-			values {spawnflags "1"
-				OnMapSpawn "lobby_frontdoors_soldier_makers,SetMaxLiveChildren,5,8,-1"
-				OnMapSpawn "lobby_frontdoors_soldier_makers,SetSpawnFrequency,0.1,8,-1"
-				OnMapSpawn "lobby_frontdoors_soldier_makers,AddMaxChildren,5,8,-1"
-				//OnMapSpawn "tank_mortar,SetDamage,100,8,-1"
-				} }
+//		create {classname "logic_auto"
+//			values {spawnflags "1"
+//				OnMapSpawn "lobby_frontdoors_soldier_makers,SetMaxLiveChildren,5,8,-1"
+//				OnMapSpawn "lobby_frontdoors_soldier_makers,SetSpawnFrequency,0.1,8,-1"
+//				OnMapSpawn "lobby_frontdoors_soldier_makers,AddMaxChildren,5,8,-1"
+//				//OnMapSpawn "tank_mortar,SetDamage,100,8,-1"
+//				} }
 
 //modi tp barney
 		create {classname "point_teleport"
@@ -205,7 +224,6 @@ d3_c17_10a
 		create {classname "trigger_multiple"
 			origin "252 6344 316"
 			values {
-				//model "*33"
 				edt_getbspmodelfor_classname "trigger_multiple"
 				edt_getbspmodelfor_origin "-2692 7528 572"
 				spawnflags "2"
@@ -222,7 +240,6 @@ d3_c17_10a
 		create {classname "trigger_push"
 			origin "268 6272 316"
 			values {
-				//model "*33"
 				edt_getbspmodelfor_classname "trigger_multiple"
 				edt_getbspmodelfor_origin "-2692 7528 572"
 				spawnflags "1"
@@ -253,7 +270,6 @@ d3_c17_10a
 		create {classname "trigger_coop"
 			origin "376 4880 356"
 			values {
-				//model "*24"
 				edt_getbspmodelfor_classname "trigger_once"
 				edt_getbspmodelfor_origin "-2488 6040 220"
 				spawnflags "1"

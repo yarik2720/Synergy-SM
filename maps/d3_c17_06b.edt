@@ -108,7 +108,6 @@ d3_c17_06b
 		create {classname "trigger_once"
 			origin "3447 1277 17"
 			values {
-				//model "*97"
 				edt_getbspmodelfor_classname "trigger_multiple"
 				edt_getbspmodelfor_origin "3447 1277 17"
 				spawnflags "1"
@@ -142,7 +141,6 @@ d3_c17_06b
 		create {classname "trigger_push"
 			origin "3852 1480 166.5"
 			values {
-				//model "*61"
 				edt_getbspmodelfor_classname "trigger_multiple"
 				edt_getbspmodelfor_origin "3580 1392 281.5"
 				targetname "trav_wallpush"
@@ -174,7 +172,6 @@ d3_c17_06b
 		create {classname "trigger_push"
 			origin "3800 1555 138"//3800 1556 194
 			values {
-				//model "*46"
 				edt_getbspmodelfor_classname "trigger_once"
 				edt_getbspmodelfor_origin "3041 1192 78"
 				targetname "trav_wallpush"
@@ -185,7 +182,6 @@ d3_c17_06b
 		create {classname "trigger_once"
 			origin "3580 1392 281.5"
 			values {
-				//model "*61"
 				edt_getbspmodelfor_classname "trigger_multiple"
 				edt_getbspmodelfor_origin "3580 1392 281.5"
 				spawnflags "1"
@@ -195,7 +191,6 @@ d3_c17_06b
 		create {classname "trigger_coop"
 			origin "5440 1495 240"
 			values {
-				//model "*3"
 				edt_getbspmodelfor_classname "trigger_multiple"
 				edt_getbspmodelfor_origin "3264 216 66.5"
 				spawnflags "1"

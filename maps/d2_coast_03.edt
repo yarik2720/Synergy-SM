@@ -65,8 +65,12 @@ d2_coast_03
 		create {classname "info_spawn_manager"
 			values {targetname "syn_spawn_manager"} }
 //Intro: Tunnel
-		create {classname "info_player_coop" origin "-6752 -14100 1025"
-			values {angles "0 100 0" targetname "syn_spawn_player_1"} }
+		create {classname "info_player_coop" origin "-6920 -13348 1033"
+			values {targetname "syn_spawn_player_1"
+				model "models/buggy.mdl"
+				VehicleEntity "prop_vehicle_jeep"
+				SpawnMode "1"
+				EnableGun "1"} }
 //First House
 		create {classname "info_player_coop" origin "-3840 -6016 560"
 			values {angles "0 270 0" targetname "syn_spawn_player_2" StartDisabled "1"} }
@@ -426,7 +430,6 @@ d2_coast_03
 		create {classname "trigger_once"
 			origin "-4608 -5832 484"
 			values {
-				//model "*77"
 				edt_getbspmodelfor_classname "trigger_multiple"
 				edt_getbspmodelfor_origin "-4608 -5832 484"
 				spawnflags "1"
@@ -437,7 +440,6 @@ d2_coast_03
 		create {classname "trigger_once"
 			origin "-4540.2 2560 602.67"
 			values {
-				//model "*83"
 				edt_getbspmodelfor_classname "trigger_once"
 				edt_getbspmodelfor_origin "-4540.2 2560 602.67"
 				spawnflags "1"
@@ -470,7 +472,6 @@ d2_coast_03
 		create {classname "trigger_once"
 			origin "-553.09 9611.8 738.67"
 			values {
-				//model "*83"
 				edt_getbspmodelfor_classname "trigger_once"
 				edt_getbspmodelfor_origin "-4540.2 2560 602.67"
 				spawnflags "1"
@@ -632,7 +633,6 @@ d2_coast_03
 		create {classname "trigger_once"
 			origin "7108 604 320"
 			values {
-				//model "*86"
 				edt_getbspmodelfor_classname "trigger_once"
 				edt_getbspmodelfor_origin "7108 604 320"
 				spawnflags "1"
@@ -651,7 +651,6 @@ d2_coast_03
 		create {classname "trigger_once"//trigger_coop (disable this teleport point for now)
 			origin "8852 4376 276.08"
 			values {
-				//model "*98"
 				edt_getbspmodelfor_classname "trigger_once"
 				edt_getbspmodelfor_origin "8852 4376 276.08"
 				spawnflags "1"
@@ -729,7 +728,6 @@ d2_coast_03
 		create {classname "trigger_coop"
 			origin "6110 12575 200"
 			values {
-				//model "*126"
 				edt_mins "-1400 -800 -200"
 				edt_maxs "1050 820 400"
 				spawnflags "1"
@@ -829,7 +827,6 @@ d2_coast_03
 
 		create {classname "trigger_multiple" origin "8516 4268 300"
 			values {
-				//model "*140"
 				edt_getbspmodelfor_targetname "trigger_odessa"
 				spawnflags "1"
 				wait "0.5"
@@ -902,7 +899,6 @@ d2_coast_03
 		delete { targetname "telescope_button" }
 		create { classname "func_button" origin "-3694.5 3735 544"
 			values {
-				//"model" "*109"//*114 - Pre 2010 Update
 				"edt_getbspmodelfor_targetname" "telescope_button"
 				"targetname" "telescope_button"
 				"spawnflags" "1056" // 1024 (use) + 32 (toggle)

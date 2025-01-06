@@ -304,6 +304,15 @@ ep2_outland_04
 				target "vort"} }
 
 
+// Prevent props getting stuck above elevator
+		create {classname "trigger_remove"
+			origin "4992 -1656 -2096"
+			values {model "*170"
+				spawnflags "2"
+				targetname "trav_antistucker_vort_vator"
+				StartDisabled "1"
+				OnTrigger "trav_teleport_vort_vator,Teleport,,0,-1"} }
+
 		//edit {targetname "gnome_clip" values {filtername ""} }
 
 //Trav|Edt - allow dynamic light to light word to look good

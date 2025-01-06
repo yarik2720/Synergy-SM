@@ -57,11 +57,15 @@ d3_c17_07
 		create {classname "info_global_settings"
 			values {IsVehicleMap "0" targetname "syn_global_settings"} }
 
+		// Don't block players after one player jumps down into the turrent room.
+		// Not sure why this was added in hl2 20a update. Not surprised I missed this in my solo testing.
+		delete {targetname "turretroom_playerclipbrush"}
+
 //--Extra--
 
 		// create intermission
 		"create" { "classname" "info_intermission" "origin" "7103.490723 1270.962769 204.487061" "values" { "angles" "16 150 0" } }
-			
+
 //Game Over text
 		delete {targetname "message_alyxdead"}
 		create {classname "logic_auto"
@@ -97,7 +101,7 @@ d3_c17_07
 		create {classname "logic_auto"
 			values {spawnflags "1"
 				OnMapSpawn "turretroom_doorbreak_conditions,AddOutPut,OnConditionsSatisfied !self:Kill::0:-1,0,-1"} }
-				
+
 //prevent players rushing before alyx sequence
 		create {classname "trigger_push"
 			origin "4575 735 192"
@@ -176,7 +180,6 @@ d3_c17_07
 		create {classname "func_brush"
 			origin "7264 1520 248"
 			values {
-				//model "*35"
 				edt_getbspmodelfor_classname "func_brush"
 				edt_getbspmodelfor_origin "7312 1536 64"
 				spawnflags "2"} }
@@ -205,7 +208,6 @@ d3_c17_07
 		create {classname "trigger_once"
 			origin "5544 1408 64"
 			values {
-				//model "*11"
 				edt_getbspmodelfor_classname "trigger_once"
 				edt_getbspmodelfor_origin "5544 1408 64"
 				spawnflags "1"
@@ -335,9 +337,9 @@ d3_c17_07
 				angles " 0 270 0"
 				targetname "balcony_cop1_maker"
 				StartDisabled "1"
-				MaxNPCCount "24"
+				MaxNPCCount "6"
 				SpawnFrequency "4"
-				MaxLiveChildren "3"
+				MaxLiveChildren "2"
 				Radius "0"
 				TemplateName "balcony_cop1"
 				OnSpawnNPC "balcony_doors,Open,,0,-1"
@@ -370,7 +372,6 @@ d3_c17_07
 		create {classname "trigger_coop"
 			origin "9096 2592 -88"
 			values {
-				//model "*20"
 				edt_getbspmodelfor_classname "trigger_multiple"
 				edt_getbspmodelfor_origin "7616 1536 104"
 				spawnflags "1"

@@ -3,7 +3,6 @@ d1_canals_01a
 	entity {
 //--Setup--
 		delete {classname "logic_auto" origin "576.631 2850.74 -68"}
-		edit {classname "func_areaportal" values {targetname "disabledPortals" StartOpen "1"} }
 
 //--Starting Items--
 		create {classname "info_player_equip"
@@ -37,7 +36,6 @@ d1_canals_01a
 		create {classname "trigger_once"
 			origin "-1608 6066 34"
 			values {
-				//model "*124"
 				edt_getbspmodelfor_classname "trigger_once"
 				edt_getbspmodelfor_origin "-1608 6066 34"
 				spawnflags "1"
@@ -46,7 +44,6 @@ d1_canals_01a
 		create {classname "trigger_once"
 			origin "-2808 7328 4"
 			values {
-				//model "*77"
 				edt_getbspmodelfor_classname "trigger_once"
 				edt_getbspmodelfor_origin "-2808 7328 4"
 				spawnflags "1"
@@ -58,7 +55,6 @@ d1_canals_01a
 		create {classname "func_brush"
 			origin "420 6268 120"
 			values {
-				//model "*131"
 				edt_getbspmodelfor_classname "func_brush"
 				edt_getbspmodelfor_origin "364 5796 -8"
 				spawnflags "2"
@@ -67,7 +63,6 @@ d1_canals_01a
 		create {classname "func_brush"
 			origin "924 6372 120"
 			values {
-				//model "*131"
 				edt_getbspmodelfor_classname "func_brush"
 				edt_getbspmodelfor_origin "364 5796 -8"
 				spawnflags "2"
@@ -76,7 +71,6 @@ d1_canals_01a
 		create {classname "func_brush"
 			origin "1444 6236 136"
 			values {
-				//model "*131"
 				edt_getbspmodelfor_classname "func_brush"
 				edt_getbspmodelfor_origin "364 5796 -8"
 				spawnflags "2"
@@ -130,7 +124,6 @@ d1_canals_01a
 		create {classname "trigger_once"
 			origin "2282.66 6204 68.36"
 			values {
-				//model "*1"
 				edt_getbspmodelfor_classname "trigger_multiple"
 				edt_getbspmodelfor_origin "2282.66 6204 68.36"
 				spawnflags "1"
@@ -169,7 +162,6 @@ d1_canals_01a
 		create {classname "func_brush"
 			origin "364 5796 -8"
 			values {
-				//model "*131"
 				edt_getbspmodelfor_classname "func_brush"
 				edt_getbspmodelfor_origin "364 5796 -8"
 				targetname "trav_clips"
@@ -178,11 +170,11 @@ d1_canals_01a
 		create {classname "func_brush"
 			origin "394 6304 30"
 			values {
-				//model "*126"
 				edt_getbspmodelfor_classname "func_brush"
 				edt_getbspmodelfor_origin "394 6304 30"
 				targetname "trav_clips"} }
-//modi: copy from d2_coast_04 Trav|Edt - save major network usage by removeing prop_ragdoll cars
+
+//modi: save major network usage by removeing prop_ragdoll
 		create {classname "logic_auto"
 			values {spawnflags "1"
 				OnMapSpawn "prop_ragdoll,DisableMotion,,10,-1"} }
@@ -234,7 +226,6 @@ d1_canals_01a
 		create {classname "trigger_once"
 			origin "-1600 4616 -96"
 			values {
-				//model "*6"
 				edt_getbspmodelfor_classname "trigger_once"
 				edt_getbspmodelfor_origin "-1600 4616 -96"
 				spawnflags "1"
@@ -260,7 +251,6 @@ d1_canals_01a
 		create {classname "trigger_push"
 			origin "-4760 9109 148"
 			values {
-				//model "*15"
 				edt_getbspmodelfor_classname "trigger_once"
 				edt_getbspmodelfor_origin "-3112 5413 -20"
 				spawnflags "1"
@@ -272,7 +262,6 @@ d1_canals_01a
 		create {classname "trigger_coop"
 			origin "-5470 9210 80"
 			values {
-				//model "*83"
 				edt_mins "-120 -70 -100"
 				edt_maxs "400 80 100"
 				spawnflags "1"

@@ -1,22 +1,24 @@
 # Map fixes of Half Life 2 and Episodes for Synergy Mod
 ## Installation 
-### Synergy old version 56.16:
-- Simply place folders with files in `synergy` directory, for example: `Steam\steamapps\common\Synergy\synergy\`
-
-### Synergy public branch 24.11 and newer:
+### Synergy actual version:
 - Place folders with files in custom directory, for example:
-`Synergy\synergy\custom\thisedit\`
+`Synergy\synergy\custom\synergy-sm\`
 
-	> The folder `thisedit` can be named anything, it is just a container folder.
+	> The folder `synergy-sm` can be named anything, it is just a container folder.
+
+	> On linux operating system you should use lower-case naming
 
 - After placing edt files you need to restart your server if it was already running and set `content_mount_synergy_mod_path_priority 0` on your server config for the EDTs to apply.
+
+### Synergy old version 56.16:
+- Download version https://github.com/yarik2720/Synergy-SM/releases/tag/1.56.16
+- Simply place folders with files in `synergy` directory, for example: `Steam\steamapps\common\Synergy\synergy\`
 
 ## Changes
 > All files were imported from Synergy version 56.16 and here is changes:
 
 - Changes over all maps (or almost all):
 	+ Notifications of mission failure (will be removed when next version releases)
-	+ Half Life 2 Update support
 	+ Added Elite Jeep spawn on some hl2 and ep2 maps (also fix for Jeep Elite included in `scripts` folder)
 	+ Increased vehicle spawns for more players
 	+ Damage players on vehicle spawn places who blocks spawning

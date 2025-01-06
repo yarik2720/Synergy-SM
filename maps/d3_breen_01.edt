@@ -22,33 +22,6 @@ d3_breen_01
 			values {targetname "syn_get_physcannon" StartDisabled "1"
 				weapon_physcannon	"1"
 			} }
-			
-//Game Over text
-		delete {targetname "message_breenwins"}
-		create {classname "logic_auto"
-			values {
-				spawnflags "1"
-				OnMapSpawn "relay_breenwins,AddOutput,OnTrigger syn_gameover_message:Display::5:-1,1,-1"
-			}
-		}
-		create {
-			classname "game_text"
-			values {
-				"y" "-1"
-				"x" "-1"
-				"targetname" "syn_gameover_message"
-				"spawnflags" "1"
-				"message" "HL2_GameOver_Timer"
-				"holdtime" "5"
-				"fxtime" "0.25"
-				"fadeout" "0.5"
-				"fadein" "1.5"
-				"effect" "0"
-				"color2" "240 110 0"
-				"color" "100 100 100"
-				"channel" "1"
-			}
-		}
 //--Spawns--
 		create {classname "info_spawn_manager"
 			values {targetname "syn_spawn_manager"} }
@@ -58,26 +31,15 @@ d3_breen_01
 
 		create {classname "info_player_coop" origin "-1729.093750 543.218750 631.562500"
 			values {angles "0 -130 0" targetname "syn_spawn_player_2" StartDisabled "1"} }
-		
-		create {classname "info_teleport_destination" origin "-1729.093750 543.218750 631.562500" values {angles "0 0 0" targetname "syn_spawn_player_2TP" } }
-		
+
 		create {classname "info_player_coop" origin "-1703 0 1346"
 			values {angles "0 0 0" targetname "syn_spawn_player_3" StartDisabled "1"} }
-		
-		create {classname "info_teleport_destination" origin "-1703 0 1346" values {angles "0 0 0" targetname "syn_spawn_player_3TP" } }
-		
-		create {classname "info_teleport_destination" origin "-996 0 -252" values {angles "0 0 0" targetname "syn_spawn_player_4TP" } }
+
 		create {classname "info_player_coop" origin "-996 0 -252"
 			values {angles "0 0 0" targetname "syn_spawn_player_4" StartDisabled "1"} }
 
 		create {classname "info_global_settings"
 			values {IsVehicleMap "1" targetname "syn_global_settings"} }
-
-		create {classname "logic_auto"
-			values {spawnflags "1"
-				OnMapTransition "syn_spawn_manager,TeleportPlayers,syn_spawn_teleport,0,-1"} }
-
-		create {classname "info_teleport_destination" origin "-2436.75 -1405.8 -1463" values {targetname "syn_spawn_teleport" angles "0 150 0"} }
 
 		edit {targetname "trans_cit05_breen01" values {origin "-2432 -1392 -512"} }
 
@@ -88,19 +50,12 @@ d3_breen_01
 
 		create { classname "info_teleport_destination" origin "-2436.75 -1405.8 -1463" values { targetname "MPVS_SPAWN_TP" } }
 
-//fix players GUI breaking
-		delete {classname "trigger_multiple" origin "256 0 -1920"}
-
-//todo: remove after code optimisations made -- modi: fix weird teleportations caused by lag compensation on func_breakable (while player shoots on them)
-		edit {targetname "citadel_breakable_alyxglass" values {"spawnflags" "3073"}}
-
 //Trav|Edt - lower ragdoll count
 		edit {classname "game_ragdoll_manager" values {MaxRagdollCount "2"} }//4
 
 //Trav|Edt make sure players get into pod on level trainsistion
 		create {classname "trigger_multiple" origin "-2448 -1408 -1456"
 			values {
-				//model "*98"
 				edt_mins "-100 -100 -100"
 				edt_maxs "100 100 100"
 				spawnflags "1"
@@ -109,7 +64,6 @@ d3_breen_01
 //over spawn
 		create {classname "trigger_weapon_strip" origin "-2448 -1408 -1192"
 			values {
-				//model "*100"
 				edt_getbspmodelfor_classname "trigger_weapon_strip"
 				edt_getbspmodelfor_origin "-2459 -1408 -40"
 				KillWeapons "1"
@@ -117,7 +71,7 @@ d3_breen_01
 
 //Trav|Edt - make sure slow loaders dont keep gg
 		create {classname "trigger_weapon_strip" origin "-2008 656 648"
-			values {edt_getbspmodelfor_classname "trigger_teleport" edt_getbspmodelfor_origin "-2008 656 648" spawnflags "1" KillWeapons "1"} }//model "*91"
+			values {edt_getbspmodelfor_classname "trigger_teleport" edt_getbspmodelfor_origin "-2008 656 648" spawnflags "1" KillWeapons "1"} }
 
 //delete this, testing only
 		//edit {targetname "trigger_sceneStart" values {spawnflags "0"} }
@@ -129,17 +83,18 @@ d3_breen_01
 		create {classname "trigger_once"
 			origin "-640 -464 1424"//-640 -368 1424 not in same spot origin //-640 -472 1424 nvm use reg
 			values {
-				//model "*45"
 				edt_getbspmodelfor_classname "trigger_once"
 				edt_getbspmodelfor_origin "-640 -464 1424"
 				spawnflags "1"
 				OnTrigger "syn_spawn_manager,MovePlayers,,0,-1"} }
 
+//fix players GUI breaking on suicide with high amoun of health (such as on sxpm)
+		delete {classname "trigger_multiple" origin "256 0 -1920"}
+
 //Trav|Edt - block jump
 		create {classname "func_brush"
 			origin "-370.35 -554.35 -180"
 			values {
-				//model "*125"
 				edt_getbspmodelfor_classname "func_brush"
 				edt_getbspmodelfor_origin "-1056 382.5 1392"
 				angles "0 45 0"
@@ -231,7 +186,6 @@ d3_breen_01
 
 		create { classname "trigger_multiple" origin "-2436 -1405 -1463"
 			values {
-				//"model" "*100"
 				"edt_getbspmodelfor_classname" "trigger_weapon_strip"
 				"edt_getbspmodelfor_origin" "-2459 -1408 -40"
 				"spawnflags" "1"
@@ -244,7 +198,6 @@ d3_breen_01
 
 		create { classname "trigger_teleport" origin "-2436 -1405 -1463"
 			values {
-				//"model" "*100"
 				"edt_getbspmodelfor_classname" "trigger_weapon_strip"
 				"edt_getbspmodelfor_origin" "-2459 -1408 -40"
 				"spawnflags" "1"
@@ -254,13 +207,6 @@ d3_breen_01
 				"targetname" "TeleportInBlack"
 			}
 		}
-		
-		//balimbanana fix
-		create {classname "func_tracktrain" origin "-2436 -1406 159" values {targetname "syn_podtrain" target "syn_podpath1" angles "90 -90 0" speed "70" orientationtype "1"} }
-		edit {targetname "pod" values {DisableShadows "1" parentname "syn_podtrain"} }
-		create {classname "path_track" origin "-2430 -1386 110" values {targetname "syn_podpath1" angles "0 0 0" target "syn_podpath2"} }
-		create {classname "path_track" origin "-2430 -1386 667" values {targetname "syn_podpath2" angles "0 0 0" target "syn_podpath3" OnPass "pod,SetParent,Breen_arm_player,1,-1" OnPass "pod,SetParentAttachment,eli_pod_inner_attachment,1.1,-1"} }
-
 
 		// do not do the getup scene
 		"delete" { "targetname" "logic_fade_view" }
@@ -281,7 +227,6 @@ d3_breen_01
 				"OnTrigger" "pod,ExitVehicle,,0.75,-1"
 
 				"OnTrigger" "syn_spawn_manager,SetCheckpoint,syn_spawn_player_2,0.5,-1"
-				"OnTrigger" "syn_spawn_manager,TeleportPlayers,syn_spawn_player_2TP,3,-1"
 				"OnTrigger" "MPVS_SPAWN,Kill,,0.48,-1"
 			}
 		}
@@ -297,7 +242,6 @@ d3_breen_01
 			"origin" "-1968 -4 616.75"
 			"values"
 			{
-				//"model" "*106"
 				"edt_getbspmodelfor_classname" "trigger_once"
 				"edt_getbspmodelfor_origin" "-1968 -4 616.75"
 				"spawnflags" "1"
@@ -310,25 +254,11 @@ d3_breen_01
 				"OnTrigger" "logic_goto_teleport,Trigger,,0,-1"
 				"OnTrigger" "lcs_br_controlroom,Start,,0,-1"
 
-				"OnTrigger" "syn_spawn_manager,SetCheckpoint,syn_spawn_player_3,0,-1"
+				"OnTrigger" "syn_spawn_manager,SetCheckpoint,syn_spawn_player_4,0,-1"
 //Trav|Edt - make moveplayers instant delay was 8
-				"OnTrigger" "syn_spawn_manager,MovePlayers,,0,-1" // 4
+				"OnTrigger" "syn_spawn_manager,MovePlayers,syn_spawn_player_4,0,-1" // 4
 				//OnTrigger "syn_get_physcannon,Enable,,0,-1"//give physcannon
 				//OnTrigger "syn_get_physcannon,EquipAllPlayers,,1,-1"
-			}
-		}
-		"create"
-		{
-			"classname" "trigger_once"
-			"origin" "-896 0 -192"
-			"values"
-			{
-				//"model" "*28"
-				"edt_getbspmodelfor_classname" "trigger_once"
-				"edt_getbspmodelfor_origin" "-896 0 -192"
-				"spawnflags" "1"
-				"OnTrigger" "syn_spawn_manager,SetCheckpoint,syn_spawn_player_4,0,-1"
-				"OnTrigger" "syn_spawn_manager,TeleportPlayers,syn_spawn_player_4TP,0,-1"
 			}
 		}
 
@@ -345,7 +275,6 @@ d3_breen_01
 			"origin" "-1056 504 1536"
 			"values"
 			{
-				//"model" "*123"
 				"edt_getbspmodelfor_classname" "trigger_once"
 				"edt_getbspmodelfor_origin" "-1056 504 1536"
 				"targetname" "Trigger_lift_control"
@@ -402,8 +331,7 @@ d3_breen_01
 			}
 		}
 
-		delete {classname "point_clientcommand"}
-		create {classname "point_servercommand" values {targetname "PSCTest"} }
+		create { classname "point_servercommand" values { targetname "PSCTest" } }
 
 		create {classname "logic_auto"
 			values
@@ -430,8 +358,6 @@ d3_breen_01
 		create {classname "point_viewcontrol" origin "-728 -66 1346"//-728 -66 1282 (1354)
 			values {spawnflags "172" angles "0 12 0"
 				targetname "syn_gman_viewcontrol"} }
-		// Additional view controls should also have all players, such as the Lamarr ending sequence if not changing to Ep1 immediately
-		edit {classname "point_viewcontrol" values {edt_addspawnflags "128"} }
 
 		//"All Players" flag
 		edit {targetname "blackout_viewcontroller" values {spawnflags "188"} }
