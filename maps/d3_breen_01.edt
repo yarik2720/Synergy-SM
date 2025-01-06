@@ -88,6 +88,9 @@ d3_breen_01
 				spawnflags "1"
 				OnTrigger "syn_spawn_manager,MovePlayers,,0,-1"} }
 
+//fix players GUI breaking on suicide with high amoun of health (such as on sxpm)
+		delete {classname "trigger_multiple" origin "256 0 -1920"}
+
 //Trav|Edt - block jump
 		create {classname "func_brush"
 			origin "-370.35 -554.35 -180"
