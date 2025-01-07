@@ -55,6 +55,13 @@ ep2_outland_03
 				OnMapSpawn "holdout_elevator_2_vort_exit_aiss_timer,AddOutput,OnTimer syn_vorttp:Teleport::0:1,0,-1"
 				OnMapSpawn "thumper_arena_ragdolls,DisableMotion,,10,-1"
 				OnMapSpawn "counterweight_room_ragdolls,DisableMotion,,10,-1"} }
+		//temp fix on Synergy 24.12, holdout_elevator_2_vort_exit_ss is not parented to elevator
+		edit {
+			targetname "holdout_elevator_2_vort_exit_ss"
+			values {
+				m_fMoveTo "4"
+			}
+		}
 		
 		create {classname "point_teleport" origin "1152 -9211 -465" values {targetname "syn_vorttp" target "vort" angles "0 0 0" parentname "holdout_elevator_2"} }
 //No need to teleport if vort has reached the correct zone
