@@ -14,7 +14,7 @@ ep1_citadel_01
 		edit {classname "func_areaportal" values {targetname "syn_DisabledPortal" StartOpen "1"} }
 		edit {classname "func_areaportalwindow" values {targetname "syn_DisabledPortalWindow" FadeStartDist "1000" FadeDist "1500"} }
 
-		//fix edtbuild
+		//fix edtbuild from patches and apply particles effect on vortex
 		delete {targetname "wellwell"}
 		
 		create {
@@ -25,6 +25,19 @@ ep1_citadel_01
 				"start_active" "0"
 				"effect_name" "bridge_vortex_b"
 				"angles" "0 359.5 0"
+			}
+		}
+		//TODO: remove when Synergy will correctly read PAT and LMP files
+		create
+		{
+			classname "logic_auto"
+			origin "0 0 0"
+			values
+			{
+				"OnMapSpawn" "relay_spin_on,addoutput,OnTrigger rot_spinners:color:1:0:-1,0,-1"
+				"OnMapSpawn" "relay_spin_off,addoutput,OnTrigger rot_spinners:color:1:0:-1,0,-1"
+				"OnMapSpawn" "relay_energyvortex_1,addoutput,OnTrigger wellwell:Start::0.1:-1,0,-1"
+				"OnMapSpawn" "relay_energyvortex_1,addoutput,OnTrigger wellwell:Stop::9:-1,0,-1"
 			}
 		}
 
