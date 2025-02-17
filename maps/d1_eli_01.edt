@@ -77,6 +77,10 @@ d1_eli_01
 			}
 		}
 
+		//extra fix to prevent blocking scene alyxtour04
+		delete {targetname "trigger_alyxtour03b"}
+		delete {targetname "trigger_alyxtour03b_stop"}
+
 //enable syn_spawn_player_1
 		create {classname "trigger_once" origin "-384 4168 -1368"
 			values {
