@@ -63,10 +63,11 @@ d1_eli_01
 			values {targetname "syn_spawn_vehicle_1"
 				angles "0 180 0"
 				StartDisabled "0"
-				VehicleGun "1"
-				SpawnMode "2"
+				RespawnVehicle "1"
+				VehicleType "2"
+				VehicleSize "164"
 				model "models/airboat.mdl"
-				VehicleEntity "prop_vehicle_airboat"} }
+				VehicleScript "scripts/vehicles/airboat.txt"} }
 
 //--Extra--
 		// lcs resume - so Alyx won't get stuck
