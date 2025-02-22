@@ -120,6 +120,9 @@ ep2_outland_06a
 				model "models/airboat.mdl"
 				VehicleScript "scripts/vehicles/airboat.txt"} }
 
+		//always spawn hunters when point is visible
+		edit {classname "npc_template_maker" values {spawnflags "0"}}
+
 //cruel way of disableing gun
 		create {classname "logic_timer"
 			values {RefireTime "5"
