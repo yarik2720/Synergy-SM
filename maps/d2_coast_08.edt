@@ -446,7 +446,8 @@ d2_coast_08
 
 		create { classname "trigger_changelevel"
 			values {
-				"edt_getbspmodelfor_targetname" "return_trip_autosave"
+				//"edt_getbspmodelfor_targetname" "return_trip_autosave" // TODO: Look into why this doesn't work for trigger_changelevel
+				"model"	"*55"
 				"spawnflags" "0"
 				"landmark" "landmark_d2_coast_07-08"
 				"map" "d2_coast_07"
