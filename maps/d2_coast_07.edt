@@ -878,6 +878,17 @@ d2_coast_07
 		//edit {classname "trigger_changelevel" values {edt_map "d2_coast_05" edt_landmark "landmark_d2_coast_05-07" spawnflags "6"} }
 		edit {classname "trigger_changelevel" values {edt_map "d2_coast_08" edt_landmark "landmark_d2_coast_07-08" targetname "synreturnchangelevel"} }
 
+// This may break compatibility with pre-anniversary/HL2U but there is currently no way to delete specifically the trigger_transition by this name
+		delete {targetname "landmark_d2_coast_07-09"}
+		create {classname "info_landmark" origin "9216 -9568 2144" values {targetname "landmark_d2_coast_07-09"} }
+		create {classname "trigger_transition" origin "1800 -1200 0"
+			values
+			{
+				targetname "landmark_d2_coast_07-09"
+				edt_getbspmodelfor_targetname "landmark_d2_coast_07-09"
+			}
+		}
+
 		//create { classname "trigger_changelevel" origin "3330 5030 1590"
 		//	values {
 		//		//"model" "*139"
