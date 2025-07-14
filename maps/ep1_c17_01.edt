@@ -207,7 +207,7 @@ ep1_c17_01
 		}
 		create {classname "logic_auto"
 			values {spawnflags "1"
-				OnMapSpawn "relay_hellskitchen_start,AddOutput,OnTrigger modi_antiskip_cafe:Disable::1:-1,0,-1"} }
+				OnMapSpawn "relay_hellskitchen_stop,AddOutput,OnTrigger modi_antiskip_cafe:Disable::1:-1,0,-1"} }
 
 //End of Trav|Edt
 
