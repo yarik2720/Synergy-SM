@@ -231,7 +231,10 @@ ep2_outland_07
 //Trav|Edt anti-rush
 		create {classname "trigger_coop"
 			origin "-3664 12128 192"
-			values {model "*105"
+			values {
+				//model "*105"
+				edt_getbspmodelfor_classname "trigger_multiple"
+				edt_getbspmodelfor_origin "-5232 -8032 128"
 				spawnflags "1"
 				targetname "syn_antirush_coop"
 				CountType "1"
@@ -282,7 +285,16 @@ ep2_outland_07
 			values {targetname "syn_teleport_jeep_end07"
 				angles "0 0 0"
 				target "jeep"} }
-
+//prevent running car out of bounds
+		create {
+			classname "func_vehicleclip" 
+			origin "-3680 13200 160" 
+			values {
+				edt_getbspmodelfor_classname "trigger_once"
+				edt_getbspmodelfor_origin "-3680 10280 160"
+				targetname "modi_vclip_final"
+			}
+		}
 //--
 
 		delete { targetname "global_newgame_template_base_items" }
