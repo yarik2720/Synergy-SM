@@ -67,10 +67,12 @@ d2_coast_03
 //Intro: Tunnel
 		create {classname "info_player_coop" origin "-6920 -13348 1033"
 			values {targetname "syn_spawn_player_1"
-				model "models/buggy.mdl"
+				model "models/vehicles/buggy_p2.mdl"
 				VehicleEntity "prop_vehicle_jeep"
+				VehicleScriptOverride "scripts/vehicles/jeep_test.txt"
 				SpawnMode "1"
-				EnableGun "1"} }
+				VehicleGun "1"
+			} }
 //First House
 		create {classname "info_player_coop" origin "-3840 -6016 560"
 			values {angles "0 270 0" targetname "syn_spawn_player_2" StartDisabled "1"} }
