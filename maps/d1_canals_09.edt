@@ -52,20 +52,8 @@ d1_canals_09
 		create {classname "info_player_coop" origin "7737 9744 -444"//7774.01 9199.78 -438.98
 			values {angles "0 90 0" targetname "syn_spawn_player_1"} }
 
-		create {classname "info_player_coop" origin "13184 -1280 -444"
-			values {angles "0 240 0" targetname "syn_spawn_player_2" StartDisabled "1"} }
-
 		create {classname "info_global_settings"
 			values {IsVehicleMap "1" targetname "syn_global_settings"} }
-
-		create {classname "info_vehicle_spawn" origin "7480 9920 -480.02"//7718.65 9928.35 -480.02
-			values {targetname	"syn_spawn_vehicle_1"
-				angles "0 0 0"
-				StartDisabled "0"
-				SpawnMode "2"
-				model "models/airboat.mdl"
-				VehicleScript "scripts/vehicles/airboat.txt"
-				OnSpawnVehicle "syn_moreplayers,CheckSkill,,5,-1"} }
 
 		create {classname "info_vehicle_spawn" origin "7880 9920 -480.02"
 			values {targetname	"syn_spawn_vehicle_1"
@@ -112,13 +100,15 @@ d1_canals_09
 			}
 		}
 
-		create {classname "info_vehicle_spawn" origin "13152 -1632 -480"
-			values {targetname	"syn_spawn_vehicle_2"
+		create {classname "info_player_coop" origin "13152 -1632 -480"
+			values {targetname	"syn_spawn_player_2"
 				angles "0 90 0"
 				StartDisabled "1"
 				SpawnMode "2"
+				VehicleEntity "prop_vehicle_airboat"
 				model "models/airboat.mdl"
-				VehicleScript "scripts/vehicles/airboat.txt"} }
+				VehicleScriptOverride "scripts/vehicles/airboat.txt"
+			} }
 		
 		create {classname "info_vehicle_spawn" origin "13152 -1800 -480"
 			values {targetname	"syn_spawn_vehicle_2_med"
@@ -147,7 +137,7 @@ d1_canals_09
 				spawnflags "1"
 				OnTrigger "syn_spawn_manager,SetCheckpoint,syn_spawn_player_2,0,-1"
 				OnTrigger "syn_moreplayerssec,CheckSkill,,0,1"
-				OnTrigger "syn_spawn_vehicle_2,Enable,,0,-1"} }
+			} }
 
 //--Extra--
 	
