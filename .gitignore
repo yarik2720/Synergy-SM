@@ -43,3 +43,18 @@ sound/
 workshop/
 user_custom
 user_custom/
+/fgd
+/maps_sources
+
+// temporary folders created during tasks
+temp/
+backup/
+logs/
+output/
+
+// editor backup files and system files
+*.edt.bak
+*.edt~
+*.vmx
+Thumbs.db
+.DS_Store

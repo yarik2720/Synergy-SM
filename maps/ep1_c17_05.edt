@@ -197,7 +197,7 @@ ep1_c17_05
 				
 
 		// create { classname "point_servercommand" values { targetname "theEndCmd" } }
-//modi: made citizens proceed automatically - BUG on Synergy 56.16: citizens stops following any player when someone connects. Remove if you need vanilla "Follow Citizen"
+//modi: made citizens proceed automatically. Remove if you need vanilla "Follow Citizen"
 		create {classname "scripted_sequence"
 			origin "9400 9720 -734"
 			values {spawnflags "100"
@@ -255,6 +255,29 @@ ep1_c17_05
 				OnTrigger "relay_first_area_complete,Trigger,,0,1"
 			}
 		}
+
+		// protecting from doubling and activation assault system
+		create {classname "logic_relay"
+			values {targetname "syn_assault_activator"
+				StartDisabled "0"
+				spawnflags "1"
+				OnTrigger "assault_cit_board_train_1,Activate,,0,-1"
+				OnTrigger "assault_cit_board_train_2,Activate,,0,-1"
+				OnTrigger "assault_cit_board_train_3,Activate,,0,-1"
+				OnTrigger "assault_cit_board_train_4,Activate,,0,-1"}}
+
+		create {classname "logic_auto"
+			values {spawnflags "1"
+				OnMapSpawn "trigger_pickup_citizens,AddOutput,OnTrigger syn_assault_activator:Trigger::0:-1,0,-1"}}
+
+		// Protect from multiple activating: disable on first activating
+		create {classname "logic_relay"
+			values {targetname "syn_trigger_protector"
+				StartDisabled "0"
+				spawnflags "0"
+				OnTrigger "trigger_pickup_citizens,Disable,,0.1,-1"
+				OnTrigger "trigger_pickup_citizens,Enable,,30,-1"}}  // fail-safe reenable in case of issues
+
 
 //Trav|Edt - remove trigger_serverragdoll
 		delete {classname "trigger_serverragdoll"}
