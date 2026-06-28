@@ -30,6 +30,17 @@ Synergy-SM/
 > **Important**: Folders `fgd/` and `maps_sources/` are excluded from git via `.gitignore`
 > **Mapping rule**: Any file `maps/<map_name>.edt` corresponds to source `maps_sources/<map_name>_d.vmf`. The `_d` suffix is added to all decompiled sources.
 
+## Agent Workflow
+
+1. Prefer editing published EDT files in `maps/`. Treat `fgd/` and `maps_sources/` as references unless explicitly asked otherwise.
+2. Before adding a new entity pattern, search existing `maps/*.edt` files for similar fixes and reuse the established approach when it fits.
+3. For map-specific changes, inspect the matching `maps_sources/<map_name>_d.vmf` when it is available.
+4. When adding or changing entity keys, check the relevant FGD file to confirm class names, key names, inputs, outputs, and spawnflags.
+5. Keep EDT edits scoped. Do not reformat unrelated parts of a file.
+6. Bring only newly added or touched EDT blocks toward the project style used nearby in that file.
+7. Write EDT comments in English.
+8. Use semantic `targetname` values for created entities, preferably with the `syn_` prefix when the entity is part of the cooperative fix logic.
+
 ## EDT File Format
 
 EDT (Entity Definition Template) — a text format for modifying map entities without recompilation.
@@ -62,6 +73,12 @@ EDT (Entity Definition Template) — a text format for modifying map entities wi
 - **create** — create a new entity
 - **edit** — modify parameters of an existing entity
 - **delete** — delete an entity
+
+### Style rules
+- Preserve the local style of the EDT file being edited.
+- Normalize only new or modified blocks as part of the change.
+- Use English comments in EDT files.
+- Avoid creating backup files in the repository; rely on git history unless a manual backup is explicitly requested.
 
 ### Operation examples
 ```edt
@@ -176,6 +193,12 @@ ent_fire !picker <input>  # Activate entity under cursor
 - **Game logs**: `synergy/logs/`
 - **Console messages**: Use `developer 1`
 - **Entity debugging**: `ent_text` for info about entity under cursor
+- **Generated entity cache**: after launching the map, inspect the generated `.ent` file in `Synergy/synergy/maps/ent_cache` to confirm the final entity output.
+
+### 4. EDT validation
+- Without launching the game, only EDT syntax can be validated.
+- Syntax validation should check balanced braces, quoted key/value pairs, and operation structure (`create`, `edit`, `delete`, `values`).
+- Runtime behavior still requires loading the map in Synergy.
 
 ## Useful Commands
 
@@ -205,11 +228,11 @@ The `maps_sources/` folder contains original VMF map files for analysis:
 3. Run the map in Synergy to understand current changes
 
 ### Best practices
-1. **Always backup** before editing EDT files
+1. **Use git/history** before editing EDT files; create manual backups only when explicitly requested
 2. **Test with different player counts** (1, 2, 4+)
-3. **Document changes** in corresponding plans (`plans/`)
-4. **Refer to FGD** when adding new entities
-5. **Use semantic names** for created entities (prefix `syn_`)
+3. **Refer to FGD** when adding new entities
+4. **Use semantic names** for created entities (prefix `syn_`)
+5. **Check generated `.ent` output** in `Synergy/synergy/maps/ent_cache` after launching the map
 
 ### Common mistakes
 - Changing coordinates without considering Hammer coordinate system
