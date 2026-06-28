@@ -275,13 +275,13 @@ ep2_outland_07
 				
 // teleport Alyx and car
 		create {classname "point_teleport"
-			origin "-3855 12590 92"
+			origin "-3855 12720 92"
 			values {targetname "syn_teleport_alyx_end07"
 				angles "0 180 0"
 				target "alyx"} }
 				
 		create {classname "point_teleport"
-			origin "-3855 12590 92"
+			origin "-3855 12720 92"
 			values {targetname "syn_teleport_jeep_end07"
 				angles "0 0 0"
 				target "jeep"} }
