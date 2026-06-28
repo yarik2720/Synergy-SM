@@ -461,12 +461,12 @@ d2_coast_03
 				targetname "syn_checkpoint_4_relay"
 				OnTrigger "thumper_soldier_*,AddOutput,OnDeath syn_checkpoint_4_counter_threat:Add:1:0:-1,0,-1"} }
 
-		create {classname"math_counter"
+		create {classname "math_counter"
 			values {targetname "syn_checkpoint_4_counter_threat"
 				max "3"
 				OnHitMax "syn_checkpoint_4_counter_enable,Add,1,0,-1"} }
 
-		create {classname"math_counter"
+		create {classname "math_counter"
 			values {targetname "syn_checkpoint_4_counter_enable"
 				max "2"
 				OnHitMax "syn_checkpoint_4,Enable,,0,-1"} }

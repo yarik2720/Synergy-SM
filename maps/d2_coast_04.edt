@@ -210,7 +210,7 @@ d2_coast_04
 				RespawnVehicle "1"
 				VehicleType "4"
 				VehicleSize "192"
-				model "models\vehicles\buggy_p2.mdl"
+				model "models/vehicles/buggy_p2.mdl"
 				VehicleScript "scripts/vehicles/jeep_test.txt"
 				OnSpawnVehicle "syn_moreplayerssec,CheckSkill,,5,-1"} }
 		
@@ -266,7 +266,7 @@ d2_coast_04
 				RespawnVehicle "1"
 				VehicleType "4"
 				VehicleSize "192"
-				model "models\vehicles\buggy_p2.mdl"//models/buggy.mdl
+				model "models/vehicles/buggy_p2.mdl"//models/buggy.mdl
 				VehicleScript "scripts/vehicles/jeep_test.txt"
 				OnSpawnVehicle "syn_moreplayersthird,CheckSkill,,5,-1"} }
 		

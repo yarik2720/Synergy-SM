@@ -53,7 +53,7 @@ d1_canals_11
 				OnMapSpawn "hopper_physics_trigger,AddOutput,OnTrigger syn_enable_vehiclespawn:Add:1:0:1,0,-1"
 				OnMapSpawn "lock_lever_button,AddOutput,OnPressed syn_enable_vehiclespawn:Add:1:0:1,0,-1"} }
 
-		create {classname"math_counter"
+		create {classname "math_counter"
 			values {targetname "syn_enable_vehiclespawn"
 				max "2"
 				OnHitMax "syn_spawn_vehicle_1,Enable,,0,-1"

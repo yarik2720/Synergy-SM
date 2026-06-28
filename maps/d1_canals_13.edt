@@ -248,7 +248,7 @@ d1_canals_13
 		edit {targetname "canals_trigger_gateperchpath01" values {targetname "syn_canals_trigger_gateperchpath01"} }//prevent default inputs
 		edit {targetname "canals_music_helideath" values {targetname "syn_canals_music_helideath"} }
 
-		create {classname"math_counter"
+		create {classname "math_counter"
 			values {targetname "syn_helisdead"
 				max "2"
 				OnHitMax "syn_canals_music_helideath,PlaySound,,0,-1"

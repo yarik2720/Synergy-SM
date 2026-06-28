@@ -195,12 +195,12 @@ d2_coast_12
 				//OnMapSpawn "assault_template_spawner,AddOutput,OnEntitySpawned trav_bigassault_counter:Add:4:0:-1,0,-1"
 				OnMapSpawn "assault_template_spawner,AddOutput,OnEntitySpawned syn_vint_trav_bigassault_setuper:Trigger::0:-1,0,-1"} }
 //additional waves
-		create {classname"math_counter"
+		create {classname "math_counter"
 			values {targetname "trav_bigassault_counter_total"
 				max "4"
 				OnHitMax "trav_bigassault_counter,Disable,,0,-1"} }
 //when to spawn next wave
-		create {classname"math_counter"
+		create {classname "math_counter"
 			values {targetname "trav_bigassault_counter"
 				min "6"
 				startvalue "12"

@@ -559,14 +559,14 @@ d1_canals_01
 				additionalequipment "weapon_pistol"} }
 
 //Trav|Edt - Add crates near end
-		create {classname"item_item_crate"
+		create {classname "item_item_crate"
 			origin "929 -993 260"
 			values {spawnflags "386"
 				targetname "syn_vint_crates"
 				ItemClass "item_dynamic_resupply"
 				ItemCount "3" } }
 
-		create {classname"item_item_crate"
+		create {classname "item_item_crate"
 			origin "929 -929 260"
 			values {spawnflags "386"
 				targetname "syn_vint_crates"

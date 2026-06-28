@@ -87,7 +87,7 @@ d2_coast_01
 				RespawnVehicle "1"
 				VehicleType "4"
 				VehicleSize "192"
-				model "models\vehicles\buggy_p2.mdl"//models/buggy.mdl
+				model "models/vehicles/buggy_p2.mdl"//models/buggy.mdl
 				VehicleScript "scripts/vehicles/jeep_test.txt"} }
 		
 		create {classname "info_vehicle_spawn" origin "-7195 -9792 560"
@@ -98,7 +98,7 @@ d2_coast_01
 				RespawnVehicle "1"
 				VehicleType "4"
 				VehicleSize "192"
-				model "models\vehicles\buggy_p2.mdl"//models/buggy.mdl
+				model "models/vehicles/buggy_p2.mdl"//models/buggy.mdl
 				VehicleScript "scripts/vehicles/jeep_test.txt"
 				OnSpawnVehicle "modi_high_vehicles_counter,Add,1,,-1"} }
 		
@@ -110,7 +110,7 @@ d2_coast_01
 				RespawnVehicle "1"
 				VehicleType "4"
 				VehicleSize "192"
-				model "models\vehicles\buggy_p2.mdl"//models/buggy.mdl
+				model "models/vehicles/buggy_p2.mdl"//models/buggy.mdl
 				VehicleScript "scripts/vehicles/jeep_test.txt"} }
 		
 		create {classname "info_vehicle_spawn" origin "-6995.95 -9792 560"

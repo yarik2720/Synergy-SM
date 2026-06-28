@@ -358,7 +358,7 @@ ep1_citadel_00
 				VehicleLocked "1"
 				parentname "blackout"
 				ignoremoveparent "1"
-				actionScale"1"} }
+				actionScale "1"} }
 
 //Trav|Edt - Antideath clip
 		create {classname "func_brush"

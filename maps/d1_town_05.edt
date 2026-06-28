@@ -210,7 +210,7 @@ d1_town_05
 			}
 		}
 //Trav|Edt - Mod counter to adhere for extra enemies
-		edit {targetname"warehouse_deadcombine_counter"
+		edit {targetname "warehouse_deadcombine_counter"
 			values {max "11"} }//23//24//11? should work
 
 		create {classname "npc_template_maker"
