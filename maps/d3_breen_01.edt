@@ -45,6 +45,10 @@ d3_breen_01
 
 //--Extra--
 
+		// Synergy misses the HD render target used by models/effects/portalrift.mdl,
+		// which makes the magic looking glass render as a broken magenta effect.
+		delete {targetname "prop_magic_lookingglass"}
+
 		// create intermission
 		"create" { "classname" "info_intermission" "origin" "759.806091 -227.057999 458.113525" "values" { "angles" "-32 160 0" } }
 
